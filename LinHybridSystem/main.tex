@@ -1,0 +1,53 @@
+\documentclass{llncs}
+\usepackage{times}
+
+\usepackage{amsmath}
+\usepackage{amssymb} % For \mathbb font
+\usepackage{algorithm}
+\usepackage{algpseudocode}
+\usepackage{multirow}
+\usepackage{url}
+\usepackage{tikz} 
+\usetikzlibrary{arrows,backgrounds,decorations,decorations.pathmorphing,positioning,fit,automata,shapes,snakes,patterns,plotmarks,calc}
+\usepackage{graphicx,color} 
+\usepackage{enumitem}
+\usepackage{float}
+
+
+% Input macros
+\input{macros}
+
+% Headers
+\title{Coupling template complex zonotope with parallelotope for
+  efficient invariant computation
+} 
+
+\author{Arvind\ Adimoolam and Thao\ Dang
+} 
+\institute{\ Verimag,~Grenoble, France\\ \url{{santosh.adimoolam,thao.dang}@univ-grenoble-alpes.fr}.
+}
+
+
+\begin{document}
+
+\maketitle
+
+\section{Inclusion relations}
+\input{SetInclusions}
+
+\section{Positive invariance}
+\input{PositiveInvariance.tex}
+
+
+
+
+
+
+
+
+
+
+\bibliographystyle{plain}
+\bibliography{ref}
+
+\end{document}
