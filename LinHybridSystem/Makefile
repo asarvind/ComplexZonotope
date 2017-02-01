@@ -13,5 +13,5 @@ upload:
 	make add; make commit;  git push
 
 clean:
-	rm main.pdf *.aux *.log *~
+	rm main.pdf *.aux *.log *~ *.bbl *.blg
 
