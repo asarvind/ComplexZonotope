@@ -1,0 +1,20 @@
+In a generalized template complex zonotope,
+a subset of the combining coefficients are real and bounded in real
+intervals, while the rest are complex with the usual bound on their
+absolute values.
+
+\begin{definition}
+Let $V\in\mat{n}{m}{C}$ called primary template, $W\in\mat{n}{k}{R}$
+called secondary template, $c\in\mb{R}^n$ called primary offset,
+$s\in\mb{R}^m$ called scaling factors, $u,l\in\mb{R}^k$ called lower
+and upper rectangular bounds, respectively such that $l\leq u$.  The
+following is a generalized template complex
+zonotope.
+\begin{multline}
+\gcz{V}{c}{s}{W}{u}{l} =
+\lt\{
+  c+V\epsilon+W\zeta:\epsilon\in\mb{C}^m,\zeta\in\mb{R}^k,\rt.\\ \lt.  \lt|\epsilon_i\rt|\leq
+ s_i~\forall i\in\tup{m},~\zeta_j\in[l_j,u_j]~\forall j\in \tup{k}
+\rt\}
+\end{multline}
+\end{definition}
