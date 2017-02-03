@@ -16,6 +16,8 @@
 
 
 % Sets
+\newcommand{\realset}{\mb{R}}
+\newcommand{\comprealset}{\mb{\ov{R}}}
 \newcommand{\pint}{\mb{Z}_{> 0}}
 \newcommand{\nzrl}{\mb{R}_{\geq 0}}
 \newcommand{\prl}{\mb{R}_{>0}}
@@ -43,14 +45,33 @@
 
 
 %matrix operations
-\newcommand{\ColumnJoin}[2]{\left(\begin{array}{l}#1\\#2 \end{array}\right)}
+\newcommand{\ColumnJoin}[2]{\left[\begin{array}{l}{#1}\\{#2} \end{array}\right]}
+\newcommand{\minaffine}[2]{\Lambda^{\min}\lt(#1,#2\rt)}
+\newcommand{\maxaffine}[2]{\Lambda^{\max}\lt(#1,#2\rt)}
 
 % local macros
+\newcommand{\real}{\mathcal{R}}
 \newcommand{\CZ}{\lt(V,c,s\rt)}
+\newcommand{\GCZ}{\gcz{V}{c}{s}{W}{l}{u}}
 \newcommand{\cz}[3]{\mc{C}\lt(#1,#2,#3\rt)}
 \newcommand{\CZO}{\lt(V,0,s\rt)}
 \newcommand{\czo}[2]{\mc{Z}\lt(#1,0,#2\rt)}
 \newcommand{\trj}[2]{\tbf{#1}(#2)}
-\newcommand{\IncTcz}{F_{\mc{Z}}}
+\newcommand{\IncTcz}[6]{\mc{T}\lt(#1,#2,#3,#4,#5,#6\rt)}
+\newcommand{\IncGcz}[6]{\mc{G}\lt(#1,#2,#3,#4,#5,#6\rt)}
 \newcommand{\Ptope}[3]{\mc{P}\left(#1,#2,#3\right)}
 \newcommand{\gcz}[6]{\mathcal{Z}\lt(#1,#2,#3,#4,#5,#6\rt)}
+\newcommand{\sptope}[3]{\mathcal{P}\lt(#1,#2,#3\rt)}
+\newcommand{\system}{\mb{H}}
+\newcommand{\locationset}{\mb{L}}
+\newcommand{\edgeset}{\mb{E}}
+\newcommand{\stay}{\mb{S}}
+\newcommand{\linearmapset}{\mb{A}}
+\newcommand{\inputset}{\mb{U}}
+\newcommand{\initialset}{\Omega}
+\newcommand{\edge}{\sigma}
+\newcommand{\loc}{\mu}
+\newcommand{\map}{\linearmapset}
+\newcommand{\inp}{\inputset}
+\newcommand{\ptemplate}{\mb{K}}
+\newcommand{\systrj}[3]{\lt(\tbf{#1},\tbf{#2}\rt)\lt(#3\rt)}

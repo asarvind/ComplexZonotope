@@ -1,15 +1,25 @@
 
 
 
-A generalized complex zonotope can be specified as a template complex zonotope as follows.
-\begin{lemma}
-\gcz{V}{c}{s}{W}{l}{u} = \cz{\lt[V~W\rt]}{c+\frac{u+l}{2}}{\ColumnJoin{s}{\frac{u-l}{2}}}
+The real projection of a generalized complex zonotope can be
+equivalently represented as the real projection of a template complex
+zonotope, as follows.  
+\begin{lemma}~\label{lem:conversion}
+$\real\lt(\gcz{V}{c}{s}{W}{l}{u}\rt) = \real\lt(\cz{\lt[V~W\rt]}{c+\frac{u+l}{2}}{\ColumnJoin{s}{\frac{u-l}{2}}}\rt)$.
 \end{lemma}
+Although the real projection of the generalized complex zonotope can
+be expressed as a real projection of template complex zonotope, a
+generalized complex zonotope itself can not be represented as as a
+template complex zonotope.  Therefore, generalized complex zonotopes
+constitute a larger class of sets than template complex zonotopes.
 
-
-The following lemma describes a sufficient condition for inclusion of
-a template complex zonotope inside another.
-\begin{lemma}[Inclusion: template complex zonotopes]~\label{lem:zon-zon} Define $\IncTcz\lt(V,V^\pr,c,c^\pr,s,s^\pr\rt) = $
+Before stating a sufficient condition for inclusion between generalized complex
+zonotopes, we review an inclusion relation between template complex
+zonotopes, which was earlier derived in~\cite{todo}.
+\begin{lemma}[Inclusion: template complex
+  zonotopes]~\label{lem:zon-zon} Given two template complex zonotopes
+  $\cz{V}{c}{s}$ and $\cz{V^\pr}{c^\pr}{s^\pr}$, define
+  $\IncTcz{V}{V^\pr}{c}{c^\pr}{s}{s^\pr} = $
 \begin{align}
 \begin{split}
 \min_{X,y}\lt(\max_{i=1}^m\lt(\lt|y_i\rt|-s_i+\sum_{j=1}^{k}\lt|X_{ij}\rt|\rt)\rt):~~~~~~VX
@@ -17,43 +27,110 @@ a template complex zonotope inside another.
 \end{split}
 \end{align}
 Then $\cz{V_{n\times m}}{c}{s}\subseteq \cz{V_{n\times
-    k}^\pr}{c^\pr}{s^\pr}$, if $\IncTcz(V,V^\pr,c,c^\pr,s,s^\pr)\leq
+    k}^\pr}{c^\pr}{s^\pr}$, if $\IncTcz{V}{V^\pr}{c}{c^\pr}{s}{s^\pr}\leq
 0$.
 \end{lemma}
 
-
-
-
-
-
-
-A parallelotope can be represented as the real projection of a
-template complex zonotope in the following way.
-\begin{lemma}[Parallelotope to template complex zonotope conversion]~\label{lem:ptope-zon}
-\begin{equation}~\label{lem:ptope-zon}\Ptope{W}{l}{u} = real\lt(\cz{W^{-1}}{\frac{u+l}{2}}{\frac{u-l}{2}} \rt).\end{equation}
+Based on Lemmas~\ref{lem:conversion} and~\ref{lem:zon-zon}, we obtain
+the following sufficient condition for inclusion between the real
+projections of generalized complex zonotopes.
+\begin{lemma}[Real Inclusion:generalized complex zonotopes]~\label{lem:gcz-gcz}
+Given two generalized complex zonotopes $\gcz{V}{c}{s}{W}{l}{u}$ and
+$\gcz{V^\pr}{c^\pr}{s^\pr}{W^\pr}{l^\pr}{u^\pr}$, define 
+\begin{multline}
+\IncGcz{V,V^\pr}{c,c^\pr}{s,s^\pr}{W,W^\pr}{l,l^\pr}{u,u^\pr} = \\
+\IncTcz{\lt[V~W\rt]}{\lt[V^\pr~W^\pr\rt]}{c+\frac{l+u}{2}}{c^\pr+\frac{l^\pr+u^\pr}{2}}{\ColumnJoin{s}{\frac{u-l}{2}}}{\ColumnJoin{s^\pr}{\frac{u^\pr-l^\pr}{2}}}
+\end{multline}
+Then  $\real\lt(\gcz{V}{c}{s}{W}{l}{u}\rt) \subseteq
+\real\lt(\gcz{V^\pr}{c^\pr}{s^\pr}{W^\pr}{l^\pr}{u^\pr}\rt)$ if\\
+$\IncGcz{V,V^\pr}{c,c^\pr}{s,s^\pr}{W,W^\pr}{l,l^\pr}{u,u^\pr}\leq 0$.
 \end{lemma}
 
-The optimum value of a linear function inside a parallelope can be quickly
-computed by the following formulas.
-\begin{lemma}[Linear optima inside parallelotope]~\label{lem:opt-ptope}
-Let $c\in\mb{R}^n$. Then
+For certain kinds of templates, the intersection of a
+sub-parallelotope with a generalized complex zonotope can be exactly
+specified as another generalized complex zonotope with the same
+template.  This is stated in the following lemma 
+\begin{lemma}
+  Let a generalized complex zonotope $\GCZ$ and a sub-parallelotope
+  $\sptope{K}{\wh{l}}{\wh{u}}$ be such that $VK=0$ and
+  $W=K(KK^T)^{-1}$.  Then, 
+\begin{equation}~\label{eqn:intersection}
+\GCZ\bigcap \sptope{K}{\wh{l}}{\wh{u}} =
+  \gcz{V}{c}{s}{W}{\max\lt(l,\wh{l}\rt)}{\min\lt(u,\wh{u}\rt)}.
+\end{equation}
+\end{lemma}
+
+While computing invariants, if the guards or staying conditions
+provide finite bounds along certain directions, then we may use these
+bounds for over-apporoximation.  In this regard, consider the
+following functions.  Given $a\in\realset^n$ and $b\in\comprealset^n$,
+we define $\minaffine{a}{b}$ and $\maxaffine{a}{b}$ as, for any
+$i\in\tup{n}$,
 \begin{align}
-\max_{x\in\Ptope{W}{l}{u}}c^Tx = c^TW^{-1}\lt(\frac{u+l}{2}\rt) + \lt|c^TW^{-1}\rt|\lt(\frac{u-l}{2}\rt),\\
-\min_{x\in\Ptope{W}{l}{u}}c^Tx = c^TW^{-1}\lt(\frac{u+l}{2}\rt) - \lt|c^TW^{-1}\rt|\lt(\frac{u-l}{2}\rt).
+\lt(\minaffine{a}{b}\rt)_i= & \left\{
+\begin{array}{l}
+b_i~~\text{if}~b_i<\inf\\
+a_i~~\text{if}~b_i=\inf
+\end{array}
+\right.\\
+\lt(\maxaffine{a}{b}\rt)_i= &\left\{
+\begin{array}{l}
+b_i~~\text{if}~b_i>-\inf\\
+a_i~~\text{if}~b_i=-\inf
+\end{array}
+\right.
 \end{align}
-\end{lemma}
-
-Following the above lemma about linear optima inside a parallelotope, we
-deduce the following formulas for inclusion between parallelotopes.
-\begin{lemma}~\label{lem:ptope-ptope}
-The inclusion $\Ptope{W^\pr}{l^\pr}{u^\pr}\subseteq \Ptope{W}{l}{u}$
-holds iff both the below conditions hold.
+%
+Then, we obtain an overapproximation of the intersection
+operation~(\ref{eqn:intersection}) as an affine function of the
+interval bounds of the generalized complex zonotope, as follows.
+\begin{lemma}
+All the following statements are true.
 \begin{enumerate}
-\item $W\lt(W^\pr\rt)^{-1}\lt(\frac{u^\pr+l^\pr}{2}\rt) +
-  \lt|W\lt(W^\pr\rt)^{-1}\rt|\lt(\frac{u^\pr-l^\pr}{2}\rt) \leq u$.
-\item $W\lt(W^\pr\rt)^{-1}\lt(\frac{u^\pr+l^\pr}{2}\rt) -
-  \lt|W\lt(W^\pr\rt)^{-1}\rt|\lt(\frac{u^\pr-l^\pr}{2}\rt) \geq l$.
+\item For a fixed $b\in\comprealset^n$, the functions
+  $\minaffine{.}{b}:\realset^n\ra\realset^n$ and
+  $\maxaffine{.}{b}:\realset^n\ra\realset^n$ are affine functions
+  (i.e., in
+  the first argument).
+\item Given $a\in\realset^n$ and $b\in\comprealset^n$,
+  $\minaffine{a}{b}\geq \min(a,b)$ and $\maxaffine{a}{b}\leq
+  \max(a,b)$.
+\item Let a generalized complex zonotope $\GCZ$ and a sub-parallelotope
+  $\sptope{K}{\wh{l}}{\wh{u}}$ be such that $VK=0$ and
+  $W=K(KK^T)^{-1}$.  Then, \[\GCZ\bigcap \sptope{K}{\wh{l}}{\wh{u}} \subseteq
+  \gcz{V}{c}{s}{W}{\maxaffine{l}{\wh{l}}}{\minaffine{u}{\wh{u}}}.\]
 \end{enumerate}
 \end{lemma}
+
+
+
+% A parallelotope can be represented as the real projection of a
+% template complex zonotope in the following way.
+% \begin{lemma}[Parallelotope to template complex zonotope conversion]~\label{lem:ptope-zon}
+% \begin{equation}~\label{lem:ptope-zon}\Ptope{W}{l}{u} = real\lt(\cz{W^{-1}}{\frac{u+l}{2}}{\frac{u-l}{2}} \rt).\end{equation}
+% \end{lemma}
+
+% The optimum value of a linear function inside a parallelope can be quickly
+% computed by the following formulas.
+% \begin{lemma}[Linear optima inside parallelotope]~\label{lem:opt-ptope}
+% Let $c\in\mb{R}^n$. Then
+% \begin{align}
+% \max_{x\in\Ptope{W}{l}{u}}c^Tx = c^TW^{-1}\lt(\frac{u+l}{2}\rt) + \lt|c^TW^{-1}\rt|\lt(\frac{u-l}{2}\rt),\\
+% \min_{x\in\Ptope{W}{l}{u}}c^Tx = c^TW^{-1}\lt(\frac{u+l}{2}\rt) - \lt|c^TW^{-1}\rt|\lt(\frac{u-l}{2}\rt).
+% \end{align}
+% \end{lemma}
+
+% Following the above lemma about linear optima inside a parallelotope, we
+% deduce the following formulas for inclusion between parallelotopes.
+% \begin{lemma}~\label{lem:ptope-ptope}
+% The inclusion $\Ptope{W^\pr}{l^\pr}{u^\pr}\subseteq \Ptope{W}{l}{u}$
+% holds iff both the below conditions hold.
+% \begin{enumerate}
+% \item $W\lt(W^\pr\rt)^{-1}\lt(\frac{u^\pr+l^\pr}{2}\rt) +
+%   \lt|W\lt(W^\pr\rt)^{-1}\rt|\lt(\frac{u^\pr-l^\pr}{2}\rt) \leq u$.
+% \item $W\lt(W^\pr\rt)^{-1}\lt(\frac{u^\pr+l^\pr}{2}\rt) -
+%   \lt|W\lt(W^\pr\rt)^{-1}\rt|\lt(\frac{u^\pr-l^\pr}{2}\rt) \geq l$.
+% \end{enumerate}
+% \end{lemma}
 
 

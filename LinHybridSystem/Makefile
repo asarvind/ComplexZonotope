@@ -4,7 +4,7 @@ output: main.tex
 
 
 add: 
-	make clean; git add Makefile main.tex macros.tex ref.bib zonotope.tex SetInclusions.tex PositiveInvariance.tex
+	make clean; git add Makefile main.tex macros.tex ref.bib prelims.tex zonotope.tex SetInclusions.tex PositiveInvariance.tex
 
 commit:
 	git commit -m "updated repo"

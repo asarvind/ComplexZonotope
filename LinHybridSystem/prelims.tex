@@ -1,0 +1,51 @@
+We consider discrete time hyrbid systems with affine dynamics in each
+location, and the guards and staying conditions are specified by
+linear inequalities.  Additionally, we also consider that for any
+location of the hybrid system, the collection of staying conditions
+and guards on the edges emanating from the location define a (possibly
+unbounded) parallelotope on a vector sub-space of the state space.  We
+call such sets as \emph{sub-parallelotopes}, defined as follows.
+%
+\begin{definition}~\label{defn:sub-parallelotope} Let
+  $K\in\mat{k}{n}{R}$ called \emph{sub-parallelotopic template}
+  s.t. $k<n$ and $\lt(KK^T\rt)$ is non-singular.  Let
+  $\wh{u},\wh{l}\in\comprealset^n$ s.t. $u\leq l$.  Then the following
+  is a sub-parallelotopic set.
+\[
+\sptope{K}{\wh{l}}{\wh{u}} = \lt\{x\in\realset^n: \wh{l}\leq Kx \leq \wh{u}\rt\}
+\]
+\end{definition}
+
+Our hybrid system is defined by a tuple 
+\begin{equation}~\label{eqn:system}
+\system =
+\lt(\locationset,\initialset,\linearmapset,\inputset,\ptemplate,\stay,\edgeset\rt)
+\end{equation}
+where $\locationset$ is a finite set of locations,
+$\initialset:\locationset\ra \mb{R}^n$ gives the set of initial points
+of the system in any location,
+$\linearmapset:\locationset\ra\mat{n}{n}{R}$ and
+$\inputset:\locationset\ra\mb{R}^n$ define the affine dynamics in any
+location $\loc\in\locationset$ as 
+\begin{equation}~\label{eqn:next}
+\trj{x}{t+1} = \map(\loc)\trj{x}{t}+u:~~~u\in\inp(\loc).
+\end{equation}
+For each location $\loc\in\locationset$, $\ptemplate(\loc)$ is the
+sub-parallelotopic template used for defining the linear inequalities
+in the staying conditions and the guards emanating from the location.
+The staying condition is a location $\loc\in\locationset$ is specified as
+$\stay(\loc)=\lt(\stay^-(\loc),\stay^+(\loc)\rt)\in\mb{R}^n\times\mb{R}^n$
+s.t $\stay^-(\loc)\leq\stay^+(\loc)$, which is the pair of upper and
+and lower bounds on the sub-parallelotopic staying set, respectively.
+The set of edges is $\edgeset$, where an edge
+$\edge\in\edgeset$ is denoted as a tuple $\edge =
+\lt(\edge^1_L,\edge^2_L,\edge^-,\edge^+,\edge_r\rt)$, described as
+follows.  The pre and post locations of the edge are
+$\edge^1_L\in\locationset$ and $\edge^2_L\in\locationset$,
+respectively.  The lower and upper bounds of the sub-parallelotopic
+constraints (guard) specified on the edge are denoted
+$\edge^-,\edge^+\in\realset^n$, respectively, such that
+$\edge^-\leq\edge^+$.  The reset map is given by a transformation
+matrix $\edge_r\in\mat{n}{n}{R}$.
+
+The dynamics of the system is defined by a trajectory 
