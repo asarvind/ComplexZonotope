@@ -56,22 +56,28 @@
 \newcommand{\cz}[3]{\mc{C}\lt(#1,#2,#3\rt)}
 \newcommand{\CZO}{\lt(V,0,s\rt)}
 \newcommand{\czo}[2]{\mc{Z}\lt(#1,0,#2\rt)}
-\newcommand{\trj}[2]{\tbf{#1}(#2)}
+\newcommand{\trj}[2]{{\bf #1}(#2)}
 \newcommand{\IncTcz}[6]{\mc{T}\lt(#1,#2,#3,#4,#5,#6\rt)}
 \newcommand{\IncGcz}[6]{\mc{G}\lt(#1,#2,#3,#4,#5,#6\rt)}
 \newcommand{\Ptope}[3]{\mc{P}\left(#1,#2,#3\right)}
 \newcommand{\gcz}[6]{\mathcal{Z}\lt(#1,#2,#3,#4,#5,#6\rt)}
 \newcommand{\sptope}[3]{\mathcal{P}\lt(#1,#2,#3\rt)}
 \newcommand{\system}{\mb{H}}
-\newcommand{\locationset}{\mb{L}}
-\newcommand{\edgeset}{\mb{E}}
-\newcommand{\stay}{\mb{S}}
-\newcommand{\linearmapset}{\mb{A}}
-\newcommand{\inputset}{\mb{U}}
+\newcommand{\locationset}{Q}
+\newcommand{\edgeset}{E}
+\newcommand{\stay}{\gamma}
+\newcommand{\linearmapset}{\mc{A}}
+\newcommand{\inputset}{U}
 \newcommand{\initialset}{\Omega}
 \newcommand{\edge}{\sigma}
-\newcommand{\loc}{\mu}
+\newcommand{\loc}{q}
 \newcommand{\map}{\linearmapset}
 \newcommand{\inp}{\inputset}
-\newcommand{\ptemplate}{\mb{K}}
-\newcommand{\systrj}[3]{\lt(\tbf{#1},\tbf{#2}\rt)\lt(#3\rt)}
+\newcommand{\ptemplate}{\mc{K}}
+\newcommand{\systrj}[2]{\lt({\bf #1},{\bf #2}\rt)}
+\newcommand{\wholenums}{\mb{Z}_\geq 0}
+\newcommand{\preloc}[1]{#1^1_{\locationset}}
+\newcommand{\postloc}[1]{#1^2_{\locationset}}
+\newcommand{\upperedgebound}[1]{#1^+}
+\newcommand{\loweredgebound}[1]{#1^-}
+\newcommand{\reset}[1]{#1_r}
