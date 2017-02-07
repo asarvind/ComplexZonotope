@@ -1,3 +1,48 @@
+Consider the following two kinds of functions over sets, which are related to the intralocation and interlocation dynamics of $\system$, respectively.
+\begin{enumerate}
+\item For any location $\loc\in\locationset$, $\locationtransition{\loc}:2^{\realset^n}\ra 2^{\realset^n}$, where 
+\begin{multline*}
+\locationtransition{q}\lt(S\rt) = \lt(\map\lt(\loc\rt)\lt(S\bigcap\staysptope{\loc}\rt)\oplus \inputset\lt(\loc\rt)\rt)\\  \bigcap \staysptope{\loc}.
+\end{multline*}
+\item For any edge $\edge\in\edgeset$, $\edgetransition{\edge}:2^{\realset^n}\ra 2^{\realset^n}$ where
+\begin{multline*}
+\edgetransition{\edge}\lt(S\rt) =  \reset{\edge}\lt(S\bigcap \guardsptope{\edge}\rt) \\ \bigcap\staysptope{\postloc{\edge}}.
+\end{multline*}
+\end{enumerate}
+
+We call a mapping $\hybridset:\locationset\ra 2^{\realset^n}$ as
+ a \emph{state set} because for such a mapping, we can identify a set
+ of states $\lt\{\lt(x,\loc\rt):x\in\hybridset\lt(\loc\rt)\rt\}$.  We
+ call $\hybridset\lt(\loc\rt)$ as
+ the projection of $\hybridset$ in the location $\loc$.
+
+\begin{definition}
+A state set $\hybridset$ is a positive invariant if
+both the following are true.
+\begin{align}
+& \forall\loc\in\locationset,~~\locationtransition{q}\lt(\hybridset(\loc)\rt) \subseteq \hybridset\lt(\loc\rt)\\
+& \forall\edge\in\edgeset,~~\edgetransition{\edge}\lt(\hybridset\lt(\preloc{\edge}\rt)\rt) \subseteq
+  \hybridset\lt(\postloc{\edge}\rt).
+\end{align}
+\end{definition}
 
 
+Our objective is to find positive invariants whose projection in any
+location is a generalized complex zonotope.  Firstly, for each
+location $\loc\in\locationset$, we fix the primary template as
+$V_q\in\mat{n}{m(q)}{\mb{C}}$ and the secondary tempalte as
+$\lt[\pseudoinverse{\ptemplate\lt(q\rt)}\rt]$.  The secondary template
+is chosen as such so that Lemma~\ref{lem:intersection} can be used to
+compute the intersection with the sub-parallelotopic staying and guard
+conditions.  Next, we derive sufficient conditions for finding the
+primary offsets, scaling factors and sub-parallelotopic bounds of the
+generalized complex zonotopeic projections in all locations such that
+the state set so defined is positively invariant.
 
+\begin{lemma}
+For each $\loc\in\locationset$, let $\hybridset(q) = $
+we have
+$\locationtransition{q}\lt(\hybridset(\loc)\rt) \subseteq
+\hybridset\lt(\loc\rt)$ if the following is true.
+
+\end{lemma}

@@ -1,15 +1,16 @@
 We consider discrete time hyrbid systems with affine dynamics in each
 location, and the guards and staying conditions are specified by
-linear inequalities.  Additionally, we also consider that for any
-location of the hybrid system, the collection of staying conditions
-and guards on the edges emanating from the location define a (possibly
-unbounded) parallelotope on a vector sub-space of the state space.  We
-call such sets as \emph{sub-parallelotopes}, defined as follows.
+linear inequalities.  Additionally, for any location of the hybrid
+system, we consider that the collection of staying conditions and
+guards on the edges emanating from the location define a parallelotope
+(possibly unbounded) on a vector sub-space strictly contained in the
+state space.  We call such sets as \emph{sub-parallelotopes}, defined
+as follows.
 %
 \begin{definition}~\label{defn:sub-parallelotope} Let
-  $K\in\mat{k}{n}{R}$ called \emph{sub-parallelotopic template}
-  s.t. $k<n$ and $\lt(KK^T\rt)$ is non-singular.  Let
-  $\wh{u},\wh{l}\in\comprealset^n$ s.t. $u\leq l$.  Then the following
+  $K\in\mat{k}{n}{R}$ such that $k<n$ and $\lt(KK^T\rt)$ is
+  non-singular, which we call \emph{sub-parallelotopic template}.  Let
+  $\wh{u},\wh{l}\in\comprealset^n$ such that $u\leq l$.  Then the following
   is a sub-parallelotopic set.
 \[
 \sptope{K}{\wh{l}}{\wh{u}} = \lt\{x\in\realset^n: \wh{l}\leq Kx \leq \wh{u}\rt\}
@@ -19,7 +20,7 @@ call such sets as \emph{sub-parallelotopes}, defined as follows.
 Our hybrid system is specified by a tuple 
 \begin{equation}~\label{eqn:system}
 \system =
-\lt(\locationset,\initialset,\linearmapset,\inputset,\ptemplate,\stay,\edgeset\rt)
+\lt(\locationset,\linearmapset,\inputset,\ptemplate,\stay,\edgeset\rt)
 \end{equation}
 where $\locationset$ is a finite set of locations,
 $\initialset:\locationset\ra 2^{\mb{R}^n}$ gives the set of initial points
@@ -30,29 +31,30 @@ location $\loc\in\locationset$ as
 \begin{equation}~\label{eqn:next}
 \trj{x}{t+1} = \map(\loc)\trj{x}{t}+u:~~~u\in\inp(\loc).
 \end{equation}
-For each location $\loc\in\locationset$, $\ptemplate(\loc)$ is the
-sub-parallelotopic template used for defining the linear inequalities
-in the staying conditions and the guards emanating from the location.
-The staying condition in a location $\loc\in\locationset$ is specified
-by
-$\stay(\loc)=\lt(\stay^-(\loc),\stay^+(\loc)\rt)\in\mb{R}^n\times\mb{R}^n$
-s.t $\stay^-(\loc)\leq\stay^+(\loc)$, where $\stay^-(\loc)$ is the
-lower bound and $\stay^+(\loc)$ is the upper bound on the
-sub-parallelotopic staying set.  The set of edges is denoted by
-$\edgeset$, where an edge $\edge\in\edgeset$ is denoted as by tuple
-$\edge =
+For each location $\loc\in\locationset$,
+$\ptemplate(\loc)\in\mat{k(q)}{n}{\realset}$ is the sub-parallelotopic
+template used for defining the linear inequalities in the staying
+conditions and the guards emanating from the location.  The staying
+condition in a location $\loc\in\locationset$ is specified by a pair
+of upper and lower bounds,
+$\stay(\loc)=\lt(\stay^-(\loc),\stay^+(\loc)\rt)\in\mb{R}^n\times\mb{R}^n:
+~~\stay^-(\loc)\leq\stay^+(\loc)$, on the sub-parallelotope
+$\sptope{\ptemplate\lt(\loc\rt)}{\stay^-(\loc)}{\stay^+(\loc)}$.  The
+set of edges is denoted by $\edgeset$, where an edge
+$\edge\in\edgeset$ is denoted as by tuple $\edge =
 \lt(\preloc{\edge},\postloc{\edge},\loweredgebound{\edge},\upperedgebound{\edge},\reset{\edge}\rt)$, described as
 follows.  The pre and post locations of the edge are
-$\edge^1_L\in\locationset$ and $\edge^2_L\in\locationset$,
-respectively.  The lower and upper bounds of the sub-parallelotopic
-constraints (guard) specified on the edge are denoted
-$\edge^-,\edge^+\in\realset^n$, respectively, such that
-$\edge^-\leq\edge^+$.  The reset map is given by a transformation
-matrix $\edge_r\in\mat{n}{n}{R}$.
+$\preloc{\edge}\in\locationset$ and $\postloc{\edge}\in\locationset$,
+respectively.  The pair of upper and lower bounds
+$\lt(\edge^-,\edge^+\rt)\in\realset^n\times\realset^n:~~\edge^-\leq\edge^+$
+specified on the edge define the sub-parallelotopic guard set
+$\sptope{\ptemplate\lt(\preloc{\edge}\rt)}{\edge^-}{\edge^+}$.  The
+reset map is given by a transformation matrix
+$\edge_r\in\mat{n}{n}{R}$.
 
 A trajectory of the system~$\system$ is a function
 $\systrj{x}{\loc}:\wholenums\ra\realset^n\times\locationset$, such
-that $\trj{x}{0}\in\initialset\lt(\trj{\loc}{0}\rt)$ and for all
+that for all
 $t\in\wholenums$, one of the following is true.
 \begin{enumerate}
 \item Intralocation dynamics.
@@ -70,8 +72,10 @@ $t\in\wholenums$, one of the following is true.
 \begin{split}
 & \exists \edge\in\edgeset~~\text{such that}\\
 & \trj{\loc}{t}=\preloc{\edge},~~\trj{\loc}{t+1}=\postloc{\edge}\\
-& \trj{x}{t}\in\sptope{\ptemplate\lt(\trj{\loc}{t}\rt)}{\max\lt(\loweredgebound{\edge},\stay^-\lt(\preloc{\edge}\rt)\rt)}{\min\lt(\upperedgebound{\edge},\stay^+\lt(\preloc{\edge}\rt)\rt)}\\
-& \trj{x}{t+1}\in \sptope{\ptemplate\lt(\trj{x}{t+1}\rt)}{\stay^-\lt(\postloc{\edge}\rt)}{\stay^+\lt(\postloc{\edge}\rt)}.
+& \trj{x}{t}\in\sptope{\ptemplate\lt(\preloc{\edge}\rt)}{\max\lt(\loweredgebound{\edge},\stay^-\lt(\preloc{\edge}\rt)\rt)}{\min\lt(\upperedgebound{\edge},\stay^+\lt(\preloc{\edge}\rt)\rt)} \\
+& \trj{x}{t+1}\in \sptope{\ptemplate\lt(\postloc{\edge}\rt)}{\stay^-\lt(\postloc{\edge}\rt)}{\stay^+\lt(\postloc{\edge}\rt)}\\
+& \trj{x}{t+1} = \reset{\edge}\trj{x}{t}.
 \end{split}
 \end{align}
 \end{enumerate}
+

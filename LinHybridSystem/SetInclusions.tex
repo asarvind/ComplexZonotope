@@ -22,8 +22,8 @@ zonotopes, which was earlier derived in~\cite{todo}.
   $\IncTcz{V}{V^\pr}{c}{c^\pr}{s}{s^\pr} = $
 \begin{align}
 \begin{split}
-\min_{X,y}\lt(\max_{i=1}^m\lt(\lt|y_i\rt|-s_i+\sum_{j=1}^{k}\lt|X_{ij}\rt|\rt)\rt):~~~~~~VX
-= V^\pr\dg(s^\pr),~~~Vy = \lt(c^\pr-c\rt).\\
+%\min_{X,y}\lt(\max_{i=1}^m\lt(\lt|y_i\rt|-s_i+\sum_{j=1}^{k}\lt|X_{ij}\rt|\rt)\rt):
+\min_{X,y}\lt(\scalebound{X}{y}{s}{m}{k}\rt):~~~~~~\transfer{V}{V^\pr}{s^\pr}{X},~~~\centertransfer{V}{c}{c^\pr}{y}.\\
 \end{split}
 \end{align}
 Then $\cz{V_{n\times m}}{c}{s}\subseteq \cz{V_{n\times
@@ -50,7 +50,7 @@ For certain kinds of templates, the intersection of a
 sub-parallelotope with a generalized complex zonotope can be exactly
 specified as another generalized complex zonotope with the same
 template.  This is stated in the following lemma 
-\begin{lemma}
+\begin{lemma}~\label{lem:intersection}
   Let a generalized complex zonotope $\GCZ$ and a sub-parallelotope
   $\sptope{K}{\wh{l}}{\wh{u}}$ be such that $VK=0$ and
   $W=K(KK^T)^{-1}$.  Then, 
@@ -84,7 +84,7 @@ a_i~~\text{if}~b_i=-\inf
 Then, we obtain an overapproximation of the intersection
 operation~(\ref{eqn:intersection}) as an affine function of the
 interval bounds of the generalized complex zonotope, as follows.
-\begin{lemma}
+\begin{lemma}~\label{lem:affineapproximation}
 All the following statements are true.
 \begin{enumerate}
 \item For a fixed $b\in\comprealset^n$, the functions
