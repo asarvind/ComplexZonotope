@@ -30,19 +30,54 @@ both the following are true.
 Our objective is to find positive invariants whose projection in any
 location is a generalized complex zonotope.  Firstly, for each
 location $\loc\in\locationset$, we fix the primary template as
-$V_q\in\mat{n}{m(q)}{\mb{C}}$ and the secondary tempalte as
-$\lt[\pseudoinverse{\ptemplate\lt(q\rt)}\rt]$.  The secondary template
+$V(\loc)\in\mat{n}{m(q)}{\mb{C}}$ and the secondary tempalte as
+$\lt[\sectemp{\loc}\rt]$.  The secondary template
 is chosen as such so that Lemma~\ref{lem:intersection} can be used to
 compute the intersection with the sub-parallelotopic staying and guard
 conditions.  Next, we derive sufficient conditions for finding the
 primary offsets, scaling factors and sub-parallelotopic bounds of the
-generalized complex zonotopeic projections in all locations such that
+generalized complex zonotopic projections in all locations such that
 the state set so defined is positively invariant.
 
 \begin{lemma}
-For each $\loc\in\locationset$, let $\hybridset(q) = $
-we have
-$\locationtransition{q}\lt(\hybridset(\loc)\rt) \subseteq
-\hybridset\lt(\loc\rt)$ if the following is true.
-
+  Let  
+  $\hybridset$ be a state set whose projection in in each
+  location $\loc\in\locationset$ is $\hybridset(q) =
+  \gcz{V(\loc)}{c(\loc)}{s(\loc)}{W(\loc)}{l(\loc)}{u(\loc)}$ where
+  $W(\loc)={\lt[\sectemp{\loc}\rt]}$.  Let us consider that the additive input in each location
+  $\loc\in\locationset$ can be overapproximated as $\inputset(\loc) = \cz{B_{n\times
+      m^\pr(q)}(\loc)}{b(\loc)}{r(\loc)}$, then
+   $\locationtransition{q}\lt(\hybridset(\loc)\rt)
+  \subseteq \hybridset\lt(\loc\rt)$ holds if the following is true.
+\begin{align}
+\begin{split}
+& \exists X(\loc)\in\mat{\lt(m(\loc)+k(\loc)\rt)}{\lt(m(\loc)+k(\loc)+m^\pr(\loc)\rt)}{\mb{C}},~
+y(\loc)\in\realset^{m(\loc)+k(\loc)}~\text{and}\\&~u^\pr(\loc),l^\pr(\loc)\in\realset^{k(\loc)}~\text{such that}:\\
+& \left[V(\loc),~~W(\loc)\rt]X(\loc) =
+  [AV(\loc)~B(\loc)]\dg\lt(\cjoin{\hspace{3em}~~~~~~~~s(\loc)}{\frac{\minaffine{\stay^+(\loc)}{u(\loc)}
+      -\maxaffine{\stay^-(\loc)}{l(\loc)}}{2}}{\hspace{3em}~~~~~~~~r(\loc)}\rt),
+\end{split}\\
+\begin{split}
+  & \left[V(\loc),~~W(\loc)\rt]y(\loc) = 
+    \map(\loc)\lt(c(\loc)+\frac{\minaffine{\stay^+(\loc)}{u(\loc)}
+     +\maxaffine{\stay^-(\loc)}{l(\loc)}}{2}\rt)\\ & \hspace{10em} +
+  b(\loc)-c(\loc)-\frac{u^\pr(\loc)+l^\pr(\loc)}{2},
+\end{split}\\
+\begin{split}
+& \forall
+i\in\tup{m(\loc)},~\lt|y_i(\loc)\rt|+\sum_{i=1}^{m(\loc)+k(\loc)+m^\pr(\loc)}\lt|X_{ij}(\loc)\rt|\leq
+s_i(\loc),
+\end{split}\\
+\begin{split}
+& \forall
+i\in\lt\{m(\loc)+1,...,m(\loc)+k(\loc)\rt\},\\
+&\lt|y_i(\loc)\rt|+\sum_{i=1}^{m(\loc)+k(\loc)+m^\pr(\loc)}\lt|X_{ij}(\loc)\rt|\leq
+\frac{u^\pr(\loc)-l^\pr(\loc)}{2},
+\end{split}\\
+& l^\pr(\loc)\leq u^\pr(\loc),\\
+\begin{split}
+& \maxaffine{l^\pr(\loc)}{\stay^-(\loc)}\geq
+l(\loc)~\text{and}~\minaffine{u^\pr(\loc)}{\stay^+(\loc)}\leq u(\loc).
+\end{split}
+\end{align}
 \end{lemma}

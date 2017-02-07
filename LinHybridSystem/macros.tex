@@ -89,4 +89,6 @@
 \newcommand{\transfer}[4]{#1#4 = #2\dg\lt(#3\rt)}
 \newcommand{\centertransfer}[4]{#1#4 = #3-#2}
 \newcommand{\scalebound}[5]{\max_{i=1}^{#4}\lt(\lt(\sum_{j=1}^{#5}\lt|#1\rt|_j\rt)-#3_i+#2_i\rt)}
-\newcommand{\pseudoinverse}[1]{#1\lt(#1#1^T\rt)^{-1}}
+\newcommand{\contemp}[1]{#1\lt(#1#1^T\rt)^{-1}}
+\newcommand{\sectemp}[1]{\contemp{\ptemplate\lt(#1\rt)}}
+\newcommand{\cjoin}[3]{\begin{array}{l}#1\\#2\\#3\end{array}}
