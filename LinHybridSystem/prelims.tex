@@ -79,3 +79,11 @@ $t\in\wholenums$, one of the following is true.
 \end{align}
 \end{enumerate}
 
+A state of the hybrid system is a pair $(x,\loc)$, where
+$x\in\realset^n$ and $\loc\in\locationset$.  Then, we call a mapping
+$\hybridset:\locationset\ra 2^{\realset^n}$ as a \emph{state set}
+because for such a mapping, we can identify a set of states
+$\lt\{\lt(x,\loc\rt):x\in\hybridset\lt(\loc\rt)\rt\}$.  We call
+$\hybridset\lt(\loc\rt)$ as the projection of $\hybridset$ in the
+location $\loc$.
+

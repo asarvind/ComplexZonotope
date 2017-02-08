@@ -1,20 +1,25 @@
-Consider the following two kinds of functions over sets, which are related to the intralocation and interlocation dynamics of $\system$, respectively.
+For computing the possible reachable state from a given state set in
+one transition, we define the following functions related to the
+intralocation and interlocation dynamics of the hybrid system.
 \begin{enumerate}
-\item For any location $\loc\in\locationset$, $\locationtransition{\loc}:2^{\realset^n}\ra 2^{\realset^n}$, where 
+\item For any location $\loc\in\locationset$, $\locationtransition{\loc}:2^{\realset^n}\ra 2^{\realset^n}$, defined as
 \begin{multline*}
 \locationtransition{q}\lt(S\rt) = \lt(\map\lt(\loc\rt)\lt(S\bigcap\staysptope{\loc}\rt)\oplus \inputset\lt(\loc\rt)\rt)\\  \bigcap \staysptope{\loc}.
 \end{multline*}
-\item For any edge $\edge\in\edgeset$, $\edgetransition{\edge}:2^{\realset^n}\ra 2^{\realset^n}$ where
+\item For any edge $\edge\in\edgeset$, $\edgetransition{\edge}:2^{\realset^n}\ra 2^{\realset^n}$, defined as
 \begin{multline*}
 \edgetransition{\edge}\lt(S\rt) =  \reset{\edge}\lt(S\bigcap \guardsptope{\edge}\rt) \\ \bigcap\staysptope{\postloc{\edge}}.
 \end{multline*}
 \end{enumerate}
 
-We call a mapping $\hybridset:\locationset\ra 2^{\realset^n}$ as
- a \emph{state set} because for such a mapping, we can identify a set
- of states $\lt\{\lt(x,\loc\rt):x\in\hybridset\lt(\loc\rt)\rt\}$.  We
- call $\hybridset\lt(\loc\rt)$ as
- the projection of $\hybridset$ in the location $\loc$.
+A positively invariant set is a set of state of the hybrid system such
+that all trajectories beginning at any state in the positive invariant
+remain withing the positive invariant.  Since we identity set of
+states of the hybrid system by a mapping called state set,
+equivalently, we can define positively invariant state sets as
+follows. This is based on the the reachable states by
+intralocation and interlocation dynamics of the system in one step,
+as follows.
 
 \begin{definition}
 A state set $\hybridset$ is a positive invariant if
@@ -41,21 +46,24 @@ the state set so defined is positively invariant.
 
 \begin{lemma}
   Let  
-  $\hybridset$ be a state set whose projection in in each
-  location $\loc\in\locationset$ is $\hybridset(q) =
+  us consider a state set $\hybridset$ whose projection in in each
+  location $\loc\in\locationset$ is $\hybridset(\loc) =
   \gcz{V(\loc)}{c(\loc)}{s(\loc)}{W(\loc)}{l(\loc)}{u(\loc)}$ where
   $W(\loc)={\lt[\sectemp{\loc}\rt]}$.  Let us consider that the additive input in each location
   $\loc\in\locationset$ can be overapproximated as $\inputset(\loc) = \cz{B_{n\times
-      m^\pr(q)}(\loc)}{b(\loc)}{r(\loc)}$, then
-   $\locationtransition{q}\lt(\hybridset(\loc)\rt)
-  \subseteq \hybridset\lt(\loc\rt)$ holds if the following is true.
+      m^\pr(q)}(\loc)}{b(\loc)}{r(\loc)}$.  Then
+   $\locationtransition{\loc}\lt(\hybridset(\loc)\rt)
+  \subseteq \hybridset\lt(\loc\rt)$ holds if,
 \begin{align}
 \begin{split}
 & \exists X(\loc)\in\mat{\lt(m(\loc)+k(\loc)\rt)}{\lt(m(\loc)+k(\loc)+m^\pr(\loc)\rt)}{\mb{C}},~
-y(\loc)\in\realset^{m(\loc)+k(\loc)}~\text{and}\\&~u^\pr(\loc),l^\pr(\loc)\in\realset^{k(\loc)}~\text{such that}:\\
-& \left[V(\loc),~~W(\loc)\rt]X(\loc) =
-  [AV(\loc)~B(\loc)]\dg\lt(\cjoin{\hspace{3em}~~~~~~~~s(\loc)}{\frac{\minaffine{\stay^+(\loc)}{u(\loc)}
-      -\maxaffine{\stay^-(\loc)}{l(\loc)}}{2}}{\hspace{3em}~~~~~~~~r(\loc)}\rt),
+y(\loc)\in\mb{C}^{m(\loc)+k(\loc)}~\text{and}\\&~u^\pr(\loc),l^\pr(\loc)\in\realset^{k(\loc)}~\text{such
+  that}:\\
+\end{split}\\
+\begin{split}
+& \left[V(\loc),~W(\loc)\rt]X(\loc) =
+  [AV(\loc),~AW(\loc),~B(\loc)]\dg\lt(\cjoin{\hspace{3em}~~~~~~~~s(\loc)}{\frac{\minaffine{\stay^+(\loc)}{u(\loc)}
+      -\maxaffine{\stay^-(\loc)}{l(\loc)}}{2}}{\hspace{3em}~~~~~~~~r(\loc)}\rt),\\
 \end{split}\\
 \begin{split}
   & \left[V(\loc),~~W(\loc)\rt]y(\loc) = 
@@ -79,5 +87,31 @@ i\in\lt\{m(\loc)+1,...,m(\loc)+k(\loc)\rt\},\\
 & \maxaffine{l^\pr(\loc)}{\stay^-(\loc)}\geq
 l(\loc)~\text{and}~\minaffine{u^\pr(\loc)}{\stay^+(\loc)}\leq u(\loc).
 \end{split}
+\end{align}
+\end{lemma}
+
+\begin{lemma}
+  Let us consider a state set $\hybridset$ whose projection in each location
+  $\loc\in\locationset$ is $\hybridset(\loc) =
+  \gcz{V(\loc)}{c(\loc)}{s(\loc)}{W(\loc)}{l(\loc)}{u(\loc)}$ where
+  $W(\loc)={\lt[\sectemp{\loc}\rt]}$.  Then for any edge
+  $\edge\in\edgeset$, $\edgetransition{\edge}\lt(\hybridset\lt(\preloc{\edge}\rt)\rt) \subseteq
+  \hybridset\lt(\postloc{\edge}\rt)$
+    holds if the following is true.
+\begin{align}
+\begin{split}
+& \exists X(\edge)\in
+\mat{\lt(m\lt(\postloc{\edge}\rt)+k\lt(\postloc{\edge}\rt)\rt)}{\lt(m\lt(\preloc{\edge}\rt)+k\lt(\preloc{\edge}\rt)\rt)}{\mb{C}}~\text{and}~y(\edge)\in
+\mb{C}^{m\lt(\preloc{\edge}\rt)+k\lt(\preloc{\edge}\rt)},\\
+& \exists u^\pr(\edge),l^\pr(\edge)\in \realset^{k\lt(\postloc{\edge}\rt)}~\text{and}~s^\pr(\edge)\in\realset^{k\lt(\preloc{\edge}\rt)}~\text{s.t.}\\
+\end{split}\\
+\begin{split}
+& \lt[V\lt(\postloc{\edge}\rt),~W\lt(\postloc{\edge}\rt)\rt]X(\edge) = \reset{\edge}\lt[V\lt(\preloc{\edge}\rt),~W\lt(\preloc{\edge}\rt)\rt]\dg
+\ColumnJoin{s\lt(\preloc{\edge}\rt)}{s^\pr(\edge)}
+\end{split}\\
+\begin{split}
+s^\pr(\edge) = \minaffine{u\lt(\preloc{\edge}\rt)}{\min\lt(\stay^+\lt(\preloc{\edge},\edge^+\rt)\rt)}-
+\maxaffine{l\lt(\preloc{\edge}\rt)}{\max\lt(\stay^-\lt(\preloc{\edge},\edge^-\rt)\rt)},\\
+\end{split}\\
 \end{align}
 \end{lemma}
