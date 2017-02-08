@@ -58,7 +58,7 @@ the state set so defined is positively invariant.
 \begin{split}
 & \exists X(\loc)\in\mat{\lt(m(\loc)+k(\loc)\rt)}{\lt(m(\loc)+k(\loc)+m^\pr(\loc)\rt)}{\mb{C}},~
 y(\loc)\in\mb{C}^{m(\loc)+k(\loc)}~\text{and}\\&~u^\pr(\loc),l^\pr(\loc)\in\realset^{k(\loc)}~\text{such
-  that}:\\
+  that}:
 \end{split}\\
 \begin{split}
 & \left[V(\loc),~W(\loc)\rt]X(\loc) =
@@ -69,7 +69,7 @@ y(\loc)\in\mb{C}^{m(\loc)+k(\loc)}~\text{and}\\&~u^\pr(\loc),l^\pr(\loc)\in\real
   & \left[V(\loc),~~W(\loc)\rt]y(\loc) = 
     \map(\loc)\lt(c(\loc)+\frac{\minaffine{\stay^+(\loc)}{u(\loc)}
      +\maxaffine{\stay^-(\loc)}{l(\loc)}}{2}\rt)\\ & \hspace{10em} +
-  b(\loc)-c(\loc)-\frac{u^\pr(\loc)+l^\pr(\loc)}{2},
+  b(\loc)-c(\loc)-W(\loc)\frac{u^\pr(\loc)+l^\pr(\loc)}{2},
 \end{split}\\
 \begin{split}
 & \forall
@@ -103,23 +103,45 @@ l(\loc)~\text{and}~\minaffine{u^\pr(\loc)}{\stay^+(\loc)}\leq u(\loc).
 & \exists X(\edge)\in
 \mat{\lt(m\lt(\postloc{\edge}\rt)+k\lt(\postloc{\edge}\rt)\rt)}{\lt(m\lt(\preloc{\edge}\rt)+k\lt(\preloc{\edge}\rt)\rt)}{\mb{C}}~\text{and}~y(\edge)\in
 \mb{C}^{m\lt(\preloc{\edge}\rt)+k\lt(\preloc{\edge}\rt)},\\
-& \exists u^\pr(\edge),l^\pr(\edge)\in \realset^{k\lt(\postloc{\edge}\rt)}, c~\text{and}~s^\pr(\edge)\in\realset^{k\lt(\preloc{\edge}\rt)}~\text{s.t.}\\
+& \exists u^\pr(\edge),l^\pr(\edge)\in \realset^{k\lt(\postloc{\edge}\rt)}, c^\pr(\sigma)\in\mb{R}^n~\text{and}~s^\pr(\edge)\in\realset^{k\lt(\preloc{\edge}\rt)}~\text{s.t.}
 \end{split}\\
 \begin{split}
 & \lt[V\lt(\postloc{\edge}\rt),~W\lt(\postloc{\edge}\rt)\rt]X(\edge) = \reset{\edge}\lt[V\lt(\preloc{\edge}\rt),~W\lt(\preloc{\edge}\rt)\rt]\dg
-\ColumnJoin{s\lt(\preloc{\edge}\rt)}{s^\pr(\edge)}
+\ColumnJoin{s\lt(\preloc{\edge}\rt)}{s^\pr(\edge)}\\
+\end{split}
+\end{align}
+\begin{align}
+\begin{split}
+s^\pr(\edge) = \frac{\minaffine{u\lt(\preloc{\edge}\rt)}{\min\lt(\stay^+\lt(\preloc{\edge},\edge^+\rt)\rt)}-
+\maxaffine{l\lt(\preloc{\edge}\rt)}{\max\lt(\stay^-\lt(\preloc{\edge},\edge^-\rt)\rt)}}{2},\\
+\end{split}
+\end{align}
+\begin{align}
+\begin{split}
+& \lt[V\lt(\postloc{\edge}\rt),~W\lt(\postloc{\edge}\rt)\rt]y(\edge) = \reset{\edge}\lt(c\lt(\preloc{\edge}\rt)+c^\pr(\edge)\rt)- 
+c\lt(\postloc{\edge}\rt) - W\lt(\postloc{\edge}\rt)\frac{u^\pr\lt(\edge\rt)+l^\pr\lt(\edge\rt)}{2},\\
+\end{split}
+\end{align}
+\begin{align}
+\begin{split}
+& c^\pr(\edge) = W\lt(\preloc{\edge}\rt)\frac{\minaffine{u\lt(\preloc{\edge}\rt)}{\min\lt(\stay^+\lt(\preloc{\edge},\edge^+\rt)\rt)}+
+\maxaffine{l\lt(\preloc{\edge}\rt)}{\max\lt(\stay^-\lt(\preloc{\edge},\edge^-\rt)\rt)}}{2}
+\end{split}
+\end{align}
+\begin{align}
+\begin{split}
+& \forall i\in \tup{m\lt(\postloc{\edge}\rt)}:
+ \lt|y_i\rt|+\sum_{j=1}^{m\lt(\preloc{\edge}\rt)+k\lt(\preloc{\edge}\rt)}\lt|X_{ij}\rt|\leq s_i\lt(\postloc{\edge}\rt)
 \end{split}\\
 \begin{split}
-s^\pr(\edge) = \minaffine{u\lt(\preloc{\edge}\rt)}{\min\lt(\stay^+\lt(\preloc{\edge},\edge^+\rt)\rt)}-
-\maxaffine{l\lt(\preloc{\edge}\rt)}{\max\lt(\stay^-\lt(\preloc{\edge},\edge^-\rt)\rt)},\\
+& \forall i\in
+\lt\{m\lt(\postloc{\edge}\rt)+1,...,m\lt(\postloc{\edge}\rt)+k\lt(\postloc{\edge}\rt)\rt\}:
+\lt|y_i\rt|+\sum_{j=1}^{m\lt(\preloc{\edge}\rt)+k\lt(\preloc{\edge}\rt)}\lt|X_{ij}\rt|\leq \frac{u^\pr_i\lt(\edge\rt)+l^\pr_i\lt(\edge\rt)}{2}
 \end{split}\\
 \begin{split}
-& \lt[V\lt(\postloc{\edge}\rt),~W\lt(\postloc{\edge}\rt)\rt]y(\edge) = \reset{\edge}\lt(c\lt(\preloc{\edge}\rt)+c^\pr\rt)rt)- 
-c\lt(\postloc{\edge}\rt) - W\lt(\postloc{\edge}\rt)\frac{u\lt(\postloc{\edge}\rt)+l\lt(\postloc{\edge}\rt)}{2},\\
-\end{split}
-\begin{split}
-& c^\pr(\edge) = W\lt(\preloc{\edge}\rt)\frac{\min\lt(\stay^+\lt(\preloc{\edge},\edge^+\rt)\rt)}+
-\maxaffine{l\lt(\preloc{\edge}\rt)}{\max\lt(\stay^-\lt(\preloc{\edge},\edge^-\rt)\rt)}{2}
-\end{split}
+l^\pr(\edge)\leq u^\pr(\edge)
+\end{split}\\
+& \maxaffine{l^\pr(\edge)}{\stay^-\lt(\postloc{\edge}\rt)}\geq
+l\lt(\postloc{\edge}\rt)~\text{and}~\minaffine{u^\pr(\edge)}{\stay^+\lt(\postloc{\edge}\rt)}\leq u\lt(\postloc{\edge}\rt).
 \end{align}
 \end{lemma}
