@@ -1,37 +1,36 @@
-  So, let us define the
-following functions 
 
-
-Then a state set is positively invariant if the reachable set in one
-step by both the intralocation and interlocation dynamics is contained
-within the state set.
-
-
-Our objective is to find positive invariants whose projection in any
+Our objective is to find positive invariants whose projection in every
 location is a generalized complex zonotope.  We use a template based
-approach where we first fix the primary and secondary template in each
-location $\loc\in\locationset$ as as $V(\loc)\in\mat{n}{m(q)}{\mb{C}}$
-and $W(\loc) = \lt[\sectemp{\loc}\rt]$, respectively.  The secondary
-template is chosen as above so that intersection with the
+approach, where we fix suitable primary and secondary templates and
+then find corresponding primary offsets, scaling factors and
+sub-parallelotopic bounds to get a positive invariant.  Let us denote
+the choice of the primary and secondary template in a location
+$\loc\in\locationset$ as $V(\loc)\in\mat{n}{m(q)}{\mb{C}}$ and
+$W(\loc)$, respectively, such that
+\begin{equation}~\label{eqn:tempselect}
+V(\loc)\ptemplate(\loc)=0~\text{and}~
+W(\loc)=\lt[\sectemp{\loc}\rt]
+\end{equation}  
+The templates are chosen as above so that intersection with the
 sub-parallelotopic staying and guard conditions can be conveniently
-computed, based on Lemma~\ref{lem:intersection}.  Next, we
-try to find corresponding primary offsets, scaling factors
-and sub-parallelotopic bounds of the generalized complex zonotopic
-projections in all locations so that the state set so defined is
-positively invariant.
+computed, based on Lemma~\ref{lem:intersection}.  We shall discuss
+further considerations in selecting the primary template later in this
+section.
 
-To this end, we state the following lemmas for the inclusion relations
-in~\ref{eqn:PosInv} to be satisfied.
+
+We state in the following lemmas sufficient conditions for satisfaction of inclusions
+of~(\ref{eqn:PosInv}) by a generalized complex zonotopes,
+whose templates are chosen as above.
 \begin{lemma}
-  Let  
-  us consider a state set $\hybridset$ whose projection in in each
-  location $\loc\in\locationset$ is $\hybridset(\loc) =
-  \gcz{V(\loc)}{c(\loc)}{s(\loc)}{W(\loc)}{l(\loc)}{u(\loc)}$ where
-  $W(\loc)={\lt[\sectemp{\loc}\rt]}$.  Let us consider that the additive input in each location
-  $\loc\in\locationset$ can be overapproximated as $\inputset(\loc) = \cz{B_{n\times
-      m^\pr(q)}(\loc)}{b(\loc)}{r(\loc)}$.  Then
-   $\locationtransition{\loc}\lt(\hybridset(\loc)\rt)
-  \subseteq \hybridset\lt(\loc\rt)$ holds if,
+  Let us consider a state set $\hybridset$ whose projection in each
+  location $\loc\in\locationset$ is $\hybridset(\loc)
+  = \gcz{V(\loc)}{c(\loc)}{s(\loc)}{W(\loc)}{l(\loc)}{u(\loc)}$, where
+  the templates satisfy~(\ref{eqn:tempselect}).  Let us consider that
+  the additive input in each location $\loc\in\locationset$ can be
+  overapproximated as $\inputset(\loc) = \cz{B_{n\times
+  m^\pr(q)}(\loc)}{b(\loc)}{r(\loc)}$.  Then the inclusion
+  $\locationtransition{\loc}\lt(\hybridset(\loc)\rt) \subseteq \hybridset\lt(\loc\rt)$
+  holds if,
 \begin{align}
 \begin{split}
 & \exists
@@ -41,17 +40,17 @@ in~\ref{eqn:PosInv} to be satisfied.
 \end{split}\\
 \begin{split}
 & \left[V(\loc),~W(\loc)\rt]X(\loc) =
-  [AV(\loc),~AW(\loc),~B(\loc)]\dg\lt(\cjoin{s(\loc)}{s^\pr(\loc)}{r(\loc)}\rt),\\
+  [AV(\loc),~AW(\loc),~B(\loc)]\dg\lt(\cjoin{s(\loc)}{s^\pr(\loc)}{r(\loc)}\rt)\\
 \end{split}\\
 \begin{split}
 & s^\pr(\loc) = \frac{\minaffine{\stay^+(\loc)}{u(\loc)}
-      -\maxaffine{\stay^-(\loc)}{l(\loc)}}{2},
+      -\maxaffine{\stay^-(\loc)}{l(\loc)}}{2}
 \end{split}\\
 \begin{split}
   & \left[V(\loc),~~W(\loc)\rt]y(\loc) = 
     \map(\loc)\lt(c(\loc)+W(\loc)\frac{\minaffine{\stay^+(\loc)}{u(\loc)}
      +\maxaffine{\stay^-(\loc)}{l(\loc)}}{2}\rt)\\ & \hspace{10em} +
-  b(\loc)-c(\loc)-W(\loc)\frac{u^\pr(\loc)+l^\pr(\loc)}{2},
+  b(\loc)-c(\loc)-W(\loc)\frac{u^\pr(\loc)+l^\pr(\loc)}{2}
 \end{split}\\
 \begin{split}
 & \forall
@@ -62,24 +61,27 @@ s_i(\loc),
 & \forall
 i\in\lt\{m(\loc)+1,...,m(\loc)+k(\loc)\rt\},\\
 &\lt|y_i(\loc)\rt|+\sum_{i=1}^{m(\loc)+k(\loc)+m^\pr(\loc)}\lt|X_{ij}(\loc)\rt|\leq
-\frac{u^\pr(\loc)-l^\pr(\loc)}{2},
+\frac{u^\pr(\loc)-l^\pr(\loc)}{2}
 \end{split}\\
-& l^\pr(\loc)\leq u^\pr(\loc),\\
+& l^\pr(\loc)\leq u^\pr(\loc)\\
 \begin{split}
 & \maxaffine{l^\pr(\loc)}{\stay^-(\loc)}\geq
 l(\loc)~\text{and}~\minaffine{u^\pr(\loc)}{\stay^+(\loc)}\leq u(\loc).
 \end{split}
 \end{align}
 \end{lemma}
+\begin{proof}
+{\color{red} TODO}
+\end{proof}
 
 \begin{lemma}
-  Let us consider a state set $\hybridset$ whose projection in each location
-  $\loc\in\locationset$ is $\hybridset(\loc) =
-  \gcz{V(\loc)}{c(\loc)}{s(\loc)}{W(\loc)}{l(\loc)}{u(\loc)}$ where
-  $W(\loc)={\lt[\sectemp{\loc}\rt]}$.  Then for any edge
-  $\edge\in\edgeset$, $\edgetransition{\edge}\lt(\hybridset\lt(\preloc{\edge}\rt)\rt) \subseteq
-  \hybridset\lt(\postloc{\edge}\rt)$
-    holds if the following is true.
+  Let us consider a state set $\hybridset$ whose projection in each
+  location $\loc\in\locationset$ is $\hybridset(\loc)
+  = \gcz{V(\loc)}{c(\loc)}{s(\loc)}{W(\loc)}{l(\loc)}{u(\loc)}$, where
+  the templates satisfy~(\ref{eqn:tempselect}).  Then for any
+  edge $\edge\in\edgeset$, the inclusion
+  ñ$\edgetransition{\edge}\lt(\hybridset\lt(\preloc{\edge}\rt)\rt) \subseteq \hybridset\lt(\postloc{\edge}\rt)$
+  holds if,
 \begin{align}
 \begin{split}
 & \exists X(\edge)\in
@@ -95,13 +97,13 @@ l(\loc)~\text{and}~\minaffine{u^\pr(\loc)}{\stay^+(\loc)}\leq u(\loc).
 \begin{align}
 \begin{split}
 s^\pr(\edge) = \frac{\minaffine{u\lt(\preloc{\edge}\rt)}{\min\lt(\stay^+\lt(\preloc{\edge},\edge^+\rt)\rt)}-
-\maxaffine{l\lt(\preloc{\edge}\rt)}{\max\lt(\stay^-\lt(\preloc{\edge},\edge^-\rt)\rt)}}{2},\\
+\maxaffine{l\lt(\preloc{\edge}\rt)}{\max\lt(\stay^-\lt(\preloc{\edge},\edge^-\rt)\rt)}}{2}\\
 \end{split}
 \end{align}
 \begin{align}
 \begin{split}
 & \lt[V\lt(\postloc{\edge}\rt),~W\lt(\postloc{\edge}\rt)\rt]y(\edge) = \reset{\edge}\lt(c\lt(\preloc{\edge}\rt)+c^\pr(\edge)\rt)- 
-c\lt(\postloc{\edge}\rt) - W\lt(\postloc{\edge}\rt)\frac{u^\pr\lt(\edge\rt)+l^\pr\lt(\edge\rt)}{2},\\
+c\lt(\postloc{\edge}\rt) - W\lt(\postloc{\edge}\rt)\frac{u^\pr\lt(\edge\rt)+l^\pr\lt(\edge\rt)}{2}\\
 \end{split}
 \end{align}
 \begin{align}
@@ -127,3 +129,9 @@ l^\pr(\edge)\leq u^\pr(\edge)
 l\lt(\postloc{\edge}\rt)~\text{and}~\minaffine{u^\pr(\edge)}{\stay^+\lt(\postloc{\edge}\rt)}\leq u\lt(\postloc{\edge}\rt).
 \end{align}
 \end{lemma}
+\begin{proof}
+{\color{red} TODO}
+\end{proof}
+
+One of the applications of positive invariants is to prove safety.  If
+the safe set is specified by a set of parallelotopic constraints, then 

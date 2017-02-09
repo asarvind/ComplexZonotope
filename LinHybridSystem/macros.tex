@@ -51,6 +51,7 @@
 
 % local macros
 \DeclareMathOperator{\real}{\operatorname{Re}}
+\newcommand{\zon}[3]{\mathcal{Z}\lt(#1,#2,#3\rt)}
 \newcommand{\CZ}{\lt(V,c,s\rt)}
 \newcommand{\GCZ}{\gcz{V}{c}{s}{W}{l}{u}}
 \newcommand{\cz}[3]{\mc{C}\lt(#1,#2,#3\rt)}
@@ -60,7 +61,7 @@
 \newcommand{\IncTcz}[6]{\mc{T}\lt(#1,#2,#3,#4,#5,#6\rt)}
 \newcommand{\IncGcz}[6]{\mc{G}\lt(#1,#2,#3,#4,#5,#6\rt)}
 \newcommand{\Ptope}[3]{\mc{P}\left(#1,#2,#3\right)}
-\newcommand{\gcz}[6]{\mathcal{Z}\lt(#1,#2,#3,#4,#5,#6\rt)}
+\newcommand{\gcz}[6]{\mathcal{G}\lt(#1,#2,#3,#4,#5,#6\rt)}
 \newcommand{\sptope}[3]{\mathcal{P}\lt(#1,#2,#3\rt)}
 \newcommand{\system}{\mb{H}}
 \newcommand{\locationset}{Q}
@@ -89,6 +90,6 @@
 \newcommand{\transfer}[4]{#1#4 = #2\dg\lt(#3\rt)}
 \newcommand{\centertransfer}[4]{#1#4 = #3-#2}
 \newcommand{\scalebound}[5]{\max_{i=1}^{#4}\lt(\lt(\sum_{j=1}^{#5}\lt|#1\rt|_j\rt)-#3_i+#2_i\rt)}
-\newcommand{\contemp}[1]{#1\lt(#1#1^T\rt)^{-1}}
+\newcommand{\contemp}[1]{#1^T\lt(#1#1^T\rt)^{-1}}
 \newcommand{\sectemp}[1]{\contemp{\ptemplate\lt(#1\rt)}}
 \newcommand{\cjoin}[3]{\begin{array}{l}#1\\#2\\#3\end{array}}

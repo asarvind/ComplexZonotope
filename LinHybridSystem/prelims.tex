@@ -2,29 +2,13 @@ We consider discrete time hyrbid systems with affine dynamics in each
 location, and the guards and staying conditions are specified by
 linear inequalities.  Additionally, for any location of the hybrid
 system, we consider that the collection of staying conditions and
-guards on the edges emanating from the location define a parallelotope
-(possibly unbounded) on a vector sub-space strictly contained in the
-state space.  We call such sets as \emph{sub-parallelotopes}, defined
-as follows.
-%
-\begin{definition}~\label{defn:sub-parallelotope} Let
-  $K\in\mat{k}{n}{R}$ such that $k<n$ and $\lt(KK^T\rt)$ is
-  non-singular, which we call \emph{sub-parallelotopic template}.  Let
-  $\wh{u},\wh{l}\in\comprealset^n$ such that $u\leq l$.  Then the following
-  is a sub-parallelotopic set.
-\[
-\sptope{K}{\wh{l}}{\wh{u}} = \lt\{x\in\realset^n: \wh{l}\leq Kx \leq \wh{u}\rt\}
-\]
-\end{definition}
-
-Our hybrid system is specified by a tuple 
+guards on the edges emanating from the location define a
+sub-parallelotope.  Our hybrid system is specified by a tuple
 \begin{equation}~\label{eqn:system}
 \system =
 \lt(\locationset,\linearmapset,\inputset,\ptemplate,\stay,\edgeset\rt)
 \end{equation}
-where $\locationset$ is a finite set of locations,
-$\initialset:\locationset\ra 2^{\mb{R}^n}$ gives the set of initial points
-of the system in any location,
+where $\locationset$ is a finite set of locations and
 $\linearmapset:\locationset\ra\mat{n}{n}{R}$ and
 $\inputset:\locationset\ra 2^{\mb{R}^n}$ define the affine dynamics in any
 location $\loc\in\locationset$ as 
@@ -46,17 +30,16 @@ $\edge\in\edgeset$ is denoted as by tuple $\edge =
 follows.  The pre and post locations of the edge are
 $\preloc{\edge}\in\locationset$ and $\postloc{\edge}\in\locationset$,
 respectively.  The pair of upper and lower bounds
-$\lt(\edge^-,\edge^+\rt)\in\realset^n\times\realset^n:~~\edge^-\leq\edge^+$
-specified on the edge define the sub-parallelotopic guard set
+$\lt(\edge^-,\edge^+\rt)\in\realset^{k\lt(\preloc{\edge}\rt)}\times\realset^{k\lt(\preloc{\edge}\rt)}:~~\edge^-\leq\edge^+$,
+relate to the sub-parallelotopic guard set
 $\sptope{\ptemplate\lt(\preloc{\edge}\rt)}{\edge^-}{\edge^+}$.  The
 reset map is given by a transformation matrix
 $\edge_r\in\mat{n}{n}{R}$.
 
 A \emph{state} of the hybrid system is a pair $(x,\loc)$, where
 $x\in\realset^n$ and $\loc\in\locationset$.  The evolution of the
-state of the system state in time is called a \emph{trajectory}.
-Therefore, it
-is a function
+state of the system in time is called a \emph{trajectory}.  Therefore,
+it is a function
 $\systrj{x}{\loc}:\wholenums\ra\realset^n\times\locationset$, such
 that for all $t\in\wholenums$, one of the following is true.
 
@@ -86,10 +69,10 @@ that for all $t\in\wholenums$, one of the following is true.
 We always identify a set of states by a mapping of the kind
 $\hybridset:\locationset\ra 2^{\realset^n}$, called a \emph{state
 set}, which corresponds to the set of states
-$\lt\{\lt(x,\loc\rt):x\in\hybridset\lt(\loc\rt)\rt\}$.  The
-set of reachable states from a given state set in one time step of
-intralocation ond interlocation dynamics is given by the following two
-functions, respectively.
+$\lt\{\lt(x,\loc\rt):x\in\hybridset\lt(\loc\rt)\rt\}$.  The set of
+reachable states from a given state set in one time step of
+intralocation and interlocation dynamics, respectively, is given by
+the following two functions.
 \begin{enumerate}
 \item For any location $\loc\in\locationset$, define $\locationtransition{\loc}:2^{\realset^n}\ra 2^{\realset^n}$ as
 \begin{multline*}
@@ -102,12 +85,12 @@ functions, respectively.
 \end{multline*}
 \end{enumerate}
 
-A positively invariant is a set of state of the system such
+A positive invariant is a set of states of the system such
 that all trajectories beginning at any state in the positive invariant
 remain withing the positive invariant.  Equivalently, a state set
 is a positive invariant if the reachable set in one time step by
 both the intralocation and interlocation dynamics is contained within the
-original state set.  Thus, we define a positive invariant as follows.
+original state set.
 \begin{definition}
 A state set $\hybridset$ is a positive invariant if
 both the following are true.

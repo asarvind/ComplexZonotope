@@ -5,10 +5,10 @@ The real projection of a generalized complex zonotope can be
 equivalently represented as the real projection of a template complex
 zonotope, as follows.  
 \begin{lemma}~\label{lem:conversion}
-$\real\lt(\gcz{V}{c}{s}{W}{l}{u}\rt) = \real\lt(\cz{\lt[V~W\rt]}{c+\frac{u+l}{2}}{\ColumnJoin{s}{\frac{u-l}{2}}}\rt)$.
+$\real\lt(\gcz{V}{c}{s}{W}{l}{u}\rt) = \real\lt(\cz{\lt[V~W\rt]}{c+W\lt(\frac{u+l}{2}\rt)}{\ColumnJoin{s}{\frac{u-l}{2}}}\rt)$.
 \end{lemma}
 Although the real projection of the generalized complex zonotope can
-be expressed as a real projection of template complex zonotope, a
+be expressed as a real projection of a template complex zonotope, a
 generalized complex zonotope itself can not be represented as as a
 template complex zonotope.  Therefore, generalized complex zonotopes
 constitute a larger class of sets than template complex zonotopes.
@@ -17,33 +17,31 @@ Before stating a sufficient condition for inclusion between generalized complex
 zonotopes, we review an inclusion relation between template complex
 zonotopes, which was earlier derived in~\cite{todo}.
 \begin{lemma}[Inclusion: template complex
-  zonotopes]~\label{lem:zon-zon} Given two template complex zonotopes
-  $\cz{V}{c}{s}$ and $\cz{V^\pr}{c^\pr}{s^\pr}$, define
-  $\IncTcz{V}{V^\pr}{c}{c^\pr}{s}{s^\pr} = $
+  zonotopes]~\label{lem:zon-zon} The inclusion between template complex zonotopes,
+  $\cz{V^\pr_{n\times m^\pr}}{c^\pr}{s^\pr}\subseteq \cz{V_{n\times m}}{c}{s}$ holds if,
 \begin{align}
 \begin{split}
-%\min_{X,y}\lt(\max_{i=1}^m\lt(\lt|y_i\rt|-s_i+\sum_{j=1}^{k}\lt|X_{ij}\rt|\rt)\rt):
-\min_{X,y}\lt(\scalebound{X}{y}{s}{m}{k}\rt):~~~~~~\transfer{V}{V^\pr}{s^\pr}{X},~~~\centertransfer{V}{c}{c^\pr}{y}.\\
+& \exists X\in\mat{m}{m^\pr}{\mb{C}}~\text{and}~y\in\mb{C}^{m}~\text{s.t.}\\
+& \transfer{V}{V^\pr}{s^\pr}{X},~~~\centertransfer{V}{c}{c^\pr}{y}\\
+& \lt(\scalebound{X}{y}{s}{m}{k}\rt).\\
 \end{split}
 \end{align}
-Then $\cz{V_{n\times m}}{c}{s}\subseteq \cz{V_{n\times
-    k}^\pr}{c^\pr}{s^\pr}$, if $\IncTcz{V}{V^\pr}{c}{c^\pr}{s}{s^\pr}\leq
-0$.
 \end{lemma}
 
 Based on Lemmas~\ref{lem:conversion} and~\ref{lem:zon-zon}, we obtain
 the following sufficient condition for inclusion between the real
 projections of generalized complex zonotopes.
 \begin{lemma}[Real Inclusion:generalized complex zonotopes]~\label{lem:gcz-gcz}
-Given two generalized complex zonotopes $\gcz{V}{c}{s}{W}{l}{u}$ and
-$\gcz{V^\pr}{c^\pr}{s^\pr}{W^\pr}{l^\pr}{u^\pr}$, define 
-\begin{multline}
-\IncGcz{V,V^\pr}{c,c^\pr}{s,s^\pr}{W,W^\pr}{l,l^\pr}{u,u^\pr} = \\
-\IncTcz{\lt[V~W\rt]}{\lt[V^\pr~W^\pr\rt]}{c+\frac{l+u}{2}}{c^\pr+\frac{l^\pr+u^\pr}{2}}{\ColumnJoin{s}{\frac{u-l}{2}}}{\ColumnJoin{s^\pr}{\frac{u^\pr-l^\pr}{2}}}
-\end{multline}
-Then  $\real\lt(\gcz{V}{c}{s}{W}{l}{u}\rt) \subseteq
-\real\lt(\gcz{V^\pr}{c^\pr}{s^\pr}{W^\pr}{l^\pr}{u^\pr}\rt)$ if\\
-$\IncGcz{V,V^\pr}{c,c^\pr}{s,s^\pr}{W,W^\pr}{l,l^\pr}{u,u^\pr}\leq 0$.
+The inclusion relation
+$\real\lt(\gcz{V^\pr_{n\times m^\pr}}{c^\pr}{s^\pr}{W^\pr_{n\times k^\pr}}{l^\pr}{u^\pr}\rt)\subseteq
+\real\lt(\gcz{V_{n\times m}}{c}{s}{W_{n\times k}}{l}{u}\rt)$ holds if,
+\begin{align}
+\begin{split}
+& \exists X\in\mat{(m+k)}{(m^\pr+k^\pr)}{\mb{C}}~\text{and}~y\in\mb{C}^{m+k}~s.t.\\
+& \lt[V~W\rt]X = \lt[V^\pr~W^\pr\rt]\dg\ColumnJoin{\hspace{1em}s^\pr}{\frac{u^\pr-l^\pr}{2}}\\
+& \lt[V~W\rt]y = c^\pr+W\frac{u^\pr+l^\pr}{2}-c-W\frac{u+l}{2}
+\end{split}
+\end{align}
 \end{lemma}
 
 For certain kinds of templates, the intersection of a
