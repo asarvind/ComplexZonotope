@@ -5,7 +5,7 @@ The real projection of a generalized complex zonotope can be
 equivalently represented as the real projection of a template complex
 zonotope, as follows.  
 \begin{lemma}~\label{lem:conversion}
-$\real\lt(\gcz{V}{c}{s}{W}{l}{u}\rt) = \real\lt(\cz{\lt[V~W\rt]}{c+W\lt(\frac{u+l}{2}\rt)}{\ColumnJoin{s}{\frac{u-l}{2}}}\rt)$.
+$\real\lt(\gcz{V}{c}{s}{W}{l}{u}\rt) = \real\lt(\cz{\lt[V~W\rt]}{c+W\lt(\frac{u+l}{2}\rt)}{\ColumnJoin{\hspace{0.5em}s}{\frac{u-l}{2}}}\rt)$.
 \end{lemma}
 Although the real projection of the generalized complex zonotope can
 be expressed as a real projection of a template complex zonotope, a
@@ -38,7 +38,7 @@ $\real\lt(\gcz{V^\pr_{n\times m^\pr}}{c^\pr}{s^\pr}{W^\pr_{n\times k^\pr}}{l^\pr
 \begin{align}
 \begin{split}
 & \exists X\in\mat{(m+k)}{(m^\pr+k^\pr)}{\mb{C}}~\text{and}~y\in\mb{C}^{m+k}~s.t.\\
-& \lt[V~W\rt]X = \lt[V^\pr~W^\pr\rt]\dg\ColumnJoin{\hspace{1em}s^\pr}{\frac{u^\pr-l^\pr}{2}}\\
+& \lt[V~W\rt]X = \lt[V^\pr~W^\pr\rt]\dg\ColumnJoin{\hspace{0.5em}s^\pr}{\frac{u^\pr-l^\pr}{2}}\\
 & \lt[V~W\rt]y = c^\pr+W\frac{u^\pr+l^\pr}{2}-c-W\frac{u+l}{2}
 \end{split}
 \end{align}
@@ -50,8 +50,8 @@ specified as another generalized complex zonotope with the same
 template.  This is stated in the following lemma 
 \begin{lemma}~\label{lem:intersection}
   Let a generalized complex zonotope $\GCZ$ and a sub-parallelotope
-  $\sptope{K}{\wh{l}}{\wh{u}}$ be such that $VK=0$ and
-  $W=K(KK^T)^{-1}$.  Then, 
+  $\sptope{K}{\wh{l}}{\wh{u}}$ be such that $KV=0$ and
+  $W=K^T(KK^T)^{-1}$.  Then, 
 \begin{equation}~\label{eqn:intersection}
 \GCZ\bigcap \sptope{K}{\wh{l}}{\wh{u}} =
   \gcz{V}{c}{s}{W}{\max\lt(l,\wh{l}\rt)}{\min\lt(u,\wh{u}\rt)}.
