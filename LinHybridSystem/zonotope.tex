@@ -1,5 +1,5 @@
-Before introducing generalized complex zonotopes, we briefly discuss
-related set representations .  Usual zonotopes are Minkowski sums of
+Before introducing augmented complex zonotope, we briefly discuss
+related set representations.  Usual zonotopes are Minkowski sums of
 line segemnts, represented as a linear combination of real vectors,
 called \emph{generators}, such that the corresponding combining coefficients
 are bounded in real valued intervals.
@@ -55,27 +55,27 @@ sub-parallelotope, then the intersection can be exactly specified as a
 sub-parallelotope.  However, a sub-parallelotope has
 an equivalent representation as a zonotope, as follows.
 \begin{proposition}
-We have the equivalence $\sptope{K}{l}{u}=\zon{K^T(KK^T)^{-1}}{l}{u}$.
+We have the equivalence $\sptope{K}{l}{u}=\zon{\pinv{K}}{l}{u}$.
 \end{proposition}
 
 Motivated by the above equivalence between sub-parallelotopes and
-zonotopes, we introduce \emph{generalized complex zonotopes}, which is
-a Minkowski sum of template complex zonotopes and usual (real)
-zonotopes.  Then, the real zonotopic part of the generalized complex
+zonotopes, we introduce \emph{augmented complex zonotope}, which is
+a Minkowski sum of template complex zonotope and usual (real)
+zonotope.  Then, the real zonotopic part of the augmented complex
 zonotope can be used to represent parallelotopes, in which case
 intersection with linear constraints can be specified exactly under
 some assumptions.  The assumptions under which such an intersection
 can be exactly specified will be explained later.  Firstly, we define
-generalized complex zonotopes, where a subset of the combining
+augmented complex zonotopes, where a subset of the combining
 coefficients and generators are complex and bounded in absolute
 values, while the rest are real and bounded in real intervals.
 
-\begin{definition}[Generalized complex zonotope]
+\begin{definition}[Augmented complex zonotope]
 Let $V\in\mat{n}{m}{C}$ called primary template, $W\in\mat{n}{k}{R}$
 called secondary template, $c\in\mb{R}^n$ called primary offset,
 $s\in\mb{R}^m$ called scaling factors, $u,l\in\mb{R}^k$ called lower
 and upper interval bounds, respectively, such that $l\leq u$.  The
-following is a generalized complex
+following is an augmented complex
 zonotope.
 \begin{multline}
 \gcz{V}{c}{s}{W}{l}{u} =

@@ -19,6 +19,7 @@
 \newcommand{\realset}{\mb{R}}
 \newcommand{\comprealset}{\mb{\ov{R}}}
 \newcommand{\pint}{\mb{Z}_{> 0}}
+\newcommand{\wholenums}{\mb{Z}_\geq 0}
 \newcommand{\nzrl}{\mb{R}_{\geq 0}}
 \newcommand{\prl}{\mb{R}_{>0}}
 \newcommand{\rl}{\mb{R}}
@@ -46,11 +47,22 @@
 
 % matrix operations
 \newcommand{\ColumnJoin}[2]{\left[\begin{array}{l}{#1}\\{#2} \end{array}\right]}
+\newcommand{\cjoin}[3]{\begin{array}{l}#1\\#2\\#3\end{array}}
+\newcommand{\pseudoinverse}[1]{#1^\dagger}
+\newcommand{\pinv}{\pseudoinverse}
+
+%% Local macros:
+
+% Operators
+\DeclareMathOperator{\real}{\operatorname{Re}}
 \newcommand{\minaffine}[2]{\widehat{\Lambda}\lt(#1,#2\rt)}
 \newcommand{\maxaffine}[2]{\overline{\Lambda}\lt(#1,#2\rt)}
+\newcommand{\minaffinefunc}{\widehat{\Lambda}}
+\newcommand{\maxaffinefunc}{\overline{\Lambda}}
+\newcommand{\minaffineset}{\widehat{\Delta}}
+\newcommand{\maxaffineset}{\overline{\Delta}}
 
-% local macros
-\DeclareMathOperator{\real}{\operatorname{Re}}
+% Set notations
 \newcommand{\zon}[3]{\mathcal{Z}\lt(#1,#2,#3\rt)}
 \newcommand{\CZ}{\lt(V,c,s\rt)}
 \newcommand{\GCZ}{\gcz{V}{c}{s}{W}{l}{u}}
@@ -63,6 +75,11 @@
 \newcommand{\Ptope}[3]{\mc{P}\left(#1,#2,#3\right)}
 \newcommand{\gcz}[6]{\mathcal{G}\lt(#1,#2,#3,#4,#5,#6\rt)}
 \newcommand{\sptope}[3]{\mathcal{P}\lt(#1,#2,#3\rt)}
+\newcommand{\scalebound}[5]{\max_{i=1}^{#4}\lt(\lt(\sum_{j=1}^{#5}\lt|#1\rt|_j\rt)-#3_i+#2_i\rt)}
+\newcommand{\contemp}[1]{#1^T\lt(#1#1^T\rt)^{-1}}
+\newcommand{\sectemp}[1]{\contemp{\ptemplate\lt(#1\rt)}}
+
+% System notations
 \newcommand{\system}{\mb{H}}
 \newcommand{\locationset}{Q}
 \newcommand{\edgeset}{E}
@@ -76,7 +93,6 @@
 \newcommand{\inp}{\inputset}
 \newcommand{\ptemplate}{\mc{K}}
 \newcommand{\systrj}[2]{\lt({\bf #1},{\bf #2}\rt)}
-\newcommand{\wholenums}{\mb{Z}_\geq 0}
 \newcommand{\preloc}[1]{#1_{1}}
 \newcommand{\postloc}[1]{#1_{2}}
 \newcommand{\upperedgebound}[1]{#1^+}
@@ -87,9 +103,9 @@
 \newcommand{\staysptope}[1]{\sptope{\ptemplate\lt(#1\rt)}{\stay^-\lt(#1\rt)}{\stay^+\lt(#1\rt)}}
 \newcommand{\guardsptope}[1]{\sptope{\ptemplate\lt(\preloc{#1}\rt)}{\max\lt(\loweredgebound{#1},\stay^-\lt(\preloc{#1}\rt)\rt)}{\min\lt(\upperedgebound{#1},\stay^+\lt(\preloc{#1}\rt) \rt)}}
 \newcommand{\hybridset}{\Gamma}
+
+% Equations
 \newcommand{\transfer}[4]{#1#4 = #2\dg\lt(#3\rt)}
 \newcommand{\centertransfer}[4]{#1#4 = #3-#2}
-\newcommand{\scalebound}[5]{\max_{i=1}^{#4}\lt(\lt(\sum_{j=1}^{#5}\lt|#1\rt|_j\rt)-#3_i+#2_i\rt)}
-\newcommand{\contemp}[1]{#1^T\lt(#1#1^T\rt)^{-1}}
-\newcommand{\sectemp}[1]{\contemp{\ptemplate\lt(#1\rt)}}
-\newcommand{\cjoin}[3]{\begin{array}{l}#1\\#2\\#3\end{array}}
+
+

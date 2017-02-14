@@ -3,19 +3,18 @@ Our objective is to find positive invariants whose projection in every
 location is a generalized complex zonotope.  We use a template based
 approach, where we fix suitable primary and secondary templates and
 then find corresponding primary offsets, scaling factors and
-sub-parallelotopic bounds to get a positive invariant.  Let us denote
-the choice of the primary and secondary template in a location
-$\loc\in\locationset$ as $V(\loc)\in\mat{n}{m(q)}{\mb{C}}$ and
-$W(\loc)$, respectively, such that
-\begin{equation}~\label{eqn:tempselect}
-\ptemplate(\loc)V(\loc) = 0~\text{and}~
-W(\loc)=\lt[\sectemp{\loc}\rt]
-\end{equation}  
-The templates are chosen as above so that intersection with the
-sub-parallelotopic staying and guard conditions can be conveniently
-computed, based on Lemma~\ref{lem:intersection}.  We shall discuss
-further considerations in selecting the primary template later in this
-section.
+sub-parallelotopic bounds to get a positive invariant.  We choose the
+the primary template $V(\loc)\in\mat{n}{m(q)}{\mb{C}}$ in a
+location $\loc\in\locationset$ such
+that
+%\begin{equation}~\label{eqn:tempselect}
+$\ptemplate(\loc)V(\loc) = 0$,
+%\end{equation}  
+so that intersection with the sub-parallelotopic staying and guard
+conditions can be conveniently computed, based on
+Lemma~\ref{lem:intersection}.  Another consideration for choosing the
+primary template is the eigenstructure of the linear
+maps, that is discussed in a latter section.
 
 
 We state in the following lemmas sufficient conditions for satisfaction of inclusions
@@ -23,33 +22,34 @@ of~(\ref{eqn:PosInv}) by a generalized complex zonotopes,
 whose templates are chosen as above.
 \begin{lemma}
   Let us consider a state set $\hybridset$ whose projection in each
-  location $\loc\in\locationset$ is $\hybridset(\loc)
-  = \gcz{V(\loc)}{c(\loc)}{s(\loc)}{W(\loc)}{l(\loc)}{u(\loc)}$, where
-  the templates satisfy~(\ref{eqn:tempselect}).  Let us consider that
-  the additive input in each location $\loc\in\locationset$ can be
+  location $\loc\in\locationset$ is $\hybridset(\loc) =
+  \gcz{V(\loc)}{c(\loc)}{s(\loc)}{\pinv{\ptemplate}(\loc)}{l(\loc)}{u(\loc)}$
+  such that $\ptemplate(\loc)V(\loc) = 0$.  Let us consider that the
+  additive input in each location $\loc\in\locationset$ can be
   overapproximated as $\inputset(\loc) = \cz{B_{n\times
-  m^\pr(q)}(\loc)}{b(\loc)}{r(\loc)}$.  Then the inclusion
-  $\locationtransition{\loc}\lt(\hybridset(\loc)\rt) \subseteq \hybridset\lt(\loc\rt)$
-  holds if,
+      m^\pr(q)}(\loc)}{b(\loc)}{r(\loc)}$.  Then the inclusion
+  $\locationtransition{\loc}\lt(\hybridset(\loc)\rt) \subseteq
+  \hybridset\lt(\loc\rt)$ holds if,
 \begin{align}
 \begin{split}
 & \exists
   X(\loc)\in\mat{\lt(m(\loc)+k(\loc)\rt)}{\lt(m(\loc)+k(\loc)+m^\pr(\loc)\rt)}{\mb{C}},~
-  y(\loc)\in\mb{C}^{m(\loc)+k(\loc)}\\&~u^\pr(\loc),l^\pr(\loc)\in\realset^{k(\loc)}~\text{and}~s^\pr(\loc)\in\realset^{k(\loc)}~\text{such
-    that}:
+  y(\loc)\in\mb{C}^{m(\loc)+k(\loc)}\\&~u^\pr(\loc),l^\pr(\loc)\in\realset^{k(\loc)}~\text{and}~s^\pr(\loc)\in\realset^{k(\loc)}~text{and policies}\\
+&\minaffinefunc_{\loc}^{pre}\in\minaffineset\lt(k\lt(\loc\rt)\rt),\maxaffinefunc_{\loc}^{pre}\in\maxaffineset\lt(k\lt(\loc\rt)\rt),
+\minaffinefunc_{\loc}^{post}\in\minaffineset\lt(k\lt(\loc\rt)\rt),\maxaffinefunc_{\loc}^{post}\in\maxaffineset\lt(k\lt(\loc\rt)\rt),~\text{s.t.}
 \end{split}\\
 \begin{split}
 & \left[V(\loc),~W(\loc)\rt]X(\loc) =
   [AV(\loc),~AW(\loc),~B(\loc)]\dg\lt(\cjoin{s(\loc)}{s^\pr(\loc)}{r(\loc)}\rt)\\
 \end{split}\\
 \begin{split}
-& s^\pr(\loc) = \frac{\minaffine{\stay^+(\loc)}{u(\loc)}
-      -\maxaffine{\stay^-(\loc)}{l(\loc)}}{2}
+& s^\pr(\loc) = \frac{\minaffinefunc_{\loc}^{pre}\lt(\stay^+(\loc),u(\loc)\rt)
+      -\maxaffinefunc_{\loc}^{pre}\lt(\stay^-(\loc),l(\loc)\rt)}{2}
 \end{split}\\
 \begin{split}
   & \left[V(\loc),~~W(\loc)\rt]y(\loc) = 
-    \map(\loc)\lt(c(\loc)+W(\loc)\frac{\minaffine{\stay^+(\loc)}{u(\loc)}
-     +\maxaffine{\stay^-(\loc)}{l(\loc)}}{2}\rt)\\ & \hspace{10em} +
+    \map(\loc)\lt(c(\loc)+W(\loc)\frac{\minaffinefunc_{\loc}^{pre}\lt(\stay^+(\loc),u(\loc)\rt)
+     +\maxaffinefunc_{\loc}^{pre}\lt(\stay^-(\loc),l(\loc)\rt)}{2}\rt)\\ & \hspace{10em} +
   b(\loc)-c(\loc)-W(\loc)\frac{u^\pr(\loc)+l^\pr(\loc)}{2}
 \end{split}\\
 \begin{split}
@@ -65,8 +65,8 @@ i\in\lt\{m(\loc)+1,...,m(\loc)+k(\loc)\rt\},\\
 \end{split}\\
 & l^\pr(\loc)\leq u^\pr(\loc)\\
 \begin{split}
-& \maxaffine{l^\pr(\loc)}{\stay^-(\loc)}\geq
-l(\loc)~\text{and}~\minaffine{u^\pr(\loc)}{\stay^+(\loc)}\leq u(\loc).
+& \maxaffinefunc_{\loc}^{post}\lt(l^\pr(\loc),\stay^-(\loc)\rt)\geq
+l(\loc)~\text{and}~\minaffinefunc_{\loc}^{post}\lt(u^\pr(\loc),\stay^+(\loc)\rt)\leq u(\loc).
 \end{split}
 \end{align}
 \end{lemma}
@@ -76,18 +76,20 @@ l(\loc)~\text{and}~\minaffine{u^\pr(\loc)}{\stay^+(\loc)}\leq u(\loc).
 
 \begin{lemma}
   Let us consider a state set $\hybridset$ whose projection in each
-  location $\loc\in\locationset$ is $\hybridset(\loc)
-  = \gcz{V(\loc)}{c(\loc)}{s(\loc)}{W(\loc)}{l(\loc)}{u(\loc)}$, where
-  the templates satisfy~(\ref{eqn:tempselect}).  Then for any
-  edge $\edge\in\edgeset$, the inclusion
-  ñ$\edgetransition{\edge}\lt(\hybridset\lt(\preloc{\edge}\rt)\rt) \subseteq \hybridset\lt(\postloc{\edge}\rt)$
-  holds if,
+  location $\loc\in\locationset$ is $\hybridset(\loc) =
+  \gcz{V(\loc)}{c(\loc)}{s(\loc)}{\pinv{\ptemplate}(\loc)}{l(\loc)}{u(\loc)}$
+  such that $\ptemplate(\loc)V(\loc) = 0$.  Then for any edge
+  $\edge\in\edgeset$, the inclusion
+  $\edgetransition{\edge}\lt(\hybridset\lt(\preloc{\edge}\rt)\rt)
+  \subseteq \hybridset\lt(\postloc{\edge}\rt)$ holds if,
 \begin{align}
 \begin{split}
 & \exists X(\edge)\in
 \mat{\lt(m\lt(\postloc{\edge}\rt)+k\lt(\postloc{\edge}\rt)\rt)}{\lt(m\lt(\preloc{\edge}\rt)+k\lt(\preloc{\edge}\rt)\rt)}{\mb{C}}~\text{and}~y(\edge)\in
 \mb{C}^{m\lt(\postloc{\edge}\rt)+k\lt(\postloc{\edge}\rt)},\\
-& \exists u^\pr(\edge),l^\pr(\edge)\in \realset^{k\lt(\postloc{\edge}\rt)}, c^\pr(\sigma)\in\mb{R}^n~\text{and}~s^\pr(\edge)\in\realset^{k\lt(\preloc{\edge}\rt)}~\text{s.t.}
+& \exists u^\pr(\edge),l^\pr(\edge)\in \realset^{k\lt(\postloc{\edge}\rt)}, c^\pr(\sigma)\in\mb{R}^n,s^\pr(\edge)\in\realset^{k\lt(\preloc{\edge}\rt)}~\text{and policies}\\
+&\minaffinefunc_{\edge}^{pre}\in\minaffineset\lt(k\lt(\preloc{\edge}\rt)\rt),\maxaffinefunc_{\edge}^{pre}\in\maxaffineset\lt(k\lt(\preloc{\edge}\rt)\rt),
+\minaffinefunc_{\edge}^{post}\in\minaffineset\lt(k\lt(\postloc{\edge}\rt)\rt),\maxaffinefunc_{\edge}^{post}\in\maxaffineset\lt(k\lt(\postloc{\edge}\rt)\rt),~\text{s.t.}
 \end{split}\\
 \begin{split}
 & \lt[V\lt(\postloc{\edge}\rt),~W\lt(\postloc{\edge}\rt)\rt]X(\edge) = \reset{\edge}\lt[V\lt(\preloc{\edge}\rt),~W\lt(\preloc{\edge}\rt)\rt]\dg
@@ -96,8 +98,8 @@ l(\loc)~\text{and}~\minaffine{u^\pr(\loc)}{\stay^+(\loc)}\leq u(\loc).
 \end{align}
 \begin{align}
 \begin{split}
-s^\pr(\edge) = \frac{\minaffine{u\lt(\preloc{\edge}\rt)}{\min\lt(\stay^+\lt(\preloc{\edge},\edge^+\rt)\rt)}-
-\maxaffine{l\lt(\preloc{\edge}\rt)}{\max\lt(\stay^-\lt(\preloc{\edge},\edge^-\rt)\rt)}}{2}\\
+s^\pr(\edge) = \frac{\minaffinefunc_{\edge}^{pre}\lt(u\lt(\preloc{\edge}\rt),\min\lt(\stay^+\lt(\preloc{\edge},\edge^+\rt)\rt)\rt)-
+\maxaffinefunc_{\edge}^{pre}\lt(l\lt(\preloc{\edge}\rt),\max\lt(\stay^-\lt(\preloc{\edge},\edge^-\rt)\rt)\rt)}{2}\\
 \end{split}
 \end{align}
 \begin{align}
@@ -108,8 +110,8 @@ c\lt(\postloc{\edge}\rt) - W\lt(\postloc{\edge}\rt)\frac{u^\pr\lt(\edge\rt)+l^\p
 \end{align}
 \begin{align}
 \begin{split}
-& c^\pr(\edge) = W\lt(\preloc{\edge}\rt)\frac{\minaffine{u\lt(\preloc{\edge}\rt)}{\min\lt(\stay^+\lt(\preloc{\edge},\edge^+\rt)\rt)}+
-\maxaffine{l\lt(\preloc{\edge}\rt)}{\max\lt(\stay^-\lt(\preloc{\edge},\edge^-\rt)\rt)}}{2}
+& c^\pr(\edge) = W\lt(\preloc{\edge}\rt)\frac{\minaffinefunc_{\edge}^{pre}\lt(u\lt(\preloc{\edge}\rt),\min\lt(\stay^+\lt(\preloc{\edge},\edge^+\rt)\rt)\rt)+
+\maxaffinefunc_{\edge}^{pre}\lt(l\lt(\preloc{\edge}\rt),\max\lt(\stay^-\lt(\preloc{\edge},\edge^-\rt)\rt)\rt)}{2}
 \end{split}
 \end{align}
 \begin{align}
@@ -125,13 +127,12 @@ c\lt(\postloc{\edge}\rt) - W\lt(\postloc{\edge}\rt)\frac{u^\pr\lt(\edge\rt)+l^\p
 \begin{split}
 l^\pr(\edge)\leq u^\pr(\edge)
 \end{split}\\
-& \maxaffine{l^\pr(\edge)}{\stay^-\lt(\postloc{\edge}\rt)}\geq
-l\lt(\postloc{\edge}\rt)~\text{and}~\minaffine{u^\pr(\edge)}{\stay^+\lt(\postloc{\edge}\rt)}\leq u\lt(\postloc{\edge}\rt).
+& \maxaffinefunc_{\edge}^{post}\lt(l^\pr(\edge),\stay^-\lt(\postloc{\edge}\rt)\rt)\geq
+l\lt(\postloc{\edge}\rt)~\text{and}~\minaffinefunc_{\edge}^{post}\lt(u^\pr(\edge),\stay^+\lt(\postloc{\edge}\rt)\rt)\leq u\lt(\postloc{\edge}\rt).
 \end{align}
 \end{lemma}
 \begin{proof}
 {\color{red} TODO}
 \end{proof}
 
-One of the applications of positive invariants is to prove safety.  If
-the safe set is specified by a set of parallelotopic constraints, then 
+
