@@ -23,7 +23,7 @@ zonotopes, which was earlier derived in~\cite{todo}.
 \begin{split}
 & \exists X\in\mat{m}{m^\pr}{\mb{C}}~\text{and}~y\in\mb{C}^{m}~\text{s.t.}\\
 & \transfer{V}{V^\pr}{s^\pr}{X},~~~\centertransfer{V}{c}{c^\pr}{y}\\
-& \lt(\scalebound{X}{y}{s}{m}{k}\rt).\\
+& \lt(\scalebound{X}{y}{s}{m}{k}\rt)\leq 0\\
 \end{split}
 \end{align}
 \end{lemma}
@@ -39,7 +39,9 @@ $\real\lt(\gcz{V^\pr_{n\times m^\pr}}{c^\pr}{s^\pr}{W^\pr_{n\times k^\pr}}{l^\pr
 \begin{split}
 & \exists X\in\mat{(m+k)}{(m^\pr+k^\pr)}{\mb{C}}~\text{and}~y\in\mb{C}^{m+k}~s.t.\\
 & \lt[V~W\rt]X = \lt[V^\pr~W^\pr\rt]\dg\ColumnJoin{\hspace{0.5em}s^\pr}{\frac{u^\pr-l^\pr}{2}}\\
-& \lt[V~W\rt]y = c^\pr+W\frac{u^\pr+l^\pr}{2}-c-W\frac{u+l}{2}
+& \lt[V~W\rt]y = c^\pr+W\frac{u^\pr+l^\pr}{2}-c-W\frac{u+l}{2}\\
+& \forall i\in\tup{m},~|y_i|+\sum_{j=1}^{m^\pr+k^\pr}\lt|X_{ij}\rt|\leq s_i\\
+& \forall i\in\{m+1,...,m+k\},~|y_i|+\sum_{j=1}^{m^\pr+k^\pr}\lt|X_{ij}\rt|\leq \frac{u^\pr_i-l^\pr_i}{2}.
 \end{split}
 \end{align}
 \end{lemma}
