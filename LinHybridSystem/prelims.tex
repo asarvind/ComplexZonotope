@@ -34,12 +34,13 @@ $\lt(\edge^-,\edge^+\rt)\in\realset^{k\lt(\preloc{\edge}\rt)}\times\realset^{k\l
 relate to the sub-parallelotopic guard set
 $\sptope{\ptemplate\lt(\preloc{\edge}\rt)}{\edge^-}{\edge^+}$.  The
 reset map is given by a transformation matrix
-$\edge_r\in\mat{n}{n}{R}$.
+$\reset{\edge}\in\mat{n}{n}{R}$.
 
 A \emph{state} of the hybrid system is a pair $(x,\loc)$, where
-$x\in\realset^n$ and $\loc\in\locationset$.  The evolution of the
-state of the system in time is called a \emph{trajectory}.  Therefore,
-it is a function
+$x\in\realset^n$ is called the \emph{continuous state} and
+$\loc\in\locationset$ is called the \emph{discrete state}.  The
+evolution of the state of the system in time is called a
+\emph{trajectory}.  Therefore, it is a function
 $\systrj{x}{\loc}:\wholenums\ra\realset^n\times\locationset$, such
 that for all $t\in\wholenums$, one of the following is true.
 
@@ -66,13 +67,10 @@ that for all $t\in\wholenums$, one of the following is true.
 \end{align}
 \end{enumerate}
 
-We always identify a set of states by a mapping of the kind
-$\hybridset:\locationset\ra 2^{\realset^n}$, called a \emph{state
-set}, which corresponds to the set of states
-$\lt\{\lt(x,\loc\rt):x\in\hybridset\lt(\loc\rt)\rt\}$.  The set of
-reachable states from a given state set in one time step of
-intralocation and interlocation dynamics, respectively, is given by
-the following two functions.
+The set of reachable continuous states in one time step of
+intralocation and interlocation dynamics from a given set of
+continuous states is given by the following two functions,
+respectively.
 \begin{enumerate}
 \item For any location $\loc\in\locationset$, define $\locationtransition{\loc}:2^{\realset^n}\ra 2^{\realset^n}$ as
 \begin{multline*}
@@ -85,12 +83,15 @@ the following two functions.
 \end{multline*}
 \end{enumerate}
 
-A positive invariant is a set of states of the system such
-that all trajectories beginning at any state in the positive invariant
-remain withing the positive invariant.  Equivalently, a state set
-is a positive invariant if the reachable set in one time step by
-both the intralocation and interlocation dynamics is contained within the
-original state set.
+We always identify a set of states by a mapping of the kind
+$\hybridset:\locationset\ra 2^{\realset^n}$, called a \emph{state
+  set}, which corresponds to the set of states
+$\lt\{\lt(x,\loc\rt):x\in\hybridset\lt(\loc\rt)\rt\}$.  A positive
+invariant is a set of states of the system such that all trajectories
+beginning at any state in the positive invariant remain withing the
+positive invariant.  Equivalently, a state set is a positive invariant
+if the reachable set in one time step by both the intralocation and
+interlocation dynamics is contained within the original state set.
 \begin{definition}
 A state set $\hybridset$ is a positive invariant if
 both the following are true.

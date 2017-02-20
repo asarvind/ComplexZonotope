@@ -24,7 +24,7 @@ above.
 \begin{lemma}
   Let us consider a state set $\hybridset$ whose projection in each
   location $\loc\in\locationset$ is $\hybridset(\loc) =
-  \gcz{V(\loc)}{c(\loc)}{s(\loc)}{\pinv{\ptemplate}(\loc)}{l(\loc)}{u(\loc)}$
+  \real\lt(\gcz{V(\loc)}{c(\loc)}{s(\loc)}{\pinv{\ptemplate}(\loc)}{l(\loc)}{u(\loc)}\rt)$
   such that $\ptemplate(\loc)V(\loc) = 0$.  Let us consider that the
   additive input in each location $\loc\in\locationset$ can be
   overapproximated as $\inputset(\loc) = \cz{B_{n\times
@@ -35,7 +35,7 @@ above.
 \begin{split}~\label{eqn:exists-intra}
 & \exists
   X(\loc)\in\mat{\lt(m(\loc)+k(\loc)\rt)}{\lt(m(\loc)+k(\loc)+m^\pr(\loc)\rt)}{\mb{C}},~
-  y(\loc)\in\mb{C}^{m(\loc)+k(\loc)}\\&~u^\pr(\loc),l^\pr(\loc)\in\realset^{k(\loc)}~\text{and}~s^\pr(\loc)\in\realset^{k(\loc)}~text{and policies}\\
+  y(\loc)\in\mb{C}^{m(\loc)+k(\loc)}\\&~u^\pr(\loc),l^\pr(\loc)\in\realset^{k(\loc)}~\text{and}~s^\pr(\loc)\in\realset^{k(\loc)}~\text{and policies}\\
 &\minaffinefunc_{\loc}^{pre}\in\minaffineset\lt(k\lt(\loc\rt)\rt),\maxaffinefunc_{\loc}^{pre}\in\maxaffineset\lt(k\lt(\loc\rt)\rt),
 \minaffinefunc_{\loc}^{post}\in\minaffineset\lt(k\lt(\loc\rt)\rt),\maxaffinefunc_{\loc}^{post}\in\maxaffineset\lt(k\lt(\loc\rt)\rt),~\text{s.t.}
 \end{split}
@@ -90,8 +90,8 @@ l(\loc)~\text{and}~\minaffinefunc_{\loc}^{post}\lt(u^\pr(\loc),\stay^+(\loc)\rt)
 \begin{lemma}
   Let us consider a state set $\hybridset$ whose projection in each
   location $\loc\in\locationset$ is $\hybridset(\loc) =
-  \gcz{V(\loc)}{c(\loc)}{s(\loc)}{\pinv{\ptemplate}(\loc)}{l(\loc)}{u(\loc)}$
-  such that $\ptemplate(\loc)V(\loc) = 0$.  Then for any edge
+  \real\lt(\gcz{V(\loc)}{c(\loc)}{s(\loc)}{\pinv{\ptemplate}(\loc)}{l(\loc)}{u(\loc)}\rt)$
+  such that $\ptemplate(\loc)V(\loc) = 0$.  Then for an edge
   $\edge\in\edgeset$, the inclusion
   $\edgetransition{\edge}\lt(\hybridset\lt(\preloc{\edge}\rt)\rt)
   \subseteq \hybridset\lt(\postloc{\edge}\rt)$ holds if,
@@ -111,8 +111,8 @@ l(\loc)~\text{and}~\minaffinefunc_{\loc}^{post}\lt(u^\pr(\loc),\stay^+(\loc)\rt)
 \end{align}
 \begin{align}
 \begin{split}
-s^\pr(\edge) = \frac{\minaffinefunc_{\edge}^{pre}\lt(u\lt(\preloc{\edge}\rt),\min\lt(\stay^+\lt(\preloc{\edge},\edge^+\rt)\rt)\rt)-
-\maxaffinefunc_{\edge}^{pre}\lt(l\lt(\preloc{\edge}\rt),\max\lt(\stay^-\lt(\preloc{\edge},\edge^-\rt)\rt)\rt)}{2}\\
+s^\pr(\edge) = \frac{\minaffinefunc_{\edge}^{pre}\lt(u\lt(\preloc{\edge}\rt),\min\lt(\stay^+\lt(\preloc{\edge}\rt),\edge^+\rt)\rt)-
+\maxaffinefunc_{\edge}^{pre}\lt(l\lt(\preloc{\edge}\rt),\max\lt(\stay^-\lt(\preloc{\edge}\rt),\edge^-\rt)\rt)}{2}\\
 \end{split}
 \end{align}
 \begin{align}
@@ -123,19 +123,19 @@ c\lt(\postloc{\edge}\rt) - \pinv{\ptemplate}\lt(\postloc{\edge}\rt)\frac{u^\pr\l
 \end{align}
 \begin{align}
 \begin{split}
-& c^\pr(\edge) = \pinv{\ptemplate}\lt(\preloc{\edge}\rt)\frac{\minaffinefunc_{\edge}^{pre}\lt(u\lt(\preloc{\edge}\rt),\min\lt(\stay^+\lt(\preloc{\edge},\edge^+\rt)\rt)\rt)+
-\maxaffinefunc_{\edge}^{pre}\lt(l\lt(\preloc{\edge}\rt),\max\lt(\stay^-\lt(\preloc{\edge},\edge^-\rt)\rt)\rt)}{2}
+& c^\pr(\edge) = \pinv{\ptemplate}\lt(\preloc{\edge}\rt)\frac{\minaffinefunc_{\edge}^{pre}\lt(u\lt(\preloc{\edge}\rt),\min\lt(\stay^+\lt(\preloc{\edge}\rt),\edge^+\rt)\rt)+
+\maxaffinefunc_{\edge}^{pre}\lt(l\lt(\preloc{\edge}\rt),\max\lt(\stay^-\lt(\preloc{\edge}\rt),\edge^-\rt)\rt)}{2}
 \end{split}
 \end{align}
 \begin{align}
 \begin{split}
 & \forall i\in \tup{m\lt(\postloc{\edge}\rt)}:
- \lt|y_i\rt|+\sum_{j=1}^{m\lt(\preloc{\edge}\rt)+k\lt(\preloc{\edge}\rt)}\lt|X_{ij}\rt|\leq s_i\lt(\postloc{\edge}\rt)
+ \lt|y_i(\edge)\rt|+\sum_{j=1}^{m\lt(\preloc{\edge}\rt)+k\lt(\preloc{\edge}\rt)}\lt|X_{ij}(\edge)\rt|\leq s_i\lt(\postloc{\edge}\rt)
 \end{split}\\
 \begin{split}
 & \forall i\in
-\lt\{m\lt(\postloc{\edge}\rt)+1,...,m\lt(\postloc{\edge}\rt)+k\lt(\postloc{\edge}\rt)\rt\}:
-\lt|y_i\rt|+\sum_{j=1}^{m\lt(\preloc{\edge}\rt)+k\lt(\preloc{\edge}\rt)}\lt|X_{ij}\rt|\leq \frac{u^\pr_i\lt(\edge\rt)+l^\pr_i\lt(\edge\rt)}{2}
+\lt\{m\lt(\postloc{\edge}\rt)+1,...,m\lt(\postloc{\edge}\rt)+k\lt(\postloc{\edge}\rt)\rt\}:\\
+&\lt|y_i(\edge)\rt|+\sum_{j=1}^{m\lt(\preloc{\edge}\rt)+k\lt(\preloc{\edge}\rt)}\lt|X_{ij}(\edge)\rt|\leq \frac{u^\pr_i\lt(\edge\rt)-l^\pr_i\lt(\edge\rt)}{2}
 \end{split}\\
 \begin{split}
 l^\pr(\edge)\leq u^\pr(\edge)
@@ -153,16 +153,14 @@ set.  So, the following lemma states the sufficient condition for
 containing an initial set which can be overapproximated by an
 augmented complex zonotope.
 \begin{lemma}
-  Consider a state set $\mc{I}$ whose projection in each location
-  $\loc\in\locationset$ is a $\mc{I}(\loc)=\real\lt(\gcz{V^I_{n\times
+  Let us consider a two state sets $\mc{I}$ and $\hybridset$ whose projections in each location
+  $\loc\in\locationset$ are respectively $\mc{I}(\loc)=\real\lt(\gcz{V^I_{n\times
       m^\pr }}{c^I(\loc)}{s^I(\loc)}{W_{n\times
-      k^\pr}}{l^I(\loc)}{u^I(\loc)}\rt)$.  Let us consider another
-  state set $\hybridset$ whose projection in each location $\loc\in
-  \locationset$ is $\hybridset(\loc) =
+      k^\pr}}{l^I(\loc)}{u^I(\loc)}\rt)$ and $\hybridset(\loc) =
   \gcz{V(\loc)}{c(\loc)}{s(\loc)}{\pinv{\ptemplate}(\loc)}{l(\loc)}{u(\loc)}$.
-  Then the inclusion
+  Then
   $\forall\loc\in\locationset,~\mc{I}(\loc)\subseteq \hybridset(\loc)$
-  holds if $\forall\loc\in\locationset$, 
+  if $\forall\loc\in\locationset$, 
 \begin{align}
 \begin{split}
 & \exists X^I(\loc)\in\mat{(m(\loc)+k(\loc))}{(m^\pr+k^\pr)}{\mb{C}}~\text{and}~y^I\in\mb{C}^{m(\loc)+k(\loc)}~s.t.\\
@@ -170,9 +168,9 @@ augmented complex zonotope.
 & \lt[V,~\pinv{\ptemplate}(\loc)\rt]y^I =
 c^I(\loc)+W\frac{u^I(\loc)+l^I(\loc)}{2}-c(\loc)-\pinv{\ptemplate}(\loc)\frac{u(\loc)+l(\loc)}{2}\\
 & \forall i\in\tup{m(\loc)},
-\lt|y_i\rt|+\sum_{j=1}^{m^\pr+k^\pr}\lt|X_{ij}\rt|\leq s_i(\loc)\\
+\lt|y_i^I\rt|+\sum_{j=1}^{m^\pr+k^\pr}\lt|X_{ij}^I\rt|\leq s_i(\loc)\\
 & \forall
-i\in\lt\{m(\loc)+k(\loc)\rt\}\lt|y_i\rt|+\sum_{j=1}^{m^\pr+k^\pr}\lt|X_{ij}\rt|\leq \frac{u_i(\loc)-l_i(\loc)}{2}
+i\in\lt\{m(\loc)+k(\loc)\rt\},\lt|y_i^I\rt|+\sum_{j=1}^{m^\pr+k^\pr}\lt|X_{ij}^I\rt|\leq \frac{u_i(\loc)-l_i(\loc)}{2}
 \end{split}
 \end{align}
 \end{lemma}
@@ -184,25 +182,26 @@ lemma states a sufficient condition for an augmented complex zonotope
 to be contained within a polytopic safe set.
 
 \begin{lemma}
-  Let us consider a state set $\hybridset$ whose projection in each location
-  $\loc \in\locationset$ is $\hybridset(\loc) =
+  Let us consider a state set $\hybridset$ whose projection in each
+  location $\loc \in\locationset$ is $\hybridset(\loc) =
   \real\lt(\gcz{V(\loc)}{c(\loc)}{s(\loc)}{\pinv{\ptemplate}(\loc)}{l(\loc)}{u(\loc)}\rt)$.
-  Let $T\in\mat{p}{n}{R}$ and
-  $\forall\loc\in\locationset,~d(\loc)\in\comprealset^n$.  Let us
-  consider a polytopic state set $\mc{J}:\locationset\ra\realset^n$
-  described as $\forall
+  Let us consider a polytopic state set
+  $\mc{J}:\locationset\ra\realset^n$ described as $\forall
   \loc\in\locationset,~\mc{J}(\loc)=\lt\{x\in\realset^n:Tx\leq
-  d(\loc)\rt\}$.  Then $\forall\loc\in\locationset$,
-  $\hybridset(\loc)\subseteq \mc{J}(\loc)$ if $\forall q\in\locationset$,
+  d(\loc)\rt\}$, where $T\in\mat{p}{n}{R}$ and
+  $d(\loc)\in\comprealset^n$.  Then $\forall\loc\in\locationset$,
+  $\hybridset(\loc)\subseteq \mc{J}(\loc)$ if $\forall
+  q\in\locationset$,
 \begin{align}~\label{eqn:safe-contain}
 T\lt(c+W\lt(\frac{u(\loc)+l(\loc)}{2}\rt)\rt)+\lt|T\lt[V(\loc),~\pinv{\ptemplate}(\loc)\rt]\rt|\ColumnJoin{\hspace{2em}s}{\frac{u(\loc)-l(\loc)}{2}}\leq d(\loc).
 \end{align}
 \end{lemma}
 
 Consolidating all the above results, the following theorem states a
-sufficient condition for a augemented complex zonotopic state set to
-be a positive invariant, containing an initial set and contained
-within a polytopic safe set.
+sufficient condition for a state set, having augmented complex
+zonotopic projections in all locations, to be a positive invariant.
+Additionally, we include sufficient conditions such that the state set is
+contained within a polytopic safe set and contains an initial set.
 
 \begin{theorem}~\label{thm:main} Let us consider a state set
   $\hybridset$ whose projection in each location $\loc\in\locationset$

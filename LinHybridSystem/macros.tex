@@ -75,7 +75,6 @@
 \newcommand{\Ptope}[3]{\mc{P}\left(#1,#2,#3\right)}
 \newcommand{\gcz}[6]{\mathcal{G}\lt(#1,#2,#3,#4,#5,#6\rt)}
 \newcommand{\sptope}[3]{\mathcal{P}\lt(#1,#2,#3\rt)}
-\newcommand{\scalebound}[5]{\max_{i=1}^{#4}\lt(\lt(\sum_{j=1}^{#5}\lt|#1\rt|_j\rt)-#3_i+#2_i\rt)}
 \newcommand{\contemp}[1]{#1^T\lt(#1#1^T\rt)^{-1}}
 \newcommand{\sectemp}[1]{\contemp{\ptemplate\lt(#1\rt)}}
 
@@ -97,7 +96,7 @@
 \newcommand{\postloc}[1]{#1_{2}}
 \newcommand{\upperedgebound}[1]{#1^+}
 \newcommand{\loweredgebound}[1]{#1^-}
-\newcommand{\reset}[1]{#1_r}
+\newcommand{\reset}[1]{F_{#1}}
 \newcommand{\locationtransition}[1]{R_{#1}}
 \newcommand{\edgetransition}[1]{R_{#1}}
 \newcommand{\staysptope}[1]{\sptope{\ptemplate\lt(#1\rt)}{\stay^-\lt(#1\rt)}{\stay^+\lt(#1\rt)}}
@@ -107,5 +106,5 @@
 % Equations
 \newcommand{\transfer}[4]{#1#4 = #2\dg\lt(#3\rt)}
 \newcommand{\centertransfer}[4]{#1#4 = #3-#2}
-
+\newcommand{\scalebound}[5]{\max_{i=1}^{#4}\lt(\lt|#2_i\rt|-#3_i+\sum_{j=1}^{#5}\lt|#1_{ij}\rt|\rt)}
 
