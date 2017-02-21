@@ -1,43 +1,42 @@
 
-Our objective is to find positive invariants whose projection in every
-location is a augmented complex zonotope.  We use a template based
-approach, where we fix suitable primary and secondary templates and
-then find corresponding primary offsets, scaling factors and
-sub-parallelotopic bounds to get a positive invariant.  We choose the
-the primary template $V(\loc)\in\mat{n}{m(q)}{\mb{C}}$ in a
-location $\loc\in\locationset$ such
-that
-%\begin{equation}~\label{eqn:tempselect}
-$\ptemplate(\loc)V(\loc) = 0$,
-%\end{equation}  
-so that intersection with the sub-parallelotopic staying and guard
-conditions can be conveniently computed, based on
-Lemma~\ref{lem:intersection}.  Another consideration for choosing the
-primary template is the eigenstructure of the linear
-maps, that is discussed in a latter section.
+Our objective is to find a positive invariant of the following kind.
+\begin{itemize}
+\item The projection of the positive invariant in every location is an augmented complex zonotope.
+\item The positive invariant is contained within a safe set specified by linear inequalities.
+\item The positive invariant contains an initial set that is over-approximated by an augmented complex zonotope.
+\end{itemize} 
+We use a fixed template based approach for finding such a positive
+invariant.  In this approach, we fix suitable primary and secondary
+templates and solve for the primary offsets, scaling factors and
+sub-parallelotopic bounds.  In this section, we derive constranints on
+the aforementioned variables whose satisfaction yeilds a positive
+invariant as above, assuming that the templates are given.  The way we
+choose the primary and secondary templates will be discussed in a
+latter section.
 
 
-The following lemmas state sufficient conditions for satisfaction of
-the inclusion relations for positive invariance~(\ref{eqn:PosInv}) by
-an augmented complex zonotope, whose template is chosen as specified
-above.
+The following two lemmas state sufficient conditions for satisfaction of
+the inclusion relations for positive invariance~(\ref{eqn:pi1},\ref{eqn:pi2}) by
+an augmented complex zonotope.
 \begin{lemma}
   Let us consider a state set $\hybridset$ whose projection in each
   location $\loc\in\locationset$ is $\hybridset(\loc) =
-  \real\lt(\gcz{V(\loc)}{c(\loc)}{s(\loc)}{\pinv{\ptemplate}(\loc)}{l(\loc)}{u(\loc)}\rt)$
+  \real\lt(\gcz{V_{n\times m(\loc)}(\loc)}{c(\loc)}{s(\loc)}{\pinv{\ptemplate}(\loc)}{l(\loc)}{u(\loc)}\rt)$
   such that $\ptemplate(\loc)V(\loc) = 0$.  Let us consider that the
   additive input in each location $\loc\in\locationset$ can be
   overapproximated as $\inputset(\loc) = \cz{B_{n\times
-      m^\pr(q)}(\loc)}{b(\loc)}{r(\loc)}$.  Then the inclusion
+      m^\pr(q)}(\loc)}{b(\loc)}{r(\loc)}$.  Then we have
   $\locationtransition{\loc}\lt(\hybridset(\loc)\rt) \subseteq
-  \hybridset\lt(\loc\rt)$ holds if,
+  \hybridset\lt(\loc\rt)$ if,
 \begin{align}
 \begin{split}~\label{eqn:exists-intra}
 & \exists
   X(\loc)\in\mat{\lt(m(\loc)+k(\loc)\rt)}{\lt(m(\loc)+k(\loc)+m^\pr(\loc)\rt)}{\mb{C}},~
-  y(\loc)\in\mb{C}^{m(\loc)+k(\loc)}\\&~u^\pr(\loc),l^\pr(\loc)\in\realset^{k(\loc)}~\text{and}~s^\pr(\loc)\in\realset^{k(\loc)}~\text{and policies}\\
+  y(\loc)\in\mb{C}^{m(\loc)+k(\loc)}\\&~u^\pr(\loc),l^\pr(\loc)\in\realset^{k(\loc)}~\text{and}~s^\pr(\loc)\in\realset^{k(\loc)}~\text{and
+    policies}~
+\minaffinefunc_{\loc}^{post}\in\minaffineset\lt(k\lt(\loc\rt)\rt),\\
 &\minaffinefunc_{\loc}^{pre}\in\minaffineset\lt(k\lt(\loc\rt)\rt),\maxaffinefunc_{\loc}^{pre}\in\maxaffineset\lt(k\lt(\loc\rt)\rt),
-\minaffinefunc_{\loc}^{post}\in\minaffineset\lt(k\lt(\loc\rt)\rt),\maxaffinefunc_{\loc}^{post}\in\maxaffineset\lt(k\lt(\loc\rt)\rt),~\text{s.t.}
+\maxaffinefunc_{\loc}^{post}\in\maxaffineset\lt(k\lt(\loc\rt)\rt),~\text{s.t.}
 \end{split}
 \end{align}
 \begin{align}
@@ -90,7 +89,8 @@ l(\loc)~\text{and}~\minaffinefunc_{\loc}^{post}\lt(u^\pr(\loc),\stay^+(\loc)\rt)
 \begin{lemma}
   Let us consider a state set $\hybridset$ whose projection in each
   location $\loc\in\locationset$ is $\hybridset(\loc) =
-  \real\lt(\gcz{V(\loc)}{c(\loc)}{s(\loc)}{\pinv{\ptemplate}(\loc)}{l(\loc)}{u(\loc)}\rt)$
+  \real\lt(\gcz{V_{n\times
+      m(\loc)}(\loc)}{c(\loc)}{s(\loc)}{\pinv{\ptemplate}(\loc)}{l(\loc)}{u(\loc)}\rt)$
   such that $\ptemplate(\loc)V(\loc) = 0$.  Then for an edge
   $\edge\in\edgeset$, the inclusion
   $\edgetransition{\edge}\lt(\hybridset\lt(\preloc{\edge}\rt)\rt)
@@ -149,15 +149,14 @@ l\lt(\postloc{\edge}\rt)~\text{and}~\minaffinefunc_{\edge}^{post}\lt(u^\pr(\edge
 \end{proof}
 
 Additionally, we may want the positive invariant to contain an initial
-set.  So, the following lemma states the sufficient condition for
-containing an initial set which can be overapproximated by an
-augmented complex zonotope.
+set.  The following lemma states the sufficient condition for
+containing an initial set.
 \begin{lemma}
-  Let us consider a two state sets $\mc{I}$ and $\hybridset$ whose projections in each location
+  Let $\mc{I}$ and $\hybridset$ be two state sets whose projections in each location
   $\loc\in\locationset$ are respectively $\mc{I}(\loc)=\real\lt(\gcz{V^I_{n\times
       m^\pr }}{c^I(\loc)}{s^I(\loc)}{W_{n\times
       k^\pr}}{l^I(\loc)}{u^I(\loc)}\rt)$ and $\hybridset(\loc) =
-  \gcz{V(\loc)}{c(\loc)}{s(\loc)}{\pinv{\ptemplate}(\loc)}{l(\loc)}{u(\loc)}$.
+  \gcz{V_{n\times m(\loc)}(\loc)}{c(\loc)}{s(\loc)}{\pinv{\ptemplate}(\loc)}{l(\loc)}{u(\loc)}$.
   Then
   $\forall\loc\in\locationset,~\mc{I}(\loc)\subseteq \hybridset(\loc)$
   if $\forall\loc\in\locationset$, 
@@ -176,15 +175,16 @@ i\in\lt\{m(\loc)+k(\loc)\rt\},\lt|y_i^I\rt|+\sum_{j=1}^{m^\pr+k^\pr}\lt|X_{ij}^I
 \end{lemma}
 
 One of the applications of positive invariants is to prove safety.  If
-a positive invariant, containing an initial set, is contained inside a
-safe set, then the system is safe.  In this regard, the following
-lemma states a sufficient condition for an augmented complex zonotope
-to be contained within a polytopic safe set.
+a positive invariant containing an initial set is also contained
+inside a safe set, it implies that the system is safe.  In this
+regard, the following lemma states a sufficient condition for an
+augmented complex zonotope to be contained within a polytopic
+set (safe set).
 
 \begin{lemma}
   Let us consider a state set $\hybridset$ whose projection in each
   location $\loc \in\locationset$ is $\hybridset(\loc) =
-  \real\lt(\gcz{V(\loc)}{c(\loc)}{s(\loc)}{\pinv{\ptemplate}(\loc)}{l(\loc)}{u(\loc)}\rt)$.
+  \real\lt(\gcz{V_{n\times m(\loc)}(\loc)}{c(\loc)}{s(\loc)}{\pinv{\ptemplate}(\loc)}{l(\loc)}{u(\loc)}\rt)$.
   Let us consider a polytopic state set
   $\mc{J}:\locationset\ra\realset^n$ described as $\forall
   \loc\in\locationset,~\mc{J}(\loc)=\lt\{x\in\realset^n:Tx\leq
@@ -193,34 +193,32 @@ to be contained within a polytopic safe set.
   $\hybridset(\loc)\subseteq \mc{J}(\loc)$ if $\forall
   q\in\locationset$,
 \begin{align}~\label{eqn:safe-contain}
-T\lt(c+W\lt(\frac{u(\loc)+l(\loc)}{2}\rt)\rt)+\lt|T\lt[V(\loc),~\pinv{\ptemplate}(\loc)\rt]\rt|\ColumnJoin{\hspace{2em}s}{\frac{u(\loc)-l(\loc)}{2}}\leq d(\loc).
+T\lt(c+W\lt(\frac{u(\loc)+l(\loc)}{2}\rt)\rt)+\lt|T\lt[V(\loc),~\pinv{\ptemplate}(\loc)\rt]\rt|\ColumnJoin{\hspace{1.5em}s}{\frac{u(\loc)-l(\loc)}{2}}\leq d(\loc).
 \end{align}
 \end{lemma}
 
-Consolidating all the above results, the following theorem states a
-sufficient condition for a state set, having augmented complex
-zonotopic projections in all locations, to be a positive invariant.
-Additionally, we include sufficient conditions such that the state set is
+Consolidating the previous results in this section gives the following
+sufficient condition for positive invariance.  We also
+include sufficient conditions so that the positive invariant is
 contained within a polytopic safe set and contains an initial set.
 
-\begin{theorem}~\label{thm:main} Let us consider a state set
-  $\hybridset$ whose projection in each location $\loc\in\locationset$
-  is $\hybridset(\loc) =
-  \gcz{V(\loc)}{c(\loc)}{s(\loc)}{\pinv{\ptemplate}(\loc)}{l(\loc)}{u(\loc)}$
-  such that $\ptemplate(\loc)V(\loc) = 0$.  Let a state set $\mc{I}$
-  where $\forall\loc\in\locationset$,
-  $\mc{I}(\loc)=\real\lt(\gcz{V^I_{n\times
-      m^\pr }}{c^I(\loc)}{s^I(\loc)}{W_{n\times
-      k^\pr}}{l^I(\loc)}{u^I(\loc)}\rt)$ be the initial state set.  Let $T\in\mat{p}{n}{R}$ and
-  $\forall\loc\in\locationset,~d(\loc)\in\comprealset^n$.  A safe set
-  is given by a polytopic
-  state set $\mc{J}:\locationset\ra\realset^n$ described as $\forall
+\begin{theorem}~\label{thm:main} Let $\hybridset$ be a state set whose
+  projection in each location $\loc\in\locationset$ is
+  $\hybridset(\loc) = \real\lt(\gcz{V_{n\times
+      m(\loc)}(\loc)}{c(\loc)}{s(\loc)}{\pinv{\ptemplate}(\loc)}{l(\loc)}{u(\loc)}\rt)$
+  such that $\ptemplate(\loc)V(\loc) = 0$.  Consider
+  $\mc{I}:~\forall\loc\in\locationset$,
+  $\mc{I}(\loc)=\real\lt(\gcz{V^I_{n\times m^\pr
+    }}{c^I(\loc)}{s^I(\loc)}{W_{n\times
+      k^\pr}}{l^I(\loc)}{u^I(\loc)}\rt)$ as an initial state set.  Let
+  us consider a safe set specified by a polytopic state set
+  $\mc{J}:\locationset\ra\realset^n$ described as $\forall
   \loc\in\locationset,~\mc{J}(\loc)=\lt\{x\in\realset^n:Tx\leq
-  d(\loc)\rt\}$.  Then $\hybridset$ is a positive
-  invariant and $\forall
-  \loc\in\locationset,~\mc{I}(\loc)\subseteq\hybridset(\loc)\subseteq
-  \mc{J}(\loc)$, if $\forall \loc\in\locationset$ and $\forall
-  \edge\in\edgeset$,
+  d(\loc)\rt\}$, where $T\in\mat{p}{n}{R}$ and
+  $\forall\loc\in\locationset,~d(\loc)\in\comprealset^n$.  If $\forall
+  \loc\in\locationset$ and $\forall \edge\in\edgeset$,
   Equations[\ref{eqn:exists-intra}-\ref{eqn:safe-contain}] are all
-  satisfied.
+  satisfied, then $\hybridset$ is a positive invariant and $\forall
+  \loc\in\locationset,~\mc{I}(\loc)\subseteq\hybridset(\loc)\subseteq
+  \mc{J}(\loc)$.
 \end{theorem}

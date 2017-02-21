@@ -50,27 +50,30 @@ For certain kinds of templates, the intersection of a
 sub-parallelotope with an augmented complex zonotope can be exactly
 specified as another augmented complex zonotope with the same
 template.  This is stated in the following lemma 
-\begin{lemma}~\label{lem:intersection} Let a sub-parallelotope
+\begin{lemma}[Intersection with
+  sub-parallelotope]~\label{lem:intersection} If a sub-parallelotope
   $\sptope{K}{\wh{l}}{\wh{u}}$ and an augmented complex zonotope
-  $\gcz{V}{c}{s}{\pseudoinverse{K}}{l}{u}$ and be such that $KV=0$.  Then,
+  $\gcz{V}{c}{s}{\pseudoinverse{K}}{l}{u}$ are such that $KV=0$, then
+  
 \begin{equation}~\label{eqn:intersection}
 \gcz{V}{c}{s}{\pseudoinverse{K}}{l}{u}\bigcap \sptope{K}{\wh{l}}{\wh{u}} =
   \gcz{V}{c}{s}{\pseudoinverse{K}}{\max\lt(l,\wh{l}\rt)}{\min\lt(u,\wh{u}\rt)}.
 \end{equation}
 \end{lemma}
 
-The minimum and maximum functions are not affine functions, hence,
-when composed with convex constraints, the resulting constraints need
-not be convex.  However, the minimum function can be written as the
-minimum of a finite number of affine functions, while the
-maximum function can be written as the maximum of a finite number of
-affine functions.  We will call such functions as \emph{policies}, which are
+The above intersection operation employs the minimum and maximum
+function.  These functions are not affine functions, hence, when
+composed with convex constraints, the resulting constraints need not
+be convex.  However, the minimum function can be written as the
+minimum of a finite number of affine functions, while the maximum
+function can be written as the maximum of a finite number of affine
+functions.  We will call such functions as \emph{policies}, which are
 defined below.  Latter, we use these functions to derive a policy
 iteration framework for finding positive invariants, where for each
-policy in the iteration, we solve SOCP constraints.
+policy in the iteration, we  get convex constraints.
 
-\begin{definition}[Min-approximation policy] A function (affine)
-  $\minaffine:\realset^k\times\comprealset^k$ is called a
+\begin{definition}[Min-approximation policy] A function
+  $\minaffinefunc:\realset^k\times\comprealset^k$ is called a
   min-approximation policy on $n$ variables, if there exists a boolean
   vector $v\in\{0,1\}^k$ such that for all $a\in\realset^k$,
   $b\in\comprealset^k$ and $i\in\tup{n}$,
@@ -86,8 +89,8 @@ a_i~~\text{if}~b_i=\inf
 %
 
 
-\begin{definition}[Max-approximation policy] A function (affine)
-  $\maxaffine:\realset^k\times\comprealset^k$ is called a
+\begin{definition}[Max-approximation policy] A function
+  $\maxaffinefunc:\realset^k\times\comprealset^k$ is called a
   max-approximation policy on $n$ variables, if there exists a boolean
   vector $v\in\{0,1\}^k$ such that for all $a\in\realset^k$,
   $b\in\comprealset^k$ and $i\in\tup{n}$,
@@ -110,7 +113,7 @@ $\minaffineset(k)$ and max-approximation policies as
 $\maxaffineset(k)$.
 
 
-\begin{lemma}~\label{lem:affineapproximation} Let a sub-parallelotope
+\begin{lemma}[Intersection using policies]~\label{lem:affineapproximation} Let a sub-parallelotope
   $\sptope{K}{\wh{l}}{\wh{u}}$ and an augmented complex zonotope
   $\gcz{V}{c}{s}{\pseudoinverse{K}}{l}{u}$ be such that $VK=0$.  Then,
   all
@@ -128,8 +131,13 @@ $\maxaffineset(k)$.
   \gcz{V}{c}{s}{W}{\maxaffine{l}{\wh{l}}}{\minaffine{u}{\wh{u}}}.\]
 \item For every $a\in\realset^k$ and $b\in\comprealset^k$, there exist
   $\minaffinefunc\in\minaffineset(k)$ and
-  $\maxaffinefunc\in\maxaffineset(k)$ such that 
-  $\min(a,b)=\minaffine{a}{b}$ and $\max(a,b)=\maxaffine{a}{b}$.  
+  $\maxaffinefunc\in\maxaffineset(k)$ such that
+  $\min(a,b)=\minaffine{a}{b}$ and
+  $\max(a,b)=\maxaffine{a}{b}$. Consequently, there exist policies
+  $\minaffinefunc\in\minaffineset(k)$ and
+  $\maxaffinefunc\in\maxaffineset(k)$ such that
+\[\gcz{V}{c}{s}{\pseudoinverse{K}}{l}{u}\bigcap \sptope{K}{\wh{l}}{\wh{u}} =
+  \gcz{V}{c}{s}{W}{\maxaffine{l}{\wh{l}}}{\minaffine{u}{\wh{u}}}.\]
 \end{enumerate}
 \end{lemma}
 

@@ -17,30 +17,31 @@ location $\loc\in\locationset$ as
 \end{equation}
 For each location $\loc\in\locationset$,
 $\ptemplate(\loc)\in\mat{k(q)}{n}{\realset}$ is the sub-parallelotopic
-template used for defining the linear inequalities in the staying
-conditions and the guards emanating from the location.  The staying
-condition in a location $\loc\in\locationset$ is specified by a pair
-of upper and lower bounds,
+template used for defining the linear inequalities of the staying
+conditions and the guards on edges emanating from the location.  We also
+speicify a 
+pair of upper and lower bounds
 $\stay(\loc)=\lt(\stay^-(\loc),\stay^+(\loc)\rt)\in\mb{R}^n\times\mb{R}^n:
-~~\stay^-(\loc)\leq\stay^+(\loc)$, on the sub-parallelotope
-$\sptope{\ptemplate\lt(\loc\rt)}{\stay^-(\loc)}{\stay^+(\loc)}$.  The
-set of edges is denoted by $\edgeset$, where an edge
-$\edge\in\edgeset$ is denoted as by tuple $\edge =
-\lt(\preloc{\edge},\postloc{\edge},\loweredgebound{\edge},\upperedgebound{\edge},\reset{\edge}\rt)$, described as
-follows.  The pre and post locations of the edge are
+~~\stay^-(\loc)\leq\stay^+(\loc)$ corresponding to a sub-parallelotopic
+staying set
+$\sptope{\ptemplate\lt(\loc\rt)}{\stay^-(\loc)}{\stay^+(\loc)}$ in the
+location.  The set of edges is denoted by $\edgeset$, where an edge
+$\edge\in\edgeset$ is a tuple $\edge =
+\lt(\preloc{\edge},\postloc{\edge},\loweredgebound{\edge},\upperedgebound{\edge},\reset{\edge}\rt)$,
+described as follows.  The pre and post locations of the edge are
 $\preloc{\edge}\in\locationset$ and $\postloc{\edge}\in\locationset$,
 respectively.  The pair of upper and lower bounds
 $\lt(\edge^-,\edge^+\rt)\in\realset^{k\lt(\preloc{\edge}\rt)}\times\realset^{k\lt(\preloc{\edge}\rt)}:~~\edge^-\leq\edge^+$,
 relate to the sub-parallelotopic guard set
 $\sptope{\ptemplate\lt(\preloc{\edge}\rt)}{\edge^-}{\edge^+}$.  The
-reset map is given by a transformation matrix
+reset is a linear map with the transformation matrix
 $\reset{\edge}\in\mat{n}{n}{R}$.
 
 A \emph{state} of the hybrid system is a pair $(x,\loc)$, where
 $x\in\realset^n$ is called the \emph{continuous state} and
 $\loc\in\locationset$ is called the \emph{discrete state}.  The
 evolution of the state of the system in time is called a
-\emph{trajectory}.  Therefore, it is a function
+\emph{trajectory}.  The trajectory is a function
 $\systrj{x}{\loc}:\wholenums\ra\realset^n\times\locationset$, such
 that for all $t\in\wholenums$, one of the following is true.
 
@@ -68,9 +69,8 @@ that for all $t\in\wholenums$, one of the following is true.
 \end{enumerate}
 
 The set of reachable continuous states in one time step of
-intralocation and interlocation dynamics from a given set of
-continuous states is given by the following two functions,
-respectively.
+intralocation and interlocation dynamics, respectively, from a given
+set of continuous states is given by the following two functions.
 \begin{enumerate}
 \item For any location $\loc\in\locationset$, define $\locationtransition{\loc}:2^{\realset^n}\ra 2^{\realset^n}$ as
 \begin{multline*}
@@ -83,7 +83,7 @@ respectively.
 \end{multline*}
 \end{enumerate}
 
-We always identify a set of states by a mapping of the kind
+We shall identify a set of states by a mapping of the kind
 $\hybridset:\locationset\ra 2^{\realset^n}$, called a \emph{state
   set}, which corresponds to the set of states
 $\lt\{\lt(x,\loc\rt):x\in\hybridset\lt(\loc\rt)\rt\}$.  A positive
@@ -95,9 +95,9 @@ interlocation dynamics is contained within the original state set.
 \begin{definition}
 A state set $\hybridset$ is a positive invariant if
 both the following are true.
-\begin{align}~\label{eqn:PosInv}
-& \forall\loc\in\locationset,~~\locationtransition{q}\lt(\hybridset(\loc)\rt) \subseteq \hybridset\lt(\loc\rt)\\
-& \forall\edge\in\edgeset,~~\edgetransition{\edge}\lt(\hybridset\lt(\preloc{\edge}\rt)\rt) \subseteq
+\begin{align}
+& \forall\loc\in\locationset,~~\locationtransition{q}\lt(\hybridset(\loc)\rt) \subseteq \hybridset\lt(\loc\rt)~\label{eqn:pi1}\\
+& \forall\edge\in\edgeset,~~\edgetransition{\edge}\lt(\hybridset\lt(\preloc{\edge}\rt)\rt) \subseteq~\label{eqn:pi2}
   \hybridset\lt(\postloc{\edge}\rt).
 \end{align}
 \end{definition}
