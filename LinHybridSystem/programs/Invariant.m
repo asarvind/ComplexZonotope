@@ -70,7 +70,7 @@ classdef Invariant
             % Collect all eigenvectors
             E = [];
             for i = 1:this.system.NumLocs
-                [~,new] = eig(this.system.map{i});
+                [new,~] = eig(this.system.map{i});
                 E = [E,new];
             end
             for i = 1:numel(this.system.edges)
@@ -87,6 +87,7 @@ classdef Invariant
         end
         
         function [ this ] = Invariant( system,filename )
+            clear -global
             this.system = system;
             this.filename = filename;
             
@@ -125,9 +126,11 @@ classdef Invariant
             fprintf( fid,'\n global v_locmin');
             global v_locmax;
             fprintf( fid,'\n global v_locmax');
-            for i = 1:H.NumLocs
-                [b_locmin,v_locmin] = init_minvect(H.stay{i}.u);
-                [b_locmax,v_locmax] = init_maxvect(H.stay{i}.l);
+            for i = 1:H.NumLocs                
+                [val1,val2] = init_minvect(H.stay{i}.u);
+                [val3,val4] = init_maxvect(H.stay{i}.l);
+                b_locmin{i} = val1; v_locmin{i} = val2;
+                b_locmax{i} = val3; v_locmax{i} = val4;
             end
             
             
@@ -150,10 +153,14 @@ classdef Invariant
             fprintf( fid,'\n global v_postmax');
             for i = 1:numel(H.edges)
                 edge = H.edges{i};
-                [b_premin{i},v_premin{i}] = init_minvect(min(edge.u,H.stay{edge.loc1}.u));
-                [b_premax{i},v_premax{i}] = init_maxvect(max(edge.l,H.stay{edge.loc1}.l));
-                [b_postmin{i},v_postmin{i}] = init_minvect(H.stay{edge.loc2}.u);
-                [b_postmax{i},v_postmax{i}] = init_maxvect(H.stay{edge.loc2}.l);
+                [val1,val2] = init_minvect(min(edge.u,H.stay{edge.loc1}.u));
+                [val3,val4] = init_maxvect(max(edge.l,H.stay{edge.loc1}.l));
+                [val5,val6] = init_minvect(H.stay{edge.loc2}.u);
+                [val7,val8] = init_maxvect(H.stay{edge.loc2}.l);
+                b_premin{i} = val1; v_premin{i} = val2;
+                b_premax{i} = val3; v_premax{i} = val4;
+                b_postmin{i} = val5; v_postmin{i} = val6;
+                b_postmax{i} = val7; v_postmax{i} = val8;
             end
             
                       
@@ -182,9 +189,13 @@ classdef Invariant
                 m1 = size(V{i},2);
                 m2 = size(W{i},2);
                 m3 = size(H.input{i}.V,2);
+                m4 = size(H.initial{i}.V,2);
+                m5 = size(H.initial{i}.W,2);
                 fprintf(fid,'\n %s declare auxillary variables for location %s',comment,num2str(i));
-                fprintf( fid,'\n variables Xreal_loc%s(%s,%s) yreal_loc%s(%s,1)',num2str(i),num2str(m1+m2),num2str(m1+m2+m3),num2str(i),num2str(n) );
-                fprintf( fid,'\n variables Xcomp_loc%s(%s,%s) ycomp_loc%s(%s,1)',num2str(i),num2str(m1+m2),num2str(m1+m2+m3),num2str(i),num2str(n) );
+                fprintf( fid,'\n variables Xreal_loc%s(%s,%s) yreal_loc%s(%s,1)',num2str(i),num2str(m1+m2),num2str(m1+m2+m3),num2str(i),num2str(m1+m2) );
+                fprintf( fid,'\n variables Xcomp_loc%s(%s,%s) ycomp_loc%s(%s,1)',num2str(i),num2str(m1+m2),num2str(m1+m2+m3),num2str(i),num2str(m1+m2) );
+                fprintf( fid,'\n variables Xreal_init%s(%s,%s) yreal_init%s(%s,1)',num2str(i),num2str(m1+m2),num2str(m4+m5),num2str(i),num2str(m1+m2) );
+                fprintf( fid,'\n variables Xcomp_init%s(%s,%s) ycomp_init%s(%s,1)',num2str(i),num2str(m1+m2),num2str(m4+m5),num2str(i),num2str(m1+m2) );
                 fprintf( fid,'\n variables lpr_loc%s(%s,1) upr_loc%s(%s,1)',num2str(i),num2str(m2),num2str(i),num2str(m2) );
                 fprintf(fid,'\n');
             end
@@ -198,8 +209,8 @@ classdef Invariant
                 m3 = size(V{edge.loc2},2);
                 m4 = size(W{edge.loc2},2);
                 fprintf(fid,'\n %s declare auxillary variables for edge %s',comment,num2str(i));
-                fprintf( fid,'\n variables Xreal_edge%s(%s,%s) yreal_edge%s(%s,1)',num2str(i),num2str(m1+m2),num2str(m3+m4),num2str(i),num2str(n) );
-                fprintf( fid,'\n variables Xcomp_edge%s(%s,%s) ycomp_edge%s(%s,1)',num2str(i),num2str(m1+m2),num2str(m3+m4),num2str(i),num2str(n) );
+                fprintf( fid,'\n variables Xreal_edge%s(%s,%s) yreal_edge%s(%s,1)',num2str(i),num2str(m1+m2),num2str(m3+m4),num2str(i),num2str(m1+m2) );
+                fprintf( fid,'\n variables Xcomp_edge%s(%s,%s) ycomp_edge%s(%s,1)',num2str(i),num2str(m1+m2),num2str(m3+m4),num2str(i),num2str(m1+m2) );
                 fprintf( fid,'\n variables lpr_edge%s(%s,1) upr_edge%s(%s,1)',num2str(i),num2str(m4),num2str(i),num2str(m4) );
                 fprintf(fid,'\n');
             end
@@ -233,11 +244,11 @@ classdef Invariant
                 acz2.lowerbound = sprintf( 'l_%s',num2str(i) );
                 acz2.upperbound = sprintf( 'u_%s',num2str(i) );
                 
-                % stay constraint before transition
-                fprintf(fid,'\n %s stay constraint before transition for location %s',comment,num2str(i));
-                fprintf( fid,'\n l_%s >= H.stay{%s}.l',num2str(i),num2str(i) );
-                fprintf( fid,'\n u_%s <= H.stay{%s}.u',num2str(i),num2str(i) );
-                fprintf(fid,'\n');
+%                 % stay constraint before transition
+%                 fprintf(fid,'\n %s stay constraint before transition for location %s',comment,num2str(i));
+%                 fprintf( fid,'\n -1*l_%s  <= -1*((1-b_locmin{%s}.*l_%sH.stay{%s}.l)',num2str(i),num2str(i) );
+%                 fprintf( fid,'\n u_%s <= H.stay{%s}.u',num2str(i),num2str(i) );
+%                 fprintf(fid,'\n');
                 
                 % Overapproximation after transition
                 fprintf(fid,'\n %s overapproximation of location %s reach set',comment,num2str(i));
@@ -249,7 +260,7 @@ classdef Invariant
                 % Invariance after transition
                 fprintf(fid,'\n %s invariance after transition for location %s',comment, num2str(i));
                 fprintf( fid,'\n (1-b_locmin{%s}).*upr_loc%s+v_locmin{%s}-u_%s <= epsilon',num2str(i),num2str(i),num2str(i),num2str(i) );
-                fprintf( fid,'\n (1-b_locmax{%s}).*lpr_loc%s+v_locmax{%s}-l_%s >= -1*epsilon',num2str(i),num2str(i),num2str(i),num2str(i) );
+                fprintf( fid,'\n -1*(1-b_locmax{%s}).*lpr_loc%s+v_locmax{%s}-l_%s <= epsilon',num2str(i),num2str(i),num2str(i),num2str(i) );
                 fprintf(fid,'\n');
             end
             
@@ -283,7 +294,7 @@ classdef Invariant
                 % Invariance after transition
                 fprintf(fid,'\n %s Invariance condition after edge %s transition',comment,num2str(i));
                 fprintf( fid,'\n (1-b_postmin{%s}).*upr_edge%s+v_postmin{%s}-u_%s <= epsilon',num2str(i),num2str(i),num2str(i),num2str(edge.loc2) );
-                fprintf( fid,'\n (1-b_postmax{%s}).*lpr_edge%s+v_postmax{%s}-l_%s >= -1*epsilon',num2str(i),num2str(i),num2str(i),num2str(edge.loc2) );
+                fprintf( fid,'\n -1*(1-b_postmax{%s}).*lpr_edge%s+v_postmax{%s}-l_%s <= epsilon',num2str(i),num2str(i),num2str(i),num2str(edge.loc2) );
                 fprintf(fid,'\n');
             end
             
@@ -340,12 +351,12 @@ classdef Invariant
             end            
             fclose(fid);
             
-%             run(this.filename);
-%                      
-%             this.scale = scale;
-%             this.center = center;
-%             this.lbs = lowerbounds;
-%             this.ubs = upperbounds;
+            run(this.filename);
+                     
+            this.scale = scale;
+            this.center = center;
+            this.lbs = lowerbounds;
+            this.ubs = upperbounds;
         end
         
         
