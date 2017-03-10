@@ -135,32 +135,32 @@ classdef Invariant
             
             
             % compute approxbounds for all edge transitions
-            global b_premin;
-            fprintf( fid,'\n global b_premin');
-            global b_premax;
-            fprintf( fid,'\n global b_premax');
-            global b_postmin;
-            fprintf( fid,'\n global b_postmin');
-            global b_postmax;
-            fprintf( fid,'\n global b_postmax');
-            global v_premin;
-            fprintf( fid,'\n global v_premin');
-            global v_premax;
-            fprintf( fid,'\n global v_premax');
-            global v_postmin;
-            fprintf( fid,'\n global v_postmin');
-            global v_postmax;
-            fprintf( fid,'\n global v_postmax');
+            global bedge_premin;
+            fprintf( fid,'\n global bedge_premin');
+            global bedge_premax;
+            fprintf( fid,'\n global bedge_premax');
+            global bedge_postmin;
+            fprintf( fid,'\n global bedge_postmin');
+            global bedge_postmax;
+            fprintf( fid,'\n global bedge_postmax');
+            global vedge_premin;
+            fprintf( fid,'\n global vedge_premin');
+            global vedge_premax;
+            fprintf( fid,'\n global vedge_premax');
+            global vedge_postmin;
+            fprintf( fid,'\n global vedge_postmin');
+            global vedge_postmax;
+            fprintf( fid,'\n global vedge_postmax');
             for i = 1:numel(H.edges)
                 edge = H.edges{i};
                 [val1,val2] = init_minvect(min(edge.u,H.stay{edge.loc1}.u));
                 [val3,val4] = init_maxvect(max(edge.l,H.stay{edge.loc1}.l));
                 [val5,val6] = init_minvect(H.stay{edge.loc2}.u);
                 [val7,val8] = init_maxvect(H.stay{edge.loc2}.l);
-                b_premin{i} = val1; v_premin{i} = val2;
-                b_premax{i} = val3; v_premax{i} = val4;
-                b_postmin{i} = val5; v_postmin{i} = val6;
-                b_postmax{i} = val7; v_postmax{i} = val8;
+                bedge_premin{i} = val1; vedge_premin{i} = val2;
+                bedge_premax{i} = val3; vedge_premax{i} = val4;
+                bedge_postmin{i} = val5; vedge_postmin{i} = val6;
+                bedge_postmax{i} = val7; vedge_postmax{i} = val8;
             end
             
                       
@@ -241,14 +241,8 @@ classdef Invariant
                 acz2.SecTempname = sprintf( 'H.map{%s}*W{%s}',num2str(i),num2str(i) );
                 acz2.centername = sprintf( 'H.map{%s}*c_%s + H.input{%s}.c',num2str(i),num2str(i),num2str(i) );
                 acz2.scalename = sprintf( '[s_%s; H.input{%s}.s]',num2str(i),num2str(i) );
-                acz2.lowerbound = sprintf( 'l_%s',num2str(i) );
-                acz2.upperbound = sprintf( 'u_%s',num2str(i) );
-                
-%                 % stay constraint before transition
-%                 fprintf(fid,'\n %s stay constraint before transition for location %s',comment,num2str(i));
-%                 fprintf( fid,'\n -1*l_%s  <= -1*((1-b_locmin{%s}.*l_%sH.stay{%s}.l)',num2str(i),num2str(i) );
-%                 fprintf( fid,'\n u_%s <= H.stay{%s}.u',num2str(i),num2str(i) );
-%                 fprintf(fid,'\n');
+                acz2.lowerbound = sprintf( '(1-b_locmax{%s}).*l_%s+v_locmax{%s}',num2str(i),num2str(i),num2str(i) );
+                acz2.upperbound = sprintf( '(1-b_locmin{%s}).*u_%s+v_locmin{%s}',num2str(i),num2str(i),num2str(i) );
                 
                 % Overapproximation after transition
                 fprintf(fid,'\n %s overapproximation of location %s reach set',comment,num2str(i));
@@ -259,8 +253,8 @@ classdef Invariant
                 
                 % Invariance after transition
                 fprintf(fid,'\n %s invariance after transition for location %s',comment, num2str(i));
-                fprintf( fid,'\n (1-b_locmin{%s}).*upr_loc%s+v_locmin{%s}-u_%s <= epsilon',num2str(i),num2str(i),num2str(i),num2str(i) );
-                fprintf( fid,'\n -1*(1-b_locmax{%s}).*lpr_loc%s+v_locmax{%s}-l_%s <= epsilon',num2str(i),num2str(i),num2str(i),num2str(i) );
+                fprintf( fid,'\n (1-b_locmin{%s}).*upr_loc%s+v_locmin{%s}-epsilon <= u_%s',num2str(i),num2str(i),num2str(i),num2str(i) );
+                fprintf( fid,'\n l_%s-epsilon <= (1-b_locmax{%s}).*lpr_loc%s+v_locmax{%s}',num2str(i),num2str(i),num2str(i),num2str(i) );
                 fprintf(fid,'\n');
             end
             
@@ -282,8 +276,8 @@ classdef Invariant
                 acz2.SecTempname = sprintf( 'H.edges{%s}.reset*W{%s}',num2str(i),num2str(edge.loc1) );
                 acz2.centername = sprintf( 'H.edges{%s}.reset*c_%s',num2str(i),num2str(edge.loc1) );
                 acz2.scalename = sprintf( 's_%s',num2str(edge.loc1) );
-                acz2.lowerbound = sprintf( '(1-b_premax{%s}).*l_%s+v_premax{%s}',num2str(i),num2str(edge.loc1),num2str(i) );
-                acz2.upperbound = sprintf( '(1-b_premin{%s}).*u_%s+v_premin{%s}',num2str(i),num2str(edge.loc1),num2str(i) );
+                acz2.lowerbound = sprintf( '(1-bedge_premax{%s}).*l_%s+vedge_premax{%s}',num2str(i),num2str(edge.loc1),num2str(i) );
+                acz2.upperbound = sprintf( '(1-bedge_premin{%s}).*u_%s+vedge_premin{%s}',num2str(i),num2str(edge.loc1),num2str(i) );
                 
                 % Overapproximation after transition
                 fprintf(fid,'\n %s Overapproximation after edge %s transition',comment,num2str(i));
@@ -293,8 +287,8 @@ classdef Invariant
                 
                 % Invariance after transition
                 fprintf(fid,'\n %s Invariance condition after edge %s transition',comment,num2str(i));
-                fprintf( fid,'\n (1-b_postmin{%s}).*upr_edge%s+v_postmin{%s}-u_%s <= epsilon',num2str(i),num2str(i),num2str(i),num2str(edge.loc2) );
-                fprintf( fid,'\n -1*(1-b_postmax{%s}).*lpr_edge%s+v_postmax{%s}-l_%s <= epsilon',num2str(i),num2str(i),num2str(i),num2str(edge.loc2) );
+                fprintf( fid,'\n (1-bedge_postmin{%s}).*upr_edge%s+vedge_postmin{%s}-epsilon <= u_%s ',num2str(i),num2str(i),num2str(i),num2str(edge.loc2) );
+                fprintf( fid,'\n l_%s-epsilon <= (1-bedge_postmax{%s}).*lpr_edge%s+vedge_postmax{%s}',num2str(i),num2str(i),num2str(i),num2str(edge.loc2) );
                 fprintf(fid,'\n');
             end
             
