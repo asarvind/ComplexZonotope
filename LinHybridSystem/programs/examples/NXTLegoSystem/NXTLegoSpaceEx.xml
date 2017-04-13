@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<sspaceex xmlns="http://www-verimag.imag.fr/xml-namespaces/sspaceex" version="0.2" math="SpaceEx">
+  <component id="dynamics">
+    <param name="x1" type="real" local="false" d1="1" d2="1" dynamics="any" />
+    <param name="x2" type="real" local="false" d1="1" d2="1" dynamics="any" />
+    <param name="x3" type="real" local="false" d1="1" d2="1" dynamics="any" />
+    <param name="x4" type="real" local="false" d1="1" d2="1" dynamics="any" />
+    <param name="x5" type="real" local="false" d1="1" d2="1" dynamics="any" />
+    <param name="x6" type="real" local="false" d1="1" d2="1" dynamics="any" />
+    <param name="x7" type="real" local="false" d1="1" d2="1" dynamics="any" />
+    <param name="x8" type="real" local="false" d1="1" d2="1" dynamics="any" />
+    <param name="x9" type="real" local="false" d1="1" d2="1" dynamics="any" />
+    <param name="x10" type="real" local="false" d1="1" d2="1" dynamics="any" />
+    <param name="t" type="real" local="false" d1="1" d2="1" dynamics="any" />
+    <param name="u1" type="real" local="false" d1="1" d2="1" dynamics="const" controlled="true" />
+    <param name="u2" type="real" local="false" d1="1" d2="1" dynamics="const" controlled="true" />
+    <param name="u3" type="real" local="false" d1="1" d2="1" dynamics="const" controlled="true" />
+    <param name="u4" type="real" local="false" d1="1" d2="1" dynamics="const" controlled="true" />
+    <location id="1" name="loc1" x="463.0" y="250.0" width="146.0" height="118.0">
+      <invariant />
+      <flow>t' == 0 &amp;
+
+x1' ==  0 &amp;
+
+x2' == 0 &amp;
+
+x3' ==  0 &amp;
+
+x4' ==  0 &amp;
+
+x5' == 0 &amp;
+
+x6' == 0 &amp;
+
+x7' ==  0 &amp;
+
+x8' ==  0 &amp;
+
+x9' ==   0 &amp;
+
+x10' == 0</flow>
+    </location>
+    <transition source="1" target="1">
+      <assignment>t := t+1 &amp;
+
+x1 :=  0.254308*x1 + 0.254308*x2 + 3.69291*x3 + 0.730244*x5 + 7.97155*x6 + 14.5019*x7 - 0.00723289*x8 + 0.0720492*x9 - 2.7354*x10  + 0.0202175*u4 - 0.00032955*u3 &amp;
+
+x2 :=  0.254308*x1 + 0.254308*x2 + 3.69291*x3 + 0.730244*x5 + 7.97155*x6 + 14.5019*x7 - 0.00723289*x8 + 0.0720492*x9 - 2.7354*x10 +    - 0.00032955*u3 - 0.0202175*u4 &amp;
+
+x3 :=  0.956243*x3 - 0.00010048*x2 - 0.00010048*x1 + 0.00186474*x5 - 0.00213434*x6 - 0.00218145*x7 - 4.43866e-7*x8 - 0.000086086*x9 - 0.000159282*x10 &amp;
+
+x4 :=  0.690973*x4 +                    0.000108685*u4 &amp;
+
+x5 :=  0.883258*x3 - 0.0413392*x2 - 0.0413392*x1 - 0.115356*x5 - 1.29429*x6 - 2.35196*x7 + 0.00117067*x8 - 0.0118017*x9 + 0.442749*x10 +   0.000172029*u3 - 0.000118491*u1 &amp;
+
+x6 :=  0.021899*x1 + 0.021899*x2 - 0.471216*x3 - 0.0811628*x5 + 0.11509*x6 - 1.48454*x7 + 0.000745392*x8 - 0.00713134*x9 + 0.281871*x10 +  0.000436097*u1 + 0.0000029287*u3 &amp;
+
+x7 :=            0.0102189*x1 + 0.0102189*x2 - 0.155962*x3 - 0.0459271*x5 - 0.317291*x6 + 0.364992*x7 + 0.000307372*x8 - 0.00232111*x9 +     0.116174*x10 +  0.0000343143*u3 - 0.000478303*u1 &amp;
+
+x8 :=  0.0431312*x1 + 0.0431312*x2 - 0.771896*x3 - 0.124767*x5 - 1.42644*x6 - 2.59013*x7 + 0.997282*x8 - 0.013084*x9 + 0.486922*x10 +     0.0000615619*u3 - 0.133924*u1 &amp;
+
+x9 :=   0.0428432*x1 + 0.0428432*x2 - 0.754377*x3 - 0.124335*x5 - 1.42036*x6 - 2.57916*x7 + 0.00128207*x8 + 0.982466*x9 + 0.479612*x10 +  0.000909032*u1 + 0.0000614427*u3 &amp;
+
+x10 :=  0.00648058*x1 + 0.00648058*x2 - 0.19055*x3 - 0.0147943*x5 - 0.208132*x6 - 0.375109*x7 + 0.00018391*x8 + 0.00325666*x9 + 1.06506*x10 +   0.0000168249*u3 - 0.00079826*u1</assignment>
+      <labelposition x="-1.0" y="-41.0" />
+    </transition>
+  </component>
+</sspaceex>
+
