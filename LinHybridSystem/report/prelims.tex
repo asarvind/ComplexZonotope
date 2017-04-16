@@ -1,0 +1,140 @@
+
+In a discrete time affine hybrid system, we have a set of
+discrete variables, called locations, and continuous
+variables that take values in the real euclidean space of dimension
+$n\in\pint$.  In each location, there are a set
+of linear constraints, called \emph{staying conditions}, within which
+the continuous state of the system in that location is contrained.
+In each location, there is an affine transition map with (possibly)
+additive uncertain but bounded disturbance input specifying the
+transition of the continuous variables.  A set of labeled directed
+edges specify possible transitions between different locations,
+accompanied by affine transitions on continuous variables with a bounded
+additive disturbance input.  Each edge transition is controlled by a
+set of linear constraints on the continous variables, called guards.
+
+In this paper, for specifying the staying conditions and guards, we consider a
+specific class of linear constraints that represent possibly
+unbounded parallelotopes.  We shall call them as
+sub-parallelotopes, defined as follows.
+%
+\begin{definition}[Sub-parallelotope]~\label{defn:sub-parallelotope} Let
+  $K\in\mat{k}{n}{R}$ such that $k\leq n$ and $\lt(KK^T\rt)$ is
+  non-singular.  We call such a matrix $K$ as a
+  ñ\emph{sub-parallelotopic template}.  Let
+  $\wh{u},\wh{l}\in\comprealset^n$ such that $\wh{u}\leq\wh{l}$.  Then
+  the following is a sub-parallelotopic set.
+\[
+\sptope{K}{\wh{l}}{\wh{u}} = \lt\{x\in\realset^n: \wh{l}\leq Kx \leq \wh{u}\rt\}
+\]
+\end{definition}
+%
+[GIVE EXAMPLE] For many examples of affine hybrid systems, the guards
+and staying conditions can be specified as sub-parallelotopic sets. 
+
+
+\paragraph{Specification.}
+We specify the discrete time affine hybrid system by a tuple 
+%
+\begin{equation}~\label{eqn:system}
+\system =
+\lt(\locationset,\ptemplate,\stay,\edgeset,\linearmapset,\inputset\rt).
+\end{equation}
+%
+Here, $\locationset$ is a finite set of locations.  For each location
+$\loc\in\locationset$, a sub-parallelotopic template
+$\ptemplate(\loc)\in\mat{k(q)}{n}{\realset}$ is used for defining the
+linear constraints on the staying conditions and the guards on edges
+emanating from the location.  Accordingly, a pair of upper and lower
+bounds
+$\stay(\loc)=\lt(\stay^-(\loc),\stay^+(\loc)\rt)\in\mb{R}^n\times\mb{R}^n:
+~~\stay^-(\loc)\leq\stay^+(\loc)$ gives the sub-parallelotopic
+staying set
+$\sptope{\ptemplate\lt(\loc\rt)}{\stay^-(\loc)}{\stay^+(\loc)}$ in the
+location.  The maps
+$\linearmapset:\lt(\locationset\bigcup\edgeset\rt)\ra\mat{n}{n}{R}$
+and $\inputset:\lt(\locationset\bigcup\edgeset\rt)\ra 2^{\mb{R}^n}$,
+respectively, give the linear transfomation and additive input set for
+all intralocation transitions and edge transitions.
+
+The set of edges is $\edgeset$, where $\edge\in\edgeset$ is a tuple
+$\edge =
+\lt(\preloc{\edge},\postloc{\edge},\loweredgebound{\edge},\upperedgebound{\edge},\map(\edge),\inp(\edge)\rt)$,
+described as follows.  The pre and post locations of the edge are
+$\preloc{\edge}\in\locationset$ and $\postloc{\edge}\in\locationset$,
+respectively.  The pair of upper and lower bounds
+$\lt(\edge^-,\edge^+\rt)\in\realset^{k\lt(\preloc{\edge}\rt)}\times\realset^{k\lt(\preloc{\edge}\rt)}:~~\edge^-\leq\edge^+$,
+relate to the sub-parallelotopic guard set
+$\sptope{\ptemplate\lt(\preloc{\edge}\rt)}{\edge^-}{\edge^+}$, which
+is a precondition on the edge transition.  The
+affine transition along the edge is given by the linear map
+$\map(\edge)$ and additive uncertain input set $\inp(\edge)$.
+
+\paragraph{Dynamics.}
+The state of the hybrid system is a pair $(x,\loc)$, where
+$x\in\realset^n$ is called the continuous state and
+$\loc\in\locationset$ is called the discrete state.  The
+evolution of the state of the system in time is called a
+\emph{trajectory}.  The trajectory is a function
+$\systrj{x}{\loc}:\wholenums\ra\realset^n\times\locationset$, such
+that for all $t\in\wholenums$, one of the following is true.
+
+\begin{enumerate}
+\item Intralocation dynamics.
+\begin{align}~\label{eqn:intralocation}
+\begin{split}
+& \exists u\in\inputset\lt(\trj{\loc}{t}\rt)~~\text{such that all of
+    the below conditions  are satisfied.}\\
+& \trj{x}{t+1} = \map(\trj{\loc}{t})+u,~~~\trj{\loc}{t+1} = \trj{\loc}{t}~~
+\text{and}\\
+& \trj{x}{t},~\trj{x}{t+1}\in\sptope{\ptemplate\lt(\trj{\loc}{t}\rt)}{\stay^-\lt(\trj{\loc}{t}\rt)}{\stay^+\lt(\trj{\loc}{t}\rt)}.
+\end{split}
+\end{align}
+\item Interlocation dynamics.
+\begin{align} 
+\begin{split}
+& \exists \edge\in\edgeset~~\text{such that all of the below
+    conditions are satisfied.}\\
+&
+  \trj{\loc}{t}=\preloc{\edge},~~~\trj{x}{t}\in\sptope{\ptemplate\lt(\preloc{\edge}\rt)}{\loweredgebound{\edge}\bigvee\stay^-\lt(\preloc{\edge}\rt)}{\upperedgebound{\edge}\bigwedge\stay^+\lt(\preloc{\edge}\rt)} \\
+& \trj{x}{t+1} = \map(\trj{\loc}{t})+u,~~~\trj{\loc}{t+1} = \postloc{\edge}\\
+& \trj{x}{t+1}\in \sptope{\ptemplate\lt(\postloc{\edge}\rt)}{\stay^-\lt(\postloc{\edge}\rt)}{\stay^+\lt(\postloc{\edge}\rt)}.
+\end{split}
+\end{align}
+\end{enumerate}
+
+The set of reachable continuous states in one time step of
+intralocation and interlocation dynamics, respectively, from a given
+set of continuous states is given by the following two functions.
+\begin{enumerate}
+\item For any location $\loc\in\locationset$, define $\locationtransition{\loc}:2^{\realset^n}\ra 2^{\realset^n}$ as
+\begin{equation*}
+\locationtransition{q}\lt(S\rt) = \lt\{\Calign{\lt(\map\lt(\loc\rt)\lt(S\bigcap\staysptope{\loc}\rt)\oplus
+\inputset\lt(\loc\rt)\rt)}{~~\bigcap~~\staysptope{\loc}}\rt..
+\end{equation*}
+\item For any edge $\edge\in\edgeset$, define
+  $\edgetransition{\edge}:2^{\realset^n}\ra 2^{\realset^n}$ as
+\begin{multline*}
+\edgetransition{\edge}\lt(S\rt) =  \lt\{\Calign{\lt(\map(\edge)\lt(S\bigcap
+\guardsptope{\edge}\rt)\oplus\inp(\edge)\rt)}{~~\bigcap~~\staysptope{\postloc{\edge}}}\rt..
+\end{multline*}
+\end{enumerate}
+
+We shall identify a set of states by a mapping of the kind
+$\hybridset:\locationset\ra 2^{\realset^n}$, called a \emph{state
+  set}, which corresponds to the set of states
+$\lt\{\lt(x,\loc\rt):x\in\hybridset\lt(\loc\rt)\rt\}$.  A positive
+invariant is a set of states of the system such that all trajectories
+beginning at any state in the positive invariant remain withing the
+positive invariant.  Equivalently, a state set is a positive invariant
+if the reachable set in one time step by both the intralocation and
+interlocation dynamics is contained within the original state set.
+\begin{definition}
+A state set $\hybridset$ is a positive invariant if
+both the following are true.
+\begin{align}
+& \forall\loc\in\locationset,~~\locationtransition{q}\lt(\hybridset(\loc)\rt) \subseteq \hybridset\lt(\loc\rt)~\label{eqn:pi1}\\
+& \forall\edge\in\edgeset,~~\edgetransition{\edge}\lt(\hybridset\lt(\preloc{\edge}\rt)\rt) \subseteq~\label{eqn:pi2}
+  \hybridset\lt(\postloc{\edge}\rt).
+\end{align}
+\end{definition}

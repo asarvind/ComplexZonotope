@@ -1,0 +1,193 @@
+
+Before we introduce augmented complex zonotopes, we briefly review
+related set representations and discuss our motivation for the
+current extension.
+
+\subsection{Related set representations}
+Usual zonotopes are Minkowski sums of
+line segemnts, represented as a linear combination of real vectors,
+called \emph{generators}, whose combining coefficients
+are bounded in real valued intervals.
+\begin{definition}[Real zonotope]
+Let $W\in\mat{n}{k}{\mb{R}}$ and $l,u\in\mb{R}^m: l\leq u$.  Then the
+following is a real zonotope.
+\begin{equation*}
+\zon{W}{l}{u} = \lt\{W\zeta: \zeta\in\mb{R}^k,~\zeta_j\in[l_j,u_j]~\forall j\in \tup{k}\rt\}
+\end{equation*}
+\end{definition}
+
+Zonotopes are a special class of polytopes.  In terms of hyperplane
+representation, we define a polytope as follows.
+%
+\begin{definition}
+Let $T\in\mat{n}{k}{\mb{R}}$ and $d\in\mb{R}^k$.  Then a (possibly
+unbounded) polytope, denoted $\polytope{T}{d}$, is defined as
+$\polytope{T}{d} = \lt\{x\in\comprealset^k: Tx\leq d\rt\}$.
+
+\end{definition}
+
+Although zonotopes are a special class of polytopes, they do not have
+efficient hyperplane representation as a polytope.  A zonotope with
+$m$ generators in an $n$ dimensional space can have as many as
+${m}\choose{n}$ faces (bounding hyperplanes).  [GIVE EXAMPLE HERE].
+The linear transformations and Minkowski sums of zonotopes are also
+zonotopes, which can be computed efficiently.  Hence, zonotopes are
+efficient for reachability analysis of linear systems and some special
+cases of affine hybrid systems.  We will discuss these operations
+latter in the general case of augmented complex zonotopes.
+
+To incorporate possibly complex eigenstructure of linear maps while
+finding invariants, the complex zonotope set representation and its
+generalization to template complex zontopes was introduced
+in~\cite{todo}.  A template complex zonotope has complex valued
+vectors as generators, whose combining coefficients are complex and
+bounded in their absolute values.
+
+\begin{definition}[Template complex zonotope]
+Let $V\in\mat{n}{m}{\mb{C}}$ (template) and $s\in\mb{R}^m_{\geq 0}$ (scaling factors) and
+$c\in\mb{C}^n$ (center).  Then the following is a template complex zonotope.
+\begin{equation*}
+\cz{V}{c}{s} =
+\lt\{V\epsilon:\epsilon\in\mb{C}^m,~\lt|\epsilon_i\rt|\leq s_i~\forall
+i\in\tup{m}\rt\}
+\end{equation*}
+\end{definition}
+
+When the template vectors of a complex zonotope are real, then the
+real projection of the complex zonotope is equivalent to a usual
+zonotope and has a polytopic shape.  However, when some of the
+template vectors have both real and imaginary parts, then the real
+projection of a complex zonotope is a Minkowski sum of ellipsoids and
+line segments, hence not polyheadral.  An example of the non-polyheadral
+real projection of a complex zonotope is given in Figure~\ref{TODO}.
+
+%% A major issue with using zonotopes for
+%% analysis of affine hybrid systems is that there is no efficient way to
+%% compute a reasonable zonotopic overapproximation of intersection with
+%% linear guard conditions.  In case of usual zonotopes, a method for
+%% computing the former was proposed in [TODO]~\cite{} that relied on
+%% computing polytopic projections on different hyperplanes.  However,
+%% this method is not efficient for high dimensions.  Furthermore, in case of
+%% non-polyheadral complex zonotopes, to our knowledge there is no existing method to
+%% overapproximate with reasonable accuracy the intersection with
+%% linear guards as a complex zonotope. 
+
+However, certain polytopes like parallelotopes are equivalent to
+zonotopes and the coversion between the representations only requires
+computing the inverse of some matrix.  Firstly, we define a class of
+polytopes that can be efficiently converted to zonotopes and are
+somewhat more general than parallelotopes. We call them as
+sub-parallelotopes, whose hyperplane representation is defined as
+follows.
+%
+\begin{definition}[Sub-parallelotope]~\label{defn:sub-parallelotope} Let
+  $K\in\mat{k}{n}{R}$ such that $k\leq n$ and $\lt(KK^T\rt)$ is
+  non-singular.  We call $K$ as a ñ\emph{sub-parallelotopic template}.
+  Let $\wh{u},\wh{l}\in\comprealset^n$ such that $u\leq l$.  Then the
+  following is a sub-parallelotopic set.
+\[
+\sptope{K}{\wh{l}}{\wh{u}} = \lt\{x\in\realset^n: \wh{l}\leq Kx \leq \wh{u}\rt\}
+\]
+\end{definition}
+Note that in the above definition, the lower and upper limits on the
+sub-parallelotope can be unbounded in some directions.  Therefore we
+defined that the limits along each direction belong to
+$\realset\bigcup\{\inf\}\bigcup\{-\inf\}$. We say that a
+sub-parallelotope $\sptope{K}{\wh{u}}{\wh{l}}$ is bounded if $\wh{u}$
+and $\wh{l}$ are finite, i.e. $\wh{u},\wh{l}\in\realset^k$, and
+unbounded otherwise.  [GIVE EXAMPLE HERE].
+
+A bounded sub-parallelotope has an equivalent representation as a
+zonotope, which can be computed efficiently as follows.
+\begin{lemma}
+We have the equivalence $\sptope{K}{l}{u}=\zon{\pinv{K}}{l}{u}$.
+\end{lemma}
+[GIVE EXAMPLE HERE]
+
+
+%% %
+%% \begin{lemma}[Linear transformation]
+%% Let $A\in\mat{n}{n}{\mb{R}}$, $W\in\mat{n}{k}{\mb{R}}$ and
+%% $V\in\mat{n}{m}{\mb{C}}$.  We have 
+%% \begin{align}
+%% & A\zon{W}{l}{u} = \zon{AW}{l}{u}.\\
+%% & A\cz{V}{c}{s} = \cz{AV}{Ac}{s}.
+%% \end{align}
+%% \end{lemma}
+%% %
+%% \begin{lemma}[Minkowski sum]
+%% We have
+%% \begin{align}
+%% & \zon{W}{l}{u}\oplus\zon{W^\pr}{l^\pr}{u^\pr} = \zon{[W~~
+%% W^\pr]}{\ColumnJoin{l}{l^\pr}}{\ColumnJoin{u}{u^\pr}}.\\
+%% & \cz{V}{c}{s}\oplus\cz{V^\pr}{c^\pr}{s^\pr} = \cz{[V~~V^\pr]}{c+c^\pr}{\ColumnJoin{s}{s^\pr}}.
+%% \end{align}
+%% \end{lemma}
+%% %
+
+For affine transitions, it is known~[CITE] that the reachable set of a
+real or complex zonotope after one transition can be efficiently
+computed.  This is an advantage of using zonotopes for reachable set
+computation of linear systems.  But in case of affine hybrid
+systems, the transition between discrete states may be controlled by
+linear guards (linear constraints).  Reachability analysis of such
+systems would require computing the intersection of the set
+representation being used with the linear guards.  In case of real
+zonotopes, existing approaches to compute reasonably accurate
+zonotopic overapproximations of the intersections with linear
+guards~[CITE] are not efficient in high dimensions.  In case of
+complex zonotopes, to our knowledge no method has yet been proposed
+for computing a reasonable overapproximation of the intersection with
+linear guards.
+
+However, if the zonotope is also a sub-parallelotope, then the
+intersection of 
+the zonotope with a sub-parallelotope with a corresponding template can be
+exactly computed as follows. The below observation is useful since for
+the discrete time hybrid systems that we consider, the linear guards
+are represented as sub-parallelotopes.
+%
+\begin{lemma}\label{lem:motivation}
+Let $K\in\mat{n}{k}{R}$ such that $k\leq n$ and $\lt(K^TK\rt)$ is
+non-singular.  We have
+\[
+\zon{K}{l}{u} \bigcap \sptope{\pinv{K}}{\wh{l}}{\wh{u}}
+= \zon{K}{l\bigvee \wh{l}}{u\bigwedge \wh{u}}
+\]
+\end{lemma}
+%
+
+\subsection{Augmented complex zonotopes}
+Motivated by the possibility of efficiently computing intersection
+between a zonotope and a sub-parallelotope under some assumptions
+(Lemma~\ref{lem:motivation}), we introduce a new set representation
+called \emph{augmented complex zonotope}, which is a Minkowski sum of
+template complex zonotope and real zonotope.
+
+\begin{definition}[Augmented complex zonotope]
+Let $V\in\mat{n}{m}{C}$ called primary template, $W\in\mat{n}{k}{R}$
+called secondary template, $c\in\mb{R}^n$ called primary offset,
+$s\in\mb{R}^m$ called scaling factors, $u,l\in\mb{R}^k$ called lower
+and upper interval bounds, respectively, such that $l\leq u$.  The
+following is an augmented complex
+zonotope.
+\begin{multline}
+\gcz{V}{c}{s}{W}{l}{u} =
+\lt\{
+  c+V\epsilon+W\zeta:\epsilon\in\mb{C}^m,\zeta\in\mb{R}^k,\rt.\\ \lt.  \lt|\epsilon_i\rt|\leq
+ s_i~\forall i\in\tup{m},~\zeta_j\in[l_j,u_j]~\forall j\in \tup{k}
+\rt\}
+\end{multline}
+\end{definition}
+
+We observe that the real zonotopic part of an augmented complex
+zonotope can be used to represent bounded sub-parallelotopes.  Then
+under suitable assumptions, intersection with sub-parallelotopes can
+be exactly represented as an augmented complex zonotope and computed
+easily.  These assumptions will be discussed in the next section.
+Furthermore, we shall also state some relaxed assumptions under which
+the intersection can be overapproximated, although not exactly
+computed.
+
+
+

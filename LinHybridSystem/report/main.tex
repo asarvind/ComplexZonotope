@@ -1,0 +1,59 @@
+\documentclass{llncs}
+\usepackage{times}
+\usepackage{amsmath}
+\usepackage{amssymb} % For \mathbb font
+\usepackage{algorithm}
+\usepackage{algpseudocode}
+\usepackage{multirow}
+\usepackage{url}
+\usepackage{tikz} 
+\usetikzlibrary{arrows,backgrounds,decorations,decorations.pathmorphing,positioning,fit,automata,shapes,snakes,patterns,plotmarks,calc}
+\usepackage{graphicx,color} 
+\usepackage{enumitem}
+\usepackage{float}
+\usepackage{bm}
+
+
+% Input macros
+\input{macros}
+
+% Headers
+\title{An efficient approach to invariant computation of discrete time affine hybrid systems
+} 
+
+\author{Arvind\ Adimoolam and Thao\ Dang
+} 
+\institute{\ Verimag,~Grenoble, France\\ \url{{santosh.adimoolam,thao.dang}@univ-grenoble-alpes.fr}.
+}
+
+
+\begin{document}
+
+\maketitle
+
+\section{Hybrid system and positive invariant}
+\input{prelims.tex}
+
+\section{Augmented complex zonotopes}
+\input{zonotope}
+
+\section{Inclusion relations}
+\input{SetInclusions}
+
+\section{Sufficient condition for positive invariance}
+\input{PositiveInvariance.tex}
+
+
+
+
+
+
+
+
+
+
+
+\bibliographystyle{plain}
+\bibliography{ref}
+
+\end{document}
