@@ -28,7 +28,7 @@ transition can be computed based on the following two lemmas.
   all of the below conditions are satisfied.
 \begin{align}~\label{eqn:locinv}
 \begin{split}
-& \text{there exists a complex vector}~
+& \pinv{\ptemplate}(\loc)c(\loc) = 0~\text{and there exists a complex vector}~
   c^\pr(\loc)~\text{and}\\
 & \text{real
     vectors}~s^\pr(\loc),l^\pr(\loc),u^\pr(\loc),l^\dpr(\loc),u^\dpr(\loc)~\text{such
@@ -51,8 +51,9 @@ transition can be computed based on the following two lemmas.
   all of the below conditions are satisfied.
 \begin{align}~\label{eqn:edgeinv}
 \begin{split}
-& \text{there exists a complex
-  vectors}~c^\pr(\postloc{\edge})~\text{and}\\
+& \pinv{\ptemplate}\lt(\preloc{\edge}\rt)c\lt(\preloc{\edge}\rt) =
+  0~\text{and there exists a complex
+  vector}~c^\pr(\postloc{\edge})~\text{and}\\
 & \text{real
     vectors}~s^\pr(\postloc{\edge}),l^\pr(\postloc{\edge}),u^\pr(\postloc{\edge}),l^\dpr(\postloc{\edge}),u^\dpr(\postloc{\edge})~~\text{such
   that}\\

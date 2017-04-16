@@ -2,7 +2,7 @@ output: main.tex
 	make clean; pdflatex main.tex; bibtex main; pdflatex main.tex; pdflatex main.tex;
 
 pdf: main.tex
-	make clean; pdflatex main.tex;
+	pdflatex main.tex;
 
 
 
