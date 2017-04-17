@@ -1,0 +1,164 @@
+As discussed in the previous section, a complex zonotope can have a
+non-polyhedral real projection.  Hence, when a complex zonotope is
+intersected with even a single linear constraint, we may not be able
+to computing a reasonably accurate complex zonotopic overapproximation
+of the intersection.  In contrast, Lemma~\ref{lem:motivation}
+discussed the possibility of efficiently computing the intersection
+between a real zonotope and a sub-parallelotope under some assumption.
+This being a motivation, we combine the template complex zonotopic set
+representation and the real zonotopic set representation by their
+Minkowski sum.  We call the resulting representation as an
+\emph{augmented complex zonotope}.
+%
+\begin{definition}[Augmented complex zonotope]
+Let $V\in\mat{n}{m}{C}$ called primary template, $W\in\mat{n}{k}{R}$
+called secondary template, $c\in\mb{R}^n$ called primary offset,
+$s\in\mb{R}^m$ called scaling factors, $u,l\in\mb{R}^k$ called lower
+and upper interval bounds, respectively, such that $l\leq u$.  The
+following is an augmented complex
+zonotope.
+\begin{multline}
+\gcz{V}{c}{s}{W}{l}{u} =
+\lt\{
+  c+V\epsilon+W\zeta:\epsilon\in\mb{C}^m,\zeta\in\mb{R}^k,\rt.\\ \lt.  \lt|\epsilon_i\rt|\leq
+ s_i~\forall i\in\tup{m},~\zeta_j\in[l_j,u_j]~\forall j\in \tup{k}
+\rt\}
+\end{multline}
+\end{definition}
+%
+Before we discuss the intersection between an augmented complex
+zonotope and a sub-parallelotope, we introduce the following lemma.
+It states the limits of the projection of an augmented complex
+zonotope along any direction.  This lemma is latter used to reason
+about the intersection.
+%
+\begin{lemma}
+Let us consider an augmented complex zonotope $\gcz{V}{c}{s}{W}{l}{u}$
+where $V\in\mat{n}{m}{\mb{C}}$.  If $v\in\realset^n$, then
+\[
+\max_{x\in\gcz{V}{c}{s}{W}{l}{u}}v^Tx = v^T\lt(c+W\frac{l+u}{2}\rt)+\lt|v^T[V~~W]\rt|\lt(\ColumnJoin{s}{\frac{l-u}{2}}\rt)
+\]
+\end{lemma}
+%
+The following lemma gives an overapproximation of the intersection
+between an augmented complex zonotope and a sub-parallelotope.
+Furthermore, it also states a condition when the intersection is
+exactly computed.
+%
+\begin{lemma}
+Let $\ptemplate$ be a sub-paralleotopic template and $c\in\mb{C}^n$
+such that $\ptemplate c=0$.  Then both the following statements are
+true.
+\begin{enumerate}
+\item
+  $\gcz{V}{c}{s}{\pinv{\ptemplate}}{l}{u}\bigcap\sptope{\ptemplate}{\wh{l}}{\wh{u}}\subseteq
+  \gcz{V}{c}{s}{\pinv{\ptemplate}}{l\bigvee\wh{l}}{u\bigwedge\wh{u}}$.
+\item If $KV=0$, then $\gcz{V}{c}{s}{\pinv{\ptemplate}}{l}{u}\bigcap\sptope{\ptemplate}{\wh{l}}{\wh{u}}=
+  \gcz{V}{c}{s}{\pinv{\ptemplate}}{l\bigvee\wh{l}}{u\bigwedge\wh{u}}$.
+\end{enumerate}
+\end{lemma}
+%
+The linear transformation and Minkowski sum operations on
+augmented complex zonotopes are computed as follows.
+%
+\begin{lemma}[Linear transformation and Minkowski sum]
+\begin{enumerate}
+\item $A\gcz{V}{c}{s}{W}{l}{u} = \gcz{AV}{Ac}{s}{AW}{l}{u}$.
+\item $\gcz{V}{c}{s}{W}{l}{u}\oplus
+  \gcz{V^\pr}{c^\pr}{s^\pr}{W^\pr}{l^\pr}{u^\pr}$\\
+$= \gcz{\lt[V~~V^\pr\rt]}{c+c^\pr}{\ColumnJoin{s}{s^\pr}}{\lt[W~~W^\pr\rt]}{\ColumnJoin{l}{l^\pr}}{\ColumnJoin{u}{u^\pr}}$
+\end{enumerate}
+\end{lemma}
+%
+The real projection of an augmented complex zonotope can be
+equivalently tranformed as the real projection of a template complex
+zonotope, as follows.  However, we note that as a complex valued set,
+an augmented complex zonotope is more general and can not be
+represented as a template complex zonotope.
+%
+\begin{lemma}~\label{lem:conversion}
+$\real\lt(\gcz{V}{c}{s}{W}{l}{u}\rt) = \real\lt(\cz{\lt[V~W\rt]}{c+W\lt(\frac{u+l}{2}\rt)}{\ColumnJoin{\hspace{0.5em}s}{\frac{u-l}{2}}}\rt)$.
+\end{lemma}
+%
+Because of the above relationship, checking the inclusion between the
+real projections of two augmented complex zonotopes amounts to checking the
+inclusion between real projections of two template complex zonotopes.
+%
+Recall the partial order between two template complex zonotopes
+defined in the previous section. We extend this partial order to
+augmented complex zonotopes as follows.
+
+\begin{definition}
+We say that $\gcz{V^\pr}{c^\pr}{s^\pr}{W^\pr}{l^\pr}{u^\pr}\order
+\gcz{V}{c}{s}{W}{l}{u}$ if\\ $\cz{\lt[V^\pr~W^\pr\rt]}{c^\pr+W^\pr\lt(\frac{u^\pr+l^\pr}{2}\rt)}{\ColumnJoin{\hspace{0.5em}s^\pr}{\frac{u-l}{2}}}
+\order
+\cz{\lt[V~W\rt]}{c+W\lt(\frac{u+l}{2}\rt)}{\ColumnJoin{\hspace{0.5em}s}{\frac{u-l}{2}}}.$
+\end{definition}
+
+\begin{lemma}[Ordering: augmented complex
+    zonotopes]~\label{lem:gcz-gcz} 
+\begin{enumerate}
+\item The relation ``$\order$'' between
+  augmented complex zonotopes is a partial order.  
+\item The real inclusion
+  $\real\lt(\gcz{V^\pr}{c^\pr}{s^\pr}{W^\pr}{l^\pr}{u^\pr}\rt)\subseteq
+  \real\lt(\gcz{V}{c}{s}{W_{n\times k}}{l}{u}\rt)$ holds if
+  $\gcz{V^\pr}{c^\pr}{s^\pr}{W^\pr}{l^\pr}{u^\pr}\order
+  \gcz{V}{c}{s}{W_{n\times k}}{l}{u}$.
+\end{enumerate}
+\end{lemma}
+
+The intersection of an augmented complex zonotope with a
+sub-parallelotope involves the meet and join operations, according to
+Lemma~\ref[REFER].  The meet and join operations on the variables give
+rise to non-affine functions, which when composed with convex
+functions, may result in non-convex functions.  However, in case of
+hybrid systems the guards and staying conditions define the limits on
+the interval bounds of a sub-parallelotope.  Since we are interested
+in computing large invariants, these bounds are usually attained by
+the sufficiently large invariant augmented complex zonotope.  Based on
+this observation, we propose the following affine upper and lower
+bound functions for the meet and join operations, respectively.
+
+Let us define a binary operation called \emph{min-approximation} function,
+$\minaffinefunc:\realset^k\times\comprealset^k$, defined as follows.
+For $u\in\realset^k$ and $\wh{u}\in\comprealset^k$, $\lt(\minaffine{u}{wh{u}}\rt)_i = \left\{
+\begin{array}{l}
+\wh{u}_i~~\text{if}~\wh{u}_i<\inf\\
+u_i~~\text{if}~\wh{u}_i=\inf
+\end{array}
+\right.$
+
+Similarly, define a binaray operation called \emph{max-approximation}
+function, $\maxaffinefunc:\realset^k\times\comprealset^k$, defined as
+follows.  For $l\in\realset^k$ and $\wh{l}\in\comprealset^k$,
+$\lt(\maxaffine{l}{wh{l}}\rt)_i = \left\{
+\begin{array}{l}
+\wh{l}_i~~\text{if}~\wh{l}_i>\inf\\
+l_i~~\text{if}~\wh{l}_i=-\inf
+\end{array}
+\right.$
+
+[Give example here]
+
+The following lemma states that the min-approximation and
+max-approximation functions are affine upper and lower bound functions
+for the meet and join operations, respectively.
+%
+\begin{lemma}
+All of the below statements are true.
+\begin{enumerate}
+\item Let $l,u\in\realset^k$ and $\wh{l},\wh{u}\in\comprealset^k$.
+  Then, $\maxaffine{l}{\wh{l}}\leq l\bigcup\wh{l}$ and
+  $u\bigcap\wh{u}\leq\minaffine{u}{\wh{u}}$.
+\item For a fixed $\wh{l},\wh{u}\in\comprealset^k$, the functions
+  $\maxaffine{.}{\wh{l}}:\realset^k\ra\realset^k$ and
+  $\minaffine{.}{\wh{u}}:\realset^k\ra\realset^k$ are affine functions
+  functions.
+\end{enumerate}
+\end{lemma}
+
+
+
+
+

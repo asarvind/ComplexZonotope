@@ -3,8 +3,7 @@ Before we introduce augmented complex zonotopes, we briefly review
 related set representations and discuss our motivation for the
 current extension.
 
-\subsection{Related set representations}
-Usual zonotopes are Minkowski sums of
+Usual (real) zonotopes are Minkowski sums of
 line segemnts, represented as a linear combination of real vectors,
 called \emph{generators}, whose combining coefficients
 are bounded in real valued intervals.
@@ -15,30 +14,47 @@ following is a real zonotope.
 \zon{W}{l}{u} = \lt\{W\zeta: \zeta\in\mb{R}^k,~\zeta_j\in[l_j,u_j]~\forall j\in \tup{k}\rt\}
 \end{equation*}
 \end{definition}
-
-Zonotopes are a special class of polytopes.  In terms of hyperplane
-representation, we define a polytope as follows.
 %
-\begin{definition}
-Let $T\in\mat{n}{k}{\mb{R}}$ and $d\in\mb{R}^k$.  Then a (possibly
-unbounded) polytope, denoted $\polytope{T}{d}$, is defined as
-$\polytope{T}{d} = \lt\{x\in\comprealset^k: Tx\leq d\rt\}$.
-
-\end{definition}
-
-Although zonotopes are a special class of polytopes, they do not have
-efficient hyperplane representation as a polytope.  A zonotope with
-$m$ generators in an $n$ dimensional space can have as many as
-${m}\choose{n}$ faces (bounding hyperplanes).  [GIVE EXAMPLE HERE].
 The linear transformations and Minkowski sums of zonotopes are also
 zonotopes, which can be computed efficiently.  Hence, zonotopes are
 efficient for reachability analysis of linear systems and some special
 cases of affine hybrid systems.  We will discuss these operations
 latter in the general case of augmented complex zonotopes.
 
-To incorporate possibly complex eigenstructure of linear maps while
-finding invariants, the complex zonotope set representation and its
-generalization to template complex zontopes was introduced
+Zonotopes are a sub-class of polytopes.  First, we define a polytope
+in terms of hyperplane representation.  Latter we explain that
+zonotopes do not have efficient hyperplane representation. 
+%
+\begin{definition}
+Let $T\in\mat{n}{k}{\mb{R}}$ and $d\in\mb{R}^k$.  Then a (possibly
+unbounded) polytope, denoted $\polytope{T}{d}$, is defined as
+$\polytope{T}{d} = \lt\{x\in\comprealset^k: Tx\leq d\rt\}$.
+\end{definition}
+%
+Although zonotopes are a special class of polytopes, they do not have
+efficient hyperplane representation as a polytope.  A zonotope with
+$m$ generators in an $n$ dimensional space can have as many as
+${m}\choose{n}$ faces (bounding hyperplanes).  [GIVE EXAMPLE HERE].
+
+Generally, the intersection of a real zonotope with linear constraints
+is not a zonotope.  However, if the linear constraints constitute a
+sub-parallelotope, then the intersection with a real zonotope having a
+corresponding template can be exactly computed.  This is described in
+the following lemma.
+%
+\begin{lemma}\label{lem:motivation}
+Let $K\in\mat{n}{k}{R}$ such that $k\leq n$ and $\lt(K^TK\rt)$ is
+non-singular.  Then
+\[
+\zon{K}{l}{u} \bigcap \sptope{\pinv{K}}{\wh{l}}{\wh{u}}
+= \zon{K}{l\bigvee \wh{l}}{u\bigwedge \wh{u}}
+\]
+\end{lemma}
+%
+
+To incorporate the possibly complex eigenstructure of linear maps while
+computing invariants, the complex zonotope set representation and its
+generalization to the template complex zontope were introduced
 in~\cite{todo}.  A template complex zonotope has complex valued
 vectors as generators, whose combining coefficients are complex and
 bounded in their absolute values.
@@ -58,7 +74,7 @@ real projection of the complex zonotope is equivalent to a usual
 zonotope and has a polytopic shape.  However, when some of the
 template vectors have both real and imaginary parts, then the real
 projection of a complex zonotope is a Minkowski sum of ellipsoids and
-line segments, hence not polyheadral.  An example of the non-polyheadral
+line segments, hence not polyhedral.  An example of the non-polyhedral
 real projection of a complex zonotope is given in Figure~\ref{TODO}.
 
 %% A major issue with using zonotopes for
@@ -70,58 +86,44 @@ real projection of a complex zonotope is given in Figure~\ref{TODO}.
 %% this method is not efficient for high dimensions.  Furthermore, in case of
 %% non-polyheadral complex zonotopes, to our knowledge there is no existing method to
 %% overapproximate with reasonable accuracy the intersection with
-%% linear guards as a complex zonotope. 
+%% linear guards as a complex zonotope.
 
-Generally, the intersection of a zonotope with linear constraints is
-not a zonotope.  However, if the linear constraints constitute a
-sub-parallelotope, then intersection with a zonotope with the
-corresponding template can be exactly computed.  This is described in
-the following lemma.
+In general, checking the exact inclusion between two template complex
+zonotopes amounts to solving a non-convex optimization problem, which
+could be inefficient.  Therefore, a convex condition was proposed
+in~[CITE], which is sufficient to guarantee inclusion between template
+complex zonotopes.  Here, we present this condition as a
+partial order between template complex zonotopes.
+
 %
-\begin{lemma}\label{lem:motivation}
-Let $K\in\mat{n}{k}{R}$ such that $k\leq n$ and $\lt(K^TK\rt)$ is
-non-singular.  Then
-\[
-\zon{K}{l}{u} \bigcap \sptope{\pinv{K}}{\wh{l}}{\wh{u}}
-= \zon{K}{l\bigvee \wh{l}}{u\bigwedge \wh{u}}
-\]
-\end{lemma}
-%
-
-\subsection{Augmented complex zonotopes}
-Lemma~\ref{lem:motivation} described the possibility of efficiently
-computing intersection between a zonotope and a sub-parallelotope
-under some assumption.  This being a motivation, we introduce a new
-set representation called \emph{augmented complex zonotope}, which is
-a Minkowski sum of a template complex zonotope and areal zonotope.
-
-\begin{definition}[Augmented complex zonotope]
-Let $V\in\mat{n}{m}{C}$ called primary template, $W\in\mat{n}{k}{R}$
-called secondary template, $c\in\mb{R}^n$ called primary offset,
-$s\in\mb{R}^m$ called scaling factors, $u,l\in\mb{R}^k$ called lower
-and upper interval bounds, respectively, such that $l\leq u$.  The
-following is an augmented complex
-zonotope.
-\begin{multline}
-\gcz{V}{c}{s}{W}{l}{u} =
-\lt\{
-  c+V\epsilon+W\zeta:\epsilon\in\mb{C}^m,\zeta\in\mb{R}^k,\rt.\\ \lt.  \lt|\epsilon_i\rt|\leq
- s_i~\forall i\in\tup{m},~\zeta_j\in[l_j,u_j]~\forall j\in \tup{k}
-\rt\}
-\end{multline}
+\begin{definition}
+We define a relation ``$\order$'' between template complex zonotopes
+as\\ $\cz{V^\pr_{n\times m^\pr}}{c^\pr}{s^\pr}\order \cz{V_{n\times
+    m}}{c}{s}$ if all of the following is true.
+\begin{align}
+\begin{split}
+& \exists X\in\mat{m}{m^\pr}{\mb{C}}~\text{and}~y\in\mb{C}^{m}~\text{s.t.}\\
+& \transfer{V}{V^\pr}{s^\pr}{X},~~~\centertransfer{V}{c}{c^\pr}{y}\\
+& \scalebound{X}{y}{s}{m}{m^\pr}\leq 0\\
+\end{split}
+\end{align}
 \end{definition}
+%
+The following lemma states that the relation defined above is a partial
+order and is sufficient to
+guarantee inclusion between template complex zonotopes.
 
-The following 
-
-
-We observe that the real zonotopic part of an augmented complex
-zonotope can be used to represent bounded sub-parallelotopes.  Then
-under suitable assumptions, intersection with sub-parallelotopes can
-be exactly represented as an augmented complex zonotope and computed
-easily.  These assumptions will be discussed in the next section.
-Furthermore, we shall also state some relaxed assumptions under which
-the intersection can be overapproximated, although not exactly
-computed.
+\begin{lemma}[Ordering: template complex
+  zonotopes]~\label{lem:zon-zon}
+\begin{enumerate}
+\item The relation ``$\order$'' between template complex zonotopes is
+  a partial order.
+\item The inclusion $\cz{V^\pr}{c^\pr}{s^\pr}\subseteq
+  \cz{V}{c}{s}$ holds if the
+  relation\\ $\cz{{V^\pr}}{c^\pr}{s^\pr}\order
+  \cz{V}{c}{s}$ holds.
+\end{enumerate}
+\end{lemma}
 
 
 
