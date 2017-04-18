@@ -44,12 +44,13 @@ d_p$, where $\delta=100$ and $d_p=0.0807$.  The saturated input is
 computed as $sat(u_i) = max\lt(-v_i,min\lt(u_i,v_i\rt)\rt)$.  So, the
 two dimensional controller input can be divided into nine regions such
 that the saturation function is piecewise affine with respect to these
-regions.  We model this hybrid system using one location and nine self
+regions.  We model the hybrid system using one location and nine self
 edges with appropriate guards, such that all possible transitions
-occur only along the edges.  So, we can set a constant value for the
-intralocation affine map as the origin.  For the unsaturated model, we
-have one location and no edges, where the system transition is given
-by the intralocation affine map.
+occur only along the edges.  As all possible transitions are specified
+along the edges, we set a constant value for the intralocation affine
+map as the origin.  For the unsaturated model, we have one location
+and no edges, where the system transition is given by the
+intralocation affine map.
 \vspace{0.2em}
 
 \emph{Implementation.}  Using our approach and also the SpaceEx tool,
