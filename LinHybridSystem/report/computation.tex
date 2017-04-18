@@ -1,10 +1,61 @@
 In the previous section, we derived a sufficient condition for an
-augmented complex zonotope to be a positive invariant.  In this
-section, we will discuss how to compute a positive invaraint based on
-the sufficient condition.  The computation procedure involves two
-steps.  In the first step, we choose suitable primary and secondary
-templates for the augmented complex zonotope.  In the next step, we
-solve for the other variables that satisfy the sufficient condition
-derived in Theorem~\ref{thm:main}.
+augmented complex zonotope to be a positive invariant with some
+additional requirements.  In this section, we will discuss how to
+compute the positive invaraint based on the sufficient condition.  Our
+computational procedure involves two steps.  In the first step, we
+choose suitable primary and secondary templates for the augmented
+complex zonotope.  In the next step, we solve for the other variables
+that satisfy the sufficient condition derived in
+Theorem~\ref{thm:main}.
 
-
+\paragraph{Solving for the variables.}  The sufficient condition we
+derived for the required positive invariant is equivalent to the
+satisfaction of a set of convex constraints.  By a convex constraint,
+we mean a constraint of the form $f(x)\leq 0$ where $f$ is a convex
+function.  We formalize our observation as follows.
+%
+\begin{proposition}~\label{prop:convex-inclusion}
+Both the below statements are true.
+\begin{enumerate}
+\item For fixed templates $V\in\mat{n}{m}{\mb{C}}$ and
+$V^\pr\in\mat{n}{m^\pr}{\mb{C}}$, the partial order
+$\cz{V}{c}{s}\order\cz{V^\pr}{c^\pr}{s^\pr}$ is equivalent to a set of
+convex constraints on $c,s,c^\pr,s^\pr$ and some auxillary variables.
+\item For fixed templates $V\in\mat{n}{m}{\mb{C}}$,
+$W\in\mat{n}{k}{\realset}$, 
+$V^\pr\in\mat{n}{m^\pr}{\mb{C}}$ and
+$W^\pr\in\mat{n}{k^\pr}{\realset}$, the partial order
+$\gcz{V}{c}{s}{W}{l}{u}\order\gcz{V^\pr}{c^\pr}{s^\pr}{W^\pr}{l^\pr}{u^\pr}$
+is equivalent to a set of convex constraints on
+$c,s,l,u,c^\pr,s^\pr,l^\pr,u^\pr$ and some auxillary variables.
+\end{enumerate}
+\end{proposition}
+%
+If a variable is assigned to an affine function of another variable,
+then a convex constraint on the former variable is equivalent to
+another convex constraint on the latter variable.  We have stated in
+Lemma~\ref{lem:min-max-approx} that the min and max approximation
+functions are affine functions in the first argument, for a fixed
+second argument.  These affine approximations are used in
+Equations~(\ref{eqn:locinv}) and~(\ref{eqn:edgeinv}).  Therefore, we
+deduce the following observation about the former equations.
+%
+\begin{proposition}
+Both the below statements are true.
+\begin{enumerate}
+\item Consider the Equation~(\ref{eqn:locinv}).  For any location
+$\loc\in\locationset$, given fixed templates $V(\loc)$ and $W(\loc)$,
+the Equation~(\ref{eqn:locinv}) is equivalent to a set of convex
+constraints on the variables $c(\loc),s(\loc),l(\loc),u(\loc)$ and
+some auxillary variables.
+\item Consider the Equation~(\ref{eqn:edgeinv}).  For any edge
+$\edge\in\edgeset$, given fixed templates
+$V(\preloc{\edge})$, $W(\preloc{\edge}),V(\postloc{\edge})$ and
+$W(\postloc{\edge})$, the Equation~(\ref{eqn:edgeinv}) is equivalent
+to a set of convex constraint on the variables
+$c(\preloc{\edge}),s(\preloc{\edge}),l(\preloc{\edge}),u(\preloc{\edge}),
+c(\postloc{\edge}),s(\postloc{\edge}),l(\postloc{\edge}),u(\postloc{\edge})$
+and some auxillary variables.
+\end{enumerate}
+\end{proposition}
+%

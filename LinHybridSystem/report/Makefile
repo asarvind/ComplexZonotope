@@ -7,7 +7,7 @@ pdf: main.tex
 
 
 add: 
-	make clean; git add Makefile main.tex macros.tex ref.bib prelims.tex zonotope.tex acz.tex PositiveInvariance.tex computation.tex
+	make clean; git add Makefile main.tex macros.tex ref.bib prelims.tex zonotope.tex acz.tex PositiveInvariance.tex computation.tex benchmarks.tex
 
 commit:
 	git commit -m "updated repo"

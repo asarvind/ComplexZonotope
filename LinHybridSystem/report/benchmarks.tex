@@ -1,0 +1,72 @@
+We performed experiments on three benchmark examples from literature
+and compared the results with that obtained by the tool SpaceEx. [Add
+  configuration here]
+
+\subsection{Robot controller model with saturation}   We consider the benchmark
+model of a self-balancing two wheeled robot called NXTway-GS1 by
+Yorihisa Yamamoto, presented in the ARCH workshop~\cite{TODO}.  The
+model is a networked control system, i.e. a plant interacting with a
+controller.  The controller has a hole, which is an unknown input to
+the controller.  The controlled input received by the plant has a
+saturation limit and this saturation can be modeled in a hybrid
+system.  Different models of the controller are presented like
+continuous linear, sampled data (discrete time) linear and non-linear.
+The plant can receive unsaturated controlled inputs or have saturation
+limits on the controlled input.  In the latter case, the system can be
+described as a hybrid system.
+
+In our experiment, we consider both the discrete time affine hybrid
+system model, i.e., with the saturation limits, as well as the
+unsaturated discrete time affine system model.  The safety requirement
+is that the \emph{body pitch angle} of the robot, denoted $\psi$,
+should be bounded within some value.  For the affine system model
+without saturation, a pair of reasonable bounds were specified as
+$\psi\in\lt[-\frac{\pi}{2.26},\frac{\pi}{2.26}\rt]$.  Whereas, for the
+affine hybrid system model, i.e. with saturation, the bounds were
+specified as
+$\psi\in\lt[-\frac{\pi}{2}-\epsilon,\frac{\pi}{2}+\epsilon\rt]$ such
+that $\epsilon>0$.
+
+The composite system with the plant and controller together could be
+modeled using thirteen continuous state variables and four uncertain input
+variables.  This model had unbounded trajectories in some
+directions.  But it was possible to decouple some bounded
+directions from the unbounded directions by an appropriate linear
+transformation of the co-ordinates, such that the body pitch angle and the
+controller inputs belong to the bounded directions.  So, we
+experimented with the transformed model.  The latter model has ten
+continuous state variables and four uncertain input variables.  We consider
+the uncertain input as an additive disturbance input.
+
+The controller input received by the plant is two dimensional, which
+we denote by $u_1$ and $u_2$.  The saturation limit is $v_i=\delta
+d_p$, where $\delta=100$ and $d_p=0.0807$.  The saturated input is
+computed as $sat(u_i) = max\lt(-v_i,min\lt(u_i,v_i\rt)\rt)$.  So, the
+two dimensional controller input can be divided into nine regions such
+that the saturation function is piecewise affine with respect to these
+regions.  We model this hybrid system using one location and nine self
+edges with appropriate guards, such that all possible transitions
+occur only along the edges.  So, we can set a constant value for the
+intralocation affine map as the origin.  For the unsaturated model, we
+have one location and no edges, where the system transition is given
+by the intralocation affine map.
+\vspace{0.2em}
+
+\emph{Implementation.}  Using our approach and also the SpaceEx tool,
+we tried to find the smallest possible safety bounds for the discrete
+time affine unsaturated and hybrid (saturated) models, respectively.
+In our approach, we choose the secondary template as the pseudoinverse
+of the normal for the hyperplane guards in the hybrid model.  The
+primary template is choosen as the collection of eigenvectors of all
+affine maps for the edge transitions, orthonormal vectors to the
+normals of the hyperplane guards and projections of the eigenvectors
+on the subspace orthogonal to the normal of hyperplane guards.  For
+the SpaceEx implementation, we tested with the octagon template and
+also a uniformly sampled template with 400 directions.
+
+\emph{Results.}  We could prove smaller safety bounds that what is
+proposed in the paper.  In comparison, the SpaceEx tool exceeded the
+proposed limits by a large margin in fourty iterations and could not
+find a fix point.  The results of this experiment are reported in
+Table~\ref{TODO}.
+
