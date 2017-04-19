@@ -185,36 +185,38 @@ beyond the scope of this paper.  The same discrete time model is
 implemented in SpaceEx.  Furthermore, the paper~\cite{TODO} report the
 continuous time implementation in SpaceEx as well.
 
-\emph{Implementation.}  We try to verify the minimum possible upper
-bounds on $-e_1$, $-e_2$ and $-e_3$, respectively, using our invariant
-computation procedure.  In our implementation, we choose the primary
+\emph{Implementation.}  We tried to verify upper
+bounds on $-e_1$, $-e_2$ and $-e_3$, respectively, that are as small
+as possible.  In our implementation, we choose the primary
 template as the collection of the eigenvectors of the affine maps in
 the two locations.  The secondary template is set to the zero vector
 since there are no linear guards or staying conditions in this
 example.  For the SpaceEx implementation, we choose the octagon
 template.
 
-\emph{Results.}  We could verify the integer upper bounds $28$, $26$
-and $12$ on $-e_1$, $-e_2$ and $-e_3$, respectively.  In comparision,
-the reported upper bounds for the continuous time SpaceEx
-implementation were $30$, $30$ and $16$, respectively.  The discrete
+\emph{Results.}  We verified the integer upper bounds on $-e_1$,
+$-e_2$ and $-e_3$ as $28$, $26$ and $12$, respectively.  In
+comparision, the reported upper bounds for the continuous time SpaceEx
+implementation are $30$, $30$ and $16$, respectively.  The discrete
 time implementation in SpaceEx did not find a fix point in two hunderd
-iterations.  Within these iterations, the bounds found were $28$, $27$
-and $10$, respectively.  But the bounds found in the discrete time
-SpaceEx implementation are not reliable because the implementation did
-not find a fixpoint.  Furthermore, the computation time until the end
-of two hundred iterations for SpaceEx is TODO, while our computation
-time is less than $19$ seconds.  We verified each bound separately,
-where each such verification took around $6$ seconds, amounting to a
-total time of less than $19$ seconds.  
+iterations.  Within these iterations, the bounds found by the discrete
+time SpaceEx implementation are $28$, $27$ and $10$, respectively.
+But the latter bounds are not reliable because a fixpoint is not
+found.  Furthermore, the computation time until the end of two hundred
+iterations for SpaceEx is TODO, while our computation time is less
+than $19$ seconds.  We verified each bound separately, where each such
+verification took around $6$ seconds, amounting to a total time of
+less than $19$ seconds.  The results are reported in the
+Tables~\ref{TODO} and~\ref{TODO}.
 
-More accurate results are reported for the (real) zonotope set based
-simulation approach~\cite{TODO}, which found the bounds to be $25$,
-$25$ and $10$, respectively.  For this particular example, the set
-based simulation using zonotopes approach is feasible because there
-are no guards or staying conditions on the state variables.  However,
-in general when there are linear guards and staying conditions on the
-state variables, to our knowledge zonotopes are not good for set based
-simulation because intersection with linear constraints can not be
-approximated well (refer~\cite{TODO}).
+More accurate results are found by the (real) zonotope set based
+simulation approach as reported in~\cite{TODO}.  These bounds are
+$25$, $25$ and $10$, respectively.  For this particular example, the
+set based simulation approach using zonotopes is feasible because
+there are no guards or staying conditions on the state variables.
+However, in general when there are linear guards and staying
+conditions on the state variables, to our knowledge (usual) there is
+no efficient way to compute, in each simulation step, the intersection
+of the zonotope with the linear constraints.
+
 
