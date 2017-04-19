@@ -1,0 +1,236 @@
+We performed experiments on three benchmark examples from literature
+and compared the results with that obtained by the tool SpaceEx. [Add
+  configuration here]. [Add floating point error here]
+
+\subsection{Robot controller model with saturation}   We consider the benchmark
+model of a self-balancing two wheeled robot called NXTway-GS1 by
+Yorihisa Yamamoto, presented in the ARCH workshop~\cite{TODO}.  The
+model is a networked control system, i.e. a plant interacting with a
+controller.  The controller has a hole, which is an unknown input to
+the controller and is modeled as an additive disturbance input.  The
+controller input received by the plant has a saturation limit.  Due to
+saturation, the system is modeled as a hybrid system.  Three different
+models of the controller are proposed in the benchmark: continuous
+linear, sampled data (discrete time) linear and non-linear.  In our
+experiment, we consider the sampled data hybrid system model, i.e.,
+with the saturation limits.  The sampling time given in the benchmark
+is $4 ms$.  The safety requirement is that the \emph{body pitch angle}
+of the robot, denoted $\psi$, should be bounded within some value. In
+the benchmark, the following bounds were suggested as reasonable
+limits for the pitch angle:
+$\psi\in\lt[-\frac{\pi}{2}+\epsilon,\frac{\pi}{2}-\epsilon\rt]$ such
+that $\epsilon>0$.
+
+\emph{Modeling}.  In discrete time, the composite sampled data system
+of the plant and controller can be modeled using thirteen continuous
+state variables and four uncertain input variables.  This model,
+however, has unbounded trajectories in some directions.  But we could
+decouple some bounded directions from the unbounded directions by an
+appropriate linear transformation of the co-ordinates, such that the
+body pitch angle and the controller inputs belong to the bounded
+directions.  So, we experimented with the transformed model.  The
+latter model has ten continuous state variables and four uncertain
+input variables. The controller input received by the plant is two
+dimensional, which we denote by $u_1$ and $u_2$, respectively.  The
+saturation limit on $u_i$ is $v_i=\delta d_p$, where $\delta=100$ and
+$d_p=0.0807$.  Then, the saturated input is computed as $sat(u_i) =
+max\lt(-v_i,min\lt(u_i,v_i\rt)\rt)$.  So, the two dimensional
+controller input can be divided into nine regions such that the
+saturation function is piecewise affine with respect to these regions.
+We model the hybrid system using one location and nine self edges with
+appropriate guards, such that all possible transitions occur only
+along the edges.  For the unsaturated model, we have one location and
+no edges, where the system transition is given by the intralocation
+affine map.  The initial set is the origin.
+
+\emph{Implementation.}  In our approach, we choose the secondary
+template as the pseudoinverse of the guarding hyperplane normals.  The
+primary template is choosen as the collection of the (complex)
+eigenvectors of all affine maps for the edge transitions, orthonormal
+vectors to guarding hyperplane normals and projections of the
+eigenvectors on the subspace spanned by the orthonormal vectors.  For
+the SpaceEx implementation, we tested with the octagon template and
+also a uniformly sampled template with 400 directions.  The
+performance of the octagon template is better than the latter, hence
+we report the results for the octagon template.
+
+\emph{Results.}  We could prove smaller magnitude of safety bounds
+than what is proposed in the benchmark~\cite{TODO}.  In comparison,
+the SpaceEx tool exceeded the proposed limits by a large margin in just
+[TODO] iterations and could not find a fix point.  These results are
+reported in Table~\ref{TODO}.  The computation times are reported in
+Table~\ref{TODO}.
+
+\subsection{Perturbed double integrator}
+We consider the model of a perturbed double integrator, given
+in~\cite{TODO}.  The closed loop system with feedback control is piecewise affine described as
+\[\trj{x}{t+1}=\lt(A_i+B_iK_i\rt)\trj{x}{t}+w,~\text{where}~
+i=\left\{\begin{array}{l}
+1,~\text{if}~x_1\geq 0~\text{and}~x_2\geq 0\\
+2,~\text{if}~x_1\leq 0~\text{and}~x_2\leq 0\\
+3,~\text{if}~x_1\leq 0~\text{and}~x_2\geq 0\\
+4,~\text{if}~x_1\geq 0~\text{and}~x_2\leq 0\\
+\end{array} \rt.\]
+%
+\begin{align*}
+& A_1 =\lt[\begin{array}{ll}
+1 & 1\\
+0 & 1
+\end{array}\rt],~B_1 = \lt[\Calign{1}{0.5}\rt],~K_1 = \lt[-0.5897~
+  -0.9347\rt]\\
+& A_2 = \lt[\begin{array}{ll}
+1 & 1\\
+1 & 0
+\end{array}
+\rt],~B_2 = \lt[\Calign{-1}{-0.5}\rt],~K_2 = \lt[0.5897~~0.9387\rt]\\
+& A_3 = \lt[\begin{array}{ll}
+1 & -1\\
+0 & 1
+\end{array}
+\rt],~B_3 = \lt[\Calign{-1}{0.5}\rt],~K_3 = \lt[0.5897~-0.9387\rt]\\
+& A_4 = \lt[\begin{array}{ll}
+1 & -1\\
+0 & 1
+\end{array}
+\rt],~B_4 = \lt[\Calign{1}{-0.5}\rt],~K_4 = \lt[-0.5897~~0.9387\rt].\\
+\end{align*}
+%  
+The additive disturbance input $w$ is bounded as $\|w\|_{\infty}\leq
+0.2$.  
+
+\emph{Modeling.}  In our formalism, the system is modeled by four
+locations with the staying conditions corresponding to the divisions
+of the state space described above.  Every location is connected to
+every other location by an edge with a corresponding affine map.  In
+this model, the linear constraints on transitions are comprised of the
+staying conditions in the locations.  The same is modeled in SpaceEx.
+The initial set is the origin.
+
+\emph{Implementation}.  We choose the secondary template as
+$\lt[\begin{array}{ll}1 & 0\\0 & 1\end{array}\rt]$, whose columns are
+the pseudoinverse (in this case equal to) the normals of the
+hyperplane guards.  For the primary template, we collected the
+eigenvectors of all the affine maps as well as the eigenvectors of the
+binary products of the different affine maps. For the SpaceEx tool, we
+choose the octagon template.
+
+\emph{Results.}  Firstly, using our approach and also SpaceEx, we
+tried to find the smallest magnitudes of the bounds for the reachable
+set along the two coordinates $x1$ and $x2$.  Our method found smaller
+magnitudes of the bounds than that of SpaceEx for the second
+coordinate, while these bounds were equal to that of SpaceEx for the
+first coordinate.  The results are reported in Table~\ref{TODO}.
+
+Next, we performed an exeriment to draw comparison, in terms of the
+computation time, with the reported results of the MPT
+tool~\cite{TODO} for finding a large invariant.  The method
+of~\cite{TODO} computes the maximal invariant for the system under the
+safety constraints $\|x\|_{\infty}\leq 5$ and $\lt|K_i(x)\leq
+1\rt|~\forall i\in\lt\{1,2\rt\}$.  Our method may not be able to
+compute the maximal invariant.  Still, we can optimize the size of the
+invariant in terms of the largeness by maximizing an objective function
+defined as the sum of scaling factors and differences between the
+upper and lower interval bounds of the augmented complex zonotope.
+The maximization of this objective function is done by second order
+conic optimization in the CVX tool.  In our implementation, we first
+decompose the above safety constraints as an intersection of four
+different safety constraints.  The actual invariant is then computed
+as the intersection of different invaraints satisfying each of the
+four different safety constraints.  For each of the four safety
+constraints, our method took less than $3$ seconds to compute an
+invariant.  So, the total computation time is less than $4\times 3$
+seconds $=12$ seconds.  In comparison, the reported computation time
+of the MPT tool is 107 seconds.  This is summarized in
+Table~\ref{TODO}.
+
+\begin{table}
+\caption{Pitch angle bounds for the robot model}
+\centering
+\begin{tabular}{|c|c|}
+\hline
+Method & Bounds\\
+\hline
+\multirow{2}{9.8em}{Reasonable bounds suggested in~\cite{TODO}} &
+$[-1.57+\epsilon~~~1.57-\epsilon]:$\\
+& $\epsilon>0$\\
+\hline
+\multirow{2}{9.8em}{SpaceEx: Discrete time (Octagon template)} &
+\multirow{2}{*}{$[-9.65~~9.65]$}\\
+& \\
+\hline
+\multirow{2}{9.8em}{Augmented complex zonotope invariant}
+&  \multirow{2}{*}{$[-1.13~~1.13]$}\\
+& \\
+\hline
+\end{tabular}
+\end{table}
+
+
+\subsection{Networked platoon of vehicles}
+We consider the example of a networked cooperative platoon, presented
+as a benchmark in the ARCH workshop~\cite{TODO}.  The platoon consists
+of three vehicles $M_1$, $M_2$ and $M_3$ along with a leader board
+ahead.  Each vehicle has a reference distance to the vehicle ahead of
+it.  The difference between the actual distance of a vehicle $M_i$ to
+the successor and the reference distance is denoted as $e_i$.  Then,
+any upper bound on $-e_i$ is a lower limit on the reference
+distance, above which the platoon is guaranteed not to collide.
+
+The movement of the vehicles is dependent on the communication between
+them.  In the benchmark proposal, the dynamics of the vechicles is
+described as a hybrid system with two locations having different
+dynamics.  One location dynamics is exhibited when there is
+communication among all the vehicles.  The other location dynamics is
+exhibited when there is complete communication failure.  Furthermore,
+in the SpaceEx implementation that is available online, a minimum time
+lag of 20 seconds is assumed before switching from one location to
+another.  The specification of the dynamics in each location can be
+found in the paper~\cite{TODO}.
+
+\emph{Modeling.}  In our experiment, we specified a discrete time
+system whose reachable states are an overapproximation of the
+continuous time system.  There are nine continuous state variables in
+the model, two locations and four edges in the discrete time
+approximation.  Note that although in the continuous time model, there
+are only two edges, two additional edges were added in the discrete
+time model to account for the discretization error.  We do not explain
+the discretization procedure for the continuous system since it is
+beyond the scope of this paper.  The same discrete time model is
+implemented in SpaceEx.  Furthermore, the paper~\cite{TODO} report the
+continuous time implementation in SpaceEx as well.
+
+\emph{Implementation.}  We tried to verify upper
+bounds on $-e_1$, $-e_2$ and $-e_3$, respectively, that are as small
+as possible.  In our implementation, we choose the primary
+template as the collection of the eigenvectors of the affine maps in
+the two locations.  The secondary template is set to the zero vector
+since there are no linear guards or staying conditions in this
+example.  For the SpaceEx implementation, we choose the octagon
+template.
+
+\emph{Results.}  We verified the integer upper bounds on $-e_1$,
+$-e_2$ and $-e_3$ as $28$, $26$ and $12$, respectively.  In
+comparision, the reported upper bounds for the continuous time SpaceEx
+implementation are $30$, $30$ and $16$, respectively.  The discrete
+time implementation in SpaceEx did not find a fix point in two hunderd
+iterations.  Within these iterations, the bounds found by the discrete
+time SpaceEx implementation are $28$, $27$ and $10$, respectively.
+But the latter bounds are not reliable because a fixpoint is not
+found.  Furthermore, the computation time until the end of two hundred
+iterations for SpaceEx is TODO, while our computation time is less
+than $19$ seconds.  We verified each bound separately, where each such
+verification took around $6$ seconds, amounting to a total time of
+less than $19$ seconds.  The results are reported in the
+Tables~\ref{TODO} and~\ref{TODO}.
+
+More accurate results are found by the (real) zonotope set based
+simulation approach as reported in~\cite{TODO}.  These bounds are
+$25$, $25$ and $10$, respectively.  For this particular example, the
+set based simulation approach using zonotopes is feasible because
+there are no guards or staying conditions on the state variables.
+However, in general when there are linear guards and staying
+conditions on the state variables, to our knowledge (usual) there is
+no efficient way to compute, in each simulation step, the intersection
+of the zonotope with the linear constraints.
+
+
