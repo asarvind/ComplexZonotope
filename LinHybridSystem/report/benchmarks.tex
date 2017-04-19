@@ -43,18 +43,16 @@ along the edges.  For the unsaturated model, we have one location and
 no edges, where the system transition is given by the intralocation
 affine map.  The initial set is the origin.
 
-\emph{Implementation.}  We tried to find the smallest possible
-magnitude of the safety bounds based on our approach and the SpaceEx
-tool.  In our approach, we choose the secondary template as the
-pseudoinverse of the normal for the hyperplane guards in the hybrid
-model.  The primary template is choosen as the collection of (complex)
+\emph{Implementation.}  In our approach, we choose the secondary
+template as the pseudoinverse of the guarding hyperplane normals.  The
+primary template is choosen as the collection of the (complex)
 eigenvectors of all affine maps for the edge transitions, orthonormal
-vectors to the normals of the hyperplane guards and projections of the
-eigenvectors on the subspace orthogonal to the normal of hyperplane
-guards.  For the SpaceEx implementation, we tested with the octagon
-template and also a uniformly sampled template with 400 directions.
-The performance of the octagon template is better than the latter,
-hence we report the results for the octagon template.
+vectors to guarding hyperplane normals and projections of the
+eigenvectors on the subspace spanned by the orthonormal vectors.  For
+the SpaceEx implementation, we tested with the octagon template and
+also a uniformly sampled template with 400 directions.  The
+performance of the octagon template is better than the latter, hence
+we report the results for the octagon template.
 
 \emph{Results.}  We could prove smaller magnitude of safety bounds
 than what is proposed in the benchmark~\cite{TODO}.  In comparison,
