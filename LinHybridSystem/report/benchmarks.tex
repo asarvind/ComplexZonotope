@@ -179,58 +179,38 @@ distance, above which the platoon is guaranteed not to collide.
 The movement of the vehicles is dependent on the communication between
 them.  In the benchmark proposal, the dynamics of the vechicles is
 described as a hybrid system with two locations having different
-dynamics.  One location dynamics is exhibited when there is
-communication among all the vehicles.  The other location dynamics is
-exhibited when there is complete communication failure.  Furthermore,
-in the SpaceEx implementation that is available online, a minimum time
-lag of 20 seconds is assumed before switching from one location to
-another.  The specification of the dynamics in each location can be
-found in the paper~\cite{TODO}.
+dynamics.  In one location, there is communication between all the
+vehicles, while there is complete communication failure in the other
+location.  In the general model described in the benchmark, there can
+be staying conditions for each location and time constraints on the
+switching time.  The paper then considers a specific case where the
+switching time is greater than 20 seconds, (the minimum dwell time is
+also specified in the distributed implementation~\cite{TODO} of SpaceEx).
 
-\emph{Modeling.}  In our experiment, we specified a discrete time
-system whose reachable states are an overapproximation of the
-continuous time system.  There are nine continuous state variables in
-the model, two locations and four edges in the discrete time
-approximation.  Note that although in the continuous time model, there
-are only two edges, two additional edges were added in the discrete
-time model to account for the discretization error.  We do not explain
-the discretization procedure for the continuous system since it is
-beyond the scope of this paper.  The same discrete time model is
-implemented in SpaceEx.  Furthermore, the paper~\cite{TODO} report the
-continuous time implementation in SpaceEx as well.
 
-\emph{Implementation.}  We tried to verify upper
-bounds on $-e_1$, $-e_2$ and $-e_3$, respectively, that are as small
-as possible.  In our implementation, we choose the primary
-template as the collection of the eigenvectors of the affine maps in
-the two locations.  The secondary template is set to the zero vector
-since there are no linear guards or staying conditions in this
-example.  For the SpaceEx implementation, we choose the octagon
-template.
+\emph{Modeling.}  Since our implementation is concerned with discrete
+time hybrid systems, we need to find a discrete time system whose
+reachable set overapproximates that of the continuous time.  The
+proposed discretization is possible if we assume that the switching
+can occur at discrete instants of time.  We do not explain the
+discretization procedure here, because it is beyond the scope of this
+paper.  In our case study, we consider that the switching to occur at
+any integer time instant.  Then, we modeled four different discretized
+affine hybrid systems related to four different dwell times, i.e., $1s$,
+$2s$, $4s$ and $20s$.  These discrete time systems were also modeled
+in SpaceEx.
 
-\emph{Results.}  We verified the integer upper bounds on $-e_1$,
-$-e_2$ and $-e_3$ as $28$, $26$ and $12$, respectively.  In
-comparision, the reported upper bounds for the continuous time SpaceEx
-implementation are $30$, $30$ and $16$, respectively.  The discrete
-time implementation in SpaceEx did not find a fix point in two hunderd
-iterations.  Within these iterations, the bounds found by the discrete
-time SpaceEx implementation are $28$, $27$ and $10$, respectively.
-But the latter bounds are not reliable because a fixpoint is not
-found.  Furthermore, the computation time until the end of two hundred
-iterations for SpaceEx is TODO, while our computation time is less
-than $19$ seconds.  We verified each bound separately, where each such
-verification took around $6$ seconds, amounting to a total time of
-less than $19$ seconds.  The results are reported in the
-Tables~\ref{TODO} and~\ref{TODO}.
+\emph{Implementation.}  We tried to smallest possible upper bounds on
+$-e_1$, $-e_2$ and $-e_3$.  In our implementation, we choose the
+primary template as the collection of the eigenvectors of the affine
+maps in the two locations.  The secondary template is set to the zero
+vector since there are no linear guards or staying conditions in this
+example.  For the SpaceEx implementation, we considered three
+different templates, i.e., octagon, fifty uniformly sampled support
+vectors and hundred uniformly sampled support vectors.
 
-More accurate results are found by the (real) zonotope set based
-simulation approach as reported in~\cite{TODO}.  These bounds are
-$25$, $25$ and $10$, respectively.  For this particular example, the
-set based simulation approach using zonotopes is feasible because
-there are no guards or staying conditions on the state variables.
-However, in general when there are linear guards and staying
-conditions on the state variables, to our knowledge (usual) there is
-no efficient way to compute, in each simulation step, the intersection
-of the zonotope with the linear constraints.
+\emph{Results.}  
+
+
 
 
