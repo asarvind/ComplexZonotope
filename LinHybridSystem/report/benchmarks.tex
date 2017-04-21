@@ -28,7 +28,7 @@ and compared the results with that obtained by the tool SpaceEx. [Add
 \caption{Unsaturated robot model results}
 ~\label{tab:robot-unsaturated}
 \end{minipage}
-\hspace{1.5em}
+\hspace{0em}
 \begin{minipage}{0.48\textwidth}
 \centering
 \begin{tabular}{|l|c|c|c|}
@@ -45,8 +45,8 @@ and compared the results with that obtained by the tool SpaceEx. [Add
 & vectors & & \\
 \hline
 \multicolumn{2}{|c|}{\multirow{2}{*}{Suggested in~\cite{TODO}}} &
-\multirow{2}{*}{1.571} & \multirow{2}{*}{n/a}\\
-\multicolumn{2}{|c|}{} & &\\
+$1.571-\epsilon:$ & \multirow{2}{*}{n/a}\\
+\multicolumn{2}{|c|}{} & $\epsilon>0$ &\\
 \hline
 \multicolumn{2}{|c|}{\multirow{2}{*}{ACZ invariant}} & \multirow{2}{*}{$1.13$} &
 \multirow{2}{*}{45}\\
@@ -79,7 +79,7 @@ and compared the results with that obtained by the tool SpaceEx. [Add
 \end{tabular}
 \caption{Small invariant computation:\newline Perturbed double integrator}
 \end{minipage}
-\hspace{4em}
+\hspace{6em}
 \begin{minipage}{0.45\textwidth}
 \begin{tabular}{|c|c|}
 \hline
@@ -106,16 +106,17 @@ model is a networked control system, i.e. a plant interacting with a
 controller.  The controller has a hole, which is an unknown input to
 the controller and is modeled as an additive disturbance input.  The
 controller input received by the plant has a saturation limit.  Due to
-saturation, the system is modeled as a hybrid system.  Three different
-models of the controller are proposed in the benchmark: continuous
-linear, sampled data (discrete time) linear and non-linear.  In our
-experiment, we consider the sampled data model with saturation
-(hybrid) and also without saturation (linear).  The sampling time given in
-the benchmark is $4 ms$.  The safety requirement is that the
-\emph{body pitch angle} of the robot, denoted $\psi$, should be
+the saturation, the composite system is modeled as a hybrid system.
+Three different models of the controller are proposed in the
+benchmark: continuous linear, sampled data (discrete time) linear and
+non-linear.  In our experiment, we consider the sampled data linear
+controller, with two kinds of interaction with the plant: saturated
+(hybrid system) and unsaturated (linear system).  The sampling
+time given in the benchmark is $4 ms$.  The safety requirement is that
+the \emph{body pitch angle} of the robot, denoted $\psi$, should be
 bounded within some value. In the benchmark, the following bounds on
-the pitch angle were
-suggested as reasonable limits for the hyrbid system model:
+the pitch angle were suggested as reasonable limits for the hyrbid
+system model:
 $\psi\in\lt[-\frac{\pi}{2}+\epsilon,\frac{\pi}{2}-\epsilon\rt]$ such
 that $\epsilon>0$.  For the linear system model, the bounds were
 suggested as $\psi\in\lt[\frac{-\pi}{2.26}~~\frac{\pi}{2.26}\rt]$.
@@ -137,14 +138,16 @@ max\lt(-v_i,min\lt(u_i,v_i\rt)\rt)$.  So, the two dimensional
 controller input can be divided into nine regions such that the
 saturation function is affine in each of these regions.
 
-\emph{Modeling}.  We model the saturated system as a ten dimensional
+\tbf{Modeling}.  We model the saturated system as a ten dimensional
 hybrid system using one location and nine self edges with appropriate
 guards, such that all possible transitions occur only along the edges.
 For the unsaturated model, we have one location and no edges, where
 the system transition is given by the intralocation affine map.  The
 initial set is the origin.
 
-\emph{Implementation.}  For the hybrid system, we choose the secondary
+\tbf{Complexity of representation}: 10 dimensional, 1 location and 9 edges.
+
+\tbf{Implementation.}  For the hybrid system, we choose the secondary
 template as the pseudoinverse of the guarding hyperplane normals.  The
 primary template for the hybrid system is the collection of the
 (complex) eigenvectors of linear matrices of all affine maps for the
@@ -162,7 +165,7 @@ zonotope invariant for both the upper and lower safety bounds.  But
 for the linear system, we computed two different invariants, verifying
 the upper and the lower bounds separately.
 
-\emph{Results.}  For both the hybrid and the linear systems, we could
+\tbf{Results.}  For both the hybrid and the linear systems, we could
 verify smaller magnitudes for the bounds on the pitch angle than what
 is proposed in the benchmark~\cite{TODO}.  But the SpaceEx tool could
 not find a finite bound for either of the above systems.  The bounds
@@ -228,23 +231,24 @@ method, still the optimizer would find a large invaraint.  For this
 experiment, we draw comparison in terms of the computation time with
 the MPT tool.
 
-\emph{Modeling.}  We model the system as a two dimensional hybrid
+\tbf{Modeling.}  We model the system as a two dimensional hybrid
 system with four locations and twelve edges constituting all possible
 directed edges.  Appropriate staying conditions are specified in each
 location, reflecting the division of the state space into different
 regions where the dynamics is affine.  The initial set is the origin.
 The same model is specified in SpaceEx.
 
-\emph{Implementation}.  We choose the secondary template as
-$\lt[\begin{array}{ll}1 & 0\\0 & 1\end{array}\rt]$, whose columns are
+\tbf{Complexity of representation}: 2 dimensional, 4 locations and 12 edges.
+
+\tbf{Implementation}.  We choose the secondary template as
 the pseudoinverse (in this case equal to) the hyperplane normals of
 the staying conditions.  For the primary template, we collected the
-eigenvectors of all linear matrices of the affine maps and their
+(complex) eigenvectors of all linear matrices of the affine maps and their
 binary products. For the SpaceEx tool, we experimented with two
 templates, the octagon template and a template with 100 uniformly
 sampled support vectors.
 
-\emph{Results.}  In the first experiment on the perturbed double
+\tbf{Results.}  In the first experiment on the perturbed double
 integrator model, the bounds verified for the second coordinate are
 smaller than that of SpaceEx.  For the first coordinate, the bounds
 verified are equal to that of SpaceEx.  In our second experiment on
@@ -287,7 +291,7 @@ However, for our case study, we consider four different dwell times,
 i.e., 20s, 4s, 2s, and 1s.
 
 
-\emph{Modeling.}  Since our implementation is concerned with discrete
+\tbf{Modeling.}  Since our implementation is concerned with discrete
 time hybrid systems, we need to find a discrete time system whose
 reachable set overapproximates that of the continuous time.  The
 proposed discretization is possible if we assume that the switching
@@ -295,18 +299,21 @@ can occur at discrete instants of time.  We do not explain the
 discretization procedure here, because it is beyond the scope of this
 paper.  In our case study, we consider that the switching to occur at
 any integer time instant.  The same discrete time models are
-specified in SpaceEx as well.  
+specified in SpaceEx as well. 
 
-\emph{Implementation.}  In our implementation, we choose the primary
-template as the collection of the eigenvectors of the affine maps in
-the two locations and their binary products, the axis alligned box
-template and the templates used for overapproximating the input sets.
-The secondary template is set to the zero vector since there are no
-linear guards or staying conditions in this example.  For the SpaceEx
-implementation, we considered the following two different templates,
-i.e., octagon and hundred uniformly sampled support vectors.
+\tbf{Complexity of representation}: 9 dimensional, 2 locations and 2 edges. 
 
-\emph{Results.}  For the larger dwell times, i.e., $20s$ and $4s$,
+\tbf{Implementation.}  We choose the primary template as the
+collection of the (complex) eigenvectors of linear matrices of the
+affine maps in the the two locations and their binary products, the
+axis alligned box template and the templates used for
+overapproximating the input sets.  The secondary template is set to
+the zero vector since there are no linear guards or staying conditions
+in this example.  For SpaceEx, we considered the
+the octagon template and also a template with hundred uniformly
+sampled support vectors.
+
+\tbf{Results.}  For the larger dwell times, i.e., $20s$ and $4s$,
 SpaceEx could verify slightly smaller bounds on $-e_1$, $-e_2$, and
 $-e_3$, compared to our approach.  However, for the smaller dwell
 times, i.e., $2s$ and $1s$, SpaceEx could not find even a finite set of
