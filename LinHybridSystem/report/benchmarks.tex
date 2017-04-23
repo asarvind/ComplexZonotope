@@ -2,12 +2,15 @@ We performed experiments on three benchmark examples from literature
 and compared the results with that obtained by the tool SpaceEx. [Add
   configuration here]. [Add floating point error here]
 \begin{table}
+\center{UB: $>$1000, ~~NT: Not terminating in more than 180s, \newline
+  n/a: Not applicable/not available, ~~ACZ: Augmented complex
+  zonotope.\vspace{1em} }
 \begin{minipage}{0.48\textwidth}
 \centering
 \begin{tabular}{|l|c|c|c|}
 \hline
 \multicolumn{2}{|c|}{\multirow{2}{*}{Method}} &
-\multirow{2}{*}{$\lt|\psi\rt|\leq$} & Computation\\
+\multirow{2}{*}{$\lt|\psi\rt|\leq$} & Comp.\\
 \multicolumn{2}{|c|}{} & & time (s)\\
 \hline
 \multirow{4}{*}{SpaceEx} & octagon & \multirow{2}{*}{UB} & \multirow{2}{*}{NT}\\
@@ -34,7 +37,7 @@ and compared the results with that obtained by the tool SpaceEx. [Add
 \begin{tabular}{|l|c|c|c|}
 \hline
 \multicolumn{2}{|c|}{\multirow{2}{*}{Method}} &
-\multirow{2}{*}{$\lt|\psi\rt|\leq$} & Computation\\
+\multirow{2}{*}{$\lt|\psi\rt|\leq$} & Comp.\\
 \multicolumn{2}{|c|}{} & & time (s)\\
 \hline
 \multirow{4}{*}{SpaceEx} & octagon & \multirow{2}{*}{UB} &
@@ -56,47 +59,141 @@ $1.571-\epsilon:$ & \multirow{2}{*}{n/a}\\
 \caption{Saturated robot model results}
 ~\label{tab:robot-saturated}
 \end{minipage}
-%
 \begin{minipage}{0.45\textwidth}
 \begin{tabular}{|l|c|c|c|c|}
 \hline
 \multicolumn{2}{|c|}{\multirow{2}{*}{Method}} &
-\multirow{2}{*}{$\lt|x_1\rt|\leq$} & \multirow{2}{*}{$\lt|x_2\rt|\leq$} & Computation\\
+\multirow{2}{*}{$\lt|x_1\rt|\leq$} & \multirow{2}{*}{$\lt|x_2\rt|\leq$} & Comp.\\
 \multicolumn{2}{|c|}{} & & & time (s) \\
 \hline
-\multirow{4}{*}{SpaceEx} & octagon & \multirow{2}{*}{result} &
-\multirow{2}{*}{result} & \multirow{2}{*}{result}\\
+\multirow{4}{*}{SpaceEx} & octagon & \multirow{2}{*}{0.38} &
+\multirow{2}{*}{0.43} & \multirow{2}{*}{1.7}\\
 & template & & &\\
 \cline{2-5}
-& 100 support & \multirow{2}{*}{result} & \multirow{2}{*}{result} & \multirow{2}{*}{result}\\
+& 100 support & \multirow{2}{*}{0.38} & \multirow{2}{*}{0.43} & \multirow{2}{*}{23.6}\\
 & vectors & & &\\
 \hline
 \multicolumn{2}{|c|}{\multirow{2}{*}{ACZ invariant}} &
-\multirow{2}{*}{result} & \multirow{2}{*}{result} & 
-\multirow{2}{*}{result}\\
+\multirow{2}{*}{0.38} & \multirow{2}{*}{0.36} & 
+\multirow{2}{*}{5.1}\\
 \multicolumn{2}{|c|}{} & & &\\
 \hline
 \end{tabular}
 \caption{Small invariant computation:\newline Perturbed double integrator}
+\vspace{1em}
 \end{minipage}
 \hspace{6em}
-\begin{minipage}{0.45\textwidth}
+\begin{minipage}{0.35\textwidth}
 \begin{tabular}{|c|c|}
 \hline
-\multirow{2}{*}{Method} & Computation\\
+\multirow{2}{*}{Method} & Comp.\\
 & time (s)\\
 \hline
-\multirow{2}{*}{MPT tool~\cite{TODO}} & \multirow{2}{*}{result}\\
+\multirow{2}{*}{MPT tool~\cite{TODO}} & \multirow{2}{*}{107}\\
 & \\
 \hline
-\multirow{2}{*}{ACZ} & \multirow{2}{*}{result}\\
+\multirow{2}{*}{ACZ} & \multirow{2}{*}{12}\\
 & \\
 \hline
 \end{tabular}
-\caption{Large invariant computation:\newline Perturbed double integrator}
+\caption{Large invariant computation: Perturbed double integrator}
+\vspace{1em}
 \end{minipage}
-\center{ACZ: Augmented complex zonotope, ~n/a: Not applicable/not
-  available, \newline UB: $>$1000, NT: Not terminating in more than 180s.}
+%
+\begin{minipage}{0.45\textwidth}
+\begin{tabular}{|c|c|c|c|c|}
+\hline
+Dwell & \multirow{2}{*}{$-e1<=$} & \multirow{2}{*}{$-e2\leq$} &
+\multirow{2}{*}{$-e3\leq$} & Comp.\\
+time (s) & & & & time (s)\\
+\hline
+\multirow{2}{*}{dt} & \multirow{2}{*}{result} &
+\multirow{2}{*}{result} & \multirow{2}{*}{result} &
+\multirow{2}{*}{result} \\
+& & & & \\
+\hline
+\multirow{2}{*}{dt} & \multirow{2}{*}{result} &
+\multirow{2}{*}{result} & \multirow{2}{*}{result} &
+\multirow{2}{*}{result} \\
+& & & & \\
+\hline
+\multirow{2}{*}{dt} & \multirow{2}{*}{result} &
+\multirow{2}{*}{result} & \multirow{2}{*}{result} &
+\multirow{2}{*}{result} \\
+& & & & \\
+\hline
+\multirow{2}{*}{dt} & \multirow{2}{*}{result} &
+\multirow{2}{*}{result} & \multirow{2}{*}{result} &
+\multirow{2}{*}{result} \\
+& & & & \\
+\hline
+\end{tabular}
+\caption{Networked platoon model experiment in SpaceEx with the Octagon template}
+\end{minipage}
+\hspace{2.5em}
+\begin{minipage}{0.45\textwidth}
+\begin{tabular}{|c|c|c|c|c|}
+\hline
+Dwell & \multirow{2}{*}{$-e1<=$} & \multirow{2}{*}{$-e2\leq$} &
+\multirow{2}{*}{$-e3\leq$} & Comp.\\
+time (s) & & & & time (s)\\
+\hline
+\multirow{2}{*}{dt} & \multirow{2}{*}{result} &
+\multirow{2}{*}{result} & \multirow{2}{*}{result} &
+\multirow{2}{*}{result} \\
+& & & & \\
+\hline
+\multirow{2}{*}{dt} & \multirow{2}{*}{result} &
+\multirow{2}{*}{result} & \multirow{2}{*}{result} &
+\multirow{2}{*}{result} \\
+& & & & \\
+\hline
+\multirow{2}{*}{dt} & \multirow{2}{*}{result} &
+\multirow{2}{*}{result} & \multirow{2}{*}{result} &
+\multirow{2}{*}{result} \\
+& & & & \\
+\hline
+\multirow{2}{*}{dt} & \multirow{2}{*}{result} &
+\multirow{2}{*}{result} & \multirow{2}{*}{result} &
+\multirow{2}{*}{result} \\
+& & & & \\
+\hline
+\end{tabular}
+\caption{Networked platoon model experiment in SpaceEx with 100 support
+  vectors}
+\vspace{0.5em}
+\end{minipage}
+$~$\\
+$~$\\
+\centering
+\begin{tabular}{|c|c|c|c|c|}
+\hline
+Dwell & \multirow{2}{*}{$-e1<=$} & \multirow{2}{*}{$-e2\leq$} &
+\multirow{2}{*}{$-e3\leq$} & Computation\\
+time (s) & & & & time (s)\\
+\hline
+\multirow{2}{*}{dt} & \multirow{2}{*}{result} &
+\multirow{2}{*}{result} & \multirow{2}{*}{result} &
+\multirow{2}{*}{result} \\
+& & & & \\
+\hline
+\multirow{2}{*}{dt} & \multirow{2}{*}{result} &
+\multirow{2}{*}{result} & \multirow{2}{*}{result} &
+\multirow{2}{*}{result} \\
+& & & & \\
+\hline
+\multirow{2}{*}{dt} & \multirow{2}{*}{result} &
+\multirow{2}{*}{result} & \multirow{2}{*}{result} &
+\multirow{2}{*}{result} \\
+& & & & \\
+\hline
+\multirow{2}{*}{dt} & \multirow{2}{*}{result} &
+\multirow{2}{*}{result} & \multirow{2}{*}{result} &
+\multirow{2}{*}{result} \\
+& & & & \\
+\hline
+\end{tabular}
+\caption{Networked platoon model experiment based on Augmented complex zonotopes}
 \end{table}
 
 \subsection{Robot with a saturated controller}   We consider the benchmark
