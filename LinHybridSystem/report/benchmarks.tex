@@ -1,6 +1,82 @@
 We performed experiments on three benchmark examples from literature
 and compared the results with that obtained by the tool SpaceEx. [Add
   configuration here]. [Add floating point error here]
+
+
+\subsection{Robot with a saturated controller}   Our first example is a benchmark
+model of a self-balancing two wheeled robot called NXTway-GS1 by
+Yorihisa Yamamoto, presented in the ARCH
+workshop~\cite{heinz2014benchmark}.  The model is a networked control
+system, i.e. a plant interacting with a controller.  The controller
+has a hole, which is an unknown input to the controller and is modeled
+as an additive disturbance input.  The controller input received by
+the plant has a saturation limit.  Due to the saturation, the
+composite system is modeled as a hybrid system.  Three different
+models of the controller are proposed in the benchmark: continuous
+linear, sampled data (discrete time) linear and non-linear.  In our
+experiment, we consider the sampled data linear controller, with two
+kinds of interaction with the plant: saturated, i.e., hybrid system
+and unsaturated, i.e., linear system.  The sampling time given in the
+benchmark is $4 ms$.  The safety requirement is that the \emph{body
+  pitch angle} of the robot, denoted $\psi$, should be bounded within
+some value. In the benchmark, it was suggested that
+$\psi\in\lt[-\frac{\pi}{2}+\epsilon,\frac{\pi}{2}-\epsilon\rt]$ for
+any $\epsilon>0$, is given as a safe set.  For the linear system
+model, $\psi\in\lt[\frac{-\pi}{2.26},~\frac{\pi}{2.26}\rt]$ is given
+as a safe set.
+
+
+In discrete time, the composite sampled data system of the plant and
+controller could be modeled using thirteen continuous state variables
+and four uncertain input variables.  The model, however, had unbounded
+trajectories in some directions.  Therefore, we decoupled some bounded
+directions from the unbounded directions by an appropriate linear
+transformation of the co-ordinates, such that the body pitch angle and
+the controller inputs belong to the bounded directions.  The latter
+model has ten continuous state variables and four uncertain input
+variables. The controller input received by the plant is two
+dimensional, which we denote by $u_1$ and $u_2$, respectively.  The
+saturation limit on $u_i$ is $v_i=\delta d_p$, where $\delta=100$ and
+$d_p=0.0807$.  Then, the saturated input is computed as $sat(u_i) =
+max\lt(-v_i,min\lt(u_i,v_i\rt)\rt)$.  Thus, the two dimensional
+controller input can be divided into nine regions such that in each
+region, the saturation function is affine.
+
+\tbf{Modeling}.  We model the saturated system (after transformation)
+as a ten dimensional hybrid system using one location and nine self
+edges with appropriate guards, such that all possible transitions
+occur only along the edges.  For the unsaturated model, we have one
+location and no edges, and the only system transition is specified by
+the intralocation affine map.  The initial set is the origin.
+
+\tbf{Size of model}: 10 dimensional, 1 location and 9 edges.
+
+\tbf{Implementation.}  For the hybrid system, we choose the secondary
+template as the pseudoinverse of the guarding hyperplane normals, in
+conformity with Theroem~\ref{thm:main}.  The primary template for the
+hybrid system is chosen as the collection of the (complex) eigenvectors of
+linear matrices of all affine maps for the edge transitions, the
+orthonormal vectors to the guarding hyperplane normals and the
+projections of the eigenvectors on the subspace spanned by the
+orthonormal vectors.  For the linear system, we only have a primary
+template, which is constituted by the eigenvectors of the linear map,
+the input set template and its multiplication by the linear matrix
+(related to affine map) and square of the linear matrix.  For the
+SpaceEx implementation, we tested with the octagon template and a
+template with 400 uniformly sampled support vectors.
+
+%% For the hybrid system, we computed a single augmented complex
+%% zonotopic invariant satisfying both the upper and lower safety bounds.
+%% But for the linear system, we computed two different invariants, one
+%% each satisfying the upper and lower bounds, respectively.
+
+\tbf{Results.}  For both the hybrid and the linear systems, we could
+verify smaller magnitudes for the bounds on the pitch angle than what
+is proposed in the benchmark~\cite{heinz2014benchmark}.  But the
+SpaceEx tool could not find a finite bound for either of the above
+systems.  The results are reported in the
+Tables~\ref{tab:robot-unsaturated} and~\ref{tab:robot-saturated}.
+
 \begin{table}
 \center{UB: $>$1000, ~~NT: Not terminating in more than 180s, \newline
   n/a: Not applicable/not available, ~~ACZ: Augmented complex
@@ -19,7 +95,7 @@ and compared the results with that obtained by the tool SpaceEx. [Add
 & 400 support & \multirow{2}{*}{UB} & \multirow{2}{*}{NT}\\
 & vectors & &\\
 \hline
-\multicolumn{2}{|c|}{\multirow{2}{*}{Suggested in~\cite{TODO}}} &
+\multicolumn{2}{|c|}{\multirow{2}{*}{Suggested in~\cite{heinz2014benchmark}}} &
 \multirow{2}{*}{$1.39$} & \multirow{2}{*}{n/a}\\
 \multicolumn{2}{|c|}{} & &\\
 \hline
@@ -28,7 +104,7 @@ and compared the results with that obtained by the tool SpaceEx. [Add
 \multicolumn{2}{|c|}{} & & \\
 \hline
 \end{tabular}
-\caption{Unsaturated robot model results}
+\caption{Unsaturated robot model: results}
 ~\label{tab:robot-unsaturated}
 \end{minipage}
 \hspace{0em}
@@ -47,7 +123,7 @@ and compared the results with that obtained by the tool SpaceEx. [Add
 & 400 support & \multirow{2}{*}{UB} & \multirow{2}{*}{NT}\\
 & vectors & & \\
 \hline
-\multicolumn{2}{|c|}{\multirow{2}{*}{Suggested in~\cite{TODO}}} &
+\multicolumn{2}{|c|}{\multirow{2}{*}{Suggested in~\cite{heinz2014benchmark}}} &
 $1.571-\epsilon:$ & \multirow{2}{*}{n/a}\\
 \multicolumn{2}{|c|}{} & $\epsilon>0$ &\\
 \hline
@@ -56,7 +132,7 @@ $1.571-\epsilon:$ & \multirow{2}{*}{n/a}\\
 \multicolumn{2}{|c|}{} & &\\
 \hline
 \end{tabular}
-\caption{Saturated robot model results}
+\caption{Saturated robot model: results}
 ~\label{tab:robot-saturated}
 \end{minipage}
 \begin{minipage}{0.45\textwidth}
@@ -79,17 +155,19 @@ $1.571-\epsilon:$ & \multirow{2}{*}{n/a}\\
 \multicolumn{2}{|c|}{} & & &\\
 \hline
 \end{tabular}
-\caption{Small invariant computation:\newline Perturbed double integrator}
+\caption{Small invariant computation:\newline Perturbed double
+  integrator}
+~\label{tab:smallinv-pdi}
 \vspace{1em}
 \end{minipage}
-\hspace{6em}
-\begin{minipage}{0.35\textwidth}
+\hspace{4em}
+\begin{minipage}{0.4\textwidth}
 \begin{tabular}{|c|c|}
 \hline
 \multirow{2}{*}{Method} & Comp.\\
 & time (s)\\
 \hline
-\multirow{2}{*}{MPT tool~\cite{TODO}} & \multirow{2}{*}{107}\\
+\multirow{2}{*}{MPT tool~\cite{rakovic2004computation}} & \multirow{2}{*}{107}\\
 & \\
 \hline
 \multirow{2}{*}{ACZ} & \multirow{2}{*}{12}\\
@@ -97,185 +175,76 @@ $1.571-\epsilon:$ & \multirow{2}{*}{n/a}\\
 \hline
 \end{tabular}
 \caption{Large invariant computation: Perturbed double integrator}
+~\label{tab:largeinv-pdi}
 \vspace{1em}
 \end{minipage}
 %
-\begin{minipage}{0.45\textwidth}
-\begin{tabular}{|c|c|c|c|c|}
+\begin{tabular}{|l|c|c|c|c|c|}
 \hline
-Dwell & \multirow{2}{*}{$-e1<=$} & \multirow{2}{*}{$-e2\leq$} &
-\multirow{2}{*}{$-e3\leq$} & Comp.\\
-time (s) & & & & time (s)\\
+\multicolumn{2}{|c|}{\multirow{2}{*}{Method}} &
+\multirow{2}{*}{$-e_1\leq$} & \multirow{2}{*}{$-e_2\leq$} & \multirow{2}{*}{$-e_3\leq$} & Comp.\\
+\multicolumn{2}{|c|}{} & & & & time (s)\\
 \hline
-\multirow{2}{*}{dt} & \multirow{2}{*}{result} &
-\multirow{2}{*}{result} & \multirow{2}{*}{result} &
-\multirow{2}{*}{result} \\
-& & & & \\
+\multirow{4}{*}{SpaceEx} & octagon & \multirow{2}{*}{28} &
+\multirow{2}{*}{27} & \multirow{2}{*}{10} &
+\multirow{2}{*}{NT}\\
+& template & & & & \\
+\cline{2-6}
+& 100 support & \multirow{2}{*}{28} & \multirow{2}{*}{25} &
+\multirow{2}{*}{13} & \multirow{2}{*}{1.3}\\
+& vectors & & & & \\
 \hline
-\multirow{2}{*}{dt} & \multirow{2}{*}{result} &
-\multirow{2}{*}{result} & \multirow{2}{*}{result} &
-\multirow{2}{*}{result} \\
-& & & & \\
+\multicolumn{2}{|c|}{\multirow{2}{*}{Real zonotope~\cite{makhlouf2014networked}}} &
+\multirow{2}{*}{25} & \multirow{2}{*}{25} & \multirow{2}{*}{10}
+ & \multirow{2}{*}{n/a}\\
+\multicolumn{2}{|c|}{} & & & & \\
 \hline
-\multirow{2}{*}{dt} & \multirow{2}{*}{result} &
-\multirow{2}{*}{result} & \multirow{2}{*}{result} &
-\multirow{2}{*}{result} \\
-& & & & \\
-\hline
-\multirow{2}{*}{dt} & \multirow{2}{*}{result} &
-\multirow{2}{*}{result} & \multirow{2}{*}{result} &
-\multirow{2}{*}{result} \\
-& & & & \\
+\multicolumn{2}{|c|}{\multirow{2}{*}{ACZ invariant}} &
+\multirow{2}{*}{28} & \multirow{2}{*}{26} &
+\multirow{2}{*}{12} & \multirow{2}{*}{12}\\
+\multicolumn{2}{|c|}{} & & & &\\
 \hline
 \end{tabular}
-\caption{Networked platoon model experiment in SpaceEx with the Octagon template}
-\end{minipage}
-\hspace{2.5em}
-\begin{minipage}{0.45\textwidth}
-\begin{tabular}{|c|c|c|c|c|}
+\caption{Large minimum dwell time (20s) model of networked
+  vehicle platoon: results}
+~\label{tab:largedwell-platoon}
+ $~$\\
+\begin{tabular}{|l|c|c|c|c|c|}
 \hline
-Dwell & \multirow{2}{*}{$-e1<=$} & \multirow{2}{*}{$-e2\leq$} &
-\multirow{2}{*}{$-e3\leq$} & Comp.\\
-time (s) & & & & time (s)\\
+\multicolumn{2}{|c|}{\multirow{2}{*}{Method}} &
+\multirow{2}{*}{$-e_1\leq$} & \multirow{2}{*}{$-e_2\leq$} & \multirow{2}{*}{$-e_3\leq$} & Comp.\\
+\multicolumn{2}{|c|}{} & & & & time (s)\\
 \hline
-\multirow{2}{*}{dt} & \multirow{2}{*}{result} &
-\multirow{2}{*}{result} & \multirow{2}{*}{result} &
-\multirow{2}{*}{result} \\
-& & & & \\
+\multirow{4}{*}{SpaceEx} & octagon & \multirow{2}{*}{UB} &
+\multirow{2}{*}{UB} & \multirow{2}{*}{UB} &
+\multirow{2}{*}{NT}\\
+& template & & & & \\
+\cline{2-6}
+& 100 support & \multirow{2}{*}{UB} & \multirow{2}{*}{UB} &
+\multirow{2}{*}{UB} & \multirow{2}{*}{NT}\\
+& vectors & & & & \\
 \hline
-\multirow{2}{*}{dt} & \multirow{2}{*}{result} &
-\multirow{2}{*}{result} & \multirow{2}{*}{result} &
-\multirow{2}{*}{result} \\
-& & & & \\
-\hline
-\multirow{2}{*}{dt} & \multirow{2}{*}{result} &
-\multirow{2}{*}{result} & \multirow{2}{*}{result} &
-\multirow{2}{*}{result} \\
-& & & & \\
-\hline
-\multirow{2}{*}{dt} & \multirow{2}{*}{result} &
-\multirow{2}{*}{result} & \multirow{2}{*}{result} &
-\multirow{2}{*}{result} \\
-& & & & \\
+\multicolumn{2}{|c|}{\multirow{2}{*}{ACZ invariant}} &
+\multirow{2}{*}{46} & \multirow{2}{*}{54} &
+\multirow{2}{*}{57} & \multirow{2}{*}{12.6}\\
+\multicolumn{2}{|c|}{} & & & &\\
 \hline
 \end{tabular}
-\caption{Networked platoon model experiment in SpaceEx with 100 support
-  vectors}
-\vspace{0.5em}
-\end{minipage}
-$~$\\
-$~$\\
-\centering
-\begin{tabular}{|c|c|c|c|c|}
-\hline
-Dwell & \multirow{2}{*}{$-e1<=$} & \multirow{2}{*}{$-e2\leq$} &
-\multirow{2}{*}{$-e3\leq$} & Computation\\
-time (s) & & & & time (s)\\
-\hline
-\multirow{2}{*}{dt} & \multirow{2}{*}{result} &
-\multirow{2}{*}{result} & \multirow{2}{*}{result} &
-\multirow{2}{*}{result} \\
-& & & & \\
-\hline
-\multirow{2}{*}{dt} & \multirow{2}{*}{result} &
-\multirow{2}{*}{result} & \multirow{2}{*}{result} &
-\multirow{2}{*}{result} \\
-& & & & \\
-\hline
-\multirow{2}{*}{dt} & \multirow{2}{*}{result} &
-\multirow{2}{*}{result} & \multirow{2}{*}{result} &
-\multirow{2}{*}{result} \\
-& & & & \\
-\hline
-\multirow{2}{*}{dt} & \multirow{2}{*}{result} &
-\multirow{2}{*}{result} & \multirow{2}{*}{result} &
-\multirow{2}{*}{result} \\
-& & & & \\
-\hline
-\end{tabular}
-\caption{Networked platoon model experiment based on Augmented complex zonotopes}
+\caption{Small minimum dwell time (1s) model of networked vehicle
+  platoon: results}
+~\label{tab:smalldwell-platoon}
 \end{table}
-
-\subsection{Robot with a saturated controller}   We consider the benchmark
-model of a self-balancing two wheeled robot called NXTway-GS1 by
-Yorihisa Yamamoto, presented in the ARCH workshop~\cite{TODO}.  The
-model is a networked control system, i.e. a plant interacting with a
-controller.  The controller has a hole, which is an unknown input to
-the controller and is modeled as an additive disturbance input.  The
-controller input received by the plant has a saturation limit.  Due to
-the saturation, the composite system is modeled as a hybrid system.
-Three different models of the controller are proposed in the
-benchmark: continuous linear, sampled data (discrete time) linear and
-non-linear.  In our experiment, we consider the sampled data linear
-controller, with two kinds of interaction with the plant: saturated
-(hybrid system) and unsaturated (linear system).  The sampling
-time given in the benchmark is $4 ms$.  The safety requirement is that
-the \emph{body pitch angle} of the robot, denoted $\psi$, should be
-bounded within some value. In the benchmark, the following bounds on
-the pitch angle were suggested as reasonable limits for the hyrbid
-system model:
-$\psi\in\lt[-\frac{\pi}{2}+\epsilon,\frac{\pi}{2}-\epsilon\rt]$ such
-that $\epsilon>0$.  For the linear system model, the bounds were
-suggested as $\psi\in\lt[\frac{-\pi}{2.26}~~\frac{\pi}{2.26}\rt]$.
-
-In discrete time, the composite sampled data system of the plant and
-controller could be modeled using thirteen continuous state variables
-and four uncertain input variables.  The model, however, had unbounded
-trajectories in some directions.  But we could decouple some bounded
-directions from the unbounded directions by an appropriate linear
-transformation of the co-ordinates, such that the body pitch angle and
-the controller inputs belong to the bounded directions.  So, we
-experimented with the transformed model.  The latter model has ten
-continuous state variables and four uncertain input variables. The
-controller input received by the plant is two dimensional, which we
-denote by $u_1$ and $u_2$, respectively.  The saturation limit on
-$u_i$ is $v_i=\delta d_p$, where $\delta=100$ and $d_p=0.0807$.  Then,
-the saturated input is computed as $sat(u_i) =
-max\lt(-v_i,min\lt(u_i,v_i\rt)\rt)$.  So, the two dimensional
-controller input can be divided into nine regions such that the
-saturation function is affine in each of these regions.
-
-\tbf{Modeling}.  We model the saturated system as a ten dimensional
-hybrid system using one location and nine self edges with appropriate
-guards, such that all possible transitions occur only along the edges.
-For the unsaturated model, we have one location and no edges, where
-the system transition is given by the intralocation affine map.  The
-initial set is the origin.
-
-\tbf{Complexity of representation}: 10 dimensional, 1 location and 9 edges.
-
-\tbf{Implementation.}  For the hybrid system, we choose the secondary
-template as the pseudoinverse of the guarding hyperplane normals.  The
-primary template for the hybrid system is the collection of the
-(complex) eigenvectors of linear matrices of all affine maps for the
-edge transitions, the orthonormal vectors to the guarding hyperplane
-normals and the projections of the eigenvectors on the subspace
-spanned by the orthonormal vectors.  For the linear system, we only
-have a primary template, which is constituted by the eigenvectors of
-the linear map, the input set template and its multiplication by the
-linear matrix (related to affine map) and square of the linear matrix.
-For the SpaceEx implementation, we tested with the octagon template
-and a template with 400 uniformly sampled support vectors.
-
-For the hybrid system, we tried to compute a single augmented complex
-zonotope invariant for both the upper and lower safety bounds.  But
-for the linear system, we computed two different invariants, verifying
-the upper and the lower bounds separately.
-
-\tbf{Results.}  For both the hybrid and the linear systems, we could
-verify smaller magnitudes for the bounds on the pitch angle than what
-is proposed in the benchmark~\cite{TODO}.  But the SpaceEx tool could
-not find a finite bound for either of the above systems.  The bounds
-along with the computation times are reported in the Tables~\ref{TODO}
-and~\ref{TODO}.
-
 %
 \subsection{Perturbed double integrator}
-We consider the model of a perturbed double integrator, given
-in~\cite{TODO}.  The closed loop system with a feedback control has
-four different affine dynamics in four different regions of space,
-respectively, i.e. piecewise affine. The dynamics has a bounded
-additive disturbance input.  The system is two dimensional.
+Our second example is a perturbed double integrator system that is
+described in~\cite{rakovic2004computation}.  The closed loop system
+with a feedback control is piecewise affine, having four different
+affine dynamics in four different regions of space.  The system is two
+dimensional and has a bounded additive disturbance input.  We perform
+two different experiments on this system.  In the first experiment, we
+try to verify the smallest possible magnitude of bounds on the two
+coordinates, denoted $x_1$ and $x_2$. We compare these bounds with
+that found by the SpaceEx tool.
 
 %% \begin{equation}~\label{eqn:pwa-regions}
 %% \trj{x}{t+1}=\lt(A_i+B_iK_i\rt)\trj{x}{t}+w,~\text{where}~
@@ -313,66 +282,63 @@ additive disturbance input.  The system is two dimensional.
 %% The additive disturbance input $w$ is bounded as $\|w\|_{\infty}\leq
 %% 0.2$.  
 
-We perform two different experiments on this system.  In the first
-experiment, we try to verify the smallest possible magnitude of bounds
-on the two coordinates $x_1$ and $x_2$.  In the second experiment, our
-objective is to quickly compute a large invariant for the system under
-the given safety constraints in~\cite{TODO}.  The given safety
-constraints are $\|x\|_{\infty}\leq 5$ and $\lt|K_i(x)\leq
-1\rt|~\forall i\in\lt\{1,2\rt\}$.  In order to do this, we
-maximize the sum of the scaling factors and differences of the
-upper and lower interval bounds of the augmented complex zonotopic
-invaraint.  The above maximization is a second order conic program.
-Although we may not find the largest (maximal) invariant by this
-method, still the optimizer would find a large invaraint.  For this
-experiment, we draw comparison in terms of the computation time with
-the MPT tool.
+In the second experiment, we try to quickly compute a large invariant
+for the system under the safety constraints given
+in~\cite{rakovic2004computation}.  %% The
+%% given safety
+%% constraints are $\|x\|_{\infty}\leq 5$ and $\lt|K_i(x)\leq
+%% 1\rt|~\forall i\in\lt\{1,2\rt\}$.
+In the latter case, we maximize the sum of the scaling factors and
+differences of the upper and lower interval bounds of the augmented
+complex zonotopic invaraint.  Furthermore, we decompose the given
+safety constraints as the intersection of four different sets of
+safety constraints.  For each set of safety constraints, we compute a
+large augmented complex zonotopic invariant.  Then the desired
+invariant is the intersection of four augmented complex zonotopic
+invaraints.  Although we may not find the largest possible (maximal)
+invariant by this approach, still the optimizer would find a large
+invaraint.  We draw comparison in terms of the computation time with
+the reported result for the MPT tool~\cite{rakovic2004computation}.
 
-\tbf{Modeling.}  We model the system as a two dimensional hybrid
-system with four locations and twelve edges constituting all possible
-directed edges.  Appropriate staying conditions are specified in each
-location, reflecting the division of the state space into different
-regions where the dynamics is affine.  The initial set is the origin.
-The same model is specified in SpaceEx.
+\tbf{Modeling.}  In our formalism, we model the system as two
+dimensional with four locations and twelve edges.  Appropriate staying
+conditions are specified in each location, reflecting the division of
+the state space into different regions where the dynamics is affine.
+The edges constitute all possible interlocation transitions.  The
+initial set is the origin.  The same model is specified in SpaceEx.
 
-\tbf{Complexity of representation}: 2 dimensional, 4 locations and 12 edges.
+\tbf{Size of model}: 2 dimensional, 4 locations and 12 edges.
 
-\tbf{Implementation}.  We choose the secondary template as
-the pseudoinverse (in this case equal to) the hyperplane normals of
-the staying conditions.  For the primary template, we collected the
-(complex) eigenvectors of all linear matrices of the affine maps and their
-binary products. For the SpaceEx tool, we experimented with two
-templates, the octagon template and a template with 100 uniformly
-sampled support vectors.
+\tbf{Implementation}.  We choose the secondary template in each
+location as the pseudoinverse (in this case equal to) the hyperplane
+normals of the staying conditions in that location, so that
+Theorem~\ref{thm:main} is applicable.  For the primary template, we
+collected the (complex) eigenvectors of all linear matrices of the
+affine maps and their binary products. For the SpaceEx tool, we
+experimented with two different templates, the octagon template and a
+template with 100 uniformly sampled support vectors.
 
-\tbf{Results.}  In the first experiment on the perturbed double
-integrator model, the bounds verified for the second coordinate are
-smaller than that of SpaceEx.  For the first coordinate, the bounds
-verified are equal to that of SpaceEx.  In our second experiment on
-the perturbed double integrator model, our computation time for
-finding a large invariant is significantly smaller than that of the
-reported result of the MPT tool.  In our implementation, we first
-decompose the given safety constraints as an intersection of four
-different safety constraints.  The actual invariant is then given as
-the intersection of different invaraints satisfying each of the four
-different safety constraints.  For each of the four safety
-constraints, our method took less than $3$ seconds to compute a large
-invariant.  So, the total computation time is less than $4\times 3$
-seconds $=12$ seconds.  In comparison, the reported computation time
-of the MPT tool is 107 seconds.  The results are summarized in the
-Tables~\ref{TODO} and~\ref{TODO}.
+\tbf{Results.}  In the first experiment on this example, the bounds
+verified bounds for the first coordinate by our method is equal to
+that of SpaceEx. But for the second coordinate, we verfied smaller
+bounds than that of SpaceEx.  In our second experiment on this
+example, the computation time for finding a large invariant by our
+method is significantly smaller than that of the reported result for
+the MPT tool.  The results are summarized in the Tables~\ref{tab:smallinv-pdi}
+and~\ref{tab:largeinv-pdi}.
 
 
 
 \subsection{Networked platoon of vehicles}
-We consider the example of a networked cooperative platoon, presented
-as a benchmark in the ARCH workshop~\cite{TODO}.  The platoon consists
-of three vehicles $M_1$, $M_2$ and $M_3$ along with a leader board
-ahead.  Each vehicle has a reference distance to the vehicle ahead of
-it.  The difference between the actual distance of a vehicle $M_i$ to
-its successor and the reference distance is denoted as $e_i$.  Then, any
-upper bound on $-e_i$ is a lower limit on the reference distance
-above which the platoon is guaranteed not to collide.
+Our third example is a model of a networked cooperative platoon of
+vehicles, which is presented as a benchmark in the ARCH
+workshop~\cite{makhlouf2014networked}.  The platoon consists of three
+vehicles $M_1$, $M_2$ and $M_3$ along with a leader board ahead.  Each
+vehicle has a reference distance to the vehicle ahead of it.  The
+difference between the actual distance of a vehicle $M_i$ to its
+successor and the reference distance is denoted as $e_i$.  Any upper
+bound on $-e_i$ is a safe lower limit on the reference distance above
+which the platoon is guaranteed not to collide.
 
 The movement of the vehicles is dependent on the communication between
 them.  In the benchmark proposal, the dynamics of the vechicles is
@@ -381,140 +347,110 @@ dynamics.  In one location, there is communication between all the
 vehicles, while in another location, there is complete communication
 failure.  In the general model described in the benchmark, there can
 be staying conditions for each location and time constraints on the
-switching time.  The paper then considers a specific case where the
-dwell time (minimum switching time) is greater than 20 seconds, (this
-is also in the distributed SpaceEx implementation~\cite{TODO}).
-However, for our case study, we consider four different dwell times,
-i.e., 20s, 4s, 2s, and 1s.
+switching time.  The benchmark then considers a specific case where
+the minimum dwell time is 20 seconds (also specified in the
+distributed SpaceEx
+implementation\footnote{http://cps-vo.org/node/15096}).  In this
+paper, we consider two cases, minimum dwell times of 20 seconds and 1
+second, respectively.
 
 
-\tbf{Modeling.}  Since our implementation is concerned with discrete
-time hybrid systems, we need to find a discrete time system whose
-reachable set overapproximates that of the continuous time.  The
-proposed discretization is possible if we assume that the switching
-can occur at discrete instants of time.  We do not explain the
-discretization procedure here, because it is beyond the scope of this
-paper.  In our case study, we consider that the switching to occur at
-any integer time instant.  The same discrete time models are
-specified in SpaceEx as well. 
+\tbf{Modeling.}  Since our method is applicable to discrete time
+hybrid systems, we need to find a discrete time system whose reachable
+set overapproximates that of the given continuous time system.  For
+the large minimum dwell time of $20s$, it is possible efficiently
+discretize the system, satisfying the aforementioned requirement.  We
+do not, however, explain the discretization procedure here, because it
+is beyond the scope of this paper.  But for the small minimum dwell
+time of $1s$, a similar discretization of the system would lead to a
+very high complexity model.  So, for our experiment in the latter
+case, we alternatively considered a model in which the switching can
+only happen at integer instants of time.  With this assumption,
+efficient discretization was possible for the $1s$ minimum dwell
+model.  Henceforth, we model the above two systems in the formalism
+described in this paper. The same models are also used for the
+discrete time SpaceEx implementation.  The size of both the models is
+given below.
 
-\tbf{Complexity of representation}: 9 dimensional, 2 locations and 2 edges. 
+\tbf{Size of large dwell time model}: 9 dimensional, 2
+locations and 4 edges.
 
-\tbf{Implementation.}  We choose the primary template as the
-collection of the (complex) eigenvectors of linear matrices of the
-affine maps in the the two locations and their binary products, the
-axis alligned box template and the templates used for
+\tbf{Size of small dwell time model}: 9 dimensional, 2
+locations, 2 edges.
+
+\tbf{Implementation.}  In our approach, we choose the primary template
+as the collection of the (complex) eigenvectors of linear matrices of
+the affine maps in the the two locations and their binary products,
+the axis alligned box template and the templates used for
 overapproximating the input sets.  The secondary template is set to
 the zero vector since there are no linear guards or staying conditions
-in this example.  For SpaceEx, we considered the
-the octagon template and also a template with hundred uniformly
-sampled support vectors.
+in this example.  For the SpaceEx tool, we experimented with two
+templates, octagon and hundred uniformly sampled support vectors.
 
-\tbf{Results.}  For the larger dwell times, i.e., $20s$ and $4s$,
-SpaceEx could verify slightly smaller bounds on $-e_1$, $-e_2$, and
-$-e_3$, compared to our approach.  However, for the smaller dwell
-times, i.e., $2s$ and $1s$, SpaceEx could not find even a finite set of
-bounds, while our approach could verify a finite set of bounds.  These
-results and the computation times are reported in the
-Table~\ref{TODO}.
+\tbf{Results.}  For the large minimum dwell time of $20s$, the
+discrete time SpaceEx implementation and also a method based on using
+real zonotopes~\cite{makhlouf2014networked} could verify slightly
+smaller bounds on $-e_1$, $-e_2$ and $-e_3$, compared to our approach.
+But for the small minimum dwell time ($1s$) model, SpaceEx could not
+even find a finite set of bounds, whereas our approach could verify a
+finite set of bounds.  These results are reported in the
+Tables~\ref{tab:largedwell-platoon} and~\ref{tab:smalldwell-platoon}.
+
+\subsection{Discussion of experimental results}
+We observe that for four out of five experiments,
+i.e. Tables~\ref{tab:robot-unsaturated},~\ref{tab:robot-saturated},~\ref{tab:smallinv-pdi},
+and~\ref{tab:smalldwell-platoon}, where comparison is drawn with
+SpaceEx, our approach produced more accurate results than the latter.
+In terms of computation time, SpaceEx showed better performance only
+if it managed to find an invariant. However, we note that out of the
+five experiments with SpaceEx, only two experiments yeilded an
+invariant.  We have also demonstrated in an experiment on the
+perturbed double integrator that our method can be used to quickly
+compute large invaraint.  Our method took significantly smaller
+computation time than that of the MPT tool.  Furthermore, we draw the
+following inference about the performance of the SpaceEx tool and a
+real zonotope based implementation~\cite{makhlouf2014networked}, and
+the advantage of our approach.
+
+SpaceEx may show good performace for strongly stable systems, i.e.,
+systems that converge quickly to a stable state.  For instance,
+SpaceEx performed well on the networked platoon model with a large
+minimum dwell time ($20s$).  This is because, both the dynamics in the
+locations being stable, the lyapunov exponent (measure of stability)
+tends to be higher for larger dwell times.  But SpaceEx could not
+compute an invariant when the minimum dwell time is small, i.e., $1s$.
+The reason being that in the latter case, the lyapunov exponent could
+be small.  The same reasoning pertains to the case of the real
+zonotope based set simulation~\cite{makhlouf2014networked}, which
+showed better performance when the dwell time is larger.  If the dwell
+time is smaller, then a zonotope based set simulation method would be
+difficult to implement.  Also for high dimensional systems having
+complex (non-real) eigenvalues, it can be difficult to find an
+appropriate polytopic template for which SpaceEx could work well.  For
+instance, SpaceEx with as many as 400 uniformly sampled support
+vectors did not find an invariant for even the linear (unsaturated)
+model of the NXT-robot.  Although in theory, a linear system has a
+polytopic invariant, but the number of faces of such a polytope can be
+arbitrarily large for a fixed dimension.  In case of NXT model, the
+system is 10 dimensional with some eigenvalues whose magnitude is
+close to one and it has complex (with non-negative imaginary part)
+eigenvalues.  This could be the reason even a large number of support
+vectors did not suffice to find the SpaceEx invariant for NXT-robot
+model.
 
 
-%
-\begin{table}
-\begin{minipage}{0.45\textwidth}
-\begin{tabular}{|c|c|c|c|c|}
-\hline
-Dwell & \multirow{2}{*}{$-e1<=$} & \multirow{2}{*}{$-e2\leq$} &
-\multirow{2}{*}{$-e3\leq$} & Computation\\
-time (s) & & & & time (s)\\
-\hline
-\multirow{2}{*}{dt} & \multirow{2}{*}{result} &
-\multirow{2}{*}{result} & \multirow{2}{*}{result} &
-\multirow{2}{*}{result} \\
-& & & & \\
-\hline
-\multirow{2}{*}{dt} & \multirow{2}{*}{result} &
-\multirow{2}{*}{result} & \multirow{2}{*}{result} &
-\multirow{2}{*}{result} \\
-& & & & \\
-\hline
-\multirow{2}{*}{dt} & \multirow{2}{*}{result} &
-\multirow{2}{*}{result} & \multirow{2}{*}{result} &
-\multirow{2}{*}{result} \\
-& & & & \\
-\hline
-\multirow{2}{*}{dt} & \multirow{2}{*}{result} &
-\multirow{2}{*}{result} & \multirow{2}{*}{result} &
-\multirow{2}{*}{result} \\
-& & & & \\
-\hline
-\end{tabular}
-\caption{Networked platoon model experiment in SpaceEx with the Octagon template}
-\end{minipage}
-\hspace{3em}
-\begin{minipage}{0.45\textwidth}
-\begin{tabular}{|c|c|c|c|c|}
-\hline
-Dwell & \multirow{2}{*}{$-e1<=$} & \multirow{2}{*}{$-e2\leq$} &
-\multirow{2}{*}{$-e3\leq$} & Computation\\
-time (s) & & & & time (s)\\
-\hline
-\multirow{2}{*}{dt} & \multirow{2}{*}{result} &
-\multirow{2}{*}{result} & \multirow{2}{*}{result} &
-\multirow{2}{*}{result} \\
-& & & & \\
-\hline
-\multirow{2}{*}{dt} & \multirow{2}{*}{result} &
-\multirow{2}{*}{result} & \multirow{2}{*}{result} &
-\multirow{2}{*}{result} \\
-& & & & \\
-\hline
-\multirow{2}{*}{dt} & \multirow{2}{*}{result} &
-\multirow{2}{*}{result} & \multirow{2}{*}{result} &
-\multirow{2}{*}{result} \\
-& & & & \\
-\hline
-\multirow{2}{*}{dt} & \multirow{2}{*}{result} &
-\multirow{2}{*}{result} & \multirow{2}{*}{result} &
-\multirow{2}{*}{result} \\
-& & & & \\
-\hline
-\end{tabular}
-\caption{Networked platoon model experiment in SpaceEx with 100 support
-  vectors}
-\end{minipage}
-$~$\\
-$~$\\
-\centering
-\begin{tabular}{|c|c|c|c|c|}
-\hline
-Dwell & \multirow{2}{*}{$-e1<=$} & \multirow{2}{*}{$-e2\leq$} &
-\multirow{2}{*}{$-e3\leq$} & Computation\\
-time (s) & & & & time (s)\\
-\hline
-\multirow{2}{*}{dt} & \multirow{2}{*}{result} &
-\multirow{2}{*}{result} & \multirow{2}{*}{result} &
-\multirow{2}{*}{result} \\
-& & & & \\
-\hline
-\multirow{2}{*}{dt} & \multirow{2}{*}{result} &
-\multirow{2}{*}{result} & \multirow{2}{*}{result} &
-\multirow{2}{*}{result} \\
-& & & & \\
-\hline
-\multirow{2}{*}{dt} & \multirow{2}{*}{result} &
-\multirow{2}{*}{result} & \multirow{2}{*}{result} &
-\multirow{2}{*}{result} \\
-& & & & \\
-\hline
-\multirow{2}{*}{dt} & \multirow{2}{*}{result} &
-\multirow{2}{*}{result} & \multirow{2}{*}{result} &
-\multirow{2}{*}{result} \\
-& & & & \\
-\hline
-\end{tabular}
-\caption{Networked platoon model experiment based on Augmented complex zonotopes}
-\end{table}
+In contrast, since our approach can incorporate complex valued vectors
+as generators, we are guaranteed to find finite invaraints for any
+stable linear system by using the eigenvectors as generators.  The
+overapproximation accuracy can, however, be increased by adding more
+generators to the template.  Furthermore, by using the theory for
+computing the intersection of augmented complex zonotopes with
+sub-parallelotopes, we could handle models having linear guards and
+staying conditions.  For instance, the saturated robot and the
+perturbed double integrator models  have either linear guards or
+staying conditions.
+
+
 
 
 
