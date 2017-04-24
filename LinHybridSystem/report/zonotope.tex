@@ -2,28 +2,7 @@
 Before we introduce augmented complex zonotopes, we briefly review
 related set representations and discuss our motivation for the
 current extension.
-
-Usual (real) zonotopes are Minkowski sums of
-line segemnts, represented as a linear combination of real vectors,
-called \emph{generators}, whose combining coefficients
-are bounded in real valued intervals.
-\begin{definition}[Real zonotope]
-Let $W\in\mat{n}{k}{\mb{R}}$ and $l,u\in\mb{R}^m: l\leq u$.  Then the
-following is a real zonotope.
-\begin{equation*}
-\zon{W}{l}{u} = \lt\{W\zeta: \zeta\in\mb{R}^k,~\zeta_j\in[l_j,u_j]~\forall j\in \tup{k}\rt\}
-\end{equation*}
-\end{definition}
-%
-The linear transformations and Minkowski sums of zonotopes are also
-zonotopes, which can be computed efficiently.  Hence, zonotopes are
-efficient for reachability analysis of linear systems and some special
-cases of affine hybrid systems.  We will discuss these operations
-latter in the general case of augmented complex zonotopes.
-
-Zonotopes are a sub-class of polytopes.  First, we define a polytope
-in terms of hyperplane representation.  Latter we explain that
-zonotopes do not have efficient hyperplane representation. 
+Firstly, we define polytopes in terms of hyperplane representation.
 %
 \begin{definition}
 Let $T\in\mat{n}{k}{\mb{R}}$ and $d\in\mb{R}^k$.  Then a (possibly
@@ -31,16 +10,45 @@ unbounded) polytope, denoted $\polytope{T}{d}$, is defined as
 $\polytope{T}{d} = \lt\{x\in\comprealset^k: Tx\leq d\rt\}$.
 \end{definition}
 %
-Although zonotopes are a special class of polytopes, they do not have
-efficient hyperplane representation as a polytope.  A zonotope with
-$m$ generators in an $n$ dimensional space can have as many as
-${m}\choose{n}$ faces (bounding hyperplanes).  [GIVE EXAMPLE HERE].
+Usual zonotopes are a sub-class of polytopes, which are geometrically
+Minkowski sums of line segments.They are represented as a linear
+combination of real vectors, called \emph{generators}, whose combining
+coefficients are bounded in real valued intervals.
+\begin{definition}[Real zonotope]
+Let $W\in\mat{n}{k}{\mb{R}}$ and $l,u\in\mb{R}^m: l\leq u$.  Then 
+ a real zonotope is
+%\begin{equation*}
+$\zon{W}{l}{u} = \lt\{W\zeta: \zeta\in\mb{R}^k,~\zeta_i\in[l_i,u_i]~\forall i\in \tup{k}\rt\}.$
+%\end{equation*}
+\end{definition}
+%
+For simple examples of zonotopes like boxes and octagons, efficient
+interconversion between the zonotopic representation and hyperplane
+based polytopic representation is possible.  However, in general
+zonotopes do not have efficient hyperplane representation as a
+polytope.  The reason is that zonotope with $m$ generators in an $n$
+dimensional space will have ${m}\choose{n}$ faces (bounding
+hyperplanes), if all combinations of $n$ generators are linearly
+independent.  That is, the hyperplane representation of a zonotope can
+be, in general, exponentially large compared to the zonotope.  
 
-Generally, the intersection of a real zonotope with linear constraints
-is not a zonotope.  However, if the linear constraints constitute a
-sub-parallelotope, then the intersection with a real zonotope having a
-corresponding template can be exactly computed.  This is described in
-the following lemma.
+The linear transformations and Minkowski sums of zonotopes are also
+zonotopes, which can be computed efficiently.  Hence, zonotopes are
+considered efficient for reachability analysis of linear systems.  But
+the drawback with zonotopes is that in general, intersection with
+linear constraints will not give a zonotope.  Also, there is no unique
+smallest zonotope that overapproximates the intersected zonotope with
+linear constraints.  However, we observe that if the linear
+constraints constitute a subparallelotope with a a template aligned
+with that of the zonotope, then the intersection can be exactly
+computed.  To illustrate a simple case, the intersection of
+$\zon{\lt[\begin{array}{l l}1 & 0 \\ 0 &
+1\end{array}\rt]}{\lt[\begin{array}{c}-1\\
+-1\end{array}\rt]}{\lt[\begin{array}{c}2\\ 2\end{array}\rt]}$ with
+$x_1\leq 1~\wedge~x_2\geq 0.5$ gives $\zon{\lt[\begin{array}{l l}1 &
+0 \\ 0 & 1\end{array}\rt]}{\lt[\begin{array}{c}-1\\
+-0.5\end{array}\rt]}{\lt[\begin{array}{c}1\\ 2\end{array}\rt]}$.  The
+general case is described in the following lemma.
 %
 \begin{lemma}\label{lem:motivation}
 Let $K\in\mat{n}{k}{R}$ such that $k\leq n$ and $\lt(K^TK\rt)$ is
@@ -51,56 +59,37 @@ non-singular.  Then
 \]
 \end{lemma}
 %
-
-To incorporate the possibly complex eigenstructure of linear maps while
-computing invariants, the complex zonotope set representation and its
-generalization to the template complex zontope were introduced
-in~\cite{todo}.  A template complex zonotope has complex valued
-vectors as generators, whose combining coefficients are complex and
-bounded in their absolute values.
-
+To incorporate the possibly complex eigenstructure of linear maps
+while computing invariants, the complex zonotope set representation
+and its generalization to the template complex zontope were introduced
+in~\cite{adimoolam2016using,tcz2017}.  A template complex zonotope has
+complex valued vectors as generators, whose combining coefficients are
+complex and bounded in their absolute values.
+%
 \begin{definition}[Template complex zonotope]
 Let $V\in\mat{n}{m}{\mb{C}}$ (template) and $s\in\mb{R}^m_{\geq 0}$ (scaling factors) and
-$c\in\mb{C}^n$ (center).  Then the following is a template complex zonotope.
-\begin{equation*}
-\cz{V}{c}{s} =
+$c\in\mb{C}^n$ (center).  Then the following is a template complex zonotope:
+%\begin{equation*}
+$\cz{V}{c}{s} =
 \lt\{V\epsilon:\epsilon\in\mb{C}^m,~\lt|\epsilon_i\rt|\leq s_i~\forall
-i\in\tup{m}\rt\}
-\end{equation*}
+i\in\tup{m}\rt\}.$
+%\end{equation*}
 \end{definition}
-
-When the template vectors of a complex zonotope are real, then the
-real projection of the complex zonotope is equivalent to a usual
-zonotope and has a polytopic shape.  However, when some of the
-template vectors have both real and imaginary parts, then the real
-projection of a complex zonotope is a Minkowski sum of ellipsoids and
-line segments, hence not polyhedral.  An example of the non-polyhedral
-real projection of a complex zonotope is given in Figure~\ref{TODO}.
-
-%% A major issue with using zonotopes for
-%% analysis of affine hybrid systems is that there is no efficient way to
-%% compute a reasonable zonotopic overapproximation of intersection with
-%% linear guard conditions.  In case of usual zonotopes, a method for
-%% computing the former was proposed in [TODO]~\cite{} that relied on
-%% computing polytopic projections on different hyperplanes.  However,
-%% this method is not efficient for high dimensions.  Furthermore, in case of
-%% non-polyheadral complex zonotopes, to our knowledge there is no existing method to
-%% overapproximate with reasonable accuracy the intersection with
-%% linear guards as a complex zonotope.
-
-In general, checking the exact inclusion between two template complex
-zonotopes amounts to solving a non-convex optimization problem, which
-could be inefficient.  Therefore, a convex condition was proposed
-in~[CITE], which is sufficient to guarantee inclusion between template
-complex zonotopes.  Here, we present this condition as a
-partial order between template complex zonotopes.
-
+%
+Unlike real zonotopes, a template complex zonotope can have a
+non-polyhedral real projection.  Therefore, in general, checking the
+exact inclusion between two template complex zonotopes amounts to
+solving a non-convex optimization problem, which could be inefficient.
+Instead, a convex condition was proposed in~\cite{tcz2017}, which is
+sufficient to guarantee the inclusion between template complex
+zonotopes.  Here, we present this condition as a partial order between
+template complex zonotopes.
 %
 \begin{definition}
 We define a relation ``$\order$'' between template complex zonotopes
 as\\ $\cz{V^\pr_{n\times m^\pr}}{c^\pr}{s^\pr}\order \cz{V_{n\times
     m}}{c}{s}$ if all of the following is true.
-\begin{align}
+\begin{align}~\label{eqn:tcz-inc}
 \begin{split}
 & \exists X\in\mat{m}{m^\pr}{\mb{C}}~\text{and}~y\in\mb{C}^{m}~\text{s.t.}\\
 & \transfer{V}{V^\pr}{s^\pr}{X},~~~\centertransfer{V}{c}{c^\pr}{y}\\
@@ -109,21 +98,34 @@ as\\ $\cz{V^\pr_{n\times m^\pr}}{c^\pr}{s^\pr}\order \cz{V_{n\times
 \end{align}
 \end{definition}
 %
-The following lemma states that the relation defined above is a partial
-order and is sufficient to
-guarantee inclusion between template complex zonotopes.
-
 \begin{lemma}[Ordering: template complex
-  zonotopes]~\label{lem:zon-zon}
-\begin{enumerate}
-\item The relation ``$\order$'' between template complex zonotopes is
-  a partial order.
-\item The inclusion $\cz{V^\pr}{c^\pr}{s^\pr}\subseteq
-  \cz{V}{c}{s}$ holds if the
-  relation\\ $\cz{{V^\pr}}{c^\pr}{s^\pr}\order
-  \cz{V}{c}{s}$ holds.
-\end{enumerate}
+  zonotopes]~\label{lem:zon-zon} The relation ``$\order$'' among
+template complex zonotopes is a partial order.  Furthermore, the
+inclusion $\cz{V^\pr}{c^\pr}{s^\pr}\subseteq \cz{V}{c}{s}$ holds if
+the order relation $\cz{{V^\pr}}{c^\pr}{s^\pr}\order \cz{V}{c}{s}$ holds.
 \end{lemma}
-
-
-
+%
+For fixed $V$ and $V^\pr$,~(\ref{eqn:tcz-inc}) can be equivalently
+described as a set of convex constraints called second order conic
+constraints.  There are many convex optimization tools that can
+efficiently solve second order conic constraints upto a high numerical
+precision.  Linear inequalities and equalities are also a subclass of
+second order conic constraints.  We define a second order conic
+constraint (SOCC) as follows.
+%
+\begin{definition}[SOCC]
+A constraint of the form $\|Ax\|_{2}+Fx+b\leq 0$ on an $n$-dimensional
+variable $x$, given $A,F\in\mat{n}{k}{\realset}$ and $b\in\mb{R}^k$, is
+called a second order conic constraint (SOCC).
+\end{definition}
+%
+   Our aforementioned observation about~(\ref{eqn:tcz-inc}) is
+ formalized below.
+%
+\begin{lemma}
+For fixed $V$,$V^\pr$, the partial order $\cz{V^\pr_{n\times
+    m^\pr}}{c^\pr}{s^\pr}\order \cz{V_{n\times m}}{c}{s}$ is
+    equivalent to a set of second order conic constraints on the
+    variables on $c,c^\pr,s,s^\pr,l,l^\pr$ and some additional
+    variables.
+\end{lemma}

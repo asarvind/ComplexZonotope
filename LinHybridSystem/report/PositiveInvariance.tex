@@ -1,40 +1,31 @@
-%% To find positive invariants using augmented complex zonotopes, our
-%% approach is to fix the template vectors of the augmented complex
-%% zonotope and solve for remaining variables to get a positive
-%% invariant.  Some aspects of the hybrid system specification, like the
-%% eigenstructure of affine maps, directions for the linear guards and
-%% staying conditions, etc. provide guidance for choosing the template
-%% vectors.  We shall discuss the approach to choosing a template in a
-%% latter section.  In this section, we derive sufficient conditions for
-%% finding a positively invariant augmented complex zonotope, given fixed
-%% primary and secondary templates.  
-Our goal is to compute positively invariant augmented complex
-zonotopes satisfying some safety constraints and containing a given
-initial set.  In this section, we derive sufficient conditions for the
-aforementioned requirements.  In a latter section, we will discuss how
-to use this condition for computing the required augmented complex
-zonotope.
 
+
+In this section, we first derive sufficient conditions for a
+positively invariant augmented complex zonotopes satisfying some
+safety constraints and containing a given initial set.  Latter, we
+explain how we solve the conditions to compute the desired invariant.
 The following lemma gives an overapproximation of its reachable set
 after one transition.
 
 %
 \begin{lemma}
-  Let us consider a state set $\hybridset:\locationset\ra\realset^n$ whose projection in each
-  location $\loc\in\locationset$ is $\real\lt(\gcz{V(\loc)}{c(\loc)}{s(\loc)}{\pinv{\ptemplate}(\loc)}{l(\loc)}{u(\loc)}\rt)$.
-  Let us consider that the
-  additive input for an intralocation transition in any location 
-  $\loc\in\locationset$ and an interlocation transition along any edge
-  $\edge\in\edgeset$, respectively, are
-  overapproximated by augmented complex zonotopes as $\inputset(\loc)\subseteq
+  Let us consider a state set $\hybridset:\locationset\ra\realset^n$
+  whose projection in each location $\loc\in\locationset$ is
+  $\real\lt(\gcz{V(\loc)}{c(\loc)}{s(\loc)}{\pinv{\ptemplate}(\loc)}{l(\loc)}{u(\loc)}\rt)$.
+  Let us consider that the additive input for an intralocation
+  transition in any location $\loc\in\locationset$ and an
+  interlocation transition along any edge $\edge\in\edgeset$,
+  respectively, are overapproximated by augmented complex zonotopes as
+  $\inputset(\loc)\subseteq
   \gcz{V^{in}(\loc)}{c^{in}(\loc)}{s^{in}(\loc)}{W^{in}(\loc)}{l^{in}(\loc)}{u^{in}(\loc)}$
   and $\inputset(\edge)\subseteq
-  \gcz{V^{in}(\edge)}{c^{in}(\edge)}{s^{in}(\edge)}{W^{in}(\edge)}{l^{in}(\edge)}{u^{in}(\edge)}$.  Then,
+  \gcz{V^{in}(\edge)}{c^{in}(\edge)}{s^{in}(\edge)}{W^{in}(\edge)}{l^{in}(\edge)}{u^{in}(\edge)}$.
+  Then,
 \begin{enumerate}
 \item For any location $\loc\in\locationset$, the inclusion
   $\locationtransition{\loc}\lt(\hybridset(\loc)\rt)\subseteq
-  \hybridset(\loc)$ holds if 
-  all of the below conditions are satisfied.
+  \hybridset(\loc)$ holds if all of the below statements are
+  collectively true.
 \begin{align}~\label{eqn:locinv}
 \begin{split}
 & \pinv{\ptemplate}(\loc)c(\loc) = 0~\text{and there exists a complex vector}~
@@ -42,22 +33,36 @@ after one transition.
 & \text{real
     vectors}~s^\pr(\loc),l^\pr(\loc),u^\pr(\loc),l^\dpr(\loc),u^\dpr(\loc)~\text{such
     that}\\
+\end{split}
+\end{align}
+\vspace{-1.5em}
+\begin{align}
 & c^\pr(\loc) = \map(\loc)c(\loc)+c^{in}(\loc),~~s^\pr(\loc) =
-  \ColumnJoin{s(\loc)}{s^{in}(\loc)}\\
+  \ColumnJoin{s(\loc)}{s^{in}(\loc)}
+\end{align}
+\vspace{-1.5em}
+\begin{align}
 & l^\pr(\loc) =
-  \ColumnJoin{\maxaffine{l(\loc)}{\stay^-(\loc)}}{~~~~~~~~~l^{in}(\loc)~~~},~~u^\pr =
-  \ColumnJoin{\minaffine{u(\loc)}{\stay^+(\loc)}}{~~~~~~~~~u^{in}(\loc)~~~}\\
+  \ColumnJoin{\maxaffine{l(\loc)}{\stay^-(\loc)}}{~~~~~~~~~l^{in}(\loc)~~~},~~u^\pr
+  =
+  \ColumnJoin{\minaffine{u(\loc)}{\stay^+(\loc)}}{~~~~~~~~~u^{in}(\loc)~~~}
+\end{align}
+\vspace{-1.5em}
+\begin{align}
 & \lt\{\Calign{\gcz{\lt[\map(\loc)V(\loc)~~V^{in}(\loc)\rt]}{c^\pr(\loc)}{s^\pr(\loc)}
           {\lt[\map(\loc)\pinv{\ptemplate}(\loc)~~W^{in}(\loc)\rt]}{l^\pr(\loc)}{u^\pr(\loc)}}
- {~~\order \gcz{V(\loc)}{c(\loc)}{s(\loc)}{\pinv{\ptemplate}(\loc)}{l^\dpr(\loc)}{u^\dpr(\loc)}}\rt.\\
+ {~~\order
+   \gcz{V(\loc)}{c(\loc)}{s(\loc)}{\pinv{\ptemplate}(\loc)}{l^\dpr(\loc)}{u^\dpr(\loc)}}\rt.
+\end{align}
+\vspace{-1.5em}
+\begin{align}
 & \maxaffine{l^\dpr(\loc)}{\stay^-(\loc)}\geq l(\loc)~\text{and}~~
 \minaffine{u^\dpr(\loc)}{\stay^+(\loc)}\leq u(\loc).
-\end{split}
  \end{align}
 \item For any edge $\edge\in\edgeset$, the inclusion
   $\edgetransition{\edge}\lt(\hybridset\lt(\preloc{\edge}\rt)\rt)
   \subseteq \hybridset\lt(\postloc{\edge}\rt)$ holds if 
-  all of the below conditions are satisfied.
+  all of the below statements are collectively true.
 \begin{align}~\label{eqn:edgeinv}
 \begin{split}
 & \pinv{\ptemplate}\lt(\preloc{\edge}\rt)c\lt(\preloc{\edge}\rt) =
@@ -65,28 +70,39 @@ after one transition.
   vector}~c^\pr(\postloc{\edge})~\text{and}\\
 & \text{real
     vectors}~s^\pr(\postloc{\edge}),l^\pr(\postloc{\edge}),u^\pr(\postloc{\edge}),l^\dpr(\postloc{\edge}),u^\dpr(\postloc{\edge})~~\text{such
-  that}\\
-& c^\pr(\edge) = \map(\edge)c(\preloc{\edge})+c^{in}(\edge),~~s^\pr(\edge) =
-  \ColumnJoin{s(\preloc{\edge})}{s^{in}(\edge)}\\
-& l^\pr(\edge) =
-  \ColumnJoin{\maxaffine{l(\preloc{\edge})}{\stay^-(\preloc{\edge})\bigvee\loweredgebound{\edge}}}{~~~~~~~~~l^{in}(\edge)~~~},~~u^\pr =
-  \ColumnJoin{\minaffine{u(\preloc{\edge})}{\stay^+(\preloc{\edge})\bigwedge\upperedgebound{\edge}}}{~~~~~~~~~u^{in}(\edge)~~~}\\
-& \lt\{\Calign{\gcz{\lt[\map(\edge)V(\preloc{\edge})~~V^{in}(\edge)\rt]}{c^\pr(\edge)}{s^\pr(\edge)}
-          {\lt[\map(\edge)\pinv{\ptemplate}(\preloc{\edge})~~W^{in}(\edge)\rt]}{l^\pr(\edge)}{u^\pr(\edge)}}
- {~~\order \gcz{V(\postloc{\edge})}{c(\postloc{\edge})}{s(\postloc{\edge})}{\pinv{\ptemplate}(\postloc{\edge})}{l^\dpr(\edge)}{u^\dpr(\edge)}}\rt.\\
-& \maxaffine{l^\dpr(\edge)}{\stay^-(\postloc{\edge})}\geq l(\postloc{\edge})~\text{and}~~
-\minaffine{u^\pr(\edge)}{\stay^+(\postloc{\edge})}\leq u(\postloc{\edge}).
+  that}
 \end{split}
 \end{align}
+\vspace{-1.5em}
+\begin{align}
+& c^\pr(\edge) = \map(\edge)c(\preloc{\edge})+c^{in}(\edge),~~s^\pr(\edge) =
+  \ColumnJoin{s(\preloc{\edge})}{s^{in}(\edge)}
+\end{align}
+\vspace{-1.5em}
+\begin{align}
+& l^\pr(\edge) =
+  \ColumnJoin{\maxaffine{l(\preloc{\edge})}{\stay^-(\preloc{\edge})\bigvee\loweredgebound{\edge}}}{~~~~~~~~~l^{in}(\edge)~~~},~~u^\pr =
+  \ColumnJoin{\minaffine{u(\preloc{\edge})}{\stay^+(\preloc{\edge})\bigwedge\upperedgebound{\edge}}}{~~~~~~~~~u^{in}(\edge)~~~}
+\end{align}
+\vspace{-1.5em}
+\begin{align}
+& \lt\{\Calign{\gcz{\lt[\map(\edge)V(\preloc{\edge})~~V^{in}(\edge)\rt]}{c^\pr(\edge)}{s^\pr(\edge)}
+          {\lt[\map(\edge)\pinv{\ptemplate}(\preloc{\edge})~~W^{in}(\edge)\rt]}{l^\pr(\edge)}{u^\pr(\edge)}}
+ {~~\order
+   \gcz{V(\postloc{\edge})}{c(\postloc{\edge})}{s(\postloc{\edge})}{\pinv{\ptemplate}(\postloc{\edge})}{l^\dpr(\edge)}{u^\dpr(\edge)}}\rt.
+\end{align}
+\vspace{-1.5em}
+\begin{align}
+& \maxaffine{l^\dpr(\edge)}{\stay^-(\postloc{\edge})}\geq l(\postloc{\edge})~\text{and}~~
+\minaffine{u^\pr(\edge)}{\stay^+(\postloc{\edge})}\leq u(\postloc{\edge}).
+\end{align}
+\vspace{-1.5em}
 \end{enumerate}
 \end{lemma}
-\begin{proof}
-{\color{red} TODO}
-\end{proof}
-
-Additionally, we may require that an initial set is contained in the
-positive invariant.  The following lemma gives a sufficient condition
-for the former.
+%
+Based on the partial order for inclusion between augmented complex
+zonotopes, we state a sufficient condition for the
+positive invariant to contain the initial set.
 \begin{lemma}
   Let $\mc{I}$ and $\hybridset$ be two state sets whose projections in
   each location $\loc\in\locationset$ are respectively
@@ -99,7 +115,7 @@ for the former.
 \gcz{V^I(\loc)}{c^I(\loc)}{s^I(\loc)}{W^I(\loc)}{l^I(\loc)}{u^I(\loc)}\order\gcz{V(\loc)}{c(\loc)}{s(\loc)}{\pinv{\ptemplate}(\loc)}{l(\loc)}{u(\loc)}.
 \end{align}
 \end{lemma}
-
+%
 For satisfaction of polytopic safety constraints by an augmented
 complex zonotope, the following lemma gives a sufficient condition.
 %
