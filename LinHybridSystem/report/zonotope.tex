@@ -24,47 +24,49 @@ $\zon{W}{l}{u} = \lt\{W\zeta: \zeta\in\mb{R}^k,~\zeta_i\in[l_i,u_i]~\forall i\in
 %
 For simple examples of zonotopes like boxes and octagons, efficient
 interconversion between the zonotopic representation and hyperplane
-based polytopic representation is possible.  However, in general
+based polytopic representation is possible.  However, in general,
 zonotopes do not have efficient hyperplane representation as a
 polytope.  The reason is that zonotope with $m$ generators in an $n$
 dimensional space will have ${m}\choose{n}$ faces (bounding
 hyperplanes), if all combinations of $n$ generators are linearly
 independent.  That is, the hyperplane representation of a zonotope can
-be, in general, exponentially large compared to the zonotope.  
+be exponentially large compared to the zonotope.
 
 The linear transformations and Minkowski sums of zonotopes are also
 zonotopes, which can be computed efficiently.  Hence, zonotopes are
 considered efficient for reachability analysis of linear systems.  But
-the drawback with zonotopes is that in general, intersection with
-linear constraints will not give a zonotope.  Also, there is no unique
-smallest zonotope that overapproximates the intersected zonotope with
-linear constraints.  However, we observe that if the linear
-constraints constitute a subparallelotope with a a template aligned
-with that of the zonotope, then the intersection can be exactly
-computed.  To illustrate a simple case, the intersection of
+the drawback with zonotopes is that the intersection with linear
+constraints need not be a zonotope.  Also, there is no unique smallest
+zonotope that overapproximates the intersected zonotope with linear
+constraints.  However, we observe that if the linear constraints
+constitute a subparallelotope with a a template aligned with that of
+the zonotope, then the intersection can be exactly computed.  This is
+also the reason we considered the case of subparallelotpic
+specification of staying conditions and guards in the our formalism of
+an affine hybrid system.  As a simple example, the intersection of
 $\zon{\lt[\begin{array}{l l}1 & 0 \\ 0 &
-1\end{array}\rt]}{\lt[\begin{array}{c}-1\\
--1\end{array}\rt]}{\lt[\begin{array}{c}2\\ 2\end{array}\rt]}$ with
-$x_1\leq 1~\wedge~x_2\geq 0.5$ gives $\zon{\lt[\begin{array}{l l}1 &
-0 \\ 0 & 1\end{array}\rt]}{\lt[\begin{array}{c}-1\\
--0.5\end{array}\rt]}{\lt[\begin{array}{c}1\\ 2\end{array}\rt]}$.  The
-general case is described in the following lemma.
+      1\end{array}\rt]}{\lt[\begin{array}{c}-1\\ -1\end{array}\rt]}{\lt[\begin{array}{c}2\\ 2\end{array}\rt]}$
+with $x_1\leq 1~\wedge~x_2\geq 0.5$ gives $\zon{\lt[\begin{array}{l
+        l}1 & 0 \\ 0 &
+      1\end{array}\rt]}{\lt[\begin{array}{c}-1\\ -0.5\end{array}\rt]}{\lt[\begin{array}{c}1\\ 2\end{array}\rt]}$.
+The general case is described in the following lemma.
 %
 \begin{lemma}\label{lem:motivation}
-Let $K\in\mat{n}{k}{R}$ such that $k\leq n$ and $\lt(K^TK\rt)$ is
+Let $K\in\mat{k}{n}{R}$ such that $k\leq n$ and $\lt(KK^T\rt)$ is
 non-singular.  Then
 \[
-\zon{K}{l}{u} \bigcap \sptope{\pinv{K}}{\wh{l}}{\wh{u}}
+\zon{\pinv{K}}{l}{u} \bigcap \sptope{K}{\wh{l}}{\wh{u}}
 = \zon{K}{l\bigvee \wh{l}}{u\bigwedge \wh{u}}
 \]
 \end{lemma}
 %
-To incorporate the possibly complex eigenstructure of linear maps
-while computing invariants, the complex zonotope set representation
-and its generalization to the template complex zontope were introduced
-in~\cite{adimoolam2016using,tcz2017}.  A template complex zonotope has
-complex valued vectors as generators, whose combining coefficients are
-complex and bounded in their absolute values.
+To incorporate the possibly complex (having real and imaginary parts)
+eigenstructure of linear maps while computing invariants, the complex
+zonotope set representation and its generalization to the template
+complex zontope were introduced in~\cite{adimoolam2016using,tcz2017}.
+A template complex zonotope has complex valued vectors as generators,
+whose combining coefficients are complex and bounded in their absolute
+values.
 %
 \begin{definition}[Template complex zonotope]
 Let $V\in\mat{n}{m}{\mb{C}}$ (template) and $s\in\mb{R}^m_{\geq 0}$ (scaling factors) and
@@ -88,7 +90,7 @@ template complex zonotopes.
 \begin{definition}
 We define a relation ``$\order$'' between template complex zonotopes
 as\\ $\cz{V^\pr_{n\times m^\pr}}{c^\pr}{s^\pr}\order \cz{V_{n\times
-    m}}{c}{s}$ if all of the following is true.
+    m}}{c}{s}$ if all of the below statements are collectively true.
 \begin{align}~\label{eqn:tcz-inc}
 \begin{split}
 & \exists X\in\mat{m}{m^\pr}{\mb{C}}~\text{and}~y\in\mb{C}^{m}~\text{s.t.}\\
@@ -105,13 +107,10 @@ inclusion $\cz{V^\pr}{c^\pr}{s^\pr}\subseteq \cz{V}{c}{s}$ holds if
 the order relation $\cz{{V^\pr}}{c^\pr}{s^\pr}\order \cz{V}{c}{s}$ holds.
 \end{lemma}
 %
-For fixed $V$ and $V^\pr$,~(\ref{eqn:tcz-inc}) can be equivalently
-described as a set of convex constraints called second order conic
-constraints.  There are many convex optimization tools that can
-efficiently solve second order conic constraints upto a high numerical
-precision.  Linear inequalities and equalities are also a subclass of
-second order conic constraints.  We define a second order conic
-constraint (SOCC) as follows.
+For fixed $V$ and $V^\pr$, we observe that~(\ref{eqn:tcz-inc}) is
+equivalently to as a set of convex constraints called second order
+conic constraints.  We define a second order conic constraint (SOCC)
+as follows.
 %
 \begin{definition}[SOCC]
 A constraint of the form $\|Ax\|_{2}+Fx+b\leq 0$ on an $n$-dimensional
@@ -122,10 +121,14 @@ called a second order conic constraint (SOCC).
    Our aforementioned observation about~(\ref{eqn:tcz-inc}) is
  formalized below.
 %
-\begin{lemma}
-For fixed $V$,$V^\pr$, the partial order $\cz{V^\pr_{n\times
-    m^\pr}}{c^\pr}{s^\pr}\order \cz{V_{n\times m}}{c}{s}$ is
-    equivalent to a set of second order conic constraints on the
-    variables on $c,c^\pr,s,s^\pr,l,l^\pr$ and some additional
-    variables.
+\begin{lemma}~\label{lem:zon-socc}
+For fixed $V$,$V^\pr$, the partial order
+$\cz{V^\pr}{c^\pr}{s^\pr}\order \cz{V}{c}{s}$ is equivalent to a set
+of second order conic constraints on the variables
+$c,c^\pr,s,s^\pr,l,l^\pr$ and some additional variables.
 \end{lemma}
+%
+There are many convex optimization tools that can efficiently solve
+second order conic constraints upto a high numerical precision.  We
+also note that linear inequalities and equalities can be expressed in
+the form of SOCC described above.

@@ -1,26 +1,33 @@
 
 
-In this section, we first derive sufficient conditions for a
-positively invariant augmented complex zonotopes satisfying some
-safety constraints and containing a given initial set.  Latter, we
-explain how we solve the conditions to compute the desired invariant.
-The following lemma gives an overapproximation of its reachable set
-after one transition.
+In this section, we first derive a sufficient condition for positive
+invariance of an augmented complex zonotope.  Also, we state
+conditions for containment of an initial set and satisfaction of
+polytopic safety constraints.  Latter, we explain how find the
+augmented complex zontope based on these conditions.
 
+Earlier, we had computed the linear transformations and Minkowki sums
+of augmented complex zonotope and possible overapproximations of their
+intersection with subparalleotopic constraints.  Accordingly, we can
+compute the overapproximation of the reachable set of an augmented
+complex zonotope as another augmented complex zonotope.  Then, we
+utilize the partial order given in Definition~\ref{defn:gcz-order} to
+  deduce a sufficient condition for positive invariance, as follows.
 %
-\begin{lemma}
+\begin{lemma}[Positive invariance]
   Let us consider a state set $\hybridset:\locationset\ra\realset^n$
   whose projection in each location $\loc\in\locationset$ is
   $\real\lt(\gcz{V(\loc)}{c(\loc)}{s(\loc)}{\pinv{\ptemplate}(\loc)}{l(\loc)}{u(\loc)}\rt)$.
   Let us consider that the additive input for an intralocation
-  transition in any location $\loc\in\locationset$ and an
-  interlocation transition along any edge $\edge\in\edgeset$,
-  respectively, are overapproximated by augmented complex zonotopes as
-  $\inputset(\loc)\subseteq
-  \gcz{V^{in}(\loc)}{c^{in}(\loc)}{s^{in}(\loc)}{W^{in}(\loc)}{l^{in}(\loc)}{u^{in}(\loc)}$
-  and $\inputset(\edge)\subseteq
+  transition in any location $\loc\in\locationset$ is overapproximated
+  as $\inputset(\loc)\subseteq
+  \gcz{V^{in}(\loc)}{c^{in}(\loc)}{s^{in}(\loc)}{W^{in}(\loc)}{l^{in}(\loc)}{u^{in}(\loc)}$.
+  Similarly, let the additive input for an interlocation transition
+  along any edge $\edge\in\edgeset$, be overapproximated as
+  $\inputset(\edge)\subseteq
   \gcz{V^{in}(\edge)}{c^{in}(\edge)}{s^{in}(\edge)}{W^{in}(\edge)}{l^{in}(\edge)}{u^{in}(\edge)}$.
-  Then,
+  The condition for positive invariance of the state set $\hybridset$
+  is described as follows.
 \begin{enumerate}
 \item For any location $\loc\in\locationset$, the inclusion
   $\locationtransition{\loc}\lt(\hybridset(\loc)\rt)\subseteq
@@ -100,9 +107,10 @@ after one transition.
 \end{enumerate}
 \end{lemma}
 %
-Based on the partial order for inclusion between augmented complex
-zonotopes, we state a sufficient condition for the
-positive invariant to contain the initial set.
+Next, we state a sufficient condition for an augmented complex
+zonotopic state set to contain an initial set overapproximated by an
+augmented complex zonotope.  This is just the partial order between
+the augmented complex zonotopes (Lemma~\ref{lem:gcz-gcz}).
 \begin{lemma}
   Let $\mc{I}$ and $\hybridset$ be two state sets whose projections in
   each location $\loc\in\locationset$ are respectively
@@ -118,6 +126,7 @@ positive invariant to contain the initial set.
 %
 For satisfaction of polytopic safety constraints by an augmented
 complex zonotope, the following lemma gives a sufficient condition.
+This is based on the limits derived in Lemma~\ref{lem:polylimits-acz}.
 %
 \begin{lemma}
   Let us consider a state set $\hybridset$ whose projection in each
@@ -133,11 +142,11 @@ complex zonotope, the following lemma gives a sufficient condition.
 T(\loc)\lt(c(\loc)+\pinv{\ptemplate}(\loc)\lt(\frac{u(\loc)+l(\loc)}{2}\rt)\rt)+\lt|T\lt[V(\loc),~\pinv{\ptemplate}(\loc)\rt]\rt|\ColumnJoin{\hspace{1.5em}s}{\frac{u(\loc)-l(\loc)}{2}}\leq d(\loc).
 \end{align}
 \end{lemma}
-
+%
 Consolidating the previous results in this section, we state following
 sufficient condition for positive invariance, along with satisfaction
 of a given set of polytopic safety constraints and containment of an initial set.
-
+%
 \begin{theorem}~\label{thm:main} Let $\hybridset$ be a state set whose
   projection in each location $\loc\in\locationset$ is
   $\hybridset(\loc) = \real\lt(\gcz{V_{n\times
@@ -149,8 +158,48 @@ of a given set of polytopic safety constraints and containment of an initial set
       k^\pr}}{l^I(\loc)}{u^I(\loc)}\rt)$.  Let the polytopic safe set
   be $\safeset:\locationset\ra\realset^n$ described as $\forall
   \loc\in\locationset,~\safeset(\loc)=\polytope{T(\loc)}{d(\loc)}$.
-  The state set $\hybridset$ is a positive invariant satisfying the
-  safety constraints and containing the initial set if $\forall
-  \loc\in\locationset$ and $\forall \edge\in\edgeset$, all of the
-  Equations[\ref{eqn:locinv}-\ref{eqn:safecont}] are satisfied.
+  The state set $\hybridset$ is a positive invariant, satisfies the
+  given safety constraints and contains the given initial set if
+  $\forall \loc\in\locationset$ and $\forall \edge\in\edgeset$, all of
+  the Equations[\ref{eqn:locinv}-\ref{eqn:safecont}] are collectively
+  true.
 \end{theorem}
+
+\tbf{Solving the conditions.}  Firstly, we note that the secondary
+template in a location is predefined as the pseudoinverse of the
+subparallelotopic template in the location, in accordance with
+Theorem~\ref{thm:main}.  Then, we observe that for a fixed primary
+template in each location, the set of
+Equations[\ref{eqn:locinv}-\ref{eqn:safecont}] are equivalent to
+second order conic constraints on the primary offset, upper and lowe
+interval bounds in each location and some additional varaibles.  This
+can be inferred from the~Lemma~\ref{lem:zon-socc}. So, we first fix
+the primary template in each location and solve the aforementioned
+constraints as a convex program.  The choice of the primary template
+is explained below.
+
+\tbf{Refinement of primary template.}  Adding any set of vectors to
+the primary template increases the chance of computing the desired
+invariant, because the scaling factors are adjusted accordingly by the
+optimizer.  However, the computational complexity increases with the
+size of the template.
+
+\tbf{Choosing the primary template.}  We may collect all or some of
+the following vectors in the primary template.
+%
+\begin{enumerate}
+\item Eigenvectors of the transformation matrices of the affine maps
+  of the intralocation and interlocation transitions and also
+  eigenvectors of products of the matrices.  This is because the
+  eigenvectors can capture stable directions of the dynamics.
+\item The primary and secondary templates of the augmented complex
+  zonotopes which overapproimate the additive disturbance input sets.
+  Also, we can incorporate the products of these templates with the
+  affine map linear matrices and their products.  This is because the
+  input set and its transformations are added as Minkowski sum in
+  reachability computation.
+\item Any other vectors based on the discretion of the user can be
+  added.  As remarked earlier, adding any set of vectors to the
+  primary template increases the chance of computing a desired
+  invariant, but at a computational expense.
+\end{enumerate}

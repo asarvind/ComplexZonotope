@@ -46,7 +46,7 @@ many examples of affine hybrid systems, the guards and staying
 conditions can be specified by sub-parallelotopes.
 
 
-\paragraph{Specification.}
+\tbf{Specification.}
 We specify the discrete time affine hybrid system by a tuple 
 %
 \[
@@ -64,7 +64,7 @@ $\stay(\loc)=\lt(\stay^-(\loc),\stay^+(\loc)\rt)\in\mb{R}^n\times\mb{R}^n:
 template $\ptemplate\lt(\loc\rt)$ define the
 sub-parallelotopic staying set
 $\sptope{\ptemplate\lt(\loc\rt)}{\stay^-(\loc)}{\stay^+(\loc)}$ in the
-location.  The maps
+location $\loc$.  The maps
 $\linearmapset:\lt(\locationset\bigcup\edgeset\rt)\ra\mat{n}{n}{R}$
 and $\inputset:\lt(\locationset\bigcup\edgeset\rt)\ra 2^{\mb{R}^n}$,
 respectively, give the linear transfomation and additive input set for
@@ -74,18 +74,18 @@ is $\edgeset$, where $\edge\in\edgeset$ is a tuple $\edge =
 $\preloc{\edge}\in\locationset$ and $\postloc{\edge}\in\locationset$,
 respectively.  The pair of upper and lower bounds
 $\lt(\edge^-,\edge^+\rt)\in\realset^{k\lt(\preloc{\edge}\rt)}\times\realset^{k\lt(\preloc{\edge}\rt)}:~~\edge^-\leq\edge^+$,
-relate to the sub-parallelotopic guard set
+gives the sub-parallelotopic guard set
 $\sptope{\ptemplate\lt(\preloc{\edge}\rt)}{\edge^-}{\edge^+}$, which
 is a precondition on the edge transition.  The affine transition along
-the edge is given by the linear map $\map(\edge)$ and additive
-uncertain input set $\inp(\edge)$.
+the edge is given by the linear map $\map(\edge)$ with the additive
+disturbance input set $\inp(\edge)$.
 
-\paragraph{Dynamics.}
+\tbf{Dynamics.}
 The state of the hybrid system is a pair $(x,\loc)$, where
 $x\in\realset^n$ is called the continuous state and
 $\loc\in\locationset$ is called the discrete state.  The
 evolution of the state of the system in time is called a
-\emph{trajectory}.  The trajectory is a function
+\emph{trajectory} of the system.  The trajectory is a function
 $\systrj{x}{\loc}:\wholenums\ra\realset^n\times\locationset$, such
 that for all $t\in\wholenums$, one of the following is true.
 

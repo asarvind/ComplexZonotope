@@ -77,6 +77,18 @@ SpaceEx tool could not find a finite bound for either of the above
 systems.  The results are reported in the
 Tables~\ref{tab:robot-unsaturated} and~\ref{tab:robot-saturated}.
 
+\tbf{Remarks.}  Although the unsaturated model is linear,
+SpaceEx could not find an invariant with as many as 400 support
+vectors.  In theory, although a linear system has a polytopic
+invariant, but the number of faces of the polytope can be arbitrarily
+large for a fixed dimension if the eigenvalues are complex.  The
+robot model has some complex eigenvalues whose absolute values were
+close to one.  On the other hand, since augmented complex zonotopes
+can incorporate the complex eigenvectors in the template, we are
+guaranteed to find an invariant for the linear (unsaturated) system.
+Futhermore, we could also a safe invariant for the hybrid model of the
+saturated system.
+
 \begin{table}
 \center{UB: $>$1000, ~~NT: Not terminating in more than 180s, \newline
   n/a: Not applicable/not available, ~~ACZ: Augmented complex
@@ -327,6 +339,13 @@ method is significantly smaller than that of the reported result for
 the MPT tool.  The results are summarized in the Tables~\ref{tab:smallinv-pdi}
 and~\ref{tab:largeinv-pdi}.
 
+\tbf{Remark.}  The overapproximation quality of SpaceEx reduces when
+there are large number of possible transitions, because then a union
+of many different polytopes has to be overapproximated using support
+vectors.  In contrast, our approach uses optimization to learn an
+appropriate invariant, avoiding the union operations.  Possibly
+because of this reason, we could verify smaller bounds than SpaceEx,
+for the second coordinate.
 
 
 \subsection{Networked platoon of vehicles}
@@ -396,61 +415,17 @@ even find a finite set of bounds, whereas our approach could verify a
 finite set of bounds.  These results are reported in the
 Tables~\ref{tab:largedwell-platoon} and~\ref{tab:smalldwell-platoon}.
 
-\subsection{Discussion of experimental results}
-We observe that for four out of five experiments,
-i.e. Tables~\ref{tab:robot-unsaturated},~\ref{tab:robot-saturated},~\ref{tab:smallinv-pdi},
-and~\ref{tab:smalldwell-platoon}, where comparison is drawn with
-SpaceEx, our approach produced more accurate results than the latter.
-In terms of computation time, SpaceEx showed better performance only
-if it managed to find an invariant. However, we note that out of the
-five experiments with SpaceEx, only two experiments yeilded an
-invariant.  We have also demonstrated in an experiment on the
-perturbed double integrator that our method can be used to quickly
-compute large invaraint.  Our method took significantly smaller
-computation time than that of the MPT tool.  Furthermore, we draw the
-following inference about the performance of the SpaceEx tool and a
-real zonotope based implementation~\cite{makhlouf2014networked}, and
-the advantage of our approach.
-
-SpaceEx may show good performace for strongly stable systems, i.e.,
-systems that converge quickly to a stable state.  For instance,
-SpaceEx performed well on the networked platoon model with a large
-minimum dwell time ($20s$).  This is because, both the dynamics in the
-locations being stable, the lyapunov exponent (measure of stability)
-tends to be higher for larger dwell times.  But SpaceEx could not
-compute an invariant when the minimum dwell time is small, i.e., $1s$.
-The reason being that in the latter case, the lyapunov exponent could
-be small.  The same reasoning pertains to the case of the real
-zonotope based set simulation~\cite{makhlouf2014networked}, which
-showed better performance when the dwell time is larger.  If the dwell
-time is smaller, then a zonotope based set simulation method would be
-difficult to implement.  Also for high dimensional systems having
-complex (non-real) eigenvalues, it can be difficult to find an
-appropriate polytopic template for which SpaceEx could work well.  For
-instance, SpaceEx with as many as 400 uniformly sampled support
-vectors did not find an invariant for even the linear (unsaturated)
-model of the NXT-robot.  Although in theory, a linear system has a
-polytopic invariant, but the number of faces of such a polytope can be
-arbitrarily large for a fixed dimension.  In case of NXT model, the
-system is 10 dimensional with some eigenvalues whose magnitude is
-close to one and it has complex (with non-negative imaginary part)
-eigenvalues.  This could be the reason even a large number of support
-vectors did not suffice to find the SpaceEx invariant for NXT-robot
-model.
-
-
-In contrast, since our approach can incorporate complex valued vectors
-as generators, we are guaranteed to find finite invaraints for any
-stable linear system by using the eigenvectors as generators.  The
-overapproximation accuracy can, however, be increased by adding more
-generators to the template.  Furthermore, by using the theory for
-computing the intersection of augmented complex zonotopes with
-sub-parallelotopes, we could handle models having linear guards and
-staying conditions.  For instance, the saturated robot and the
-perturbed double integrator models have either linear guards or
-staying conditions.
-
-
-
+\tbf{Remarks.}  The dynamics in both locations being stable, the
+lyapunov exponent (measure of stability) tends to be higher for larger
+dwell time.  Threfore, SpaceEx and the zonotope based approach could
+perform somewhat better than our approach when the minimum dwell time
+is 20s.  But when the minimum dwell time is 1s, SpaceEx failed
+possibly because the lyapunov exponent is smaller in this case.
+However, our approach found an invariant for the smaller minimum dwell
+time case as well.  Besides, we note that the zonotope based approach
+can be difficult to use when the dwell time is smaller because then a
+union of a large number of zonotopes has to be stored or
+overapproximated in each step.  In contrast, our approach avoids the
+union operations and instead formulates an optimization program.
 
 
