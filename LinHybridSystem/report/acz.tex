@@ -4,12 +4,12 @@ complex zonotopic real projection.  Moreover, there is no unique way
 to overapproximate such an intersection as a template complex
 zonotope.  In contrast, we discussed in~Lemma~\ref{lem:motivation}
 that the intersection of a real zonotope with a suitably aligned
-subparallelotope can be a real zonotope.  However, for invariant
-computation, template complex zonotopes have the advantage that they
-can incorporate complex valued eigenvectors in the template, while
-real zonotopes can not.  Therefore, we define a new set
-representation, called augmented complex zonotopes, which combines the
-template complex zonotope and the real zonotope by their Minkowski
+subparallelotope can be a real zonotope.  But for invariant
+computation, template complex zonotopes have the advantage over real
+zonotopes that the former can incorporate complex valued eigenvectors
+in the template, while the latter can not.  Therefore, we define a new
+set representation, called augmented complex zonotopes, which combines
+the template complex zonotope and the real zonotope by their Minkowski
 sum.  Then, the real zonotopic part of the augmented complex zonotope
 can be used to compute the intersections, while the template complex
 zonotopic part can incorporate the complex eigenvectors.
@@ -44,32 +44,32 @@ such that $\ptemplate c=0$.  Then,
 \end{enumerate}
 \end{lemma}
 %
-To illustrate, the intersection of $\gcz{\lt[\begin{array}{cc}1+2i &
-2+i\\1-2i & 2-i\\0 &
-0\end{array}\rt]}{\lt[\begin{array}{c}1\\1\\0\end{array}\rt]}{\lt[\begin{array}{c}1\\1\\1\end{array}\rt]}
-{\lt[\begin{array}{c}0\\0\\1\end{array}\rt]}{-2}{2}$. with a
-constraint on the third coordinate $-1\leq x_3\leq 1$ is exactly\\
-$\gcz{\lt[\begin{array}{cc}1+2i & 2+i\\1-2i & 2-i\\0 &
-0\end{array}\rt]}{\lt[\begin{array}{c}1\\1\\0\end{array}\rt]}{\lt[\begin{array}{c}1\\1\\1\end{array}\rt]}
-{\lt[\begin{array}{c}0\\0\\1\end{array}\rt]}{-1}{1}$.  We observe that
-the center $\lt(\begin{array}{c}1\\1\\0\end{array}\rt)$ is
-perpendicular to the third axis, i.e., the vector
-$\lt[\begin{array}{ccc}0 & 0 & 1\end{array}\rt]$, which is a required
-condition in the above lemma.  Furthermore, since the primary template
-is orthogonal to the subparallelotopic template in this example, i.e.
-$\lt[\begin{array}{ccc}0 & 0 &
-1\end{array}\rt]\lt[\begin{array}{cc}1+2i & 2+i\\1-2i & 2-i\\0 &
-0\end{array}\rt]=0$, the resultant intersection is exactly an
-augmented complex zonotope.  On the other hand, if the primary
-template is not orthogonal with the secondary template, like in the
-case of $\gcz{\lt[\begin{array}{cc}1+2i & 2+i\\1-2i & 2-i\\1 &
-1\end{array}\rt]}{\lt[\begin{array}{c}1\\1\\0\end{array}\rt]}{\lt[\begin{array}{c}1\\1\\1\end{array}\rt]}
-{\lt[\begin{array}{c}0\\0\\1\end{array}\rt]}{-2}{2}$, then the
-intersection with $-1\leq x_3\leq 1$ is overapproximated by
-$\gcz{\lt[\begin{array}{cc}1+2i & 2+i\\1-2i & 2-i\\1 &
-1\end{array}\rt]}{\lt[\begin{array}{c}1\\1\\0\end{array}\rt]}{\lt[\begin{array}{c}1\\1\\1\end{array}\rt]}
-{\lt[\begin{array}{c}0\\0\\1\end{array}\rt]}{-1}{1}$, but this is not
-the exact intersected set.
+%% To illustrate, the intersection of $\gcz{\lt[\begin{array}{cc}1+2i &
+%% 2+i\\1-2i & 2-i\\0 &
+%% 0\end{array}\rt]}{\lt[\begin{array}{c}1\\1\\0\end{array}\rt]}{\lt[\begin{array}{c}1\\1\\1\end{array}\rt]}
+%% {\lt[\begin{array}{c}0\\0\\1\end{array}\rt]}{-2}{2}$. with a
+%% constraint on the third coordinate $-1\leq x_3\leq 1$ is exactly\\
+%% $\gcz{\lt[\begin{array}{cc}1+2i & 2+i\\1-2i & 2-i\\0 &
+%% 0\end{array}\rt]}{\lt[\begin{array}{c}1\\1\\0\end{array}\rt]}{\lt[\begin{array}{c}1\\1\\1\end{array}\rt]}
+%% {\lt[\begin{array}{c}0\\0\\1\end{array}\rt]}{-1}{1}$.  We observe that
+%% the center $\lt(\begin{array}{c}1\\1\\0\end{array}\rt)$ is
+%% perpendicular to the third axis, i.e., the vector
+%% $\lt[\begin{array}{ccc}0 & 0 & 1\end{array}\rt]$, which is a required
+%% condition in the above lemma.  Furthermore, since the primary template
+%% is orthogonal to the subparallelotopic template in this example, i.e.
+%% $\lt[\begin{array}{ccc}0 & 0 &
+%% 1\end{array}\rt]\lt[\begin{array}{cc}1+2i & 2+i\\1-2i & 2-i\\0 &
+%% 0\end{array}\rt]=0$, the resultant intersection is exactly an
+%% augmented complex zonotope.  On the other hand, if the primary
+%% template is not orthogonal with the secondary template, like in the
+%% case of $\gcz{\lt[\begin{array}{cc}1+2i & 2+i\\1-2i & 2-i\\1 &
+%% 1\end{array}\rt]}{\lt[\begin{array}{c}1\\1\\0\end{array}\rt]}{\lt[\begin{array}{c}1\\1\\1\end{array}\rt]}
+%% {\lt[\begin{array}{c}0\\0\\1\end{array}\rt]}{-2}{2}$, then the
+%% intersection with $-1\leq x_3\leq 1$ is overapproximated by
+%% $\gcz{\lt[\begin{array}{cc}1+2i & 2+i\\1-2i & 2-i\\1 &
+%% 1\end{array}\rt]}{\lt[\begin{array}{c}1\\1\\0\end{array}\rt]}{\lt[\begin{array}{c}1\\1\\1\end{array}\rt]}
+%% {\lt[\begin{array}{c}0\\0\\1\end{array}\rt]}{-1}{1}$, but this is not
+%% the exact intersected set.
 
 
 Linear transformations and Minkowski sums preserve the class of

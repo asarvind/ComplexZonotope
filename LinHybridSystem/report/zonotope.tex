@@ -11,7 +11,7 @@ $\polytope{T}{d} = \lt\{x\in\comprealset^k: Tx\leq d\rt\}$.
 \end{definition}
 %
 Usual zonotopes are a sub-class of polytopes, which are geometrically
-Minkowski sums of line segments.They are represented as a linear
+Minkowski sums of line segments.  They are represented as a linear
 combination of real vectors, called \emph{generators}, whose combining
 coefficients are bounded in real valued intervals.
 \begin{definition}[Real zonotope]
@@ -23,14 +23,14 @@ $\zon{W}{l}{u} = \lt\{W\zeta: \zeta\in\mb{R}^k,~\zeta_i\in[l_i,u_i]~\forall i\in
 \end{definition}
 %
 For simple examples of zonotopes like boxes and octagons, efficient
-interconversion between the zonotopic representation and hyperplane
-based polytopic representation is possible.  However, in general,
-zonotopes do not have efficient hyperplane representation as a
-polytope.  The reason is that zonotope with $m$ generators in an $n$
-dimensional space will have ${m}\choose{n}$ faces (bounding
-hyperplanes), if all combinations of $n$ generators are linearly
-independent.  That is, the hyperplane representation of a zonotope can
-be exponentially large compared to the zonotope.
+interconversion between the zonotopic representation and the
+hyperplane based polytopic representation is possible.  However, in
+general, a zonotope does not have an efficient hyperplane
+representation as a polytope.  The reason is that zonotope with $m$
+generators in an $n$ dimensional space will have ${m}\choose{n}$ faces
+(bounding hyperplanes), if all combinations of the $n$ generators are
+linearly independent.  That is, the hyperplane representation of a
+zonotope can be exponentially large compared to the zonotope.
 
 The linear transformations and Minkowski sums of zonotopes are also
 zonotopes, which can be computed efficiently.  Hence, zonotopes are
@@ -41,14 +41,14 @@ zonotope that overapproximates the intersected zonotope with linear
 constraints.  However, we observe that if the linear constraints
 constitute a subparallelotope with a a template aligned with that of
 the zonotope, then the intersection can be exactly computed.  This is
-also the reason we considered the case of subparallelotpic
+also the reason we considered subparallelotpic
 specification of staying conditions and guards in the our formalism of
 an affine hybrid system.  As a simple example, the intersection of
 $\zon{\lt[\begin{array}{l l}1 & 0 \\ 0 &
       1\end{array}\rt]}{\lt[\begin{array}{c}-1\\ -1\end{array}\rt]}{\lt[\begin{array}{c}2\\ 2\end{array}\rt]}$
 with $x_1\leq 1~\wedge~x_2\geq 0.5$ gives $\zon{\lt[\begin{array}{l
         l}1 & 0 \\ 0 &
-      1\end{array}\rt]}{\lt[\begin{array}{c}-1\\ -0.5\end{array}\rt]}{\lt[\begin{array}{c}1\\ 2\end{array}\rt]}$.
+      1\end{array}\rt]}{\lt[\begin{array}{c}-1\\ 0.5\end{array}\rt]}{\lt[\begin{array}{c}1\\ 2\end{array}\rt]}$.
 The general case is described in the following lemma.
 %
 \begin{lemma}\label{lem:motivation}
