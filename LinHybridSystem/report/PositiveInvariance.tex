@@ -24,7 +24,7 @@ utilize the partial order given in Definition~\ref{defn:gcz-order} to
   \gcz{V^{in}(\loc)}{c^{in}(\loc)}{s^{in}(\loc)}{W^{in}(\loc)}{l^{in}(\loc)}{u^{in}(\loc)}$.
   Similarly, let the additive input for an interlocation transition
   along any edge $\edge\in\edgeset$, be overapproximated as
-  $\inputset(\edge)\subseteq
+  $\edgeinp(\edge)\subseteq
   \gcz{V^{in}(\edge)}{c^{in}(\edge)}{s^{in}(\edge)}{W^{in}(\edge)}{l^{in}(\edge)}{u^{in}(\edge)}$.
   The condition for positive invariance of the state set $\hybridset$
   is described as follows.
@@ -82,7 +82,7 @@ utilize the partial order given in Definition~\ref{defn:gcz-order} to
 \end{align}
 \vspace{-1.5em}
 \begin{align}
-& c^\pr(\edge) = \map(\edge)c(\preloc{\edge})+c^{in}(\edge),~~s^\pr(\edge) =
+& c^\pr(\edge) = \edgemap(\edge)c(\preloc{\edge})+c^{in}(\edge),~~s^\pr(\edge) =
   \ColumnJoin{s(\preloc{\edge})}{s^{in}(\edge)}
 \end{align}
 \vspace{-1.5em}
@@ -147,19 +147,21 @@ Consolidating the previous results in this section, we state following
 sufficient condition for positive invariance, along with satisfaction
 of a given set of polytopic safety constraints and containment of an initial set.
 %
-\begin{theorem}~\label{thm:main} Let $\hybridset$ be a state set whose
-  projection in each location $\loc\in\locationset$ is
-  $\hybridset(\loc) = \real\lt(\gcz{V_{n\times
-      m(\loc)}(\loc)}{c(\loc)}{s(\loc)}{\pinv{\ptemplate}(\loc)}{l(\loc)}{u(\loc)}\rt)$.
-  Let the initial set be given as a state set
-  $\mc{I}:~\forall\loc\in\locationset$,
-  $\mc{I}(\loc)=\real\lt(\gcz{V^I_{n\times m^\pr
-  }}{c^I(\loc)}{s^I(\loc)}{W_{n\times
-      k^\pr}}{l^I(\loc)}{u^I(\loc)}\rt)$.  Let the polytopic safe set
-  be $\safeset:\locationset\ra\realset^n$ described as $\forall
-  \loc\in\locationset,~\safeset(\loc)=\polytope{T(\loc)}{d(\loc)}$.
-  The state set $\hybridset$ is a positive invariant, satisfies the
-  given safety constraints and contains the given initial set if
+\begin{theorem}~\label{thm:main} Let us consider that the additive input sets for the intralocation
+  transition in any location $\loc\in\locationset$ and interlocation
+  transition along any edge $\edge\in\edgeset$ be overapproximated as
+  $\inputset(\loc)\subseteq \gcz{V^{in}(\loc)}{c^{in}(\loc)}{s^{in}(\loc)}{W^{in}(\loc)}{l^{in}(\loc)}{u^{in}(\loc)}$
+  and
+  $\edgeinp(\edge)\subseteq \gcz{V^{in}(\edge)}{c^{in}(\edge)}{s^{in}(\edge)}{W^{in}(\edge)}{l^{in}(\edge)}{u^{in}(\edge)}$,
+  respectively.  Let $\hybridset$ be a state set such that for any
+  $\loc\in\locationset$, $\hybridset(\loc)
+  = \real\lt(\gcz{V(\loc)}{c(\loc)}{s(\loc)}{\pinv{\ptemplate}(\loc)}{l(\loc)}{u(\loc)}\rt)$.
+  Let the initial in any lcoation $\loc\in\locationset$ be
+  $\mc{I}(\loc)=\real\lt(\gcz{V^I(\loc)}{c^I(\loc)}{s^I(\loc)}{W}{l^I(\loc)}{u^I(\loc)}\rt)$
+  and polytopic safe set be
+  $\forall \loc\in\locationset,~\safeset(\loc)=\polytope{T(\loc)}{d(\loc)}$.
+  Then the state set $\hybridset$ is a positive invariant, satisfies
+  the given safety constraints and contains the given initial set if
   $\forall \loc\in\locationset$ and $\forall \edge\in\edgeset$, all of
   the Equations[\ref{eqn:locinv}-\ref{eqn:safecont}] are collectively
   true.
