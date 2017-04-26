@@ -125,8 +125,8 @@ the augmented complex zonotopes (Lemma~\ref{lem:gcz-gcz}).
 \end{lemma}
 %
 For satisfaction of polytopic safety constraints by an augmented
-complex zonotope, the following lemma gives a sufficient condition.
-This is based on the limits derived in Lemma~\ref{lem:polylimits-acz}.
+complex zonotope, the following lemma gives a sufficient condition,
+which is based on Lemma~\ref{lem:polylimits-acz}.
 %
 \begin{lemma}
   Let us consider a state set $\hybridset$ whose projection in each
@@ -173,14 +173,17 @@ subparallelotopic template in the location, in accordance with
 Theorem~\ref{thm:main}.  Then, we observe that for a fixed primary
 template in each location, the set of
 Equations[\ref{eqn:locinv}-\ref{eqn:safecont}] are equivalent to
-second order conic constraints on the primary offset, upper and lowe
+second order conic constraints on the primary offset, upper and lower
 interval bounds in each location and some additional varaibles.  This
-can be inferred from the~Lemma~\ref{lem:zon-socc}. So, we first fix
-the primary template in each location and solve the aforementioned
-constraints as a convex program.  The choice of the primary template
-is explained below.
+can be inferred from the~Lemma~\ref{lem:zon-socc} and the fact that
+the min and max approximation functions we defined earlier are
+affine. So, we first fix the primary template in each location and
+solve the aforementioned constraints as a convex program.  The choice
+of the primary template is explained below.  But first, we note that
+the primary template can be soundly refined by adding any set of
+complex vectors.
 
-\tbf{Refinement of primary template.}  Adding any set of vectors to
+\tbf{Refinement of primary template.}  Adding any set of complex vectors to
 the primary template increases the chance of computing the desired
 invariant, because the scaling factors are adjusted accordingly by the
 optimizer.  However, the computational complexity increases with the
@@ -196,10 +199,10 @@ the following vectors in the primary template.
   eigenvectors can capture stable directions of the dynamics.
 \item The primary and secondary templates of the augmented complex
   zonotopes which overapproimate the additive disturbance input sets.
-  Also, we can incorporate the products of these templates with the
-  affine map linear matrices and their products.  This is because the
-  input set and its transformations are added as Minkowski sum in
-  reachability computation.
+  Also, we can incorporate the products of the linear matrices of the
+  affine maps with these templates.  This is because the input set and
+  its transformations are added in reachable set
+  computation.
 \item Any other vectors based on the discretion of the user can be
   added.  As remarked earlier, adding any set of vectors to the
   primary template increases the chance of computing a desired
