@@ -1,5 +1,3 @@
-
-
 In this section, we first derive a sufficient condition for positive
 invariance of an augmented complex zonotope.  Also, we state
 conditions for containment of an initial set and satisfaction of
@@ -179,15 +177,7 @@ can be inferred from the~Lemma~\ref{lem:zon-socc} and the fact that
 the min and max approximation functions we defined earlier are
 affine. So, we first fix the primary template in each location and
 solve the aforementioned constraints as a convex program.  The choice
-of the primary template is explained below.  But first, we note that
-the primary template can be soundly refined by adding any set of
-complex vectors.
-
-\tbf{Refinement of primary template.}  Adding any set of complex vectors to
-the primary template increases the chance of computing the desired
-invariant, because the scaling factors are adjusted accordingly by the
-optimizer.  However, the computational complexity increases with the
-size of the template.
+of the primary template is explained below.
 
 \tbf{Choosing the primary template.}  We may collect all or some of
 the following vectors in the primary template.
@@ -203,8 +193,12 @@ the following vectors in the primary template.
   affine maps with these templates.  This is because the input set and
   its transformations are added in reachable set
   computation.
-\item Any other vectors based on the discretion of the user can be
-  added.  As remarked earlier, adding any set of vectors to the
-  primary template increases the chance of computing a desired
-  invariant, but at a computational expense.
+\item Orthogonal projections of the above vectors on the null
+  space of the subparallelotopic template.  This is because the
+  proposed intersection in Lemma~\ref{lem:acz-int} is exact when the
+  primary template belongs to the null space of the subparallelotopic
+  template.
+\item Adding any set of arbitrary vectors will only increase the chance of computing a desired
+  invariant, but at a computational expense.  This is because the
+  scaling factors will be adjusted accordingly by the optimizer. 
 \end{enumerate}
