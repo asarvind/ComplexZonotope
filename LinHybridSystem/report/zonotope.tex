@@ -1,8 +1,7 @@
 
 Before we introduce augmented complex zonotopes, we briefly review
 related set representations and discuss our motivation for the
-current extension.
-Firstly, we define polytopes in terms of hyperplane representation.
+current extension. First, polytopes can be defined in terms of halfspace representation.
 %
 \begin{definition}
 Let $T\in\mat{n}{k}{\mb{R}}$ and $d\in\mb{R}^k$.  Then a (possibly
@@ -10,8 +9,8 @@ unbounded) polytope, denoted $\polytope{T}{d}$, is defined as
 $\polytope{T}{d} = \lt\{x\in\comprealset^k: Tx\leq d\rt\}$.
 \end{definition}
 %
-Usual zonotopes are a sub-class of polytopes, which are geometrically
-Minkowski sums of line segments.They are represented as a linear
+Usual zonotopes form a sub-class of polytopes, which are geometrically
+Minkowski sums of line segments. They are represented as a linear
 combination of real vectors, called \emph{generators}, whose combining
 coefficients are bounded in real valued intervals.
 \begin{definition}[Real zonotope]
@@ -23,27 +22,24 @@ $\zon{W}{l}{u} = \lt\{W\zeta: \zeta\in\mb{R}^k,~\zeta_i\in[l_i,u_i]~\forall i\in
 \end{definition}
 %
 For simple examples of zonotopes like boxes and octagons, efficient
-interconversion between the zonotopic representation and hyperplane
-based polytopic representation is possible.  However, in general,
-zonotopes do not have efficient hyperplane representation as a
-polytope.  The reason is that zonotope with $m$ generators in an $n$
-dimensional space will have ${m}\choose{n}$ faces (bounding
+interconversion between the zonotopic representation and halfspace polytopic representation is possible.  
+However, in general,
+zonotopes do not have efficient halfspace representation as a
+polytope.  The reason is that a zonotope with $m$ generators in an $n$
+dimensional space has ${m}\choose{n}$ faces (bounding
 hyperplanes), if all combinations of $n$ generators are linearly
-independent.  That is, the hyperplane representation of a zonotope can
-be exponentially large compared to the zonotope.
+independent.  That is, the halfspace representation of a zonotope can
+be exponentially large, compared to the above generator representation. 
 
-The linear transformations and Minkowski sums of zonotopes are also
-zonotopes, which can be computed efficiently.  Hence, zonotopes are
-considered efficient for reachability analysis of linear systems.  But
-the drawback with zonotopes is that the intersection with linear
-constraints need not be a zonotope.  Also, there is no unique smallest
-zonotope that overapproximates the intersected zonotope with linear
-constraints.  However, we observe that if the linear constraints
-constitute a subparallelotope with a a template aligned with that of
-the zonotope, then the intersection can be exactly computed.  This is
-also the reason we considered the case of subparallelotpic
-specification of staying conditions and guards in the our formalism of
-an affine hybrid system.  As a simple example, the intersection of
+Zonotopes are closed under linear transformations and Minkowski sums, which can be computed efficiently.  Hence, zonotopes are
+considered efficient for reachability analysis of linear systems.  Nevertheless
+a major drawback of zonotopes is that their intersection with sets defined by linear
+constraints need not be zonotopes.  Also, there is no unique smallest
+zonotope that overapproximates such intersections.  However, we observe that when the linear constraints
+constitute a sub-parallelotope with a template aligned with that of
+the zonotope, their intersection can be exactly computed.  This is
+also the reason we considered the case of staying conditions and guards specified as sub-parallelotopes 
+in the class of affine hybrid systems under study.  As a simple example, the intersection of
 $\zon{\lt[\begin{array}{l l}1 & 0 \\ 0 &
       1\end{array}\rt]}{\lt[\begin{array}{c}-1\\ -1\end{array}\rt]}{\lt[\begin{array}{c}2\\ 2\end{array}\rt]}$
 with $x_1\leq 1~\wedge~x_2\geq 0.5$ gives $\zon{\lt[\begin{array}{l
@@ -81,7 +77,7 @@ i\in\tup{m}\rt\}.$
 Unlike real zonotopes, a template complex zonotope can have a
 non-polyhedral real projection.  Therefore, in general, checking the
 exact inclusion between two template complex zonotopes amounts to
-solving a non-convex optimization problem, which could be inefficient.
+solving a non-convex optimization problem, which could be computationally intractable.
 Instead, a convex condition was proposed in~\cite{tcz2017}, which is
 sufficient to guarantee the inclusion between template complex
 zonotopes.  Here, we present this condition as a partial order between
