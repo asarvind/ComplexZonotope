@@ -1,0 +1,80 @@
+
+
+For discrete time affine hybrid systems, the eigenvectors of the
+products of linear matrices related to the affine dynamics of
+different subsystems can possibly capture some of the stable
+directions for the overall hybrid dynamics.  As such, for invariant
+computation, template complex zonotopes have the advantage that they
+can include the possibly complex eigenvectors among the generators,
+while usual (real) zonotopes can not.  In an earlier
+work~\cite{tcz2017}, numerically efficiently solvable conditions for
+computing a template complex zonotopic invariant subject to linear
+safety constraints were obtained for a limited class of hybrid
+systems, i.e., having uncontrolled switching.  However, a formidable
+hurdle in extending the approach for more general affine hybrid
+systems, where switching is controlled by linear constraints, is that
+we have to handle the intersection of template complex zonotopes with
+the linear constraints.  In this regard, template complex zonotopes
+share the drawback of usual zonotopes that these classes of sets are
+not closed under intersection with linear constraints.
+
+In this paper, we circumvent this problem as follows.  We observe that
+it is possible to compute or reasonably overapproximate the
+intersection of a template complex zonotope with a class of linear
+constraints, called subparallelotpic, by appropriately choosing the
+template of the complex zonotope.  We use a slightly more general set
+representation, called augmented complex zonotope, with which the
+intersection operation can be succinctly presented.  Geometrically
+speaking, augmented complex zonotopes and template complex zonotopes
+describe the same classes of sets in terms of their real valued
+projections.  However, it is easier and more succinct, using the
+representation of an augmented complex zonotope instead of a template
+complex zonotope, to represent the resultant intersection with linear
+constraints.  Then, we derive a numerically efficiently solvable
+sufficient condition for computing an augmented complex zonotopic
+invaraint satisfying linear safety constraints, for a discrete time
+affine hybrid system with subparallelotopic switching constraints and
+bounded additive disturbance input.  The sufficient condition is
+expressed as a set of second order conic constraints.  We also note
+that the class of sub-parallelotopic constraints that we consider are
+quite general and can be used in the specification of many examples
+affine hybrid systems.  We implemented our approach on three benchmark
+examples from literature and compared the results with that of the
+SpaceEx tool on the same discrete time models, and also the reported
+benchmark results from literature.  In some experiments, we could
+verify finite safety bounds when SpaceEx could not even find an
+invariant. In other experiments, we could verify competitive safety
+bounds.  Also, our computation time is quite reasonable in all the
+experiments, depending on the size of the specification.
+
+The rest of the paper is organized as follows.  Firstly, we explain
+some of the mathematical notation used in this paper.  Then in
+Section~\ref{sec:system}, we describe the model of a discrete time
+affine hybrid system, controlled by sub-parallelotopic switching
+conditions and having a bounded additive disturbance input.  In
+Section~\ref{sec:review}, we review some existing set representations
+before presenting augmented complex zonotopes.  In
+Section~\ref{sec:acz}, we present the set representaion of augmented
+complex zonotopes and discuss some important operations and relations
+like intersection with sub-parallelotopic constraints, projection in
+any direction, linear transformation, Minkowski sum and inclusion.  In
+Section~\ref{sec:invcomp}, we derive a set of second order conic
+constraints to compute an augmented complex zonotopic invariant,
+satisfying linear safety constraints and containing an initial set.
+Furthermore, we explain how to choose the template.  In
+Section~\ref{sec:exp}, we discuss the experimental results.  The
+conclusion and future work are given in
+Section~\ref{sec:conclusion}.  We annex the proofs of the lemmas
+presented in the paper as an Appendix.
+
+{\bf Notation.} Some of the notations used in this paper, for which we
+consider explanation may be required, is described below.  If $S$ is a
+set of complex numbers, then $real(S)$ represents the real projection
+of $S$.  If $z$ is a complex number, then $|z|$ denotes the absolute
+value of $z$.  On the other hand, if $X$ is a complex matrix, then $\lt|X\rt|$ denotes
+the matrix containing the absolute values of the elements of $X$.  The
+diagonal square matrix containing the entries of a complex vector $z$
+along the diagonal is denoted by $\dg(z)$.  Let
+$K\in\mat{k}{n}{\realset}$ such that $k\leq n$ and $KK^T$ is
+non-singular.  Then, we denote $\pinv{K}=K^T\lt(KK^T\rt)^{-1}$,
+which is the pseudo-inverse of $K$.

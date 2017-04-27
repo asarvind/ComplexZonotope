@@ -56,16 +56,17 @@ We consider discrete-time affine hybrid systems defined by a tuple
 %
 Here, $\locationset$ is a finite set of locations.  For each location
 $\loc\in\locationset$, a sub-parallelotopic template
-$\ptemplate(\loc)\in\mat{k(q)}{n}{\realset}$ is used for defining the
+$\ptemplate(\loc)\in\mat{k(q)}{n}{\realset}$, i.e.,
+$\ptemplate(\loc)\lt(\ptemplate(\loc)\rt)^T$ is non-singular, and
+$k(q)$ is the number of rows of the template, is used for defining the
 staying conditions and the guards on edges emanating from the
-location.  A pair of upper and lower bounds
-$\stay(\loc)=\lt(\stay^-(\loc),\stay^+(\loc)\rt)\in\mb{R}^n\times\mb{R}^n:
+location.  Then, a pair of upper and lower bounds
+$\stay(\loc)=\lt(\stay^-(\loc),\stay^+(\loc)\rt)\in\mb{R}^{k(q)}\times\mb{R}^{k(q)}:
 ~~\stay^-(\loc)\leq\stay^+(\loc)$ together with the sub-parallelotopic
-template $\ptemplate\lt(\loc\rt)$ define the sub-parallelotopic
-staying set
-$\sptope{\ptemplate\lt(\loc\rt)}{\stay^-(\loc)}{\stay^+(\loc)}$ in the
-location $\loc$.  The maps
-$\linearmapset:\locationset\ra\mat{n}{n}{R}$ and
+template define the sub-parallelotopic staying set in a location
+$\loc$ as
+$\sptope{\ptemplate\lt(\loc\rt)}{\stay^-(\loc)}{\stay^+(\loc)}$.  The
+maps $\linearmapset:\locationset\ra\mat{n}{n}{R}$ and
 $\inputset:\locationset\ra 2^{\mb{R}^n}$, respectively, give the
 linear transfomation and additive input set for all intralocation
 transitions.  The set of edges is $\edgeset$, where $\edge\in\edgeset$
@@ -78,7 +79,7 @@ gives the sub-parallelotopic guard set
 $\sptope{\ptemplate\lt(\preloc{\edge}\rt)}{\edge^-}{\edge^+}$, which
 is a precondition on the edge transition.  The maps
 $\edgemap:\edgeset\ra\mat{n}{n}{R}$ and $\edgeinp:\edgeset\ra
-2^{\mb{R}^n}$, respectively, give the linear transfomation and
+2^{\mb{R}^n}$, respectively, give the linear transfomation and the
 additive input set for all edge (interlocation) transitions.
 
 \tbf{Dynamics.}
@@ -114,22 +115,19 @@ that all of the following are collectively true.}\\
 \end{align}
 \end{enumerate}
 
-The set of reachable continuous states in one step of
-intralocation and interlocation dynamics, respectively, from a given
-set of continuous states is given by the following two functions.
-\begin{enumerate}
-\item For any location $\loc\in\locationset$, define $\locationtransition{\loc}:2^{\realset^n}\ra 2^{\realset^n}$ as
-\begin{equation*}
-\locationtransition{q}\lt(S\rt) = \lt\{\Calign{\lt(\map\lt(\loc\rt)\lt(S\bigcap\staysptope{\loc}\rt)\oplus
-\inputset\lt(\loc\rt)\rt)}{~~\bigcap~~\staysptope{\loc}}\rt..
-\end{equation*}
-\item For any edge $\edge\in\edgeset$, define
-  $\edgetransition{\edge}:2^{\realset^n}\ra 2^{\realset^n}$ as
-\begin{multline*}
-\edgetransition{\edge}\lt(S\rt) =  \lt\{\Calign{\lt(\edgemap(\edge)\lt(S\bigcap
+Given a set of continuous states $S\in\realset^n$, we compute the set
+of reachable continuous states in the next time step of intralocation transition
+in a location $\loc\in\locationset$ or interlocation transition along
+an edge $\edge\in\edgeset$, by the functions
+$\locationtransition{\loc}:2^{\realset^n}\ra 2^{\realset^n}$ or
+$\edgetransition{\edge}:2^{\realset^n}\ra 2^{\realset^n}$,
+respectively, defined as
+\begin{align*}
+&\locationtransition{q}\lt(S\rt) = \lt\{\Calign{\lt(\map\lt(\loc\rt)\lt(S\bigcap\staysptope{\loc}\rt)\oplus
+\inputset\lt(\loc\rt)\rt)}{~~\bigcap~~\staysptope{\loc}}\rt..\\
+&\edgetransition{\edge}\lt(S\rt) =  \lt\{\Calign{\lt(\edgemap(\edge)\lt(S\bigcap
 \guardsptope{\edge}\rt)\oplus\edgeinp(\edge)\rt)}{~~\bigcap~~\staysptope{\postloc{\edge}}}\rt..
-\end{multline*}
-\end{enumerate}
+\end{align*}
 
 We shall identify a set of states by a mapping of the kind
 $\hybridset:\locationset\ra 2^{\realset^n}$, called a \emph{state

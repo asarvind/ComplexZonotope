@@ -80,7 +80,7 @@ exact inclusion between two template complex zonotopes amounts to
 solving a non-convex optimization problem, which could be computationally intractable.
 Instead, a convex condition was proposed in~\cite{tcz2017}, which is
 sufficient to guarantee the inclusion between template complex
-zonotopes.  Here, we present this condition as a partial order between
+zonotopes.  Here, we present this condition as a relation between
 template complex zonotopes.
 %
 \begin{definition}
@@ -96,11 +96,10 @@ as\\ $\cz{V^\pr_{n\times m^\pr}}{c^\pr}{s^\pr}\order \cz{V_{n\times
 \end{align}
 \end{definition}
 %
-\begin{lemma}[Ordering: template complex
-  zonotopes]~\label{lem:zon-zon} The relation ``$\order$'' among
-template complex zonotopes is a partial order.  Furthermore, the
+\begin{lemma}[Inclusion: template complex
+  zonotopes]~\label{lem:zon-zon} The
 inclusion $\cz{V^\pr}{c^\pr}{s^\pr}\subseteq \cz{V}{c}{s}$ holds if
-the order relation $\cz{{V^\pr}}{c^\pr}{s^\pr}\order \cz{V}{c}{s}$ holds.
+the relation $\cz{{V^\pr}}{c^\pr}{s^\pr}\order \cz{V}{c}{s}$ is true.
 \end{lemma}
 %
 For fixed $V$ and $V^\pr$, we observe that~(\ref{eqn:tcz-inc}) is
@@ -114,8 +113,9 @@ variable $x$, given $A,F\in\mat{n}{k}{\realset}$ and $b\in\mb{R}^k$, is
 a second order conic constraint.
 \end{definition}
 %
-   Our aforementioned observation about~(\ref{eqn:tcz-inc}) is
- formalized below.
+We also note that linear inequalities and equalities can be expressed
+in the form of SOCC described above.  Our aforementioned observation
+about~(\ref{eqn:tcz-inc}) is formalized below.
 %
 \begin{lemma}~\label{lem:zon-socc}
 For fixed $V$,$V^\pr$, the partial order
@@ -125,6 +125,4 @@ $c,c^\pr,s,s^\pr,l,l^\pr$ and some additional variables.
 \end{lemma}
 %
 There are many convex optimization tools that can efficiently solve
-SOCC upto a high numerical precision.  We
-also note that linear inequalities and equalities can be expressed in
-the form of SOCC described above.
+SOCC upto a high numerical precision.  
