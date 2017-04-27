@@ -25,14 +25,14 @@ transformation, the dynamics of the system is given as $
 \lt[\begin{array}{cc}\trj{x}{t+1} &
     \trj{y}{t+1}\end{array}\rt]^T=F_1\trj{x}{t}+F_2sat\lt(\trj{y}{t}\rt)+F_3\trj{u}{t}.$
 where the matrices $F_1$, $F_2$ and $F_3$ are given above the
-Table~\ref{tab:robot-saturated}. $\trj{x}{t}\in\realset^8$ is the
-transformed state of the system and controller together,
-$\trj{y}{t}\in\realset^2$ is the transformed inputs transmitted by the
+Table~\ref{tab:robot-saturated}, $\trj{x}{t}\in\realset^8$ is the
+transformed state of the composite system,
+$\trj{y}{t}\in\realset^2$ is the input sent by the
 controller, $\trj{u}{t}\in\realset^4$ is the additive disturbance
-input and $sat$ is the saturation function which limits the controller
+input and $sat$ is the saturation function which limits
 input received by the plant, as follows.  For the saturated system,
 $sat\lt(y_i\rt) = max\lt(-\delta d_p,min\lt(u_i,v_i\rt)\rt),~\forall
-i\in\{1,2\}$, where $\delta=100$ and $d_p=0.0807$.  But for the
+i\in\{1,2\}$, where $\delta=100$ and $d_p=0.0807$.  For the
 unsaturated system, $sat\lt(y_i\rt)=y_i~\forall i\in\{1,2\}$.
 %
 
@@ -78,18 +78,18 @@ unsaturated system, $sat\lt(y_i\rt)=y_i~\forall i\in\{1,2\}$.
 %% \end{align*}}
 %% \normalsize
 
-The satruated system state space can be divided into nine different
-regions such that the system exhibits different affine dynamics in
-different regions.  Therefore, the saturated sampled data system can
-be seen as a discrete time affine hybrid system.  But the unsaturated
-system has just one affine dynamics and is not a hybrid system.  We
-model the saturated system using one location and nine self edges,
-corresponding to the nine different affine dynamics in different
-regions, which are specified by the guards on the edges.  The
-unsaturated system is modeled with one location and no edges such that
-the only dynamics is part of the intralocation affine dynamics.  The
-same discrete time models are specified in SpaceEx for comparison of
-performace.
+The state space of the satruated system can be divided into nine
+different regions such that the system exhibits different affine
+dynamics in different regions.  Therefore, the saturated sampled data
+system can be seen as a discrete time affine hybrid system.  On the
+other hand, the unsaturated system has just one affine dynamics and is
+not a hybrid system.  We model the saturated system using one location
+and nine self edges, corresponding to the nine different affine
+dynamics in different regions, which are specified by the guards on
+the edges.  The unsaturated system is modeled with one location and no
+edges such that the only dynamics is part of the intralocation affine
+dynamics.  The same discrete time models are specified in SpaceEx for
+comparison of performace.
 
 \tbf{Size of unsaturated model}: 10 dimensional, 1 location, 0 edges.
 
@@ -125,17 +125,15 @@ SpaceEx tool could not find a finite bound for either of the above
 systems.  The results are reported in the
 Tables~\ref{tab:robot-unsaturated} and~\ref{tab:robot-saturated}.
 
-\tbf{Remarks.}  In theory, although a linear system (without hybrid
-dynamics) has a polytopic invariant, but the number of faces of the
-polytope can be arbitrarily large for a fixed dimension if the
-eigenvalues are complex.  The robot model has some complex eigenvalues
-whose absolute values were close to one.  This is possibly the reason
-SpaceEx could not find an invariant, even for the unsaturated system
-with as many as 400 support vectors.  On the other hand, since
-augmented complex zonotopes can incorporate the complex eigenvectors
-in the template, we are guaranteed to find an invariant for the
-unsaturated system.  Futhermore, we could also find a safe
-invariant for the hybrid (saturated) system.
+\tbf{Remarks.}  We note that although in theory, a linear system has a
+polytopic invariant, but the number of faces of such a polytope can be
+arbitrarily large for any fixed dimension.  In our unsaturated model
+which is linear, some of the eigenvalues are complex and their
+magnitudes are close to one.  Possibly, this is the reason SpaceEx
+could not find an invariant even with 400 support vectors.  But, since
+in our approach we use the complex eigenstructure, we could find the
+desired invariant for the unsaturated (linear) model.  Furthermore, we
+we also computed the invariant for the saturated (hybrid) model.
 
 \begin{table}
 \center{UB: $>$1000, ~~NT: Not terminating in more than 180s, \newline
@@ -589,13 +587,13 @@ method is significantly smaller than that of the reported result for
 the MPT tool.  The results are summarized in the
 Tables~\ref{tab:smallinv-pdi} and~\ref{tab:largeinv-pdi}.
 
-\tbf{Remark.}  The overapproximation quality of SpaceEx reduces when
-there are large number of edges, because then in each step, a union of
-many different polytopes has to be overapproximated using support
-vectors.  In contrast, our approach uses optimization to learn an
-appropriate invariant, avoiding the union operations.  Possibly
-because of this reason, we verified smaller bounds than SpaceEx on
-this example.
+%% \tbf{Remark.}  The overapproximation quality of SpaceEx reduces when
+%% there are large number of edges, because then in each step, a union of
+%% many different polytopes has to be overapproximated using support
+%% vectors.  In contrast, our approach uses optimization to learn an
+%% appropriate invariant, avoiding the union operations.  Possibly
+%% because of this reason, we verified smaller bounds than SpaceEx on
+%% this example.
 
 \subsection{Networked platoon of vehicles}
 Our third example is a model of a networked cooperative platoon of
@@ -659,19 +657,19 @@ even find a finite set of bounds, whereas our approach could verify a
 finite set of bounds.  These results are reported in the
 Table~\ref{tab:largedwell-platoon}.
 
-\tbf{Remarks.}  The dynamics in both locations being stable, the
-lyapunov exponent (measure of stability) tends to be higher in case of
-slow switching.  Possibly because of this, SpaceEx perfomed well for
-the slow switching case, but could not find an invariant for the fast
-switching case.  For the real zonotope
-approach~\cite{makhlouf2014networked}, we note that the number of
-zonotopes whose union has to be computed in each step increases  with
-faster switching.  Therefore, although the aproach performed well in
-case of slow switching, it may not be applicable to the case of fast
-switching.  In contrast, our approach
-avoids the union operations and instead formulates an optimization
-program.  Unlike SpaceEx, we verified finite bounds for the case of
-fast switching.
+%% \tbf{Remarks.}  The dynamics in both locations being stable, the
+%% lyapunov exponent (measure of stability) tends to be higher in case of
+%% slow switching.  Possibly because of this, SpaceEx perfomed well for
+%% the slow switching case, but could not find an invariant for the fast
+%% switching case.  For the real zonotope
+%% approach~\cite{makhlouf2014networked}, we note that the number of
+%% zonotopes whose union has to be computed in each step increases  with
+%% faster switching.  Therefore, although the aproach performed well in
+%% case of slow switching, it may not be applicable to the case of fast
+%% switching.  In contrast, our approach
+%% avoids the union operations and instead formulates an optimization
+%% program.  Unlike SpaceEx, we verified finite bounds for the case of
+%% fast switching.
 
 
 

@@ -1,18 +1,13 @@
-Since a complex zonotope can have a non-polyhedral real projection,
-its intersection with a linear constraint may not have a template
-complex zonotopic real projection.  Moreover, there is no unique way
-to overapproximate such an intersection as a template complex
-zonotope.  In contrast, we discussed in~Lemma~\ref{lem:motivation}
-that the intersection of a real zonotope with a suitably aligned
-subparallelotope can be a real zonotope.  But for invariant
-computation, template complex zonotopes have the advantage over real
-zonotopes that the former can incorporate complex valued eigenvectors
-in the template, while the latter can not.  Therefore, we define a new
-set representation, called augmented complex zonotopes, which combines
-the template complex zonotope and the real zonotope by their Minkowski
-sum.  Then, the real zonotopic part of the augmented complex zonotope
-can be used to compute the intersections, while the template complex
-zonotopic part can incorporate the complex eigenvectors.
+We introduce an augmented complex zonotope, which is a slightly more
+general set representation than a template complex zonotope.  An
+augmented complex zonotope is the Minkowski sum of a template complex
+zonotope and a real zonotope.  Geometrically, the sets that can be
+described as real projections of augmented complex zonotopes can also
+be described as real projections of template complex zonotopes.  But
+with augmented complex zonotopes, the intersection with
+subparallelotopic constraints can be succinctly specified, as we will
+see latter.  Threfore, it will be more convenient to derive conditions
+for positive invariance based on augmented complex zonotopes.
 %
 \begin{definition}[Augmented complex zonotope]
 Let $V\in\mat{n}{m}{C}$ called primary template, $W\in\mat{n}{k}{R}$
@@ -97,12 +92,7 @@ Let $V\in\mat{n}{m}{\mb{C}}$ and $v\in\realset^n$.  Then,
 %
 The real projection of an augmented complex zonotope can be
 equivalently tranformed as the real projection of a template complex
-zonotope, as follows.  However, we note that as a complex valued set,
-an augmented complex zonotope is more general and can not be
-represented as a template complex zonotope.  Furthermore, the
-representation as an augmented complex zonotope is more succinct,
-hence, more convenient for deriving the conditions for invariant
-computation.
+zonotope, as follows.
 %
 \begin{lemma}~\label{lem:conversion}
 $\real\lt(\gcz{V}{c}{s}{W}{l}{u}\rt) = \real\lt(\cz{\lt[V~W\rt]}{c+W\lt(\frac{u+l}{2}\rt)}{\ColumnJoin{s}{\frac{u-l}{2}}}\rt)$.
@@ -111,9 +101,9 @@ $\real\lt(\gcz{V}{c}{s}{W}{l}{u}\rt) = \real\lt(\cz{\lt[V~W\rt]}{c+W\lt(\frac{u+
 Because of the above relationship, checking the inclusion between the
 real projections of two augmented complex zonotopes amounts to
 checking the inclusion between real projections of two template
-complex zonotopes.  Recall the partial order between two template
-complex zonotopes defined in the previous section. We extend this
-partial order to augmented complex zonotopes as follows.
+complex zonotopes.  Recall the relation between template complex
+zonotopes that was a sufficient condition for inclusion.  We extend
+the relation to augmented complex zonotopes as follows.
 %
 \begin{definition}~\label{defn:gcz-order}
 We say that $\gcz{V^\pr}{c^\pr}{s^\pr}{W^\pr}{l^\pr}{u^\pr}\order
@@ -122,27 +112,22 @@ We say that $\gcz{V^\pr}{c^\pr}{s^\pr}{W^\pr}{l^\pr}{u^\pr}\order
 \cz{\lt[V~W\rt]}{c+W\lt(\frac{u+l}{2}\rt)}{\ColumnJoin{s}{\frac{u-l}{2}}}.$
 \end{definition}
 %
-\begin{lemma}[Ordering: augmented complex
-    zonotopes]~\label{lem:gcz-gcz} The relation ``$\order$'' among
-augmented complex zonotopes is a partial order.  Furthermore, the real
-inclusion\\
+\begin{lemma}[Inclusion: augmented complex
+    zonotopes]~\label{lem:gcz-gcz} The real inclusion\\
 $\real\lt(\gcz{V^\pr}{c^\pr}{s^\pr}{W^\pr}{l^\pr}{u^\pr}\rt)\subseteq \real\lt(\gcz{V}{c}{s}{W_{n\times
-k}}{l}{u}\rt)$ holds if the order relation
+k}}{l}{u}\rt)$ holds if the relation\\
 $\gcz{V^\pr}{c^\pr}{s^\pr}{W^\pr}{l^\pr}{u^\pr}\order \gcz{V}{c}{s}{W_{n\times
-k}}{l}{u}$ holds.
+k}}{l}{u}$ is true.
 \end{lemma}
 
 The intersection of an augmented complex zonotope with a
 subparallelotope involves the meet and join operations, as stated in
 Lemma~\ref{lem:acz-int}.  These operations are piecewise affine
 functions of their arguments, but not affine.  Hence, their
-composition with a convex function may be non-convex.  But in the case
-of affine hybrid systems, the guards and staying conditions define the
-limits on the interval bounds of a sub-parallelotope.  Therefore,
-during invaraint computation, we may overapproximate the intersections
-using the provided by the staying conditions and guards.  Formally, we
-define the following upper and lower bound functions for the join and
-meet operations, respectively.
+composition with a convex function may be non-convex.  But since we
+are interested in deriving convex conditions for finding an invariant,
+in this regard, we define the following upper and lower bound
+functions for the join and meet operations, respectively.
 
 Let us define a binary function
 $\minaffinefunc:\realset^k\times\comprealset^k$,
