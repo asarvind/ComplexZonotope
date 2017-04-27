@@ -23,59 +23,60 @@ among the bounded directions.  We do not explain the transformation
 here because it is beyond the scope of this paper.  After such
 transformation, the dynamics of the system is given as $
 \lt[\begin{array}{cc}\trj{x}{t+1} &
-    \trj{y}{t+1}\end{array}\rt]^T=A_1\trj{x}{t}+A_2sat\lt(\trj{y}{t}\rt)+B\trj{u}{t},$
-where $\trj{x}{t}\in\realset^8$ is the transformed state of the system
-and controller together, $\trj{y}{t}\in\realset^2$ is the transformed
-inputs transmitted by the controller, $\trj{u}{t}\in\realset^4$ is the
-additive disturbance input and $sat$ is the saturation function which
-limits the controller input received by the plant, as follows.  For
-the saturated system, $sat\lt(y_i\rt) = max\lt(-\delta
-d_p,min\lt(u_i,v_i\rt)\rt),~\forall i\in\{1,2\}$, where $\delta=100$ and
-$d_p=0.0807$.  But for the unsaturated system,
-$sat\lt(y_i\rt)=y_i~\forall i\in\{1,2\}$.
+    \trj{y}{t+1}\end{array}\rt]^T=F_1\trj{x}{t}+F_2sat\lt(\trj{y}{t}\rt)+F_3\trj{u}{t}.$
+where the matrices $F_1$, $F_2$ and $F_3$ are given above the
+Table~\ref{tab:robot-saturated}. $\trj{x}{t}\in\realset^8$ is the
+transformed state of the system and controller together,
+$\trj{y}{t}\in\realset^2$ is the transformed inputs transmitted by the
+controller, $\trj{u}{t}\in\realset^4$ is the additive disturbance
+input and $sat$ is the saturation function which limits the controller
+input received by the plant, as follows.  For the saturated system,
+$sat\lt(y_i\rt) = max\lt(-\delta d_p,min\lt(u_i,v_i\rt)\rt),~\forall
+i\in\{1,2\}$, where $\delta=100$ and $d_p=0.0807$.  But for the
+unsaturated system, $sat\lt(y_i\rt)=y_i~\forall i\in\{1,2\}$.
 %
 
-{\scriptsize 
-\begin{align*}
-& A_1  = \lt[\begin{matrix}
-3.6929   &      0  &  0.7302  &  7.9715 &  14.5019 &   -0.0072 &
-0.0720 &   -2.7354\\
-    3.6929   &      0  &  0.7302  &  7.9715 &  14.5019 &  -0.0072  &  0.0720  & -2.7354\\
-    0.9562    &     0  &  0.0019 &  -0.0021 &  -0.0022 &   -0.0000 &  -0.0001 &  -0.0002\\
-         0 &   0.6910    &     0    &     0  &       0     &    0   &      0    &     0\\
-    0.8833     &    0  & -0.1154 &  -1.2943 &  -2.3520  &  0.0012 &  -0.0118  &  0.4427\\
-   -0.4712    &     0 &  -0.0812 &    0.1151  & -1.4845  &  0.0007 &  -0.0071  &  0.2819\\
-   -0.1560     &    0 &  -0.0459 &  -0.3173  &  0.3650  &  0.0003  & -0.0023  &  0.1162\\
-   -0.7719   &      0 &  -0.1248  & -1.4264 &  -2.5901  &  0.9973 &  -0.0131  &  0.4869\\
-   -0.7544  &       0  & -0.1243 &  -1.4204 &  -2.5792  &  0.0013 &   0.9825 &   0.4796\\
-   -0.1905   &      0  & -0.0148  & -0.2081 &  -0.3751  &  0.0002  &  0.0033  &  1.0651
-\end{matrix}\rt]\\
-& A_2 = \lt[\begin{matrix}
-0.2543  &  0.2543\\
-    0.2543  &  0.2543\\
-   -0.0001 &  -0.0001\\
-         0 &        0\\
-   -0.0413 &  -0.0413\\
-    0.0219  &  0.0219\\
-    0.0102 &   0.0102\\
-    0.0431 &   0.0431\\
-    0.0428 &   0.0428\\
-    0.0065 &   0.0065\\
-\end{matrix}\rt],
-~B = 10^{-2}\times\lt[\begin{matrix}
- 0.0000    &     0  & -0.0330 &   2.0218\\
-    0   &      0  & -0.0330 &  -2.0218\\
-    0  &       0 &   -0  &  0\\
-   -0  &       0  &  0 &   0.0109\\
-   -0.0118 &        0  &  0.0172  &  0 \\
-    0.0436  &       0 &   0.0003 &  0 \\
-   -0.0478   &      0  &  0.0034 &   0 \\
-  -13.3924 &        0 &   0.0062 &   0 \\
-    0.0909     &    0  &  0.0061 &  0\\
-   -0.0798  &       0 &   0.0017  &  0\\
-\end{matrix}\rt]
-\end{align*}}
-\normalsize
+%% {\scriptsize 
+%% \begin{align*}
+%% & A_1  = \lt[\begin{matrix}
+%% 3.6929   &      0  &  0.7302  &  7.9715 &  14.5019 &   -0.0072 &
+%% 0.0720 &   -2.7354\\
+%%     3.6929   &      0  &  0.7302  &  7.9715 &  14.5019 &  -0.0072  &  0.0720  & -2.7354\\
+%%     0.9562    &     0  &  0.0019 &  -0.0021 &  -0.0022 &   -0.0000 &  -0.0001 &  -0.0002\\
+%%          0 &   0.6910    &     0    &     0  &       0     &    0   &      0    &     0\\
+%%     0.8833     &    0  & -0.1154 &  -1.2943 &  -2.3520  &  0.0012 &  -0.0118  &  0.4427\\
+%%    -0.4712    &     0 &  -0.0812 &    0.1151  & -1.4845  &  0.0007 &  -0.0071  &  0.2819\\
+%%    -0.1560     &    0 &  -0.0459 &  -0.3173  &  0.3650  &  0.0003  & -0.0023  &  0.1162\\
+%%    -0.7719   &      0 &  -0.1248  & -1.4264 &  -2.5901  &  0.9973 &  -0.0131  &  0.4869\\
+%%    -0.7544  &       0  & -0.1243 &  -1.4204 &  -2.5792  &  0.0013 &   0.9825 &   0.4796\\
+%%    -0.1905   &      0  & -0.0148  & -0.2081 &  -0.3751  &  0.0002  &  0.0033  &  1.0651
+%% \end{matrix}\rt]\\
+%% & A_2 = \lt[\begin{matrix}
+%% 0.2543  &  0.2543\\
+%%     0.2543  &  0.2543\\
+%%    -0.0001 &  -0.0001\\
+%%          0 &        0\\
+%%    -0.0413 &  -0.0413\\
+%%     0.0219  &  0.0219\\
+%%     0.0102 &   0.0102\\
+%%     0.0431 &   0.0431\\
+%%     0.0428 &   0.0428\\
+%%     0.0065 &   0.0065\\
+%% \end{matrix}\rt],
+%% ~B = 10^{-2}\times\lt[\begin{matrix}
+%%  0.0000    &     0  & -0.0330 &   2.0218\\
+%%     0   &      0  & -0.0330 &  -2.0218\\
+%%     0  &       0 &   -0  &  0\\
+%%    -0  &       0  &  0 &   0.0109\\
+%%    -0.0118 &        0  &  0.0172  &  0 \\
+%%     0.0436  &       0 &   0.0003 &  0 \\
+%%    -0.0478   &      0  &  0.0034 &   0 \\
+%%   -13.3924 &        0 &   0.0062 &   0 \\
+%%     0.0909     &    0  &  0.0061 &  0\\
+%%    -0.0798  &       0 &   0.0017  &  0\\
+%% \end{matrix}\rt]
+%% \end{align*}}
+%% \normalsize
 
 The satruated system state space can be divided into nine different
 regions such that the system exhibits different affine dynamics in
@@ -137,7 +138,49 @@ unsaturated system.  Futhermore, we could also find a safe
 invariant for the hybrid (saturated) system.
 
 \begin{table}
-\vspace{-2em}
+\center{UB: $>$1000, ~~NT: Not terminating in more than 180s, \newline
+  n/a: Not applicable/not available, ~~ACZ: Augmented complex
+  zonotope.}
+{\scriptsize 
+\begin{align*}
+& F_1  = \lt[\begin{matrix}
+3.6929   &      0  &  0.7302  &  7.9715 &  14.5019 &   -0.0072 &
+0.0720 &   -2.7354\\
+    3.6929   &      0  &  0.7302  &  7.9715 &  14.5019 &  -0.0072  &  0.0720  & -2.7354\\
+    0.9562    &     0  &  0.0019 &  -0.0021 &  -0.0022 &   -0.0000 &  -0.0001 &  -0.0002\\
+         0 &   0.6910    &     0    &     0  &       0     &    0   &      0    &     0\\
+    0.8833     &    0  & -0.1154 &  -1.2943 &  -2.3520  &  0.0012 &  -0.0118  &  0.4427\\
+   -0.4712    &     0 &  -0.0812 &    0.1151  & -1.4845  &  0.0007 &  -0.0071  &  0.2819\\
+   -0.1560     &    0 &  -0.0459 &  -0.3173  &  0.3650  &  0.0003  & -0.0023  &  0.1162\\
+   -0.7719   &      0 &  -0.1248  & -1.4264 &  -2.5901  &  0.9973 &  -0.0131  &  0.4869\\
+   -0.7544  &       0  & -0.1243 &  -1.4204 &  -2.5792  &  0.0013 &   0.9825 &   0.4796\\
+   -0.1905   &      0  & -0.0148  & -0.2081 &  -0.3751  &  0.0002  &  0.0033  &  1.0651
+\end{matrix}\rt]\\
+& F_2 = \lt[\begin{matrix}
+0.2543  &  0.2543\\
+    0.2543  &  0.2543\\
+   -0.0001 &  -0.0001\\
+         0 &        0\\
+   -0.0413 &  -0.0413\\
+    0.0219  &  0.0219\\
+    0.0102 &   0.0102\\
+    0.0431 &   0.0431\\
+    0.0428 &   0.0428\\
+    0.0065 &   0.0065\\
+\end{matrix}\rt],
+~F_3 = 10^{-2}\times\lt[\begin{matrix}
+ 0.0000    &     0  & -0.0330 &   2.0218\\
+    0   &      0  & -0.0330 &  -2.0218\\
+    0  &       0 &   -0  &  0\\
+   -0  &       0  &  0 &   0.0109\\
+   -0.0118 &        0  &  0.0172  &  0 \\
+    0.0436  &       0 &   0.0003 &  0 \\
+   -0.0478   &      0  &  0.0034 &   0 \\
+  -13.3924 &        0 &   0.0062 &   0 \\
+    0.0909     &    0  &  0.0061 &  0\\
+   -0.0798  &       0 &   0.0017  &  0\\
+\end{matrix}\rt]
+\end{align*}}
 \begin{minipage}{0.48\textwidth}
 \centering
 \begin{tabular}{|l|c|c|c|}
@@ -235,7 +278,88 @@ $1.571-\epsilon:$ & \multirow{2}{*}{n/a}\\
 \caption{Large invariant computation: Perturbed double integrator}
 ~\label{tab:largeinv-pdi}
 \end{minipage}
+
+%% \end{table}
+%% \begin{table}
+\begin{tabular}{|l|c|c|c|c|c|c|c|c|c|}
+\hline
+\multicolumn{2}{|c|}{\multirow{4}{*}{Method}} & \multicolumn{4}{|c|}{\multirow{2}{*}{Slow switching}} & \multicolumn{4}{|c|}{\multirow{2}{*}{Fast switching}}\\
+\multicolumn{2}{|c|}{} & \multicolumn{4}{|c|}{} & \multicolumn{4}{|c|}{} \\
+\cline{3-10}
+\multicolumn{2}{|c|}{} & \multirow{2}{*}{$-x_1\leq$} & \multirow{2}{*}{$-x_4\leq$} & \multirow{2}{*}{$-x_7\leq$} & Comp. & \multirow{2}{*}{$-x_1\leq$} & \multirow{2}{*}{$-x_4\leq$} & \multirow{2}{*}{$-x_7\leq$} & Comp.\\
+\multicolumn{2}{|c|}{} & & & & time (s) & & & & time (s)\\
+\hline
+\multirow{4}{*}{SpaceEx} & octagon & \multirow{2}{*}{28} &
+\multirow{2}{*}{27} & \multirow{2}{*}{10} &
+\multirow{2}{*}{NT} & \multirow{2}{*}{UB} &
+\multirow{2}{*}{UB} & \multirow{2}{*}{UB} &
+\multirow{2}{*}{NT}\\
+& template & & & & & & & &\\
+\cline{2-10}
+& 100 support & \multirow{2}{*}{28} & \multirow{2}{*}{25} &
+\multirow{2}{*}{13} & \multirow{2}{*}{1.3} & \multirow{2}{*}{UB} & \multirow{2}{*}{UB} &
+\multirow{2}{*}{UB} & \multirow{2}{*}{NT}\\
+& vectors & & & & & & & &\\
+\hline
+\multicolumn{2}{|c|}{\multirow{2}{*}{Real zonotope~\cite{makhlouf2014networked}}} &
+\multirow{2}{*}{25} & \multirow{2}{*}{25} & \multirow{2}{*}{10}
+ & \multirow{2}{*}{n/a} & \multirow{2}{*}{n/a} & \multirow{2}{*}{n/a} & \multirow{2}{*}{n/a}
+ & \multirow{2}{*}{n/a}\\
+\multicolumn{2}{|c|}{} & & & & & & & &\\
+\hline
+\multicolumn{2}{|c|}{\multirow{2}{*}{ACZ invariant}} &
+\multirow{2}{*}{28} & \multirow{2}{*}{26} &
+\multirow{2}{*}{12} & \multirow{2}{*}{12} &
+\multirow{2}{*}{46} & \multirow{2}{*}{54} &
+\multirow{2}{*}{57} & \multirow{2}{*}{12.6}\\
+\multicolumn{2}{|c|}{} & & & & & & & &\\
+\hline
+\end{tabular}
+%
+%% {\scriptsize
+%% \begin{align*}
+%% & A_1 = \lt[\begin{matrix}
+%% 0  &  1.0000   &      0   &      0    &     0    &     0     &    0     &    0    &     0\\
+%%          0    &     0  & -1.0000   &      0    &     0   &      0   &      0   &      0   &      0\\
+%%     1.6050 &   4.8680 &  -3.5754 &  -0.8198  &  0.4270 &  -0.0450 &  -0.1942  &  0.3626  & -0.0946\\
+%%          0   &      0     &    0    &     0  &  1.0000    &     0   &      0   &      0    &     0\\
+%%          0   &      0 &   1.0000    &     0    &     0  & -1.0000   &      0    &     0    &     0\\
+%%     0.8718  &  3.8140 &  -0.0754  &  1.1936 &   3.6258  & -3.2396  & -0.5950 &   0.1294 &  -0.0796\\
+%%          0    &     0    &     0   &      0   &      0    &     0   &      0 &   1.0000   &      0\\
+%%          0    &     0    &     0    &     0    &     0  &  1.0000      &   0    &     0  & -1.0000\\
+%%     0.7132  &  3.5730 &  -0.0964  &  0.8472  &  3.2568 &  -0.0876  &  1.2726  &  3.0720 &  -3.1356
+%% \end{matrix}\rt]\\
+%% & A_2 = \lt[\begin{matrix}
+%%  0   & 1.0000   &      0    &     0     &    0  &       0   &      0      &   0     &    0\\
+%%          0    &     0  & -1.0000    &     0   &      0     &    0    &     0   &      0  &       0\\
+%%     1.6050  &  4.8680  & -3.5754    &     0     &    0     &    0  &       0     &    0    &     0\\
+%%          0   &      0   &      0    &     0   & 1.0000     &    0     &    0    &     0   &      0\\
+%%          0  &       0  &  1.0000      &   0    &     0  & -1.0000   &      0  &       0  &       0\\
+%%          0  &       0   &      0  &  1.1936  &  3.6258  & -3.2396   &      0     &    0   &      0\\
+%%          0  &       0    &     0     &    0   &      0     &    0    &     0  &  1.0000    &     0\\
+%%          0   &      0    &     0    &     0     &    0  &  1.0000    &     0      &   0 &  -1.0000\\
+%%     0.7132 &   3.5730  & -0.0964 &   0.8472  &  3.2568 &  -0.0876 &   1.2726  &  3.0720  & -3.1356
+%% \end{matrix}\rt],~B = \lt[\begin{matrix}
+%%  0\\
+%%      1\\
+%%      0\\
+%%      0\\
+%%      0\\
+%%      0\\
+%%      0\\
+%%      0\\
+%%      0
+%% \end{matrix}\rt]
+%% \end{align*}
+%% }
+\caption{Networked
+  vehicle platoon: results and matrices}
+~\label{tab:largedwell-platoon}
 \end{table}
+
+%
+
+%
 %
 %% \begin{table}
 %% \center{UB: $>$1000, ~~NT: Not terminating in more than 180s, \newline
@@ -485,51 +609,16 @@ related to the presence and absence of communication between the
 vechicles, respectively.  Furthermore, there are time constraints on
 when the switching can happen.  The continuous time dynamics can be
 described as 
+\vspace{-0.75em}
  \begin{align*} &\dot{x} = A_{q(c)}x+B
 u:~q(c)\in{1,2}~~\wedge~~\dot{q}(c)=0~~\wedge~~\dot{c}=1\\ &\exists
-c\in C:~q(c^+)\neq q(c)~\wedge~c^+=0.\\
+c\in C:~q(c^+)\neq q(c)~\wedge~c^+=0.
+\vspace{-2em}
 \end{align*}
-{\scriptsize
-\begin{align*}
-& A_1 = \lt[\begin{matrix}
-0  &  1.0000   &      0   &      0    &     0    &     0     &    0     &    0    &     0\\
-         0    &     0  & -1.0000   &      0    &     0   &      0   &      0   &      0   &      0\\
-    1.6050 &   4.8680 &  -3.5754 &  -0.8198  &  0.4270 &  -0.0450 &  -0.1942  &  0.3626  & -0.0946\\
-         0   &      0     &    0    &     0  &  1.0000    &     0   &      0   &      0    &     0\\
-         0   &      0 &   1.0000    &     0    &     0  & -1.0000   &      0    &     0    &     0\\
-    0.8718  &  3.8140 &  -0.0754  &  1.1936 &   3.6258  & -3.2396  & -0.5950 &   0.1294 &  -0.0796\\
-         0    &     0    &     0   &      0   &      0    &     0   &      0 &   1.0000   &      0\\
-         0    &     0    &     0    &     0    &     0  &  1.0000      &   0    &     0  & -1.0000\\
-    0.7132  &  3.5730 &  -0.0964  &  0.8472  &  3.2568 &  -0.0876  &  1.2726  &  3.0720 &  -3.1356
-\end{matrix}\rt]\\
-& A_2 = \lt[\begin{matrix}
- 0   & 1.0000   &      0    &     0     &    0  &       0   &      0      &   0     &    0\\
-         0    &     0  & -1.0000    &     0   &      0     &    0    &     0   &      0  &       0\\
-    1.6050  &  4.8680  & -3.5754    &     0     &    0     &    0  &       0     &    0    &     0\\
-         0   &      0   &      0    &     0   & 1.0000     &    0     &    0    &     0   &      0\\
-         0  &       0  &  1.0000      &   0    &     0  & -1.0000   &      0  &       0  &       0\\
-         0  &       0   &      0  &  1.1936  &  3.6258  & -3.2396   &      0     &    0   &      0\\
-         0  &       0    &     0     &    0   &      0     &    0    &     0  &  1.0000    &     0\\
-         0   &      0    &     0    &     0     &    0  &  1.0000    &     0      &   0 &  -1.0000\\
-    0.7132 &   3.5730  & -0.0964 &   0.8472  &  3.2568 &  -0.0876 &   1.2726  &  3.0720  & -3.1356
-\end{matrix}\rt],~B = \lt[\begin{matrix}
- 0\\
-     1\\
-     0\\
-     0\\
-     0\\
-     0\\
-     0\\
-     0\\
-     0
-\end{matrix}\rt]
-\end{align*}
-}
-%
 where $x$ is the state of the system, $u\in[-9,1]$ is the additive
 disturbance input, $c$ is a clock, $q$ is an index
 for the type of dynamics and $C$ is a set of clock instants when a
-switching can happen.  The system matrices are 
+switching can happen.  The system matrices are given in~\cite{makhlouf2014networked}.
 %
  Any upper bounds on $-x_1$, $-x_4$, and $-x_7$ provide lower limits
  on the reference distances of $M_1$, $M_2$ and $M_3$ to their
@@ -568,7 +657,7 @@ smaller bounds compared to our approach.
 But for the small minimum dwell time ($1s$) model, SpaceEx could not
 even find a finite set of bounds, whereas our approach could verify a
 finite set of bounds.  These results are reported in the
-Tables~\ref{tab:largedwell-platoon} and~\ref{tab:smalldwell-platoon}.
+Table~\ref{tab:largedwell-platoon}.
 
 \tbf{Remarks.}  The dynamics in both locations being stable, the
 lyapunov exponent (measure of stability) tends to be higher in case of
@@ -584,46 +673,6 @@ avoids the union operations and instead formulates an optimization
 program.  Unlike SpaceEx, we verified finite bounds for the case of
 fast switching.
 
-\begin{table}
-\begin{tabular}{|l|c|c|c|c|c|c|c|c|c|}
-\hline
-\multicolumn{2}{|c|}{\multirow{4}{*}{Method}} & \multicolumn{4}{|c|}{\multirow{2}{*}{Slow switching}} & \multicolumn{4}{|c|}{\multirow{2}{*}{Fast switching}}\\
-\multicolumn{2}{|c|}{} & \multicolumn{4}{|c|}{} & \multicolumn{4}{|c|}{} \\
-\cline{3-10}
-\multicolumn{2}{|c|}{} & \multirow{2}{*}{$-x_1\leq$} & \multirow{2}{*}{$-x_4\leq$} & \multirow{2}{*}{$-x_7\leq$} & Comp. & \multirow{2}{*}{$-x_1\leq$} & \multirow{2}{*}{$-x_4\leq$} & \multirow{2}{*}{$-x_7\leq$} & Comp.\\
-\multicolumn{2}{|c|}{} & & & & time (s) & & & & time (s)\\
-\hline
-\multirow{4}{*}{SpaceEx} & octagon & \multirow{2}{*}{28} &
-\multirow{2}{*}{27} & \multirow{2}{*}{10} &
-\multirow{2}{*}{NT} & \multirow{2}{*}{UB} &
-\multirow{2}{*}{UB} & \multirow{2}{*}{UB} &
-\multirow{2}{*}{NT}\\
-& template & & & & & & & &\\
-\cline{2-10}
-& 100 support & \multirow{2}{*}{28} & \multirow{2}{*}{25} &
-\multirow{2}{*}{13} & \multirow{2}{*}{1.3} & \multirow{2}{*}{UB} & \multirow{2}{*}{UB} &
-\multirow{2}{*}{UB} & \multirow{2}{*}{NT}\\
-& vectors & & & & & & & &\\
-\hline
-\multicolumn{2}{|c|}{\multirow{2}{*}{Real zonotope~\cite{makhlouf2014networked}}} &
-\multirow{2}{*}{25} & \multirow{2}{*}{25} & \multirow{2}{*}{10}
- & \multirow{2}{*}{n/a} & \multirow{2}{*}{n/a} & \multirow{2}{*}{n/a} & \multirow{2}{*}{n/a}
- & \multirow{2}{*}{n/a}\\
-\multicolumn{2}{|c|}{} & & & & & & & &\\
-\hline
-\multicolumn{2}{|c|}{\multirow{2}{*}{ACZ invariant}} &
-\multirow{2}{*}{28} & \multirow{2}{*}{26} &
-\multirow{2}{*}{12} & \multirow{2}{*}{12} &
-\multirow{2}{*}{46} & \multirow{2}{*}{54} &
-\multirow{2}{*}{57} & \multirow{2}{*}{12.6}\\
-\multicolumn{2}{|c|}{} & & & & & & & &\\
-\hline
-\end{tabular}
-\caption{Networked
-  vehicle platoon: results}
-~\label{tab:largedwell-platoon}
-\end{table}
 
-%
 
 
