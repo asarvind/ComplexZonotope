@@ -1,13 +1,14 @@
-We introduce an augmented complex zonotope, which is a slightly more
-general set representation than a template complex zonotope.  An
-augmented complex zonotope is the Minkowski sum of a template complex
-zonotope and a real zonotope.  Geometrically, the sets that can be
-described as real projections of augmented complex zonotopes can also
-be described as real projections of template complex zonotopes.  But
+An augmented complex zonotope is the Minkowski sum of a template
+complex zonotope and a real zonotope.  In terms of specification, an
+augmented complex zonotope is slightly more general than template
+complex zonotopes.  But geometrically, the sets that can be described
+as real projections of augmented complex zonotopes can also be
+described as real projections of template complex zonotopes.  However,
 with augmented complex zonotopes, the intersection with
 subparallelotopic constraints can be succinctly specified, as we will
-see latter.  Threfore, it will be more convenient to derive conditions
-for positive invariance based on augmented complex zonotopes.
+see latter.  Consequently, this representation is more convenient to
+derive conditions for computing invariants for the affine hybrid
+system.
 %
 \begin{definition}[Augmented complex zonotope]
 Let $V\in\mat{n}{m}{C}$ called primary template, $W\in\mat{n}{k}{R}$
@@ -67,9 +68,9 @@ such that $\ptemplate c=0$.  Then,
 %% the exact intersected set.
 
 
-Linear transformations and Minkowski sums preserve the class of
-augmented complex zonotopes, and these can be efficiently computed as
-follows.
+Similar to usual zonotopes and template complex zonotopes, augmented
+complex zonotopes are closed under Minkowski sums and linear
+transformations, and their computation is also similar.
 %
 \begin{lemma}[Linear transformation and Minkowski sum]
 \begin{enumerate}

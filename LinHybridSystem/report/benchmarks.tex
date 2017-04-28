@@ -26,14 +26,14 @@ transformation, the dynamics of the system is given as $
     \trj{y}{t+1}\end{array}\rt]^T=F_1\trj{x}{t}+F_2sat\lt(\trj{y}{t}\rt)+F_3\trj{u}{t}.$
 where the matrices $F_1$, $F_2$ and $F_3$ are given above the
 Table~\ref{tab:robot-saturated}, $\trj{x}{t}\in\realset^8$ is the
-transformed state of the composite system,
-$\trj{y}{t}\in\realset^2$ is the input sent by the
-controller, $\trj{u}{t}\in\realset^4$ is the additive disturbance
-input and $sat$ is the saturation function which limits
-input received by the plant, as follows.  For the saturated system,
-$sat\lt(y_i\rt) = max\lt(-\delta d_p,min\lt(u_i,v_i\rt)\rt),~\forall
-i\in\{1,2\}$, where $\delta=100$ and $d_p=0.0807$.  For the
-unsaturated system, $sat\lt(y_i\rt)=y_i~\forall i\in\{1,2\}$.
+transformed state of the composite system, $\trj{y}{t}\in\realset^2$
+is the input sent by the controller, $\trj{u}{t}\in\lt[-100,100\rt]^4$
+is the bounded additive disturbance input and $sat$ is the saturation
+function which limits the controller input received by the plant, as
+follows.  For the saturated system, $sat\lt(y_i\rt) = max\lt(-\delta
+d_p,min\lt(y_i,\delta d_p\rt)\rt),~\forall i\in\{1,2\}$, where $\delta=100$
+and $d_p=0.0807$.  For the unsaturated system,
+$sat\lt(y_i\rt)=y_i~\forall i\in\{1,2\}$.
 %
 
 %% {\scriptsize 
@@ -90,6 +90,7 @@ the edges.  The unsaturated system is modeled with one location and no
 edges such that the only dynamics is part of the intralocation affine
 dynamics.  The same discrete time models are specified in SpaceEx for
 comparison of performace.
+
 
 \tbf{Size of unsaturated model}: 10 dimensional, 1 location, 0 edges.
 

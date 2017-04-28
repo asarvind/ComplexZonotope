@@ -1,7 +1,7 @@
 
-Before we introduce augmented complex zonotopes, we briefly review
-related set representations and discuss our motivation for the
-current extension. First, polytopes can be defined in terms of halfspace representation.
+Before we introduce augmented complex zonotopes, we briefly review the
+related set representations that are used in this paper.  Firstly,
+polytopes can be defined in terms of halfspace representation.
 %
 \begin{definition}
 Let $T\in\mat{n}{k}{\mb{R}}$ and $d\in\mb{R}^k$.  Then a (possibly
@@ -47,7 +47,7 @@ with $x_1\leq 1~\wedge~x_2\geq 0.5$ gives $\zon{\lt[\begin{array}{l
       1\end{array}\rt]}{\lt[\begin{array}{c}-1\\ 0.5\end{array}\rt]}{\lt[\begin{array}{c}1\\ 2\end{array}\rt]}$.
 The general case is described in the following lemma.
 %
-\begin{lemma}\label{lem:motivation}
+\begin{lemma}~\label{lem:motivation}
 Let $K\in\mat{k}{n}{R}$ such that $k\leq n$ and $\lt(KK^T\rt)$ is
 non-singular.  Then
 \[
@@ -77,11 +77,11 @@ i\in\tup{m}\rt\}.$
 Unlike real zonotopes, a template complex zonotope can have a
 non-polyhedral real projection.  Therefore, in general, checking the
 exact inclusion between two template complex zonotopes amounts to
-solving a non-convex optimization problem, which could be computationally intractable.
-Instead, a convex condition was proposed in~\cite{tcz2017}, which is
-sufficient to guarantee the inclusion between template complex
-zonotopes.  Here, we present this condition as a relation between
-template complex zonotopes.
+solving a non-convex optimization problem, which could be
+computationally intractable.  Instead, a convex condition was proposed
+in~\cite{tcz2017}, which is sufficient to guarantee the inclusion
+between template complex zonotopes.  Here, we present this condition
+as a relation between template complex zonotopes.  
 %
 \begin{definition}
 We define a relation ``$\order$'' between template complex zonotopes
@@ -101,7 +101,12 @@ as\\ $\cz{V^\pr_{n\times m^\pr}}{c^\pr}{s^\pr}\order \cz{V_{n\times
 inclusion $\cz{V^\pr}{c^\pr}{s^\pr}\subseteq \cz{V}{c}{s}$ holds if
 the relation $\cz{{V^\pr}}{c^\pr}{s^\pr}\order \cz{V}{c}{s}$ is true.
 \end{lemma}
-%
+\emph{Proof idea.}
+We relate the combining
+coefficients of the two template complex zonotopes by a linear
+transformation, with appropriate bounds on the transformation matrix
+such that the inclusion holds.
+
 For fixed $V$ and $V^\pr$, we observe that~(\ref{eqn:tcz-inc}) is
 equivalent to as a set of convex constraints called second order
 conic constraints.  We define a second order conic constraint (SOCC)
@@ -117,12 +122,12 @@ We also note that linear inequalities and equalities can be expressed
 in the form of SOCC described above.  Our aforementioned observation
 about~(\ref{eqn:tcz-inc}) is formalized below.
 %
-\begin{lemma}~\label{lem:zon-socc}
+\begin{proposition}~\label{lem:zon-socc}
 For fixed $V$,$V^\pr$, the partial order
 $\cz{V^\pr}{c^\pr}{s^\pr}\order \cz{V}{c}{s}$ is equivalent to a set
 of second order conic constraints on the variables
 $c,c^\pr,s,s^\pr,l,l^\pr$ and some additional variables.
-\end{lemma}
+\end{proposition}
 %
 There are many convex optimization tools that can efficiently solve
 SOCC upto a high numerical precision.  

@@ -12,18 +12,23 @@ complex zonotope as another augmented complex zonotope.  Then, we
 utilize the partial order given in Definition~\ref{defn:gcz-order} to
   deduce a sufficient condition for positive invariance, as follows.
 %
-Let us consider a state set $\hybridset:\locationset\ra\realset^n$
-  whose projection in each location $\loc\in\locationset$ is
+We consider a state set $\hybridset:\locationset\ra\realset^n$ whose
+  projection in each location $\loc\in\locationset$ is
   $\real\lt(\gcz{V(\loc)}{c(\loc)}{s(\loc)}{\pinv{\ptemplate}(\loc)}{l(\loc)}{u(\loc)}\rt)$.
   Let us consider that the additive input for an intralocation
   transition in any location $\loc\in\locationset$ is overapproximated
-  as $\inputset(\loc)\subseteq
-  \gcz{V^{in}(\loc)}{c^{in}(\loc)}{s^{in}(\loc)}{W^{in}(\loc)}{l^{in}(\loc)}{u^{in}(\loc)}$.
+  as
+  $\inputset(\loc)\subseteq \gcz{V^{in}(\loc)}{c^{in}(\loc)}{s^{in}(\loc)}{W^{in}(\loc)}{l^{in}(\loc)}{u^{in}(\loc)}$.
   Similarly, let the additive input for an interlocation transition
   along any edge $\edge\in\edgeset$, be overapproximated as
-  $\edgeinp(\edge)\subseteq
-  \gcz{V^{in}(\edge)}{c^{in}(\edge)}{s^{in}(\edge)}{W^{in}(\edge)}{l^{in}(\edge)}{u^{in}(\edge)}$.
+  $\edgeinp(\edge)\subseteq \gcz{V^{in}(\edge)}{c^{in}(\edge)}{s^{in}(\edge)}{W^{in}(\edge)}{l^{in}(\edge)}{u^{in}(\edge)}$.
+  Furthermore, for any $\loc\in\locationset$, the safe set in the
+  location is $\safeset(\loc)=\polytope{T(\loc)}{d(\loc)}$ and the
+  initial set is
+  $\mc{I}(\loc)=\real\lt(\gcz{V^I(\loc)}{c^I(\loc)}{s^I(\loc)}{W^I(\loc)}{l^I(\loc)}{u^I(\loc)}\rt).$
   
+
+
 \begin{lemma}[Positive invariance]
   The condition for positive invariance of the state set $\hybridset$
   is the following.
@@ -108,15 +113,10 @@ Let us consider a state set $\hybridset:\locationset\ra\realset^n$
 %
 Next, we state a sufficient condition for an augmented complex
 zonotopic state set to contain an initial set overapproximated by an
-augmented complex zonotope.  This is just the partial order between
-the augmented complex zonotopes (Lemma~\ref{lem:gcz-gcz}).
+augmented complex zonotope.  This is given by the inclusion relation
+between augmented complex zonotopes from~Lemma~\ref{lem:gcz-gcz}).
 \begin{lemma}
-  Let $\mc{I}$ and $\hybridset$ be two state sets whose projections in
-  each location $\loc\in\locationset$ are respectively
-  $\mc{I}(\loc)=\real\lt(\gcz{V^I(\loc)}{c^I(\loc)}{s^I(\loc)}{W^I(\loc)}{l^I(\loc)}{u^I(\loc)}\rt)$
-  and $\hybridset(\loc) =
-  \real\lt(\gcz{V(\loc)}{c(\loc)}{s(\loc)}{\pinv{\ptemplate}(\loc)}{l(\loc)}{u(\loc)}\rt)$.
-  Then $\forall\loc\in\locationset,~\mc{I}(\loc)\subseteq
+ $\forall\loc\in\locationset,~\mc{I}(\loc)\subseteq
   \hybridset(\loc)$ if $\forall\loc\in\locationset$,
 \begin{align}~\label{eqn:initcont}
 \gcz{V^I(\loc)}{c^I(\loc)}{s^I(\loc)}{W^I(\loc)}{l^I(\loc)}{u^I(\loc)}\order\gcz{V(\loc)}{c(\loc)}{s(\loc)}{\pinv{\ptemplate}(\loc)}{l(\loc)}{u(\loc)}.
@@ -125,18 +125,12 @@ the augmented complex zonotopes (Lemma~\ref{lem:gcz-gcz}).
 %
 For satisfaction of polytopic safety constraints by an augmented
 complex zonotope, the following lemma gives a sufficient condition,
-which is based on Lemma~\ref{lem:polylimits-acz}.
+which is just the reformulation of Lemma~\ref{lem:polylimits-acz} in
+the below context.
 %
 \begin{lemma}
-  Let us consider a state set $\hybridset$ whose projection in each
-  location $\loc \in\locationset$ is $\hybridset(\loc) =
-  \real\lt(\gcz{V_{n\times
-      m(\loc)}(\loc)}{c(\loc)}{s(\loc)}{\pinv{\ptemplate}(\loc)}{l(\loc)}{u(\loc)}\rt)$.
-  Let us consider a polytopic state set
-  $\safeset:\locationset\ra\realset^n$ described as $\forall
-  \loc\in\locationset,~\safeset(\loc)=\polytope{T(\loc)}{d(\loc)}$. Then
-  for any location $\loc\in\locationset$, $\hybridset(\loc)\subseteq
-  \safeset(\loc)$ if,
+For any location $\loc\in\locationset$,
+  $\hybridset(\loc)\subseteq \safeset(\loc)$ if,
 \begin{align}~\label{eqn:safecont}
 T(\loc)\lt(c(\loc)+\pinv{\ptemplate}(\loc)\lt(\frac{u(\loc)+l(\loc)}{2}\rt)\rt)+\lt|T\lt[V(\loc),~\pinv{\ptemplate}(\loc)\rt]\rt|\ColumnJoin{\hspace{1.5em}s}{\frac{u(\loc)-l(\loc)}{2}}\leq d(\loc).
 \end{align}
@@ -146,24 +140,12 @@ Consolidating the previous results in this section, we state following
 sufficient condition for positive invariance, along with satisfaction
 of a given set of polytopic safety constraints and containment of an initial set.
 %
-\begin{theorem}~\label{thm:main} Let us consider that the additive input sets for the intralocation
-  transition in any location $\loc\in\locationset$ and interlocation
-  transition along any edge $\edge\in\edgeset$ be overapproximated as
-  $\inputset(\loc)\subseteq \gcz{V^{in}(\loc)}{c^{in}(\loc)}{s^{in}(\loc)}{W^{in}(\loc)}{l^{in}(\loc)}{u^{in}(\loc)}$
-  and
-  $\edgeinp(\edge)\subseteq \gcz{V^{in}(\edge)}{c^{in}(\edge)}{s^{in}(\edge)}{W^{in}(\edge)}{l^{in}(\edge)}{u^{in}(\edge)}$,
-  respectively.  Let $\hybridset$ be a state set such that for any
-  $\loc\in\locationset$, $\hybridset(\loc)
-  = \real\lt(\gcz{V(\loc)}{c(\loc)}{s(\loc)}{\pinv{\ptemplate}(\loc)}{l(\loc)}{u(\loc)}\rt)$.
-  Let the initial in any lcoation $\loc\in\locationset$ be
-  $\mc{I}(\loc)=\real\lt(\gcz{V^I(\loc)}{c^I(\loc)}{s^I(\loc)}{W}{l^I(\loc)}{u^I(\loc)}\rt)$
-  and polytopic safe set be
-  $\forall \loc\in\locationset,~\safeset(\loc)=\polytope{T(\loc)}{d(\loc)}$.
-  Then the state set $\hybridset$ is a positive invariant, satisfies
-  the given safety constraints and contains the given initial set if
+\begin{theorem}~\label{thm:main} If
   $\forall \loc\in\locationset$ and $\forall \edge\in\edgeset$, all of
   the Equations[\ref{eqn:locinv}-\ref{eqn:safecont}] are collectively
-  true.
+  true, then the state set $\hybridset$ is a positive invariant,
+  satisfies the given safety constraints and contains the given
+  initial set
 \end{theorem}
 
 \tbf{Solving the conditions.}  Firstly, we note that the secondary
@@ -174,11 +156,11 @@ template in each location, the set of
 Equations[\ref{eqn:locinv}-\ref{eqn:safecont}] are equivalent to
 second order conic constraints on the primary offset, upper and lower
 interval bounds in each location and some additional varaibles.  This
-can be inferred from the~Lemma~\ref{lem:zon-socc} and the fact that
-the min and max approximation functions we defined earlier are
-affine. So, we first fix the primary template in each location and
-solve the aforementioned constraints as a convex program.  The choice
-of the primary template is explained below.
+can be inferred from the Proposition~\ref{lem:zon-socc} and the fact
+that the min-approximation and max approximation functions we defined
+earlier are affine. So, we first fix the primary template in each
+location and solve the aforementioned constraints as a convex program.
+The choice of the primary template is explained below.
 
 \tbf{Choosing the primary template.}  We may collect all or some of
 the following vectors in the primary template.

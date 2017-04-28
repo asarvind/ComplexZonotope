@@ -3,10 +3,69 @@ Therefore a common approach for proving a safety property is to find an invarian
 
 \input{contribution}
 
-Before continuing, we discuss the relation of our work with the existing works. For hybrid systems verification, convex polyhedra~\cite{DBLP:conf/popl/CousotH78}, and their special classes such as
+\emph{Related work.}  Before continuing, we discuss the relation of our work with the existing works. For hybrid systems verification, convex polyhedra~\cite{DBLP:conf/popl/CousotH78}, and their special classes such as
 zones~\cite{DBLP:conf/pado/Mine01},
-octagons~\cite{DBLP:journals/lisp/Mine06}, zonotopes~\cite{HSCC05} and tropical
-polyhedra~\cite{DBLP:conf/sas/AllamigeonGG08} are the most commonly used set representations. During the analysis which requires operations under which a set representation is not closed (such as the union or join operations for convex polyhedra and additionally intersection for zonotopes) the complexity of generated sets increases rapidly in order to guarantee a desired error bound. One way to control this complexity increase, face normal vectors or generators are fixed, which led to template convex polyhedra \cite{Sankaranarayanan+Dang+Ivancic-08-Symbolic,Gawlitza}. Although our template complex zonotopes proposed in~\cite{arvind2016lis} do not belong to the class of convex polyhedra, they follow the same spirit. Set representations defined by non-linear constraints include ellipsoids~\cite{KurzhanskiVaraiya00}, polynomial inequalities\cite{bagrodzafSAS05} et equalities~\cite{Rodriguez-Carbonell:2007}, quadratic templates and piecewise quadratic templates\cite{Feron2010,AdjeGaubertGoubaultESOP2010,AdjeHSCC2017}, which are used for computing non-linear invariants. A major problem that the template based approach faces is finding good templates. As it will become clear later, using template complex zonotopes and the augmented version introduced in this paper and exploiting eigen-structures of linear dynamics which reflects the contraction or expansion of a set by the dynamics, allows requiring only few of steps until convergence to an invariant. 
+octagons~\cite{DBLP:journals/lisp/Mine06}, zonotopes~\cite{HSCC05} and
+tropical polyhedra~\cite{DBLP:conf/sas/AllamigeonGG08} are the most
+commonly used set representations. During the analysis which requires
+operations under which a set representation is not closed (such as the
+union or join operations for convex polyhedra and additionally
+intersection for zonotopes) the complexity of generated sets increases
+rapidly in order to guarantee a desired error bound. One way to
+control this complexity increase, face normal vectors or generators
+are fixed, which led to template convex
+polyhedra \cite{Sankaranarayanan+Dang+Ivancic-08-Symbolic,Gawlitza}. Although
+our template complex zonotopes proposed in~\cite{arvind2016lis} do not
+belong to the class of convex polyhedra, they follow the same
+spirit. Set representations defined by non-linear constraints include
+ellipsoids~\cite{KurzhanskiVaraiya00}, polynomial
+inequalities\cite{bagrodzafSAS05} et
+equalities~\cite{Rodriguez-Carbonell:2007}, quadratic templates and
+piecewise quadratic
+templates\cite{Feron2010,AdjeGaubertGoubaultESOP2010,AdjeHSCC2017},
+which are used for computing non-linear invariants. A major problem
+that the template based approach faces is finding good templates. As
+it will become clear later, using template complex zonotopes and the
+augmented version introduced in this paper and exploiting
+eigen-structures of linear dynamics which reflects the contraction or
+expansion of a set by the dynamics, allows requiring only few of steps
+until convergence to an invariant.
 
 The complex zonotopes we proposed in~\cite{arvind2016lis} extend usual zonotopes to the complex domain, and geometrically speaking they are Minkowski sum of line segments and some ellipsoids.
 This extension is very similar in spirit to quadratic zonotopes~\cite{DBLP:conf/aplas/AdjeGW15} and more generally polynomial zonotopes~\cite{althoff2013}. Nevertheless, while a polynomial zonotope is a set-valued polynomial function of \emph{intervals}, a complex zonotope is a set-valued function of unit \emph{circles} in the complex plane. Our idea of coupling additional linear constraints with zonotopes is inspired by the work on constrained zonotopes proposed in~\cite{Ghorbal2010,DBLP:conf/cav/GhorbalGP09} for intersection computation.
+
+\emph{Organization.}  The rest of the paper is organized as follows.  Firstly, we explain
+some of the mathematical notation used in this paper.  Then in
+Section~\ref{sec:system}, we describe the model of a discrete time
+affine hybrid system, controlled by sub-parallelotopic switching
+conditions and having a bounded additive disturbance input.  In
+Section~\ref{sec:review}, we review some existing set representations
+before presenting augmented complex zonotopes.  In
+Section~\ref{sec:acz}, we present the set representaion of augmented
+complex zonotopes and discuss some important operations and relations
+like intersection with sub-parallelotopic constraints, projection in
+any direction, linear transformation, Minkowski sum and inclusion.  In
+Section~\ref{sec:invcomp}, we derive a set of second order conic
+constraints to compute an augmented complex zonotopic invariant,
+satisfying linear safety constraints and containing an initial set.
+Furthermore, we explain how to choose the template.  In
+Section~\ref{sec:exp}, we discuss the experimental results.  The
+conclusion and future work are given in Section~\ref{sec:conclusion}.
+We annex the proofs of the lemmas presented in the paper as an
+Appendix.
+
+\emph{Notation.} Some of the notations used in this paper, for which we
+consider explanation may be required, is described below.  If $S$ is a
+set of complex numbers, then $real(S)$ represents the real projection
+of $S$.  If $z$ is a complex number, then $|z|$ denotes the absolute
+value of $z$.  On the other hand, if $X$ is a complex matrix, then
+$\lt|X\rt|$ denotes the matrix containing the absolute values of the
+elements of $X$.  The diagonal square matrix containing the entries of
+a complex vector $z$ along the diagonal is denoted by $\dg(z)$.  Let
+$K\in\mat{k}{n}{\realset}$ such that $k\leq n$ and $KK^T$ is
+non-singular.  Then, we denote $\pinv{K}=K^T\lt(KK^T\rt)^{-1}$, which
+is the pseudo-inverse of $K$.  Given two vectors $l,u\in\realset^k$,
+the meet of the two vectors is denoted $l\bigwedge u$, defined as
+$\lt(l\bigwedge u\rt)_i=\min\lt(l_i,u_i\rt)~\forall i\in\tup{k}$.  The
+join is denoted $l\bigvee u$, defined as $\lt(l\bigvee
+u\rt)_i=\max\lt(l_i,u_i\rt)~\forall i\in\tup{k}$.
