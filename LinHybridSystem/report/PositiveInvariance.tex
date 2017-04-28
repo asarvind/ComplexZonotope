@@ -12,8 +12,7 @@ complex zonotope as another augmented complex zonotope.  Then, we
 utilize the partial order given in Definition~\ref{defn:gcz-order} to
   deduce a sufficient condition for positive invariance, as follows.
 %
-\begin{lemma}[Positive invariance]
-  Let us consider a state set $\hybridset:\locationset\ra\realset^n$
+Let us consider a state set $\hybridset:\locationset\ra\realset^n$
   whose projection in each location $\loc\in\locationset$ is
   $\real\lt(\gcz{V(\loc)}{c(\loc)}{s(\loc)}{\pinv{\ptemplate}(\loc)}{l(\loc)}{u(\loc)}\rt)$.
   Let us consider that the additive input for an intralocation
@@ -24,8 +23,10 @@ utilize the partial order given in Definition~\ref{defn:gcz-order} to
   along any edge $\edge\in\edgeset$, be overapproximated as
   $\edgeinp(\edge)\subseteq
   \gcz{V^{in}(\edge)}{c^{in}(\edge)}{s^{in}(\edge)}{W^{in}(\edge)}{l^{in}(\edge)}{u^{in}(\edge)}$.
+  
+\begin{lemma}[Positive invariance]
   The condition for positive invariance of the state set $\hybridset$
-  is described as follows.
+  is the following.
 \begin{enumerate}
 \item For any location $\loc\in\locationset$, the inclusion
   $\locationtransition{\loc}\lt(\hybridset(\loc)\rt)\subseteq
