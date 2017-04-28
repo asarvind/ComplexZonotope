@@ -16,6 +16,14 @@
 \usepackage{caption}
 \usepackage{cite}
 \usepackage{relsize}
+\usepackage{natbib}
+
+\setlength{\itemsep}{0ex}
+\setlength{\parsep}{0.5ex}
+\setlength{\parskip}{0ex}
+\setlength{\partopsep}{0ex}
+\setlength{\parindent}{0pt} 
+\setlength{\bibsep}{0.0pt}
 
 
 % Input macros
@@ -38,13 +46,14 @@
 \section{Introduction}
 \input{intro.tex}
 
-\section{Hybrid system and positive invariants}~\label{sec:system}
+\section{Hybrid systems and positive invariants}~\label{sec:system}
 \input{prelims.tex}
 
-\section{Review of some set representations}~\label{sec:review}
-\input{zonotope}
+%\section{Review of some set representations}~\label{sec:review}
+
 
 \section{Augmented complex zonotopes}~\label{sec:acz}
+\input{zonotope}
 \input{acz}
 
 
@@ -58,15 +67,8 @@
 \input{conclusion}
 
 
-
-
-
-
-
-
-
-
 \bibliographystyle{plain}
+%\bibliographystyle{abbrv}
 \bibliography{ref}
 
 \title{Appendix}
@@ -74,6 +76,6 @@
 \institute{}
 \maketitle
 \section*{Proofs in section}
-\input{appendix}
+%\input{appendix}
 
 \end{document}
