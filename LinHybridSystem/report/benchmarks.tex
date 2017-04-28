@@ -1,20 +1,20 @@
-We performed experiments on three benchmark examples from literature
+We performed experiments on three benchmark examples from the literature
 and compared the results with that obtained by the tool
-SpaceEx~\cite{TODO}. On one example, we compared the computational
+SpaceEx~\cite{FLD+11}. On one example, we compared the computational
 time with the reported results of the MPT
-tool~~\cite{rakovic2004computation}.  For convex optimization, we used
+tool~\cite{rakovic2004computation}.  For convex optimization, we used
 CVX (version 2.1) with MOSEK solver (version 7.1) and Matlab (version:
 8.5/R2015a) on a computer with 1.4 GHz Intel Core i5 processor and 4 GB
 1600 MHz DDR3.  The precision of the solver is set to the default
 precision of CVX.
 
 
-\subsection{Robot with a saturated controller}   Our first example is a benchmark
+\subsection{Robot with a saturated controller.}  Our first example is a benchmark
 model of a self-balancing two wheeled robot called NXTway-GS1 by
 Yorihisa Yamamoto, presented in the ARCH
 workshop~\cite{heinz2014benchmark}.  The consider the sampled data
 (discrete time) networked control system model consisting of a plant
-and a controller, presented in the paper.   In our case study, we
+and a controller, presented in the paper. In our experiment, we
 decoupled some unbounded directions of the dynamics of the system from
 bounded directions by making an appropriate linear transformation of
 the coordinates.  The transformation is such that the coordinates
@@ -78,7 +78,7 @@ $sat\lt(y_i\rt)=y_i~\forall i\in\{1,2\}$.
 %% \end{align*}}
 %% \normalsize
 
-The state space of the satruated system can be divided into nine
+The state space of the saturated system can be divided into $9$
 different regions such that the system exhibits different affine
 dynamics in different regions.  Therefore, the saturated sampled data
 system can be seen as a discrete time affine hybrid system.  On the
@@ -86,10 +86,10 @@ other hand, the unsaturated system has just one affine dynamics and is
 not a hybrid system.  We model the saturated system using one location
 and nine self edges, corresponding to the nine different affine
 dynamics in different regions, which are specified by the guards on
-the edges.  The unsaturated system is modeled with one location and no
+the edges.  The unsaturated system is modelled with one location and no
 edges such that the only dynamics is part of the intralocation affine
-dynamics.  The same discrete time models are specified in SpaceEx for
-comparison of performace.
+dynamics. The same discrete time models are specified in SpaceEx for
+comparison of performance.
 
 
 \tbf{Size of unsaturated model}: 10 dimensional, 1 location, 0 edges.
@@ -104,19 +104,19 @@ for the saturated system, while
 $x_1\in\lt[\frac{-\pi}{2.26},~\frac{\pi}{2.26}\rt]$ for the
 unsaturated system. The initial set is the origin.
 
-\tbf{Implementation.}  The primary template for the hybrid system is
+\tbf{Experiment settings.}  The primary template for the hybrid system is
 chosen as the collection of the (complex) eigenvectors of linear
 matrices of all affine maps for the edge transitions, the orthonormal
 vectors to the guarding hyperplane normals and the projections of the
 eigenvectors on the subspace spanned by the orthonormal vectors.  For
 the linear system, it consists of the eigenvectors of the linear map,
 the input set template and its multiplication by the linear matrix
-(related to affine map) and square of the linear matrix.  For the
-SpaceEx implementation, we tested with the octagon template and a
-template with 400 uniformly sampled support vectors.  For the hybrid
+(related to affine map) and square of the linear matrix. Concerning the experiment using
+SpaceEx, we tested with the octagon template and a
+template with $400$ uniformly sampled support vectors.  For the hybrid
 system, we computed a single augmented complex zonotopic invariant
 satisfying both the upper and lower safety bounds.  But for the linear
-system, we computed two different invariants, one each satisfying the
+system, we computed two different invariants, each of which satisfies the
 upper and lower bounds, respectively.
 
 \tbf{Results.}  For both the hybrid and the linear systems, we could
@@ -132,7 +132,7 @@ arbitrarily large for any fixed dimension.  In our unsaturated model
 which is linear, some of the eigenvalues are complex and their
 magnitudes are close to one.  Possibly, this is the reason SpaceEx
 could not find an invariant even with 400 support vectors.  But, since
-in our approach we use the complex eigenstructure, we could find the
+in our approach we use the complex eigen-structure, we could find the
 desired invariant for the unsaturated (linear) model.  Furthermore, we
 we also computed the invariant for the saturated (hybrid) model.
 
@@ -561,20 +561,20 @@ safety constraints as the intersection of four different sets of
 safety constraints.  For each set of safety constraints, we compute a
 large augmented complex zonotopic invariant.  Then the desired
 invariant is the intersection of four augmented complex zonotopic
-invaraints.  Although we may not find the largest possible (maximal)
+invariants.  Although we may not find the largest possible (maximal)
 invariant by this approach, still the optimizer would find a large
-invaraint.  We draw comparison in terms of the computation time with
+invariant.  We draw comparison in terms of the computation time with
 the reported result for the MPT tool~\cite{rakovic2004computation}.
 
-In our formalism, we model the system with four locations and twelve
+In our formalism, we model the system with $4$ locations and $12$
 edges connecting all the locations.  Appropriate staying conditions
 are specified in each location, reflecting the division of the state
 space into different regions where the dynamics is affine. The initial
-set is the origin.  The same model is specified in SpaceEx.
+set is the origin. The same model is specified in SpaceEx.
 
-\tbf{Size of model}: 2 dimensional, 4 locations and 12 edges.
+\tbf{Size of model}: 2 dimensions, 4 locations and 12 edges.
 
-\tbf{Implementation}.  For the primary template, we collected the
+\tbf{Experiment settings}.  For the primary template, we collected the
 (complex) eigenvectors of all linear matrices of the affine maps and
 their binary products. For the SpaceEx tool, we experimented with two
 different templates, the octagon template and a template with 100
@@ -635,16 +635,16 @@ switching can happen.  The system matrices are given in~\cite{makhlouf2014networ
  models.  We do not explain the discretization procedure here, because
  it is beyond the scope of this paper.
 
-\tbf{Size of slow switching model}: 9 dimensional, 2
+\tbf{Size of slow switching model}: 9 dimensions, 2
 locations and 4 edges.
 
-\tbf{Size of fast switching (integer times) model}: 9 dimensional, 2
+\tbf{Size of fast switching (integer times) model}: 9 dimensions, 2
 locations, 2 edges.
 
-\tbf{Implementation.}  In our approach, we choose the primary template
+\tbf{Experiment settings.}  We chose the primary template
 as the collection of the (complex) eigenvectors of linear matrices of
 the affine maps in the the two locations and their binary products,
-the axis alligned box template and the templates used for
+the axis aligned box template and the templates used for
 overapproximating the input sets. For the SpaceEx tool, we
 experimented with two templates, octagon and hundred uniformly sampled
 support vectors.
