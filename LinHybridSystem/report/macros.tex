@@ -110,8 +110,8 @@
 \newcommand{\reset}[1]{F_{#1}}
 \newcommand{\locationtransition}[1]{R_{#1}}
 \newcommand{\edgetransition}[1]{R_{#1}}
-\newcommand{\staysptope}[1]{\sptope{\ptemplate\lt(#1\rt)}{\stay^-\lt(#1\rt)}{\stay^+\lt(#1\rt)}}
-\newcommand{\guardsptope}[1]{\sptope{\ptemplate\lt(\preloc{#1}\rt)}{\loweredgebound{#1}\bigvee\stay^-\lt(\preloc{#1}\rt)}{\upperedgebound{#1}\bigwedge\stay^+\lt(\preloc{#1}\rt)}}
+\newcommand{\staysptope}[1]{\sptope{\ptemplate_{#1}}{\stay^-_{#1}}{\stay^+_{#1}}}
+\newcommand{\guardsptope}[1]{\sptope{\ptemplate_{\preloc{#1}}}{\loweredgebound{#1}\bigvee\stay^-_{\preloc{#1}}}{\upperedgebound{#1}\bigwedge\stay^+_{\preloc{#1}}}}
 \newcommand{\hybridset}{\Gamma}
 \newcommand{\safeset}{\mc{S}}
 
