@@ -3,23 +3,23 @@ Before we introduce augmented complex zonotopes, we briefly review the
 related set representations that are used in this paper.  Firstly,
 polytopes can be defined in terms of halfspace representation.
 %
-\begin{definition}
+%\begin{definition}
 Let $T\in\mat{n}{k}{\mb{R}}$ and $d\in\mb{R}^k$.  Then a (possibly
-unbounded) polytope, denoted $\polytope{T}{d}$, is defined as
+unbounded) \emph{polytope}, denoted $\polytope{T}{d}$, is defined as
 $\polytope{T}{d} = \lt\{x\in\comprealset^k: Tx\leq d\rt\}$.
-\end{definition}
+%\end{definition}
 %
-Usual zonotopes form a sub-class of polytopes, which are geometrically
+Usual zonotopes form a subclass of polytopes, which are geometrically
 Minkowski sums of line segments. They are represented as a linear
 combination of real vectors, called \emph{generators}, whose combining
 coefficients are bounded in real valued intervals.
-\begin{definition}[Real zonotope]
+%\begin{definition}[Real zonotope]
 Let $W\in\mat{n}{k}{\mb{R}}$ and $l,u\in\mb{R}^m: l\leq u$.  Then 
- a real zonotope is
+ a \emph{real zonotope} is
 %\begin{equation*}
 $\zon{W}{l}{u} = \lt\{W\zeta: \zeta\in\mb{R}^k,~\zeta_i\in[l_i,u_i]~\forall i\in \tup{k}\rt\}.$
 %\end{equation*}
-\end{definition}
+%\end{definition}
 %
 For simple examples of zonotopes like boxes and octagons, efficient
 interconversion between the zonotopic representation and halfspace
@@ -109,14 +109,14 @@ such that the inclusion holds.
 
 For fixed $V$ and $V^\pr$, we observe that~(\ref{eqn:tcz-inc}) is
 equivalent to as a set of convex constraints called second order
-conic constraints.  We define a second order conic constraint (SOCC)
-as follows.
+conic constraints.  A second order conic constraint (SOCC)
+is defined as follows.
 %
-\begin{definition}[SOCC]
+%\begin{definition}[SOCC]
 A constraint of the form $\|Ax\|_{2}+Fx+b\leq 0$ on an $n$-dimensional
 variable $x$, given $A,F\in\mat{n}{k}{\realset}$ and $b\in\mb{R}^k$, is
 a second order conic constraint.
-\end{definition}
+%\end{definition}
 %
 We also note that linear inequalities and equalities can be expressed
 in the form of SOCC described above.  Our aforementioned observation
