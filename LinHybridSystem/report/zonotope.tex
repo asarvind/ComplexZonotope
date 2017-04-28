@@ -32,29 +32,29 @@ halfspace representation of a zonotope can be exponentially large,
 compared to the above generator representation.
 
 Zonotopes are closed under linear transformations and Minkowski sums, which can be computed efficiently.  Hence, zonotopes are
-considered efficient for reachability analysis of linear systems.  Nevertheless
+considered efficient for reachability analysis of linear systems.  Nevertheless,
 a major drawback of zonotopes is that their intersection with sets defined by linear
-constraints need not be zonotopes.  Also, there is no unique smallest
-zonotope that overapproximates such intersections.  However, we observe that when the linear constraints
-constitute a sub-parallelotope with a template aligned with that of
-the zonotope, their intersection can be exactly computed.  This is
-also the reason we considered the case of staying conditions and guards specified as sub-parallelotopes 
-in the class of affine hybrid systems under study.  As a simple example, the intersection of
-$\zon{\lt[\begin{array}{l l}1 & 0 \\ 0 &
-      1\end{array}\rt]}{\lt[\begin{array}{c}-1\\ -1\end{array}\rt]}{\lt[\begin{array}{c}2\\ 2\end{array}\rt]}$
-with $x_1\leq 1~\wedge~x_2\geq 0.5$ gives $\zon{\lt[\begin{array}{l
-        l}1 & 0 \\ 0 &
-      1\end{array}\rt]}{\lt[\begin{array}{c}-1\\ 0.5\end{array}\rt]}{\lt[\begin{array}{c}1\\ 2\end{array}\rt]}$.
-The general case is described in the following lemma.
-%
-\begin{lemma}~\label{lem:motivation}
-Let $K\in\mat{k}{n}{R}$ such that $k\leq n$ and $\lt(KK^T\rt)$ is
-non-singular.  Then
-\[
-\zon{\pinv{K}}{l}{u} \bigcap \sptope{K}{\wh{l}}{\wh{u}}
-= \zon{K}{l\bigvee \wh{l}}{u\bigwedge \wh{u}}
-\]
-\end{lemma}
+constraints need not be zonotopes.  %% Also, there is no unique smallest
+%% zonotope that overapproximates such intersections.  However, we observe that when the linear constraints
+%% constitute a sub-parallelotope with a template aligned with that of
+%% the zonotope, their intersection can be exactly computed.  This is
+%% also the reason we considered the case of staying conditions and guards specified as sub-parallelotopes 
+%% in the class of affine hybrid systems under study.  As a simple example, the intersection of
+%% $\zon{\lt[\begin{array}{l l}1 & 0 \\ 0 &
+%%       1\end{array}\rt]}{\lt[\begin{array}{c}-1\\ -1\end{array}\rt]}{\lt[\begin{array}{c}2\\ 2\end{array}\rt]}$
+%% with $x_1\leq 1~\wedge~x_2\geq 0.5$ gives $\zon{\lt[\begin{array}{l
+%%         l}1 & 0 \\ 0 &
+%%       1\end{array}\rt]}{\lt[\begin{array}{c}-1\\ 0.5\end{array}\rt]}{\lt[\begin{array}{c}1\\ 2\end{array}\rt]}$.
+%% The general case is described in the following lemma.
+%% %
+%% \begin{lemma}~\label{lem:motivation}
+%% Let $K\in\mat{k}{n}{R}$ such that $k\leq n$ and $\lt(KK^T\rt)$ is
+%% non-singular.  Then
+%% \[
+%% \zon{\pinv{K}}{l}{u} \bigcap \sptope{K}{\wh{l}}{\wh{u}}
+%% = \zon{K}{l\bigvee \wh{l}}{u\bigwedge \wh{u}}
+%% \]
+%% \end{lemma}
 %
 To incorporate the possibly complex (having real and imaginary parts)
 eigenstructure of linear maps while computing invariants, the complex
