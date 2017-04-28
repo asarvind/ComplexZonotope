@@ -81,9 +81,9 @@ $= \gcz{\lt[V~~V^\pr\rt]}{c+c^\pr}{\ColumnJoin{s}{s^\pr}}{\lt[W~~W^\pr\rt]}{\Col
 %
 \item The limits of the projection of an augmented complex zonotope along
 any direction can be computed as follows. Let $V\in\mat{n}{m}{\mb{C}}$ and $v\in\realset^n$.  Then,
-\[
+\begin{equation}\label{lem:polylimits-acz}
 \max_{x\in\gcz{V}{c}{s}{W}{l}{u}}v^Tx = v^T\lt(c+W\frac{l+u}{2}\rt)+\lt|v^T[V~~W]\rt|\lt(\ColumnJoin{s}{\frac{u-l}{2}}\rt)
-\]
+\end{equation}
 \end{enumerate}
 %
 %\begin{lemma}[Linear transformation and Minkowski sum]
@@ -156,7 +156,7 @@ $\lt(\minaffine{u}{\wh{u}}\rt)_i = \left\{
 u_i~~\text{if}~\wh{u}_i=\inf
 \end{array}
 \right..$
-Similarly, let us define another binaray function       
+Similarly, let us define another binary function       
 $\maxaffinefunc:\realset^k\times\comprealset^k$,
 called \emph{max-approximation} function, as follows.  For
 $l\in\realset^k$ and $\wh{l}\in\comprealset^k$,
