@@ -7,7 +7,7 @@ pdf: main.tex
 
 
 add: 
-	make clean; git add Makefile main.tex macros.tex ref.bib prelims.tex zonotope.tex acz.tex PositiveInvariance.tex benchmarks.tex 
+	make clean; git add Makefile main.tex macros.tex ref.bib prelims.tex zonotope.tex cztope.tex PositiveInvariance.tex benchmarks.tex 
 
 add1:
 	git add intro.tex contribution.tex conclusion.tex appendix.tex
