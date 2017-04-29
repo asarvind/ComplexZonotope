@@ -1,0 +1,23 @@
+
+\section{Proofs in Section~\ref{}}
+%
+\subsection*{Proof of Lemma~\ref{lem:motivation}}
+\begin{proof}
+Firstly, we prove $\zon{\pinv{K}}{l}{u} \bigcap
+\sptope{K}{\wh{l}}{\wh{u}} \subseteq \zon{K}{l\bigvee
+  \wh{l}}{u\bigwedge \wh{u}}$.  Let $x\in\zon{\pinv{K}}{l}{u} \bigcap
+\sptope{K}{\wh{l}}{\wh{u}}$.  Then, $x=\pinv{K}\zeta:
+\wh{l}\leq\zeta\leq \wh{u}$.  Since $x\in\sptope{K}{\wh{l}}{\wh{u}}$, so
+$l\leq K\lt(\pinv{K}\zeta\rt)\leq u$ $\dimp$ $l\leq \zeta\leq u$.  So,
+$l\bigvee \wh{l}\leq \zeta\leq u\bigwedge\wh{u}$.  Hence, $x\in\zon{K}{l\bigvee
+  \wh{l}}{u\bigwedge \wh{u}}$.
+
+Next, we show $\zon{\pinv{K}}{l}{u} \bigcap \sptope{K}{\wh{l}}{\wh{u}}
+\supseteq \zon{K}{l\bigvee \wh{l}}{u\bigwedge \wh{u}}$. Let
+$x=\pinv{K}\zeta\in\zon{K}{l\bigvee \wh{l}}{u\bigwedge \wh{u}}$.
+Then, $l\bigvee\wh{l}\leq \zeta = K\lt(\pinv{K}\zeta\rt)=Kx\leq
+u\bigwedge\wh{u}$.  Since $l\leq l\bigvee\wh{l} \zeta\leq u\bigwedge
+\wh{u}\leq u$, so $x\in \zon{\pinv{K}}{l}{u}$.  Since $\wh{l}\leq
+l\bigvee\wh{l} Kx\leq u\bigwedge \wh{u}\leq \wh{u}$, $x\in
+\zon{\pinv{K}}{l}{u}$, so $x\in\sptope{K}{\wh{l}}{\wh{u}}$.
+\end{proof}

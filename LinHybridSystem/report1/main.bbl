@@ -1,0 +1,138 @@
+\begin{thebibliography}{10}
+
+\bibitem{tcz2017}
+A.~Adimoolam and T.~Dang.
+\newblock Template complex zonotopes for stability and invariant computation.
+\newblock In {\em American Control Conference (ACC), 2017}. IEEE, 2017.
+
+\bibitem{adimoolam2016using}
+A.~S. Adimoolam and T.~Dang.
+\newblock Using complex zonotopes for stability verification.
+\newblock In {\em American Control Conference (ACC), 2016}, pages 4269--4274.
+  IEEE, 2016.
+
+\bibitem{Bensalem2000}
+S.~Bensalem, M.~Bozga, J.-C. Fernandez, L.~Ghirvu, and Y.~Lakhnech.
+\newblock A transformational approach for generating non-linear invariants.
+\newblock In {\em International Static Analysis Symposium}, pages 58--72.
+  Springer, 2000.
+
+\bibitem{HybridFluctuat}
+O.~Bouissou, E.~Goubault, S.~Putot, K.~Tekkal, and F.~Vedrine.
+\newblock Hybridfluctuat: A static analyzer of numerical programs within a
+  continuous environment.
+\newblock In {\em International Conference on Computer Aided Verification},
+  pages 620--626. Springer, 2009.
+
+\bibitem{colonSriramSipma2003}
+M.~A. Col{\'o}n, S.~Sankaranarayanan, and H.~B. Sipma.
+\newblock Linear invariant generation using non-linear constraint solving.
+\newblock In {\em International Conference on Computer Aided Verification},
+  pages 420--432. Springer, 2003.
+
+\bibitem{CousotHalbwachs78}
+P.~Cousot and N.~Halbwachs.
+\newblock Automatic discovery of linear restraints among variables of a
+  program.
+\newblock In {\em Conference Record of the Fifth Annual ACM SIGPLAN-SIGACT
+  Symposium on Principles of Programming Languages}, pages 84--97, Tucson,
+  Arizona, 1978. ACM Press, New York, NY.
+
+\bibitem{Gawlitza}
+T.~Dang and T.~M. Gawlitza.
+\newblock Template-based unbounded time verification of affine hybrid automata.
+\newblock In {\em Asian Symposium on Programming Languages and Systems}, pages
+  34--49. Springer, 2011.
+
+\bibitem{Fluctuat}
+D.~Delmas, E.~Goubault, S.~Putot, J.~Souyris, K.~Tekkal, and F.~V{\'e}drine.
+\newblock Towards an industrial use of fluctuat on safety-critical avionics
+  software.
+\newblock In {\em International Workshop on Formal Methods for Industrial
+  Critical Systems}, pages 53--69. Springer, 2009.
+
+\bibitem{FLD+11}
+G.~Frehse, C.~Le~Guernic, A.~Donz\'e, S.~Cotton, R.~Ray, O.~Lebeltel,
+  R.~Ripado, A.~Girard, T.~Dang, and O.~Maler.
+\newblock Spaceex: Scalable verification of hybrid systems.
+\newblock In {\em Proc. 23rd International Conference on Computer Aided
+  Verification (CAV)}, LNCS. Springer, 2011.
+
+\bibitem{DBLP:conf/cav/GhorbalGP09}
+K.~Ghorbal, E.~Goubault, and S.~Putot.
+\newblock The zonotope abstract domain taylor1+.
+\newblock In {\em Computer Aided Verification, 21st International Conference,
+  {CAV} 2009, Grenoble, France, June 26 - July 2, 2009. Proceedings}, pages
+  627--633, 2009.
+
+\bibitem{heinz2014benchmark}
+T.~Heinz, J.~Oehlerking, and M.~Woehrle.
+\newblock Benchmark: Reachability on a model with holes.
+\newblock In {\em ARCH@ CPSWeek}, pages 31--36, 2014.
+
+\bibitem{jeannet2009apron}
+B.~Jeannet and A.~Min{\'e}.
+\newblock Apron: A library of numerical abstract domains for static analysis.
+\newblock In {\em Computer Aided Verification}, pages 661--667. Springer, 2009.
+
+\bibitem{makhlouf2014networked}
+I.~B. Makhlouf and S.~Kowalewski.
+\newblock Networked cooperative platoon of vehicles for testing methods and
+  verification tools.
+\newblock In {\em ARCH@ CPSWeek}, pages 37--42, 2014.
+
+\bibitem{DBLP:conf/pado/Mine01}
+A.~Min{\'{e}}.
+\newblock A new numerical abstract domain based on difference-bound matrices.
+\newblock In {\em Programs as Data Objects, Second Symposium, {PADO} 2001,
+  Aarhus, Denmark, May 21-23, 2001, Proceedings}, pages 155--172, 2001.
+
+\bibitem{differentialInvariantPlatzer}
+A.~Platzer and E.~M. Clarke.
+\newblock Computing differential invariants of hybrid systems as fixedpoints.
+\newblock In {\em International Conference on Computer Aided Verification},
+  pages 176--189. Springer, 2008.
+
+\bibitem{prajna2004safety}
+S.~Prajna and A.~Jadbabaie.
+\newblock Safety verification of hybrid systems using barrier certificates.
+\newblock In {\em International Workshop on Hybrid Systems: Computation and
+  Control}, pages 477--492. Springer, 2004.
+
+\bibitem{rakovic2004computation}
+S.~Rakovic, P.~Grieder, M.~Kvasnica, D.~Mayne, and M.~Morari.
+\newblock Computation of invariant sets for piecewise affine discrete time
+  systems subject to bounded disturbances.
+\newblock In {\em Decision and Control, 2004. CDC. 43rd IEEE Conference on},
+  volume~2, pages 1418--1423. IEEE, 2004.
+
+\bibitem{tiwariRodriguezCarbonellPolynomialInvariants}
+E.~Rodr{\'\i}guez-Carbonell and A.~Tiwari.
+\newblock Generating polynomial invariants for hybrid systems.
+\newblock In {\em International Workshop on Hybrid Systems: Computation and
+  Control}, pages 590--605. Springer, 2005.
+
+\bibitem{Sankaranarayanan+Dang+Ivancic-08-Symbolic}
+S.~Sankaranarayanan, T.~Dang, and F.~Ivancic.
+\newblock Symbolic model checking of hybrid systems using template polyhedra.
+\newblock In {\em TACAS}, volume 4963 of {\em Lecture Notes in Computer
+  Science}, pages 188--202. Springer-Verlag, 2008.
+
+\bibitem{Sriram}
+S.~Sankaranarayanan, H.~B. Sipma, and Z.~Manna.
+\newblock Constructing invariants for hybrid systems.
+\newblock In {\em International Workshop on Hybrid Systems: Computation and
+  Control}, pages 539--554. Springer, 2004.
+
+\bibitem{SriramSipma2004}
+S.~Sankaranarayanan, H.~B. Sipma, and Z.~Manna.
+\newblock Non-linear loop invariant generation using gr{\"o}bner bases.
+\newblock {\em ACM SIGPLAN Notices}, 39(1):318--329, 2004.
+
+\bibitem{Tiwari2001}
+A.~Tiwari, H.~Rue{\ss}, H.~Sa{\"\i}di, and N.~Shankar.
+\newblock A technique for invariant generation.
+\newblock {\em Tools and Algorithms for the Construction and Analysis of
+  Systems}, pages 113--127, 2001.
+
+\end{thebibliography}
