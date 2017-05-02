@@ -49,8 +49,7 @@ We consider a state set $\hybridset$ given as, for a location
 \end{split}
 \vspace{-1em}
 \end{align}
-(after intersection with staying conditions and affine transformation,
-variables are:)
+/* intersection with staying conditions and one continuous step  */
 \vspace{-1em}
 \begin{align}
 \begin{split}
@@ -62,17 +61,18 @@ variables are:)
   \ColumnJoin{\minaffine{u_\loc}{\stay^+_\loc)}}{~~~~~~~~~u^{in}_\loc~~~}
 \end{split}
 \end{align}
-(overapproximation after affine transformation:)
+/*  inclusion condition */
 \begin{align}
+\begin{split}
 & \gcz{\lt[\begin{array}{cc}\map_\loc V_\loc & ~~V^{in}_\loc\end{array}\rt]}{c^\pr_\loc}{s^\pr_\loc}
           {\lt[\map_\loc\pinv{\ptemplate}_\loc~~W^{in}_\loc\rt]}{l^\pr_\loc}{u^\pr_\loc}
  \order
-   \gcz{V_\loc}{c_\loc}{s_\loc}{\pinv{\ptemplate}_\loc}{l^\dpr_\loc}{u^\dpr_\loc}
-\end{align}
-(post-transition inclusion after intersection with staying conditions:)
-\begin{align}
+   \gcz{V_\loc}{c_\loc}{s_\loc}{\pinv{\ptemplate}_\loc}{l^\dpr_\loc}{u^\dpr_\loc} \\
+%\end{align}
+%\begin{align}
 & \maxaffine{l^\dpr_\loc}{\stay^-_\loc}\geq l_\loc~\text{and}~~
 \minaffine{u^\dpr_\loc}{\stay^+_\loc}\leq u_\loc.
+\end{split}
  \end{align}
 \item For any edge $\edge\in\edgeset$, the inclusion
   $\edgetransition{\edge}\lt(\hybridset_{\preloc{\edge}}\rt)
@@ -88,7 +88,7 @@ variables are:)
   that}
 \end{split}
 \end{align}
-(affine transformation after intersection with staying conditions and guards:)
+/* intersection with staying condition and guard of current location */
 \vspace{-0.9em}
 \begin{align}
 & c^\pr_\edge = \edgemap_\edge c_{\preloc{\edge}}+c^{in}_\edge,~~s^\pr_\edge =
@@ -100,15 +100,12 @@ variables are:)
   \ColumnJoin{\maxaffine{l_{\preloc{\edge}}}{\stay^-_{\preloc{\edge}}\bigvee\loweredgebound{\edge}}}{~~~~~~~~~l^{in}_{\edge}~~~},~~u^\pr =
   \ColumnJoin{\minaffine{u_{\preloc{\edge}}}{\stay^+_{\preloc{\edge}}\bigwedge\upperedgebound{\edge}}}{~~~~~~~~~u^{in}_\edge~~~}
 \end{align}
-(overapproximation after affine transformation:)
+/*  intersection with staying condition of target location and inclusion condition */
 \begin{align}
 & \gcz{\lt[\edgemap_\edge V_{\preloc{\edge}}~~V^{in}_{\edge}\rt]}{c^\pr_\edge}{s^\pr_\edge}
           {\lt[\edgemap_\edge\pinv{\ptemplate}_{\preloc{\edge}}~~W^{in}_\edge\rt]}{l^\pr_\edge}{u^\pr_\edge}
  \order
-   \gcz{V_{\postloc{\edge}}}{c_{\postloc{\edge}}}{s_{\postloc{\edge}}}{\pinv{\ptemplate}_{\postloc{\edge}}}{l^\dpr_\edge}{u^\dpr_\edge}
-\end{align}
-(post-transition intersection with staying conditions and inclusion)
-\begin{align}
+   \gcz{V_{\postloc{\edge}}}{c_{\postloc{\edge}}}{s_{\postloc{\edge}}}{\pinv{\ptemplate}_{\postloc{\edge}}}{l^\dpr_\edge}{u^\dpr_\edge} \nonumber \\
 & \maxaffine{l^\dpr_\edge}{\stay^-_{\postloc{\edge}}}\geq l_{\postloc{\edge}}~\text{and}~~
 \minaffine{u^\pr_\edge}{\stay^+_{\postloc{\edge}}}\leq u_{\postloc{\edge}}.
 \end{align}
