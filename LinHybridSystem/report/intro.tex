@@ -1,11 +1,11 @@
 One of the most important requirements in the design of embedded and cyber-physical systems is safety which can be roughly stated as the system never enters a bad state. Safety verification for such systems are known to be computationally challenging due to the complexity in the interactions between their heterogenous components with mixed (continuous and discrete) dynamics. In this paper, we focus on the problem of finding invariants for hybrid systems which are mathematical widely recognized as suitable for modelling embedded and cyber-physical systems. An invariant is a property that is satisfied in every state that the system can reach. 
-Therefore a common approach for proving a safety property is to find an invariant that implies the safety property. Invariant computation has been studied extensively in the context of abstract interpretation for program analysis (see for example~\cite{CousotCousot76-1,Bensalem2000,Tiwari2001,SriramSipma2004,colonSriramSipma2003,Fluctuat} and the techniques developed for generating invariants of programs have been extended to hybrid systems \cite{Sriram,Jeannet,tiwariRodriguezCarbonellPolynomialInvariants,Goubault,HybridFluctuat,differentialInvariantPlatzer,Gawlitza}. Barrier certificates \cite{prajna2004safety} are closely related to invariants in the sense that they describe a boundary that the system starting from a given initial set will never cross to enter a region containing bad states. Another common approach to safety verification is to compute or over-approximate the reachable set of the system. Reachability computation techniques have been developed for continuous and hybrid systems, and many of such techniques are based on iterative approximation on a step-by-step basis and can be thought of as a set-based extension numerical integration. A major drawback of this approach, inherent to undecidability of general hybrid systems with non-trivial dynamics, is that such an iterative procedure may not terminate and thus can only be used for bounded-time safety properties (when the over-approximation error accumulation is not too serious that the safety can be decided). Invariant and barrier certificate based approaches by contrast consider conditions that invariants or barrier certificates should satisfy at any time. Although solving these conditions often involves fixed point computation, by exploiting the structure of the dynamics (such as eigen-structures of linear systems) one can derive meaningful conditions which can significantly reduce the number of iterations until convergence.
+Therefore a common approach for proving a safety property is to find an invariant that implies the safety property. Invariant computation has been studied extensively in the context of abstract interpretation for verification of transition systems and  program analysis (see for example~\cite{CousotHalbwachs78,DBLP:journals/fmsd/BensalemL99,DBLP:conf/tacas/TiwariRSS01,DBLP:conf/cav/ColonSS03,DBLP:conf/sas/Goubault13} and the techniques developed for generating invariants of programs have been extended to continuous and hybrid systems \cite{DBLP:conf/hybrid/SankaranarayananSM04,jeannet2009apron,DBLP:conf/hybrid/Rodriguez-CarbonellT05,DBLP:conf/cdc/SassiGS14,DBLP:journals/tecs/AllamigeonGSGP16,HybridFluctuat,DBLP:conf/vmcai/SogokonGJP16,DBLP:conf/aplas/DangG11}. Barrier certificates \cite{prajna2004safety} are closely related to invariants in the sense that they describe a boundary that the system starting from a given initial set will never cross to enter a region containing bad states. Another common approach to safety verification is to compute or over-approximate the reachable set of the system. Reachability computation techniques have been developed for continuous and hybrid systems, and many of such techniques are based on iterative approximation on a step-by-step basis and can be thought of as a set-based extension numerical integration. A major drawback of this approach, inherent to undecidability of general hybrid systems with non-trivial dynamics, is that such an iterative procedure may not terminate and thus can only be used for bounded-time safety properties (when the over-approximation error accumulation is not too serious that the safety can be decided). Invariant and barrier certificate based approaches by contrast consider conditions that invariants or barrier certificates should satisfy at any time. Although solving these conditions often involves fixed point computation, by exploiting the structure of the dynamics (such as eigen-structures of linear systems) one can derive meaningful conditions which can significantly reduce the number of iterations until convergence.
 
 \input{contribution}
 
 \emph{Related work.}  Before continuing, we discuss the relation of our work with the existing works. For hybrid systems verification, convex polyhedra~\cite{CousotHalbwachs78,jeannet2009apron}, and their special classes such as
 zones~\cite{DBLP:conf/pado/Mine01},
-octagons~\cite{DBLP:journals/lisp/Mine06}, zonotopes~\cite{HSCC05} and
+octagons~\cite{DBLP:journals/lisp/Mine06}, zonotopes~\cite{DBLP:conf/hybrid/Girard05,DBLP:conf/eucc/MaigaCRT14} and
 tropical polyhedra~\cite{DBLP:conf/sas/AllamigeonGG08} are the most
 commonly used set representations. During the analysis which requires
 operations under which a set representation is not closed (such as the
@@ -14,15 +14,15 @@ intersection for zonotopes) the complexity of generated sets increases
 rapidly in order to guarantee a desired error bound. One way to
 control this complexity increase, face normal vectors or generators
 are fixed, which led to template convex
-polyhedra \cite{Sankaranarayanan+Dang+Ivancic-08-Symbolic,Gawlitza}. Although
-our template complex zonotopes proposed in~\cite{arvind2016lis} do not
+polyhedra \cite{Sankaranarayanan+Dang+Ivancic-08-Symbolic,DBLP:conf/aplas/DangG11}. Although
+our template complex zonotopes proposed in~\cite{tcz2017} do not
 belong to the class of convex polyhedra, they follow the same
 spirit. Set representations defined by non-linear constraints include
-ellipsoids~\cite{KurzhanskiVaraiya00}, polynomial
-inequalities\cite{bagrodzafSAS05} et
+ellipsoids~\cite{Kurzhanski2000201}, polynomial
+inequalities\cite{DBLP:conf/sas/BagnaraRZ05} et
 equalities~\cite{Rodriguez-Carbonell:2007}, quadratic templates and
 piecewise quadratic
-templates\cite{Feron2010,AdjeGaubertGoubaultESOP2010,AdjeHSCC2017},
+templates\cite{DBLP:conf/esop/AdjeGG10,DBLP:conf/hybrid/RouxJGF12,DBLP:conf/fm/RouxG14,DBLP:conf/hybrid/Adje17},
 which are used for computing non-linear invariants. A major problem
 that the template based approach faces is finding good templates. As
 it will become clear later, using template complex zonotopes and the
@@ -31,8 +31,10 @@ eigen-structures of linear dynamics which reflects the contraction or
 expansion of a set by the dynamics, allows requiring only few of steps
 until convergence to an invariant.
 
-The complex zonotopes we proposed in~\cite{arvind2016lis} extend usual zonotopes to the complex domain, and geometrically speaking they are Minkowski sum of line segments and some ellipsoids.
-This extension is very similar in spirit to quadratic zonotopes~\cite{DBLP:conf/aplas/AdjeGW15} and more generally polynomial zonotopes~\cite{althoff2013}. Nevertheless, while a polynomial zonotope is a set-valued polynomial function of \emph{intervals}, a complex zonotope is a set-valued function of unit \emph{circles} in the complex plane. Our idea of coupling additional linear constraints with zonotopes is inspired by the work on constrained zonotopes proposed in~\cite{DBLP:conf/cav/GhorbalGP09} for intersection computation.
+The complex zonotopes we proposed in~\cite{adimoolamACC2016} extend usual zonotopes to the complex domain, and geometrically speaking they are Minkowski sum of line segments and some ellipsoids.
+This extension is very similar in spirit to quadratic zonotopes~\cite{DBLP:conf/aplas/AdjeGW15} and more generally polynomial zonotopes~\cite{DBLP:conf/hybrid/Althoff13}. Nevertheless, while a polynomial zonotope is a set-valued polynomial function of \emph{intervals}, a complex zonotope is a set-valued function of unit \emph{circles} in the complex plane. Our idea of coupling additional linear constraints with zonotopes is inspired by the work on constrained zonotopes proposed in~\cite{DBLP:conf/cav/GhorbalGP09} for intersection computation.
+
+Intersection: ~\cite{DBLP:journals/mics/MaigaRTC14}
 
 \emph{Organization.}  The rest of the paper is organized as follows.  Firstly, we explain
 some of the mathematical notation used in this paper.  Then in
