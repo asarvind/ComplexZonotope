@@ -79,26 +79,25 @@ S_3\subseteq S_1\oplus\lt(S_2\cap S_3\rt)$.
  So, based on Lemma~\ref{supp-inclusion}, it sufficient to prove that
  for any $v\in\realset^n$, $\support{w}{v}{\lt(S_1\oplus
    S_2\rt)\bigcap S_3}\leq \support{w}{v}{S_1\oplus\lt(S_2\cap
-   S_3\rt)}$.
-
-Let us define $a = \support{0}{v}{S_1}$, $b=\support{w}{v}{S_2}$ and
-$c = \support{w}{v}{S_3}$.  It is easy to see that if a point belongs
-to a set, then relative to that point, the support in any direction is
-always greater than zero.  Since $w\in S_2\bigcap S_3$, so $b\geq 0$
-and $c\geq 0$.  Since, $0\in S_1$, so also $a\geq 0$.  Also, the
-support of the intersection of two closed sets relative to $w$ is the
-minimum of the support of the two sets relative to $w$.  So,
-$\support{w}{v}{\lt(S_1\oplus S_2\rt)\bigcap S_3}$ $=
-\min\lt(\support{w}{v}{S_1\oplus S_2},\support{w}{v}{S_3}\rt)$.  As
-$w$ can be written as $w+0$, so the above equals
-$\min\lt(\support{0}{v}{S_1}+\support{w}{v}{S_2},\support{w}{v}{S_3}\rt)
-= \min(a+b,c)$.  On the other hand, by a similar computation, we can
-show $\support{w}{v}{S_1\oplus\lt(S_2\cap S_3\rt)} = a+min(b,c)$.  So,
-we need to show $\min(a+b,c)\leq a+min(b,c)$.  We prove this in two
-cases. Case 1: Let $b\geq c$.  In this case, since $a\geq 0$ and
-$b\geq c$, so $\min(a+b,c) = c \leq a+c = a+\min(b,c)$.  Case 2: Let
-$b\leq c$.  In this case, $\min(a+b,c)\leq a+b = a+\min(b,c)$, since
-$b=min(b,c)$.
+   S_3\rt)}$.  Let us define $a = \support{0}{v}{S_1}$,
+ $b=\support{w}{v}{S_2}$ and $c = \support{w}{v}{S_3}$.  It is easy to
+ see that if a point belongs to a set, then relative to that point,
+ the support in any direction is always greater than zero.  Since
+ $w\in S_2\bigcap S_3$, so $b\geq 0$ and $c\geq 0$.  Since, $0\in
+ S_1$, so also $a\geq 0$.  Also, the support of the intersection of
+ two closed sets relative to $w$ is the minimum of the support of the
+ two sets relative to $w$.  So, $\support{w}{v}{\lt(S_1\oplus
+   S_2\rt)\bigcap S_3}$ $= \min\lt(\support{w}{v}{S_1\oplus
+   S_2},\support{w}{v}{S_3}\rt)$.  As $w$ can be written as $w+0$, so
+ the above equals
+ $\min\lt(\support{0}{v}{S_1}+\support{w}{v}{S_2},\support{w}{v}{S_3}\rt)
+ = \min(a+b,c)$.  On the other hand, by a similar computation, we can
+ show $\support{w}{v}{S_1\oplus\lt(S_2\cap S_3\rt)} = a+min(b,c)$.
+ So, we need to show $\min(a+b,c)\leq a+min(b,c)$.  We prove this in
+ two cases. Case 1: Let $b\geq c$.  In this case, since $a\geq 0$ and
+ $b\geq c$, so $\min(a+b,c) = c \leq a+c = a+\min(b,c)$.  Case 2: Let
+ $b\leq c$.  In this case, $\min(a+b,c)\leq a+b = a+\min(b,c)$, since
+ $b=min(b,c)$.
 \end{proof}
 
 Now, we define the following functions which are used latter to
