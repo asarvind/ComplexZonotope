@@ -95,10 +95,10 @@ $\min\lt(\support{0}{v}{S_1}+\support{w}{v}{S_2},\support{w}{v}{S_3}\rt)
 = \min(a+b,c)$.  On the other hand, by a similar computation, we can
 show $\support{w}{v}{S_1\oplus\lt(S_2\cap S_3\rt)} = a+min(b,c)$.  So,
 we need to show $\min(a+b,c)\leq a+min(b,c)$.  We prove this in two
-cases, $b\leq c$ and $b\geq c$. Case 1: Let $b\geq c$.  In this case,
-since $a\geq 0$, so
-$\min(a+b,c) = c \leq a+c = a+\min(b,c)$.
-Case 2: Let $b\leq c$.  In this case, $\min(a+b,c)\leq a+b = a+\min(b,c)$.
+cases. Case 1: Let $b\geq c$.  In this case, since $a\geq 0$ and
+$b\geq c$, so $\min(a+b,c) = c \leq a+c = a+\min(b,c)$.  Case 2: Let
+$b\leq c$.  In this case, $\min(a+b,c)\leq a+b = a+\min(b,c)$, since
+$b=min(b,c)$.
 \end{proof}
 
 Now, we define the following functions which are used latter to
