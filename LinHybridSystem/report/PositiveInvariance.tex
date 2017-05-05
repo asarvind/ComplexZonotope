@@ -1,7 +1,7 @@
 In this section, we first derive a sufficient condition for positive
 invariance of an augmented complex zonotope.  Also, we state
 conditions for containment of an initial set and satisfaction of
-polytopic safety constraints.  Latter, we explain how compute the
+polytopic safety constraints.  Latter, we explain how to compute the
 augmented complex zontope based on these conditions.
 
 Earlier, we had computed the linear transformations and Minkowki sums
@@ -9,12 +9,13 @@ of augmented complex zonotope and possible overapproximations of their
 intersection with subparalleotopic constraints.  Accordingly, we can
 compute the overapproximation of the reachable set of an augmented
 complex zonotope as another augmented complex zonotope.  Then, we
-utilize the partial order given in Definition~\ref{defn:gcz-order} to
+utilize the relation given in Definition~\ref{defn:gcz-order} to
   deduce a sufficient condition for positive invariance, as follows.
 %
 We consider a state set $\hybridset$ given as, for a location
   $\loc\in\locationset$,
-  $\hybridset_\loc=\real\lt(\gcz{V_\loc}{c_\loc}{s_\loc}{\pinv{\ptemplate}_\loc}{l_\loc}{u_\loc}\rt)$.
+  $\hybridset_\loc=\real\lt(\gcz{V_\loc}{c_\loc}{s_\loc}{\pinv{\ptemplate}_\loc}{l_\loc}{u_\loc}\rt)$
+  such that $V_\loc\conjtranspose{V_\loc}$ is invertible.
   Let us consider that the additive input for an intralocation
   transition in any location $\loc\in\locationset$ is overapproximated
   as
@@ -31,28 +32,33 @@ We consider a state set $\hybridset$ given as, for a location
 
 
 \begin{lemma}[Positive invariance]
-  The condition for positive invariance of the state set $\hybridset$
-  is the following.
-\begin{enumerate}
-\item For any location $\loc\in\locationset$, the inclusion
-  $\locationtransition{\loc}\lt(\hybridset_\loc\rt)\subseteq
-  \hybridset_\loc$ holds if all of the below statements are
+  %% The condition for positive invariance of the state set $\hybridset$
+  %% is the following.
+%\begin{enumerate}
+%\item 
+For all locations $\loc\in\locationset$ and all edges
+  $\edge\in\edgeset$, the inclusions
+  $\locationtransition{\loc}\lt(\hybridset_\loc\rt)\subseteq \hybridset_\loc$
+  and
+  $\edgetransition{\edge}\lt(\hybridset_{\preloc{\edge}}\rt) \subseteq \hybridset_{\postloc{\edge}}$
+  holds if $\forall \loc\in\locationset$ and
+  $\forall\edge\in\edgeset$, all of the below statements are
   collectively true.
 \begin{align}~\label{eqn:locinv}
 \begin{split}
-& \pinv{\ptemplate}_\loc c_\loc = 0~~\text{i.e., primary offset is orthogonal to
-  secondary template},\\
+& \lt|\pinv{V_\loc} c_\loc\rt|\leq s^\pr_\loc~~\lt(i.e.,~\Rightarrow
+0 \in\cz{V_\loc}{c_\loc}{s_\loc}\rt), \\
+\end{split}
+\vspace{-1em}
+\end{align}
+/* intersection with staying conditions and one continuous transition  */
+\vspace{-0.65em}
+\begin{align}
+\begin{split}
 &  \text{there exist real
     vectors}~
   c^\pr_\loc,s^\pr_\loc,l^\pr_\loc,u^\pr_\loc,l^\dpr_\loc,u^\dpr_\loc~\text{such
     that}\\
-\end{split}
-\vspace{-1em}
-\end{align}
-/* intersection with staying conditions and one continuous step  */
-\vspace{-1em}
-\begin{align}
-\begin{split}
 & c^\pr_\loc = \map_\loc c_\loc+c^{in}_\loc,~~s^\pr_\loc =
   \ColumnJoin{s_\loc}{s^{in}_\loc}\\
 & l^\pr_\loc =
@@ -74,25 +80,21 @@ We consider a state set $\hybridset$ given as, for a location
 \minaffine{u^\dpr_\loc}{\stay^+_\loc}\leq u_\loc.
 \end{split}
  \end{align}
-\item For any edge $\edge\in\edgeset$, the inclusion
-  $\edgetransition{\edge}\lt(\hybridset_{\preloc{\edge}}\rt)
-  \subseteq \hybridset_{\postloc{\edge}}$ holds if 
-  all of the below statements are collectively true.
-\begin{align}~\label{eqn:edgeinv}
-\begin{split}
-& \pinv{\ptemplate}_{\preloc{\edge}}c_{\preloc{\edge}} =
-  0~~\text{i.e., primary offset is orthogonal to
-  secondary template},\\
-& \text{there exist real
-    vectors}~c^\pr_{\postloc{\edge}},s^\pr_{\postloc{\edge}},l^\pr_{\postloc{\edge}},u^\pr_{\postloc{\edge}},l^\dpr_{\postloc{\edge}},u^\dpr_{\postloc{\edge}}~~\text{such
-  that}
-\end{split}
-\end{align}
-/* intersection with staying condition and guard of current location */
+%% \item For any edge $\edge\in\edgeset$, the inclusion
+%%   $\edgetransition{\edge}\lt(\hybridset_{\preloc{\edge}}\rt)
+%%   \subseteq \hybridset_{\postloc{\edge}}$ holds if 
+%%   all of the below statements are collectively true.
+/* intersection with staying condition and guard of current location
+and one discrete transition*/
 \vspace{-0.9em}
 \begin{align}
+\begin{split}
+& \text{there exist real
+    vectors}~c^\pr_{\postloc{\edge}},s^\pr_{\postloc{\edge}},l^\pr_{\postloc{\edge}},u^\pr_{\postloc{\edge}},l^\dpr_{\postloc{\edge}},u^\dpr_{\postloc{\edge}}~~\text{such
+  that}\\
 & c^\pr_\edge = \edgemap_\edge c_{\preloc{\edge}}+c^{in}_\edge,~~s^\pr_\edge =
   \ColumnJoin{s_{\preloc{\edge}}}{s^{in}_\edge}
+\end{split}
 \end{align}
 \vspace{-1.5em}
 \begin{align}
@@ -110,33 +112,29 @@ We consider a state set $\hybridset$ given as, for a location
 \minaffine{u^\pr_\edge}{\stay^+_{\postloc{\edge}}}\leq u_{\postloc{\edge}}.
 \end{align}
 \vspace{-1.5em}
-\end{enumerate}
+%\end{enumerate}
 \end{lemma}
 %
-Next, we state a sufficient condition for an augmented complex
-zonotopic state set to contain an initial set overapproximated by an
-augmented complex zonotope.  This is given by the inclusion relation
-between augmented complex zonotopes from Lemma~\ref{lem:gcz-gcz}.
-\begin{lemma}
+Next, for the augmented complex zonotopic state set to contain the
+initial set, we state the following sufficient condition based on the
+inclusion relation between augmented complex zonotopes from
+Lemma~\ref{lem:gcz-gcz}.
+%
  For a location $\loc \in\locationset$, $\mc{I}_\loc\subseteq
   \hybridset_\loc$ if,
 \begin{align}~\label{eqn:initcont}
 \gcz{V^I_\loc}{c^I_\loc}{s^I_\loc}{W^I_\loc}{l^I_\loc}{u^I_\loc}\order\gcz{V_\loc}{c_\loc}{s_\loc}{\pinv{\ptemplate}_\loc}{l_\loc}{u_\loc}.
 \end{align}
-\end{lemma}
 %
-For satisfaction of polytopic safety constraints by an augmented
-complex zonotope, the following lemma gives a sufficient condition,
-which is the reformulation of~(\ref{lem:polylimits-acz}) in
-the below context.
+For satisfaction of polytopic safety constraints, i.e., for a location
+  $\loc\in\locationset$, $\hybridset_\loc\subseteq \safeset_\loc$, the
+  following is a necessary and sufficient condition, which is a
+  reformulation of
+   ~(\ref{lem:polylimits-acz}). 
 %
-\begin{lemma}
-For any location $\loc\in\locationset$,
-  $\hybridset_\loc\subseteq \safeset_\loc$ if,
 \begin{align}~\label{eqn:safecont}
 T_\loc\lt(c_\loc+\pinv{\ptemplate}_\loc\lt(\frac{u_\loc+l_\loc}{2}\rt)\rt)+\lt|T\lt[V_\loc,~\pinv{\ptemplate}_\loc\rt]\rt|\ColumnJoin{\hspace{1.5em}s}{\frac{u_\loc-l_\loc}{2}}\leq d_\loc.
 \end{align}
-\end{lemma}
 %
 By simply collecting all the results of this section for computing a safe
 positive invariant, we state the following theorem.
