@@ -2,25 +2,57 @@
 %\section{Proofs in Section~\ref{}}
 %
 \subsection*{Proof of Lemma~\ref{lem:motivation}}
-\begin{proof}
 Firstly, we prove $\zon{\pinv{K}}{l}{u} \bigcap
 \sptope{K}{\wh{l}}{\wh{u}} \subseteq \zon{K}{l\bigvee
-  \wh{l}}{u\bigwedge \wh{u}}$.  Let $x\in\zon{\pinv{K}}{l}{u} \bigcap
+  \wh{l}}{u\bigwedge \wh{u}}$.\\  Let $x\in\zon{\pinv{K}}{l}{u} \bigcap
 \sptope{K}{\wh{l}}{\wh{u}}$.  Then, $x=\pinv{K}\zeta:
-\wh{l}\leq\zeta\leq \wh{u}$.  Since $x\in\sptope{K}{\wh{l}}{\wh{u}}$, so
-$l\leq K\lt(\pinv{K}\zeta\rt)\leq u$ $\dimp$ $l\leq \zeta\leq u$.  So,
+l\leq\zeta\leq u$.  Since $x\in\sptope{K}{\wh{l}}{\wh{u}}$, so also
+$\wh{l}\leq K\lt(\pinv{K}\zeta\rt)\leq \wh{u}$ $\dimp$ $\wh{l}\leq \zeta\leq \wh{u}$.  So,
 $l\bigvee \wh{l}\leq \zeta\leq u\bigwedge\wh{u}$.  Hence, $x\in\zon{K}{l\bigvee
   \wh{l}}{u\bigwedge \wh{u}}$.
 
-Next, we show $\zon{\pinv{K}}{l}{u} \bigcap \sptope{K}{\wh{l}}{\wh{u}}
-\supseteq \zon{K}{l\bigvee \wh{l}}{u\bigwedge \wh{u}}$. Let
+Next, we show $\zon{K}{l\bigvee \wh{l}}{u\bigwedge \wh{u}} \subseteq
+\zon{\pinv{K}}{l}{u} \bigcap \sptope{K}{\wh{l}}{\wh{u}}$. Let
 $x=\pinv{K}\zeta\in\zon{K}{l\bigvee \wh{l}}{u\bigwedge \wh{u}}$.
 Then, $l\bigvee\wh{l}\leq \zeta = K\lt(\pinv{K}\zeta\rt)=Kx\leq
-u\bigwedge\wh{u}$.  Since $l\leq l\bigvee\wh{l} \zeta\leq u\bigwedge
-\wh{u}\leq u$, so $x\in \zon{\pinv{K}}{l}{u}$.  Since $\wh{l}\leq
-l\bigvee\wh{l} Kx\leq u\bigwedge \wh{u}\leq \wh{u}$, $x\in
-\zon{\pinv{K}}{l}{u}$, so $x\in\sptope{K}{\wh{l}}{\wh{u}}$.
-\end{proof}
+u\bigwedge\wh{u}$.  Since $l\leq l\bigvee\wh{l} \leq \zeta\leq
+u\bigwedge \wh{u}\leq u$, so $x\in \zon{\pinv{K}}{l}{u}$.  Also,
+$\wh{l}\leq l\bigvee\wh{l} = \zeta = K\pinv{K}\zeta = Kx\leq
+u\bigwedge \wh{u}\leq \wh{u}$, $x\in \zon{\pinv{K}}{l}{u}$, hence
+$x\in\sptope{K}{\wh{l}}{\wh{u}}$.  So, $x\in\zon{\pinv{K}}{l}{u}
+\bigcap \sptope{K}{\wh{l}}{\wh{u}}$. \qed
+
+
+\subsection*{Proof of Theorem~\ref{thm:acz-int}}
+We are given $l\leq \maxaffine{l}{\wh{l}}$.  In this case, we can show
+by the definition of $\maxaffine{l}{\wh{l}}$ that
+$l\bigvee\wh{l}=\maxaffine{l}{\wh{l}}$. Similary, we can show
+$u\bigwedge \wh{u}=\minaffine{u}{\wh{u}}$.  Recall
+$\gcz{V}{c}{s}{\pinv{\ptemplate}}{l}{u}=\cz{V}{c}{s}\oplus\zon{\pinv{\ptemplate}}{l}{u}$.
+Furthermore, by Lemma~\ref{lem:motivation}, we get
+$\zon{\pinv{\ptemplate}}{\wh{l}}{\wh{u}}\bigcap\sptope{\ptemplate}{\wh{l}}{\wh{u}}$
+is equal to
+$\zon{\pinv{\ptemplate}}{l\bigvee\wh{l}}{u\bigwedge{\wh{l}}}$, which
+equals
+$\zon{\pinv{\ptemplate}}{\maxaffine{l}{\wh{l}}}{\minaffine{u}{\wh{u}}}$
+by what we have above.  So, provided $0\in S_1$ and $S_2\bigcap
+S_3\neq 0$, the proof is accomplished by substituting
+$S_1=\cz{V}{c}{s}$, $S_2=\zon{\pinv{\ptemplate}}{l}{u}$ and
+$S_3=\sptope{\ptemplate}{\wh{l}}{\wh{u}}$ in Lemma~\ref{gen-int}.  So
+we need to show $S_2=\zon{\pinv{\ptemplate}}{l}{u}$ and
+$S_3=\sptope{\ptemplate}{\wh{l}}{\wh{u}}$.  We write $0 =
+c-V\pinv{V}c$, and since $\lt|\pinv{V}c\rt|\leq s$ as given, so $0\in
+\cz{V}{c}{s}=S_1$.  Next, let
+$w=\pinv{\ptemplate}\maxaffine{l}{\wh{l}}$.  Since $l\leq
+\maxaffine{l}{\wh{l}}\leq \minaffine{u}{\wh{u}}\leq u$, so
+$w\in\zon{\pinv{\ptemplate}}{l}{u}= S_2$.  Also, $\ptemplate
+w=\ptemplate\pinv{\ptemplate}\maxaffine{l}{\wh{l}} =
+\maxaffine{l}{\wh{l}}$ and $\wh{l}\leq \maxaffine{l}{\wh{l}}\leq
+\minaffine{u}{\wh{u}}\leq \wh{u}$, so $w\in
+\sptope{\ptemplate}{\wh{l}}{\wh{u}}=S_3$.  So, $S_2\bigcap S_3\neq 0$,
+as it contains $w$.  Thus the required condition for using
+Lemma~\ref{gen-int} are satisfied. \qed
+
 
 \subsection*{Matrices in the first benchmark (robot with a saturated controller)}
 {\scriptsize 

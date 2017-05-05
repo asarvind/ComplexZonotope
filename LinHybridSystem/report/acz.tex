@@ -1,14 +1,14 @@
-An augmented complex zonotope is the Minkowski sum of a template
-complex zonotope and a real zonotope. In terms of expressivity, an
-augmented complex zonotope is slightly more general than template
-complex zonotopes.  But geometrically, the sets that can be described
-as real projections of augmented complex zonotopes can also be
-described as real projections of template complex zonotopes.  However,
-with augmented complex zonotopes, the intersection with
-subparallelotopic constraints can be succinctly specified, as we will
-see latter. Consequently, this representation is more convenient to
-derive conditions for computing invariants for the affine hybrid
-system.
+We now introduce an \emph{augmented complex zonotope}, which is a
+Minkowski sum of a template complex zonotope and a real zonotope. In
+terms of expressivity, an augmented complex zonotope is slightly more
+general than template complex zonotopes.  But geometrically, the sets
+that can be described as real projections of augmented complex
+zonotopes can also be described as real projections of template
+complex zonotopes.  However, with augmented complex zonotopes, the
+intersection with subparallelotopic constraints can be succinctly
+specified, as we will see latter. Consequently, this representation is
+more convenient to derive conditions for computing invariants for the
+affine hybrid system.
 %
 \begin{definition}[Augmented complex zonotope]
 Let $V\in\mat{n}{m}{C}$ called primary template, $W\in\mat{n}{k}{R}$
@@ -22,18 +22,17 @@ zonotope
 \end{equation*}
 \end{definition}
 %
-\subsection{Intersection with sub-parallelotope}
-In invariant computation, we have to overapproximate the intersection
-between the augmented complex zonotope and sub-parallelotopic
-constraints. We first discuss the intersection operation before
-discussing other operations. Note that due to the space limit, we do not include all the proofs but only those of the key results.
+We first discuss the intersection operation of an augmented complex
+zonotope with sub-parallelotopic constraints, before disucssing other
+operations.  Note that due to the space limit, we do not include all
+the proofs but only those of the key results.  
 
-For deriving a formula for the intersection, we first prove some results on
-intersection among convex sets. Let us define the support of a vector $v$ in a set
-$S\subset\realset^n$ relative to a point $w\in\realset^n$ as
-$\support{w}{v}{S}=\max_{x\in S}v^T\lt(x-w\rt)$.   The following
-lemma states a relationship between the support of vectors and inclusion
-between sets.
+For deriving a formula for the intersection, we first prove some
+results on intersection among convex sets. Let us define the support
+of a vector $v$ in a set $S\subset\realset^n$ relative to a point
+$w\in\realset^n$ as $\support{w}{v}{S}=\max_{x\in S}v^T\lt(x-w\rt)$.
+The following lemma states a relationship between the support of
+vectors and inclusion between sets.
 %
 \begin{lemma}~\label{supp-inclusion}
 Let $S_1,S_2\subseteq \realset^n$ be two closed convex sets such that
@@ -49,23 +48,23 @@ displacement in $S_1$ from $w$ along the direction of any
 vector $v$ is less than the maximum possible displacement in $S_2$
 from $w$ along the direction of the vector $v$.
 
-Recall that an augmented complex zonotope as a Minkowski sum of a
+Recall that an augmented complex zonotope is a Minkowski sum of a
 complex zonotope and a real zonotope, i.e.,
-$\cz{V}{c}{s}\oplus\zon{W}{l}{u}$.  From Lemma~\ref{lem:motivation}, we
-see that the intersection of a sub-parallelotope
+$\cz{V}{c}{s}\oplus\zon{W}{l}{u}$.  From Lemma~\ref{lem:motivation},
+we see that the intersection of a sub-parallelotope
 $\sptope{K}{\wh{l}}{\wh{u}}$ with a zonotope $\zon{W}{l}{u}$ can be
 computed when $W=\pinv{K}$.  This being the motivation, we want to
 find a condition under which we can overapproximate the intersection
-of an augmented complex zonotope with a sub-parallelotope
 $\lt(\cz{V}{c}{s}\oplus\zon{W}{l}{u}\rt)\bigcap\sptope{K}{\wh{l}}{\wh{u}}$
-by 
-$\cz{V}{c}{s}\oplus\lt(\zon{W}{l}{u}\bigcap\sptope{K}{\wh{l}}{\wh{u}}\rt)$, that is computing first the intersection (which can be done efficiently) and then the Minkowski sum.
-Indeed we can find the required condition for a more general case of any
-three closed convex sets sets $S_1,S_2,S_3$ (that is, find a condition under which
+by
+$\cz{V}{c}{s}\oplus\lt(\zon{W}{l}{u}\bigcap\sptope{K}{\wh{l}}{\wh{u}}\rt)$,
+that is computing first the intersection (which can be done
+efficiently) and then the Minkowski sum.  Indeed we can find the
+required condition for a more general case of any three closed convex
+sets sets $S_1,S_2,S_3$ (that is, find a condition under which
 $\lt(S_1\oplus S_2\rt)\bigcap S_3$ can be overapproximated by
-$S_1\oplus\lt(S_2\bigcap S_3\rt)$) and apply this result to
-augmented complex zonotopes. We state this
-condition as follows.
+$S_1\oplus\lt(S_2\bigcap S_3\rt)$) and apply this result to augmented
+complex zonotopes. We state this condition as follows.
 %
 \begin{lemma}~\label{gen-int}
 Let $S_1\subseteq \complexset^n$ and $S_2,S_3\in\realset^n$ be closed
@@ -82,20 +81,19 @@ $0\in S_1$, so $w=w+0\in S_1\oplus S_2\imp w\in
 Lemma~\ref{supp-inclusion}, it sufficient to prove that for all
 $v\in\realset^n$, $$\support{w}{v}{\lt(\real\lt(S_1\rt)\oplus
   S_2\rt)\bigcap S_3}\leq
-\support{w}{v}{\real\lt(S_1\rt)\oplus\lt(S_2\cap S_3\rt)}.$$  Let us
+\support{w}{v}{\real\lt(S_1\rt)\oplus\lt(S_2\cap S_3\rt)}.$$ Let us
 define $a = \support{0}{v}{\real\lt(S_1\rt)}$, $b=\support{w}{v}{S_2}$
 and $c = \support{w}{v}{S_3}$.  Since, $0\in\real\lt(S_1\rt)$, so
-$a=\max_{x\in\real\lt(S_1\rt)}v^Tx\geq v^T0 =0$, i.e., $a\geq 0$.  The
-support of the intersection of two closed real sets relative to a
-point $w$ is the minimum of the support of the two sets relative to
-$w$.  So, $\support{w}{v}{\lt(S_1\oplus S_2\rt)\bigcap S_3}$ $=
-\min\lt(\support{w}{v}{S_1\oplus S_2},\support{w}{v}{S_3}\rt)$.  As
-$w=w+0$, so the above equals
+$a=\max_{x\in\real\lt(S_1\rt)}v^Tx\geq v^T0 =0$, i.e., $a\geq 0$.
+Furthermore, $\support{w}{v}{\lt(\real\lt(S_1\rt)\oplus S_2\rt)\bigcap
+  S_3}$ $= \min\lt(\support{w}{v}{\real\lt(S_1\rt)\oplus
+  S_2},\support{w}{v}{S_3}\rt)$.  As $w=w+0$, so the above equals
 $\min\lt(\support{0}{v}{\real\lt(S_1\rt)}+\support{w}{v}{S_2},\support{w}{v}{S_3}\rt)
 = \min(a+b,c)$.  By a similar calculation, we can show
 $\support{w}{v}{\real\lt(S_1\rt)\oplus\lt(S_2\cap S_3\rt)} =
 a+min(b,c)$.  So, we need to prove that $\min(a+b,c)\leq a+min(b,c)$.
-Since $a\geq 0$, so $\min(a+b,c)\leq \min(a+b,a+c) = a+\min(b,c)$. \qed
+Since $a\geq 0$, so $\min(a+b,c)\leq \min(a+b,a+c) =
+a+\min(b,c)$. \qed
 \end{proof}
 
 Now we introduce the following functions which are used later to
@@ -126,7 +124,7 @@ l_i~~\text{if}~\wh{l}_i=-\infty
 The following theorem states that an overapproximation of the intersection
 of an augmented complex zonotope with a sub-parallelotope can be
 expressed using min and max approximation function.
-\begin{theorem}~\label{lem:acz-int}
+\begin{theorem}~\label{thm:acz-int}
 Given a sub-parallelotope $\sptope{\ptemplate}{\wh{l}}{\wh{u}}$ an
 augmented complex zonotope $\gcz{V}{c}{s}{\pinv{\ptemplate}}{l}{u}$
 such that $VV^T$ is non-singular, $\lt|\pinv{V}c\rt|\leq s$, $l\leq
@@ -134,36 +132,15 @@ such that $VV^T$ is non-singular, $\lt|\pinv{V}c\rt|\leq s$, $l\leq
 $\gcz{V}{c}{s}{\pinv{\ptemplate}}{l}{u}\bigcap\sptope{\ptemplate}{\wh{l}}{\wh{u}}\subseteq
 \gcz{V}{c}{s}{\pinv{\ptemplate}}{l\bigvee\wh{l}}{u\bigwedge\wh{u}}$.
 \end{theorem}
-\begin{proof}
-  Since, $\maxaffine{l}{\wh{l}}\leq l$ as given, while we know
-  $\maxaffine{l}{\wh{l}}\leq l\bigvee\wh{{l}}$, so
-  $l\bigvee\wh{l}=\maxaffine{l}{\wh{l}}$. Similary, we can show
-  $u\bigwedge \wh{u}=\minaffine{u}{\wh{u}}$.  We recall that
-  $\gcz{V}{c}{s}{\pinv{\ptemplate}}{l}{u}=\cz{V}{c}{s}\oplus\zon{\pinv{\ptemplate}}{l}{u}$.
-  Furthermore, by Lemma~\ref{lem:motivation}, we get
-  $\zon{\pinv{\ptemplate}}{\wh{l}}{\wh{u}}\bigcap\sptope{\ptemplate}{\wh{l}}{\wh{u}}$
-  is equal to
-  $\zon{\pinv{\ptemplate}}{l\bigvee\wh{l}}{u\bigwedge{\wh{l}}}$, which
-  equals
-  $\zon{\pinv{\ptemplate}}{\maxaffine{l}{\wh{l}}}{\minaffine{u}{\wh{u}}}$
-  by what we derived above.  So, provided the conditions in Lemma 4
-  are satisfied, i.e., $0\in S_1$ and $S_2\bigcap S_3\neq 0$, the
-  proof is accomplished by substituting $S_1=\cz{V}{c}{s}$,
-  $S_2=\zon{\pinv{\ptemplate}}{l}{u}$ and
-  $S_3=\sptope{\ptemplate}{\wh{l}}{\wh{u}}$ in the lemma.  The proof
-  that the conditions are satisfied as follows.  We write $0
-  = c-V\pinv{V}c$, and since $\lt|\pinv{V}c\rt|\leq s$ as given, so
-  $0\in \cz{V}{c}{s}=S_1$.  Next, we consider
-  $w=\pinv{\ptemplate}\maxaffine{l}{\wh{l}}$.  Since $l\leq
-  \maxaffine{l}{\wh{l}}\leq \minaffine{u}{\wh{u}}\leq u$, so
-  $w\in\zon{\pinv{\ptemplate}}{l}{u}= S_2$.  Also, $\ptemplate
-  w=\ptemplate\pinv{\ptemplate}\maxaffine{l}{\wh{l}} =
-  \maxaffine{l}{\wh{l}}$ and $\wh{l}\leq \maxaffine{l}{\wh{l}}\leq
-  \minaffine{u}{\wh{u}}\leq \wh{u}$, so $w\in
-  \sptope{\ptemplate}{\wh{l}}{\wh{u}}=S_3$.  So, $S_2\bigcap S_3\neq
-  0$, thus the required condition for Lemma~\ref{gen-int} to be
-  applied is satisfied. \qed
-\end{proof}
+\emph{Proof Sketch.}  Consider $S_1 = \cz{V}{c}{s}$, $S_2 =
+\zon{\pinv{\ptemplate}}{l}{u}$ and $S_3 =
+\sptope{\ptemplate}{\wh{l}}{\wh{u}}$.  First, we check that $0\in S_1$
+and $S_2\bigcap S_3\neq \emptyset$, and then we subsitute $S_1$, $S_2$
+and $S_3$ in Lemma~\ref{gen-int}.  To compute the intersection
+between $S_2$ and $S_3$, we use Lemma~\ref{lem:motivation}.  The
+detailed proof is in the appendix.\qed
+
+
 %
 %% To illustrate, the intersection of $\gcz{\lt[\begin{array}{cc}1+2i &
 %% 2+i\\1-2i & 2-i\\0 &
@@ -241,9 +218,45 @@ $\real\lt(\gcz{V}{c}{s}{W}{l}{u}\rt) = \real\lt(\cz{\lt[V~W\rt]}{c+W\lt(\frac{u+
 Because of the above relationship, checking the inclusion between the
 real projections of two augmented complex zonotopes amounts to
 checking the inclusion between real projections of two template
-complex zonotopes.  Recall the relation between template complex
-zonotopes that was a sufficient condition for inclusion.  We extend
-the relation to augmented complex zonotopes as follows.
+complex zonotopes.  Therefore, we first review an inclusion relation
+between template complex zonotopes, which was earlier stated
+in~\cite{tcz2017}.
+
+Unlike real zonotopes, a template complex zonotope can have a
+non-polyhedral real projection.  Therefore, in general, checking the
+exact inclusion between two template complex zonotopes amounts to
+solving a non-convex optimization problem, which could be
+computationally intractable.  Instead, a convex condition was proposed
+in~\cite{tcz2017}, which is sufficient to guarantee the inclusion
+between template complex zonotopes.  Here, we present this condition
+as a relation between template complex zonotopes.
+%
+\begin{definition}
+We define a relation ``$\order$'' between template complex zonotopes
+as\\ $\cz{V^\pr_{n\times m^\pr}}{c^\pr}{s^\pr}\order \cz{V_{n\times
+    m}}{c}{s}$ if all of the below statements are collectively true.
+\begin{align}~\label{eqn:tcz-inc}
+\begin{split}
+& \exists X\in\mat{m}{m^\pr}{\mb{C}}~\text{and}~y\in\mb{C}^{m}~\text{s.t.}\\
+& \transfer{V}{V^\pr}{s^\pr}{X},~~~\centertransfer{V}{c}{c^\pr}{y}\\
+& \scalebound{X}{y}{s}{m}{m^\pr}\leq 0\\
+\end{split}
+\end{align}
+\end{definition}
+%
+\begin{lemma}[Inclusion: template complex
+  zonotopes]~\label{lem:zon-zon} The
+inclusion $\cz{V^\pr}{c^\pr}{s^\pr}\subseteq \cz{V}{c}{s}$ holds if
+the relation $\cz{{V^\pr}}{c^\pr}{s^\pr}\order \cz{V}{c}{s}$ is true.
+\end{lemma}
+\emph{Proof idea.}
+We relate the combining
+coefficients of the two template complex zonotopes by a linear
+transformation, with appropriate bounds on the transformation matrix
+such that the inclusion holds.\qed
+
+We extend the above inclusion relation to augmented complex zonotopes,
+based on Lemma~\ref{lem:conversion} as follows.
 %
 \begin{definition}~\label{defn:gcz-order}
 We say that $\gcz{V^\pr}{c^\pr}{s^\pr}{W^\pr}{l^\pr}{u^\pr}\order
@@ -260,14 +273,37 @@ $\gcz{V^\pr}{c^\pr}{s^\pr}{W^\pr}{l^\pr}{u^\pr}\order \gcz{V}{c}{s}{W_{n\times
 k}}{l}{u}$ is true.
 \end{lemma}
 
-The intersection of an augmented complex zonotope with a
-subparallelotope involves the meet and join operations, as stated in
-Lemma~\ref{lem:acz-int}.  These operations are piecewise affine
-functions of their arguments, but not affine.  Hence, their
-composition with a convex function may be non-convex.  But since we
-are interested in deriving convex conditions for finding an invariant,
-in this regard, we define the following upper and lower bound
-functions for the join and meet operations, respectively. TOCHECK
+
+For fixed $V$ and $V^\pr$, we observe that~(\ref{eqn:tcz-inc}) is
+equivalent to a set of convex constraints called second order
+conic constraints.
+%
+%\begin{definition}[SOCC]
+Recall that A constraint of the form $\|Ax\|_{2}+Fx+b\leq 0$ on an $n$-dimensional
+variable $x$, given $A,F\in\mat{n}{k}{\realset}$ and $b\in\mb{R}^k$, is
+a second order conic constraint (SOCC).
+%\end{definition}
+%
+We also note that linear inequalities and equalities can be expressed
+in the form of SOCC described above. There are many convex optimization tools that can efficiently solve
+SOCC up to a high numerical precision. Our aforementioned observation
+about~(\ref{eqn:tcz-inc}) is consequently extended to augmented
+complex zonotopes and formalized as below.
+%
+\begin{proposition}~\label{lem:zon-socc}
+For constant $V$,$V^\pr$,$W$,$W^\pr$, the relation\\
+$\gcz{V^\pr}{c^\pr}{s^\pr}{W^\pr}{l^\pr}{u^\pr}\order \gcz{V}{c}{s}{W_{n\times
+k}}{l}{u}$ is equivalent to a set of second order conic constraints on
+the variables $c,c^\pr,s,s^\pr,l,l^\pr,u,u^\pr$ and some additional
+variables.
+\end{proposition}
+%
+
+
+
+
+
+
 
 
 

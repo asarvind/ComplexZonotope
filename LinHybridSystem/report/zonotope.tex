@@ -74,59 +74,6 @@ i\in\tup{m}\rt\}.$
 %\end{equation*}
 \end{definition}
 %
-Unlike real zonotopes, a template complex zonotope can have a
-non-polyhedral real projection.  Therefore, in general, checking the
-exact inclusion between two template complex zonotopes amounts to
-solving a non-convex optimization problem, which could be
-computationally intractable.  Instead, a convex condition was proposed
-in~\cite{tcz2017}, which is sufficient to guarantee the inclusion
-between template complex zonotopes.  Here, we present this condition
-as a relation between template complex zonotopes.  
-%
-\begin{definition}
-We define a relation ``$\order$'' between template complex zonotopes
-as\\ $\cz{V^\pr_{n\times m^\pr}}{c^\pr}{s^\pr}\order \cz{V_{n\times
-    m}}{c}{s}$ if all of the below statements are collectively true.
-\begin{align}~\label{eqn:tcz-inc}
-\begin{split}
-& \exists X\in\mat{m}{m^\pr}{\mb{C}}~\text{and}~y\in\mb{C}^{m}~\text{s.t.}\\
-& \transfer{V}{V^\pr}{s^\pr}{X},~~~\centertransfer{V}{c}{c^\pr}{y}\\
-& \scalebound{X}{y}{s}{m}{m^\pr}\leq 0\\
-\end{split}
-\end{align}
-\end{definition}
-%
-\begin{lemma}[Inclusion: template complex
-  zonotopes]~\label{lem:zon-zon} The
-inclusion $\cz{V^\pr}{c^\pr}{s^\pr}\subseteq \cz{V}{c}{s}$ holds if
-the relation $\cz{{V^\pr}}{c^\pr}{s^\pr}\order \cz{V}{c}{s}$ is true.
-\end{lemma}
-\emph{Proof idea.}
-We relate the combining
-coefficients of the two template complex zonotopes by a linear
-transformation, with appropriate bounds on the transformation matrix
-such that the inclusion holds.
-
-For fixed $V$ and $V^\pr$, we observe that~(\ref{eqn:tcz-inc}) is
-equivalent to a set of convex constraints called second order
-conic constraints.  
-%
-%\begin{definition}[SOCC]
-Recall that A constraint of the form $\|Ax\|_{2}+Fx+b\leq 0$ on an $n$-dimensional
-variable $x$, given $A,F\in\mat{n}{k}{\realset}$ and $b\in\mb{R}^k$, is
-a second order conic constraint (SOCC).
-%\end{definition}
-%
-We also note that linear inequalities and equalities can be expressed
-in the form of SOCC described above. There are many convex optimization tools that can efficiently solve
-SOCC up to a high numerical precision. Our aforementioned observation
-about~(\ref{eqn:tcz-inc}) is formalized below.
-%
-\begin{proposition}~\label{lem:zon-socc}
-For fixed $V$,$V^\pr$, the relation
-$\cz{V^\pr}{c^\pr}{s^\pr}\order \cz{V}{c}{s}$ is equivalent to a set
-of second order conic constraints on the variables
-$c,c^\pr,s,s^\pr,\mathbf{l,l^\pr}$ and some additional variables. TOCHECK
-\end{proposition}
-%
-
+We note that unlike real zonotopes, template complex zonotopes can
+have non-polyhedral real projections because they describe Minkowski
+sums of ellipsoids and line segments.  

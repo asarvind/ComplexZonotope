@@ -2,48 +2,35 @@
 
 For discrete time affine hybrid systems, the eigenvectors of the
 products of linear matrices related to the affine dynamics of
-different subsystems can possibly capture some of the stable
+different subsystems, can possibly capture some of the stable
 directions for the overall hybrid dynamics.  As such, for invariant
-computation, template complex zonotopes~\cite{tcz2017} have the advantage that they
-can include the possibly complex eigenvectors among the generators,
-while usual (real-valued) zonotopes can not. In an earlier
-work~\cite{tcz2017}, to compute a template complex zonotopic invariant, subject to linear
-safety constraints, numerically efficiently solvable conditions were obtained for a class of affine hybrid
-systems having uncontrolled switching. However, a formidable
+computation, template complex zonotopes~\cite{tcz2017} have the
+advantage that they can include the possibly complex eigenvectors
+among the generators, while usual (real-valued) zonotopes can not. In
+an earlier work~\cite{tcz2017}, to compute a template complex
+zonotopic invariant subject to linear safety constraints, numerically
+efficiently solvable conditions were obtained for a class of affine
+hybrid systems having uncontrolled switching. However, a formidable
 hurdle in extending the approach for more general affine hybrid
-systems where switching is state-dependent and controlled by linear constraints, is that
-we have to handle the intersection of template complex zonotopes with
-guard sets defining conditions for triggerring switching. In this regard, template complex zonotopes
-share the drawback of usual zonotopes that these classes of sets are
-not closed under intersection. In this paper, we circumvent this problem as follows. We observe that
-it is possible to compute or reasonably overapproximate the
-intersection of a template complex zonotope with a class of linear
-constraints, called subparallelotpic, by appropriately choosing the
-template of the complex zonotope.  To this end, we use a slightly more general set
-representation, called \emph{augmented complex zonotope}, with which the
-intersection operation can be succinctly presented.  %% Geometrically
-%% speaking, augmented complex zonotopes and template complex zonotopes
-%% describe the same classes of sets in terms of their real valued
-%% projections.  However, it is easier and more succinct, using the
-%% representation of an augmented complex zonotope instead of a template
-%% complex zonotope, to represent the resultant intersection with linear
-%% constraints. 
-Then, we derive a numerically efficiently solvable
-sufficient condition for computing an augmented complex zonotopic
-invariant satisfying linear safety constraints, for a discrete-time
-affine hybrid system with subparallelotopic switching constraints and
-bounded additive disturbance input.  The sufficient condition is
-expressed as a set of second order conic constraints.  We also note
-that the class of subparallelotopic constraints that we consider are
-quite general and can be used in the specification of many practical 
-affine hybrid systems. We corroborate our approach by presenting the
-experimental results for three benchmark examples from the literature.\\
-%% We implemented our approach on three benchmark examples from
-%% literature and compared the results with that of the SpaceEx tool
-%% on the same discrete time models, and also the reported benchmark
-%% results from literature.  In some experiments, we could verify
-%% finite safety bounds when SpaceEx could not even find an
-%% invariant. In other experiments, we could verify competitive safety
-%% bounds.  Also, our computation time is quite reasonable in all the
-%% experiments, depending on the size of the specification.
+systems, where switching is state-dependent and controlled by linear
+constraints, is that we have to handle the intersection of template
+complex zonotopes with the guard sets that trigger switching. In this
+regard, template complex zonotopes share the drawback of usual
+zonotopes that these classes of sets are not closed under
+intersection. In this paper, we circumvent this problem as follows. We
+use a slightly more general set representation, called \emph{augmented
+complex zonotope}, based on which we propose an affine
+overapproximation of the intersection with a class of linear
+constraints, called sub-parallelotopic.  Henceforth, we derive a
+numerically efficiently solvable sufficient condition for computing an
+augmented complex zonotopic invariant satisfying linear safety
+constraints, for a discrete-time affine hybrid system with
+subparallelotopic switching constraints and bounded additive
+disturbance input.  The sufficient condition is expressed as a set of
+second order conic constraints.  We also note that the class of
+subparallelotopic constraints that we consider are quite general and
+can be used in the specification of many practical affine hybrid
+systems. We corroborate our approach by presenting the experimental
+results for three benchmark examples from the literature.\\
+
 

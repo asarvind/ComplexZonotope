@@ -27,16 +27,15 @@ approximation of the reachable state on a step-by-step basis, which
 can be thought of as a set-based extension of numerical integration. A
 major drawback of this approach, inherent to undecidability of general
 hybrid systems with non-trivial dynamics, is that such an iterative
-procedure may not terminate and therefore can only be used for bounded-time
-safety properties (except when the over-approximation error accumulation is not
-too bad that the safety can be decided). Invariant and barrier
-certificate based approaches by contrast consider conditions that
-invariants or barrier certificates should satisfy at any
-time. Although solving these conditions often involves fixed point
-computation, by exploiting the structure of the dynamics (such as
-eigenstructures of linear systems) one can derive meaningful
-conditions which can significantly reduce the number of iterations
-until convergence.
+procedure may not terminate and thus can only be used for bounded-time
+safety verification (except when the over-approximation error
+accumulation is not too bad that the safety can be decided). In
+contrast, invariants and barrier certificates are based
+on conditions that are satisfied at all times. Although solving these
+conditions often involves fixed point computation, by exploiting the
+structure of the dynamics (such as eigenstructures of linear systems),
+one can derive meaningful conditions which can significantly reduce
+the number of iterations until convergence.
 
 \input{contribution}
 
@@ -83,15 +82,16 @@ satisfying linear safety constraints and containing an initial set.
 Furthermore, we explain how to choose the template.  In
 Section~\ref{sec:exp}, we report some experimental results.  The
 conclusion and future work are given in Section~\ref{sec:conclusion}.
-We annex the proofs of the lemmas presented in the paper as an
+We annex proofs of some lemmas presented in the paper in an
 Appendix.
 
-\emph{Notation.} Some of the notations, for which we
+\emph{Notation.} Some notations, for which we
 consider explanation may be required, is described below.  If $S$ is a
-set of complex numbers, then $\real(S)$ represents the real projection
-of $S$.  If $z$ is a complex number, then $|z|$ denotes the absolute
-value of $z$.  On the other hand, if $X$ is a complex matrix, then
-$\lt|X\rt|$ denotes the matrix containing the absolute values of the
+set of complex numbers, then $\real(S)$ and $\img(S)$ represent the
+real and imaginary projections of $S$, respectively.  If $z$ is a
+complex number, then $|z|$ denotes the absolute value of $z$.  On the
+other hand, if $X$ is a complex matrix (or vector), then $\lt|X\rt|$
+denotes the matrix (or vector) containing the absolute values of the
 elements of $X$.  The diagonal square matrix containing the entries of
 a complex vector $z$ along the diagonal is denoted by $\dg(z)$.  The
 conjugate transpose of a matrix $V\in\mat{m}{n}{\complexset}$ is
