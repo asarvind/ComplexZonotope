@@ -1,18 +1,18 @@
 
-Before we introduce augmented complex zonotopes, we briefly review the
-related set representations that are used in this paper.  Firstly,
+Before introducing augmented complex zonotopes, we briefly review the
+related set representations that are used in this paper. First,
 polytopes can be defined in terms of halfspace representation.
 %
 %\begin{definition}
 Let $T\in\mat{n}{k}{\mb{R}}$ and $d\in\mb{R}^k$.  Then a (possibly
-unbounded) \emph{polytope}, denoted $\polytope{T}{d}$, is defined as
+unbounded) \emph{polytope}, denoted by $\polytope{T}{d}$, is defined as
 $\polytope{T}{d} = \lt\{x\in\comprealset^k: Tx\leq d\rt\}$.
 %\end{definition}
 %
 Usual zonotopes form a subclass of polytopes, which are geometrically
 Minkowski sums of line segments. They are represented as a linear
 combination of real vectors, called \emph{generators}, whose combining
-coefficients are bounded in real valued intervals.
+coefficients are bounded in real-valued intervals.
 %\begin{definition}[Real zonotope]
 Let $W\in\mat{n}{k}{\mb{R}}$ and $l,u\in\mb{R}^m: l\leq u$.  Then 
  a \emph{real zonotope} is
@@ -24,28 +24,28 @@ $\zon{W}{l}{u} = \lt\{W\zeta: \zeta\in\mb{R}^k,~\zeta_i\in[l_i,u_i]~\forall i\in
 For simple examples of zonotopes like boxes and octagons, efficient
 interconversion between the zonotopic representation and halfspace
 polytopic representation is possible.  However, in general, zonotopes
-do not have efficient halfspace representation as a polytope.  The
-reason is that a zonotope with $m$ generators in an $n$ dimensional
+do not admit efficient halfspace representations as polytopes. The
+reason is that a zonotope with $m$ generators in an $n$-dimensional
 space has ${m}\choose{n}$ faces (bounding hyperplanes), if all
-combinations of $n$ generators are linearly independent.  That is, the
+combinations of $n$ generators are linearly independent. That is, the
 halfspace representation of a zonotope can be exponentially large,
 compared to the above generator representation.
 
 Zonotopes are closed under linear transformations and Minkowski sums, which can be computed efficiently.  Hence, zonotopes are
-considered efficient for reachability analysis of linear systems.  Nevertheless,
+considered efficient for reachability analysis of continuous linear systems.  Nevertheless,
 a major drawback of zonotopes is that their intersection with sets defined by linear
 constraints need not be zonotopes.  Also, there is no unique smallest
 zonotope that overapproximates such intersections.  However, we observe that when the linear constraints
 constitute a sub-parallelotope with a template aligned with that of
 the zonotope, their intersection can be exactly computed.  This is
 also the reason we considered the case of staying conditions and guards specified as sub-parallelotopes 
-in the class of affine hybrid systems under study.  As a simple example, the intersection of
+in this work. As a simple example, the intersection of
 $\zon{\lt[\begin{array}{l l}1 & 0 \\ 0 &
       1\end{array}\rt]}{\lt[\begin{array}{c}-1\\ -1\end{array}\rt]}{\lt[\begin{array}{c}2\\ 2\end{array}\rt]}$
 with $x_1\leq 1~\wedge~x_2\geq 0.5$ gives $\zon{\lt[\begin{array}{l
         l}1 & 0 \\ 0 &
       1\end{array}\rt]}{\lt[\begin{array}{c}-1\\ 0.5\end{array}\rt]}{\lt[\begin{array}{c}1\\ 2\end{array}\rt]}$.
-The general case is described in the following lemma.
+The general case is described in the following lemma, a proof of which is included in Appendix.
 %
 \begin{lemma}~\label{lem:motivation}
 Let $K\in\mat{k}{n}{R}$ such that $k\leq n$ and $\lt(KK^T\rt)$ is
@@ -108,26 +108,25 @@ transformation, with appropriate bounds on the transformation matrix
 such that the inclusion holds.
 
 For fixed $V$ and $V^\pr$, we observe that~(\ref{eqn:tcz-inc}) is
-equivalent to as a set of convex constraints called second order
-conic constraints.  A second order conic constraint (SOCC)
-is defined as follows.
+equivalent to a set of convex constraints called second order
+conic constraints.  
 %
 %\begin{definition}[SOCC]
-A constraint of the form $\|Ax\|_{2}+Fx+b\leq 0$ on an $n$-dimensional
+Recall that A constraint of the form $\|Ax\|_{2}+Fx+b\leq 0$ on an $n$-dimensional
 variable $x$, given $A,F\in\mat{n}{k}{\realset}$ and $b\in\mb{R}^k$, is
-a second order conic constraint.
+a second order conic constraint (SOCC).
 %\end{definition}
 %
 We also note that linear inequalities and equalities can be expressed
-in the form of SOCC described above.  Our aforementioned observation
+in the form of SOCC described above. There are many convex optimization tools that can efficiently solve
+SOCC up to a high numerical precision. Our aforementioned observation
 about~(\ref{eqn:tcz-inc}) is formalized below.
 %
 \begin{proposition}~\label{lem:zon-socc}
 For fixed $V$,$V^\pr$, the relation
 $\cz{V^\pr}{c^\pr}{s^\pr}\order \cz{V}{c}{s}$ is equivalent to a set
 of second order conic constraints on the variables
-$c,c^\pr,s,s^\pr,l,l^\pr$ and some additional variables.
+$c,c^\pr,s,s^\pr,\mathbf{l,l^\pr}$ and some additional variables. TOCHECK
 \end{proposition}
 %
-There are many convex optimization tools that can efficiently solve
-SOCC upto a high numerical precision.  
+

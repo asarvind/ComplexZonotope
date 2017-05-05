@@ -1,5 +1,5 @@
 
-\section{Proofs in Section~\ref{}}
+%\section{Proofs in Section~\ref{}}
 %
 \subsection*{Proof of Lemma~\ref{lem:motivation}}
 \begin{proof}
@@ -21,3 +21,63 @@ u\bigwedge\wh{u}$.  Since $l\leq l\bigvee\wh{l} \zeta\leq u\bigwedge
 l\bigvee\wh{l} Kx\leq u\bigwedge \wh{u}\leq \wh{u}$, $x\in
 \zon{\pinv{K}}{l}{u}$, so $x\in\sptope{K}{\wh{l}}{\wh{u}}$.
 \end{proof}
+
+\subsection*{Matrices in the first benchmark (robot with a saturated controller)}
+{\scriptsize 
+\begin{align*}
+& F_1  = \lt[\begin{matrix}
+3.6929   &      0  &  0.7302  &  7.9715 &  14.5019 &   -0.0072 &
+0.0720 &   -2.7354\\
+    3.6929   &      0  &  0.7302  &  7.9715 &  14.5019 &  -0.0072  &  0.0720  & -2.7354\\
+    0.9562    &     0  &  0.0019 &  -0.0021 &  -0.0022 &   -0.0000 &  -0.0001 &  -0.0002\\
+         0 &   0.6910    &     0    &     0  &       0     &    0   &      0    &     0\\
+    0.8833     &    0  & -0.1154 &  -1.2943 &  -2.3520  &  0.0012 &  -0.0118  &  0.4427\\
+   -0.4712    &     0 &  -0.0812 &    0.1151  & -1.4845  &  0.0007 &  -0.0071  &  0.2819\\
+   -0.1560     &    0 &  -0.0459 &  -0.3173  &  0.3650  &  0.0003  & -0.0023  &  0.1162\\
+   -0.7719   &      0 &  -0.1248  & -1.4264 &  -2.5901  &  0.9973 &  -0.0131  &  0.4869\\
+   -0.7544  &       0  & -0.1243 &  -1.4204 &  -2.5792  &  0.0013 &   0.9825 &   0.4796\\
+   -0.1905   &      0  & -0.0148  & -0.2081 &  -0.3751  &  0.0002  &  0.0033  &  1.0651
+\end{matrix}\rt]\\
+& F_2 = \lt[\begin{matrix}
+0.2543  &  0.2543\\
+    0.2543  &  0.2543\\
+   -0.0001 &  -0.0001\\
+         0 &        0\\
+   -0.0413 &  -0.0413\\
+    0.0219  &  0.0219\\
+    0.0102 &   0.0102\\
+    0.0431 &   0.0431\\
+    0.0428 &   0.0428\\
+    0.0065 &   0.0065\\
+\end{matrix}\rt],
+~F_3 = 10^{-2}\times\lt[\begin{matrix}
+ 0.0000    &     0  & -0.0330 &   2.0218\\
+    0   &      0  & -0.0330 &  -2.0218\\
+    0  &       0 &   -0  &  0\\
+   -0  &       0  &  0 &   0.0109\\
+   -0.0118 &        0  &  0.0172  &  0 \\
+    0.0436  &       0 &   0.0003 &  0 \\
+   -0.0478   &      0  &  0.0034 &   0 \\
+  -13.3924 &        0 &   0.0062 &   0 \\
+    0.0909     &    0  &  0.0061 &  0\\
+   -0.0798  &       0 &   0.0017  &  0\\
+\end{matrix}\rt]
+\end{align*}}
+
+\subsection*{Matrices in the second benchmark (perturbed double integrator)}
+{\scriptsize
+\begin{align*}~\label{eqn:pwa-regions}
+i=\left\{\begin{array}{l}
+1,~\text{if}~x_1\geq 0~\text{and}~x_2\geq 0\\
+2,~\text{if}~x_1\leq 0~\text{and}~x_2\leq 0\\
+3,~\text{if}~x_1\leq 0~\text{and}~x_2\geq 0\\
+4,~\text{if}~x_1\geq 0~\text{and}~x_2\leq 0\\
+\end{array} \rt.,
+~M_1=M_2=\lt[\begin{matrix}
+0.4103  &  0.0653\\
+   -0.2949  &  0.5327
+\end{matrix}\rt],~M_3=M_4=\lt[\begin{matrix}
+0.4103  &  -0.0653\\
+   0.2949  &  0.5327
+\end{matrix}\rt]
+\end{align*}}

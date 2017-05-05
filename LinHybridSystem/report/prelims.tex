@@ -27,10 +27,7 @@ operation later after defining augmented complex zonotopes.
   non-singular.  We call such a matrix $K$ a
   \emph{sub-parallelotopic template}.  Let
   $\wh{u},\wh{l}\in\comprealset^n$ such that $\wh{u}\leq\wh{l}$.  Then
-  the following is a sub-parallelotopic set.
-\[
-\sptope{K}{\wh{l}}{\wh{u}} = \lt\{x\in\realset^n: \wh{l}\leq Kx \leq \wh{u}\rt\}
-\]
+  a sub-parallelotopic set is $\sptope{K}{\wh{l}}{\wh{u}} = \lt\{x\in\realset^n: \wh{l}\leq Kx \leq \wh{u}\rt\}$.
 \end{definition}
 %
 For example, the set of linear constraints $-1\leq x+y-z\leq
@@ -48,14 +45,8 @@ c c}1 & 1 & -1\end{array}\rt]$, $\lt[\begin{array}{c c c}1 & 1 &
 
 
 \tbf{System model.}
-We consider discrete-time affine hybrid systems defined by a tuple 
-%
-\[
-\system =
-\lt(\locationset,\ptemplate,\stay,\linearmapset,\inputset,\edgeset\rt).
-\]
-%
-Here, $\locationset$ is a finite set of locations.  For each location
+We consider discrete-time affine hybrid systems defined by a tuple $\system =
+\lt(\locationset,\ptemplate,\stay,\linearmapset,\inputset,\edgeset\rt)$. Here, $\locationset$ is a finite set of locations.  For each location
 $\loc\in\locationset$, a sub-parallelotopic template
 $\ptemplate_\loc\in\mat{k_q}{n}{\realset}$, i.e.,
 $\ptemplate_\loc\lt(\ptemplate_\loc\rt)^T$ is non-singular, and $k(q)$
@@ -141,10 +132,7 @@ reachable set in one time step by both the intralocation and
 interlocation dynamics is contained within the original state set.
 \begin{definition}
 A state set $\hybridset$ is a positive invariant if
-the following is true.
-\[
- \forall\loc\in\locationset,~~\locationtransition{q}\lt(\hybridset_\loc\rt) \subseteq \hybridset_\loc~\label{eqn:pi1}~\text{and}~~
+$\forall\loc\in\locationset,~~\locationtransition{q}\lt(\hybridset_\loc\rt) \subseteq \hybridset_\loc~\label{eqn:pi1}~\text{and}~~
  \forall\edge\in\edgeset,~~\edgetransition{\edge}\lt(\hybridset_{\preloc{\edge}}\rt) \subseteq
-  \hybridset_{\postloc{\edge}}.
-\]
+  \hybridset_{\postloc{\edge}}$.
 \end{definition}

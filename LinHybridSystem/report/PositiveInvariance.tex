@@ -127,7 +127,7 @@ between augmented complex zonotopes from Lemma~\ref{lem:gcz-gcz}.
 %
 For satisfaction of polytopic safety constraints by an augmented
 complex zonotope, the following lemma gives a sufficient condition,
-which is just the reformulation of~\ref{lem:polylimits-acz} in
+which is the reformulation of~(\ref{lem:polylimits-acz}) in
 the below context.
 %
 \begin{lemma}
@@ -143,23 +143,22 @@ positive invariant, we state the following theorem.
 %
 \begin{theorem}~\label{thm:main} If
   $\forall \loc\in\locationset$ and $\forall \edge\in\edgeset$, all of
-  the Equations[\ref{eqn:locinv}-\ref{eqn:safecont}] are collectively
+  the Equations [\ref{eqn:locinv}-\ref{eqn:safecont}] are collectively
   true, then the state set $\hybridset$ is a positive invariant,
   satisfies the given safety constraints and contains the given
-  initial set
+  initial set.
 \end{theorem}
 
-\tbf{Solving the conditions.}  Firstly, we note that the secondary
+\tbf{Solving the conditions.}  First we note that the secondary
 template in a location is predefined as the pseudoinverse of the
 subparallelotopic template in the location, in accordance with the
 above results in this section.  Then, we observe that for a fixed
 primary template in each location, the set of
-Equations[\ref{eqn:locinv}-\ref{eqn:safecont}] are equivalent to
+Equations [\ref{eqn:locinv}-\ref{eqn:safecont}] are equivalent to
 second order conic constraints on the primary offset, upper and lower
 interval bounds in each location and some additional varaibles.  This
 can be inferred from the Proposition~\ref{lem:zon-socc} and the fact
-that the min-approximation and max approximation functions we defined
-earlier are affine. So, we first fix the primary template in each
+that the min-approximation and max approximation functions are affine. So, we first fix the primary template in each
 location and solve the aforementioned constraints as a convex program.
 The choice of the primary template is explained below.
 
@@ -170,12 +169,10 @@ the following vectors in the primary template.
 \item Eigenvectors of the transformation matrices and their products, for the
    different transition maps.  This is because the eigenvectors can
   possibly capture some of the stable directions of the dynamics.
-\item The primary and secondary templates of the augmented complex
-  zonotopes which overapproimate the additive disturbance input sets.
+\item The primary and secondary templates of the zonotopes which overapproximate the additive disturbance input sets.
   Also, we can incorporate the products of the linear matrices of the
-  transition maps with these templates.  This is because the input set and
-  its transformations are added in reachable set
-  computation.
+  transition maps with these templates. This is because the input set and
+  its transformations are added in continuous step computation.
 \item Orthogonal projections of the above vectors on the null
   space of the subparallelotopic template.  This is because the
   proposed intersection in Lemma~\ref{lem:acz-int} is exact when the
