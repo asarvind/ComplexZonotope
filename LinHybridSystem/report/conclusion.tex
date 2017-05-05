@@ -1,1 +1,17 @@
+Augmented complex zonotopes overcome the drawback of template complex
+zonotopes in that intersection with linear guard conditions can be
+reasonably overapproximated, which can be used for efficient invariant
+computation.  As such, our invariant computation procedure based on
+augmented complex zonotopes have a three advantages.  First is that,
+like template complex zonotopes, we can meaningfully choose the
+templates based on the eigenstructure of the dynamics and other
+characteristics.  Second is that unlike step-by-step reachability
+computation approaches that can accumulate overapproximation error in
+each step, we compute an invariant in a single convex optimization
+step, where the optimizer inherently tries to minimize the
+overapproximation error in only one step.  Third is that we can
+reasonably overapproximate the intersection with linear guard
+conditions and specify it as a part of the convex optimization program
+for invariant computation, which was earlier not possible with
+template complex zonotopes.
 
