@@ -160,7 +160,7 @@ that the min-approximation and max approximation functions are affine. So, we fi
 location and solve the aforementioned constraints as a convex program.
 The choice of the primary template is explained below.
 
-\tbf{Choosing the primary template.}  We may collect all or some of
+\tbf{Choosing the primary template.}  We should ensure that the primary template has full rank, so that the the pseudo-inverse is defined. Ensuring this, we may collect all or some of
 the following vectors in the primary template.
 %
 \begin{enumerate}
@@ -173,7 +173,7 @@ the following vectors in the primary template.
   its transformations are added in continuous step computation.
 \item Orthogonal projections of the above vectors on the null
   space of the subparallelotopic template.  This is because the
-  proposed intersection in Lemma~\ref{lem:acz-int} is exact when the
+  proposed intersection in Theorem~\ref{thm:acz-int} is exact when the
   primary template belongs to the null space of the subparallelotopic
   template.
 \item Adding any set of arbitrary vectors will only increase the chance of computing a desired

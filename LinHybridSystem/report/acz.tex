@@ -269,8 +269,7 @@ We say that $\gcz{V^\pr}{c^\pr}{s^\pr}{W^\pr}{l^\pr}{u^\pr}\order
     zonotopes]~\label{lem:gcz-gcz} The real inclusion\\
 $\real\lt(\gcz{V^\pr}{c^\pr}{s^\pr}{W^\pr}{l^\pr}{u^\pr}\rt)\subseteq \real\lt(\gcz{V}{c}{s}{W_{n\times
 k}}{l}{u}\rt)$ holds if the relation\\
-$\gcz{V^\pr}{c^\pr}{s^\pr}{W^\pr}{l^\pr}{u^\pr}\order \gcz{V}{c}{s}{W_{n\times
-k}}{l}{u}$ is true.
+$\gcz{V^\pr}{c^\pr}{s^\pr}{W^\pr}{l^\pr}{u^\pr}\order \gcz{V}{c}{s}{W}{l}{u}$ is true.
 \end{lemma}
 
 
@@ -279,7 +278,7 @@ equivalent to a set of convex constraints called second order
 conic constraints.
 %
 %\begin{definition}[SOCC]
-Recall that A constraint of the form $\|Ax\|_{2}+Fx+b\leq 0$ on an $n$-dimensional
+Recall that a constraint of the form $\|Ax\|_{2}+Fx+b\leq 0$ on an $n$-dimensional
 variable $x$, given $A,F\in\mat{n}{k}{\realset}$ and $b\in\mb{R}^k$, is
 a second order conic constraint (SOCC).
 %\end{definition}
@@ -287,13 +286,12 @@ a second order conic constraint (SOCC).
 We also note that linear inequalities and equalities can be expressed
 in the form of SOCC described above. There are many convex optimization tools that can efficiently solve
 SOCC up to a high numerical precision. Our aforementioned observation
-about~(\ref{eqn:tcz-inc}) is consequently extended to augmented
+about~(\ref{eqn:tcz-inc}) is extended to augmented
 complex zonotopes and formalized as below.
 %
 \begin{proposition}~\label{lem:zon-socc}
 For constant $V$,$V^\pr$,$W$,$W^\pr$, the relation\\
-$\gcz{V^\pr}{c^\pr}{s^\pr}{W^\pr}{l^\pr}{u^\pr}\order \gcz{V}{c}{s}{W_{n\times
-k}}{l}{u}$ is equivalent to a set of second order conic constraints on
+$\gcz{V^\pr}{c^\pr}{s^\pr}{W^\pr}{l^\pr}{u^\pr}\order \gcz{V}{c}{s}{W}{l}{u}$ is equivalent to a set of second order conic constraints on
 the variables $c,c^\pr,s,s^\pr,l,l^\pr,u,u^\pr$ and some additional
 variables.
 \end{proposition}

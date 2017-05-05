@@ -20,19 +20,8 @@ bounded directions by making an appropriate linear transformation of
 the coordinates.  The transformation is such that the coordinates
 corresponding to the \emph{body pitch angle} and controller inputs are
 among the bounded directions.  We do not explain the transformation
-here because it is beyond the scope of this paper.  After such
-transformation, the dynamics of the system is given as $
-\lt[\begin{array}{cc}\trj{x}{t+1} &
-    \trj{y}{t+1}\end{array}\rt]^T=F_1\trj{x}{t}+F_2sat\lt(\trj{y}{t}\rt)+F_3\trj{u}{t}$,
-where the matrices $F_1$, $F_2$ and $F_3$ are given in Appendix, $\trj{x}{t}\in\realset^8$ is the
-transformed state of the composite system, $\trj{y}{t}\in\realset^2$
-is the input sent by the controller, $\trj{u}{t}\in\lt[-100,100\rt]^4$
-is the bounded additive disturbance input and $sat$ is the saturation
-function which limits the controller input received by the plant, as
-follows.  For the saturated system, $sat\lt(y_i\rt) = max\lt(-\delta
-d_p,min\lt(y_i,\delta d_p\rt)\rt),~\forall i\in\{1,2\}$, where $\delta=100$
-and $d_p=0.0807$.  For the unsaturated system,
-$sat\lt(y_i\rt)=y_i~\forall i\in\{1,2\}$.
+here because it is beyond the scope of this paper.  The dynamics of
+the system after the transformation is given in the appendix.  
 %
 
 %% {\scriptsize 
@@ -85,10 +74,10 @@ other hand, the unsaturated system has just one affine dynamics and is
 not a hybrid system.  We model the saturated system using one location
 and nine self edges, corresponding to the nine different affine
 dynamics in different regions, which are specified by the guards on
-the edges.  The unsaturated system is modelled with one location and no
-edges such that the only dynamics is part of the intralocation affine
-dynamics. The same discrete time models are specified in SpaceEx for
-comparison of performance.
+the edges.  The unsaturated system is modelled with one location and
+no edges such that the only dynamics is the continuous affine dynamics
+in the location. The same discrete time models are specified in
+SpaceEx for comparison of performance.
 
 
 \tbf{Size of unsaturated model}: 10 dimensional, 1 location, 0 edges.
@@ -131,8 +120,8 @@ polytopic invariant, but the number of faces of such a polytope can be
 arbitrarily large for any fixed dimension.  In our unsaturated model
 which is linear, some of the eigenvalues are complex and their
 magnitudes are close to one.  Possibly, this is the reason SpaceEx
-could not find an invariant even with 400 support vectors.  But, since
-in our approach we use the complex eigen-structure, we could find the
+could not find an invariant even with 400 support vectors.  But
+in our approach, since we use the complex eigen-structure, we could find the
 desired invariant for the unsaturated (linear) model.  Furthermore, we
 we also computed the invariant for the saturated (hybrid) model.
 \begin{table}
@@ -259,6 +248,7 @@ $1.571-\epsilon:$ & \multirow{2}{*}{n/a}\\
 %  integrator}
 %~\label{tab:smallinv-pdi}
 %\end{minipage}
+\vspace{-2em}
 \end{table}
 
 \paragraph{Perturbed double integrator.}
@@ -409,6 +399,11 @@ Tables~\ref{tab:smallinv-pdi} and~\ref{tab:largeinv-pdi}.
 \multicolumn{2}{|c|}{} & & & & & & & &\\
 \hline
 \end{tabular}
+%
+\caption{Networked
+  vehicle platoon: results and matrices}
+~\label{tab:largedwell-platoon}
+\vspace{-4em}
 \end{table}
 %% \tbf{Remark.}  The overapproximation quality of SpaceEx reduces when
 %% there are large number of edges, because then in each step, a union of
@@ -428,17 +423,8 @@ vechicles is described as a hybrid system with two possible dynamics,
 related to the presence and absence of communication between the
 vechicles, respectively.  Furthermore, there are time constraints on
 when the switching can happen.  The continuous time dynamics is
-\vspace{-0.75em}
- \begin{align*} &\dot{x} = A_{q(c)}x+B
-u:~q(c)\in{1,2}~~\wedge~~\dot{q}(c)=0~~\wedge~~\dot{c}=1\\ &\exists
-c\in C:~q(c^+)\neq q(c)~\wedge~c^+=0.
-\vspace{-2em}
-\end{align*}
-where $x$ is the state of the system, $u\in[-9,1]$ is the additive
-disturbance input, $c$ is a clock, $q$ is an index
-for the type of dynamics and $C$ is a set of clock instants when a
-switching can happen.  The system matrices are given in~\cite{makhlouf2014networked}.
-%
+given in the appendix.
+The state of the system is a $9$ dimensional vector $x$.
  Any upper bounds on $-x_1$, $-x_4$, and $-x_7$ provide lower limits
  on the reference distances of $M_1$, $M_2$ and $M_3$ to their
  successor vehicles, beyond which the platoon is guaranteed avoid
@@ -643,85 +629,49 @@ Table~\ref{tab:largedwell-platoon}.
 %~\label{tab:largeinv-pdi}
 %\end{minipage}
 %\end{table}
-\begin{table}
-\center{UB: $>$1000, ~~NT: Not terminating in more than 180s, \newline
-  n/a: Not applicable/not available, ~~ACZ: Augmented complex
-  zonotope.}
-\begin{tabular}{|l|c|c|c|c|c|c|c|c|c|}
-\hline
-\multicolumn{2}{|c|}{\multirow{4}{*}{Method}} & \multicolumn{4}{|c|}{\multirow{2}{*}{Slow switching}} & \multicolumn{4}{|c|}{\multirow{2}{*}{Fast switching}}\\
-\multicolumn{2}{|c|}{} & \multicolumn{4}{|c|}{} & \multicolumn{4}{|c|}{} \\
-\cline{3-10}
-\multicolumn{2}{|c|}{} & \multirow{2}{*}{$-x_1\leq$} & \multirow{2}{*}{$-x_4\leq$} & \multirow{2}{*}{$-x_7\leq$} & Comp. & \multirow{2}{*}{$-x_1\leq$} & \multirow{2}{*}{$-x_4\leq$} & \multirow{2}{*}{$-x_7\leq$} & Comp.\\
-\multicolumn{2}{|c|}{} & & & & time (s) & & & & time (s)\\
-\hline
-\multirow{4}{*}{SpaceEx} & octagon & \multirow{2}{*}{28} &
-\multirow{2}{*}{27} & \multirow{2}{*}{10} &
-\multirow{2}{*}{NT} & \multirow{2}{*}{UB} &
-\multirow{2}{*}{UB} & \multirow{2}{*}{UB} &
-\multirow{2}{*}{NT}\\
-& template & & & & & & & &\\
-\cline{2-10}
-& 100 support & \multirow{2}{*}{28} & \multirow{2}{*}{25} &
-\multirow{2}{*}{13} & \multirow{2}{*}{1.3} & \multirow{2}{*}{UB} & \multirow{2}{*}{UB} &
-\multirow{2}{*}{UB} & \multirow{2}{*}{NT}\\
-& vectors & & & & & & & &\\
-\hline
-\multicolumn{2}{|c|}{\multirow{2}{*}{Real zonotope~\cite{makhlouf2014networked}}} &
-\multirow{2}{*}{25} & \multirow{2}{*}{25} & \multirow{2}{*}{10}
- & \multirow{2}{*}{n/a} & \multirow{2}{*}{n/a} & \multirow{2}{*}{n/a} & \multirow{2}{*}{n/a}
- & \multirow{2}{*}{n/a}\\
-\multicolumn{2}{|c|}{} & & & & & & & &\\
-\hline
-\multicolumn{2}{|c|}{\multirow{2}{*}{ACZ invariant}} &
-\multirow{2}{*}{28} & \multirow{2}{*}{26} &
-\multirow{2}{*}{12} & \multirow{2}{*}{12} &
-\multirow{2}{*}{46} & \multirow{2}{*}{54} &
-\multirow{2}{*}{57} & \multirow{2}{*}{12.6}\\
-\multicolumn{2}{|c|}{} & & & & & & & &\\
-\hline
-\end{tabular}
-%
-%% {\scriptsize
-%% \begin{align*}
-%% & A_1 = \lt[\begin{matrix}
-%% 0  &  1.0000   &      0   &      0    &     0    &     0     &    0     &    0    &     0\\
-%%          0    &     0  & -1.0000   &      0    &     0   &      0   &      0   &      0   &      0\\
-%%     1.6050 &   4.8680 &  -3.5754 &  -0.8198  &  0.4270 &  -0.0450 &  -0.1942  &  0.3626  & -0.0946\\
-%%          0   &      0     &    0    &     0  &  1.0000    &     0   &      0   &      0    &     0\\
-%%          0   &      0 &   1.0000    &     0    &     0  & -1.0000   &      0    &     0    &     0\\
-%%     0.8718  &  3.8140 &  -0.0754  &  1.1936 &   3.6258  & -3.2396  & -0.5950 &   0.1294 &  -0.0796\\
-%%          0    &     0    &     0   &      0   &      0    &     0   &      0 &   1.0000   &      0\\
-%%          0    &     0    &     0    &     0    &     0  &  1.0000      &   0    &     0  & -1.0000\\
-%%     0.7132  &  3.5730 &  -0.0964  &  0.8472  &  3.2568 &  -0.0876  &  1.2726  &  3.0720 &  -3.1356
-%% \end{matrix}\rt]\\
-%% & A_2 = \lt[\begin{matrix}
-%%  0   & 1.0000   &      0    &     0     &    0  &       0   &      0      &   0     &    0\\
-%%          0    &     0  & -1.0000    &     0   &      0     &    0    &     0   &      0  &       0\\
-%%     1.6050  &  4.8680  & -3.5754    &     0     &    0     &    0  &       0     &    0    &     0\\
-%%          0   &      0   &      0    &     0   & 1.0000     &    0     &    0    &     0   &      0\\
-%%          0  &       0  &  1.0000      &   0    &     0  & -1.0000   &      0  &       0  &       0\\
-%%          0  &       0   &      0  &  1.1936  &  3.6258  & -3.2396   &      0     &    0   &      0\\
-%%          0  &       0    &     0     &    0   &      0     &    0    &     0  &  1.0000    &     0\\
-%%          0   &      0    &     0    &     0     &    0  &  1.0000    &     0      &   0 &  -1.0000\\
-%%     0.7132 &   3.5730  & -0.0964 &   0.8472  &  3.2568 &  -0.0876 &   1.2726  &  3.0720  & -3.1356
-%% \end{matrix}\rt],~B = \lt[\begin{matrix}
-%%  0\\
-%%      1\\
-%%      0\\
-%%      0\\
-%%      0\\
-%%      0\\
-%%      0\\
-%%      0\\
-%%      0
-%% \end{matrix}\rt]
-%% \end{align*}
-%% }
-\caption{Networked
-  vehicle platoon: results and matrices}
-~\label{tab:largedwell-platoon}
-\end{table}
+%% \begin{table}
+%% \center{UB: $>$1000, ~~NT: Not terminating in more than 180s, \newline
+%%   n/a: Not applicable/not available, ~~ACZ: Augmented complex
+%%   zonotope.}
+%% \begin{tabular}{|l|c|c|c|c|c|c|c|c|c|}
+%% \hline
+%% \multicolumn{2}{|c|}{\multirow{4}{*}{Method}} & \multicolumn{4}{|c|}{\multirow{2}{*}{Slow switching}} & \multicolumn{4}{|c|}{\multirow{2}{*}{Fast switching}}\\
+%% \multicolumn{2}{|c|}{} & \multicolumn{4}{|c|}{} & \multicolumn{4}{|c|}{} \\
+%% \cline{3-10}
+%% \multicolumn{2}{|c|}{} & \multirow{2}{*}{$-x_1\leq$} & \multirow{2}{*}{$-x_4\leq$} & \multirow{2}{*}{$-x_7\leq$} & Comp. & \multirow{2}{*}{$-x_1\leq$} & \multirow{2}{*}{$-x_4\leq$} & \multirow{2}{*}{$-x_7\leq$} & Comp.\\
+%% \multicolumn{2}{|c|}{} & & & & time (s) & & & & time (s)\\
+%% \hline
+%% \multirow{4}{*}{SpaceEx} & octagon & \multirow{2}{*}{28} &
+%% \multirow{2}{*}{27} & \multirow{2}{*}{10} &
+%% \multirow{2}{*}{NT} & \multirow{2}{*}{UB} &
+%% \multirow{2}{*}{UB} & \multirow{2}{*}{UB} &
+%% \multirow{2}{*}{NT}\\
+%% & template & & & & & & & &\\
+%% \cline{2-10}
+%% & 100 support & \multirow{2}{*}{28} & \multirow{2}{*}{25} &
+%% \multirow{2}{*}{13} & \multirow{2}{*}{1.3} & \multirow{2}{*}{UB} & \multirow{2}{*}{UB} &
+%% \multirow{2}{*}{UB} & \multirow{2}{*}{NT}\\
+%% & vectors & & & & & & & &\\
+%% \hline
+%% \multicolumn{2}{|c|}{\multirow{2}{*}{Real zonotope~\cite{makhlouf2014networked}}} &
+%% \multirow{2}{*}{25} & \multirow{2}{*}{25} & \multirow{2}{*}{10}
+%%  & \multirow{2}{*}{n/a} & \multirow{2}{*}{n/a} & \multirow{2}{*}{n/a} & \multirow{2}{*}{n/a}
+%%  & \multirow{2}{*}{n/a}\\
+%% \multicolumn{2}{|c|}{} & & & & & & & &\\
+%% \hline
+%% \multicolumn{2}{|c|}{\multirow{2}{*}{ACZ invariant}} &
+%% \multirow{2}{*}{28} & \multirow{2}{*}{26} &
+%% \multirow{2}{*}{12} & \multirow{2}{*}{12} &
+%% \multirow{2}{*}{46} & \multirow{2}{*}{54} &
+%% \multirow{2}{*}{57} & \multirow{2}{*}{12.6}\\
+%% \multicolumn{2}{|c|}{} & & & & & & & &\\
+%% \hline
+%% \end{tabular}
+%% %
+%% \caption{Networked
+%%   vehicle platoon: results and matrices}
+%% ~\label{tab:largedwell-platoon}
+%% \end{table}
 
 %
 
