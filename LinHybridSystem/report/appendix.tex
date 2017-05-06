@@ -1,7 +1,14 @@
 
 %\section{Proofs in Section~\ref{}}
 %
-\subsection*{Proof of Lemma~\ref{lem:motivation}}
+\subsubsection*{Lemma~\ref{lem:motivation}}
+Let $K\in\mat{k}{n}{R}$ such that $k\leq n$ and $\lt(KK^T\rt)$ is
+non-singular.  Then
+\[
+\zon{\pinv{K}}{l}{u} \bigcap \sptope{K}{\wh{l}}{\wh{u}}
+= \zon{K}{l\bigvee \wh{l}}{u\bigwedge \wh{u}}
+\]
+\begin{proof}
 Firstly, we prove $\zon{\pinv{K}}{l}{u} \bigcap
 \sptope{K}{\wh{l}}{\wh{u}} \subseteq \zon{K}{l\bigvee
   \wh{l}}{u\bigwedge \wh{u}}$.\\  Let $x\in\zon{\pinv{K}}{l}{u} \bigcap
@@ -21,38 +28,45 @@ $\wh{l}\leq l\bigvee\wh{l} = \zeta = K\pinv{K}\zeta = Kx\leq
 u\bigwedge \wh{u}\leq \wh{u}$, $x\in \zon{\pinv{K}}{l}{u}$, hence
 $x\in\sptope{K}{\wh{l}}{\wh{u}}$.  So, $x\in\zon{\pinv{K}}{l}{u}
 \bigcap \sptope{K}{\wh{l}}{\wh{u}}$. \qed
+\end{proof}
 
-
-\subsection*{Proof of Theorem~\ref{thm:acz-int}}
-We are given $l\leq \maxaffine{l}{\wh{l}}$.  In this case, we can show
-by the definition of $\maxaffine{l}{\wh{l}}$ that
-$l\bigvee\wh{l}=\maxaffine{l}{\wh{l}}$. Similary, we can show
-$u\bigwedge \wh{u}=\minaffine{u}{\wh{u}}$.  Recall
-$\gcz{V}{c}{s}{\pinv{\ptemplate}}{l}{u}=\cz{V}{c}{s}\oplus\zon{\pinv{\ptemplate}}{l}{u}$.
-Furthermore, by Lemma~\ref{lem:motivation}, we get
-$\zon{\pinv{\ptemplate}}{\wh{l}}{\wh{u}}\bigcap\sptope{\ptemplate}{\wh{l}}{\wh{u}}$
-is equal to
-$\zon{\pinv{\ptemplate}}{l\bigvee\wh{l}}{u\bigwedge{\wh{l}}}$, which
-equals
-$\zon{\pinv{\ptemplate}}{\maxaffine{l}{\wh{l}}}{\minaffine{u}{\wh{u}}}$
-by what we have above.  So, provided $0\in S_1$ and $S_2\bigcap
-S_3\neq 0$, the proof is accomplished by substituting
-$S_1=\cz{V}{c}{s}$, $S_2=\zon{\pinv{\ptemplate}}{l}{u}$ and
-$S_3=\sptope{\ptemplate}{\wh{l}}{\wh{u}}$ in Lemma~\ref{gen-int}.  So
-we need to show $S_2=\zon{\pinv{\ptemplate}}{l}{u}$ and
-$S_3=\sptope{\ptemplate}{\wh{l}}{\wh{u}}$.  We write $0 =
-c-V\pinv{V}c$, and since $\lt|\pinv{V}c\rt|\leq s$ as given, so $0\in
-\cz{V}{c}{s}=S_1$.  Next, let
-$w=\pinv{\ptemplate}\maxaffine{l}{\wh{l}}$.  Since $l\leq
-\maxaffine{l}{\wh{l}}\leq \minaffine{u}{\wh{u}}\leq u$, so
-$w\in\zon{\pinv{\ptemplate}}{l}{u}= S_2$.  Also, $\ptemplate
-w=\ptemplate\pinv{\ptemplate}\maxaffine{l}{\wh{l}} =
-\maxaffine{l}{\wh{l}}$ and $\wh{l}\leq \maxaffine{l}{\wh{l}}\leq
-\minaffine{u}{\wh{u}}\leq \wh{u}$, so $w\in
-\sptope{\ptemplate}{\wh{l}}{\wh{u}}=S_3$.  So, $S_2\bigcap S_3\neq 0$,
-as it contains $w$.  Thus the required condition for using
-Lemma~\ref{gen-int} are satisfied. \qed
-
+\subsubsection*{Theorem~\ref{thm:acz-int}}
+Given a sub-parallelotope $\sptope{\ptemplate}{\wh{l}}{\wh{u}}$ an
+augmented complex zonotope $\gcz{V}{c}{s}{\pinv{\ptemplate}}{l}{u}$
+such that $VV^T$ is non-singular, $\lt|\pinv{V}c\rt|\leq s$, $l\leq
+\maxaffine{l}{\wh{l}}$ and $u\geq \minaffine{l}{\wh{l}}$, then
+$\gcz{V}{c}{s}{\pinv{\ptemplate}}{l}{u}\bigcap\sptope{\ptemplate}{\wh{l}}{\wh{u}}\subseteq
+\gcz{V}{c}{s}{\pinv{\ptemplate}}{\maxaffine{l}{\wh{l}}}{\minaffine{u}{\wh{u}}}$.
+%
+\begin{proof}
+  We have $l\bigvee\wh{l} = l\bigvee \maxaffine{l}{\wh{l}}$.  But
+  since $l\leq \maxaffine{l}{\wh{l}}$ as given, so
+  $l\bigvee\wh{l}=\maxaffine{l}{\wh{l}}$. Similary, we can show
+  $u\bigwedge \wh{u}=\minaffine{u}{\wh{u}}$.  Recall that
+  $\gcz{V}{c}{s}{\pinv{\ptemplate}}{l}{u}=\cz{V}{c}{s}\oplus\zon{\pinv{\ptemplate}}{l}{u}$.
+  Furthermore, by Lemma~\ref{lem:motivation}, we get
+  $\zon{\pinv{\ptemplate}}{\wh{l}}{\wh{u}}\bigcap\sptope{\ptemplate}{\wh{l}}{\wh{u}}$
+  is equal to
+  $\zon{\pinv{\ptemplate}}{l\bigvee\wh{l}}{u\bigwedge{\wh{l}}}$, which
+  equals $\zon{\pinv{\ptemplate}}{\maxaffine{l}{\wh{l}}}{\minaffine{u}{\wh{u}}}$
+  by what we have above.  So, provided $0\in S_1$ and $S_2\bigcap
+  S_3\neq 0$, the proof is accomplished by substituting
+  $S_1=\cz{V}{c}{s}$, $S_2=\zon{\pinv{\ptemplate}}{l}{u}$ and
+  $S_3=\sptope{\ptemplate}{\wh{l}}{\wh{u}}$ in Lemma~\ref{gen-int}.
+  So we need to show $S_2=\zon{\pinv{\ptemplate}}{l}{u}$ and
+  $S_3=\sptope{\ptemplate}{\wh{l}}{\wh{u}}$.  We write $0 =
+  c-V\pinv{V}c$, and since $\lt|\pinv{V}c\rt|\leq s$ as given, so
+  $0\in \cz{V}{c}{s}=S_1$.  Next, let
+  $w=\pinv{\ptemplate}\maxaffine{l}{\wh{l}}$.  Since $l\leq
+  \maxaffine{l}{\wh{l}}\leq \minaffine{u}{\wh{u}}\leq u$, so
+  $w\in\zon{\pinv{\ptemplate}}{l}{u}= S_2$.  Also, $\ptemplate
+  w=\ptemplate\pinv{\ptemplate}\maxaffine{l}{\wh{l}} =
+  \maxaffine{l}{\wh{l}}$ and $\wh{l}\leq \maxaffine{l}{\wh{l}}\leq
+  \minaffine{u}{\wh{u}}\leq \wh{u}$, so $w\in
+  \sptope{\ptemplate}{\wh{l}}{\wh{u}}=S_3$.  So, $S_2\bigcap S_3\neq
+  0$, as it contains $w$.  Thus the required condition for using
+  Lemma~\ref{gen-int} are satisfied. \qed
+\end{proof}
 
 \subsection*{Dynamics of the first benchmark (robot with a saturated controller)}
  $

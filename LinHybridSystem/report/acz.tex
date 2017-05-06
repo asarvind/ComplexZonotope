@@ -128,9 +128,9 @@ expressed using min and max approximation function.
 Given a sub-parallelotope $\sptope{\ptemplate}{\wh{l}}{\wh{u}}$ an
 augmented complex zonotope $\gcz{V}{c}{s}{\pinv{\ptemplate}}{l}{u}$
 such that $VV^T$ is non-singular, $\lt|\pinv{V}c\rt|\leq s$, $l\leq
-\maxaffine{l}{\wh{l}}$ and $u\geq \minaffine{l}{\wh{l}}$, we have
+\maxaffine{l}{\wh{l}}$ and $u\geq \minaffine{l}{\wh{l}}$, then
 $\gcz{V}{c}{s}{\pinv{\ptemplate}}{l}{u}\bigcap\sptope{\ptemplate}{\wh{l}}{\wh{u}}\subseteq
-\gcz{V}{c}{s}{\pinv{\ptemplate}}{l\bigvee\wh{l}}{u\bigwedge\wh{u}}$.
+\gcz{V}{c}{s}{\pinv{\ptemplate}}{\maxaffine{l}{\wh{l}}}{\minaffine{u}{\wh{u}}}$.
 \end{theorem}
 \emph{Proof Sketch.}  Consider $S_1 = \cz{V}{c}{s}$, $S_2 =
 \zon{\pinv{\ptemplate}}{l}{u}$ and $S_3 =
