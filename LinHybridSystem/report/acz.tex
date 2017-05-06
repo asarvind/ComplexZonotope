@@ -205,11 +205,14 @@ any direction can be computed as follows. For $v\in\realset^n$,
 %\]
 %\end{lemma}
 %%%%%%%%%%%
-
-
-The real projection of an augmented complex zonotope can be
-equivalently transformed as the real projection of a template complex
-zonotope, as follows.
+To derive~(\ref{lem:polylimits-acz}), we multiply the linear
+constraints with the center of the augmented complex zonotope and add
+an error term proportional to a set of scaling factors.  The center is
+$\lt(c+W\frac{l+u}{2}\rt)$, while the scaling factors are
+$\ColumnJoin{s}{\frac{u-l}{2}}$.  Based
+on~(\ref{lem:polylimits-acz}), we derive the following Lemma relating
+the real projection of an augmented complex zonotope and a template
+complex zonotope. 
 %
 \begin{lemma}~\label{lem:conversion}
 $\real\lt(\gcz{V}{c}{s}{W}{l}{u}\rt) = \real\lt(\cz{\lt[V~W\rt]}{c+W\lt(\frac{u+l}{2}\rt)}{\ColumnJoin{s}{\frac{u-l}{2}}}\rt)$.
@@ -222,14 +225,14 @@ complex zonotopes.  Therefore, we first review an inclusion relation
 between template complex zonotopes, which was earlier stated
 in~\cite{tcz2017}.
 
-Unlike real zonotopes, a template complex zonotope can have a
-non-polyhedral real projection.  Therefore, in general, checking the
-exact inclusion between two template complex zonotopes amounts to
-solving a non-convex optimization problem, which could be
-computationally intractable.  Instead, a convex condition was proposed
-in~\cite{tcz2017}, which is sufficient to guarantee the inclusion
-between template complex zonotopes.  Here, we present this condition
-as a relation between template complex zonotopes.
+Since a template complex zonotope can have a non-polyhedral real
+projection, checking the exact inclusion between two template complex
+zonotopes, in general, amounts to solving a non-convex optimization
+problem, which could be computationally intractable.  Instead, a
+convex condition was proposed in~\cite{tcz2017}, which is sufficient
+to guarantee the inclusion between template complex zonotopes.  Here,
+we present this condition as a relation between template complex
+zonotopes.
 %
 \begin{definition}
 We define a relation ``$\order$'' between template complex zonotopes
@@ -238,8 +241,8 @@ as\\ $\cz{V^\pr_{n\times m^\pr}}{c^\pr}{s^\pr}\order \cz{V_{n\times
 \begin{align}~\label{eqn:tcz-inc}
 \begin{split}
 & \exists X\in\mat{m}{m^\pr}{\mb{C}}~\text{and}~y\in\mb{C}^{m}~\text{s.t.}\\
-& \transfer{V}{V^\pr}{s^\pr}{X},~~~\centertransfer{V}{c}{c^\pr}{y}\\
-& \scalebound{X}{y}{s}{m}{m^\pr}\leq 0\\
+& \transfer{V}{V^\pr}{s^\pr}{X},~~~\centertransfer{V}{c}{c^\pr}{y},~\text{and}~
+ \scalebound{X}{y}{s}{m}{m^\pr}\leq 0\\
 \end{split}
 \end{align}
 \end{definition}

@@ -59,9 +59,8 @@ For all locations $\loc\in\locationset$ and all edges
     vectors}~
   c^\pr_\loc,s^\pr_\loc,l^\pr_\loc,u^\pr_\loc,l^\dpr_\loc,u^\dpr_\loc~\text{such
     that}\\
-& c^\pr_\loc = \map_\loc c_\loc+c^{in}_\loc,~~s^\pr_\loc =
-  \ColumnJoin{s_\loc}{s^{in}_\loc}\\
-& l^\pr_\loc =
+& c^\pr_\loc = \map_\loc c_\loc+c^{in}_\loc,~s^\pr_\loc =
+  \ColumnJoin{s_\loc}{s^{in}_\loc}, l^\pr_\loc =
   \ColumnJoin{\maxaffine{l_\loc}{\stay^-_\loc}}{~~~~~~~~~l^{in}_\loc~~~},~~u^\pr
   =
   \ColumnJoin{\minaffine{u_\loc}{\stay^+_\loc)}}{~~~~~~~~~u^{in}_\loc~~~}
@@ -163,20 +162,20 @@ The choice of the primary template is explained below.
 \tbf{Choosing the primary template.}  We should ensure that the primary template has full rank, so that the the pseudo-inverse is defined. Ensuring this, we may collect all or some of
 the following vectors in the primary template.
 %
-\begin{enumerate}
-\item Eigenvectors of the transformation matrices and their products, for the
+%\begin{enumerate}
+1) Eigenvectors of the transformation matrices and their products, for the
    different transition maps.  This is because the eigenvectors can
   possibly capture some of the stable directions of the dynamics.
-\item The primary and secondary templates of the zonotopes which overapproximate the additive disturbance input sets.
+2) The primary and secondary templates of the zonotopes which overapproximate the additive disturbance input sets.
   Also, we can incorporate the products of the linear matrices of the
   transition maps with these templates. This is because the input set and
   its transformations are added in continuous step computation.
-\item Orthogonal projections of the above vectors on the null
+3) Orthogonal projections of the above vectors on the null
   space of the subparallelotopic template.  This is because the
   proposed intersection in Theorem~\ref{thm:acz-int} is exact when the
   primary template belongs to the null space of the subparallelotopic
   template.
-\item Adding any set of arbitrary vectors will only increase the chance of computing a desired
+4) Adding any set of arbitrary vectors will increase the chance of computing a desired
   invariant, but at a computational expense.  This is because the
   scaling factors will be adjusted accordingly by the optimizer. 
-\end{enumerate}
+%\end{enumerate}

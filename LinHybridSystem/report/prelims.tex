@@ -39,7 +39,13 @@ x+y-z\leq 1~\wedge~~x+y+z\leq 2\wedge~~-1\leq x+y$ do not constitute a
 sub-parallelotope, because the three row vectors $\lt[\begin{array}{c
 c c}1 & 1 & -1\end{array}\rt]$, $\lt[\begin{array}{c c c}1 & 1 &
 1\end{array}\rt]$, and $\lt[\begin{array}{c c c}1 & 1 &
-0\end{array}\rt]$ together are linearly dependent. 
+0\end{array}\rt]$ together are linearly dependent.  Sub-parallelotopic
+constraints are algebraically related to a generator representation.
+We can express $\sptope{K_{n\times
+k}}{l}{u}=\lt\{\pinv{K}\zeta+w:~Kw=0\wedge\zeta\in\realset^k\rt\}$.
+Because of the above, we can express the intersection of
+sub-parallelotope with a suitably aligned zonotope as a simple
+algebraic expression, as we will see latter.
 
 %Nevertheless, for many examples of affine hybrid systems, the guards and staying conditions can be specified by sub-parallelotopes.
 
@@ -82,7 +88,7 @@ $\systrj{x}{\loc}:\wholenums\ra\realset^n\times\locationset$, such
 that for all $t\in\wholenums$, one of the following is true.
 
 \begin{enumerate}
-\item Intralocation dynamics.
+\item Continuous transition.
 \begin{align}~\label{eqn:intralocation}
 \begin{split}
 & \exists u\in\inputset_{\trj{\loc}{t}}~~\text{such that all of
@@ -92,7 +98,7 @@ that for all $t\in\wholenums$, one of the following is true.
 & \trj{x}{t},~\trj{x}{t+1}\in\sptope{\ptemplate_{\trj{\loc}{t}}}{\stay^-_{\trj{\loc}{t}}}{\stay^+_{\trj{\loc}{t}}}.
 \end{split}
 \end{align}
-\item Interlocation dynamics.
+\item Discrete transition.
 \begin{align} 
 \begin{split}
 & \exists \edge\in\edgeset~\text{and}~u\in\edgeinp_{\edge}~\text{such

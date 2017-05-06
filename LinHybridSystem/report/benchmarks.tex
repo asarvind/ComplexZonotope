@@ -8,6 +8,147 @@ CVX (version 2.1) with MOSEK solver (version 7.1) and Matlab (version:
 1600 MHz DDR3.  The precision of the solver is set to the default
 precision of CVX.
 
+\begin{table}
+\center{UB: $>$1000, ~~NT: Not terminating in more than 180s, \newline
+  n/a: Not applicable/not available, ~~ACZ: Augmented complex
+  zonotope.}
+%{\scriptsize 
+%\begin{align*}
+%& F_1  = \lt[\begin{matrix}
+%3.6929   &      0  &  0.7302  &  7.9715 &  14.5019 &   -0.0072 &
+%0.0720 &   -2.7354\\
+%    3.6929   &      0  &  0.7302  &  7.9715 &  14.5019 &  -0.0072  &  0.0720  & -2.7354\\
+%    0.9562    &     0  &  0.0019 &  -0.0021 &  -0.0022 &   -0.0000 &  -0.0001 &  -0.0002\\
+%         0 &   0.6910    &     0    &     0  &       0     &    0   &      0    &     0\\
+%    0.8833     &    0  & -0.1154 &  -1.2943 &  -2.3520  &  0.0012 &  -0.0118  &  0.4427\\
+%   -0.4712    &     0 &  -0.0812 &    0.1151  & -1.4845  &  0.0007 &  -0.0071  &  0.2819\\
+%   -0.1560     &    0 &  -0.0459 &  -0.3173  &  0.3650  &  0.0003  & -0.0023  &  0.1162\\
+%   -0.7719   &      0 &  -0.1248  & -1.4264 &  -2.5901  &  0.9973 &  -0.0131  &  0.4869\\
+%   -0.7544  &       0  & -0.1243 &  -1.4204 &  -2.5792  &  0.0013 &   0.9825 &   0.4796\\
+%   -0.1905   &      0  & -0.0148  & -0.2081 &  -0.3751  &  0.0002  &  0.0033  &  1.0651
+%\end{matrix}\rt]\\
+%& F_2 = \lt[\begin{matrix}
+%0.2543  &  0.2543\\
+%    0.2543  &  0.2543\\
+%   -0.0001 &  -0.0001\\
+%         0 &        0\\
+%   -0.0413 &  -0.0413\\
+%    0.0219  &  0.0219\\
+%    0.0102 &   0.0102\\
+%    0.0431 &   0.0431\\
+%    0.0428 &   0.0428\\
+%    0.0065 &   0.0065\\
+%\end{matrix}\rt],
+%~F_3 = 10^{-2}\times\lt[\begin{matrix}
+% 0.0000    &     0  & -0.0330 &   2.0218\\
+%    0   &      0  & -0.0330 &  -2.0218\\
+%    0  &       0 &   -0  &  0\\
+%   -0  &       0  &  0 &   0.0109\\
+%   -0.0118 &        0  &  0.0172  &  0 \\
+%    0.0436  &       0 &   0.0003 &  0 \\
+%   -0.0478   &      0  &  0.0034 &   0 \\
+%  -13.3924 &        0 &   0.0062 &   0 \\
+%    0.0909     &    0  &  0.0061 &  0\\
+%   -0.0798  &       0 &   0.0017  &  0\\
+%\end{matrix}\rt]
+%\end{align*}}
+\begin{minipage}{0.48\textwidth}
+\centering
+\begin{tabular}{|l|c|c|c|}
+\hline
+\multicolumn{2}{|c|}{\multirow{2}{*}{Method}} &
+\multirow{2}{*}{$\lt|\psi\rt|\leq$} & Comp.\\
+\multicolumn{2}{|c|}{} & & time (s)\\
+\hline
+\multirow{4}{*}{SpaceEx} & octagon & \multirow{2}{*}{UB} & \multirow{2}{*}{NT}\\
+& template & & \\
+\cline{2-4}
+& 400 support & \multirow{2}{*}{UB} & \multirow{2}{*}{NT}\\
+& vectors & &\\
+\hline
+\multicolumn{2}{|c|}{\multirow{2}{*}{Suggested in~\cite{heinz2014benchmark}}} &
+\multirow{2}{*}{$1.39$} & \multirow{2}{*}{n/a}\\
+\multicolumn{2}{|c|}{} & &\\
+\hline
+\multicolumn{2}{|c|}{\multirow{2}{*}{ACZ invariant}} & \multirow{2}{*}{$1.29$} &
+\multirow{2}{*}{$4$}\\
+\multicolumn{2}{|c|}{} & & \\
+\hline
+\end{tabular}
+\caption{Unsaturated robot model: results}
+~\label{tab:robot-unsaturated}
+\end{minipage}
+\hspace{0em}
+\begin{minipage}{0.48\textwidth}
+\centering
+\begin{tabular}{|l|c|c|c|}
+\hline
+\multicolumn{2}{|c|}{\multirow{2}{*}{Method}} &
+\multirow{2}{*}{$\lt|\psi\rt|\leq$} & Comp.\\
+\multicolumn{2}{|c|}{} & & time (s)\\
+\hline
+\multirow{4}{*}{SpaceEx} & octagon & \multirow{2}{*}{UB} &
+\multirow{2}{*}{NT}\\
+& template & & \\
+\cline{2-4}
+& 400 support & \multirow{2}{*}{UB} & \multirow{2}{*}{NT}\\
+& vectors & & \\
+\hline
+\multicolumn{2}{|c|}{\multirow{2}{*}{Suggested in~\cite{heinz2014benchmark}}} &
+$1.571-\epsilon:$ & \multirow{2}{*}{n/a}\\
+\multicolumn{2}{|c|}{} & $\epsilon>0$ &\\
+\hline
+\multicolumn{2}{|c|}{\multirow{2}{*}{ACZ invariant}} & \multirow{2}{*}{$1.13$} &
+\multirow{2}{*}{45}\\
+\multicolumn{2}{|c|}{} & &\\
+\hline
+\end{tabular}
+\caption{Saturated robot model: results}
+~\label{tab:robot-saturated}
+\end{minipage}
+\begin{minipage}{0.45\textwidth}
+\begin{tabular}{|l|c|c|c|c|}
+\hline
+\multicolumn{2}{|c|}{\multirow{2}{*}{Method}} &
+\multirow{2}{*}{$\lt|x_1\rt|\leq$} & \multirow{2}{*}{$\lt|x_2\rt|\leq$} & Comp.\\
+\multicolumn{2}{|c|}{} & & & time (s) \\
+\hline
+\multirow{4}{*}{SpaceEx} & octagon & \multirow{2}{*}{0.38} &
+\multirow{2}{*}{0.43} & \multirow{2}{*}{1.7}\\
+& template & & &\\
+\cline{2-5}
+& 100 support & \multirow{2}{*}{0.38} & \multirow{2}{*}{0.43} & \multirow{2}{*}{23.6}\\
+& vectors & & &\\
+\hline
+\multicolumn{2}{|c|}{\multirow{2}{*}{ACZ invariant}} &
+\multirow{2}{*}{0.38} & \multirow{2}{*}{0.36} & 
+\multirow{2}{*}{5.1}\\
+\multicolumn{2}{|c|}{} & & &\\
+\hline
+\end{tabular}
+\caption{Small invariant computation:\newline Perturbed double
+  integrator}
+~\label{tab:smallinv-pdi}
+\end{minipage}
+\hspace{4em}
+\begin{minipage}{0.4\textwidth}
+\begin{tabular}{|c|c|}
+\hline
+\multirow{2}{*}{Method} & Comp.\\
+& time (s)\\
+\hline
+\multirow{2}{*}{MPT tool~\cite{rakovic2004computation}} & \multirow{2}{*}{107}\\
+& \\
+\hline
+\multirow{2}{*}{ACZ} & \multirow{2}{*}{12}\\
+& \\
+\hline
+\end{tabular}
+\caption{Large invariant computation: Perturbed double integrator}
+~\label{tab:largeinv-pdi}
+\end{minipage}
+\vspace{-5em}
+\end{table}
 
 \paragraph{Robot with a saturated controller.}  Our first example is a benchmark
 model of a self-balancing two wheeled robot called NXTway-GS1 by
@@ -91,7 +232,7 @@ $x_1\in\lt[-\frac{\pi}{2}+\epsilon,\frac{\pi}{2}-\epsilon\rt]:~\epsilon>0$
 for the saturated system, while
 $x_1\in\lt[\frac{-\pi}{2.26},~\frac{\pi}{2.26}\rt]$ for the
 unsaturated system. The initial set is the origin.
-\smallskip
+\vspace{0.5em}
 
 \tbf{Experiment settings.}  The primary template for the hybrid system is
 chosen as the collection of the (complex) eigenvectors of linear
@@ -115,256 +256,23 @@ SpaceEx tool could not find a finite bound for either of the above
 systems.  The results are reported in the
 Tables~\ref{tab:robot-unsaturated} and~\ref{tab:robot-saturated}.
 
-\tbf{Remarks.}  We note that although in theory, a linear system has a
-polytopic invariant, but the number of faces of such a polytope can be
-arbitrarily large for any fixed dimension.  In our unsaturated model
-which is linear, some of the eigenvalues are complex and their
-magnitudes are close to one.  Possibly, this is the reason SpaceEx
-could not find an invariant even with 400 support vectors.  But
-in our approach, since we use the complex eigen-structure, we could find the
-desired invariant for the unsaturated (linear) model.  Furthermore, we
-we also computed the invariant for the saturated (hybrid) model.
-\begin{table}
-\center{UB: $>$1000, ~~NT: Not terminating in more than 180s, \newline
-  n/a: Not applicable/not available, ~~ACZ: Augmented complex
-  zonotope.}
-%{\scriptsize 
-%\begin{align*}
-%& F_1  = \lt[\begin{matrix}
-%3.6929   &      0  &  0.7302  &  7.9715 &  14.5019 &   -0.0072 &
-%0.0720 &   -2.7354\\
-%    3.6929   &      0  &  0.7302  &  7.9715 &  14.5019 &  -0.0072  &  0.0720  & -2.7354\\
-%    0.9562    &     0  &  0.0019 &  -0.0021 &  -0.0022 &   -0.0000 &  -0.0001 &  -0.0002\\
-%         0 &   0.6910    &     0    &     0  &       0     &    0   &      0    &     0\\
-%    0.8833     &    0  & -0.1154 &  -1.2943 &  -2.3520  &  0.0012 &  -0.0118  &  0.4427\\
-%   -0.4712    &     0 &  -0.0812 &    0.1151  & -1.4845  &  0.0007 &  -0.0071  &  0.2819\\
-%   -0.1560     &    0 &  -0.0459 &  -0.3173  &  0.3650  &  0.0003  & -0.0023  &  0.1162\\
-%   -0.7719   &      0 &  -0.1248  & -1.4264 &  -2.5901  &  0.9973 &  -0.0131  &  0.4869\\
-%   -0.7544  &       0  & -0.1243 &  -1.4204 &  -2.5792  &  0.0013 &   0.9825 &   0.4796\\
-%   -0.1905   &      0  & -0.0148  & -0.2081 &  -0.3751  &  0.0002  &  0.0033  &  1.0651
-%\end{matrix}\rt]\\
-%& F_2 = \lt[\begin{matrix}
-%0.2543  &  0.2543\\
-%    0.2543  &  0.2543\\
-%   -0.0001 &  -0.0001\\
-%         0 &        0\\
-%   -0.0413 &  -0.0413\\
-%    0.0219  &  0.0219\\
-%    0.0102 &   0.0102\\
-%    0.0431 &   0.0431\\
-%    0.0428 &   0.0428\\
-%    0.0065 &   0.0065\\
-%\end{matrix}\rt],
-%~F_3 = 10^{-2}\times\lt[\begin{matrix}
-% 0.0000    &     0  & -0.0330 &   2.0218\\
-%    0   &      0  & -0.0330 &  -2.0218\\
-%    0  &       0 &   -0  &  0\\
-%   -0  &       0  &  0 &   0.0109\\
-%   -0.0118 &        0  &  0.0172  &  0 \\
-%    0.0436  &       0 &   0.0003 &  0 \\
-%   -0.0478   &      0  &  0.0034 &   0 \\
-%  -13.3924 &        0 &   0.0062 &   0 \\
-%    0.0909     &    0  &  0.0061 &  0\\
-%   -0.0798  &       0 &   0.0017  &  0\\
-%\end{matrix}\rt]
-%\end{align*}}
-\begin{minipage}{0.48\textwidth}
-\centering
-\begin{tabular}{|l|c|c|c|}
-\hline
-\multicolumn{2}{|c|}{\multirow{2}{*}{Method}} &
-\multirow{2}{*}{$\lt|\psi\rt|\leq$} & Comp.\\
-\multicolumn{2}{|c|}{} & & time (s)\\
-\hline
-\multirow{4}{*}{SpaceEx} & octagon & \multirow{2}{*}{UB} & \multirow{2}{*}{NT}\\
-& template & & \\
-\cline{2-4}
-& 400 support & \multirow{2}{*}{UB} & \multirow{2}{*}{NT}\\
-& vectors & &\\
-\hline
-\multicolumn{2}{|c|}{\multirow{2}{*}{Suggested in~\cite{heinz2014benchmark}}} &
-\multirow{2}{*}{$1.39$} & \multirow{2}{*}{n/a}\\
-\multicolumn{2}{|c|}{} & &\\
-\hline
-\multicolumn{2}{|c|}{\multirow{2}{*}{ACZ invariant}} & \multirow{2}{*}{$1.29$} &
-\multirow{2}{*}{$4$}\\
-\multicolumn{2}{|c|}{} & & \\
-\hline
-\end{tabular}
-\caption{Unsaturated robot model: results}
-~\label{tab:robot-unsaturated}
-\vspace{-1.5em}
-\end{minipage}
-\hspace{0em}
-\begin{minipage}{0.48\textwidth}
-\centering
-\begin{tabular}{|l|c|c|c|}
-\hline
-\multicolumn{2}{|c|}{\multirow{2}{*}{Method}} &
-\multirow{2}{*}{$\lt|\psi\rt|\leq$} & Comp.\\
-\multicolumn{2}{|c|}{} & & time (s)\\
-\hline
-\multirow{4}{*}{SpaceEx} & octagon & \multirow{2}{*}{UB} &
-\multirow{2}{*}{NT}\\
-& template & & \\
-\cline{2-4}
-& 400 support & \multirow{2}{*}{UB} & \multirow{2}{*}{NT}\\
-& vectors & & \\
-\hline
-\multicolumn{2}{|c|}{\multirow{2}{*}{Suggested in~\cite{heinz2014benchmark}}} &
-$1.571-\epsilon:$ & \multirow{2}{*}{n/a}\\
-\multicolumn{2}{|c|}{} & $\epsilon>0$ &\\
-\hline
-\multicolumn{2}{|c|}{\multirow{2}{*}{ACZ invariant}} & \multirow{2}{*}{$1.13$} &
-\multirow{2}{*}{45}\\
-\multicolumn{2}{|c|}{} & &\\
-\hline
-\end{tabular}
-\caption{Saturated robot model: results}
-~\label{tab:robot-saturated}
-\vspace{-1.5em}
-\end{minipage}
-%\begin{minipage}{0.45\textwidth}
-%\begin{tabular}{|l|c|c|c|c|}
-%\hline
-%\multicolumn{2}{|c|}{\multirow{2}{*}{Method}} &
-%\multirow{2}{*}{$\lt|x_1\rt|\leq$} & \multirow{2}{*}{$\lt|x_2\rt|\leq$} & Comp.\\
-%\multicolumn{2}{|c|}{} & & & time (s) \\
-%\hline
-%\multirow{4}{*}{SpaceEx} & octagon & \multirow{2}{*}{0.38} &
-%\multirow{2}{*}{0.43} & \multirow{2}{*}{1.7}\\
-%& template & & &\\
-%\cline{2-5}
-%& 100 support & \multirow{2}{*}{0.38} & \multirow{2}{*}{0.43} & \multirow{2}{*}{23.6}\\
-%& vectors & & &\\
-%\hline
-%\multicolumn{2}{|c|}{\multirow{2}{*}{ACZ invariant}} &
-%\multirow{2}{*}{0.38} & \multirow{2}{*}{0.36} & 
-%\multirow{2}{*}{5.1}\\
-%\multicolumn{2}{|c|}{} & & &\\
-%\hline
-%\end{tabular}
-%\caption{Small invariant computation:\newline Perturbed double
-%  integrator}
-%~\label{tab:smallinv-pdi}
-%\end{minipage}
-\vspace{-2em}
-\end{table}
+%% \tbf{Remarks.}  We note that although in theory, a linear system has a
+%% polytopic invariant, but the number of faces of such a polytope can be
+%% arbitrarily large for any fixed dimension.  In our unsaturated model
+%% which is linear, some of the eigenvalues are complex and their
+%% magnitudes are close to one.  Possibly, this is the reason SpaceEx
+%% could not find an invariant even with 400 support vectors.  But
+%% in our approach, since we use the complex eigen-structure, we could find the
+%% desired invariant for the unsaturated (linear) model.  Furthermore, we
+%% we also computed the invariant for the saturated (hybrid) model.
 
-\paragraph{Perturbed double integrator.}
-Our second example is a perturbed double integrator system given
-in~\cite{rakovic2004computation}.  The closed loop system with a
-feedback control is piecewise affine, having four different affine
-dynamics in four different regions of space, as
-$\trj{x}{t+1}=M_i\trj{x}{t}+w$ (the matrices and the regions are given in Appendix).
-%{\scriptsize
-%\begin{align*}~\label{eqn:pwa-regions}
-%i=\left\{\begin{array}{l}
-%1,~\text{if}~x_1\geq 0~\text{and}~x_2\geq 0\\
-%2,~\text{if}~x_1\leq 0~\text{and}~x_2\leq 0\\
-%3,~\text{if}~x_1\leq 0~\text{and}~x_2\geq 0\\
-%4,~\text{if}~x_1\geq 0~\text{and}~x_2\leq 0\\
-%\end{array} \rt.,
-%~M_1=M_2=\lt[\begin{matrix}
-%0.4103  &  0.0653\\
-%   -0.2949  &  0.5327
-%\end{matrix}\rt],~M_3=M_4=\lt[\begin{matrix}
-%0.4103  &  -0.0653\\
-%   0.2949  &  0.5327
-%\end{matrix}\rt]
-%\end{align*}}
 %
-The additive disturbance input $w$ is bounded as $\|w\|_{\infty}\leq
-0.2$.  
-
-We perform two different experiments on this system.  In the first
-experiment, we try to verify the smallest possible magnitude of bounds
-on the two coordinates, denoted $x_1$ and $x_2$. We compare these
-bounds with that found by the SpaceEx tool.  In the second experiment,
-we try to quickly compute a large invariant for the system under the
-safety constraints given in~\cite{rakovic2004computation}.  %% The
-%% given safety
-%% constraints are $\|x\|_{\infty}\leq 5$ and $\lt|K_i(x)\leq
-%% 1\rt|~\forall i\in\lt\{1,2\rt\}$.
-In the latter case, we maximize the sum of the scaling factors and
-differences of the upper and lower interval bounds of the augmented
-complex zonotopic invaraint.  Furthermore, we decompose the given
-safety constraints as the intersection of four different sets of
-safety constraints.  For each set of safety constraints, we compute a
-large augmented complex zonotopic invariant.  Then the desired
-invariant is the intersection of four augmented complex zonotopic
-invariants.  Although we may not find the largest possible (maximal)
-invariant by this approach, still the optimizer would find a large
-invariant.  We draw comparison in terms of the computation time with
-the reported result for the MPT tool~\cite{rakovic2004computation}.
-
-In our formalism, we model the system with $4$ locations and $12$
-edges connecting all the locations.  Appropriate staying conditions
-are specified in each location, reflecting the division of the state
-space into different regions where the dynamics is affine. The initial
-set is the origin. The same model is specified in SpaceEx.
-
-\tbf{Size of model}: 2 dimensions, 4 locations and 12 edges.
-
-\tbf{Experiment settings}.  For the primary template, we collected the
-(complex) eigenvectors of all linear matrices of the affine maps and
-their binary products. For the SpaceEx tool, we experimented with two
-different templates, the octagon template and a template with 100
-uniformly sampled support vectors.
-
-\tbf{Results.}  In the first experiment, we verified smalled bounds
-for $x_2$ than that of SpaceEx, while the bounds verified for $x_1$
-were equal for both methods.  In our second experiment on this
-example, the computation time for finding a large invariant by our
-method is significantly smaller than that of the reported result for
-the MPT tool.  The results are summarized in the
-Tables~\ref{tab:smallinv-pdi} and~\ref{tab:largeinv-pdi}.
+%
 \begin{table}
 \center{UB: $>$1000, ~~NT: Not terminating in more than 180s, \newline
   n/a: Not applicable/not available, ~~ACZ: Augmented complex
   zonotope.}
 %\hspace{4em}
-\begin{minipage}{0.45\textwidth}
-\begin{tabular}{|l|c|c|c|c|}
-\hline
-\multicolumn{2}{|c|}{\multirow{2}{*}{Method}} &
-\multirow{2}{*}{$\lt|x_1\rt|\leq$} & \multirow{2}{*}{$\lt|x_2\rt|\leq$} & Comp.\\
-\multicolumn{2}{|c|}{} & & & time (s) \\
-\hline
-\multirow{4}{*}{SpaceEx} & octagon & \multirow{2}{*}{0.38} &
-\multirow{2}{*}{0.43} & \multirow{2}{*}{1.7}\\
-& template & & &\\
-\cline{2-5}
-& 100 support & \multirow{2}{*}{0.38} & \multirow{2}{*}{0.43} & \multirow{2}{*}{23.6}\\
-& vectors & & &\\
-\hline
-\multicolumn{2}{|c|}{\multirow{2}{*}{ACZ invariant}} &
-\multirow{2}{*}{0.38} & \multirow{2}{*}{0.36} & 
-\multirow{2}{*}{5.1}\\
-\multicolumn{2}{|c|}{} & & &\\
-\hline
-\end{tabular}
-\caption{Small invariant computation:\newline Perturbed double
-  integrator}
-~\label{tab:smallinv-pdi}
-\end{minipage}
-\hspace{4em}
-\begin{minipage}{0.4\textwidth}
-\begin{tabular}{|c|c|}
-\hline
-\multirow{2}{*}{Method} & Comp.\\
-& time (s)\\
-\hline
-\multirow{2}{*}{MPT tool~\cite{rakovic2004computation}} & \multirow{2}{*}{107}\\
-& \\
-\hline
-\multirow{2}{*}{ACZ} & \multirow{2}{*}{12}\\
-& \\
-\hline
-\end{tabular}
-\caption{Large invariant computation: Perturbed double integrator}
-~\label{tab:largeinv-pdi}
-\end{minipage}
 \begin{tabular}{|l|c|c|c|c|c|c|c|c|c|}
 \hline
 \multicolumn{2}{|c|}{\multirow{4}{*}{Method}} & \multicolumn{4}{|c|}{\multirow{2}{*}{Slow switching}} & \multicolumn{4}{|c|}{\multirow{2}{*}{Fast switching}}\\
@@ -405,6 +313,79 @@ Tables~\ref{tab:smallinv-pdi} and~\ref{tab:largeinv-pdi}.
 ~\label{tab:largedwell-platoon}
 \vspace{-4em}
 \end{table}
+
+
+
+\paragraph{Perturbed double integrator.}
+Our second example is a perturbed double integrator system given
+in~\cite{rakovic2004computation}.  The closed loop system with a
+feedback control is piecewise affine, having four different affine
+dynamics in four different regions of space, as
+$\trj{x}{t+1}=M_i\trj{x}{t}+w$ (the matrices and the regions are given in Appendix).
+%{\scriptsize
+%\begin{align*}~\label{eqn:pwa-regions}
+%i=\left\{\begin{array}{l}
+%1,~\text{if}~x_1\geq 0~\text{and}~x_2\geq 0\\
+%2,~\text{if}~x_1\leq 0~\text{and}~x_2\leq 0\\
+%3,~\text{if}~x_1\leq 0~\text{and}~x_2\geq 0\\
+%4,~\text{if}~x_1\geq 0~\text{and}~x_2\leq 0\\
+%\end{array} \rt.,
+%~M_1=M_2=\lt[\begin{matrix}
+%0.4103  &  0.0653\\
+%   -0.2949  &  0.5327
+%\end{matrix}\rt],~M_3=M_4=\lt[\begin{matrix}
+%0.4103  &  -0.0653\\
+%   0.2949  &  0.5327
+%\end{matrix}\rt]
+%\end{align*}}
+%
+The additive disturbance input $w$ is bounded as $\|w\|_{\infty}\leq
+0.2$.  
+
+We perform two different experiments on this system.  In the first
+experiment, we try to verify the smallest possible magnitude of bounds
+on the two coordinates, denoted $x_1$ and $x_2$. We compare these
+bounds with that found by the SpaceEx tool.  In the second experiment,
+we try to quickly compute a large invariant for the system under the
+safety constraints given in~\cite{rakovic2004computation}.  %% The
+%% given safety
+%% constraints are $\|x\|_{\infty}\leq 5$ and $\lt|K_i(x)\leq
+%% 1\rt|~\forall i\in\lt\{1,2\rt\}$.
+%% In the latter case, we maximize the sum of the scaling factors and
+%% differences of the upper and lower interval bounds of the augmented
+%% complex zonotopic invaraint.  Furthermore, we decompose the given
+%% safety constraints as the intersection of four different sets of
+%% safety constraints.  For each set of safety constraints, we compute a
+%% large augmented complex zonotopic invariant.  Then the desired
+%% invariant is the intersection of four augmented complex zonotopic
+%% invariants.  Although we may not find the largest possible (maximal)
+%% invariant by this approach, still the optimizer would find a large
+%% invariant.
+We draw comparison in terms of the computation time with
+the reported result for the MPT tool~\cite{rakovic2004computation}.
+
+In our formalism, we model the system with $4$ locations and $12$
+edges connecting all the locations.  Appropriate staying conditions
+are specified in each location, reflecting the division of the state
+space into different regions where the dynamics is affine. The initial
+set is the origin. The same model is specified in SpaceEx.
+
+\tbf{Size of model}: 2 dimensions, 4 locations and 12 edges.
+
+\tbf{Experiment settings}.  For the primary template, we collected the
+(complex) eigenvectors of all linear matrices of the affine maps and
+their binary products. For the SpaceEx tool, we experimented with two
+different templates, the octagon template and a template with 100
+uniformly sampled support vectors.
+
+\tbf{Results.}  In the first experiment, we verified smalled bounds
+for $x_2$ than that of SpaceEx, while the bounds verified for $x_1$
+were equal for both methods.  In our second experiment on this
+example, the computation time for finding a large invariant by our
+method is significantly smaller than that of the reported result for
+the MPT tool.  The results are summarized in the
+Tables~\ref{tab:smallinv-pdi} and~\ref{tab:largeinv-pdi}.
+
 %% \tbf{Remark.}  The overapproximation quality of SpaceEx reduces when
 %% there are large number of edges, because then in each step, a union of
 %% many different polytopes has to be overapproximated using support
