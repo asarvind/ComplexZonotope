@@ -96,7 +96,7 @@ Since $a\geq 0$, so $\min(a+b,c)\leq \min(a+b,a+c) =
 a+\min(b,c)$. \qed
 \end{proof}
 
-Now we introduce the following functions which are used later to
+Now we introduce the following \emph{affine} functions which are used later to
 express the overapproximation of the intersection between an augmented
 complex zonotope and a sub-parallelotope.
 %
@@ -120,10 +120,11 @@ $\lt(\maxaffine{l}{\wh{l}}\rt)_i = \left\{
 l_i~~\text{if}~\wh{l}_i=-\infty
 \end{array}
 \right..$
+It is easy to see that the min-approximation and max-approximation functions are affine, because for any one coordinate, a respective function is either a constant function or equal to the first argument, i.e, identity function.
 %
 The following theorem states that an overapproximation of the intersection
 of an augmented complex zonotope with a sub-parallelotope can be
-expressed using min and max approximation function.
+expressed using these affine approximation functions.
 \begin{theorem}~\label{thm:acz-int}
 Given a sub-parallelotope $\sptope{\ptemplate}{\wh{l}}{\wh{u}}$ an
 augmented complex zonotope $\gcz{V}{c}{s}{\pinv{\ptemplate}}{l}{u}$

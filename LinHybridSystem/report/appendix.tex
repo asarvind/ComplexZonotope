@@ -122,7 +122,7 @@ $sat\lt(y_i\rt)=y_i~\forall i\in\{1,2\}$.
 \end{matrix}\rt]
 \end{align*}}
 
-\subsection*{Matrices in the second benchmark (perturbed double integrator)}
+\subsection*{Regions and Matrices in the second benchmark (perturbed double integrator)}
 {\scriptsize
 \begin{align*}~\label{eqn:pwa-regions}
 i=\left\{\begin{array}{l}
@@ -142,11 +142,17 @@ i=\left\{\begin{array}{l}
 
 
 \subsection*{Dynamics of the third benchmark (networked vehicle platoon)}
+Given $x\in\realset^9$ is the state of the system, $u\in[-9,1]$ is the additive
+disturbance input, $c\in\realset_{\geq 0}$ is a clock, $q$ is an index
+for the type of dynamics and $C$ is a set of clock instants when a
+switching can happen.
  \begin{align*} &\dot{x} = A_{q(c)}x+B
 u:~q(c)\in{1,2}~~\wedge~~\dot{q}(c)=0~~\wedge~~\dot{c}=1\\ &\exists
 c\in C:~q(c^+)\neq q(c)~\wedge~c^+=0.
 \vspace{-2em}
 \end{align*}
+ The system matrices are given below.
+
 {\scriptsize
 \begin{align*}
 & A_1 = \lt[\begin{matrix}
@@ -183,7 +189,3 @@ c\in C:~q(c^+)\neq q(c)~\wedge~c^+=0.
 \end{matrix}\rt]
 \end{align*}
 }
-where $x$ is the state of the system, $u\in[-9,1]$ is the additive
-disturbance input, $c$ is a clock, $q$ is an index
-for the type of dynamics and $C$ is a set of clock instants when a
-switching can happen. 
