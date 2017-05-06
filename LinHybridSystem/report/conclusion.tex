@@ -1,16 +1,16 @@
 We introduced augmented complex zonotopes as a more general set
 representation than template complex zonotopes, based on which we
 derived efficiently solvable conditions for computing invariants,
-subject to polytopic safety requirements, discrete time affine hybrid
+subject to linear safety constraints, for discrete time affine hybrid
 systems with linear guards and additive disturbance input.  Like
 template complex zonotopes, augmented complex zonotopes have the
-advantage that we can meaningfully choose the templates based on the
-eigenstructure and and other relevant aspects of the dynamics, for
-efficient fixpoint computation.  Furthermore, we overcame a drawback
-of template complex zonotopes in that we derived a reasonable
-overapproximation of the intersection with a class of linear
-constraints, which is expressed as a simple algebraic expression.  We
-use this expression in the derivation of a set of second order conic
+advantage that we can meaningfully choose the templates for efficient
+fixpoint computation, based on the eigenstructure and and other
+relevant aspects of the dynamics.  But additionally, we overcame a
+drawback of template complex zonotopes in that we derived a simple
+algebraic expression for reasonable overapproximation of the
+intersection with a class of linear constraints.  We use this
+algebraic expression to obtain of a set of second order conic
 constraints that can be efficiently solved to compute an invariant.
 In contrast to the step-by-step reachability computation approaches
 that iteratively accumulate overapproximation error, we instead
