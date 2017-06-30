@@ -53,7 +53,7 @@ complex zonotope and a real zonotope, i.e.,
 $\cz{V}{c}{s}\oplus\zon{W}{l}{u}$.  From Lemma~\ref{lem:motivation},
 we see that the intersection of a sub-parallelotope
 $\sptope{K}{\wh{l}}{\wh{u}}$ with a zonotope $\zon{W}{l}{u}$ can be
-computed when $W=\pinv{K}$.  This being the motivation, we want to
+computed when $W=\pinv{K}$.  Motivated by this, we want to
 find a condition under which we can overapproximate the intersection
 $\lt(\cz{V}{c}{s}\oplus\zon{W}{l}{u}\rt)\bigcap\sptope{K}{\wh{l}}{\wh{u}}$
 by
@@ -61,7 +61,7 @@ $\cz{V}{c}{s}\oplus\lt(\zon{W}{l}{u}\bigcap\sptope{K}{\wh{l}}{\wh{u}}\rt)$,
 that is computing first the intersection (which can be done
 efficiently) and then the Minkowski sum.  Indeed we can find the
 required condition for a more general case of any three closed convex
-sets sets $S_1,S_2,S_3$ (that is, find a condition under which
+sets $S_1,S_2,S_3$ (that is, find a condition under which
 $\lt(S_1\oplus S_2\rt)\bigcap S_3$ can be overapproximated by
 $S_1\oplus\lt(S_2\bigcap S_3\rt)$) and apply this result to augmented
 complex zonotopes. We state this condition as follows.
@@ -96,13 +96,13 @@ Since $a\geq 0$, so $\min(a+b,c)\leq \min(a+b,a+c) =
 a+\min(b,c)$. \qed
 \end{proof}
 
-Now we introduce the following \emph{affine} functions which are used later to
+Now we introduce the following \emph{affine} functions which are used latter to
 express the overapproximation of the intersection between an augmented
 complex zonotope and a sub-parallelotope.
 %
 A binary function
-$\minaffinefunc:\realset^k\times\comprealset^k$ is
-called \emph{min-approximation} function and defined as follows: for
+$\minaffinefunc:\realset^k\times\comprealset^k,$
+called \emph{min-approximation} function, is defined as follows: for
 $u\in\realset^k$ and $\wh{u}\in\comprealset^k$,
 $\lt(\minaffine{u}{\wh{u}}\rt)_i = \left\{
 \begin{array}{l}
@@ -125,21 +125,24 @@ It is easy to see that the min-approximation and max-approximation functions are
 The following theorem states that an overapproximation of the intersection
 of an augmented complex zonotope with a sub-parallelotope can be
 expressed using these affine approximation functions.
+%
 \begin{theorem}~\label{thm:acz-int}
-Given a sub-parallelotope $\sptope{\ptemplate}{\wh{l}}{\wh{u}}$ an
+Given a sub-parallelotope $\sptope{\ptemplate}{\wh{l}}{\wh{u}}$ and an
 augmented complex zonotope $\gcz{V}{c}{s}{\pinv{\ptemplate}}{l}{u}$
-such that $VV^T$ is non-singular, $\lt|\pinv{V}c\rt|\leq s$, $l\leq
-\maxaffine{l}{\wh{l}}$ and $u\geq \minaffine{l}{\wh{l}}$, then
+such that $V\conjtranspose{V}$ is non-singular, $\lt|\pinv{V}c\rt|\leq s$, $l\leq
+\maxaffine{l}{\wh{l}}\leq \minaffine{u}{\wh{u}}\leq u$, then
 $\gcz{V}{c}{s}{\pinv{\ptemplate}}{l}{u}\bigcap\sptope{\ptemplate}{\wh{l}}{\wh{u}}\subseteq
 \gcz{V}{c}{s}{\pinv{\ptemplate}}{\maxaffine{l}{\wh{l}}}{\minaffine{u}{\wh{u}}}$.
+%
 \end{theorem}
 \emph{Proof Sketch.}  Consider $S_1 = \cz{V}{c}{s}$, $S_2 =
 \zon{\pinv{\ptemplate}}{l}{u}$ and $S_3 =
 \sptope{\ptemplate}{\wh{l}}{\wh{u}}$.  First, we check that $0\in S_1$
 and $S_2\bigcap S_3\neq \emptyset$, and then we subsitute $S_1$, $S_2$
 and $S_3$ in Lemma~\ref{gen-int}.  To compute the intersection
-between $S_2$ and $S_3$, we use Lemma~\ref{lem:motivation}.  The
-detailed proof is in the appendix.\qed
+between $S_2$ and $S_3$, we use Lemma~\ref{lem:motivation}.  %% The
+%% detailed proof is in the appendix.
+\qed
 
 
 %
@@ -226,14 +229,14 @@ complex zonotopes.  Therefore, we first review an inclusion relation
 between template complex zonotopes, which was earlier stated
 in~\cite{tcz2017}.
 
-Since a template complex zonotope can have a non-polyhedral real
-projection, checking the exact inclusion between two template complex
-zonotopes, in general, amounts to solving a non-convex optimization
-problem, which could be computationally intractable.  Instead, a
-convex condition was proposed in~\cite{tcz2017}, which is sufficient
-to guarantee the inclusion between template complex zonotopes.  Here,
-we present this condition as a relation between template complex
-zonotopes.
+Unlike usual zonotopes, template complex zonotopes can have
+non-polyhedral real projections.  Checking the exact inclusion between
+two template complex zonotopes, in general, amounts to solving a
+non-convex optimization problem, which could be computationally
+intractable.  Instead, a convex condition was proposed
+in~\cite{tcz2017}, which is sufficient to guarantee the inclusion
+between template complex zonotopes.  Here, we present this condition
+as a relation between template complex zonotopes.
 %
 \begin{definition}
 We define a relation ``$\order$'' between template complex zonotopes
@@ -282,8 +285,8 @@ equivalent to a set of convex constraints called second order
 conic constraints.
 %
 %\begin{definition}[SOCC]
-Recall that a constraint of the form $\|Ax\|_{2}+Fx+b\leq 0$ on an $n$-dimensional
-variable $x$, given $A,F\in\mat{n}{k}{\realset}$ and $b\in\mb{R}^k$, is
+Recall that a constraint of the form $\|Ax\|_{2}+v^Tx+w\leq 0$ on an $n$-dimensional
+variable $x$, given $A\in\mat{n}{k}{\realset}$, $v\in\realset^n$ and $w\in\realset$, is
 a second order conic constraint (SOCC).
 %\end{definition}
 %

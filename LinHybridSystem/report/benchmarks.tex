@@ -155,16 +155,16 @@ $1.571-\epsilon:$ & \multirow{2}{*}{n/a}\\
 \paragraph{Robot with a saturated controller.}  Our first example is a benchmark
 model of a self-balancing two wheeled robot called NXTway-GS1 by
 Yorihisa Yamamoto, presented in the ARCH
-workshop~\cite{heinz2014benchmark}. The consider the sampled data
-(discrete time) networked control system model consisting of a plant
-and a controller, presented in the paper. In our experiment, we
-decoupled some unbounded directions of the dynamics of the system from
-bounded directions by making an appropriate linear transformation of
-the coordinates.  The transformation is such that the coordinates
-corresponding to the \emph{body pitch angle} and controller inputs are
-among the bounded directions.  We do not explain the transformation
-here because it is beyond the scope of this paper.  The dynamics of
-the system after the transformation is given in the appendix.  
+workshop~\cite{heinz2014benchmark}. We consider the sampled data
+(discrete time) networked control system model presented in the
+paper. In our experiment, we decoupled some unbounded directions of
+the dynamics of the system from bounded directions by making an
+appropriate linear transformation of the coordinates.  The
+transformation is such that the coordinates corresponding to
+the \emph{body pitch angle} and controller inputs are among the
+bounded directions.  We do not explain the transformation here because
+it is beyond the scope of this paper.  %% The dynamics of the system
+%% after the transformation is given in the appendix.
 %
 
 %% {\scriptsize 
@@ -322,7 +322,7 @@ Our second example is a perturbed double integrator system given
 in~\cite{rakovic2004computation}.  The closed loop system with a
 feedback control is piecewise affine, having four different affine
 dynamics in four different regions of space, as
-$\trj{x}{t+1}=M_i\trj{x}{t}+w$ (the matrices and the regions are given in Appendix).
+$\trj{x}{t+1}=M_i\trj{x}{t}+w$, $i\in\{1,2,3,4\}$.  %% (the matrices and the regions are given in Appendix)
 %{\scriptsize
 %\begin{align*}~\label{eqn:pwa-regions}
 %i=\left\{\begin{array}{l}
@@ -379,7 +379,7 @@ their binary products. For the SpaceEx tool, we experimented with two
 different templates, the octagon template and a template with 100
 uniformly sampled support vectors.
 
-\tbf{Results.}  In the first experiment, we verified smalled bounds
+\tbf{Results.}  In the first experiment, we verified smaller bounds
 for $x_2$ than that of SpaceEx, while the bounds verified for $x_1$
 were equal for both methods.  In our second experiment on this
 example, the computation time for finding a large invariant by our
@@ -402,25 +402,26 @@ vehicles $M_1$, $M_2$ and $M_3$ along with a leader board ahead. %%  The
 %% movement of the vehicles is dependent on the communication between
 %% them. 
 In the benchmark proposal, the continuous time dynamics of the
-vechicles is described as a hybrid system with two possible dynamics,
+vehicles is described as a hybrid system with two possible dynamics,
 related to the presence and absence of communication between the
-vechicles, respectively.  Furthermore, there are time constraints on
-when the switching can happen.
-The state of the system is a $9$ dimensional vector $x$ (see appendix).
- Any upper bounds on $-x_1$, $-x_4$, and $-x_7$ provide lower limits
- on the reference distances of $M_1$, $M_2$ and $M_3$ to their
- successor vehicles, beyond which the platoon is will not collide.  Therefore, the verification challange is to find the
- smallest possible upper bounds on $-x_1$, $-x_4$, and $-x_7$.  The
- benchmark then provides the experimental results for the case when
- the minimum dwell time is 20 seconds, i.e., $C=\{c>20\}$ (also
- specified in the distributed SpaceEx
- implementation\footnote{http://cps-vo.org/node/15096}).  In our
- experiment, apart from the case of the minimum dwell time of 20s
- (slow switching), we also study a case of fast switching where $C$ is
- the set of all non-negative integer times.  We could specify discrete time
- models that overapproximate the reachable sets of both these above
- models.  We do not explain the discretization procedure here, because
- it is beyond the scope of this paper.
+vehicles, respectively.  Furthermore, there are time constraints on
+when the switching can happen.  The state of the system is a $9$
+dimensional vector $x$ %% (see appendix)
+.  Any upper bounds on $-x_1$,
+$-x_4$, and $-x_7$ provide lower limits on the reference distances of
+$M_1$, $M_2$ and $M_3$ to their successor vehicles, beyond which the
+platoon is will not collide.  Therefore, the verification challenge is
+to find the smallest possible upper bounds on $-x_1$, $-x_4$, and
+$-x_7$.  The benchmark then provides the experimental results for the
+case when the minimum dwell time is 20 seconds, i.e., $C=\{c>20\}$
+(also specified in the distributed SpaceEx
+implementation\footnote{http://cps-vo.org/node/15096}).  In our
+experiment, apart from the case of the minimum dwell time of 20s (slow
+switching), we also study a case of fast switching where the possible
+switching times $C$ is the set of all non-negative integers.  We
+could specify discrete time models that overapproximate the reachable
+sets of both these above models. %%  We do not explain the discretization
+%% procedure here, because it is beyond the scope of this paper.
 
 \tbf{Size of slow switching model}: 9 dimensions, 2
 locations and 4 edges.
@@ -439,10 +440,11 @@ support vectors.
 \tbf{Results.}  For the large minimum dwell time of $20s$, the
 discrete time SpaceEx implementation and also a method based on using
 real zonotopes~\cite{makhlouf2014networked} could verify slightly
-smaller bounds compared to our approach.
-But for the small minimum dwell time ($1s$) model, SpaceEx could not
-even find a finite set of bounds, whereas our approach could verify a
-finite set of bounds.  These results are reported in the
+smaller bounds compared to our approach.  But for the small minimum
+dwell time ($1s$) model, SpaceEx could not even find a finite set of
+bounds, whereas our approach could verify a finite set of bounds.  The
+reason is that the system is more stable under slow switching as
+compared to fast switching.  These results are reported in the
 Table~\ref{tab:largedwell-platoon}.
 
 %% \tbf{Remarks.}  The dynamics in both locations being stable, the

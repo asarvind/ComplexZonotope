@@ -15,7 +15,9 @@ systems and program analysis (see for
 example~\cite{CousotHalbwachs78,DBLP:journals/fmsd/BensalemL99,DBLP:conf/tacas/TiwariRSS01,DBLP:conf/cav/ColonSS03,DBLP:conf/sas/Goubault13}
 and the developed techniques have been extended to continuous and
 hybrid
-systems \cite{DBLP:conf/hybrid/SankaranarayananSM04,jeannet2009apron,DBLP:conf/hybrid/Rodriguez-CarbonellT05,DBLP:conf/cdc/SassiGS14,DBLP:journals/tecs/AllamigeonGSGP16,HybridFluctuat,DBLP:conf/vmcai/SogokonGJP16,DBLP:conf/aplas/DangG11}. Barrier
+systems \cite{DBLP:conf/hybrid/SankaranarayananSM04,%% jeannet2009apron,
+DBLP:conf/hybrid/Rodriguez-CarbonellT05,DBLP:conf/cdc/SassiGS14,%% DBLP:journals/tecs/AllamigeonGSGP16,
+HybridFluctuat,DBLP:conf/vmcai/SogokonGJP16,DBLP:conf/aplas/DangG11}. Barrier
 certificates \cite{prajna2004safety} are closely related to invariants
 in the sense that they describe a boundary that the system starting
 from a given initial set will never cross to enter a region containing
@@ -40,51 +42,52 @@ the number of iterations until convergence.
 \input{contribution}
 
 \emph{Related work.} For hybrid systems verification, convex polyhedra~\cite{CousotHalbwachs78,jeannet2009apron}, and their special classes such as
-zones~\cite{DBLP:conf/pado/Mine01},
-octagons~\cite{DBLP:journals/lisp/Mine06}, zonotopes~\cite{DBLP:conf/hybrid/Girard05,DBLP:conf/eucc/MaigaCRT14} and
-tropical polyhedra~\cite{DBLP:conf/sas/AllamigeonGG08} are the most
-commonly used set representations. During the analysis which requires
-operations under which a set representation is not closed (such as the
-union or join operations for convex polyhedra and additionally
-intersection for zonotopes) the complexity of generated sets increases
-rapidly in order to guarantee a desired error bound. One way to
-control this complexity increase, face normal vectors or generators
-are fixed, which leads to template convex
+%% zones~\cite{DBLP:conf/pado/Mine01},
+octagons~\cite{DBLP:journals/lisp/Mine06} and
+zonotopes~\cite{DBLP:conf/hybrid/Girard05,DBLP:conf/eucc/MaigaCRT14}
+and tropical polyhedra~\cite{DBLP:conf/sas/AllamigeonGG08} are the
+most commonly used set representations. During reachability analysis,
+which requires operations under which a set representation is not
+closed (such as the union or join operations for convex polyhedra and
+additionally intersection for zonotopes), the complexity of generated
+sets increases rapidly in order to guarantee a desired error
+bound. One way to control this complexity increase is to fix the face
+normal vectors or generators, which leads to template convex
 polyhedra \cite{Sankaranarayanan+Dang+Ivancic-08-Symbolic,DBLP:conf/aplas/DangG11}. Although
 our template complex zonotopes proposed in~\cite{tcz2017} do not
-belong to the class of convex polyhedra, they follow the same
-spirit of controlling the complexity. Set representations defined by non-linear constraints include
+belong to the class of convex polyhedra, they follow the same spirit
+of controlling the complexity using templates. Set representations
+defined by non-linear constraints include
 ellipsoids~\cite{Kurzhanski2000201}, polynomial
-inequalities\cite{DBLP:conf/sas/BagnaraRZ05} et
+inequalities\cite{DBLP:conf/sas/BagnaraRZ05} and
 equalities~\cite{Rodriguez-Carbonell:2007}, quadratic templates and
-piecewise quadratic
-templates~\cite{DBLP:conf/esop/AdjeGG10,DBLP:conf/hybrid/RouxJGF12,DBLP:conf/fm/RouxG14,DBLP:conf/hybrid/Adje17},
-which are used for computing non-linear invariants. A major problem
-that the template based approach faces is finding good templates. As
-it will become clear later, using template complex zonotopes and the
-augmented version introduced in this paper and exploiting
-eigen-structures of linear dynamics which reflect the contraction or
-expansion of a set by the dynamics, allows requiring only few of steps
-until convergence to an invariant.
+piecewise quadratic templates~\cite{%% DBLP:conf/esop/AdjeGG10,
+DBLP:conf/hybrid/RouxJGF12,DBLP:conf/fm/RouxG14,DBLP:conf/hybrid/Adje17},
+which are used for computing non-linear invariants. A major problem of
+template based approaches finding good templates.  In this regard,
+using template complex zonotopes and the augmented version introduced
+in this paper, we can exploit eigen-structures of linear dynamics
+which reflect the contraction or expansion of a set by the dynamics,
+and define good templates for efficient convergence to an invariant
+(see Proposition 4.3 of~\cite{adimoolamACC2016}).
 
-The complex zonotopes we proposed in~\cite{adimoolamACC2016} extend
-usual zonotopes to the complex domain, and geometrically speaking they
-are Minkowski sum of line segments and some ellipsoids. This extension
-is very similar in spirit to quadratic
+The extension to complex zonotope~\cite{adimoolamACC2016} is
+very similar in spirit to quadratic
 zonotopes~\cite{DBLP:conf/aplas/AdjeGW15} and more generally
 polynomial zonotopes~\cite{DBLP:conf/hybrid/Althoff13}. Nevertheless,
 while a polynomial zonotope is a set-valued polynomial function
 of \emph{intervals}, a complex zonotope is a set-valued function of
-unit \emph{circles} in the complex plane. Our idea of coupling
-additional linear constraints with zonotopes is inspired by the work
+unit \emph{circles} in the complex plane.  Our idea in this paper of coupling
+additional linear constraints with complex zonotopes is inspired by the work
 on constrained zonotopes proposed
-in~\cite{DBLP:conf/cav/GhorbalGP09,scott2016constrained} for
-intersection computation.  But
+in~\cite{DBLP:conf/cav/GhorbalGP09,scott2016constrained} for computing
+intersection with linear constraints.  But
 while~\cite{DBLP:conf/cav/GhorbalGP09,scott2016constrained} compute
 the intersection or its overapproximation, algorithmically, we instead
 derive a simple algebraic expression to overapproximate the
-intersection.  This algebraic expression is latter used to
-obtain second order conic (convex) constraints for invariant computation.\\
+intersection.  This algebraic expression is latter used to obtain
+second order conic (convex) constraints, for invariant computation in
+a single step of convex optimization.
 
 \emph{Organization.}  The rest of the paper is organized as follows.  Firstly, we explain
 some of the mathematical notation used in this paper.  Then in
@@ -92,18 +95,22 @@ Section~\ref{sec:system}, we describe the model of a discrete-time
 affine hybrid system, controlled by sub-parallelotopic switching
 conditions and having a bounded additive disturbance input. In
 Section~\ref{sec:acz}, we present the set representation of augmented
-complex zonotopes and discuss some important operations and relations, in particular intersection with sub-parallelotopic constraints, projection in any direction, linear transformation, Minkowski sum and inclusion checking.  In
-Section~\ref{sec:invcomp}, we derive a set of second order conic
-constraints to compute an augmented complex zonotopic invariant,
-satisfying linear safety constraints and containing an initial set.
-Furthermore, we explain how to choose the template.  In
-Section~\ref{sec:exp}, we report some experimental results.  The
-conclusion and future work are given in Section~\ref{sec:conclusion}.
-We annex proofs of some lemmas presented in the paper in an
-Appendix.
+complex zonotopes and discuss some important operations and relations,
+in particular intersection with sub-parallelotopic constraints,
+projection in any direction, linear transformation, Minkowski sum and
+inclusion checking.  In Section~\ref{sec:invcomp}, we derive a set of
+second order conic constraints to compute an augmented complex
+zonotopic invariant, satisfying linear safety constraints and
+containing an initial set.  Furthermore, we explain how to choose the
+template.  In Section~\ref{sec:exp}, we report some experimental
+results.  The conclusion and future work are given in
+Section~\ref{sec:conclusion}.
+%% We annex proofs of some lemmas presented in the paper in an
+%% Appendix.
 
-\emph{Notation.} Some notations, for which we
-consider explanation may be required, is described below.  If $S$ is a
+\emph{Notation.} Some notations for which we
+consider explanation may be required is described below.  We denote
+$\comprealset = \realset\bigcup\lt\{-\infty,\infty\rt\}$.  If $S$ is a
 set of complex numbers, then $\real(S)$ and $\img(S)$ represent the
 real and imaginary projections of $S$, respectively.  If $z$ is a
 complex number, then $|z|$ denotes the absolute value of $z$.  On the
@@ -115,8 +122,10 @@ conjugate transpose of a matrix $V\in\mat{m}{n}{\complexset}$ is
 denoted $\conjtranspose{V} = \lt(\real(V)-\iu\img(V)\rt)^T.$ If
 $V\conjtranspose{V}$ is invertible, then
 $\pinv{V}= \conjtranspose{V}\lt(V\conjtranspose{V}\rt)^{-1}$, which is
-the pseudo-inverse of $V$.  Given two vectors $l,u\in\realset^k$, the
-meet of the two vectors is denoted $l\bigwedge u$, defined as
+the pseudo-inverse of $V$.  Given two vectors $l,u\in\realset^k$ and
+any relation $\bowtie$ between numbers in $\comprealset$, we say
+$l\bowtie u$ if $l_i\bowtie u_i,~\forall i\in\tup{k}$.  The meet of
+the two vectors $l$ and $u$ is denoted $l\bigwedge u$, defined as
 $\lt(l\bigwedge u\rt)_i=\min\lt(l_i,u_i\rt)~\forall i\in\tup{k}$.  The
 join is denoted $l\bigvee u$, defined as $\lt(l\bigvee
 u\rt)_i=\max\lt(l_i,u_i\rt)~\forall i\in\tup{k}$.

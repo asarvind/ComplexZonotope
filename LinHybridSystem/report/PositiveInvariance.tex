@@ -43,24 +43,26 @@ For all locations $\loc\in\locationset$ and all edges
   $\edgetransition{\edge}\lt(\hybridset_{\preloc{\edge}}\rt) \subseteq \hybridset_{\postloc{\edge}}$
   holds if $\forall \loc\in\locationset$ and
   $\forall\edge\in\edgeset$, all of the below statements are
-  collectively true.
-\begin{align}~\label{eqn:locinv}
-\begin{split}
-& \lt|\pinv{V_\loc} c_\loc\rt|\leq s_\loc~~\lt(i.e.,~\Rightarrow
-0 \in\cz{V_\loc}{c_\loc}{s_\loc}\rt), \\
-\end{split}
-\vspace{-1em}
-\end{align}
+  collectively true.\\
+
 /* intersection with staying conditions and one continuous transition  */
 \vspace{-0.65em}
+\begin{align}~\label{eqn:locinv}
+\begin{split}
+& \lt|\pinv{V_\loc} c_\loc\rt|\leq s_\loc,~l_\loc\leq\maxaffine{l_\loc}{\stay^-_\loc}\leq\minaffine{u_\loc}{\stay^+_\loc)}\leq u_\loc %% ~~\lt(i.e.,~\Rightarrow
+%% 0 \in\cz{V_\loc}{c_\loc}{s_\loc}\rt),
+\\
+\end{split}
+\end{align}
+\vspace{-2em}
 \begin{align}
 \begin{split}
 &  \text{there exist real
     vectors}~
-  c^\pr_\loc,s^\pr_\loc,l^\pr_\loc,u^\pr_\loc,l^\dpr_\loc,u^\dpr_\loc~\text{such
+  c^\pr_\loc, s^\pr_\loc, l^\pr_\loc,u^\pr_\loc,l^\dpr_\loc,u^\dpr_\loc~\text{such
     that}\\
 & c^\pr_\loc = \map_\loc c_\loc+c^{in}_\loc,~s^\pr_\loc =
-  \ColumnJoin{s_\loc}{s^{in}_\loc}, l^\pr_\loc =
+  \ColumnJoin{s_\loc}{s^{in}_\loc},~l^\pr_\loc =
   \ColumnJoin{\maxaffine{l_\loc}{\stay^-_\loc}}{~~~~~~~~~l^{in}_\loc~~~},~~u^\pr
   =
   \ColumnJoin{\minaffine{u_\loc}{\stay^+_\loc)}}{~~~~~~~~~u^{in}_\loc~~~}
@@ -75,7 +77,7 @@ For all locations $\loc\in\locationset$ and all edges
    \gcz{V_\loc}{c_\loc}{s_\loc}{\pinv{\ptemplate}_\loc}{l^\dpr_\loc}{u^\dpr_\loc} \\
 %\end{align}
 %\begin{align}
-& \maxaffine{l^\dpr_\loc}{\stay^-_\loc}\geq l_\loc~\text{and}~~
+&l^\dpr_\loc\leq\maxaffine{l^\dpr_\loc}{\stay^-_\loc}\leq\minaffine{u^\dpr_\loc}{\stay^+_\loc}\leq u^\dpr_\loc,~~ \maxaffine{l^\dpr_\loc}{\stay^-_\loc}\geq l_\loc~\text{and}~~
 \minaffine{u^\dpr_\loc}{\stay^+_\loc}\leq u_\loc.
 \end{split}
  \end{align}
@@ -83,7 +85,7 @@ For all locations $\loc\in\locationset$ and all edges
 %%   $\edgetransition{\edge}\lt(\hybridset_{\preloc{\edge}}\rt)
 %%   \subseteq \hybridset_{\postloc{\edge}}$ holds if 
 %%   all of the below statements are collectively true.
-/* intersection with staying condition and guard of current location
+/* intersection with staying and guard condition of current location
 and one discrete transition*/
 \vspace{-0.9em}
 \begin{align}
@@ -92,13 +94,13 @@ and one discrete transition*/
     vectors}~c^\pr_{\postloc{\edge}},s^\pr_{\postloc{\edge}},l^\pr_{\postloc{\edge}},u^\pr_{\postloc{\edge}},l^\dpr_{\postloc{\edge}},u^\dpr_{\postloc{\edge}}~~\text{such
   that}\\
 & c^\pr_\edge = \edgemap_\edge c_{\preloc{\edge}}+c^{in}_\edge,~~s^\pr_\edge =
-  \ColumnJoin{s_{\preloc{\edge}}}{s^{in}_\edge}
+  \ColumnJoin{s_{\preloc{\edge}}}{s^{in}_\edge},~~l_{\preloc{\edge}}\leq\maxaffine{l_{\preloc{\edge}}}{\stay^-_{\preloc{\edge}}}\leq\minaffine{u_{\preloc{\edge}}}{\stay^+_{\preloc{\edge}}}\leq u_{\preloc{\edge}}
 \end{split}
 \end{align}
 \vspace{-1.5em}
 \begin{align}
 & l^\pr_\edge =
-  \ColumnJoin{\maxaffine{l_{\preloc{\edge}}}{\stay^-_{\preloc{\edge}}\bigvee\loweredgebound{\edge}}}{~~~~~~~~~l^{in}_{\edge}~~~},~~u^\pr =
+  \ColumnJoin{\maxaffine{l_{\preloc{\edge}}}{\stay^-_{\preloc{\edge}}\bigvee\loweredgebound{\edge}}}{~~~~~~~~~l^{in}_{\edge}~~~},~~u^\pr_\edge =
   \ColumnJoin{\minaffine{u_{\preloc{\edge}}}{\stay^+_{\preloc{\edge}}\bigwedge\upperedgebound{\edge}}}{~~~~~~~~~u^{in}_\edge~~~}
 \end{align}
 /*  intersection with staying condition of target location and inclusion condition */
@@ -107,8 +109,9 @@ and one discrete transition*/
           {\lt[\edgemap_\edge\pinv{\ptemplate}_{\preloc{\edge}}~~W^{in}_\edge\rt]}{l^\pr_\edge}{u^\pr_\edge}
  \order
    \gcz{V_{\postloc{\edge}}}{c_{\postloc{\edge}}}{s_{\postloc{\edge}}}{\pinv{\ptemplate}_{\postloc{\edge}}}{l^\dpr_\edge}{u^\dpr_\edge} \nonumber \\
+& l^\dpr_\edge\leq\maxaffine{l^\dpr_\edge}{\stay^-_{\postloc{\edge}}}\leq\minaffine{u^\dpr_\edge}{\stay^+_{\postloc{\edge}}}\leq u^\dpr_\edge\nonumber\\
 & \maxaffine{l^\dpr_\edge}{\stay^-_{\postloc{\edge}}}\geq l_{\postloc{\edge}}~\text{and}~~
-\minaffine{u^\pr_\edge}{\stay^+_{\postloc{\edge}}}\leq u_{\postloc{\edge}}.
+\minaffine{u^\dpr_\edge}{\stay^+_{\postloc{\edge}}}\leq u_{\postloc{\edge}}.
 \end{align}
 \vspace{-1.5em}
 %\end{enumerate}
@@ -153,29 +156,33 @@ above results in this section.  Then, we observe that for a fixed
 primary template in each location, the set of
 Equations [\ref{eqn:locinv}-\ref{eqn:safecont}] are equivalent to
 second order conic constraints on the primary offset, upper and lower
-interval bounds in each location and some additional varaibles.  This
+interval bounds in each location and some additional variables.  This
 can be inferred from the Proposition~\ref{lem:zon-socc} and the fact
 that the min-approximation and max approximation functions are affine. So, we first fix the primary template in each
 location and solve the aforementioned constraints as a convex program.
 The choice of the primary template is explained below.
 
-\tbf{Choosing the primary template.}  We should ensure that the primary template has full rank, so that the the pseudo-inverse is defined. Ensuring this, we may collect all or some of
-the following vectors in the primary template.
+\tbf{Choosing the primary template.}  Ensuring that the primary
+template has full rank, so that its pseudo-inverse as defined exists,
+we may collect all or some of the following vectors in the primary
+template.
 %
 %\begin{enumerate}
-1) Eigenvectors of the transformation matrices and their products, for the
-   different transition maps.  This is because the eigenvectors can
-  possibly capture some of the stable directions of the dynamics.
-2) The primary and secondary templates of the zonotopes which overapproximate the additive disturbance input sets.
-  Also, we can incorporate the products of the linear matrices of the
-  transition maps with these templates. This is because the input set and
-  its transformations are added in continuous step computation.
-3) Orthogonal projections of the above vectors on the null
-  space of the subparallelotopic template.  This is because the
-  proposed intersection in Theorem~\ref{thm:acz-int} is exact when the
-  primary template belongs to the null space of the subparallelotopic
-  template.
-4) Adding any set of arbitrary vectors will increase the chance of computing a desired
-  invariant, but at a computational expense.  This is because the
-  scaling factors will be adjusted accordingly by the optimizer. 
+1) Eigenvectors of the transformation matrices and their products, for
+   the different transition maps.  This is motivated by the
+   observation that complex zonotopes generated by eigenvectors of a
+   Schur stable matrix contract when multiplied by the matrix (see
+   Proposition 4.3 of~\cite{adimoolamACC2016}).  2) The primary and
+   secondary templates of the zonotopes which overapproximate the
+   additive disturbance input sets and their products with the linear
+   matrices of the transition maps.  This is because the input set and
+   its transformations are added in continuous step computation.  3)
+   Orthogonal projections of the above vectors on the null space of
+   the subparallelotopic template.  This is because the proposed
+   intersection in Theorem~\ref{thm:acz-int} is exact when the primary
+   template belongs to the null space of the subparallelotopic
+   template.  4) Adding any set of arbitrary vectors will increase the
+   chance of computing a desired invariant, but at a computational
+   expense.  This is because the scaling factors will be adjusted
+   accordingly by the optimizer.
 %\end{enumerate}

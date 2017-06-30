@@ -1,32 +1,32 @@
 
-In a discrete-time affine hybrid system, we have a finite set of
+In a discrete-time affine hybrid system, there is a finite set of
 discrete variables, called locations, and a finite set of continuous
-variables whose valuation is in the real Euclidean space of dimension
-$n\in\pint$.  In each location, there are a set of linear constraints,
-called \emph{staying conditions}, within which the continuous state of
-the system in that location is constrained.  Furthermore, there is an
-affine transition map with (possibly) additive uncertain but bounded
-disturbance input specifying the evolution of the continuous
-variables. A set of labeled directed edges specify possible discrete
-transitions between locations, accompanied by affine reset map on
-continuous variables with a bounded additive disturbance input. Each
-edge transition is controlled by a set of linear constraints on the
-continuous variables, called guards.
+variables, whose valuation is in the real Euclidean space of dimension
+$n\in\pint$.  For each location, a set of linear constraints called
+staying conditions constrain the continuous state of the system in the
+location.  Also, there is an affine transition map with a (possibly)
+additive uncertain but bounded disturbance input set, which specifies
+the evolution of the continuous variables in the location.  A set of
+labeled directed edges specify the discrete transitions, which result
+in a possible change of locations along with an affine reset of
+continuous variables, where the reset has a bounded additive
+uncertainity.  Also, each edge transition can have a set of
+preconditions, called a guard, given by linear constraints.
 
 In this paper, we consider a specific class of linear constraints
-called, sub-parallelotopic, for defining guards and staying
+called sub-parallelotopic, for defining guards and staying
 conditions, such that their intersection with the reachable set
 represented by augmented complex zonotopes (introduced later) can be
 effectively computed. The sets corresponding to sub-parallelotopic
 constraints can be seen as a generalization of parallelotopes to
-possibly unbounded sets.  We discuss the aforementioned intersection
-operation later after defining augmented complex zonotopes.
+possibly unbounded sets. %%  We discuss the aforementioned intersection
+%% operation later after defining augmented complex zonotopes.
 %
 \begin{definition}[Sub-parallelotope]~\label{defn:sub-parallelotope} Let
   $K\in\mat{k}{n}{R}$ such that $k\leq n$ and $\lt(KK^T\rt)$ is
-  non-singular.  We call such a matrix $K$ a
+  non-singular.  We call such a matrix $K$ as a
   \emph{sub-parallelotopic template}.  Let
-  $\wh{u},\wh{l}\in\comprealset^n$ such that $\wh{u}\leq\wh{l}$.  Then
+  $\wh{u},\wh{l}\in\comprealset^k$ such that $\wh{l}\leq\wh{u}$.  Then
   a sub-parallelotopic set is $\sptope{K}{\wh{l}}{\wh{u}} = \lt\{x\in\realset^n: \wh{l}\leq Kx \leq \wh{u}\rt\}$.
 \end{definition}
 %
@@ -41,12 +41,12 @@ c c}1 & 1 & -1\end{array}\rt]$, $\lt[\begin{array}{c c c}1 & 1 &
 1\end{array}\rt]$, and $\lt[\begin{array}{c c c}1 & 1 &
 0\end{array}\rt]$ together are linearly dependent.  Sub-parallelotopic
 constraints are algebraically related to a generator representation.
-We can express $\sptope{K_{n\times
-k}}{\wh{l}}{\wh{u}}=\lt\{c+\pinv{K}\zeta:~c\in\realset^n,\zeta\in\realset^k,~Kc=0,~\wh{l}\leq \zeta\leq \wh{u}\rt\}$.
-Here, the columns vectors in $\pinv{K}$ can be considered as generators.
-Therefore, it is possible to express the intersection of
-sub-parallelotope with a suitably aligned zonotope as a simple
-algebraic expression, as we will see latter.
+We can express $\sptope{K_{k\times
+n}}{\wh{l}}{\wh{u}}=\lt\{c+\pinv{K}\zeta:~c\in\realset^n,\zeta\in\realset^k,~Kc=0,~\wh{l}\leq \zeta\leq \wh{u}\rt\}$.
+Here, the columns vectors in the pseudo-inverse $\pinv{K}$ can be
+considered as generators.  Therefore, it is possible to express the
+intersection of sub-parallelotope with a suitably aligned zonotope as
+a simple algebraic expression, as we will see latter.
 
 %Nevertheless, for many examples of affine hybrid systems, the guards and staying conditions can be specified by sub-parallelotopes.
 
@@ -56,28 +56,27 @@ We consider discrete-time affine hybrid systems defined by a tuple $\system =
 \lt(\locationset,\ptemplate,\stay,\linearmapset,\inputset,\edgeset\rt)$. Here, $\locationset$ is a finite set of locations.  For each location
 $\loc\in\locationset$, a sub-parallelotopic template
 $\ptemplate_\loc\in\mat{k_q}{n}{\realset}$, i.e.,
-$\ptemplate_\loc\lt(\ptemplate_\loc\rt)^T$ is non-singular, and $k(q)$
+$\ptemplate_\loc\lt(\ptemplate_\loc\rt)^T$ is non-singular, and $k_q$
 is the number of rows of the template, is used for defining the
 staying conditions and the guards on edges emanating from the
-location.  Then, a pair of upper and lower bounds
+location.  A pair of upper and lower bounds
 $\stay_\loc=\lt(\stay^-_\loc,\stay^+_\loc\rt)\in\mb{R}^{k_q}\times\mb{R}^{k_q}:
 ~~\stay^-_\loc\leq\stay^+_\loc$ together with the sub-parallelotopic
-template define the sub-parallelotopic staying set as
-$\sptope{\ptemplate_\loc}{\stay^-_\loc}{\stay^+_\loc}$.  The matrix
-$A_\loc$ and a bounded set $\inp_\loc\subseteq\realset^n$ define the
-linear transformation and the additive input set in the location.  The
-set of edges is $\edgeset$, where $\edge\in\edgeset$ is a tuple $\edge
+template define the sub-parallelotopic staying set, given as
+$\sptope{\ptemplate_\loc}{\stay^-_\loc}{\stay^+_\loc}$.  A matrix
+$A_\loc$ and a bounded set $\inp_\loc\subseteq\realset^n$ correspond
+to the affine transformation in the location.  The set of edges is
+$\edgeset$, where $\edge\in\edgeset$ is a tuple $\edge
 = \lt(\preloc{\edge},\postloc{\edge},\loweredgebound{\edge},\upperedgebound{\edge},\edgemap_\edge,\edgeinp_\edge\rt)$.
 The pre and post locations of the edge are
 $\preloc{\edge}\in\locationset$ and $\postloc{\edge}\in\locationset$,
 respectively.  The pair of upper and lower bounds
 $\lt(\edge^-,\edge^+\rt)\in\realset^{k_{\preloc{\edge}}}\times\realset^{k_{\preloc{\edge}}}:~~\edge^-\leq\edge^+$,
 gives the sub-parallelotopic guard set
-$\sptope{\ptemplate_{\preloc{\edge}}}{\edge^-}{\edge^+}$, which
-is a precondition on the edge transition.  The matrix $\edgemap_\edge$
-and a bounded set $\edgeinp_\edge\subseteq\realset^n$, respectively,
-give the linear transfomation and the additive input set for all edge
-(interlocation) transitions.
+$\sptope{\ptemplate_{\preloc{\edge}}}{\edge^-}{\edge^+}$, which is a
+precondition on the edge transition.  The matrix $\edgemap_\edge$ and
+a bounded set $\edgeinp_\edge\subseteq\realset^n$ correspond to the
+affine transition map along the edge.
 
 \tbf{Dynamics.}
 The state of the hybrid system is a pair $(x,\loc)$, where
@@ -112,13 +111,15 @@ that all of the following are collectively true.}\\
 \end{align}
 \end{enumerate}
 
-Given a set of continuous states $S\in\realset^n$, we compute the set
-of reachable continuous states in the next time step of intralocation transition
-in a location $\loc\in\locationset$ or interlocation transition along
-an edge $\edge\in\edgeset$, by the functions
-$\locationtransition{\loc}:2^{\realset^n}\ra 2^{\realset^n}$ or
-$\edgetransition{\edge}:2^{\realset^n}\ra 2^{\realset^n}$,
-respectively, defined as
+
+Given a set of continuous states $S\in\realset^n$ in a
+ location, for computing the set of reachable continuous states in the
+ next step of continuous or discrete transition, we define the
+ following functions, respectively.
+%%   $\edge\in\edgeset$, by the
+%% functions $\locationtransition{\loc}:2^{\realset^n}\ra 2^{\realset^n}$
+%% or $\edgetransition{\edge}:2^{\realset^n}\ra 2^{\realset^n}$,
+%% respectively, defined as 
 \begin{align*}
 &\locationtransition{q}\lt(S\rt) = \lt\{\Calign{\lt(\map_{\loc}\lt(S\bigcap\staysptope{\loc}\rt)\oplus
 \inputset_\loc                   \rt)}{~~\bigcap~~\staysptope{\loc}}\rt..\\

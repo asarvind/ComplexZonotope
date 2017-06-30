@@ -1,6 +1,6 @@
 
-Before introducing augmented complex zonotopes, we briefly review the
-related set representations that are used in this paper. First,
+Before introducing augmented complex zonotope, we briefly review the
+related set representations used in this paper. First,
 polytopes can be defined in terms of halfspace representation.
 %
 %\begin{definition}
@@ -22,12 +22,12 @@ $\zon{W}{l}{u} = \lt\{W\zeta: \zeta\in\mb{R}^k,~\zeta_i\in[l_i,u_i]~\forall i\in
 %\end{definition}
 %
 For simple examples of zonotopes like boxes and octagons, efficient
-interconversion between the zonotopic representation and halfspace
+interconversion between the zonotopic representation and the halfspace
 polytopic representation is possible.  However, in general, zonotopes
 do not admit efficient halfspace representations as polytopes. The
 reason is that a zonotope with $m$ generators in an $n$-dimensional
-space has ${m}\choose{n}$ faces (bounding hyperplanes), if all
-combinations of $n$ generators are linearly independent. That is, the
+space has ${m}\choose{n-1}$ faces (bounding hyperplanes), if all
+combinations of any $n$ generators are linearly independent. That is, the
 halfspace representation of a zonotope can be exponentially large,
 compared to the above generator representation.
 
@@ -45,35 +45,57 @@ $\zon{\lt[\begin{array}{l l}1 & 0 \\ 0 &
 with $x_1\leq 1~\wedge~x_2\geq 0.5$ gives $\zon{\lt[\begin{array}{l
         l}1 & 0 \\ 0 &
       1\end{array}\rt]}{\lt[\begin{array}{c}-1\\ 0.5\end{array}\rt]}{\lt[\begin{array}{c}1\\ 2\end{array}\rt]}$.
-The general case is described in the following lemma, a proof of which is included in Appendix.
+The general case is described in the following lemma.%% , a proof of which is included in Appendix
+.
 %
 \begin{lemma}~\label{lem:motivation}
 Let $K\in\mat{k}{n}{R}$ such that $k\leq n$ and $\lt(KK^T\rt)$ is
 non-singular.  Then
 \[
 \zon{\pinv{K}}{l}{u} \bigcap \sptope{K}{\wh{l}}{\wh{u}}
-= \zon{K}{l\bigvee \wh{l}}{u\bigwedge \wh{u}}
+= \zon{\pinv{K}}{l\bigvee \wh{l}}{u\bigwedge \wh{u}}
 \]
 \end{lemma}
 %
-To incorporate the possibly complex (having real and imaginary parts)
-eigenstructure of linear maps while computing invariants, the complex
-zonotope set representation and its generalization to the template
-complex zontope were introduced in~\cite{adimoolamACC2016,tcz2017}.
-A template complex zonotope has complex valued vectors as generators,
-whose combining coefficients are complex and bounded in their absolute
-values.
+%% To incorporate the possibly complex (having real and imaginary parts)
+%% eigenstructure of linear maps while computing invariants, the complex
+%% zonotope set representation and its generalization to the template
+%% complex zontope were introduced in~\cite{adimoolamACC2016,tcz2017}. 
+A template complex zonotope introduced
+in~\cite{tcz2017} has complex valued vectors as generators, whose
+combining coefficients are complex and bounded in their absolute
+values.  It has the useful property that when multiplied by a Schur
+stable matrix whose (possibly complex) eigenvectors are its
+generators, the transformed complex zonotope is contained inside
+the original complex zonotope.  A formal statement of a similar
+property is given in Proposition 4.3 of~\cite{adimoolamACC2016}.
+Because of this property, template complex zonotopes can utilize the
+possibly complex eigenstructure while computing invariants.
 %
 \begin{definition}[Template complex zonotope]
 Let $V\in\mat{n}{m}{\mb{C}}$ (template) and $s\in\mb{R}^m_{\geq 0}$ (scaling factors) and
 $c\in\realset^n$ (center).  Then the following is a template complex zonotope:
 %\begin{equation*}
 $\cz{V}{c}{s} =
-\lt\{V\epsilon:\epsilon\in\mb{C}^m,~\lt|\epsilon_i\rt|\leq s_i~\forall
+\lt\{c+V\epsilon:\epsilon\in\mb{C}^m,~\lt|\epsilon_i\rt|\leq s_i~\forall
 i\in\tup{m}\rt\}.$
 %\end{equation*}
 \end{definition}
 %
+%% The ability of template complex zonotopes to define invariant sets
+%% based on eigenstructure is related to the following property.
+%% %
+%% \begin{proposition}
+%% Let $\mu$ be the vector of complex eigenvalues of a matrix
+%% $A\in\mat{n}{n}{R}$, with corresponding eigenvectors as columns of
+%% $V\in\mat{n}{n}{\mb{C}}$.  Then $A\cz{V}{0}{s} = \cz{V}{0}{\dg{|\mu|}{s}}$.
+%% \end{proposition}
+%% %
+%% Based on the above proposition, we infer that if the transformation
+%% matrix is Schur stable, i.e., absolute values of all eigenvalues are
+%% not greater than one, then the transformed template complex zonotope
+%% is contained in the originial complex zonotope.  
+
 We note that unlike real zonotopes, template complex zonotopes can
 have non-polyhedral real projections because they describe Minkowski
-sums of ellipsoids and line segments.  
+sums of ellipsoids and line segments.
