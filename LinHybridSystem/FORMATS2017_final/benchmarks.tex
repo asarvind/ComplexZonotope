@@ -406,21 +406,21 @@ vehicles is described as a hybrid system with two possible dynamics,
 related to the presence and absence of communication between the
 vehicles, respectively.  Furthermore, there are time constraints on
 when the switching can happen.  The state of the system is a $9$
-dimensional vector $x$ %% (see appendix)
-.  Any upper bounds on $-x_1$,
-$-x_4$, and $-x_7$ provide lower limits on the reference distances of
-$M_1$, $M_2$ and $M_3$ to their successor vehicles, beyond which the
-platoon is will not collide.  Therefore, the verification challenge is
-to find the smallest possible upper bounds on $-x_1$, $-x_4$, and
-$-x_7$.  The benchmark then provides the experimental results for the
-case when the minimum dwell time is 20 seconds, i.e., $C=\{c>20\}$
-(also specified in the distributed SpaceEx
+dimensional vector $x$. %% (see appendix).  
+Any upper bounds on
+$-x_1$, $-x_4$, and $-x_7$ provide lower limits on the reference
+distances of $M_1$, $M_2$ and $M_3$ to their successor vehicles,
+beyond which the platoon is will not collide.  Therefore, the
+verification challenge is to find the smallest possible upper bounds
+on $-x_1$, $-x_4$, and $-x_7$.  The benchmark then provides the
+experimental results for the case when the minimum dwell time is 20
+seconds, i.e., $C=\{c>20\}$ (also specified in the distributed SpaceEx
 implementation\footnote{http://cps-vo.org/node/15096}).  In our
 experiment, apart from the case of the minimum dwell time of 20s (slow
-switching), we also study a case of fast switching where the possible
-switching times $C$ is the set of all non-negative integers.  We
-could specify discrete time models that overapproximate the reachable
-sets of both these above models. %%  We do not explain the discretization
+switching), we also study a case of fast switching, where the possible
+switching times $C$ is the set of all non-negative integers.  We could
+specify discrete time models that overapproximate the reachable sets
+of both these above models. %% We do not explain the discretization
 %% procedure here, because it is beyond the scope of this paper.
 
 \tbf{Size of slow switching model}: 9 dimensions, 2
