@@ -1,0 +1,103 @@
+\documentclass{llncs}
+\usepackage{times}
+\usepackage{amsmath}
+\usepackage{amssymb} 
+\usepackage{algorithm}
+\usepackage{algpseudocode}
+\usepackage{multirow}
+\usepackage{url}
+\usepackage{tikz} 
+\usetikzlibrary{arrows,backgrounds,decorations,decorations.pathmorphing,positioning,fit,automata,shapes,snakes,patterns,plotmarks,calc}
+\usepackage{graphicx,color} 
+\usepackage{enumitem}
+\usepackage{float}
+\usepackage{bm}
+\usepackage{array}
+\usepackage{caption}
+\usepackage{cite}
+\usepackage{relsize}
+%\usepackage{natbib}
+
+\setlength{\itemsep}{0ex}
+\setlength{\parsep}{0ex}
+\setlength{\parskip}{0ex}
+\setlength{\partopsep}{0ex}
+\setlength{\parindent}{0pt} 
+%\setlength{\bibsep}{0.0pt}
+
+
+% Input macros
+\input{macros}
+
+% Headers
+\title{Augmented complex zonotopes for computing invariants of affine hybrid systems\thanks{This research work is partially supported by ANR project MALTHY.}
+} 
+
+\author{Arvind\ Adimoolam and Thao\ Dang
+} 
+\institute{\ Verimag,~Grenoble, France\\ \url{{santosh.adimoolam,thao.dang}@univ-grenoble-alpes.fr}.
+}
+
+
+\begin{document}
+
+\maketitle
+
+\begin{abstract}
+Zonotopes are a useful set representation for bounded time reach set
+computation of affine hybrid systems because of their closure under
+Minkowski sum and matrix multiplication operations.  For unbounded
+time reach set approximation of arbitrarily switched affine hybrid
+systems, template complex zonotopes and a corresponding invariant
+computation procedure were introduced, which utilized the possibly
+complex eigenstructure of the affine maps.  But a major hurdle in
+extending the technique for computing invariants of more general
+affine hybrid systems, where switching is state dependent and
+controlled by linear constraints, is that the class of template
+complex zonotopes is not closed under intersection with linear
+constraints.  In this paper, we use a more expressive set
+representation called augmented complex zonotopes, for which we
+propose an algebraic over-approximation of the intersection with
+linear constraints.  This over-approximation is then used to derive a
+set of second order conic constraints for computing an augmented
+complex zonotopic positive invariant for discrete time affine hybrid
+systems with additive disturbance input and linear safety constraints.
+We demonstrate the efficiency of this approach by experimenting on
+some benchmark examples.
+\end{abstract}
+
+\section{Introduction}
+\input{intro.tex}
+
+\section{Hybrid systems and positive invariants}~\label{sec:system}
+\input{prelims.tex}
+
+%\section{Review of some set representations}~\label{sec:review}
+
+
+\section{Augmented complex zonotopes}~\label{sec:acz}
+\input{zonotope}
+\input{acz}
+
+
+\section{Computation of positive invariants}~\label{sec:invcomp}
+\input{PositiveInvariance.tex}
+
+\vspace{-1em}
+\section{Experiments}~\label{sec:exp}
+\input{benchmarks}
+\vspace{-0.5em}
+
+\section{Conclusion}~\label{sec:conclusion}
+\input{conclusion}
+
+\newpage
+%\bibliographystyle{plain}
+\bibliographystyle{abbrv}
+\bibliography{ref}
+
+\appendix
+%\section*{Proofs in section}
+\input{appendix}
+
+\end{document}

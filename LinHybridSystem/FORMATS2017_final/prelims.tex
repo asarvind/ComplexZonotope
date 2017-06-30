@@ -1,0 +1,146 @@
+
+In a discrete-time affine hybrid system, there is a finite set of
+discrete variables, called locations, and a finite set of continuous
+variables, whose valuation is in the real Euclidean space of dimension
+$n\in\pint$.  For each location, a set of linear constraints called
+staying conditions constrain the continuous state of the system in the
+location.  Also, there is an affine transition map with a (possibly)
+additive uncertain but bounded disturbance input set, which specifies
+the evolution of the continuous variables in the location.  A set of
+labeled directed edges specify the discrete transitions, which result
+in a possible change of locations along with an affine reset of
+continuous variables, where the reset has a bounded additive
+uncertainity.  Also, each edge transition can have a set of
+preconditions, called a guard, given by linear constraints.
+
+In this paper, we consider a specific class of linear constraints
+called sub-parallelotopic, for defining guards and staying
+conditions, such that their intersection with the reachable set
+represented by augmented complex zonotopes (introduced later) can be
+effectively computed. The sets corresponding to sub-parallelotopic
+constraints can be seen as a generalization of parallelotopes to
+possibly unbounded sets. %%  We discuss the aforementioned intersection
+%% operation later after defining augmented complex zonotopes.
+%
+\begin{definition}[Sub-parallelotope]~\label{defn:sub-parallelotope} Let
+  $K\in\mat{k}{n}{R}$ such that $k\leq n$ and $\lt(KK^T\rt)$ is
+  non-singular.  We call such a matrix $K$ as a
+  \emph{sub-parallelotopic template}.  Let
+  $\wh{u},\wh{l}\in\comprealset^k$ such that $\wh{l}\leq\wh{u}$.  Then
+  a sub-parallelotopic set is $\sptope{K}{\wh{l}}{\wh{u}} = \lt\{x\in\realset^n: \wh{l}\leq Kx \leq \wh{u}\rt\}$.
+\end{definition}
+%
+For example, the set of linear constraints $-1\leq x+y-z\leq
+1~\wedge~~ x-y+z\leq 3$ is equivalent to a sub-parallelotope
+$$\sptope{\ColumnJoin{\lt[1~~~1~-1\rt]}{\lt[1~-1~1\rt]}}{\ColumnJoin{-1}{-\infty}}{\ColumnJoin{1}{3}},$$
+because the rows of the sub-parallelotopic template are linearly
+independent.  On the other hand, the set of constraints $-1\leq
+x+y-z\leq 1~\wedge~~x+y+z\leq 2\wedge~~-1\leq x+y$ do not constitute a
+sub-parallelotope, because the three row vectors $\lt[\begin{array}{c
+c c}1 & 1 & -1\end{array}\rt]$, $\lt[\begin{array}{c c c}1 & 1 &
+1\end{array}\rt]$, and $\lt[\begin{array}{c c c}1 & 1 &
+0\end{array}\rt]$ together are linearly dependent.  Sub-parallelotopic
+constraints are algebraically related to a generator representation.
+We can express $\sptope{K_{k\times
+n}}{\wh{l}}{\wh{u}}=\lt\{c+\pinv{K}\zeta:~c\in\realset^n,\zeta\in\realset^k,~Kc=0,~\wh{l}\leq \zeta\leq \wh{u}\rt\}$.
+Here, the columns vectors in the pseudo-inverse $\pinv{K}$ can be
+considered as generators.  Therefore, it is possible to express the
+intersection of sub-parallelotope with a suitably aligned zonotope as
+a simple algebraic expression, as we will see latter.
+
+%Nevertheless, for many examples of affine hybrid systems, the guards and staying conditions can be specified by sub-parallelotopes.
+
+
+\tbf{System model.}
+We consider discrete-time affine hybrid systems defined by a tuple $\system =
+\lt(\locationset,\ptemplate,\stay,\linearmapset,\inputset,\edgeset\rt)$. Here, $\locationset$ is a finite set of locations.  For each location
+$\loc\in\locationset$, a sub-parallelotopic template
+$\ptemplate_\loc\in\mat{k_q}{n}{\realset}$, i.e.,
+$\ptemplate_\loc\lt(\ptemplate_\loc\rt)^T$ is non-singular, and $k_q$
+is the number of rows of the template, is used for defining the
+staying conditions and the guards on edges emanating from the
+location.  A pair of upper and lower bounds
+$\stay_\loc=\lt(\stay^-_\loc,\stay^+_\loc\rt)\in\mb{R}^{k_q}\times\mb{R}^{k_q}:
+~~\stay^-_\loc\leq\stay^+_\loc$ together with the sub-parallelotopic
+template define the sub-parallelotopic staying set, given as
+$\sptope{\ptemplate_\loc}{\stay^-_\loc}{\stay^+_\loc}$.  A matrix
+$A_\loc$ and a bounded set $\inp_\loc\subseteq\realset^n$ correspond
+to the affine transformation in the location.  The set of edges is
+$\edgeset$, where $\edge\in\edgeset$ is a tuple $\edge
+= \lt(\preloc{\edge},\postloc{\edge},\loweredgebound{\edge},\upperedgebound{\edge},\edgemap_\edge,\edgeinp_\edge\rt)$.
+The pre and post locations of the edge are
+$\preloc{\edge}\in\locationset$ and $\postloc{\edge}\in\locationset$,
+respectively.  The pair of upper and lower bounds
+$\lt(\edge^-,\edge^+\rt)\in\realset^{k_{\preloc{\edge}}}\times\realset^{k_{\preloc{\edge}}}:~~\edge^-\leq\edge^+$,
+gives the sub-parallelotopic guard set
+$\sptope{\ptemplate_{\preloc{\edge}}}{\edge^-}{\edge^+}$, which is a
+precondition on the edge transition.  The matrix $\edgemap_\edge$ and
+a bounded set $\edgeinp_\edge\subseteq\realset^n$ correspond to the
+affine transition map along the edge.
+
+\tbf{Dynamics.}
+The state of the hybrid system is a pair $(x,\loc)$, where
+$x\in\realset^n$ is called the continuous state and
+$\loc\in\locationset$ is called the discrete state.  The
+evolution of the state of the system in time is called a
+\emph{trajectory} of the system.  The trajectory is a function
+$\systrj{x}{\loc}:\wholenums\ra\realset^n\times\locationset$, such
+that for all $t\in\wholenums$, one of the following is true.
+
+\begin{enumerate}
+\item Continuous transition.
+\begin{align}~\label{eqn:intralocation}
+\begin{split}
+& \exists u\in\inputset_{\trj{\loc}{t}}~~\text{such that all of
+    the following  are collectively true.}\\
+& \trj{x}{t+1} = \map_{\trj{\loc}{t}}\trj{x}{t}+u,~~~\trj{\loc}{t+1} = \trj{\loc}{t}~~
+\text{and}\\
+& \trj{x}{t},~\trj{x}{t+1}\in\sptope{\ptemplate_{\trj{\loc}{t}}}{\stay^-_{\trj{\loc}{t}}}{\stay^+_{\trj{\loc}{t}}}.
+\end{split}
+\end{align}
+\item Discrete transition.
+\begin{align} 
+\begin{split}
+& \exists \edge\in\edgeset~\text{and}~u\in\edgeinp_{\edge}~\text{such
+that all of the following are collectively true.}\\
+& \trj{\loc}{t}=\preloc{\edge},~~~\trj{x}{t}\in\sptope{\ptemplate_{\preloc{\edge}}}{\loweredgebound{\edge}\bigvee\stay^-_{\preloc{\edge}}}{\upperedgebound{\edge}\bigwedge\stay^+_{\preloc{\edge}}} \\
+& \trj{x}{t+1} = \edgemap_{\trj{\loc}{t}}\trj{x}{t}+u,~~~\trj{\loc}{t+1}
+= \postloc{\edge}\\
+& \trj{x}{t+1}\in \sptope{\ptemplate_{\postloc{\edge}}}{\stay^-_{\postloc{\edge}}}{\stay^+_{\postloc{\edge}}}.
+\end{split}
+\end{align}
+\end{enumerate}
+
+
+Given a set of continuous states $S\in\realset^n$ in a
+ location, for computing the set of reachable continuous states in the
+ next step of continuous or discrete transition, we define the
+ following functions, respectively.
+%%   $\edge\in\edgeset$, by the
+%% functions $\locationtransition{\loc}:2^{\realset^n}\ra 2^{\realset^n}$
+%% or $\edgetransition{\edge}:2^{\realset^n}\ra 2^{\realset^n}$,
+%% respectively, defined as 
+\begin{align*}
+&\locationtransition{q}\lt(S\rt) = \lt\{\Calign{\lt(\map_{\loc}\lt(S\bigcap\staysptope{\loc}\rt)\oplus
+\inputset_\loc                   \rt)}{~~\bigcap~~\staysptope{\loc}}\rt..\\
+&\edgetransition{\edge}\lt(S\rt) =  \lt\{\Calign{\lt(\edgemap_\edge\lt(S\bigcap
+\guardsptope{\edge}\rt)\oplus\edgeinp_\edge\rt)}{~~\bigcap~~\staysptope{\postloc{\edge}}}\rt..
+\end{align*}
+
+We shall identify a set of states by a mapping of the kind
+$\hybridset:\locationset\ra 2^{\realset^n}$, called a \emph{state
+set}, which corresponds to the set of states
+$\lt\{\lt(x,\loc\rt):x\in\hybridset\lt(\loc\rt)\rt\}$.  For notational
+convenience, we shall denote $\Gamma_\loc$ as the set of continuous
+states of $\Gamma$ in a location $\loc$.  A \emph{positive invariant}
+is a set of states of the system such that all trajectories beginning
+at any state in the positive invariant remain within the positive
+invariant.  Equivalently, a state set is a positive invariant if the
+reachable set in one time step by both the intralocation and
+interlocation dynamics is contained within the original state set.
+\begin{definition}
+A state set $\hybridset$ is a positive invariant if
+$\forall\loc\in\locationset,~~\locationtransition{q}\lt(\hybridset_\loc\rt) \subseteq \hybridset_\loc~\label{eqn:pi1}~\text{and}~~
+ \forall\edge\in\edgeset,~~\edgetransition{\edge}\lt(\hybridset_{\preloc{\edge}}\rt) \subseteq
+  \hybridset_{\postloc{\edge}}$.
+\end{definition}

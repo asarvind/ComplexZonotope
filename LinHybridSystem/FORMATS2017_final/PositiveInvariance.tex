@@ -1,0 +1,188 @@
+In this section, we first derive a sufficient condition for positive
+invariance of an augmented complex zonotope.  Also, we state
+conditions for containment of an initial set and satisfaction of
+polytopic safety constraints.  Latter, we explain how to compute the
+augmented complex zontope based on these conditions.
+
+Earlier, we had computed the linear transformations and Minkowki sums
+of augmented complex zonotope and possible overapproximations of their
+intersection with subparalleotopic constraints.  Accordingly, we can
+compute the overapproximation of the reachable set of an augmented
+complex zonotope as another augmented complex zonotope.  Then, we
+utilize the relation given in Definition~\ref{defn:gcz-order} to
+  deduce a sufficient condition for positive invariance, as follows.
+%
+We consider a state set $\hybridset$ given as, for a location
+  $\loc\in\locationset$,
+  $\hybridset_\loc=\real\lt(\gcz{V_\loc}{c_\loc}{s_\loc}{\pinv{\ptemplate}_\loc}{l_\loc}{u_\loc}\rt)$
+  such that $V_\loc\conjtranspose{V_\loc}$ is invertible.
+  Let us consider that the additive input for an intralocation
+  transition in any location $\loc\in\locationset$ is overapproximated
+  as
+  $\inputset_\loc\subseteq \gcz{V^{in}_\loc}{c^{in}_\loc}{s^{in}_\loc}{W^{in}_\loc}{l^{in}_\loc}{u^{in}_\loc}$.
+  Similarly, for an edge $\edge\in\edgeset$, let the additive input
+  set be
+  overapproximated as
+  $\edgeinp_\edge\subseteq \gcz{V^{in}_\edge}{c^{in}_\edge}{s^{in}_\edge}{W^{in}_\edge}{l^{in}_\edge}{u^{in}_\edge}$.
+  Furthermore, for any $\loc\in\locationset$, the safe set in the
+  location is $\safeset_\loc=\polytope{T_\loc}{d_\loc}$ and the
+  initial set is
+  $\mc{I}_\loc=\real\lt(\gcz{V^I_\loc}{c^I_\loc}{s^I_\loc}{W^I_\loc}{l^I_\loc}{u^I_\loc}\rt).$
+  
+
+
+\begin{lemma}[Positive invariance]
+  %% The condition for positive invariance of the state set $\hybridset$
+  %% is the following.
+%\begin{enumerate}
+%\item 
+For all locations $\loc\in\locationset$ and all edges
+  $\edge\in\edgeset$, the inclusions
+  $\locationtransition{\loc}\lt(\hybridset_\loc\rt)\subseteq \hybridset_\loc$
+  and
+  $\edgetransition{\edge}\lt(\hybridset_{\preloc{\edge}}\rt) \subseteq \hybridset_{\postloc{\edge}}$
+  holds if $\forall \loc\in\locationset$ and
+  $\forall\edge\in\edgeset$, all of the below statements are
+  collectively true.\\
+
+/* intersection with staying conditions and one continuous transition  */
+\vspace{-0.65em}
+\begin{align}~\label{eqn:locinv}
+\begin{split}
+& \lt|\pinv{V_\loc} c_\loc\rt|\leq s_\loc,~l_\loc\leq\maxaffine{l_\loc}{\stay^-_\loc}\leq\minaffine{u_\loc}{\stay^+_\loc)}\leq u_\loc %% ~~\lt(i.e.,~\Rightarrow
+%% 0 \in\cz{V_\loc}{c_\loc}{s_\loc}\rt),
+\\
+\end{split}
+\end{align}
+\vspace{-2em}
+\begin{align}
+\begin{split}
+&  \text{there exist real
+    vectors}~
+  c^\pr_\loc, s^\pr_\loc, l^\pr_\loc,u^\pr_\loc,l^\dpr_\loc,u^\dpr_\loc~\text{such
+    that}\\
+& c^\pr_\loc = \map_\loc c_\loc+c^{in}_\loc,~s^\pr_\loc =
+  \ColumnJoin{s_\loc}{s^{in}_\loc},~l^\pr_\loc =
+  \ColumnJoin{\maxaffine{l_\loc}{\stay^-_\loc}}{~~~~~~~~~l^{in}_\loc~~~},~~u^\pr
+  =
+  \ColumnJoin{\minaffine{u_\loc}{\stay^+_\loc)}}{~~~~~~~~~u^{in}_\loc~~~}
+\end{split}
+\end{align}
+/*  inclusion condition */
+\begin{align}
+\begin{split}
+& \gcz{\lt[\begin{array}{cc}\map_\loc V_\loc & ~~V^{in}_\loc\end{array}\rt]}{c^\pr_\loc}{s^\pr_\loc}
+          {\lt[\map_\loc\pinv{\ptemplate}_\loc~~W^{in}_\loc\rt]}{l^\pr_\loc}{u^\pr_\loc}
+ \order
+   \gcz{V_\loc}{c_\loc}{s_\loc}{\pinv{\ptemplate}_\loc}{l^\dpr_\loc}{u^\dpr_\loc} \\
+%\end{align}
+%\begin{align}
+&l^\dpr_\loc\leq\maxaffine{l^\dpr_\loc}{\stay^-_\loc}\leq\minaffine{u^\dpr_\loc}{\stay^+_\loc}\leq u^\dpr_\loc,~~ \maxaffine{l^\dpr_\loc}{\stay^-_\loc}\geq l_\loc~\text{and}~~
+\minaffine{u^\dpr_\loc}{\stay^+_\loc}\leq u_\loc.
+\end{split}
+ \end{align}
+%% \item For any edge $\edge\in\edgeset$, the inclusion
+%%   $\edgetransition{\edge}\lt(\hybridset_{\preloc{\edge}}\rt)
+%%   \subseteq \hybridset_{\postloc{\edge}}$ holds if 
+%%   all of the below statements are collectively true.
+/* intersection with staying and guard condition of current location
+and one discrete transition*/
+\vspace{-0.9em}
+\begin{align}
+\begin{split}
+& \text{there exist real
+    vectors}~c^\pr_{\postloc{\edge}},s^\pr_{\postloc{\edge}},l^\pr_{\postloc{\edge}},u^\pr_{\postloc{\edge}},l^\dpr_{\postloc{\edge}},u^\dpr_{\postloc{\edge}}~~\text{such
+  that}\\
+& c^\pr_\edge = \edgemap_\edge c_{\preloc{\edge}}+c^{in}_\edge,~~s^\pr_\edge =
+  \ColumnJoin{s_{\preloc{\edge}}}{s^{in}_\edge},~~l_{\preloc{\edge}}\leq\maxaffine{l_{\preloc{\edge}}}{\stay^-_{\preloc{\edge}}}\leq\minaffine{u_{\preloc{\edge}}}{\stay^+_{\preloc{\edge}}}\leq u_{\preloc{\edge}}
+\end{split}
+\end{align}
+\vspace{-1.5em}
+\begin{align}
+& l^\pr_\edge =
+  \ColumnJoin{\maxaffine{l_{\preloc{\edge}}}{\stay^-_{\preloc{\edge}}\bigvee\loweredgebound{\edge}}}{~~~~~~~~~l^{in}_{\edge}~~~},~~u^\pr_\edge =
+  \ColumnJoin{\minaffine{u_{\preloc{\edge}}}{\stay^+_{\preloc{\edge}}\bigwedge\upperedgebound{\edge}}}{~~~~~~~~~u^{in}_\edge~~~}
+\end{align}
+/*  intersection with staying condition of target location and inclusion condition */
+\begin{align}
+& \gcz{\lt[\edgemap_\edge V_{\preloc{\edge}}~~V^{in}_{\edge}\rt]}{c^\pr_\edge}{s^\pr_\edge}
+          {\lt[\edgemap_\edge\pinv{\ptemplate}_{\preloc{\edge}}~~W^{in}_\edge\rt]}{l^\pr_\edge}{u^\pr_\edge}
+ \order
+   \gcz{V_{\postloc{\edge}}}{c_{\postloc{\edge}}}{s_{\postloc{\edge}}}{\pinv{\ptemplate}_{\postloc{\edge}}}{l^\dpr_\edge}{u^\dpr_\edge} \nonumber \\
+& l^\dpr_\edge\leq\maxaffine{l^\dpr_\edge}{\stay^-_{\postloc{\edge}}}\leq\minaffine{u^\dpr_\edge}{\stay^+_{\postloc{\edge}}}\leq u^\dpr_\edge\nonumber\\
+& \maxaffine{l^\dpr_\edge}{\stay^-_{\postloc{\edge}}}\geq l_{\postloc{\edge}}~\text{and}~~
+\minaffine{u^\dpr_\edge}{\stay^+_{\postloc{\edge}}}\leq u_{\postloc{\edge}}.
+\end{align}
+\vspace{-1.5em}
+%\end{enumerate}
+\end{lemma}
+%
+Next, for the augmented complex zonotopic state set to contain the
+initial set, we state the following sufficient condition based on the
+inclusion relation between augmented complex zonotopes from
+Lemma~\ref{lem:gcz-gcz}.
+%
+ For a location $\loc \in\locationset$, $\mc{I}_\loc\subseteq
+  \hybridset_\loc$ if,
+\begin{align}~\label{eqn:initcont}
+\gcz{V^I_\loc}{c^I_\loc}{s^I_\loc}{W^I_\loc}{l^I_\loc}{u^I_\loc}\order\gcz{V_\loc}{c_\loc}{s_\loc}{\pinv{\ptemplate}_\loc}{l_\loc}{u_\loc}.
+\end{align}
+%
+For satisfaction of polytopic safety constraints, i.e., for a location
+  $\loc\in\locationset$, $\hybridset_\loc\subseteq \safeset_\loc$, the
+  following is a necessary and sufficient condition, which is a
+  reformulation of
+   ~(\ref{lem:polylimits-acz}). 
+%
+\begin{align}~\label{eqn:safecont}
+T_\loc\lt(c_\loc+\pinv{\ptemplate}_\loc\lt(\frac{u_\loc+l_\loc}{2}\rt)\rt)+\lt|T\lt[V_\loc,~\pinv{\ptemplate}_\loc\rt]\rt|\ColumnJoin{\hspace{1.5em}s}{\frac{u_\loc-l_\loc}{2}}\leq d_\loc.
+\end{align}
+%
+By simply collecting all the results of this section for computing a safe
+positive invariant, we state the following theorem.
+%
+\begin{theorem}~\label{thm:main} If
+  $\forall \loc\in\locationset$ and $\forall \edge\in\edgeset$, all of
+  the Equations [\ref{eqn:locinv}-\ref{eqn:safecont}] are collectively
+  true, then the state set $\hybridset$ is a positive invariant,
+  satisfies the given safety constraints and contains the given
+  initial set.
+\end{theorem}
+
+\tbf{Solving the conditions.}  First we note that the secondary
+template in a location is predefined as the pseudoinverse of the
+subparallelotopic template in the location, in accordance with the
+above results in this section.  Then, we observe that for a fixed
+primary template in each location, the set of
+Equations [\ref{eqn:locinv}-\ref{eqn:safecont}] are equivalent to
+second order conic constraints on the primary offset, upper and lower
+interval bounds in each location and some additional variables.  This
+can be inferred from the Proposition~\ref{lem:zon-socc} and the fact
+that the min-approximation and max approximation functions are affine. So, we first fix the primary template in each
+location and solve the aforementioned constraints as a convex program.
+The choice of the primary template is explained below.
+
+\tbf{Choosing the primary template.}  Ensuring that the primary
+template has full rank, so that its pseudo-inverse as defined exists,
+we may collect all or some of the following vectors in the primary
+template.
+%
+%\begin{enumerate}
+1) Eigenvectors of the transformation matrices and their products, for
+   the different transition maps.  This is motivated by the
+   observation that complex zonotopes generated by eigenvectors of a
+   Schur stable matrix contract when multiplied by the matrix (see
+   Proposition 4.3 of~\cite{adimoolamACC2016}).  2) The primary and
+   secondary templates of the zonotopes which overapproximate the
+   additive disturbance input sets and their products with the linear
+   matrices of the transition maps.  This is because the input set and
+   its transformations are added in continuous step computation.  3)
+   Orthogonal projections of the above vectors on the null space of
+   the subparallelotopic template.  This is because the proposed
+   intersection in Theorem~\ref{thm:acz-int} is exact when the primary
+   template belongs to the null space of the subparallelotopic
+   template.  4) Adding any set of arbitrary vectors will increase the
+   chance of computing a desired invariant, but at a computational
+   expense.  This is because the scaling factors will be adjusted
+   accordingly by the optimizer.
+%\end{enumerate}

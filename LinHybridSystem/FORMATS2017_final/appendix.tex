@@ -1,0 +1,192 @@
+
+%\section{Proofs in Section~\ref{}}
+%
+\subsubsection*{Lemma~\ref{lem:motivation}}
+Let $K\in\mat{k}{n}{R}$ such that $k\leq n$ and $\lt(KK^T\rt)$ is
+non-singular.  Then
+\[
+\zon{\pinv{K}}{l}{u} \bigcap \sptope{K}{\wh{l}}{\wh{u}}
+= \zon{K}{l\bigvee \wh{l}}{u\bigwedge \wh{u}}
+\]
+\begin{proof}
+Firstly, we prove $\zon{\pinv{K}}{l}{u} \bigcap
+\sptope{K}{\wh{l}}{\wh{u}} \subseteq \zon{K}{l\bigvee
+  \wh{l}}{u\bigwedge \wh{u}}$.\\  Let $x\in\zon{\pinv{K}}{l}{u} \bigcap
+\sptope{K}{\wh{l}}{\wh{u}}$.  Then, $x=\pinv{K}\zeta:
+l\leq\zeta\leq u$.  Since $x\in\sptope{K}{\wh{l}}{\wh{u}}$, so also
+$\wh{l}\leq K\lt(\pinv{K}\zeta\rt)\leq \wh{u}$ $\dimp$ $\wh{l}\leq \zeta\leq \wh{u}$.  So,
+$l\bigvee \wh{l}\leq \zeta\leq u\bigwedge\wh{u}$.  Hence, $x\in\zon{K}{l\bigvee
+  \wh{l}}{u\bigwedge \wh{u}}$.
+
+Next, we show $\zon{K}{l\bigvee \wh{l}}{u\bigwedge \wh{u}} \subseteq
+\zon{\pinv{K}}{l}{u} \bigcap \sptope{K}{\wh{l}}{\wh{u}}$. Let
+$x=\pinv{K}\zeta\in\zon{K}{l\bigvee \wh{l}}{u\bigwedge \wh{u}}$.
+Then, $l\bigvee\wh{l}\leq \zeta = K\lt(\pinv{K}\zeta\rt)=Kx\leq
+u\bigwedge\wh{u}$.  Since $l\leq l\bigvee\wh{l} \leq \zeta\leq
+u\bigwedge \wh{u}\leq u$, so $x\in \zon{\pinv{K}}{l}{u}$.  Also,
+$\wh{l}\leq l\bigvee\wh{l} = \zeta = K\pinv{K}\zeta = Kx\leq
+u\bigwedge \wh{u}\leq \wh{u}$, $x\in \zon{\pinv{K}}{l}{u}$, hence
+$x\in\sptope{K}{\wh{l}}{\wh{u}}$.  So, $x\in\zon{\pinv{K}}{l}{u}
+\bigcap \sptope{K}{\wh{l}}{\wh{u}}$. \qed
+\end{proof}
+
+\subsubsection*{Theorem~\ref{thm:acz-int}}
+Given a sub-parallelotope $\sptope{\ptemplate}{\wh{l}}{\wh{u}}$ an
+augmented complex zonotope $\gcz{V}{c}{s}{\pinv{\ptemplate}}{l}{u}$
+such that $V\conjtranspose{V}$ is non-singular, $\lt|\pinv{V}c\rt|\leq s$, $l\leq
+\maxaffine{l}{\wh{l}}\leq \minaffine{u}{\wh{u}}\leq u$, then
+$\gcz{V}{c}{s}{\pinv{\ptemplate}}{l}{u}\bigcap\sptope{\ptemplate}{\wh{l}}{\wh{u}}\subseteq
+\gcz{V}{c}{s}{\pinv{\ptemplate}}{\maxaffine{l}{\wh{l}}}{\minaffine{u}{\wh{u}}}$.
+%
+\begin{proof}
+  We have $l\bigvee\wh{l} = l\bigvee \maxaffine{l}{\wh{l}}$.  But
+  since $l\leq \maxaffine{l}{\wh{l}}$ as given, so
+  $l\bigvee\wh{l}=\maxaffine{l}{\wh{l}}$. Similary, we can show
+  $u\bigwedge \wh{u}=\minaffine{u}{\wh{u}}$.  Recall that
+  $\gcz{V}{c}{s}{\pinv{\ptemplate}}{l}{u}=\cz{V}{c}{s}\oplus\zon{\pinv{\ptemplate}}{l}{u}$.
+  Furthermore, by Lemma~\ref{lem:motivation}, we get
+  $\zon{\pinv{\ptemplate}}{\wh{l}}{\wh{u}}\bigcap\sptope{\ptemplate}{\wh{l}}{\wh{u}}$
+  is equal to
+  $\zon{\pinv{\ptemplate}}{l\bigvee\wh{l}}{u\bigwedge{\wh{l}}}$, which
+  equals
+  $\zon{\pinv{\ptemplate}}{\maxaffine{l}{\wh{l}}}{\minaffine{u}{\wh{u}}}$
+  by what we have above.  So, provided $0\in S_1$ and $S_2\bigcap
+  S_3\neq 0$, the proof is accomplished by substituting
+  $S_1=\cz{V}{c}{s}$, $S_2=\zon{\pinv{\ptemplate}}{l}{u}$ and
+  $S_3=\sptope{\ptemplate}{\wh{l}}{\wh{u}}$ in Lemma~\ref{gen-int}.
+  So we need to show $0\in S_1$ and $S_2\bigcap S_3\neq 0$.  We write
+  $0 = c-V\pinv{V}c$, and since $\lt|\pinv{V}c\rt|\leq s$ as given, so
+  $0\in \cz{V}{c}{s}=S_1$.  Next, let
+  $w=\pinv{\ptemplate}\maxaffine{l}{\wh{l}}$.  Since we are given in
+  the theorem that
+  $l\leq \maxaffine{l}{\wh{l}}\leq \minaffine{u}{\wh{u}}\leq u$, so
+  $w\in\zon{\pinv{\ptemplate}}{l}{u}= S_2$.  Also, $\ptemplate
+  w=\ptemplate\pinv{\ptemplate}\maxaffine{l}{\wh{l}}
+  = \maxaffine{l}{\wh{l}}$.   We can show by definition of min-approximation and max-approximation functions that
+  $\wh{l}\leq \maxaffine{l}{\wh{l}}$ and  $\minaffine{u}{\wh{u}}\leq \wh{u}$, whereas we are given $\maxaffine{l}{\wh{l}}\leq \minaffine{u}{\wh{u}}$.  So,
+  $w\in \sptope{\ptemplate}{\wh{l}}{\wh{u}}=S_3$.  So, $S_2\bigcap
+  S_3\neq 0$, as it contains $w$.  Thus the required condition for
+  using Lemma~\ref{gen-int} are satisfied. \qed
+\end{proof}
+
+\subsection*{Dynamics of the first benchmark (robot with a saturated controller)}
+ $
+\lt[\begin{array}{cc}\trj{x}{t+1} &
+    \trj{y}{t+1}\end{array}\rt]^T=F_1\trj{x}{t}+F_2sat\lt(\trj{y}{t}\rt)+F_3\trj{u}{t}$,
+where $\trj{x}{t}\in\realset^8$ is the
+transformed state of the composite system of plant and controller, $\trj{y}{t}\in\realset^2$
+is the input sent by the controller, $\trj{u}{t}\in\lt[-100,100\rt]^4$
+is the bounded additive disturbance input and $sat$ is the saturation
+function which limits the controller input received by the plant, as
+follows.  For the saturated system, $sat\lt(y_i\rt) = max\lt(-\delta
+d_p,min\lt(y_i,\delta d_p\rt)\rt),~\forall i\in\{1,2\}$, where $\delta=100$
+and $d_p=0.0807$.  For the unsaturated system,
+$sat\lt(y_i\rt)=y_i~\forall i\in\{1,2\}$.
+{\scriptsize 
+\begin{align*}
+& F_1  = \lt[\begin{matrix}
+3.6929   &      0  &  0.7302  &  7.9715 &  14.5019 &   -0.0072 &
+0.0720 &   -2.7354\\
+    3.6929   &      0  &  0.7302  &  7.9715 &  14.5019 &  -0.0072  &  0.0720  & -2.7354\\
+    0.9562    &     0  &  0.0019 &  -0.0021 &  -0.0022 &   -0.0000 &  -0.0001 &  -0.0002\\
+         0 &   0.6910    &     0    &     0  &       0     &    0   &      0    &     0\\
+    0.8833     &    0  & -0.1154 &  -1.2943 &  -2.3520  &  0.0012 &  -0.0118  &  0.4427\\
+   -0.4712    &     0 &  -0.0812 &    0.1151  & -1.4845  &  0.0007 &  -0.0071  &  0.2819\\
+   -0.1560     &    0 &  -0.0459 &  -0.3173  &  0.3650  &  0.0003  & -0.0023  &  0.1162\\
+   -0.7719   &      0 &  -0.1248  & -1.4264 &  -2.5901  &  0.9973 &  -0.0131  &  0.4869\\
+   -0.7544  &       0  & -0.1243 &  -1.4204 &  -2.5792  &  0.0013 &   0.9825 &   0.4796\\
+   -0.1905   &      0  & -0.0148  & -0.2081 &  -0.3751  &  0.0002  &  0.0033  &  1.0651
+\end{matrix}\rt]\\
+& F_2 = \lt[\begin{matrix}
+0.2543  &  0.2543\\
+    0.2543  &  0.2543\\
+   -0.0001 &  -0.0001\\
+         0 &        0\\
+   -0.0413 &  -0.0413\\
+    0.0219  &  0.0219\\
+    0.0102 &   0.0102\\
+    0.0431 &   0.0431\\
+    0.0428 &   0.0428\\
+    0.0065 &   0.0065\\
+\end{matrix}\rt],
+~F_3 = 10^{-2}\times\lt[\begin{matrix}
+ 0.0000    &     0  & -0.0330 &   2.0218\\
+    0   &      0  & -0.0330 &  -2.0218\\
+    0  &       0 &   -0  &  0\\
+   -0  &       0  &  0 &   0.0109\\
+   -0.0118 &        0  &  0.0172  &  0 \\
+    0.0436  &       0 &   0.0003 &  0 \\
+   -0.0478   &      0  &  0.0034 &   0 \\
+  -13.3924 &        0 &   0.0062 &   0 \\
+    0.0909     &    0  &  0.0061 &  0\\
+   -0.0798  &       0 &   0.0017  &  0\\
+\end{matrix}\rt]
+\end{align*}}
+
+\subsection*{Regions and Matrices in the second benchmark (perturbed double integrator)}
+{\scriptsize
+\begin{align*}~\label{eqn:pwa-regions}
+i=\left\{\begin{array}{l}
+1,~\text{if}~x_1\geq 0~\text{and}~x_2\geq 0\\
+2,~\text{if}~x_1\leq 0~\text{and}~x_2\leq 0\\
+3,~\text{if}~x_1\leq 0~\text{and}~x_2\geq 0\\
+4,~\text{if}~x_1\geq 0~\text{and}~x_2\leq 0\\
+\end{array} \rt.,
+~M_1=M_2=\lt[\begin{matrix}
+0.4103  &  0.0653\\
+   -0.2949  &  0.5327
+\end{matrix}\rt],~M_3=M_4=\lt[\begin{matrix}
+0.4103  &  -0.0653\\
+   0.2949  &  0.5327
+\end{matrix}\rt]
+\end{align*}}
+
+
+\subsection*{Dynamics of the third benchmark (networked vehicle platoon)}
+Given $x\in\realset^9$ is the state of the system, $u\in[-9,1]$ is the additive
+disturbance input, $c\in\realset_{\geq 0}$ is a clock, $q$ is an index
+for the type of dynamics and $C$ is a set of clock instants when a
+switching can happen.
+ \begin{align*} &\dot{x} = A_{q(c)}x+B
+u:~q(c)\in{1,2}~~\wedge~~\dot{q}(c)=0~~\wedge~~\dot{c}=1\\ &\exists
+c\in C:~q(c^+)\neq q(c)~\wedge~c^+=0.
+\vspace{-2em}
+\end{align*}
+ The system matrices are given below.
+
+{\scriptsize
+\begin{align*}
+& A_1 = \lt[\begin{matrix}
+0  &  1.0000   &      0   &      0    &     0    &     0     &    0     &    0    &     0\\
+         0    &     0  & -1.0000   &      0    &     0   &      0   &      0   &      0   &      0\\
+    1.6050 &   4.8680 &  -3.5754 &  -0.8198  &  0.4270 &  -0.0450 &  -0.1942  &  0.3626  & -0.0946\\
+         0   &      0     &    0    &     0  &  1.0000    &     0   &      0   &      0    &     0\\
+         0   &      0 &   1.0000    &     0    &     0  & -1.0000   &      0    &     0    &     0\\
+    0.8718  &  3.8140 &  -0.0754  &  1.1936 &   3.6258  & -3.2396  & -0.5950 &   0.1294 &  -0.0796\\
+         0    &     0    &     0   &      0   &      0    &     0   &      0 &   1.0000   &      0\\
+         0    &     0    &     0    &     0    &     0  &  1.0000      &   0    &     0  & -1.0000\\
+    0.7132  &  3.5730 &  -0.0964  &  0.8472  &  3.2568 &  -0.0876  &  1.2726  &  3.0720 &  -3.1356
+\end{matrix}\rt]\\
+& A_2 = \lt[\begin{matrix}
+ 0   & 1.0000   &      0    &     0     &    0  &       0   &      0      &   0     &    0\\
+         0    &     0  & -1.0000    &     0   &      0     &    0    &     0   &      0  &       0\\
+    1.6050  &  4.8680  & -3.5754    &     0     &    0     &    0  &       0     &    0    &     0\\
+         0   &      0   &      0    &     0   & 1.0000     &    0     &    0    &     0   &      0\\
+         0  &       0  &  1.0000      &   0    &     0  & -1.0000   &      0  &       0  &       0\\
+         0  &       0   &      0  &  1.1936  &  3.6258  & -3.2396   &      0     &    0   &      0\\
+         0  &       0    &     0     &    0   &      0     &    0    &     0  &  1.0000    &     0\\
+         0   &      0    &     0    &     0     &    0  &  1.0000    &     0      &   0 &  -1.0000\\
+    0.7132 &   3.5730  & -0.0964 &   0.8472  &  3.2568 &  -0.0876 &   1.2726  &  3.0720  & -3.1356
+\end{matrix}\rt],~B = \lt[\begin{matrix}
+ 0\\
+     1\\
+     0\\
+     0\\
+     0\\
+     0\\
+     0\\
+     0\\
+     0
+\end{matrix}\rt]
+\end{align*}
+}
