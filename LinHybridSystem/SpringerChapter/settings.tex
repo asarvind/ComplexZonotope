@@ -1,60 +1,13 @@
-%global macros:
-\newcommand{\ra}{\rightarrow}
-\newcommand{\ov}{\overline}
-\newcommand{\ur}{\underline}
-\newcommand{\pr}{\prime}
-\newcommand{\tbf}{\textbf}
-\newcommand{\omg}{\Omega}
-\newcommand{\mc}{\mathcal}
-\newcommand{\lt}{\left}
-\newcommand{\rt}{\right}
-\newcommand{\mb}{\mathbb}
-\newcommand{\imp}{\implies}
-\newcommand{\dimp}{\Leftrightarrow}
-\newcommand{\wh}{\widehat}
-\newcommand{\dg}{\mc{D}}
 
-\newcommand{\om}{\omega}
-\newcommand{\fin}{\forall i\in\{1,...,n\}}
-\newcommand{\tup}[1]{\{1,...,#1\}}
-\newcommand{\seq}[2]{_{#1=1}^#2}
-\newcommand{\Pow}{Power}
-\newcommand{\mCnn}{\mb{M}_{n\times n}(\mb{C})}
-\newcommand{\mCmm}{\mb{M}_{m\times m}(\mb{C})}
-\newcommand{\mCpn}{\mb{M}_{p\times n}(\mb{C})}
-\newcommand{\mCnm}{\mb{M}_{n\times m}(\mb{C})}
-\newcommand{\mRnn}{\mb{M}_{n\times n}(\mb{R})}
-\newcommand{\mRpn}{\mb{M}_{p\times n}(\mb{R})}
-\newcommand{\mRnm}{\mb{M}_{n\times m}(\mb{R})}
-\newcommand{\mRno}{{{\mb{R}}}^n_{\geq 0}}
-\newcommand{\mRmo}{{{\mb{R}}}^m_{\geq 0}}
-\newcommand{\mRo}{\mb{R}_{\geq 0}}
-\newcommand{\mRn}{{\mb{R}}^n}
-\newcommand{\mRm}{{\mb{R}}^m}
-\newcommand{\mCn}{\mb{C}^n}
-\newcommand{\mCm}{\mb{C}^m}
-\newcommand{\inv}{\mb{GL}_n(\mb{R})}
-\newcommand{\id}[1]{\mb{I}_{#1\times #1}}
-\newcommand{\mat}[3]{\mb{M}_{#1\times #2}(\mb{#3})}
-%numbers
-\newcommand{\pint}{\mb{Z}_{> 0}}
-\newcommand{\nzrl}{\mb{R}_{\geq 0}}
-\newcommand{\prl}{\mb{R}_{>0}}
-\newcommand{\rl}{\mb{R}}
 
-%matrix operations
-\newcommand{\cjoin}[2]{\lt(\begin{array}{l}#1\\#2 \end{array}\rt)}
-
-% local macros
-\newcommand{\sw}[1]{\lt<#1,\mb{A},\Omega,\mc{I}\rt>}
-\newcommand{\CZ}{\lt<V,c,s\rt>}
-\newcommand{\cz}[3]{\lt<#1,#2,#3\rt>}
-\newcommand{\CZO}{\lt<V,0,s\rt>}
-\newcommand{\czo}[2]{\lt<#1,0,#2\rt>}
-\newcommand{\sys}{\mc{S}}
-\newcommand{\inp}{\Omega}
-\newcommand{\mapp}{\mb{A}}
-\newcommand{\init}{\mc{I}}
-\newcommand{\sat}[2]{#1\vDash #2}
-\newcommand{\lcons}{\lt(T,b\rt)}
-\newcommand{\trj}[1]{\tbf{x}(#1)}
+\newtheorem{thm}{Theorem}[section]
+\numberwithin{thm}{section} 
+\newtheorem{lem}[thm]{Lemma}
+\newtheorem{prop}[thm]{Proposition}
+\newtheorem{cor}[thm]{Corollary}
+\newtheorem{defn}[thm]{Definition}
+\newtheorem{rem}[thm]{Remark}
+\newtheorem{prp}[thm]{Property}
+\newtheorem{prem}[thm]{Premise}
+\newtheorem{egp}[thm]{Example}
+\newtheorem{problem}[thm]{Problem}
