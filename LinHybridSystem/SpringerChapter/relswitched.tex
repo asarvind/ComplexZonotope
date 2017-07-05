@@ -1,0 +1,41 @@
+
+
+
+
+\paragraph*{Related work}  Firstly, we remark that the techniques for
+computing positive invariants in the absence of additive disturbance
+may not be able to handle the presence of additive disturbance.
+Hence, we compare here with the previous work for computing positive
+invariants for switched systems when additive disturbance is present,
+which is the problem considered in this paper.  This can be divided
+into two categories, one uses ellipsoids and the other
+polyhedra. Given that additive disturbance is present, earlier
+bi-convex constraints (non-convex conditions) were derived for
+computing \emph{minimum norm ellipsoidal positive invariants} for
+linear systems~\cite{polyak2006rejection}, whose number increases with
+the number of switching matrices.  As such, positively invariant
+ellipsoid based verification of linear invariants of a switched system
+with additive disturbances requires handling biconvex constraints that
+can be computationally expensive.  In contrast, using template complex
+zonotopes, we derive second-order conic constraints that can be
+efficiently solved.  %% A recent approach based on ellipsoidal join
+%% operations~\cite{allamigeon2015scalable} demonstrates efficiency in
+%% computation of ellipsoidal invariants for switched systems without
+%% additive disturbance. But this work does not handle additive
+%% disturbance and extending it to systems with additive disturbance
+%% requires abstraction of Minkowski sums as ellipsoids. In comparison,
+%% our approach can efficiently handle additive disturbances because
+%% template complex zonotopes are closed under the Minkowski sums
+%% operation, for which inclusion relationship with respect to the
+%% original template complex zonotope can be expressed by efficiently
+%% solvable SOCP constraints on scaling factors.
+Concerning
+\emph{polyhedral invariants}, \cite{kouramas2005minimal,DBLP:conf/aplas/DangG11} propose an
+iterative outer-approximation of the reachable set until a fixpoint is
+reached. But the procedure may take many iterations to converge to a fixpoint.  In
+contrast, our approach involves a single step of second-order conic
+optimization.
+
+
+
+

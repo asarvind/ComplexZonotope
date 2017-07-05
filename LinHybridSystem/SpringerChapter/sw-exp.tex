@@ -1,0 +1,64 @@
+
+\section{Experiments} \label{sec:exp}
+\emph{Computation platform.} For convex optimization, we use CVX
+version 2.1 with Matlab R2015a. The reported experimental results were
+obtained on 64 bit GNOME (3.4.2) with Intel Core i5-3470 CPU, 3.20GHz
+processor, having 3.8 GiB memory and disk space 242.1 GB.
+
+\input{lis-exp}
+
+\subsection{Switched systems with additive disturbance}
+In the following examples, we have two switching matrices denoted
+by $A^{f}$ and $A^g$.  For any matrix $A$, we denote the collection of
+eigenvectors of $A$ as $\Xi(A)$.  We first describe the examples
+below.
+
+
+\emph{Example 1.} The following switching matrices are taken from an
+example in Allamigeon {\it et. al.}~\cite{allamigeon2015scalable},
+where $A^{f}=\lt(\begin{array}{lll} -0.06515 &-0.4744
+  & 0.3041\\ -0.4744 & 0.4872 & 0.3732\\ 0.3041 & 0.3732 & -0.1271
+\end{array}\rt)$ and $A^{g}=\lt(\begin{array}{lll}
+  0.04419 & 0.3155 & -0.04247\\ 0.1451 & -0.04931 & -0.2805\\ 0.2833 &
+  -0.01418 & 0.1554 \end{array}\rt).$ We additionally define a
+disturbance set by zonotope ${\inp}=\lt<\mb{Id}_{3\times 3},0,[0.1~
+  0.1~ 0.1]^T\rt>$ and ${\init}=\lt<\mb{Id}_{3\times
+  3},0,[0.5~0.5~0.5]^T\rt>$ as the initial set.  We seek to find a
+small value of $b$ for which the set of rectangular constraints
+$\lt(\id{3},b\rt)$ is a linear invariant of the switched system.
+\vspace{0.2em}
+
+
+\emph{Example 2.} The next example is taken from Kouramas
+et. al.~\cite{kouramas2005minimal}, where
+$A^{f}=F_1+GK$ and $A^{g}=F_2+GK$ for $F_1=\lt(\begin{array}{ll}
+  1.2 & 1\\
+  0 & 1
+\end{array}\rt),~
+F_2=\lt(\begin{array}{ll}
+0.8 & 1\\
+-0 & 1
+\end{array}\rt)
+$, $G=[1 ~1]^T$ and $K=[-1.2 ~-1].$  We additionally consider a
+disturbance set and initial set as zonotopes
+${\inp}=\lt<0.1\times\mb{Id}_{3\times 3},0,[0.1~0.1~0.1]^T\rt>$ and
+${\init}=\lt<\mb{Id}_{3\times 3},0,[1~1~1]^T\rt>$, respectively.  We
+seek to find a small value of $b$ for which the set of rectangular
+constraints $\lt(\id{2},b\rt)$ is a linear invariant.
+\vspace{0.3em}
+
+\emph{Experiment}.  In each of the above examples, we chose the
+template as the collection of eigenvectors $V=[\Xi(A^f),\Xi(A^g)]$.
+Then using our procedure for linear invariant verification, we
+minimized $b$ to be $0.9569$ for the first example and $1.10$ for the
+second example for which the the given rectangular constriants specify
+a linear invariance property.  The computation time for the Example 1
+is $0.6006$ secs and Example 2 is is $0.3920$ seconds.  The advantage of
+our method on Example 1
+compared to~\cite{allamigeon2015scalable} is that we could handle
+additive disturbances.
+
+
+
+
+

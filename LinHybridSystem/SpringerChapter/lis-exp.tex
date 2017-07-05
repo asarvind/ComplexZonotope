@@ -1,0 +1,160 @@
+
+
+
+
+\subsection{Nearly periodic linear impulsive systems}\label{sec:lis-ex}
+%Experiments for linear impulsive systems
+
+We evaluated the implementation of our algorithm on a number of
+benchmark examples taken from~\cite{arvind2016lis} and compared it
+with the state-of-the-art methods and tools and our algorithm produced
+either better or competitive results.  We describe two of the examples
+for linear impulsive systems below.
+
+\begin{table*}
+\caption{Template complex zonotopes (TCZ) vs
+    Complex zonotopes (CZ)~\cite{arvind2016lis}}
+\center
+ \begin{tabular}{|l|c|r|}
+  \hline
+  $~$ & CZ & TCZ $~~~~~~~~$\\
+  \hline
+  Finding suitable zonotope & Requires guessing & Systematically synthesized\\
+\hline
+  No. of impulses for contraction & 2 (both examples) & 1 (both examples)\\
+  \hline
+    Computation time (Example 1) & 27.41 s & 4.6 s \\
+\hline
+Computation time (Example 2) & 74.04 s & 8.5 s\\
+\hline
+\end{tabular}
+\label{tab:tcz-cz}
+\end{table*}
+
+
+\emph{Example 1.} We consider a networked control system with
+uncertain but bounded transmission period.  A networked control system
+is composed of a plant and a controller that interact with each other
+by transmission of feedback input from controller to the plant.  If
+the system dynamics is linear with linear feedback, then for uncertain
+but bounded transmission period, we can equivalently represent it
+as a linear impulsive system where $A_c=\lt(\begin{array}{ccc} A_p & 0 & B_p\\ 0 & 0 &
+  0\\ 0 & 0 & 0
+\end{array}\rt),~A_r=\lt(\begin{array}{ccc}
+\mb{I} & 0 & 0\\
+B_oC_p & A_o & 0\\
+D_oC_p & C_o & 0
+\end{array}\rt)$ for some parameter matrices $A_p$, $B_p$, $B_o$,
+$C_p$, $A_o$, $C_o$, and $D_o$.  The sampling interval $\Delta$ of the
+linear impulsive system specifies bounds on the transmission interval.
+%
+Our example of a networked control system is taken from Bj\"{o}rn et
+al.~\cite{wittenmark2002computer}.  The system is originally described
+by discrete time transfer functions, which has an equivalent state
+space representation with parameter matrices
+$A_p=\lt(\begin{array}{cc}-1 & 0\\ 1 & 0\end{array}\rt)$,
+  $B_p=\lt(\begin{array}{c}1\\ 0\end{array}\rt)$,
+    $C_p=\lt(\begin{array}{cc}0 & 1\end{array}\rt)$, $A_o=0.4286$,
+      $B_o=-0.8163$, $C_o=-1$ and $D_o=-3.4286$.  Given the lower
+      bound on the transmission period as $t_{min}=0.8$, we want to
+      find as high a value of $t_{max}$ as possible for which the
+      system is GES.
+
+\emph{Example 2.} We consider the following linear impulsive system
+from Hetel et. al.~\cite{2013hetel}, that describes an LMI based
+approach to verify stability. The specification is given by
+$A_c=\left(\begin{array}{ccc} 0 & -3 & 1\\ 1.4 & -2.6 & 0.6\\ 8.4 &
+  -18.6 & 4.6
+\end{array}\rt)
+$ and $A_r=\lt(\begin{array}{ccc} 1 & 0 & 0\\ 0 & 1 & 0\\ 0 & 0 & 0
+\end{array}\rt).$
+
+
+
+
+While implementing the algorithm for stability
+verification, we choose first order Taylor expansion, $tol=0.05$ for
+Example 1 and $tol=0.006$ for Example 2.  We required $k=3$ as the
+number of reachability operators used for synthesis of a suitable
+template complex zonotope for stability verification in both examples.
+Then we verified stability in a sampling interval $[0.08, 0.5]$ for
+Example 1 and $[0.1,0495]$ for Example 2.  Our approach is compared
+with the state-of-the-art NCS toolbox~\cite{BauLoo_NECSYS12a} and also
+other approaches as listed in Table~\ref{tab:com1} and
+Table~\ref{tab:com2}.  For the first example, our method outperforms
+other approaches, while it is competitive with other approaches on the
+second example.  Moreover, Table~\ref{tab:tcz-cz} shows that the
+template complex zonotopic approach is computationally more efficient
+than complex zonotopes~\cite{arvind2016lis}.
+
+\begin{table}
+{\caption{Example 1}
+\begin{tabular}{|l|c|r|}
+  \hline
+  Reference & $t_{min}$ & $t_{max}$ \\
+\hline
+  %& &\\
+Value recommended in~\cite{wittenmark2002computer} & 0.08 & 0.22\\
+  \hline
+  %& &\\
+  NCS toolbox~\cite{BauLoo_NECSYS12a} & 0.08 & 0.4 \\
+  \hline
+  %& &\\
+Complex zonotope~\cite{arvind2016lis} & 0.08 & 0.5 \\
+\hline
+  %& &\\
+  Template complex zonotope & 0.08 & 0.53 \\
+  \hline
+\end{tabular}
+\label{tab:com1}
+}
+\end{table}
+\begin{table}
+{\caption{Example 2}
+\label{tab:com2}
+\begin{tabular}{|l|c|r|}
+\hline
+    Reference & $t_{min}$ & $t_{max}$ \\
+  \hline
+  %& &\\
+  Lyapunov, parametric LMI~\cite{2013hetel} & 0.1 & 0.3 \\
+  \hline
+  %& &\\
+  Polytopic set contractiveness~\cite{2014-fiacchini-set} & 0.1 & 0.475 \\
+  \hline
+  %& &\\
+Khatib et al.~\cite{AlKhatib2015} & 0.1 & 0.514\\
+\hline
+  %& &\\
+Complex zonotope~\cite{arvind2016lis} & 0.1 & 0.49 \\
+\hline
+ % & &\\
+  Template complex zonotope & 0.1 & 0.496 \\
+  \hline
+\end{tabular}
+%\label{tab:com2}
+}
+\end{table}
+
+%\end{figure}
+
+
+%\begin{figure}[htbp]
+
+
+%
+
+%% For $k=3$, we chose the template as the collection of eigenvectors of
+%% $k$-sampled reachability operators and found scaling factors
+%% satisfying~(\ref{eqn:syn}) by SOCP.  Using this template complex
+%% zonotope, we could verify contraction in a sampling interval $[0.1,
+%%   0.495]$ according to the Algorithm~\ref{alg:1step} with first order
+%% Taylor expansion, i.e., $r=1$.  This required $6.9076$ seconds.  But
+%% the LMI based approach~\cite{2013hetel} could verify stability only
+%% until 0.3.  The comparison with other approaches is given in
+%% Table~\ref{tab:com2}.  The comparison with complex zonotopes is shown
+%% in Table~\ref{tab:tcz-cz}.
+
+
+
+

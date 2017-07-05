@@ -1,0 +1,463 @@
+%\documentclass[a4, 10 pt, conference]{ieeeconf}
+
+\documentclass[letterpaper, 10 pt, conference]{ieeeconf}  % Comment this line out if you need a4paper
+
+%\documentclass[a4paper, 10pt, conference]{ieeeconf}      % Use this line for a4 paper
+
+\IEEEoverridecommandlockouts                              % This command is only needed if 
+                                                          % you want to use the \thanks command
+
+\overrideIEEEmargins                                      % Needed to meet printer requirements.
+
+% See the \addtolength command later in the file to balance the column lengths
+% on the last page of the document
+
+% The following packages can be found on http:\\www.ctan.org
+%\usepackage{graphics} % for pdf, bitmapped graphics files
+%\usepackage{epsfig} % for postscript graphics files
+%\usepackage{mathptmx} % assumes new font selection scheme installed
+%\usepackage{times} % assumes new font selection scheme installed
+%\usepackage{amsmath} % assumes amsmath package installed
+%\usepackage{amssymb}  % assumes amsmath package installed
+
+
+\usepackage{amssymb}
+\setcounter{tocdepth}{3}
+%\setlength{\parskip}{0.5ex}
+
+\usepackage{url}
+%% \urldef{\mailsa}\path|{alfred.hofmann, ursula.barth, ingrid.haas, frank.holzwarth,|
+%% \urldef{\mailsb}\path|anna.kramer, leonie.kunz, christine.reiss, nicole.sator,|
+%% \urldef{\mailsc}\path|erika.siebert-cole, peter.strasser, lncs}@springer.com|    
+%% \newcommand{\keywords}[1]{\par\addvspace\baselineskip
+%% \noindent\keywordname\enspace\ignorespaces#1}
+
+
+
+
+
+\usepackage{cite}
+ \usepackage{amsmath}
+ \usepackage{amssymb}
+%\usepackage{amsthm}
+\usepackage{float}
+\usepackage{caption}
+\usepackage{algorithm}
+%\usepackage{algorithmicx}
+\usepackage{algpseudocode}
+\usepackage{mathrsfs,amsmath}
+\usepackage{graphicx}
+
+
+
+%\setlength{\parskip}{0ex}
+%\setlength{\partopsep}{0ex}
+%\setlength{\parindent}{0pt} 
+
+%\theoremstyle{plain}
+\newtheorem{thm}{Theorem}[section]
+\numberwithin{thm}{section} 
+\newtheorem{lem}[thm]{Lemma}
+\newtheorem{prop}[thm]{Proposition}
+\newtheorem{cor}[thm]{Corollary}
+\newtheorem{defn}[thm]{Definition}
+\newtheorem{rem}[thm]{Remark}
+\newtheorem{prp}[thm]{Property}
+\newtheorem{prem}[thm]{Premise}
+\newtheorem{egp}[thm]{Example}
+\newtheorem{problem}[thm]{Problem}
+%
+
+%global macros:
+\newcommand{\ra}{\rightarrow}
+\newcommand{\ov}{\overline}
+\newcommand{\ur}{\underline}
+\newcommand{\pr}{\prime}
+\newcommand{\tbf}{\textbf}
+\newcommand{\omg}{\Omega}
+\newcommand{\mc}{\mathcal}
+\newcommand{\lt}{\left}
+\newcommand{\rt}{\right}
+\newcommand{\mb}{\mathbb}
+\newcommand{\imp}{\implies}
+\newcommand{\dimp}{\Leftrightarrow}
+\newcommand{\wh}{\widehat}
+\newcommand{\dg}{\mc{D}}
+
+\newcommand{\om}{\omega}
+\newcommand{\fin}{\forall i\in\{1,...,n\}}
+\newcommand{\tup}[1]{\{1,...,#1\}}
+\newcommand{\seq}[2]{_{#1=1}^#2}
+\newcommand{\Pow}{Power}
+\newcommand{\mCnn}{\mb{M}_{n\times n}(\mb{C})}
+\newcommand{\mCmm}{\mb{M}_{m\times m}(\mb{C})}
+\newcommand{\mCpn}{\mb{M}_{p\times n}(\mb{C})}
+\newcommand{\mCnm}{\mb{M}_{n\times m}(\mb{C})}
+\newcommand{\mRnn}{\mb{M}_{n\times n}(\mb{R})}
+\newcommand{\mRpn}{\mb{M}_{p\times n}(\mb{R})}
+\newcommand{\mRnm}{\mb{M}_{n\times m}(\mb{R})}
+\newcommand{\mRno}{{{\mb{R}}}^n_{\geq 0}}
+\newcommand{\mRmo}{{{\mb{R}}}^m_{\geq 0}}
+\newcommand{\mRo}{\mb{R}_{\geq 0}}
+\newcommand{\mRn}{{\mb{R}}^n}
+\newcommand{\mRm}{{\mb{R}}^m}
+\newcommand{\mCn}{\mb{C}^n}
+\newcommand{\mCm}{\mb{C}^m}
+\newcommand{\inv}{\mb{GL}_n(\mb{R})}
+\newcommand{\id}[1]{\mb{I}_{#1\times #1}}
+\newcommand{\mat}[3]{\mb{M}_{#1\times #2}(\mb{#3})}
+%numbers
+\newcommand{\pint}{\mb{Z}_{> 0}}
+\newcommand{\nzrl}{\mb{R}_{\geq 0}}
+\newcommand{\prl}{\mb{R}_{>0}}
+\newcommand{\rl}{\mb{R}}
+
+%matrix operations
+\newcommand{\cjoin}[2]{\lt(\begin{array}{l}#1\\#2 \end{array}\rt)}
+
+% local macros
+\newcommand{\sw}[1]{\lt<#1,\mb{A},\Omega,\mc{I}\rt>}
+\newcommand{\CZ}{\lt<V,c,s\rt>}
+\newcommand{\cz}[3]{\lt<#1,#2,#3\rt>}
+\newcommand{\CZO}{\lt<V,0,s\rt>}
+\newcommand{\czo}[2]{\lt<#1,0,#2\rt>}
+\newcommand{\sys}{\mc{S}}
+\newcommand{\inp}{\Omega}
+\newcommand{\mapp}{\mb{A}}
+\newcommand{\init}{\mc{I}}
+\newcommand{\sat}[2]{#1\vDash #2}
+\newcommand{\lcons}{\lt(T,b\rt)}
+\newcommand{\trj}[1]{\tbf{x}(#1)}
+
+
+\title{Template complex zonotopes for stability and invariant
+  verification} 
+
+\author{Arvind Adimoolam and Thao Dang\\% <-this % stops a space
+\vspace{1em}
+\small{VERIMAG / CNRS, Grenoble, France} {\tt\small \{arvind.adimoolam,thao.dang\}@imag.fr}
+\thanks{*This work is partially supported by the ANR MALTHY project (grant ANR-12-INSE-003)}% <-this % stops a space
+%\thanks{The authors are affiliated with VERIMAG/CNRS, Grenoble, France
+        %{\tt\small \{arvind.adimoolam,thao.dang\}@imag.fr}}%
+}
+
+
+\begin{document}
+\maketitle
+
+
+\begin{abstract}
+Recently complex zonotopes were introduced as an extension of real
+zonotopes to the complex domain, which could capture the eigenstructure
+nearly periodic linear impulsive systems for stability
+verification. %% They are used for stability verification of nearly
+%% periodic linear impulsive systems by capturing the eigenstructure of
+%% linear dynamics.
+However, adding more generators to complex zonotopes distorts positive
+invariance and consequently refining complex zonotopes in a verification
+procedure is not easy. Therefore, in this paper we introduce a more
+general set representation, called template complex zonotopes, where
+the generators are fixed a-priori by a template, but the bounds on the
+absolute values of their combining coefficients, called scaling
+factors, are treated as variables and can be algorithmically
+synthesized. %% Thus, complex zonotopes are a particular class of
+%% template complex zonotopes with (fixed) unit scaling factors.
+This flexibility in scaling factors leads to a more systematic and
+significantly more efficient stability verification procedures in case
+of template complex zonotope. Furthermore, the second contribution of
+this paper is an application of template complex zonotopes to
+verification of linear invariance properties of another class of
+hybrid systems, namely linear switched systems with additive
+disturbance. Experiments on a number of benchmark examples demonstrate
+that our approach gives better or competitive results, compared to the
+state-of-the-art methods and tools for these problems.
+\end{abstract}
+
+\section{Introduction}
+\input{intro}
+\input{litr}
+\input{temp-comp-zon} 
+\input{lis}
+\input{system}  
+\input{sw-exp}
+\input{conclusion}
+
+%\bibliographystyle{plain}
+%\bibliography{ref,domain,mprt}
+
+
+
+\begin{thebibliography}{10}
+
+\bibitem{arvind2016lis}
+A. Adimoolam and T. Dang.
+\newblock Using complex zonotopes for stability verification.
+\newblock In {\em American Control Conference}.
+  sites.google.com/site/cztopepubs/, 2016.
+
+\bibitem{AdjeGaubertGoubaultESOP2010}
+A.~Adje, S.~Gaubert, and E.~Goubault.
+\newblock Coupling policy iteration with semi-definite relaxation to compute
+  accurate numerical invariants in static analysis.
+\newblock In {\em ESOP}, volume 6012, pp 23--42, 2010.
+
+\bibitem{DBLP:conf/aplas/AdjeGW15}
+A. Adj{\'{e}}, P.{-}L .Garoche, and A. Werey.
+\newblock Quadratic zonotopes - an extension of zonotopes to quadratic
+  arithmetics.
+\newblock In {\em APLAS 2015}, pp 127--145, 2015.
+
+\bibitem{DBLP:conf/sas/AllamigeonGG08}
+X. Allamigeon, S. Gaubert, and E. Goubault.
+\newblock Inferring min and max invariants using max-plus polyhedra.
+\newblock In {\em SAS}, LNCS 5079, pp 189--204.
+  {Springer}, 2008.
+
+\bibitem{allamigeon2015scalable}
+X. Allamigeon, S. Gaubert, E. Goubault, S. Putot, and
+  N. Stott.
+\newblock A scalable algebraic method to infer quadratic invariants of switched
+  systems.
+\newblock In {\em Embedded
+  Software}, pp 75--84. IEEE Press, 2015.
+
+\bibitem{althoff2013}
+M. Althoff.
+\newblock Reachability analysis of nonlinear systems using conservative
+  polynomialization and non-convex sets.
+\newblock In {\em HSCC 2013}, pp 173--182. ACM, 2013.
+
+\bibitem{bagrodzafSAS05}
+R.~Bagnara, E.~Rodr{\'\i}guez-Carbonell, and E.~Zaffanella.
+\newblock Generation of basic semi-algebraic invariants using convex polyhedra.
+\newblock In {\em SAS 2005},
+LNCS 3672, pp 19--34, Springer-Verlag, 2005.
+
+\bibitem{BauLoo_NECSYS12a}
+N.W. Bauer, S.J.L.M. van Loon, M.C.F. Donkers, N~van~de Wouw, and W.P.M.H.
+  Heemels.
+\newblock Networked control systems toolbox: Robust stability analysis made
+  easy.
+\newblock In {\em IFAC Workshop on Distributed Estimation and Control in
+  Networked Systems (NECSYS)}, pp 55--60, 2012.
+
+\bibitem{blanchini2015switching}
+F. Blanchini and S. Miani.
+\newblock Switching and switched systems.
+\newblock In {\em Set-Theoretic Methods in Control}, pp 405--466. Springer,
+  2015.
+
+\bibitem{2013-briat-convex}
+C. Briat.
+\newblock Convex conditions for robust stability analysis and stabilization of
+  linear aperiodic impulsive and sampled-data systems under dwell-time
+  constraints.
+\newblock {\em Automatica}, 49(11):3449--3457, 2013.
+
+\bibitem{Cai2008}
+C. Cai, R.~Goebel, and A.R. Teel.
+\newblock Smooth lyapunov functions for hybrid systems part ii:
+  (pre)asymptotically stable compact sets.
+\newblock {\em IEEE Trans. on Automatic Control}, 53(3):734--748, 2008.
+
+\bibitem{CousotCousot76-1}
+P. Cousot and R. Cousot.
+\newblock Static determination of dynamic properties of programs.
+\newblock In {\em 2nd Int. Symp. Prog.}, pp 106--130. Dunod, 1976.
+
+\bibitem{DBLP:conf/popl/CousotH78}
+P. Cousot and N. Halbwachs.
+\newblock Automatic discovery of linear restraints among variables of a
+  program.
+\newblock In {\em POPL}, pp 84--96, 1978.
+
+\bibitem{DBLP:conf/aplas/DangG11}
+T. Dang and T.M. Gawlitza.
+\newblock Template-based unbounded time verification of affine hybrid automata.
+\newblock In {\em APLAS 2011}, LNCS 7078, pp 34--49. Springer, 2011.
+
+\bibitem{Feron2010}
+E.~Feron.
+\newblock From control systems to control software: Integrating
+  lyapunov-theoretic proofs within code.
+\newblock {\em IEEE Control Systems Magazine}, (1):50--71, December 2010.
+
+\bibitem{2014-fiacchini-set}
+M. Fiacchini and I.-C. Morarescu.
+\newblock Set theory conditions for stability of linear impulsive systems.
+\newblock In {\em CDC 2014}, IEEE, 2014.
+
+\bibitem{2010-fridman-refined}
+E. Fridman.
+\newblock A refined input delay approach to sampled-data control.
+\newblock {\em Automatica}, 46(2):421--427, 2010.
+
+\bibitem{Fujioka2009}
+H. Fujioka.
+\newblock A discrete-time approach to stability analysis of systems with
+  aperiodic sample-and-hold devices.
+\newblock {\em IEEE Trans. on Aut. Control}, 54(10):2440--2445,
+  2009.
+
+\bibitem{HSCC05}
+A. Girard.
+\newblock Reachability of uncertain linear systems using zonotopes.
+\newblock In {\em HSCC}, pp 291--305, 2005.
+
+\bibitem{Goebel2009}
+R.~Goebel, R.G. Sanfelice, and A.~Teel.
+\newblock Hybrid dynamical systems.
+\newblock {\em Control Systems, IEEE}, 29(2):28--93, 2009.
+
+\bibitem{HetelDaafouz2006}
+L.~Hetel, J.~Daafouz, and C.~Iung.
+\newblock Stabilization of arbitrary switched linear systems with unknown
+  time-varying delays.
+\newblock {\em IEEE Trans. on Automatic Control}, 51(10):1668--1674,
+  2006.
+
+\bibitem{2013hetel}
+L. Hetel, J. Daafouz, S. Tarbouriech, and C. Prieur.
+\newblock Stabilization of linear impulsive systems through a nearly-periodic
+  reset.
+\newblock {\em Nonlinear Analysis: Hybrid Systems}, 7(1):4--15, 2013.
+
+\bibitem{Hu2003}
+L.~Hu, J.~Lam, Y.~Cao, and H.~Shao.
+\newblock A  {LMI} approach to robust h2 sampled- data control for linear
+  uncertain systems.
+\newblock {\em IEEE Trans. Syst. Man Cybern.}, 33(1):149--155, 2003.
+
+\bibitem{DBLP:conf/amcc/KaoW14}
+C.{-}Y. Kao and D.{-}R. Wu.
+\newblock On robust stability of aperiodic sampled-data systems - an integral
+  quadratic constraint approach.
+\newblock In {\em ACC 2014}, pp 4871--4876, 2014.
+
+\bibitem{AlKhatib2015}
+M. Al Khatib, A. Girard, and T. Dang.
+\newblock Stability verification of nearly periodic impulsive linear systems
+  using reachability analysis.
+\newblock In {\em ADHS 2015}. ACM, 2015.
+
+\bibitem{kouramas2005minimal}
+K.I. Kouramas, S.V. Rakovi{\'c}, E.C. Kerrigan, J.C. Allwright, and D.Q. Mayne.
+\newblock On the minimal robust positively invariant set for linear difference
+  inclusions.
+\newblock In {\em CDC-ECC'05}, pp 2296--2301. IEEE,
+  2005.
+
+\bibitem{KurzhanskiVaraiya00}
+A.~Kurzhanski and P.~Varaiya.
+\newblock Ellipsoidal techniques for reachability analysis.
+\newblock In {\em HSCC}, volume 1790 of {\em {LNCS}}, pp 202--214.
+  {Springer}, 2000.
+
+\bibitem{DBLP:conf/pado/Mine01}
+A. Min{\'e}.
+\newblock A new numerical abstract domain based on difference-bound matrices.
+\newblock In {\em PADO}, pp 155--172, 2001.
+
+\bibitem{DBLP:journals/lisp/Mine06}
+A. Min{\'e}.
+\newblock The octagon abstract domain.
+\newblock {\em Higher-Order and Symbolic Computation}, 19(1):31--100, 2006.
+
+\bibitem{naghshtabrizi2007delay}
+P.~Naghshtabrizi.
+\newblock {\em Delay Impulsive Systems: A Framework for Modeling Networked
+  Control Systems}.
+\newblock University of California, Santa Barbara, 2007.
+
+\bibitem{2008-naghshtabrizi-exponential}
+P. Naghshtabrizi, J.P. Hespanha, and A.R. Teel.
+\newblock Exponential stability of impulsive systems with application to
+  uncertain sampled-data systems.
+\newblock {\em Systems \& Control Letters}, 57(5):378--385, 2008.
+
+\bibitem{nevsic2004framework}
+D.~Ne{\v{s}}i{\'c} and A.R. Teel.
+\newblock A framework for stabilization of nonlinear sampled-data systems based
+  on their approximate discrete-time models.
+\newblock {\em IEEE Transactions on Automatic Control}, 49(7):1103--1122, 2004.
+
+%\bibitem{Omran2013}
+%H.~Omran, L.~Hetel, J.-P. Richard, and F.~Lamnabhi-Lagarrigue.
+%\newblock On the stability of input-affine nonlinear systems with sampled-data
+%  control.
+%\newblock In {\em ECC 2013}, pp 2585--2590,
+%  2013.
+
+\bibitem{polyak2006rejection}
+B.T. Polyak, A.V. Nazin, M.V. Topunov, S. Nazin.
+\newblock Rejection of bounded disturbances via invariant ellipsoids technique.
+\newblock {\em CDC 2006}, pp 1429--1434. IEEE, 2006.
+
+\bibitem{Rodriguez-Carbonell:2007}
+E. Rodr\'{\i}guez-Carbonell and D. Kapur.
+\newblock Automatic generation of polynomial invariants of bounded degree using
+  abstract interpretation.
+\newblock {\em Sci. Comput. Program.}, 64(1):54--75, January 2007.
+
+\bibitem{VMCAI05}
+S. Sankaranarayanan, H.B. Sipma, and Z. Manna.
+\newblock Scalable analysis of linear systems using mathematical programming.
+\newblock In {\em VMCAI}, pp 25--41, 2005.
+
+\bibitem{2012-seuret-novel}
+A. Seuret.
+\newblock A novel stability analysis of linear systems under asynchronous
+  samplings.
+\newblock {\em Automatica}, 48(1):177--182, 2012.
+
+\bibitem{Teel1998}
+A.~Teel, D.~Nesic, and P.V. Kokotovic.
+\newblock A note on input-to-state stability of sampled-data nonlinear systems.
+\newblock In {\em CDC 1998}, pp 2473--2478, IEEE, 1998.
+
+\bibitem{wittenmark2002computer}
+B. Wittenmark, K.~J. Astrom, and K.-E. Arzen.
+\newblock Computer control: An overview.
+\newblock {\em IFAC Professional Brief}, 1 2002.
+
+\bibitem{Mikheev1988}
+Y.V. Mikheev, V.A. Sobolev, and E.M. Fridman.
+\newblock Asymptotic analysis of digital control systems.
+\newblock {\em Automation and Remote Control}, 49(9):1175--1180, 1988.
+
+\bibitem{grant2008cvx}
+Grant, Michael and Boyd, Stephen and Ye, Yinyu.
+  \newblock {CVX: Matlab software for disciplined convex programming, 2008.}
+  
+
+\end{thebibliography}
+
+
+
+
+
+\end{document}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

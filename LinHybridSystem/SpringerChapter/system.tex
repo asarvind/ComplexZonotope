@@ -1,0 +1,186 @@
+\section{Switched linear system with additive
+  disturbances}\label{sec:switched}
+
+Formally, a discrete-time switched linear system with additive disturbances
+is specified by a tuple $\sys=\sw{L}$, where $L$ is a finite
+set of modes, $\mapp: L\ra\mRnn$ is a mapping whose image is called the
+set of switching matrices, $\inp$ is a bounded additive
+disturbance set and $\init$ is the initial set.
+A function $\tbf{x}: \mb{Z}_{\geq 0}\ra \mb{R}^n$
+is called a trajectory of the system if there exists a switching signal
+$\sigma:\mb{Z}_{\geq 0}\ra L$ and a disturbance signal $w:\mb{Z}_{\geq
+  0}\ra \inp$ such that
+\begin{equation}\label{eqn:sw-system}
+\begin{split}
+& \tbf{x}(t+1)=\mapp(\sigma(t))\tbf{x}(t)+w(t)~\text{and}~
+ \tbf{x}(0)\in \init.
+\end{split}
+\end{equation}
+Here $\sigma(t)\in L$ is the mode of the system at time $t$. In this
+work, we consider arbitrary switching signals. 
+
+From now on for simplicity, by a \emph{switched system} we refer to a
+discrete-time switched linear system with additive disturbances,
+unless otherwise explicitly stated.  For any $l\in L$, we use the
+notation $\mapp(l)=A^l$ and call $A^l$ the switching matrix of mode
+$l$.
+Starting from a set $\Psi$, the set of all points that can be reached at
+the next time instant is denoted by $R(\Psi)$.  We can generalize this to
+complex sets as well, according to the following definition where
+$\Psi\subseteq \mCn$,
+%
+%\begin{equation}\label{eqn:sw-reach}
+$R(\Psi)=\bigcup_{l\in L}\lt(A^l\Psi\oplus\inp\rt)$.
+%\end{equation}
+%\subsubsection{Positive invariant}
+Then a possibly complex set is called positive invariant of the
+switched system if
+the reachable set at the next time instant is contained within the original
+set, and it also contains the initial set.  
+%
+\begin{defn}\label{defn:pi}[Positive invariant]
+  A set $\Psi\subseteq \mCn$ is called a positive invariant of the
+  switched system~(\ref{eqn:sw-system}) if $\init\subseteq \Psi$ and
+  $\forall l\in L:\; \lt(A^l\Psi\oplus\inp\rt)\subseteq \Psi$.
+\end{defn}
+%
+\paragraph*{Verification of linear invariance properties}
+A linear invariant of a switched system is a collection of linear
+constraints such that every trajectory starting in the initial set
+always satisfies the linear constraints. We consider the problem
+of verifying a linear invariance property around the origin.  This is
+motivated by the fact that analysis of switched linear systems is
+often done around the origin which is an equilibrium state.  The
+results we present in the following can indeed be extended to the case
+where the origin may not satisfy the linear constraints of the
+property, however not presented in this paper.  Before we define a
+linear invariance property, we introduce the following notation.
+
+Since we consider linear
+invariants containing the origin and the system dyanmics is symmetric
+about the origin, a linear invariance property can be defined by
+polyhedral norm constraints, as follows.
+%
+\begin{defn}[Linear invariant]
+Let $k\in\pint$, $T\in\mat{k}{n}{R}$ and $b\in\nzrl$.  A tuple $\lt(T,b\rt)$ is called a linear invariance property if
+$\forall t\in\pint,~x\in R^t(\Psi)$ and for every trajectory
+$\tbf{x}:\mb{R}_{\geq 0}\ra\mb{R}^n$ such that $\trj{0}\in\init$, we have
+$\|T\trj{t}\|_{\infty}\leq b.$
+\end{defn}
+%
+From now on, we assume that $T\in\mat{k}{n}{R}$ and $b\in\nzrl$.  For
+the set of linear constraints to be invariant, we require that every
+trajectory of the system beginning in the initial set does not violate
+the constraints at all times of during its evolution.  In other words,
+the reachable set of the initial set has to be a positive invariant
+satisfying the linear constraints.  On the other hand, if we find a
+positive invariant satisfying the linear constraints, then the
+trajectories of the system are bounded by the linear constraints since
+they are bounded by the positive invariant.  trajectory of the system
+always satisfies the constraints.  Thus, we have the following
+proposition.
+%
+\begin{prop}[Condition for linear invariance]\label{prop:pi-li}
+The set of constraints ${\lcons}$ is a linear invariant iff there
+exists a positively invariant set $\Psi$ such that $\forall x\in real(\Psi)$,
+we have
+$\|Tx\|_{\infty}\leq b$.
+\end{prop}
+%
+Therefore, to verify a linear invariance property, it
+suffices to find a positively invariant set containing an initial
+set.  This defines our problem.
+
+%
+\emph{Problem.} %[Linear invariance verification by finding positive invariants]
+  For $T\in\mat{k}{n}{R}$ and $b\in\nzrl$, find a positively invariant
+  set $\Psi$ such that $\forall x\in\Psi$, we have
+  $\|Tx\|_{\infty}\leq b$.  Then $(T,b)$ is a linear
+  invariant of~(\ref{eqn:sw-system}) by Proposition~\ref{prop:pi-li}.
+
+
+Before describing our solution, we briefly review related work.
+\input{relswitched} 
+
+
+More concretely, we verify invariance of linear constraints by finding
+positively invariant template complex zonotopes satisfying a linear
+constraint. First, we extend the linear constraints to complex-valued
+vectors, leading to conic constraints, and state the following
+necessary and sufficient condition for their satisfaction by a
+template complex zonotope.
+%
+\begin{lem}\label{lem:sat}
+  $\forall x\in \czo{V}{s}$, the inequality
+  $\|Tx\|_{\infty}\leq b$ holds if and only if
+  $\|TV\dg(s)\|_{\infty}\leq b$.
+\end{lem}
+%
+\paragraph*{Procedure for verifying a linear invariant property:} We
+want to find a positively invariant template complex zonotope
+$\czo{V}{s}$ satisfying a given set of linear constraints
+$\lt<T,b\rt>$ so as to verify a linear invariance property.
+Firstly, we fix the template $V$, which is generally the collection of
+eigenvectors of the switching matrices, although additional vectors
+can be added to the template to have more accuracy in verification.
+Next, we want to synthesize scaling factors $s$ such that $\czo{V}{s}$
+is a positively invariant template complex zonotope satisfying the
+linear constraints.  For positive invariance, we formulate second-order conic constraints as sufficient
+conditions for checking the required set inclusion relations in
+Definition~\ref{defn:pi}.  Additionally, we formulate again second-order
+conic constraints for satisfaction of the linear constriants by the
+template complex zonotope, based on Lemma~\ref{lem:sat}.  We then
+minimize the offset $b$ of the linear invariance property for which
+the second-order conic constraints are satisfied using convex
+optimization.  If the $b$ we derive is less that the given value for
+the linear invariance property, then we have verified the property.
+Otherwise, our result is inconclusive because we our conditions are
+sufficient but not necessary.
+
+%based on Theorem~\ref{toref} 
+
+
+%
+%% \begin{thm}[Sufficient condition for verifying linear invariant]\label{theorem:swiched}
+%%   Given a switched system $\sys=\sw{L}$ where the disturbance and initial sets are respectively $\inp=\czo{G}{h}$ and
+%%   $\init=\czo{W}{z}$ (with the template $G\in\mat{n}{r}{C}$, $W\in\mat{n}{p}{C}$ and the scaling factors
+%%   $h\in\mb{R}^r_{\geq 0}$ and $z\in\mb{R}^p_{\geq 0}$), a tuple $\lcons$, where $T\in\mat{k}{n}{R}$ and
+%%   $b\in\mRo$, is linear invariant of $\sys$ if all the following set
+%%   of constraints are collectively satisfied, for a given $V \in\mat{n}{m}{C}$.
+%% {\allowdisplaybreaks
+%% %\begin{equation}\label{eqn:cons}
+%% \begin{align*}
+%% & \exists s\in\mb{R}^m_{\geq 0}~(\text{scaling factors}),~
+%% \exists X^l\in\mat{n}{(m+r)}{C}~\text{for each}~l\in L~\text{and}\\
+%% &\exists Y\in\mat{n}{p}{C}~~\text{such that}:~~
+%% VX^l=\lt[A^lV~~G\rt]\dg\cjoin{s}{h},~~
+%% VY=W\dg(z), \displaybreak[0] \\
+%% & \sum_{j=1}^{m+r}|X^l_{ij}|\leq s_i~~~~~~~\forall
+%%   i\in\tup{m}, %% \wedge\forall l\in L
+%%   ~~~~~~~~~~~\text{\textsl{(inclusion after switching)}}\\
+%% & \sum_{k=1}^p|Y_{ik}|\leq s_i,~~~~~~~\forall
+%%   i\in\tup{m}~~~~~~~~~~~~~\text{\textsl{(containment of
+%%       initial set)}}\\
+%% & \|TV\dg(s)\|_{\infty}\leq b,~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\text{\textsl{(satisfaction of linear
+%%     constraints)}}
+%% \end{align*}
+%% %\end{equation}
+%% }
+%% %
+%% \end{thm}
+%% %
+%% In fact, for a fixed $T$, we can minimize $b$ for which the constraints in the 
+%% theorem are satisfied using second-order conic
+%% optimization.
+
+%% \tbf{Choosing the template.} In the restricted case of linear systems
+%% without switching, a positive invariant exists if and only if a
+%% template complex zonotope having eigenvectors as the template is
+%% positively invariant. Motivated by this, for a switched system,
+%% we can choose the template as the collection of eigenvectors of
+%% the switching matrices.  However if required, we can add new direction
+%% vectors to the template to increase the chances of
+%% successful verification.
+
+
+

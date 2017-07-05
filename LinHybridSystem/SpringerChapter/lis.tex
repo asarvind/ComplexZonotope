@@ -1,0 +1,297 @@
+\section{Nearly periodic linear impulsive system}\label{sec:lis}
+\vspace{-0.5 em}
+A nearly periodic linear impulsive system is a hybrid system
+where the state evolves continuously by a linear differential equation
+for some bounded time period, after which there is an instantaneous
+linear impulse.  Formally, a linear impulsive system is specified by
+a tuple $\mc{L}=\left<A_c,A_r,\Delta\right>$ where $A_c$ and $A_r$ are
+$n\times n$ real matrices called the linear field matrix and impulse
+matrix, respectively.  The positive integer $n$ is the dimension of
+the state space and $\Delta=[t_{min},t_{max}]$ is an interval of
+non-negative reals, called the sampling period interval.  The
+dynamics of the nearly periodic linear impulsive system is described
+as follows.  A function
+$\tbf{x}:\mathbb{R}_{\geq 0}\ra \mathbb{R}^n$ is called a trajectory
+of the system if there exists a sequence of sampling times
+$(t_i)_{i=1}^\infty$ satisfying all the following:
+%
+	\begin{equation}\label{eqn:system} \begin{split}
+&(t_{i+1}-t_i)\in\Delta~~\forall i\in\pint~~~~(\text{uncertainty in sampling period})\\
+&\dot{\tbf{x}}(t)=A_c\tbf{x}(t)~~\forall
+            t\in\nzrl:~t\neq t_i ~\forall i\in\pint~~(\text{continuous
+              })\\
+&\tbf{x}(t_i^+)=A_r\tbf{x}(t_i^-)~~\forall
+            i\in\pint~~~~(\text{linear impulse})           
+\end{split} \end{equation}
+%
+%% 	Here $\tbf{x}(t)\in\mathbb{R}^n$ is the state of the system at a time instant
+%% $t$.  We denote the set of all possible trajectories of the system by $\Gamma$.
+%% \vspace{0.2em}
+
+We say that the linear impulsive system is globally exponentially
+stable (GES) if all the trajectories of the system beginning at any
+point in the state space eventually reach arbitrarily close to the
+origin at an exponential rate, as %% Formally, GES is defined as
+follows.
+%
+\begin{defn}[Global exponential stability]
+  The system~(\ref{eqn:system}) is
+  globally exponentially stable (GES) if there exist positive scalars
+  $c>0$ and $\lambda\in[0,1)$ such that for all $t\in\mRo$,
+  $\trj{t}\leq c\lambda^t\|\trj{0}\|$.
+\end{defn}
+The problem we consider is stated the following.
+%
+\begin{problem}[Stability verification problem]
+Given $A_c$, $A_r$, $t_{min}$, find the largest upper bound $t_{max}$ on the sampling time to guarantee exponential stability.
+\end{problem}
+%
+\input{rellis}
+
+%% To show exponential stability, we use reachability analysis as
+%% follows.  Beginning at a state $x$ and by continuous evolution for a
+%% time period $t$, the system reaches the state $e^{A_ct}x$, which we
+%% obtain by integrating the continuous dynamics of the system.  On the
+%% other hand, after a linear impulse at a state $x$, the system reaches
+%% the state $A_rx$.  Overall, 
+
+The state reached after a linear impulse followed by a continuous
+evolution for time $t$ will be $e^{A_ct}A_rx$.  So, let us denote
+$H_t=e^{A_ct}Ar$ for any any positive real $t$, which we call as the
+reachability operator if $t$ lies in the sampling period interval
+$\Delta$.  Then the set of all reachable points of $\Psi$ when acted
+upon by an impulse followed by continuous evolution for sampling time
+period $t\in\Delta$ until before the next impulse is
+$\bigcup_{t\in\Delta}H_t\Psi$.  It was shown previously
+in~\cite{2014-fiacchini-set,AlKhatib2015} that a necessary and
+sufficient condition for exponential stability is the existence of a
+convex, compact and closed set containing the origin in its interior,
+called a $C$-set, that contracts between subsequent impulses.  In
+other words, we can establish exponential stability by finding a
+$C$-set $\Psi$ such that $H_t\Psi\subseteq\lambda\Psi$ for some
+$\lambda\in[0,1)$ and for all $t\in\Delta$.
+In this paper, we want to find contractive $C$-sets represented as
+template complex zonotopes.  %% Our motivation of for considering
+%% template complex zonotopes is as follows.  For a fixed sampling
+%% period, the contraction of a template complex zonotope having
+%% eigenvectors of the reachability operator in the template is bounded
+%% by the largest absolute value of the eigenvalues.
+%% %% Before discussing our motivation for
+%% %% considering template complex zonotopes, we state the following
+%% %% proposition required to explain our motivation.
+%% %% %
+%% %% \begin{prop}
+%% %%   Let $V$ contain only the eigenvectors of $H_t$ as its column vectors
+%% %%   and $\mu$ be the vector of eigenvalues corresponding the columns of
+%% %%   $V$.  Then $H_t\CZO=\czo{V}{\dg(|\mu|)s}$.
+%% %% \end{prop}
+%% %% %
+%% %% For a fixed sampling time period, i.e., when $t_{min}=t_{max}=t$, we
+%% %% can infer from the above proposition that the contraction of the
+%% %% template complex zonotope formed by the eigenvector template is
+%% %% bounded by the largest absolute value of the eigenvalues.  
+%% Therefore, when the sampling period is fixed, we can find contractive
+%% template complex zonotopes for exponentially stable systems by
+%% choosing the template as the collection of eigenvectors.  However, we
+%% are interested in the case where the sampling time period varies in
+%% the interval $\Delta$, i.e. there are uncountably many reachability
+%% operators parametrized over the time interval $\Delta$. Motivated by
+%% the above analysis, when the sampling period is uncertain, we choose
+%% the template as the collection of eigenvectors of a few reachability
+%% operators and try to synthesize suitable scaling factors for which the
+%% template complex zonotope contracts with respect to the chosen finite
+%% set of reachability operators.  However, later we also verify that the
+%% synthesized template complex zonotope actually contracts with respect
+%% to all the (uncountably many) reachability operators.  First we
+%% describe the procedure to synthesize the template complex zonotope.
+%% \begin{algorithm}
+%% \caption{Exponential stability verification of system~(\ref{eqn:system})}
+%% \label{alg:1step}
+%% \begin{algorithmic}[1]
+%% \State Initialize $k=3$.
+%% \State Choose $M\in\pint$ as the largest value of $k$ and $tol$ as
+%% discretization parameter.
+%% \While{$k \leq M$}
+%% \State Initialize $t=t_{min}$, $h=tol$, $r$ as order of Taylor
+%% expansion (typically $\leq 2$).
+%% \While{$h\geq \; tol$ and $t<t_{max}$}
+%% \If{$\eta_r(E_k,s,t,h)<1$}
+%% \State $t\gets t+h; h\gets h+tol$
+%% \Else
+%% \State $h\gets h-tol$
+%% \EndIf
+%% \EndWhile
+%% \If{$t\geq t_{max}$}
+%% \State {\bf|BreakLoop|}
+%% \Else
+%% \State $k\gets k+1$.  
+%% \EndIf
+%% \EndWhile
+%% \If {$k \leq M$}
+%% \State \emph{System is exponentially stable}
+%% \Else
+%% \State \emph{Inconclusive}
+%% \EndIf
+%% \end{algorithmic}
+%% \end{algorithm}
+
+\vspace{0.5em} \emph{Synthesizing a candidate template complex
+  zonotope.} This step of systematically synthesizing a suitable
+template complex zonotope that is likely to be contractive constitutes
+the main improvement over the procedure proposed
+in~\cite{arvind2016lis}. Our criterion for synthesizing the template
+complex zonotope is that it has to be contractive with respect to a
+few reachability operators (called reference operators), which is a
+necessary condition for contraction with respect to the overall system
+dynamics.  Since the eigenstructure of the reachability operators are
+related to the stability of the system, we include the eigenvectors of
+a few reachability operators in the template.  For a fixed number
+$k\in\pint$ of reference operators, they can be chosen incrementally
+as follows.  Define $k$-sampled time points as
+$\Lambda_k=\lt\{t_{min}+i\frac{(t_{max}-t_{min})}{k}:i\in\{0,\ldots,k-1\}\rt\}.$
+Then we define the set of $k$-sampled reachability operators as
+$\Gamma_k=\lt\{H_{t}:t\in\Lambda_k\rt\}$.  Let us denote the template
+of collection of eigenvectors of all operators in $\Gamma_k$ as $E_k$.
+For this template, we synthesize suitable scaling factors based on the
+following theorem. The derivation of this theorem uses the inclusion
+checking condition from Theorem~\ref{thm:inc}.
+%
+\begin{thm}
+If $E_k$ have rank $n$.  For a
+vector of scaling factors $s\in\mb{R}^{m}_{\geq 0}$, the template
+complex zonotope $\mc{Z}=\czo{E_k}{s}$ would represent a $C$-set and also $H_t\mc{Z}\subseteq
+\lambda\mc{Z}$ for $\lambda\in(0,1)$ if
+following are all satisfied.
+%
+\begin{equation}\label{eqn:syn}
+\begin{split}
+& s\in\mb{R}^n_{\geq 1}~~\text{(sufficient condition for representing $C$-set)}\\
+& \exists X_t\in\mat{m}{m}{C}~~\forall t\in\Lambda_k~~\text{s.t.}\\
+& E_kX_t=H_tE_k\dg(s)~~~~(\text{transfer matrix condition
+    })\\%~(\text{a finite set of time points})\\
+& \sum_{j=1}^m\lt|\lt(X_t\rt)_{ij}\rt|\leq \lambda s_i~~\forall i\in\tup{m}~~\text{(bounding contraction)}\\
+\end{split}
+\end{equation}
+\end{thm}
+
+Therefore, we can synthesize a template complex zonotope that is
+contractive with respect to a finite chosen number $k>0$ of reference
+operators by solving for the scaling factors satisfying the
+second-order conic constraints in~(\ref{eqn:syn}).
+
+\emph{Verifying contraction.}  To verify that this
+synthesized template complex zonotope actually contracts with respect
+to all the reachability operators $H_t$, where $t$ is parametrized over
+the whole sampling time interval $\Delta$, we divide the
+sampling interval into small enough sub-intervals and verify
+contraction in each interval.  We define \emph{contraction} of a
+template complex due to a linear operator as follows, which when less
+than one, implies that the zonotope is contractive.
+%
+\begin{defn}
+For a template complex zonotope $\CZO$, the amount of contraction by a
+square matrix $J\in\mat{n}{n}{R}$, denoted by $\chi(V,s,J)$
+is \[\chi(V,s,J)=\min\lt\{\lambda\in\mRo:J\czo{V}{s}\subseteq
+\lambda\czo{V}{s}\rt\}.\]
+\end{defn}
+%
+To bound the amount of contraction in small intervals, we use some
+useful properties of contraction derived in~\cite{arvind2016lis}.
+Firstly, we compute an upper bound on the contraction with respect to
+a linear operator as follows.
+\begin{lem}\label{lem:contLin}
+Let $J\in\mRnn$.  Define
+%
+$
+\beta(V,s,J)=\min\{\|X\|_\infty:X\in\mat{m}{m}{C}~\wedge~
+V\dg(s)X=JV\dg(s)\}$
+Then we have $\chi(V,s,J)\leq \beta(V,s,J)$ .
+%
+\end{lem}
+A small samling interval of the linear impulsive system corresponds to
+many reachability operators parametrized by a the sampling times in
+the interval.  The approach earlier used in ~\cite{arvind2016lis} for
+bounding such contraction gives the following result.
+ %%  Let $H_{t+\rho}$ be an operator where $\rho$
+%% lies in the interval $(0,\epsilon)$.  Then it was shown
+%% in~\cite{arvind2016lis} using Taylor expansion that \[H_{t+\rho} =
+%% P_r^t(\rho) + E_r^t(\delta),\] where
+%% %
+%% $ P^t_r(\rho)=\sum_{i=0}^r\frac{A_c^i\rho^i}{i!}H_t$ and $
+%% E^t_r(\delta)=\frac{A_c^{r+1}\delta^{r+1}}{(r+1)!}H_t $ for an order
+%% of expansion $r\in\pint$ and some $\delta\in[0,\epsilon]$.
+
+%% Furthermore, a bound on contraction as sum of contractions depending on $\epsilon$ is derived 
+%% in~\cite{arvind2016lis} as
+%% %
+%% \begin{equation}\label{eqn:expbound}
+%% \begin{split}
+%% &~~~~~~~~~~~\chi\lt(V,s,H_{t+\rho}\rt)\leq\\
+%% &\lt(\max_{i=0}^r\chi\lt(V,s,P^t_r(\epsilon)\rt)\rt)+ \frac{\epsilon^{r+1}}{(r+1)!}\chi\lt(V,s,A_c^{r+1}H_t\rt)
+%% \end{split}
+%% \end{equation}
+%% %
+%% The right hand side of~(\ref{eqn:expbound}) can be bounded if we know
+%% a bound on the contraction under a linear operation, which is
+%% derived as follows.
+%% %
+
+%% \begin{proof}
+%% If $JV\dg(s)=V\dg(s)X$, we want to prove that $J\czo{V}{s}=\czo{JV}{s}\subseteq \|X\|_\infty\CZO$.  We deduce
+%% $\czo{JV}{s}=\{ JV\zeta \;:\; \forall
+%%   i\in\tup{m}|\zeta_i|\leq s_i \} = \{JV\dg(s)\zeta^\pr:\|\zeta^\pr\|_{\infty} \leq 1\} = \{V\dg(s)X\zeta^\pr:\|\zeta^\pr\|_\infty\leq 1\}\subseteq
+%%   \|X\|_\infty\{V\dg(s)\zeta^\pr:\|\zeta^\pr\|_{\infty}\leq
+%%   1\} = \|X\|_\infty\{V\zeta \;:\; \forall i\in\tup{m}  |\zeta_i|\leq s_i \} = \|X\|_{\infty}\CZO$.
+%% \end{proof}
+%% %
+Then the contraction for sampling time interval $(t,t+\delta)$ can be
+bounded %% using Equations~(\ref{eqn:expbound}) and Lemma~(\ref{lem:contLin})
+as follows.
+%
+\begin{thm}\label{thm:expbound}
+  Let $\rho\in (t,t+\epsilon)$ and for $r\in\mb{Z}_{>0}$, $
+  P^t_r(\rho)=\sum_{i=0}^r\frac{A_c^i\rho^i}{i!}H_t$.  Define
+  $\eta_r(V,s,t,\epsilon)=
+  \lt(\max_{i=0}^r\beta\lt(V,s,P^t_r(\epsilon)\rt)\rt)+
+  \frac{\epsilon^{r+1}}{(r+1)!}\beta\lt(V,s,A_c^{r+1}H_t\rt)$, where
+  the bound $\beta(.)$ is defined in Lemma~\ref{lem:contLin}.  Then
+  $\chi\lt(V,s,H_{t+\rho}\rt)\leq \eta_r(V,s,t,\epsilon) $
+\end{thm}
+%
+
+%% \emph{Algorithm to verify contraction.}  We first choose a minimum
+%% tolerance value, say $tol$ and an order of expansion
+%% $r\in\mb{Z}_{>0}$.  Starting with $t=t_{min}$ and for some $h\geq
+%% tol$, we check whether $\eta_r(V,s,t,h) < 1$.  If this condition is
+%% satisfied, $t$ is incremented to $t+h$ and $h$ is incremented to
+%% $h+tol$.  Then the same is repeated. If the condition is not
+%% satisfied, then $h$ is reduced to $h-tol$ and we repeat the
+%% procedure. In this process, if we hit a value of $t$ greater than
+%% $t_{max}$, this means that we have verified contraction with respect
+%% to all the reachability operators.  Otherwise, if we get $h<tol$, then
+%% the process is terminated.  In the latter case case, we can increase
+%% the value of $k$ to have a larger template and repeat the procedure,
+%% as described below.
+
+
+
+\emph{Verification algorithm.} We begin with $k=3$ reference operators
+that correspond to the two end points of the sampling interval and the
+middle point.  The algorithm first finds suitable scaling factors $s$
+that gives a template complex zonotope which contracts with respect to
+these reference operators.  Next, it checks whether the contraction of
+the template complex zonotope $\czo{E_k}{s}$ with respect to all the
+reachability operators is less than one. For checking contraction, we
+use the algorithm earlier proposed in ~\cite{arvind2016lis}.  If
+successful, then exponential stability of the system is verified.
+Otherwise, $k$ is increased, the algorithm synthesizes the template
+complex zonotope for the increased $k$ and then checks contraction. If
+unsuccessful after a maximum value of $k$, the algorithm stops and the
+result is inconclusive.  %% This is described in
+%% Algorithm~\ref{alg:1step}. This algorithm has been implemented and
+%% we defer experimental results to Section~\ref{sec:exp}.
+%% %
+
+
+
+

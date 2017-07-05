@@ -1,0 +1,29 @@
+
+\paragraph*{Related work on stability verification of nearly periodic linear impulsive systems} 
+
+%A general approach to verifying exponential
+%stability of nearly-periodic linear impulsive systems is to find
+%decreasing Lyapunov functions
+%~\cite{2013-briat-convex,Mikheev1988,Teel1998,2010-liu-stability,Mazenc2013,2010-fridman-refined}. If
+%the Lyapunov functions are quadratic, they can be reduced to Linear
+%Matrix Inequality (LMI) conditions~\cite{HetelDaafouz2006}.  Another
+%approach is to find contractive
+%sets~\cite{2014-fiacchini-set,Lazar2013,AlKhatib2015}, which is the
+%inspiration to our work.  
+
+
+A common approach to this problem is extending Lyapunov techniques, which results in Lyapunov Krakovskii functionals 
+\cite{Mikheev1988,Teel1998} (using the framework of time-delay systems), and discrete-time Lyapunov functions \cite{2012-seuret-novel}. Stability with respect to time-varying input delay can also be handled by input/output approach 
+\cite{DBLP:conf/amcc/KaoW14}. Stability verification problem for time-varying impulsive systems can also be formulated in a hybrid systems framework \cite{nevsic2004framework,Goebel2009,BauLoo_NECSYS12a}, for which various Lyapunov-based 
+methods including discontinuous time-independent \cite{2008-naghshtabrizi-exponential} 
+or time-dependent Lyapunov functions \cite{2010-fridman-refined} were developed. Another approach involves using convex embedding \cite{HetelDaafouz2006,Fujioka2009,2013hetel}. In this approach, stability conditions can be checked using parametric Linear Matrix Inequalities (LMIs) \cite{HetelDaafouz2006}, 
+or as set contractiveness (such as, polytopic set contractiveness) \cite{2014-fiacchini-set,2013-briat-convex,AlKhatib2015}. Inspired by these results on 
+set contractiveness conditions~\cite{arvind2016lis} provides a stability condition, expressed in terms of complex zonotopes, which is more conservative but can be efficiently verified. The novelty of this work is in the extension of complex zonotopes to template complex zonotopes which allows a systematic way to synthesize contractive zonotopic sets to verify stability. 
+
+%Computationally speaking, our approach is close in spirit to abstract interpretation
+%and hybrid systems analysis. Indeed the way we find contractive sets using such zonotopes is similar 
+%to the way invariant sets are computed using some zonotopic
+%\cite{Girard05reachabilityof,Althoff2011,DBLP:conf/sas/GoubaultPV12} and
+%template-polyhedral abstract domains \cite{S riram2008,jeannet2009apron}.
+
+%\cite{DBLP:conf/amcc/KaoW14,Omran2013}

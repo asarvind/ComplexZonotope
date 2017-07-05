@@ -1,0 +1,144 @@
+Embedded control systems combine computer software with the physical
+world, and their global behavior can be modeled using hybrid systems.
+To assert correctness of such systems, their global behavior under all
+possible non-determinism arising in the interaction between continuous
+and discrete dynamics should be accurately analyzed. Thus, one of the
+key ingredients for safe design and verification of embedded control
+systems is a set representation which, on one hand, is expressive
+enough to describe the evolution of sets of hybrid trajectories and,
+on the other hand, can be manipulated by time-efficient
+algorithms. For most hybrid systems with non-trivial continuous
+dynamics, exact computation of hybrid trajectories is impossible, so
+the focus is put on approximate computation of reachable states. In
+the area of abstract interpretation within program verification, there
+is a similar need for data structures for set manipulation, called
+abstract domains, which should be fine-grained enough to be accurate,
+yet computationally tractable to deal with complex programs.
+%\vspace{0.2em}
+%The likelihood of finding a positive invariant and its
+%computational efficiency depend on the abstract domain used for
+%representing the positive invariant.  
+
+ 
+Two classical abstract domains are intervals~\cite{CousotCousot76-1}
+and convex polyhedra~\cite{DBLP:conf/popl/CousotH78}, and their
+variants have been developed to achieve a good compomise between
+computational speed and precision, such as
+zones~\cite{DBLP:conf/pado/Mine01},
+octagons~\cite{DBLP:journals/lisp/Mine06}, linear
+templates~\cite{VMCAI05}, zonotopes~\cite{HSCC05}, and tropical
+polyhedra~\cite{DBLP:conf/sas/AllamigeonGG08}. For hybrid model
+checking, convex polyhedra and their special classes such as
+parallelotopes and zonotopes are also among popular set
+representations.  Beyond polyhedral set representations, ellipsoids
+can be used for reachable set computations~\cite{KurzhanskiVaraiya00}.
+In abstract interpretation, polynomial inequalities are used for
+invariant computation via their reduction to linear inequalities
+in~\cite{bagrodzafSAS05} and polynomial equalities via Gr\"{o}ner
+basis methods~\cite{Rodriguez-Carbonell:2007}. Quadratic templates are
+also proposed, where semi-definite relaxations are used for deriving
+non-linear invariants (for instance quadratic invariants inspired by
+Lyapunov functions)~\cite{Feron2010,AdjeGaubertGoubaultESOP2010}.
+
+Recently, complex zonotopes were introduced in~\cite{arvind2016lis} as
+extension of usual zonotopes to handle dynamics with complex
+eigenvectors.  The efficiency of complex zonotopes is demonstrated for
+for stability verification of nearly periodic linear impulsive
+systems. However, a drawback of complex zonotopes is that adding new
+generators can distort the positive invariance of a set.  Therefore,
+refining these sets in a verification method is not easy.
+ 
+
+
+%% Recently, complex zonotopes~\cite{arvind2016lis} extend usual zonotopes to the complex domain, which geometrically speaking are Minkowski sum of line segments and some ellipsoids.
+%% Other extensions of zonotopes, such as quadratic~\cite{DBLP:conf/aplas/AdjeGW15} and more general
+%% polynomial zonotopes~\cite{althoff2013} have been proposed. Complex zonotopes are however different from polynomial zonotopes because while a polynomial zonotope is a set-valued polynomial function of
+%% \emph{intervals}, a complex zonotope is a set valued function of unit
+%% \emph{circles} in the complex plane.
+%% \vspace{0.2em}
+
+
+%% In this paper, we extend complex zonotopes to a new set
+%% representation called template complex zonotopes, which has more
+%% efficient computational procedures and broader applicability.  The
+%% interest of complex zonotopes can be explained as follows. An
+%% important problem in abstract interpretation and hybrid system
+%% verification is computing \emph{positive invariants}, which can be
+%% used as over-approximations of reachable sets. For linear systems,
+%% positive invariants are closely related to the their
+%% eigenstructures. For instance, when the eigenvectors of a linear
+%% system are real, positively invariant polytopes and zonotopes can
+%% be defined by considering the eigenvectors as normal vectors of the
+%% faces of the polytopes and generators of the zonotopes,
+%% respectively. Then, for hybrid systems with aribitrary switching
+%% among linear dynamics having real eigenvectors, the existence of
+%% such eigenvector-based positively invariant polytopes and zonotopes
+%% for the subsystems is a necessary condition for the existence of a
+%% positive invariant of the overall system. However, this analysis
+%% using real-valued polytopes and zonotopes can no longer be used if
+%% the eigenvectors are complex (having both imaginary and real
+%% parts). To handle dynamics with complex eigenvectors, complex
+%% zonotopes are introduced in~\cite{arvind2016lis} and their
+%% efficiency is demonstrated for stability verification of nearly
+%% periodic linear impulsive systems.  \vspace{0.2em}
+
+
+ %% does not necessarily increase the likelihood of finding positive
+ %% invariants because this can make the sets unnecessarily large in some
+ %% directions 
+Overcoming the afore drawback, in this paper we introduce a
+more general set representation called \emph{template complex
+zonotopes}, which has more efficient verification procedures and
+broader applicability.  In a {template complex zonotope}, the bounds
+on the complex combining coefficients, called \emph{scaling factors},
+are treated as variables, while the directions for the generators are
+fixed a-priori by a \emph{template} of complex vectors. Consequently,
+compared to complex zonotopes, template complex zonotopes provide
+better approximation quality by allowing adjusting the scaling factors
+for the generators. Thus using template complex zonotopes leads to
+significantly more efficient approach to verification of stability of
+nearly periodic linear impulsive systems.  The second contribution of
+this paper is an application of template complex zonotopes to verify
+linear invariance properties of switched systems with additive
+disturbance, which indicates their potential application to a broader
+class of hybrid systems.  %% Both the classes of hybrid systems
+%% considered in this paper are widely used models for design and
+%% implementation of embedded control systems (see for example
+%% \cite{blanchini2015switching,naghshtabrizi2007delay,2008-naghshtabrizi-exponential}
+%% and references there in). The effectiveness of the proposed methods is supported by
+%% experiments on benchmark examples.
+% \vspace{0.2em}
+
+%% The remainder of the paper is organized as follows. We first describe
+%% template complex zonotopes and the computation of some important
+%% operations required by the verification procedures. Then, we present a
+%% method which is improved compared to the work~\cite{arvind2016lis},
+%% for stability verification of linear impulsive systems using template
+%% complex zonotopes. In the next section, we show a procedure for
+%% verification of linear invariance properties of switched systems with
+%% additive disturbance. Finally, to demonstrate the efficiency of
+%% template complex zonotopes, we report experimental results which are
+%% either better or competitive, compared to the existing
+%% results. Related work on switched systems and linear impulsive systems
+%% and a comparison with our approach will be discussed in the respective
+%% sections. Before continuing, we summarize the basic notation used in
+%% the paper.
+%% \vspace{0.1em}
+
+%% {\bf Basic notation.} We represent integers by $\mb{Z}$, real numbers
+%% by $\mb{R}$ and complex numbers by $\mb{C}$.  For integers $p$ and
+%% $q$, the set of $p\times q$ matrices with entries drawn from a set
+%% $\mb{Q}$ is denoted $\mat{p}{q}{Q}$.  If $z$ is a vector of complex
+%% numbers, $real(z)$ represents the real part of $z$ and the imaginary
+%% part is $img(z)$.  For a positive integer $i$, the $i^{th}$ component
+%% of $z$ is denoted by $z_i$.  The diagonal square matrix containing
+%% entries of $z$ along the diagonal is denoted by $\dg(z)$.  For a matrix
+%% $X$ and positive integers $i, j$, $X_{ij}$ is the $i^{th}$ row and
+%% $j^{th}$ column entry of $X$.  If $c$ is a scalar complex number, its
+%% absolute value is $|c|=\lt(|real(c)|^2+|img(c)|^2\rt)^{1/2}$.  The
+%% infinity norm of a possibly complex $n$-dimensional vector $z$ is
+%% $\|z\|_{\infty}=\max_{i=1}^n{|z_i|}$. The infinity norm of a possibly
+%% complex $n\times m$ matrix $X$ is $\max_{i=1}^{n}\sum{|X_{ij}|}$.
+
+
+
