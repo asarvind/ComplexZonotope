@@ -11,27 +11,6 @@ with the state-of-the-art methods and tools and our algorithm produced
 either better or competitive results.  We describe two of the examples
 for linear impulsive systems below.
 
-\begin{table*}
-\caption{Template complex zonotopes (TCZ) vs
-    Complex zonotopes (CZ)~\cite{arvind2016lis}}
-\center
- \begin{tabular}{|l|c|r|}
-  \hline
-  $~$ & CZ & TCZ $~~~~~~~~$\\
-  \hline
-  Finding suitable zonotope & Requires guessing & Systematically synthesized\\
-\hline
-  No. of impulses for contraction & 2 (both examples) & 1 (both examples)\\
-  \hline
-    Computation time (Example 1) & 27.41 s & 4.6 s \\
-\hline
-Computation time (Example 2) & 74.04 s & 8.5 s\\
-\hline
-\end{tabular}
-\label{tab:tcz-cz}
-\end{table*}
-
-
 \emph{Example 1.} We consider a networked control system with
 uncertain but bounded transmission period.  A networked control system
 is composed of a plant and a controller that interact with each other
@@ -69,26 +48,24 @@ $A_c=\left(\begin{array}{ccc} 0 & -3 & 1\\ 1.4 & -2.6 & 0.6\\ 8.4 &
 $ and $A_r=\lt(\begin{array}{ccc} 1 & 0 & 0\\ 0 & 1 & 0\\ 0 & 0 & 0
 \end{array}\rt).$
 
-
-
-
-While implementing the algorithm for stability
-verification, we choose first order Taylor expansion, $tol=0.05$ for
-Example 1 and $tol=0.006$ for Example 2.  We required $k=3$ as the
-number of reachability operators used for synthesis of a suitable
-template complex zonotope for stability verification in both examples.
-Then we verified stability in a sampling interval $[0.08, 0.5]$ for
-Example 1 and $[0.1,0495]$ for Example 2.  Our approach is compared
-with the state-of-the-art NCS toolbox~\cite{BauLoo_NECSYS12a} and also
-other approaches as listed in Table~\ref{tab:com1} and
-Table~\ref{tab:com2}.  For the first example, our method outperforms
-other approaches, while it is competitive with other approaches on the
-second example.  Moreover, Table~\ref{tab:tcz-cz} shows that the
-template complex zonotopic approach is computationally more efficient
-than complex zonotopes~\cite{arvind2016lis}.
+While implementing the algorithm for stability verification, we choose
+first order Taylor expansion, $tol=0.05$ for Example 1 and $tol=0.006$
+for Example 2.  We required $k=3$ as the number of reachability
+operators used for synthesis of a suitable template complex zonotope
+for stability verification in both examples.  Then we verified
+stability in a sampling interval $[0.08, 0.5]$ for Example 1 and
+$[0.1,0495]$ for Example 2.  Our approach is compared with the
+state-of-the-art NCS toolbox~\cite{BauLoo_NECSYS12a} and also other
+approaches as listed in Table~\ref{tab:com1} and Table~\ref{tab:com2}.
+For the first example, our method outperforms other approaches, while
+it is competitive with other approaches on the second example.
+Moreover, Table~\ref{tab:tcz-cz} shows that the template complex
+zonotopic approach is computationally more efficient than complex
+zonotopes~\cite{arvind2016lis}.
 
 \begin{table}
-{\caption{Example 1}
+\begin{minipage}{0.49\textwidth}
+\caption{Example 1}
 \begin{tabular}{|l|c|r|}
   \hline
   Reference & $t_{min}$ & $t_{max}$ \\
@@ -107,10 +84,9 @@ Complex zonotope~\cite{arvind2016lis} & 0.08 & 0.5 \\
   \hline
 \end{tabular}
 \label{tab:com1}
-}
-\end{table}
-\begin{table}
-{\caption{Example 2}
+\end{minipage}
+\begin{minipage}{0.49\textwidth}
+\caption{Example 2}
 \label{tab:com2}
 \begin{tabular}{|l|c|r|}
 \hline
@@ -133,27 +109,28 @@ Complex zonotope~\cite{arvind2016lis} & 0.1 & 0.49 \\
   \hline
 \end{tabular}
 %\label{tab:com2}
-}
+\end{minipage}
+\vspace{1em}
+\caption{Template complex zonotopes (TCZ) vs
+    Complex zonotopes (CZ)~\cite{arvind2016lis}}
+\center
+ \begin{tabular}{|l|c|r|}
+  \hline
+  $~$ & CZ & TCZ $~~~~~~~~$\\
+  \hline
+  Finding suitable zonotope & Requires guessing & Systematically synthesized\\
+\hline
+  No. of impulses for contraction & 2 (both examples) & 1 (both examples)\\
+  \hline
+    Computation time (Example 1) & 27.41 s & 4.6 s \\
+\hline
+Computation time (Example 2) & 74.04 s & 8.5 s\\
+\hline
+\end{tabular}
+\label{tab:tcz-cz}
 \end{table}
 
-%\end{figure}
 
-
-%\begin{figure}[htbp]
-
-
-%
-
-%% For $k=3$, we chose the template as the collection of eigenvectors of
-%% $k$-sampled reachability operators and found scaling factors
-%% satisfying~(\ref{eqn:syn}) by SOCP.  Using this template complex
-%% zonotope, we could verify contraction in a sampling interval $[0.1,
-%%   0.495]$ according to the Algorithm~\ref{alg:1step} with first order
-%% Taylor expansion, i.e., $r=1$.  This required $6.9076$ seconds.  But
-%% the LMI based approach~\cite{2013hetel} could verify stability only
-%% until 0.3.  The comparison with other approaches is given in
-%% Table~\ref{tab:com2}.  The comparison with complex zonotopes is shown
-%% in Table~\ref{tab:tcz-cz}.
 
 
 

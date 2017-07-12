@@ -3,11 +3,11 @@
 \input{settings}
 \input{macros}
 
-\title{Template complex zonotopes for stability and invariant
-  verification} 
-\author{Arvind\ Adimoolam and Thao\ Dang
-} 
-\institute{\ Verimag,~Grenoble, France\\ \url{{santosh.adimoolam,thao.dang}@univ-grenoble-alpes.fr}.
+\title{Template Complex Zonotope based Stability Verification} 
+
+\author{Arvind\ Adimoolam and Thao\ Dang }
+\institute{\ Verimag,~Grenoble,
+  France\\ \url{{santosh.adimoolam,thao.dang}@univ-grenoble-alpes.fr}.
 }
 
 
@@ -16,30 +16,22 @@
 
 
 \begin{abstract}
-Recently complex zonotopes were introduced as an extension of real
-zonotopes to the complex domain, which could capture the eigenstructure
-nearly periodic linear impulsive systems for stability
-verification. %% They are used for stability verification of nearly
-%% periodic linear impulsive systems by capturing the eigenstructure of
-%% linear dynamics.
-However, adding more generators to complex zonotopes distorts positive
-invariance and consequently refining complex zonotopes in a verification
-procedure is not easy. Therefore, in this paper we introduce a more
-general set representation, called template complex zonotopes, where
-the generators are fixed a-priori by a template, but the bounds on the
-absolute values of their combining coefficients, called scaling
-factors, are treated as variables and can be algorithmically
-synthesized. %% Thus, complex zonotopes are a particular class of
-%% template complex zonotopes with (fixed) unit scaling factors.
-This flexibility in scaling factors leads to a more systematic and
-significantly more efficient stability verification procedures in case
-of template complex zonotope. Furthermore, the second contribution of
-this paper is an application of template complex zonotopes to
-verification of linear invariance properties of another class of
-hybrid systems, namely linear switched systems with additive
-disturbance. Experiments on a number of benchmark examples demonstrate
-that our approach gives better or competitive results, compared to the
-state-of-the-art methods and tools for these problems.
+In this paper, we consider the problem of verifying stability of
+computer control systems whose behavior can be modeled by nearly
+periodic linear implusive systems.  In these systems, the
+eigenstructure and stability of the dynamics are closely related.  A
+recently introduced set representation called complex zonotopes could
+utilize the possibly complex eigenstructure of the dynamics to define
+contractive sets for stability verification, which demonstrated good
+accuracy on some benchmark examples.  However, complex zonotopes had
+the drawback that it is not easy to refine them in the stability
+verification procedure, while also we had to guess the contractive
+complex zonotope instead of systematically synthesizing it.
+Overcoming this drawback, in this paper we introduce a more general
+set representation called template complex zonotope, which has the
+advantage that it is easy to refine and also the contractive set can
+be systematically synthesized.  We corraborate the efficiency of our
+approach by experimenting on some benchmark examples.
 \end{abstract}
 
 \section{Introduction}
@@ -47,7 +39,7 @@ state-of-the-art methods and tools for these problems.
 \input{litr}
 \input{temp-comp-zon} 
 \input{lis}
-\input{system}  
+%\input{system}  
 \input{sw-exp}
 \input{conclusion}
 

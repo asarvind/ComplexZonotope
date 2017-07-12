@@ -1,37 +1,40 @@
-\section{Template complex zonotopes}
+\section{Template complex zonotopes}~\label{sec:tcz}
 \paragraph{\bf Definition.}
-A template complex zonotope is a set representation in which points
-are described by a linear combination of complex-valued vectors,
-called \textit{template}, where the complex combining coefficients are
-bounded in absolute values by positive bounds called called
+A template complex zonotope is a set representation in which each point
+is described as a linear combination of a set of complex-valued vectors,
+called as a \textit{template}, such that the complex combining coefficients are
+bounded in absolute values by a set of positive bounds called
 \textit{scaling factors}.
-
-%% \begin{figure}
-%% \center
-%% \includegraphics[width=7cm,height=5cm]{fig/complex-zonotope.png}
-%% \caption{Real projection of a template complex zonotope}
-%% \label{fig:cz}
-%% \end{figure}
-
 %
 \begin{defn}[Template complex zonotope]
   For $n,m\in\pint$, let $V\in\mCnm$ be a template, $c\in\mCn$
-  be a center point and $s\in\mRmo$ be scaling factors.  Then
-  a template complex zonotope denoted by a tuple
-  $\lt<V,c,s\rt>$ represents the set
-  $\lt\{V\zeta+c:\zeta\in\mCm~\wedge~\forall
-  i\in\{1,\ldots,m\},|\zeta_i|\leq s_i\rt\}$.
+  be a center point and $s\in\mRmo$ be scaling factors.  Then we
+  define a template complex zonotope as 
+  \[\cz{V}{c}{s}=\lt\{V\zeta+c:\zeta\in\mCm~\wedge~\forall
+  i\in\{1,\ldots,m\},|\zeta_i|\leq s_i\rt\}.\]
 \end{defn}
-
+%
 Complex zonotopes, which were introduced in~\cite{arvind2016lis}, are
 a special case of template complex zonotopes where $s_i = 1$ for all
 $i\in\{1,...,m\}$.  The real projection of a template complex zonotope
 can represent, in addition to polytopic zonotopes, non-polyheral
 convex sets.  Therefore, they are also more expressive than usual
-(real-valued) zonotopes.  %% To illustrate, Figure~\ref{fig:cz}
-%% represents the non-polyhedral real projection of the template complex
-%% zonotope $\CZO$ where $V=\lt(\begin{array}{lll}(1+2i) & 1 &
-%%   (2+i)\\(1-2i) & 1 & (2-i)\end{array}\rt)$ and $s=[1~1~1]^T$.
+(real-valued) zonotopes.  To illustrate, Figure~\ref{fig:cz}
+represents the non-polyhedral real projection of the template complex
+zonotope $\CZO$ where $V=\lt(\begin{array}{lll}(1+2i) & 1 &
+  (2+i)\\(1-2i) & 1 & (2-i)\end{array}\rt)$ and $s=[1~1~1]^T$.
+%
+\begin{figure}
+\center
+\includegraphics[scale=0.7]{fig/complex-zonotope.png}
+\includegraphics[scale=0.5]{fig/CZhull.png}
+\caption{Real projection of a template complex zonotope}
+\label{fig:cz}
+\end{figure}
+%
+
+
+
 
 In the rest of the paper, unless otherwise stated, we assume that $V$
 is an $n\times m$ complex matrix, $s$ is an $m\times 1$ column vector
@@ -49,7 +52,7 @@ techniques as that of a usual zonotope. %~\cite{todo}.
   
 \begin{enumerate}%\begin{equation}\label{eqn:lin} 
 \item \emph{Linear transformation}: $A\CZ=\cz{AV}{Ac}{s}$.
-\item \emph{Minkowski sum}:\\ $\CZ\oplus\cz{G}{d}{h}=\cz{\lt[V~~G\rt]}{(c+d)}{\lt(\begin{array}{l}s\\h\end{array}\rt)}$.
+\item \emph{Minkowski sum}: $\CZ\oplus\cz{G}{d}{h}=\cz{\lt[V~~G\rt]}{(c+d)}{\lt(\begin{array}{l}s\\h\end{array}\rt)}$.
 %\end{equation}
 \end{enumerate}
 \end{lem}
@@ -76,68 +79,60 @@ techniques as that of a usual zonotope. %~\cite{todo}.
 %% j\in\tup{r}\rt\}\\=\cz{\lt[V~~G\rt]}{(c+d)}{\cjoin{s}{h}}$.
 %% \end{proof}
 
-For checking exact inclusion between template complex zonotopes, we
-propose the following convex relaxation.
-%% Checking inclusion is a fundamental problem that arises in
-%% reachability computation. For stability verification, we are
-%% interested in efficiently checking the inclusion between two template
-%% complex zonotopes centered at the origin. The inclusion checking
-%% method we propose in the following can be extended to zonotopes
-%% centered anywhere.  Although this problem is non-convex in general, we
-%% derive an easily verifiable convex condition which is sufficient (but
-%% not necessary), as follows. 
+
+Checking inclusion is a fundamental problem in reachability
+computation. For stability verification, we are interested in
+efficiently checking the inclusion between two template complex
+zonotopes centered at the origin.  Although this problem is non-convex
+in general, we derive an easily verifiable convex condition which is
+sufficient (but not necessary), as follows.  The inclusion checking
+method we propose in the following can be extended to zonotopes
+centered anywhere.
 
 
-%% Let us consider that we want to check the inclusion of a template
-%% complex zonotope $\czo{V^a}{s^a}$ inside a template complex zonotope
-%% $\czo{V^b}{s^b}$, where $V^a\in\mat{n}{r}{C}$, $V^b\in\mCnm$,
-%% $s^a\in\mb{R}^{r}_{\geq 0}$ and $s^b\in\mb{R}^m_{\geq 0}$ for some
-%% $n,m,r\in\pint$.  We relate any point in $V^a$ to a point in
-%% $V^b$ as follows.  Consider $X\in\mat{r}{m}{C}$ as a matrix solving
-%% $V^a\dg(s^a)=V^bX$, which we call a \emph{transfer matrix} from $\czo{V^a}{s^a}$
-%% to $\czo{V^b}{s^b}$.  Recall that $\dg(s^a)$ is the diagonal square matrix containing
-%% entries of $s^a$ along its diagonal. Let any point $z$ in $\czo{V^a}{s}$ be written as
-%% $z=V^a\zeta$ where $\zeta$ is a combining coefficient whose absolute
-%% values are bounded by $s^a$.  Normalizing by the scaling factors and
-%% writing $\zeta=\dg(s)\epsilon$ for some
-%% $\epsilon:\|\epsilon\|_{\infty}\leq 1$, we get $z=V^a\dg(s)\epsilon$.
-%% Then using the relation for the transfer matrix, we rewrite
-%% $z=V^bX\epsilon$.  If the absolute value of every component of
-%% $X\epsilon$ is less than the corresponding value of $s^b$, 
-%% $X\epsilon$ can be treated as a combining coefficient of
-%% $\czo{V^b}{s^b}$ for the point $z$ and then $z$ also belongs to
-%% $\czo{V^b}{s^b}$.  This is true if $\sum_{j=1}^m|X_{ij}|\leq
-%% s^b_i~\forall i\in\tup{m}$.  This gives us a sufficient condition,
-%% stated in the following theorem for inclusion of $\czo{V^a}{s^a}$ in
-%% $\czo{V^b}{s^b}$.
-Although this is a relaxation of the exact
-inclusion condition, our experiments using this relaxed
-condition give good results.
+Let us consider that we want to check the inclusion of a template
+complex zonotope $\czo{V^a}{s^a}$ inside a template complex zonotope
+$\czo{V^b}{s^b}$, where $V^a\in\mat{n}{r}{C}$, $V^b\in\mCnm$,
+$s^a\in\mb{R}^{r}_{\geq 0}$ and $s^b\in\mb{R}^m_{\geq 0}$ for some
+$n,m,r\in\pint$.  We relate any point in $V^a$ to a point in $V^b$ as
+follows.  Consider $X\in\mat{r}{m}{C}$ as a matrix solving
+$V^a\dg(s^a)=V^bX$, which we call a \emph{transfer matrix} from
+$\czo{V^a}{s^a}$ to $\czo{V^b}{s^b}$.  Recall that $\dg(s^a)$ is the
+diagonal square matrix containing entries of $s^a$ along its
+diagonal. Let any point $z$ in $\czo{V^a}{s}$ be written as
+$z=V^a\zeta$ where $\zeta$ is a combining coefficient whose absolute
+values are bounded by $s^a$.  By normalizing with the scaling factors,
+we can write $\zeta=\dg(s)\epsilon$ for some
+$\epsilon:\|\epsilon\|_{\infty}\leq 1$.  So, we get
+$z=V^a\dg(s)\epsilon$.  Then using the relation for the transfer
+matrix, we rewrite $z=V^bX\epsilon$.  If the absolute value of every
+component of $X\epsilon$ is less than the corresponding value of
+$s^b$, then $X\epsilon$ can be treated as a combining coefficient of
+$\czo{V^b}{s^b}$ for the point $z$ and then $z$ also belongs to
+$\czo{V^b}{s^b}$.  This is true if $\sum_{j=1}^m|X_{ij}|\leq
+s^b_i~\forall i\in\tup{m}$.  This gives us a sufficient condition,
+stated in the following theorem for inclusion of $\czo{V^a}{s^a}$ in
+$\czo{V^b}{s^b}$.
+
 %
 \begin{thm}[Inclusion]\label{thm:inc}
    Let $V^a\in\mat{n}{r}{C}$, $V^b\in\mCnm$, $s^a\in\mb{R}^{r}_{\geq
      0}$ and $s^b\in\mb{R}^m_{\geq 0}$ for some $n,m,r\in\pint$.  Then
-   $\czo{V^a}{s^a}\subseteq \czo{V^b}{s^b}$ if there exists a matrix
-   $X\in\mat{m}{r}{C}$ solving $V^bX=V^a\dg(s^a)$, called 
-   transfer matrix from $V^a\dg(s)$ to $V^b$, such that
-   $\lt(\sum_{j=1}^r|X_{ij}|\rt)\leq s_i^b~~\forall i\in\tup{m}$.
+   $\czo{V^a}{s^a}\subseteq \czo{V^b}{s^b}$ if all the following
+   statements are true.   
+\begin{align}
+\begin{split}
+& \exists X\in\mat{m}{r}{C}:~\\
+& V^bX=V^a\dg(s^a)~~\text{and}~~\forall i\in\tup{m}~~\lt(\sum_{j=1}^r|X_{ij}|\rt)\leq s_i^b.
+\end{split}
+\end{align}
 \end{thm}
 
 
-With respect to the
-variables $s^a$, $s^b$ and $X$, the constraints in
-Theorem~\ref{thm:inc} are second order conic constraints.  Such
-constraints can be solved efficiently in polynomial time.
-%% A \emph{second order conic (SOC) constraint} on an $n$-dimensional
-%% real variable $x$ is any inequality of the form $\|Ax+b\|_2\leq cx+d$
-%% where $A\in\mat{n}{n}{R}$ and $b,c,d\in\mb{R}^n$.  With respect to the
-%% variables $s^a$, $s^b$ and $X$, although the constraints in
-%% Theorem~\ref{thm:inc} are not written precisely in the form of the SOC
-%% constraint stated formerly, but they can be easily rewritten into SOC
-%% constraints.  We use the solver CVX~\cite{grant2008cvx} for
-%% disciplined convex optimization, which can automatically convert
-%% constraints like in Theorem~\ref{thm:inc} into SOC constraints and
-%% solves them in polynomial time in the size of the input and
-%% approximation of the output.
+For fixed $V_a$ and $V_b$, the constraints in Theorem~\ref{thm:inc}
+are second order conic constraints in the variables $s^a$, $s^b$ and
+$X$.  Many convex optimization solvers can solve such constraints can
+efficiently upto a high numerical precision.
+
 
 

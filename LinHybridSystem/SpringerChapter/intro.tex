@@ -1,24 +1,20 @@
 Embedded control systems combine computer software with the physical
 world, and their global behavior can be modeled using hybrid systems.
 To assert correctness of such systems, their global behavior under all
-possible non-determinism arising in the interaction between continuous
-and discrete dynamics should be accurately analyzed. Thus, one of the
-key ingredients for safe design and verification of embedded control
-systems is a set representation which, on one hand, is expressive
-enough to describe the evolution of sets of hybrid trajectories and,
-on the other hand, can be manipulated by time-efficient
-algorithms. For most hybrid systems with non-trivial continuous
-dynamics, exact computation of hybrid trajectories is impossible, so
-the focus is put on approximate computation of reachable states. In
-the area of abstract interpretation within program verification, there
-is a similar need for data structures for set manipulation, called
-abstract domains, which should be fine-grained enough to be accurate,
-yet computationally tractable to deal with complex programs.
-%\vspace{0.2em}
-%The likelihood of finding a positive invariant and its
-%computational efficiency depend on the abstract domain used for
-%representing the positive invariant.  
-
+possible non-determinism resulting from the interaction between
+continuous and discrete dynamics should be accurately analyzed. Thus,
+one of the key ingredients for safe design and verification of
+embedded control systems is a set representation which, on one hand,
+is expressive enough to describe the evolution of sets of hybrid
+trajectories and, on the other hand, can be manipulated by
+time-efficient algorithms. For most hybrid systems with non-trivial
+continuous dynamics, exact computation of hybrid trajectories is
+impossible, so the focus is put on approximate computation of
+reachable states. In the area of abstract interpretation within
+program verification, there is a similar need for data structures for
+set manipulation, called abstract domains, which should be
+fine-grained enough to be accurate, yet computationally tractable to
+deal with complex programs.
  
 Two classical abstract domains are intervals~\cite{CousotCousot76-1}
 and convex polyhedra~\cite{DBLP:conf/popl/CousotH78}, and their
@@ -39,91 +35,58 @@ basis methods~\cite{Rodriguez-Carbonell:2007}. Quadratic templates are
 also proposed, where semi-definite relaxations are used for deriving
 non-linear invariants (for instance quadratic invariants inspired by
 Lyapunov functions)~\cite{Feron2010,AdjeGaubertGoubaultESOP2010}.
-
-Recently, complex zonotopes were introduced in~\cite{arvind2016lis} as
-extension of usual zonotopes to handle dynamics with complex
-eigenvectors.  The efficiency of complex zonotopes is demonstrated for
-for stability verification of nearly periodic linear impulsive
-systems. However, a drawback of complex zonotopes is that adding new
-generators can distort the positive invariance of a set.  Therefore,
-refining these sets in a verification method is not easy.
- 
-
-
-%% Recently, complex zonotopes~\cite{arvind2016lis} extend usual zonotopes to the complex domain, which geometrically speaking are Minkowski sum of line segments and some ellipsoids.
-%% Other extensions of zonotopes, such as quadratic~\cite{DBLP:conf/aplas/AdjeGW15} and more general
-%% polynomial zonotopes~\cite{althoff2013} have been proposed. Complex zonotopes are however different from polynomial zonotopes because while a polynomial zonotope is a set-valued polynomial function of
-%% \emph{intervals}, a complex zonotope is a set valued function of unit
-%% \emph{circles} in the complex plane.
-%% \vspace{0.2em}
+Recently, complex zonotopes~\cite{arvind2016lis} extended usual
+zonotopes to the complex domain, which geometrically speaking are
+Minkowski sum of line segments and some ellipsoids.  Other extensions
+of zonotopes, such as quadratic~\cite{DBLP:conf/aplas/AdjeGW15} and
+more general polynomial zonotopes~\cite{althoff2013} have been
+proposed. Complex zonotopes are however different from polynomial
+zonotopes because while a polynomial zonotope is a set-valued
+polynomial function of
+\emph{intervals}, a complex zonotope is a set valued function of unit
+\emph{circles} in the complex plane.
 
 
-%% In this paper, we extend complex zonotopes to a new set
-%% representation called template complex zonotopes, which has more
-%% efficient computational procedures and broader applicability.  The
-%% interest of complex zonotopes can be explained as follows. An
-%% important problem in abstract interpretation and hybrid system
-%% verification is computing \emph{positive invariants}, which can be
-%% used as over-approximations of reachable sets. For linear systems,
-%% positive invariants are closely related to the their
-%% eigenstructures. For instance, when the eigenvectors of a linear
-%% system are real, positively invariant polytopes and zonotopes can
-%% be defined by considering the eigenvectors as normal vectors of the
-%% faces of the polytopes and generators of the zonotopes,
-%% respectively. Then, for hybrid systems with aribitrary switching
-%% among linear dynamics having real eigenvectors, the existence of
-%% such eigenvector-based positively invariant polytopes and zonotopes
-%% for the subsystems is a necessary condition for the existence of a
-%% positive invariant of the overall system. However, this analysis
-%% using real-valued polytopes and zonotopes can no longer be used if
-%% the eigenvectors are complex (having both imaginary and real
-%% parts). To handle dynamics with complex eigenvectors, complex
-%% zonotopes are introduced in~\cite{arvind2016lis} and their
-%% efficiency is demonstrated for stability verification of nearly
-%% periodic linear impulsive systems.  \vspace{0.2em}
+Complex zonotopes can utilize the possibly complex eigenstructure
+of the dynamics of linear impulsive systems to define
+contractive sets for stability verification.  This is an advantage
+over polytopes or usual zonotopes that can only utilize the real
+eigenstructure but not the complex eigenstructure.  For stabililty
+verification of nearly periodic linear impulsive systems, complex
+zonotopes demonstrated good accuracy on some benchmark examples.
+However, a drawback of complex zonotopes is that adding more
+generators to it can violate the property of contraction with respect
+to the dynamics.  Therefore, it is not easy to refine complex
+zonotopes for verifying stability for larger intervals of sampling
+times.  Moreover, we had to heuristically guess a suitable complex
+zonotope for stability verification instead of systematically
+synthesizing it.
 
-
- %% does not necessarily increase the likelihood of finding positive
- %% invariants because this can make the sets unnecessarily large in some
- %% directions 
-Overcoming the afore drawback, in this paper we introduce a
+Overcoming the aforementioned drawback, in this paper we introduce a
 more general set representation called \emph{template complex
-zonotopes}, which has more efficient verification procedures and
-broader applicability.  In a {template complex zonotope}, the bounds
-on the complex combining coefficients, called \emph{scaling factors},
-are treated as variables, while the directions for the generators are
-fixed a-priori by a \emph{template} of complex vectors. Consequently,
-compared to complex zonotopes, template complex zonotopes provide
-better approximation quality by allowing adjusting the scaling factors
-for the generators. Thus using template complex zonotopes leads to
-significantly more efficient approach to verification of stability of
-nearly periodic linear impulsive systems.  The second contribution of
-this paper is an application of template complex zonotopes to verify
-linear invariance properties of switched systems with additive
-disturbance, which indicates their potential application to a broader
-class of hybrid systems.  %% Both the classes of hybrid systems
-%% considered in this paper are widely used models for design and
-%% implementation of embedded control systems (see for example
-%% \cite{blanchini2015switching,naghshtabrizi2007delay,2008-naghshtabrizi-exponential}
-%% and references there in). The effectiveness of the proposed methods is supported by
-%% experiments on benchmark examples.
-% \vspace{0.2em}
+zonotopes}.  In a {template complex zonotope}, the bounds on the
+complex combining coefficients, called \emph{scaling factors}, are
+treated as variables, while the directions for the generators are
+fixed a-priori by a \emph{template} of complex vectors.  This allows
+us to systematically synthesize a suitable template complex zonotope
+for stability verification, instead of guessing it like in the case of
+complex zonotopes.  Furthermore, template complex zonotopes can be
+refined easily by adding any arbitrary set of vectors to the existing
+template, because the scaling factors can be adjusted accordingly.  We
+present experiments on some benchmark examples where template complex
+zonotopes contract faster than complex zonotopes, resulting in faster
+verification.
 
-%% The remainder of the paper is organized as follows. We first describe
-%% template complex zonotopes and the computation of some important
-%% operations required by the verification procedures. Then, we present a
-%% method which is improved compared to the work~\cite{arvind2016lis},
-%% for stability verification of linear impulsive systems using template
-%% complex zonotopes. In the next section, we show a procedure for
-%% verification of linear invariance properties of switched systems with
-%% additive disturbance. Finally, to demonstrate the efficiency of
-%% template complex zonotopes, we report experimental results which are
-%% either better or competitive, compared to the existing
-%% results. Related work on switched systems and linear impulsive systems
-%% and a comparison with our approach will be discussed in the respective
-%% sections. Before continuing, we summarize the basic notation used in
-%% the paper.
-%% \vspace{0.1em}
+The rest of the paper is organized as follows.  We introduce template
+complex zonotopes in Section~\ref{sec:tcz} and dicuss important
+operations on them used in the stability verification procedure, like
+linear transformation inclusion checking.  In
+Section~\ref{sec:lis-ex}, we first define a nearly-periodic linear
+impulsive system and the problem of verifying stability
+
+* ADD NOTATION 
+
+
 
 %% {\bf Basic notation.} We represent integers by $\mb{Z}$, real numbers
 %% by $\mb{R}$ and complex numbers by $\mb{C}$.  For integers $p$ and
