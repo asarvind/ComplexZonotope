@@ -2,14 +2,12 @@
 
 
 
-\subsection{Nearly periodic linear impulsive systems}\label{sec:lis-ex}
-%Experiments for linear impulsive systems
 
-We evaluated the implementation of our algorithm on a number of
-benchmark examples taken from~\cite{arvind2016lis} and compared it
-with the state-of-the-art methods and tools and our algorithm produced
-either better or competitive results.  We describe two of the examples
-for linear impulsive systems below.
+We evaluated our algorithm on two benchkmark examples of linear
+impulsive systems below and compared it with other state-of-the-art
+approaches.  For convex optimization, we use CVX version 2.1 with
+Matlab 8.5.0.197613 (R2015a).  The reported experimental results were
+obtained on Intel(R) Core(TM) i5-3470 CPU @ 3.20GHz.
 
 \emph{Example 1.} We consider a networked control system with
 uncertain but bounded transmission period.  A networked control system
@@ -39,30 +37,6 @@ $A_p=\lt(\begin{array}{cc}-1 & 0\\ 1 & 0\end{array}\rt)$,
       find as high a value of $t_{max}$ as possible for which the
       system is GES.
 
-\emph{Example 2.} We consider the following linear impulsive system
-from Hetel et. al.~\cite{2013hetel}, that describes an LMI based
-approach to verify stability. The specification is given by
-$A_c=\left(\begin{array}{ccc} 0 & -3 & 1\\ 1.4 & -2.6 & 0.6\\ 8.4 &
-  -18.6 & 4.6
-\end{array}\rt)
-$ and $A_r=\lt(\begin{array}{ccc} 1 & 0 & 0\\ 0 & 1 & 0\\ 0 & 0 & 0
-\end{array}\rt).$
-
-While implementing the algorithm for stability verification, we choose
-first order Taylor expansion, $tol=0.05$ for Example 1 and $tol=0.006$
-for Example 2.  We required $k=3$ as the number of reachability
-operators used for synthesis of a suitable template complex zonotope
-for stability verification in both examples.  Then we verified
-stability in a sampling interval $[0.08, 0.5]$ for Example 1 and
-$[0.1,0495]$ for Example 2.  Our approach is compared with the
-state-of-the-art NCS toolbox~\cite{BauLoo_NECSYS12a} and also other
-approaches as listed in Table~\ref{tab:com1} and Table~\ref{tab:com2}.
-For the first example, our method outperforms other approaches, while
-it is competitive with other approaches on the second example.
-Moreover, Table~\ref{tab:tcz-cz} shows that the template complex
-zonotopic approach is computationally more efficient than complex
-zonotopes~\cite{arvind2016lis}.
-
 \begin{table}
 \begin{minipage}{0.49\textwidth}
 \caption{Example 1}
@@ -80,7 +54,7 @@ Value recommended in~\cite{wittenmark2002computer} & 0.08 & 0.22\\
 Complex zonotope~\cite{arvind2016lis} & 0.08 & 0.5 \\
 \hline
   %& &\\
-  Template complex zonotope & 0.08 & 0.53 \\
+  Template complex zonotope & 0.08 & 0.58 \\
   \hline
 \end{tabular}
 \label{tab:com1}
@@ -122,13 +96,40 @@ Complex zonotope~\cite{arvind2016lis} & 0.1 & 0.49 \\
 \hline
   No. of impulses for contraction & 2 (both examples) & 1 (both examples)\\
   \hline
-    Computation time (Example 1) & 27.41 s & 4.6 s \\
+    Computation time (Example 1) & 27.41 s & 14.9443 s \\
 \hline
-Computation time (Example 2) & 74.04 s & 8.5 s\\
+Computation time (Example 2) & 74.04 s & 10.6097 s\\
 \hline
 \end{tabular}
 \label{tab:tcz-cz}
 \end{table}
+
+\emph{Example 2.} We consider the following linear impulsive system
+from Hetel et. al.~\cite{2013hetel}, that describes an LMI based
+approach to verify stability. The specification is given by
+$A_c=\left(\begin{array}{ccc} 0 & -3 & 1\\ 1.4 & -2.6 & 0.6\\ 8.4 &
+  -18.6 & 4.6
+\end{array}\rt)
+$ and $A_r=\lt(\begin{array}{ccc} 1 & 0 & 0\\ 0 & 1 & 0\\ 0 & 0 & 0
+\end{array}\rt).$
+
+\emph{Setting and Results.}  While implementing the algorithm for
+stability verification, we used order Taylor expansion, a tolerance of
+$tol=0.01$ for Example 1 and $tol=0.006$ for Example 2.  We required
+$k=3$ number of reachability operators for both examples, for
+synthesizing a suitable template complex zonotope used in checking
+contraction.  We could verify exponential stability in a sampling
+interval $[0.08, 0.58]$ for Example 1 and $[0.1,0.496]$ for Example 2.
+The comparison of our approach with the state-of-the-art NCS
+toolbox~\cite{BauLoo_NECSYS12a} and also other approaches is presented in
+Tables~\ref{tab:com1} and~\ref{tab:com2}.  For the first example, our
+method outperforms other approaches, while it is competitive with
+other approaches on the second example.  Furthermore,
+Table~\ref{tab:tcz-cz} shows that the template complex zonotope based
+approach is also faster than the complex zonotope approach
+of~\cite{arvind2016lis}.
+
+
 
 
 

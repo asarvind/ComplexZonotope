@@ -77,31 +77,42 @@ present experiments on some benchmark examples where template complex
 zonotopes contract faster than complex zonotopes, resulting in faster
 verification.
 
+{\bf Basic notation.} We represent integers by $\mb{Z}$, real numbers
+by $\mb{R}$ and complex numbers by $\mb{C}$.  For integers $p$ and
+$q$, the set of $p\times q$ matrices with entries drawn from a set
+$\Psi$ is denoted $\mat{p}{q}{\Psi}$.  If $z$ is a vector of complex
+numbers, then $real(z)$ denotes the real part of $z$ and the imaginary
+part is denoted $img(z)$.  For a positive integer $i$, the $i^{th}$
+component of $z$ is denoted by $z_i$.  For a matrix $X$ and positive
+integers $i, j$, $X_{ij}$ is the $i^{th}$ row and $j^{th}$ column
+entry of $X$. The diagonal square matrix containing entries of $z$
+along the diagonal is denoted by $\dg(z)$.  If $c$ is a scalar complex
+number, its absolute value is
+$|c|=\lt(|real(c)|^2+|img(c)|^2\rt)^{1/2}$.  The infinity norm of a
+possibly complex $n$-dimensional vector $z$ is
+$\|z\|_{\infty}=\max_{i=1}^n{|z_i|}$. The infinity norm of a possibly
+complex $n\times m$ matrix $X$ is $\max_{i=1}^{n}\sum{|X_{ij}|}$.
+
 The rest of the paper is organized as follows.  We introduce template
 complex zonotopes in Section~\ref{sec:tcz} and dicuss important
-operations on them used in the stability verification procedure, like
-linear transformation inclusion checking.  In
-Section~\ref{sec:lis-ex}, we first define a nearly-periodic linear
-impulsive system and the problem of verifying stability
+operations on them like linear transformation, Minkowski sum and
+inclusion checking.  In Section~\ref{sec:lis}, we first define a
+nearly-periodic linear impulsive system and the problem of verifying
+global exponential stability.  Using Proposition~\ref{prop:eig-cont},
+we relate the contraction of a template complex zonotope to the
+eigenstructure of the dynamics, which is a motivation for using
+template complex zonotopes for stability verification.  Latter in that
+section, we discuss how to find suitable template complex zonotopes
+and verify their contraction to establish exponential stability of the
+system.  In Section~\ref{sec:exp}, we describe experiments on two
+benchmark examples and their results which corraborate the efficiency
+of our approach.
 
-* ADD NOTATION 
 
 
 
-%% {\bf Basic notation.} We represent integers by $\mb{Z}$, real numbers
-%% by $\mb{R}$ and complex numbers by $\mb{C}$.  For integers $p$ and
-%% $q$, the set of $p\times q$ matrices with entries drawn from a set
-%% $\mb{Q}$ is denoted $\mat{p}{q}{Q}$.  If $z$ is a vector of complex
-%% numbers, $real(z)$ represents the real part of $z$ and the imaginary
-%% part is $img(z)$.  For a positive integer $i$, the $i^{th}$ component
-%% of $z$ is denoted by $z_i$.  The diagonal square matrix containing
-%% entries of $z$ along the diagonal is denoted by $\dg(z)$.  For a matrix
-%% $X$ and positive integers $i, j$, $X_{ij}$ is the $i^{th}$ row and
-%% $j^{th}$ column entry of $X$.  If $c$ is a scalar complex number, its
-%% absolute value is $|c|=\lt(|real(c)|^2+|img(c)|^2\rt)^{1/2}$.  The
-%% infinity norm of a possibly complex $n$-dimensional vector $z$ is
-%% $\|z\|_{\infty}=\max_{i=1}^n{|z_i|}$. The infinity norm of a possibly
-%% complex $n\times m$ matrix $X$ is $\max_{i=1}^{n}\sum{|X_{ij}|}$.
+
+
 
 
 
