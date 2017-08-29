@@ -5,12 +5,14 @@
 
 \title{Augmented Complex Zonotopes for Computing Invariants of Affine Hybrid Systems}
 \setbeamercolor{author}{fg=blue}
-\author[shortname]{Arvind\ Adimoolam~\inst{1}, Thao\ Dang~\inst{2}}
-\setbeamercolor{institute}{fg=red}
-\institute{
-\inst{1,2} VERIMAG/ \inst{2}CNRS\\~Grenoble,
-France  \and \inst{3} Decyphir, Inc, San Francisco, CA  \and Toyota
-Motors North America R\&D, Gardena, CA. 
+\author[shortname]{{ \bf \hspace{-1em} Arvind\ Adimoolam~\inst{1}\hspace{1em} Thao\ Dang~\inst{2}}}
+\setbeamercolor{institute}{fg=magenta}
+\institute{{\bf
+\inst{1,2} VERIMAG/ \inst{2}CNRS}\\~Grenoble,France
+\begin{figure}
+\center
+\hspace{2em}\includegraphics[scale=0.2]{fig/LogoVERIMAG.png}
+\end{figure}
 }
 
 \date{}
@@ -19,9 +21,94 @@ Motors North America R\&D, Gardena, CA.
 
 \maketitle
 
+\begin{frame}{Hybrid behavior of digital control systems}
+\textcol{Switch} between \textcol{different control laws}.\\
+Eg.  \textcol{Different dynamics} of an engine for \textcol{different gears}.
+\begin{figure}
+\center
+\includegraphics[scale=0.4]{fig/hybrid-model.png}
+\end{figure}
+\begin{itemize}
+\item Difference Equation: $x(t+1)=f_i\lt(x(t),u(t)\rt).$
+\item Reset: \vspace{-1.5em}
+\begin{align}
+\begin{split}
+& \text{If}~~x\in S~~\text{(Precondition)}\\
+& \text{then}~~x = g_i(x)
+\end{split}
+\end{align}
+\end{itemize}
+\end{frame}
 
+\begin{frame}{Affine hybrid system}
+\begin{figure}
+\center
+{\bf Specification}
+\end{figure}
+\begin{figure}
+\center
+\includegraphics[scale=0.35]{fig/model-spec.png}
+\caption*{{\small{\color{darkgray}$\forall q\in Q$, $S_q, U_q$: Polytopic subsets of $\realset^n$, $A_q: n\times n$ Real matrix.
+$\forall \sigma\in E$: $\sigma = \lt(\sigma^-,\sigma^+,G_\sigma,A_\sigma,U_\sigma\rt)$, $\sigma^-\in Q$: Pre-location, $\sigma^+\in Q$: Post-location,
+$G_\sigma$: Guard set $=>$ Polytopic subset of $\realset^n$, $A_\sigma: n\times n$ Real matrix, $U_\sigma$: Polytopic subsets of $\realset^n$}}}
+\end{figure}
+\hrule
+\begin{figure}
+\center
+{\bf Dynamics}
+\end{figure}
+\begin{minipage}{0.45\textwidth}
+\begin{figure}
+\centering
+\includegraphics[scale=0.4]{fig/cont-transition.png}
+\caption*{{\color{black}\hspace{1em} Continuous transition}}
+\end{figure}
+\end{minipage}
+\hspace{1em}\vrule\hspace{1em}
+\begin{minipage}{0.45\textwidth}
+\begin{figure}
+\centering
+\includegraphics[scale=0.35]{fig/dis-transition.png}
+\end{figure}
+\end{minipage}
+\end{frame}
 
+\begin{frame}{Positive Invariant}
+\begin{overprint}
+\only<1>{
+\begin{figure}
+\center
+\caption*{{\large \eqncol{$P$: Positive Invariant $\Leftrightarrow$ $\forall x(t)\in P:~ x(t+1)\in P$}}}
+\includegraphics[scale=0.4]{fig/PosInv1.png}
+\end{figure}
+}
+\only<2>{
+\begin{figure}
+\center
+\caption*{{\large \eqncol{$P$: Positive Invariant $\Leftrightarrow$ $\forall x(t)\in P:~ x(t+1)\in P$}}}
+\includegraphics[scale=0.4]{fig/PosInv.png}
+\end{figure}
+}
+\pause
+\begin{itemize}
+\item (\textcol{Initial set} \eqncol{$\subseteq$} \textcol{Positive Invariant} \eqncol{$\subseteq$} \textcol{Safe Set}) \eqncol{$\Leftrightarrow$} \textcol{System is safe}.
+\item Useful for \textcol{Proving Safety Properties}, finding \textcol{ Safe Initial Conditions}.
+\end{itemize}
+\end{overprint}
+\end{frame}
 
+\begin{frame}{Set Representations for Computing Positive Invariants}
+\begin{itemize}
+\item Computing {\color{red} Smallest Positive Invariant} involves {\color{red}Iterative computations} $\Rightarrow$ {\color{red}Convergence can be very Slow}\pause
+\item Use \textcol{Specific set representations} to \textcol{Accelerate convergence}.\\
+{\color{brown} Examples}
+\begin{enumerate}
+\item \textcol{Polytopes} $\Rightarrow$ Use \textcol{Convex Hull} overapproximation~\cite{todo}.
+\item \textcol{Ellipsoids} $\Rightarrow$ solve \textcol{Linear Matrix Inequalities}.
+\item \textcol{Template Linear inequalities} \cite{todo} and \textcol{Quadratic Inequalities} \cite{todo} \\$\Rightarrow$ Use \textcol{ Widening} or \textcol{Policy Iteration}.
+\end{enumerate}
+\end{itemize}
+\end{frame}
 
 
 
