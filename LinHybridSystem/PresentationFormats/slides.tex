@@ -396,31 +396,118 @@ All or some of the following:\pause
 \end{frame}
 
 \begin{frame}{Example: NXT-Lego Robot model}
+\eqncol{Benchmark example} published in \eqncol{ARCH 2014~\cite{heinz2014benchmark}} \textcol{(Heinz, Oehlerking and Woehrle.)}
+
 \begin{minipage}{0.3\textwidth}
 \begin{figure}
 \centering
-\includegraphics[scale=0.1]{fig/NXT-lego.JPG}
+\includegraphics[scale=0.09]{fig/NXT-lego.JPG}
 \end{figure}
 \end{minipage}
 \begin{minipage}{0.6\textwidth}
+{\footnotesize Lego NXT self-balancing robot by\\ Medelen8/CC-BY-SA-3.0}
 \begin{itemize}
 \item \textcol{Sampled data Networked Control System}: Controller input to Plant sampled at discrete time instants.
-\item Input from controller has \textcol{saturation}: \textcol{Hybrid behavior}
+\item Input from controller has \textcol{saturation} on {\color{violet} 2 controller inputs}: \textcol{Hybrid behavior}
 \end{itemize}
 \end{minipage}
 
 \eqncol{After transformation to decouple unbounded directions, we obtained}\\
-$
-\lt[\begin{array}{cc}\trj{x}{t+1} &
-    \trj{y}{t+1}\end{array}\rt]^T=F_1\trj{x}{t}+F_2sat\lt(\trj{y}{t}\rt)+F_3\trj{u}{t}$
-\begin{block}{Saturated}
-$sat\lt(y_i\rt) = max\lt(-\delta
-d_p,min\lt(y_i,\delta d_p\rt)\rt),~\forall i\in\{1,2\}$, where $\delta=100$
-and $d_p=0.0807$.
+%% \begin{block}{}
+%% $
+%% \lt[\begin{array}{cc}\trj{x}{t+1} &
+%%     \trj{y}{t+1}\end{array}\rt]^T=F_1\trj{x}{t}+F_2sat\lt(\trj{y}{t}\rt)+F_3\trj{u}{t}$\\
+%% \textcol{Saturated}: $sat\lt(y_i\rt) = max\lt(-\delta
+%% d_p,min\lt(y_i,\delta d_p\rt)\rt),~\forall i\in\{1,2\}$, where $\delta=100$
+%% and $d_p=0.0807$. \textcol{Unsaturated}: $sat\lt(y_i\rt) = y_i$
+%% \end{block}
+\begin{block}{Complexity}
+\begin{itemize}
+\item Saturated: 9 dimensional, 1 location, 9 edges.
+\item Unsaturated: 9 dimensional linear system.
+\end{itemize}
 \end{block}
-\begin{block}{Unsaturated}
-$sat\lt(y_i\rt) = y_i$
-\end{block}
+\end{frame}
+
+\begin{frame}{Experimental settings: NXT-Lego Robot model}
+
+\begin{itemize}
+\item \eqncol{Primary template:}  (Complex) \textcol{Eigenvectors} of linear maps and their products,
+ \textcol{Orthonormal
+vectors} to guarding hyperplane normals.  For
+the linear system, it consists of the eigenvectors of the linear map,
+the input set template and its multiplication by the linear matrix
+(related to affine map) and square of the linear matrix. 
+\item \eqncol{SpaceEx settings:}  \textcol{Octagon template} and a
+template with \textcol{$400$ uniformly sampled support vectors}.
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Results: NXT-Lego Robot model}
+\center{{\eqncol{\footnotesize UB: $>$1000, ~~NT: Not terminating in more than 180s, \newline
+  n/a: Not applicable/not available, ~~ACZ: Augmented complex
+  zonotope.}}}
+{\color{black}
+\begin{minipage}{0.48\textwidth}
+\begin{table}
+\centering
+\resizebox{0.5\textheight}{0.35\textwidth}{
+\begin{tabular}{|l|c|c|c|}
+\hline
+\multicolumn{2}{|c|}{\multirow{2}{*}{Method}} &
+\multirow{2}{*}{$\lt|\psi\rt|\leq$} & Comp.\\
+\multicolumn{2}{|c|}{} & & time (s)\\
+\hline
+\multirow{4}{*}{SpaceEx} & octagon & \multirow{2}{*}{UB} & \multirow{2}{*}{NT}\\
+& template & & \\
+\cline{2-4}
+& 400 support & \multirow{2}{*}{UB} & \multirow{2}{*}{NT}\\
+& vectors & &\\
+\hline
+\multicolumn{2}{|c|}{\multirow{2}{*}{Suggested in~\cite{heinz2014benchmark}}} &
+\multirow{2}{*}{$1.39$} & \multirow{2}{*}{n/a}\\
+\multicolumn{2}{|c|}{} & &\\
+\hline
+\multicolumn{2}{|c|}{\multirow{2}{*}{ACZ invariant}} & \multirow{2}{*}{$1.29$} &
+\multirow{2}{*}{$4$}\\
+\multicolumn{2}{|c|}{} & & \\
+\hline
+\end{tabular}
+}
+\caption{Unsaturated robot model: results}
+\end{table}
+\end{minipage}
+\begin{minipage}{0.48\textwidth}
+\begin{table}
+\centering
+\resizebox{0.5\textheight}{0.35\textwidth}{
+\begin{tabular}{|l|c|c|c|}
+\hline
+\multicolumn{2}{|c|}{\multirow{2}{*}{Method}} &
+\multirow{2}{*}{$\lt|\psi\rt|\leq$} & Comp.\\
+\multicolumn{2}{|c|}{} & & time (s)\\
+\hline
+\multirow{4}{*}{SpaceEx} & octagon & \multirow{2}{*}{UB} &
+\multirow{2}{*}{NT}\\
+& template & & \\
+\cline{2-4}
+& 400 support & \multirow{2}{*}{UB} & \multirow{2}{*}{NT}\\
+& vectors & & \\
+\hline
+\multicolumn{2}{|c|}{\multirow{2}{*}{Suggested in~\cite{heinz2014benchmark}}} &
+$1.571-\epsilon:$ & \multirow{2}{*}{n/a}\\
+\multicolumn{2}{|c|}{} & $\epsilon>0$ &\\
+\hline
+\multicolumn{2}{|c|}{\multirow{2}{*}{ACZ invariant}} & \multirow{2}{*}{$1.13$} &
+\multirow{2}{*}{45}\\
+\multicolumn{2}{|c|}{} & &\\
+\hline
+\end{tabular}
+}
+\caption{Saturated robot model: results}
+\end{table}
+\end{minipage}
+}
 \end{frame}
 
 
@@ -439,7 +526,7 @@ $sat\lt(y_i\rt) = y_i$
 
 
 
-
+\bibliographystyle{plain}
 \bibliography{ref}
 
 
