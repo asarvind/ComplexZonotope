@@ -6,7 +6,7 @@
 \title{Augmented Complex Zonotopes for Computing Invariants of Affine Hybrid Systems}
 \setbeamercolor{author}{fg=blue}
 \author[shortname]{{ \bf \hspace{-1em} Arvind\ Adimoolam~\inst{1}\hspace{1em} Thao\ Dang~\inst{2}}}
-\setbeamercolor{institute}{fg=magenta}
+\setbeamercolor{institute}{fg=blue}
 \institute{{\bf
 \inst{1,2} VERIMAG/ \inst{2}CNRS}\\~Grenoble,France
 \begin{figure}
@@ -41,6 +41,7 @@ Eg.  \textcol{Different dynamics} of an engine for \textcol{different gears}.
 \end{frame}
 
 \begin{frame}{Affine hybrid system}
+%\begin{minipage}[t][0.3\textheight][t]{\textwidth}
 \begin{figure}
 \center
 {\bf Specification}
@@ -52,6 +53,7 @@ Eg.  \textcol{Different dynamics} of an engine for \textcol{different gears}.
 $\forall \sigma\in E$: $\sigma = \lt(\sigma^-,\sigma^+,G_\sigma,A_\sigma,U_\sigma\rt)$, $\sigma^-\in Q$: Pre-location, $\sigma^+\in Q$: Post-location,
 $G_\sigma$: Guard set $=>$ Polytopic subset of $\realset^n$, $A_\sigma: n\times n$ Real matrix, $U_\sigma$: Polytopic subsets of $\realset^n$}}}
 \end{figure}
+%\end{minipage}
 \hrule
 \begin{figure}
 \center
@@ -60,7 +62,7 @@ $G_\sigma$: Guard set $=>$ Polytopic subset of $\realset^n$, $A_\sigma: n\times 
 \begin{minipage}{0.45\textwidth}
 \begin{figure}
 \centering
-\includegraphics[scale=0.4]{fig/cont-transition.png}
+\includegraphics[scale=0.35]{fig/cont-transition.png}
 \caption*{{\color{black}\hspace{1em} Continuous transition}}
 \end{figure}
 \end{minipage}
@@ -68,7 +70,7 @@ $G_\sigma$: Guard set $=>$ Polytopic subset of $\realset^n$, $A_\sigma: n\times 
 \begin{minipage}{0.45\textwidth}
 \begin{figure}
 \centering
-\includegraphics[scale=0.35]{fig/dis-transition.png}
+\includegraphics[scale=0.33]{fig/dis-transition.png}
 \end{figure}
 \end{minipage}
 \end{frame}
@@ -110,23 +112,316 @@ $G_\sigma$: Guard set $=>$ Polytopic subset of $\realset^n$, $A_\sigma: n\times 
 \end{itemize}
 \end{frame}
 
-\begin{frame}{Features of good set representation for invariant computation}
+\begin{frame}{Features of a good set representation}
+\begin{enumerate}
+\item \textcol{Guaranteed Existence of invariant} in the \textcol{linear case}.\\
+{\color{brown} For example}
+\begin{itemize}
+\item \textcol{Elliposidal invariants} for linear system exist and computed easily by \textcol{LMI or eigenstructure}.
+\item But \eqncol{Polyhedral invariants} can have \eqncol{Very Large Number of Faces}, hence sometimes \eqncol{Computationally Expensive}.
+\end{itemize}
+\item \textcol{Efficient computation/approximation} of system operations, like \textcol{Minkowski sum, linear transformation}, etc.\\
+{\color{brown} For example}
+\begin{itemize}
+\item \textcol{Zonotopes}~\cite{todo}$\subseteq$ {\color{brown} Polyhedra}, \textcol{closed and efficient to compute}  \textcol{Minkowski sums and Linear transformations}.
+\item \eqncol{Ellipsoids} - \eqncol{Not good for approximating Minkowski sums}
+\begin{figure}
+\includegraphics[scale=0.3]{fig/minkowski-ellipsoid.png}
+\end{figure}
+\end{itemize}
+\end{enumerate}
+\end{frame}
 
+\begin{frame}{Template Complex Zonotope}
+\eqncol{Extension} of \eqncol{Simple/Real zonotope} to \eqncol{Complex Numbers} to incorporate \eqncol{Complex Eigenstructure} of systems.\cite{todo}
+\begin{overprint}
+\only<1,2>{
+\begin{exampleblock}{Simple/Real Zonotope}
+Let $W\in\mat{n}{k}{\mb{R}}$ and $l,u\in\mb{R}^m: l\leq u$.  Then 
+ a \emph{real zonotope} is
+{\color{teal}\bm{$\zon{W}{l}{u} = \lt\{W\zeta: \zeta\in\mb{R}^k,~\zeta_i\in[l_i,u_i]~\forall i\in \tup{k}\rt\}}.$}
+\end{exampleblock}
+}
+\onslide<1,2>{
+\begin{block}{Template complex zonotope}
+Let $V\in\mat{n}{m}{\mb{C}}$ (template) and $s\in\mb{R}^m_{\geq 0}$ (scaling factors) and
+$c\in\realset^n$ (center).  Then the following is a template complex zonotope:
+\textcol{$\bm{\cz{V}{c}{s} =
+\lt\{c+V\epsilon:\epsilon\in\mb{C}^m,~\lt|\epsilon_i\rt|\leq s_i~\forall
+i\in\tup{m}\rt\}}.$}
+\end{block}
+}
+\onslide<2>{
+\begin{alertblock}{Advantages}
+\begin{itemize}
+\item \textcol{Guaranteed existence of invariant} in \textcol{linear case} based on \textcol{Complex Eigenstructure}.
+\item \textcol{Closed} under \textcol{Minkowski sums and linear transformations.}
+\end{itemize}
+\end{alertblock}
+}
+\end{overprint}
 \end{frame}
 
 
+\begin{frame}{Geometric visualization}
+\begin{minipage}{0.45\textwidth}
+\begin{figure}
+\caption*{\eqncol{Simple/Real zonotope: Minkowski sums of line segments}}
+\hspace{-2em}\includegraphics[scale=0.35]{fig/real-zonotope.png}
+\end{figure}
+\end{minipage}
+\vrule
+\hspace{1em}
+\begin{minipage}{0.45\textwidth}
+\begin{figure}
+\caption*{\eqncol{Complex zonotope: Minkowski sums of line segments and some ellipsoids}}
+\includegraphics[scale=0.4]{fig/complex-zonotope.png}\\
+\includegraphics[scale=0.2]{fig/CZhull.png}
+\end{figure}
+\end{minipage}
+\end{frame}
 
 
+\begin{frame}{Guaranteed Existence of Invariant for Linear system}
+Based on \textcol{{\bf Eigenstructure}} \\
+Let $A\in\mat{n}{n}{R}$, then
+\large{
+\begin{block}{Proposition}
+\center{
+\begin{align*}
+ A\cz{[e_1,...,e_n]}{0}{s}   = \cz{[e_1,...,e_n]}{0}{\dg\lt(\lt|\mu_i\rt|\rt)s}
+\end{align*}
+}
+\end{block}
+}
+\center{\includegraphics[scale=0.6]{fig/ContractionCZ.png}}
+\end{frame}
+
+\begin{frame}{Drawback of Simple and Template Complex Zonotopes}
+\begin{itemize}
+\item $\lt(\rt.$\textcol{Simple Zonotope} \eqncol{$\bigcap$} \textcol{Linear Constraints} (i.e. {\color{teal}$Tx\leq d$})$\lt.\rt)$\\ = (\eqncol{Polytope with exponential no. faces})
+\eqncol{$\neq$ Zonotope}
+\item $\lt(\rt.$\textcol{Complex Zonotope} \eqncol{$\bigcap$} \textcol{Linear Constraints} (i.e. {\color{teal}$Tx\leq d$})$\lt.\rt)$\\= (\eqncol{Non-polyhedral set})
+\eqncol{$\neq$ Complex Zonotope}
+\end{itemize}
+{\color{violet}{\bf However!}}
+\begin{exampleblock}{Sub-parallelotope constraints}
+Let $K\in\mat{k}{n}{R}$ such that $k\leq n$ and $\lt(KK^T\rt)$ is
+non-singular.  Let
+  $\wh{u},\wh{l}\in\comprealset^k$ such that $\wh{l}\leq\wh{u}$.  Then
+  a sub-parallelotopic set is $\sptope{K}{\wh{l}}{\wh{u}} = \lt\{x\in\realset^n: \wh{l}\leq Kx \leq \wh{u}\rt\}$.
+\end{exampleblock}
+\begin{block}{Observation: Intersection with alligned sub-parallelotope}
+\textcol{\[\bm{
+\zon{\pinv{K}}{l}{u} \bigcap \sptope{K}{\wh{l}}{\wh{u}}
+= \zon{\pinv{K}}{l\bigvee \wh{l}}{u\bigwedge \wh{u}}}
+\]}
+\end{block}
+\end{frame}
+
+\begin{frame}{Augmented Complex Zonotope}
+\textcol{Minkowski sum} of \textcol{Complex Zonotope} and \textcol{Real Zonotope}.
+\begin{definition}
+Let $V\in\mat{n}{m}{C}$ \eqncol{(primary template)}, $W\in\mat{n}{k}{R}$
+\eqncol{(secondary template)}, $c\in\mb{R}^n$ \eqncol{(primary offset)},
+$s\in\mb{R}^m$ \eqncol{(scaling factors)}, $u,l\in\mb{R}^k$ \eqncol{(lower
+and upper interval bounds)} such that $l\leq u$.  
+\begin{equation*}
+\bm{\textcol{\gcz{V}{c}{s}{W}{l}{u} = \cz{V}{c}{s}\oplus\zon{W}{l}{u}}}.
+\end{equation*}
+\end{definition}
+\end{frame}
+
+\begin{frame}{Intersection with Sub-parallelotope}
+\begin{exampleblock}{Affine approximation of multi-variable Min and Max functions}
+{\small
+\begin{itemize}
+\item \textcol{Min-approximation function}:
+$\lt(\minaffine{u}{\wh{u}}\rt)_i = \left\{
+\begin{array}{l}
+\wh{u}_i~~\text{if}~\wh{u}_i<\infty\\
+u_i~~\text{if}~\wh{u}_i=\infty
+\end{array}
+\right..$\\
+\item \textcol{Max-approximation function}:
+$\lt(\maxaffine{l}{\wh{l}}\rt)_i = \left\{
+\begin{array}{l}
+\wh{l}_i~~\text{if}~\wh{l}_i>\infty\\
+l_i~~\text{if}~\wh{l}_i=-\infty
+\end{array}
+\right..$
+\end{itemize}
+}
+\end{exampleblock}
+\begin{block}{Theorem: Affine overapproximation of Intersection with Sub-parallelotope}~\label{thm:acz-int}
+{\small Given sub-parallelotope \textcol{$\sptope{\ptemplate}{\wh{l}}{\wh{u}}$},
+augmented complex zonotope \textcol{$\gcz{V}{c}{s}{\pinv{\ptemplate}}{l}{u}$}
+such that \eqncol{$V\conjtranspose{V}$ is non-singular, $\lt|\pinv{V}c\rt|\leq s$, $l\leq
+\maxaffine{l}{\wh{l}}\leq \minaffine{u}{\wh{u}}\leq u$}:}
+\vspace{-1em}
+\textcol{
+\begin{align*}
+\begin{split}
+&\bm{\gcz{V}{c}{s}{\pinv{\ptemplate}}{l}{u}\bigcap\sptope{\ptemplate}{\wh{l}}{\wh{u}}}
+ \bm{\subseteq \gcz{V}{c}{s}{\pinv{\ptemplate}}{\maxaffine{l}{\wh{l}}}{\minaffine{u}{\wh{u}}}}
+\end{split}
+\end{align*}
+}
+\end{block}
+%
+\end{frame}
+
+\begin{frame}{Minkowski sum and Linear Transformation}
+\begin{block}{Closure under Linear transformation and Minkowski sum}
+\begin{enumerate}
+\item $A\gcz{V}{c}{s}{W}{l}{u} = \gcz{AV}{Ac}{s}{AW}{l}{u}$.
+\item $~$\vspace{-2em}\hspace{-2em}\begin{align*}
+&\gcz{V}{c}{s}{W}{l}{u}\oplus\gcz{V^\pr}{c^\pr}{s^\pr}{W^\pr}{l^\pr}{u^\pr}\\
+&= \gcz{\lt[V~V^\pr\rt]}{c+c^\pr}{\ColumnJoin{s}{s^\pr}}{\lt[W~W^\pr\rt]}{\ColumnJoin{l}{l^\pr}}{\ColumnJoin{u}{u^\pr}}.
+\end{align*}
+\end{enumerate}
+\end{block}
+%
+\begin{alertblock}{}
+\begin{itemize}
+\item For \eqncol{fixed primary and secondary templates} of augmented complex zonotopes, {\bf Linear transformation and Minkowski sums} of are \textcol{Affine functions of rest variables}.
+\end{itemize}
+\end{alertblock}
+\end{frame}
+%
+\begin{frame}{Inclusion between Template Complex Zonotopes}
+Let \textcol{$\cz{V^\pr_{n\times
+    m^\pr}}{c^\pr}{s^\pr}\order \cz{V_{n\times m}}{c}{s}$} if
+\eqncol{\begin{align*}~\label{eqn:tcz-inc}
+\begin{split}
+& \exists X\in\mat{m}{m^\pr}{\mb{C}}~\text{and}~y\in\mb{C}^{m}~\text{s.t.}\\
+& \transfer{V}{V^\pr}{s^\pr}{X},~~~\centertransfer{V}{c}{c^\pr}{y},~\text{and}~
+ \scalebound{X}{y}{s}{m}{m^\pr}\leq 0\\
+\end{split}
+\end{align*}
+}
+\textcol{Theorem}: \eqncol{$(\order)\implies(\subseteq)$} among \eqncol{Template Complex zonotopes}.
+%
+\begin{alertblock}{}
+For fixed \eqncol{template}, \textcol{$\order$} defines \textcol{SOCC (convex constraints) on rest variables}.
+\end{alertblock}
+\end{frame}
+%
+\begin{frame}{Real Inclusion between Augmented Complex Zonotopes}
+\begin{block}{}
+Let \textcol{$\gcz{V^\pr}{c^\pr}{s^\pr}{W^\pr}{l^\pr}{u^\pr}\order
+\gcz{V}{c}{s}{W}{l}{u}$} if\\ \eqncol{$\cz{\lt[V^\pr~W^\pr\rt]}{c^\pr+W^\pr\lt(\frac{u^\pr+l^\pr}{2}\rt)}{\ColumnJoin{s^\pr}{\frac{u-l}{2}}}
+\order
+\cz{\lt[V~W\rt]}{c+W\lt(\frac{u+l}{2}\rt)}{\ColumnJoin{s}{\frac{u-l}{2}}}$}\\
+\end{block}
+\textcol{Theorem}: \eqncol{$(\order)\implies(\subseteq)$} among \eqncol{Real Projections of Augmented Complex zonotopes}.
+\begin{alertblock}{}
+For fixed \eqncol{primary and secondary templates}, \textcol{$\order$} defines \textcol{SOCC (convex constraints) on rest variables}.
+\end{alertblock}
+\end{frame}
+%
+\begin{frame}{Inclusion inside Polytopic safe set}
+Consider a \eqncol{Safe set} defined by a \eqncol{Polytope $S=Tx\leq d$}.  Then \eqncol{$\real\lt(\gcz{V}{c}{s}{W}{l}{u}\rt)\subseteq S$} if
+%
+\begin{block}{}
+\textcol{
+\[
+T\lt(c+W\lt(\frac{u+l}{2}\rt)\rt)+\lt|T\lt[V,~\pinv{\ptemplate}\rt]\rt|\begin{bmatrix}s\\ \frac{u-l}{2}\end{bmatrix}\leq d.
+\]
+}
+\end{block}
+%
+\begin{alertblock}{}
+For fixed \eqncol{primary and secondary templates}, the above inequality defines \textcol{SOCC (convex constraints) on rest variables}.
+\end{alertblock}
+\end{frame}
 
 
+\begin{frame}{Convex Program for Computing Positive Invariant}
+\begin{overprint}
+\only<1>{\begin{exampleblock}{Assumptions}
+\begin{enumerate}
+\item Let \eqncol{Guards and Staying sets of Hybrid system} be specified by
+\textcol{Sub-parallelotopes with common template} {\color{violet}(can model many real-world examples).}
+\item {\color{violet} Fix primary and Secondary templates} of
+augmented complex zonotopes, so, 
+\textcol{Variables := primary offsets, scaling factors, lower and
+upper interval bounds}.
+\end{enumerate}
+\end{exampleblock}
+}
+\onslide<1,2>{
+\begin{block}{Recap}
+\begin{itemize}
+\item \eqncol{Linear Transformation and Minkowski sum} - \textcol{Affine function}
+\item \eqncol{Overapproximation of Intersection with
+Sub-parallelotopic constraints when aligned} - \textcol{Affine function}
+\item \eqncol{Inclusion between Augmented Complex Zonotopes (sufficient condition)} - \textcol{SOCC (convex) constraints}
+\item \eqncol{Inclusion inside Polytopic (Safe) set} - \textcol{Linear  constraints}
+\end{itemize}
+\end{block}
+}
+\pause
+\begin{alertblock}{Result}
+{Using above, we can derive \textcol{\bf Second order conic (convex)
+constraints} in
+above variables to compute \textcol{Positive Invariant} inside
+a \textcol{Safe set} containing  an \textcol{Initial zonotopic set!}}
+\end{alertblock}
+\end{overprint}
+\end{frame}
 
+\begin{frame}{Choosing Templates}
+\begin{itemize}
+\item \textcol{Secondary template} is fixed as \textcol{Pseudo-Inverse} of system \textcol{Sub-Parallelotopic template}.\pause
+\end{itemize}
+\begin{block}{Chosing Primary Template}
+All or some of the following:\pause
+\begin{enumerate}
+\item Eigenvectors of the transformation matrices and their products, for
+   the different transition maps.  \pause  
+\item  The primary and
+   secondary templates of the zonotopes which overapproximate the
+   additive disturbance input sets and their products with the linear
+   matrices of the transition maps.  \pause
+\item
+   Orthogonal projections of the above vectors on the null space of
+   the subparallelotopic template.  \pause
+\item Adding any set of arbitrary vectors will increase the
+   chance of computing a desired invariant, but at a computational
+   expense.  This is because the scaling factors will be adjusted
+   accordingly by the optimizer.
+\end{enumerate}
+\end{block}
+\end{frame}
 
+\begin{frame}{Example: NXT-Lego Robot model}
+\begin{minipage}{0.3\textwidth}
+\begin{figure}
+\centering
+\includegraphics[scale=0.1]{fig/NXT-lego.JPG}
+\end{figure}
+\end{minipage}
+\begin{minipage}{0.6\textwidth}
+\begin{itemize}
+\item \textcol{Sampled data Networked Control System}: Controller input to Plant sampled at discrete time instants.
+\item Input from controller has \textcol{saturation}: \textcol{Hybrid behavior}
+\end{itemize}
+\end{minipage}
 
-
-
-
-
-
+\eqncol{After transformation to decouple unbounded directions, we obtained}\\
+$
+\lt[\begin{array}{cc}\trj{x}{t+1} &
+    \trj{y}{t+1}\end{array}\rt]^T=F_1\trj{x}{t}+F_2sat\lt(\trj{y}{t}\rt)+F_3\trj{u}{t}$
+\begin{block}{Saturated}
+$sat\lt(y_i\rt) = max\lt(-\delta
+d_p,min\lt(y_i,\delta d_p\rt)\rt),~\forall i\in\{1,2\}$, where $\delta=100$
+and $d_p=0.0807$.
+\end{block}
+\begin{block}{Unsaturated}
+$sat\lt(y_i\rt) = y_i$
+\end{block}
+\end{frame}
 
 
 
