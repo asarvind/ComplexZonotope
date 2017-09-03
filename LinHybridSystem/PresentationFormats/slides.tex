@@ -595,46 +595,7 @@ uniformly sampled support vectors}.
 \end{table}
 \end{frame}
 
-\begin{frame}{Experiment: Networked vehicle platoon}
-\begin{minipage}{1\textwidth}
-\begin{minipage}{0.7\textwidth}
-{\flushleft \includegraphics[scale=0.35]{fig/VehiclePlatoon.png}}
-\end{minipage}
-\begin{minipage}{0.29\textwidth}
-{\small {\color{blue} Benchmark 2014 ARCH Workshop~\cite{makhlouf2014networked}}}
-\end{minipage}
-\end{minipage}
-\begin{table}
-\resizebox{0.7\textwidth}{!}{
-\begin{tabular}{|l|c|c|c|c|c|}
-\hline
-\multicolumn{2}{|c|}{\multirow{4}{*}{Method}} & \multicolumn{4}{|c|}{{Fast switching:}}\\
-\multicolumn{2}{|c|}{}  & \multicolumn{4}{|c|}{Integer dwell times} \\
-\cline{3-6}
-\multicolumn{2}{|c|}{} & \multirow{2}{*}{$-e_1\leq$} & \multirow{2}{*}{$-e_2\leq$} & \multirow{2}{*}{$-e_3\leq$} & Comp.\\
-\multicolumn{2}{|c|}{}  & & & & time (s)\\
-\hline
-\multirow{4}{*}{SpaceEx} & octagon & \multirow{2}{*}{UB} &
-\multirow{2}{*}{UB} & \multirow{2}{*}{UB} &
-\multirow{2}{*}{NT}\\
-& template & & & &\\
-\cline{2-6}
-& 100 support & \multirow{2}{*}{UB} & \multirow{2}{*}{UB} &
-\multirow{2}{*}{UB} & \multirow{2}{*}{NT}\\
-& vectors & & & &\\
-\hline
-\multicolumn{2}{|c|}{\multirow{2}{*}{TCZ invariant}} &
-\multirow{2}{*}{46} & \multirow{2}{*}{54} &
-\multirow{2}{*}{57} & \multirow{2}{*}{12.6}\\
-\multicolumn{2}{|c|}{} & & & & \\
-\hline
-\end{tabular}
-}
-{\tiny{\center \hspace{6em} UB: $>$1000, ~~NT: Not terminating in more than 180s, \newline
-  n/a: Not applicable/not available, ~~TCZ: Tempalte complex
-  zonotope.}}
-\end{table}
-\end{frame}
+
 
 
 
