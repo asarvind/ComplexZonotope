@@ -395,7 +395,7 @@ All or some of the following:\pause
 \end{block}
 \end{frame}
 
-\begin{frame}{Example: NXT-Lego Robot model}
+\begin{frame}{Example 1: NXT-Lego Robot model}
 \eqncol{Benchmark example} published in \eqncol{ARCH 2014~\cite{heinz2014benchmark}} \textcol{(Heinz, Oehlerking and Woehrle.)}
 
 \begin{minipage}{0.3\textwidth}
@@ -408,7 +408,7 @@ All or some of the following:\pause
 {\footnotesize Lego NXT self-balancing robot by\\ Medelen8/CC-BY-SA-3.0}
 \begin{itemize}
 \item \textcol{Sampled data Networked Control System}: Controller input to Plant sampled at discrete time instants.
-\item Input from controller has \textcol{saturation} on {\color{violet} 2 controller inputs}: \textcol{Hybrid behavior}
+\item Input from controller has \textcol{saturation} on {\color{violet} 2 controller inputs}: \textcol{Hybrid behavior}.
 \end{itemize}
 \end{minipage}
 
@@ -423,30 +423,38 @@ All or some of the following:\pause
 %% \end{block}
 \begin{block}{Complexity}
 \begin{itemize}
-\item Saturated: 9 dimensional, 1 location, 9 edges.
-\item Unsaturated: 9 dimensional linear system.
+\item \eqncol{Saturated}: \textcol{9 dimensional, 1 location, 9 edges.}
+\item \eqncol{Unsaturated}: \textcol{9 dimensional linear system.}
 \end{itemize}
 \end{block}
 \end{frame}
 
-\begin{frame}{Experimental settings: NXT-Lego Robot model}
-
+\begin{frame}{Verification challege: NXT-Lego Robot model}
+\begin{alertblock}{Task}
+Find/Verify bounds on \textcol{body pitch angle}.
+\end{alertblock}
+\begin{overprint}
+\only<2>{
+\begin{exampleblock}{Experimental settings}
 \begin{itemize}
 \item \eqncol{Primary template:}  (Complex) \textcol{Eigenvectors} of linear maps and their products,
  \textcol{Orthonormal
 vectors} to guarding hyperplane normals.  For
 the linear system, it consists of the eigenvectors of the linear map,
-the input set template and its multiplication by the linear matrix
+the \textcol{uncertain input set template} and its multiplication by the linear matrix
 (related to affine map) and square of the linear matrix. 
 \item \eqncol{SpaceEx settings:}  \textcol{Octagon template} and a
 template with \textcol{$400$ uniformly sampled support vectors}.
 \end{itemize}
+\end{exampleblock}
+}
+\end{overprint}
 \end{frame}
 
 \begin{frame}{Results: NXT-Lego Robot model}
-\center{{\eqncol{\footnotesize UB: $>$1000, ~~NT: Not terminating in more than 180s, \newline
+\center{{\eqncol{\small{\footnotesize UB: $>$1000, ~~NT: Not terminating in more than 180s, \newline
   n/a: Not applicable/not available, ~~ACZ: Augmented complex
-  zonotope.}}}
+  zonotope.}}}}
 {\color{black}
 \begin{minipage}{0.48\textwidth}
 \begin{table}
@@ -474,7 +482,7 @@ template with \textcol{$400$ uniformly sampled support vectors}.
 \hline
 \end{tabular}
 }
-\caption{Unsaturated robot model: results}
+\caption*{{\footnotesize Unsaturated robot model: results}}
 \end{table}
 \end{minipage}
 \begin{minipage}{0.48\textwidth}
@@ -504,14 +512,88 @@ $1.571-\epsilon:$ & \multirow{2}{*}{n/a}\\
 \hline
 \end{tabular}
 }
-\caption{Saturated robot model: results}
+\caption*{{\footnotesize Saturated robot model: results}}
 \end{table}
 \end{minipage}
 }
+\vspace{-2em}
+\begin{alertblock}{Remarks}
+\begin{itemize}
+\item Model has \textcol{complex eigenstructure}, some eigenvalues have \textcol{magnitude close to 1}.
+\item Since \textcol{Complex Zonotope uses complex eigenstructure}, where as \textcol{Polytope (SpaceEx)} \eqncol{can not use complex eigenstructure}.
+\end{itemize}
+\end{alertblock}
 \end{frame}
 
+\begin{frame}{Example 2: Perturbed double integrator}
+\begin{itemize}
+\item Example from \textcol{Rakovic et. al.-CDC 2004}~\cite{rakovic2004computation}.
+\item \textcol{Piecewise affine with 2 dimensional additive disturbance input}, \eqncol{Four different Affine
+dynamics} in \eqncol{Four different polytopic regions} of space.
+\item Model complexity: \textcol{2 dimensions, 4 locations and 12 edges.}
+\end{itemize}
+\begin{alertblock}{Challenge}
+\begin{enumerate}
+\item Verify \textcol{smallest (possible) bounds} on the \textcol{two state space co-ordinates}.
+\item Compute a \textcol{large set} of \textcol{safe initial conditions}.
+\end{enumerate}
+\end{alertblock}
+\pause
+\begin{exampleblock}{Experimental settings}
+\begin{itemize}
+\item  {\bf Primary template}: \textcol{Complex eigenvectors} of all linear matrices of the \textcol{affine maps and
+their binary products}. 
+\item  {\bf SpaceEx tool}: \eqncol{Two
+different templates}: \textcol{Octagon} template and a template with \textcol{100
+uniformly sampled support vectors}.
+\end{itemize}
+\end{exampleblock}
+\end{frame}
 
-
+\begin{frame}{Experimental results: PDI}
+\begin{table}
+\begin{minipage}{\textwidth}
+\center
+\caption*{Small invariant computation}
+\begin{tabular}{|l|c|c|c|c|}
+\hline
+\multicolumn{2}{|c|}{\multirow{2}{*}{Method}} &
+\multirow{2}{*}{$\lt|x_1\rt|\leq$} & \multirow{2}{*}{$\lt|x_2\rt|\leq$} & Comp.\\
+\multicolumn{2}{|c|}{} & & & time (s) \\
+\hline
+\multirow{4}{*}{SpaceEx} & octagon & \multirow{2}{*}{0.38} &
+\multirow{2}{*}{0.43} & \multirow{2}{*}{1.7}\\
+& template & & &\\
+\cline{2-5}
+& 100 support & \multirow{2}{*}{0.38} & \multirow{2}{*}{0.43} & \multirow{2}{*}{23.6}\\
+& vectors & & &\\
+\hline
+\multicolumn{2}{|c|}{\multirow{2}{*}{ACZ invariant}} &
+\multirow{2}{*}{0.38} & \multirow{2}{*}{0.36} & 
+\multirow{2}{*}{5.1}\\
+\multicolumn{2}{|c|}{} & & &\\
+\hline
+\end{tabular}
+\end{minipage}
+\hspace{4em}
+\begin{minipage}{\textwidth}
+\center
+\caption*{Large invariant computation}
+\begin{tabular}{|c|c|}
+\hline
+\multirow{2}{*}{Method} & Comp.\\
+& time (s)\\
+\hline
+\multirow{2}{*}{MPT tool~\cite{rakovic2004computation}} & \multirow{2}{*}{107}\\
+& \\
+\hline
+\multirow{2}{*}{ACZ} & \multirow{2}{*}{12}\\
+& \\
+\hline
+\end{tabular}
+\end{minipage}
+\end{table}
+\end{frame}
 
 
 
