@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <!DOCTYPE ipe SYSTEM "ipe.dtd">
 <ipe version="70206" creator="Ipe 7.2.7">
-<info created="D:20170827101828" modified="D:20170830184735"/>
+<info created="D:20170827101828" modified="D:20170903111019"/>
 <preamble>\usepackage{bm}</preamble>
 <ipestyle name="basic">
 <symbol name="arrow/arc(spx)">
@@ -472,8 +472,8 @@ h
 <path matrix="1.63854 0.0145689 -0.0153159 0.736979 120.114 143.715" stroke="turquoise" fill="turquoise">
 57.6888 0 0 57.6888 128 672 e
 </path>
-<text matrix="2.04125 0 0 1.85811 -362.559 -594.949" pos="256 656" stroke="black" type="label" width="22.171" height="15.703" depth="3.3" valign="baseline" size="Huge">$\bm{\oplus}$</text>
-<text matrix="2 0 0 2.11522 -432 -729.738" pos="432 640" stroke="black" type="label" width="18.08" height="14.347" depth="4.02" valign="baseline" size="huge">$\bm{\neq}$</text>
+<text matrix="2.04125 0 0 1.85811 -362.559 -594.949" pos="256 656" stroke="black" type="label" width="22.171" height="15.703" depth="3.3" valign="baseline" size="Huge" style="math">\bm{\oplus}</text>
+<text matrix="2 0 0 2.11522 -432 -729.738" pos="432 640" stroke="black" type="label" width="18.08" height="14.347" depth="4.02" valign="baseline" size="huge" style="math">\bm{\neq}</text>
 <text matrix="1.5 0 0 1.92953 -240 -610.899" pos="480 640" stroke="black" type="label" width="105.213" height="17.213" depth="4.82" valign="baseline" size="Huge">{\bf Ellipsoid}</text>
 </page>
 <page>
@@ -560,5 +560,29 @@ h
 240 464 l
 </path>
 <text pos="320 416" stroke="black" type="label" width="227.539" height="17.213" depth="0" valign="baseline" size="Huge">{\bf Discrete transition}</text>
+</page>
+<page>
+<layer name="alpha"/>
+<view layers="alpha" active="alpha"/>
+<path layer="alpha" stroke="lightblue" fill="lightblue">
+97.3242 0 0 97.3242 128 640 e
+</path>
+<text matrix="1 0 0 1 0 -16" transformations="translations" pos="80 672" stroke="black" type="label" width="70.369" height="17.213" depth="0" valign="baseline" size="Huge">{\bf With} </text>
+<text matrix="1 0 0 1 -48 -32" transformations="translations" pos="80 656" stroke="black" type="label" width="192.487" height="17.213" depth="0" valign="baseline" size="Huge">{\bf Communication}</text>
+<path matrix="1 0 0 1 336 0" stroke="lightblue" fill="lightblue">
+97.3242 0 0 97.3242 128 640 e
+</path>
+<text matrix="1 0 0 1 288 -16" transformations="translations" pos="80 672" stroke="black" type="label" width="199.97" height="17.213" depth="0" valign="baseline" size="Huge">{\bf Communication} </text>
+<text matrix="1 0 0 1 352 -32" transformations="translations" pos="80 656" stroke="black" type="label" width="83.857" height="17.213" depth="0" valign="baseline" size="Huge">{\bf Failure}</text>
+<path stroke="black" fill="black" pen="heavier" arrow="normal/normal">
+224 640 m
+368 640 l
+</path>
+<text matrix="1 0 0 1 -16 -16" transformations="translations" pos="240 672" stroke="black" type="label" width="132.8" height="17.213" depth="0" valign="baseline" size="Huge">{\bf Dwell time}</text>
+<path stroke="black" fill="black" pen="heavier" arrow="normal/normal">
+384 592 m
+208 592 l
+</path>
+<text matrix="1 0 0 1 -16 -112" transformations="translations" pos="240 672" stroke="black" type="label" width="132.8" height="17.213" depth="0" valign="baseline" size="Huge">{\bf Dwell time}</text>
 </page>
 </ipe>

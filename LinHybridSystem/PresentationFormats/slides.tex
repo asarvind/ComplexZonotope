@@ -596,11 +596,78 @@ uniformly sampled support vectors}.
 \end{frame}
 
 \begin{frame}{Example 3: Networked vehicle platoon}
-
 \begin{figure}
-\caption*{\small {\color{blue} Benchmark 2014 ARCH Workshop: Makhlouf and Kowalewski~\cite{makhlouf2014networked}}}
-\includegraphics[scale=0.5]{fig/VehiclePlatoon.png}
+\caption*{\small Benchmark {\color{blue}  2014 ARCH Workshop}: \eqncol{Makhlouf and Kowalewski~\cite{makhlouf2014networked}}}
+\includegraphics[scale=0.4]{fig/VehiclePlatoon.png}\\
+\includegraphics[scale=0.4]{fig/networked-platoon-model.png}
 \end{figure}
+\end{frame}
+
+\begin{frame}{Verification challenge: Networked platoon}
+\begin{alertblock}{Task}
+\begin{itemize}
+\item Find \textcol{minimum (possible) reference distances between vehicles} such that \eqncol{vehicles do not collide}.
+\item Equivalent to finding \textcol{ upper bounds on $-e_1, -e_2$ and $-e_3$}.
+\end{itemize}
+\end{alertblock}
+\pause
+\begin{exampleblock}{Two cases}
+\begin{enumerate}
+\item \textcol{Slow switching}: \eqncol{Minimum dwell time 20 s}. {\color{violet} 9 dimensional, 2 locations, 4 edges}.
+\item \textcol{Fast switching}: \eqncol{Integer dwell times}. {\color{violet} 9 dimensional, 2 locations, 2 edges}.
+\end{enumerate}
+\end{exampleblock}
+\end{frame}
+
+\begin{frame}{Expermimental results: Networked Platoon}
+\begin{table}
+\resizebox{1.1\textwidth}{!}{\hspace{-3em}
+\begin{tabular}{|l|c|c|c|c|c|c|c|c|c|}
+\hline
+\multicolumn{2}{|c|}{\multirow{4}{*}{Method}} & \multicolumn{4}{|c|}{\multirow{2}{*}{Slow switching}} & \multicolumn{4}{|c|}{\multirow{2}{*}{Fast switching}}\\
+\multicolumn{2}{|c|}{} & \multicolumn{4}{|c|}{} & \multicolumn{4}{|c|}{} \\
+\cline{3-10}
+\multicolumn{2}{|c|}{} & \multirow{2}{*}{$-e_1\leq$} & \multirow{2}{*}{$-e_2\leq$} & \multirow{2}{*}{$-e_3\leq$} & Comp. & \multirow{2}{*}{$-e_1\leq$} & \multirow{2}{*}{$-e_2\leq$} & \multirow{2}{*}{$-e_3\leq$} & Comp.\\
+\multicolumn{2}{|c|}{} & & & & time (s) & & & & time (s)\\
+\hline
+\multirow{4}{*}{SpaceEx} & octagon & \multirow{2}{*}{28} &
+\multirow{2}{*}{27} & \multirow{2}{*}{10} &
+\multirow{2}{*}{NT} & \multirow{2}{*}{UB} &
+\multirow{2}{*}{UB} & \multirow{2}{*}{UB} &
+\multirow{2}{*}{NT}\\
+& template & & & & & & & &\\
+\cline{2-10}
+& 100 support & \multirow{2}{*}{28} & \multirow{2}{*}{25} &
+\multirow{2}{*}{13} & \multirow{2}{*}{1.3} & \multirow{2}{*}{UB} & \multirow{2}{*}{UB} &
+\multirow{2}{*}{UB} & \multirow{2}{*}{NT}\\
+& vectors & & & & & & & &\\
+\hline
+\multicolumn{2}{|c|}{\multirow{2}{*}{Real zonotope~\cite{makhlouf2014networked}}} &
+\multirow{2}{*}{25} & \multirow{2}{*}{25} & \multirow{2}{*}{10}
+ & \multirow{2}{*}{n/a} & \multirow{2}{*}{n/a} & \multirow{2}{*}{n/a} & \multirow{2}{*}{n/a}
+ & \multirow{2}{*}{n/a}\\
+\multicolumn{2}{|c|}{} & & & & & & & &\\
+\hline
+\multicolumn{2}{|c|}{\multirow{2}{*}{ACZ invariant}} &
+\multirow{2}{*}{28} & \multirow{2}{*}{26} &
+\multirow{2}{*}{12} & \multirow{2}{*}{12} &
+\multirow{2}{*}{46} & \multirow{2}{*}{54} &
+\multirow{2}{*}{57} & \multirow{2}{*}{12.6}\\
+\multicolumn{2}{|c|}{} & & & & & & & &\\
+\hline
+\end{tabular}
+}
+%% \caption*{{\footnotesize UB: $>$1000, ~~NT: Not terminating in more than 180s, \newline
+%%   n/a: Not applicable/not available, ~~ACZ: Augmented complex
+%%   zonotope.
+%% }}
+\begin{alertblock}{Remarks}
+\begin{itemize}
+\item \eqncol{Slow switching model} is \textcol{more stable} than \eqncol{fast switching model}.
+\item Since {\bf complex zonotope} used \textcol{eigenstructue}, it could also compute invariant for the \textcol{less stable: fast switching} model, while  {\bf Polytope (SpaceEx)} \eqncol{could not}.
+\end{itemize}
+\end{alertblock}
+\end{table}
 \end{frame}
 
 

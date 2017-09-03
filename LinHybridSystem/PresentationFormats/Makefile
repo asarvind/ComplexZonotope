@@ -9,7 +9,7 @@ figures = fig
 sources = $(files) $(bibfiles) $(figures)
 
 output: $(sources)
-	pdflatex slides.tex; bibtex slides ; pdflatex slides.tex; pdflatex slides.tex;
+	make clean; pdflatex slides.tex; bibtex slides ; pdflatex slides.tex; pdflatex slides.tex;
 
 pdf: $(files)
 	pdflatex slides.tex;
