@@ -670,7 +670,24 @@ uniformly sampled support vectors}.
 \end{table}
 \end{frame}
 
+\begin{frame}{Summary}
+\begin{itemize}
+\item {\bf Template Complex Zonotopes} had following advantages 
+\begin{enumerate}
+\item \textcol{Efficient invariant computation} based on eigenstructure.
+\item \textcol{Closure} under \eqncol{Linear transformation and Minkowski sum}.
+\end{enumerate}
+\item However, {\color{red} A drawback of TCZ: Not closed under intersection}, so {\color{red} not suitable} in presence of {\color{red} linear guards}.
+\item \underline{Overcoming drawback}: {\bf {Augmented complex zonotopes}} allowed reasonable \textcol{over-approximation of intersection with sub-parallelotopic guards} as an \textcol{affine function of variables}.
+\item Hence, we derived \underline{\textcol{SOCP (convex) program}} to compute an invariant efficiently.
+\item \textcol{Experimental Results} on \textcol{Benchmark examples} corraborate the \textcol{efficiency} of our invariant computation procedure.
+\end{itemize}
+\end{frame}
 
+\begin{frame}{}
+\center
+{\Huge {\color{blue} Thank you!}} {\Large for your attention.}
+\end{frame}
 
 
 
