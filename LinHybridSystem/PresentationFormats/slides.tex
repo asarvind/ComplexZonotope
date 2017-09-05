@@ -22,11 +22,16 @@
 \maketitle
 
 \begin{frame}{Hybrid behavior of digital control systems}
-\textcol{Switch} between \textcol{different control laws}.\\
-Eg.  \textcol{Different dynamics} of an engine for \textcol{different gears}.
+\textcol{Switch} between \textcol{different control lows}.\\
 \begin{figure}
 \center
+\begin{subfigure}{0.7\linewidth}
 \includegraphics[scale=0.4]{fig/hybrid-model.png}
+\end{subfigure}
+\begin{subfigure}{0.25\linewidth}
+\includegraphics[scale=0.6]{fig/automatic-transmission.jpg}
+\caption*{\textcol{Example}: \eqncol{Automatic transmission with gears}}
+\end{subfigure}
 \end{figure}
 \begin{itemize}
 \item Difference Equation: $x(t+1)=f_i\lt(x(t),u(t)\rt).$
@@ -75,7 +80,12 @@ $G_\sigma$: Guard set $=>$ Polytopic subset of $\realset^n$, $A_\sigma: n\times 
 \end{minipage}
 \end{frame}
 
-\begin{frame}{Positive Invariant}
+\begin{frame}{Research Problem}
+\begin{block}{}
+\begin{itemize}
+\item {\bf Efficiently compute \textcol{Positive Invariant} of Affine Hybrid System}
+\end{itemize}
+\end{block}
 \begin{overprint}
 \only<1>{
 \begin{figure}
@@ -100,31 +110,42 @@ $G_\sigma$: Guard set $=>$ Polytopic subset of $\realset^n$, $A_\sigma: n\times 
 \end{frame}
 
 \begin{frame}{Set Representations for Computing Positive Invariants}
+\begin{alertblock}{Computational Bottleneck}
+Computing Smallest {\color{red} Positive Invariant} generally
+involves { \color{red} Iterative Unions} of reachable sets whose
+{\color{red}Convergence can be very Slow} or {\color{red} Undecidable}.\pause
+\end{alertblock}
+\begin{block}{To Accelerate Conververgence}
 \begin{itemize}
-\item Computing Smallest {\color{red} Positive Invariant} generally involves { \color{red} Iterative Unions} whose {\color{red}Convergence can be very Slow}\pause
-\item Use \textcol{Specific set representations} to \textcol{Accelerate convergence}.\\
+\item Use \textcol{Specific set representations}.\\
 {\color{brown} Examples}
 \begin{enumerate}
-\item \textcol{Polytopes} $\Rightarrow$ Use \textcol{Convex Hull} overapproximation~\cite{todo}.
+% \item \textcol{Polytopes} $\Rightarrow$ Use \textcol{Convex Hull}
+% overapproximation~\cite{todo}.
+\item \textcol{Template Linear inequalities} \cite{CousotHalbwachs78,Gawlitza} and \textcol{Quadratic Inequalities} \cite{DBLP:conf/fm/RouxG14} \\$\Rightarrow$ Use \textcol{ Widening} or \textcol{Policy Iteration}.
 \item \textcol{Ellipsoids} $\Rightarrow$ solve \textcol{Linear Matrix Inequalities}.
-\item \textcol{Template Linear inequalities} \cite{todo} and \textcol{Quadratic Inequalities} \cite{todo} \\$\Rightarrow$ Use \textcol{ Widening} or \textcol{Policy Iteration}.
 \end{enumerate}
 \end{itemize}
+\end{block}
 \end{frame}
 
 \begin{frame}{Features of a good set representation}
+\pause
 \begin{enumerate}
-\item \textcol{Guaranteed Existence of invariant} in the \textcol{linear case}.\\
+\item \textcol{Efficient computation} of invariant in the \textcol{linear case}.\\
+\pause
 {\color{brown} For example}
 \begin{itemize}
-\item \textcol{Elliposidal invariants} for linear system exist and computed easily by \textcol{LMI or eigenstructure}.
-\item But \eqncol{Polyhedral invariants} can have \eqncol{Very Large Number of Faces}, hence sometimes \eqncol{Computationally Expensive}.
+\item {\bf Elliposidal invariants} for linear system exist and computed easily by \textcol{LMI or eigenstructure}.
+\item But {\bf Polyhedral invariants} can have \eqncol{Very Large Number of Faces}, hence sometimes \eqncol{Computationally Expensive}.
 \end{itemize}
-\item \textcol{Efficient computation/approximation} of system operations, like \textcol{Minkowski sum, linear transformation}, etc.\\
+\pause
+\item \textcol{Efficient computation/approximation of system operations}, like \emph{Minkowski sum, linear transformation}, etc.\\
+\pause
 {\color{brown} For example}
 \begin{itemize}
-\item \textcol{Zonotopes}~\cite{todo}$\subseteq$ {\color{brown} Polyhedra}, \textcol{closed and efficient to compute}  \textcol{Minkowski sums and Linear transformations}.
-\item \eqncol{Ellipsoids} - \eqncol{Not good for approximating Minkowski sums}
+\item {\bf Zonotopes} (Ghorbal et.al)~\cite{DBLP:conf/cav/GhorbalGP09}$\subseteq$ {\color{brown} Polyhedra}, \textcol{closed and efficient to compute}  {Minkowski sums and Linear transformations}.
+\item {\bf Ellipsoids} - \eqncol{Not good for approximating Minkowski sums}
 \begin{figure}
 \includegraphics[scale=0.3]{fig/minkowski-ellipsoid.png}
 \end{figure}
@@ -133,7 +154,10 @@ $G_\sigma$: Guard set $=>$ Polytopic subset of $\realset^n$, $A_\sigma: n\times 
 \end{frame}
 
 \begin{frame}{Template Complex Zonotope}
-\eqncol{Extension} of \eqncol{Simple/Real zonotope} to \eqncol{Complex Numbers} to incorporate \eqncol{Complex Eigenstructure} of systems.\cite{todo}
+\begin{block}{Arvind and Thao: ACC 2016~\cite{tcz2017}}
+\eqncol{Extension} of \eqncol{Simple/Real zonotope} to \eqncol{Complex
+Numbers} to incorporate \eqncol{Complex Eigenstructure} of systems.
+\end{block}
 \begin{overprint}
 \only<1,2>{
 \begin{exampleblock}{Simple/Real Zonotope}
@@ -154,7 +178,7 @@ i\in\tup{m}\rt\}}.$}
 \onslide<2>{
 \begin{alertblock}{Advantages}
 \begin{itemize}
-\item \textcol{Guaranteed existence of invariant} in \textcol{linear case} based on \textcol{Complex Eigenstructure}.
+\item \textcol{Efficient computation} of invariant in \textcol{linear case} based on \textcol{Complex Eigenstructure}.
 \item \textcol{Closed} under \textcol{Minkowski sums and linear transformations.}
 \end{itemize}
 \end{alertblock}
@@ -182,8 +206,7 @@ i\in\tup{m}\rt\}}.$}
 \end{frame}
 
 
-\begin{frame}{Guaranteed Existence of Invariant for Linear system}
-Based on \textcol{{\bf Eigenstructure}} \\
+\begin{frame}{Eigenstructure based Invariant computation}
 Let $A\in\mat{n}{n}{R}$, then
 \large{
 \begin{block}{Proposition}
@@ -204,6 +227,7 @@ Let $A\in\mat{n}{n}{R}$, then
 \item $\lt(\rt.$\textcol{Complex Zonotope} \eqncol{$\bigcap$} \textcol{Linear Constraints} (i.e. {\color{teal}$Tx\leq d$})$\lt.\rt)$\\= (\eqncol{Non-polyhedral set})
 \eqncol{$\neq$ Complex Zonotope}
 \end{itemize}
+\pause
 {\color{violet}{\bf However!}}
 \begin{exampleblock}{Sub-parallelotope constraints}
 Let $K\in\mat{k}{n}{R}$ such that $k\leq n$ and $\lt(KK^T\rt)$ is
@@ -222,9 +246,9 @@ non-singular.  Let
 \begin{frame}{Augmented Complex Zonotope}
 \textcol{Minkowski sum} of \textcol{Complex Zonotope} and \textcol{Real Zonotope}.
 \begin{definition}
-Let $V\in\mat{n}{m}{C}$ \eqncol{(primary template)}, $W\in\mat{n}{k}{R}$
-\eqncol{(secondary template)}, $c\in\mb{R}^n$ \eqncol{(primary offset)},
-$s\in\mb{R}^m$ \eqncol{(scaling factors)}, $u,l\in\mb{R}^k$ \eqncol{(lower
+Let $V\in\mat{n}{m}{C}$ {\bf (primary template)}, $W\in\mat{n}{k}{R}$
+{\bf (secondary template)}, $c\in\mb{R}^n$ {\bf (primary offset)},
+$s\in\mb{R}^m$ {\bf (scaling factors)}, $u,l\in\mb{R}^k$ {\bf (lower
 and upper interval bounds)} such that $l\leq u$.  
 \begin{equation*}
 \bm{\textcol{\gcz{V}{c}{s}{W}{l}{u} = \cz{V}{c}{s}\oplus\zon{W}{l}{u}}}.
@@ -272,7 +296,7 @@ such that \eqncol{$V\conjtranspose{V}$ is non-singular, $\lt|\pinv{V}c\rt|\leq s
 \end{frame}
 
 \begin{frame}{Minkowski sum and Linear Transformation}
-\begin{block}{Closure under Linear transformation and Minkowski sum}
+\begin{block}{Affine function for fixed templates}
 \begin{enumerate}
 \item $A\gcz{V}{c}{s}{W}{l}{u} = \gcz{AV}{Ac}{s}{AW}{l}{u}$.
 \item $~$\vspace{-2em}\hspace{-2em}\begin{align*}
@@ -282,11 +306,11 @@ such that \eqncol{$V\conjtranspose{V}$ is non-singular, $\lt|\pinv{V}c\rt|\leq s
 \end{enumerate}
 \end{block}
 %
-\begin{alertblock}{}
-\begin{itemize}
-\item For \eqncol{fixed primary and secondary templates} of augmented complex zonotopes, {\bf Linear transformation and Minkowski sums} of are \textcol{Affine functions of rest variables}.
-\end{itemize}
-\end{alertblock}
+%% \begin{alertblock}{}
+%% \begin{itemize}
+%% \item For \eqncol{fixed primary and secondary templates} of augmented complex zonotopes, {\bf Linear transformation and Minkowski sums} of are \textcol{Affine functions of rest variables}.
+%% \end{itemize}
+%% \end{alertblock}
 \end{frame}
 %
 \begin{frame}{Inclusion between Template Complex Zonotopes}
@@ -350,8 +374,8 @@ upper interval bounds}.
 \end{enumerate}
 \end{exampleblock}
 }
-\onslide<1,2>{
-\begin{block}{Recap}
+\onslide<2>{
+\begin{block}{Observe}
 \begin{itemize}
 \item \eqncol{Linear Transformation and Minkowski sum} - \textcol{Affine function}
 \item \eqncol{Overapproximation of Intersection with
@@ -663,8 +687,8 @@ uniformly sampled support vectors}.
 %% }}
 \begin{alertblock}{Remarks}
 \begin{itemize}
-\item \eqncol{Slow switching model} is \textcol{more stable} than \eqncol{fast switching model}.
-\item Since {\bf complex zonotope} used \textcol{eigenstructue}, it could also compute invariant for the \textcol{less stable: fast switching} model, while  {\bf Polytope (SpaceEx)} \eqncol{could not}.
+\item {\bf Slow switching model} is \textcol{more stable} than {\bf fast switching model}.
+\item Since {\bf complex zonotope} used \textcol{eigenstructue}, it could also \textcol{compute invariant} for the \textcol{less stable: fast switching} model, while  {\bf Polytope (SpaceEx)} \eqncol{could not}.
 \end{itemize}
 \end{alertblock}
 \end{table}
@@ -686,7 +710,7 @@ uniformly sampled support vectors}.
 
 \begin{frame}{}
 \center
-{\Huge {\color{blue} Thank you!}} {\Large for your attention.}
+{\Huge {\color{blue} Thank you!}}
 \end{frame}
 
 

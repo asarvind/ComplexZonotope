@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <!DOCTYPE ipe SYSTEM "ipe.dtd">
 <ipe version="70206" creator="Ipe 7.2.7">
-<info created="D:20170827101828" modified="D:20170905003344"/>
+<info created="D:20170827101828" modified="D:20170905003705"/>
 <preamble>\usepackage{bm}</preamble>
 <ipestyle name="basic">
 <symbol name="arrow/arc(spx)">
@@ -392,7 +392,7 @@ h
 <page>
 <layer name="alpha"/>
 <view layers="alpha" active="alpha"/>
-<path layer="alpha" matrix="1 0 0 1 16 64" stroke="lightblue" fill="lightblue" pen="fat">
+<path layer="alpha" matrix="1 0 0 1 16 64" stroke="turquoise" fill="turquoise" pen="fat">
 128 592
 256 608
 352 576
@@ -410,7 +410,7 @@ h
 432 400
 -64 432 u
 </path>
-<path matrix="1 0 0 1 16 64" stroke="lightblue" fill="lightblue">
+<path matrix="1 0 0 1 16 64" stroke="turquoise" fill="turquoise">
 240 560 m
 240 512 l
 304 512 l
