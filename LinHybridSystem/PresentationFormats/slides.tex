@@ -140,7 +140,7 @@ involves { \color{red} Iterative Unions} of reachable sets whose
 \item But {\bf Polyhedral invariants} can have \eqncol{Very Large Number of Faces}, hence sometimes \eqncol{Computationally Expensive}.
 \end{itemize}
 \pause
-\item \textcol{Efficient computation/approximation of system operations}, like \emph{Minkowski sum, linear transformation}, etc.\\
+\item \textcol{Efficient computation/approximation of system operations}, like \emph{Minkowski sum, linear transformation, intersection with linear constraints,} etc.\\
 \pause
 {\color{brown} For example}
 \begin{itemize}
@@ -186,6 +186,21 @@ i\in\tup{m}\rt\}}.$}
 \end{overprint}
 \end{frame}
 
+\begin{frame}{Eigenstructure based Invariant computation}
+Let $A\in\mat{n}{n}{R}$, then
+\large{
+\begin{block}{Proposition}
+\center{
+\begin{align*}
+ A\cz{[e_1,...,e_n]}{0}{s}   = \cz{[e_1,...,e_n]}{0}{\dg\lt(\lt|\mu_i\rt|\rt)s}
+\end{align*}
+}
+\end{block}
+}
+\center{\includegraphics[scale=0.6]{fig/ContractionCZ.png}}
+\end{frame}
+
+
 
 \begin{frame}{Geometric visualization}
 \begin{minipage}{0.45\textwidth}
@@ -206,19 +221,6 @@ i\in\tup{m}\rt\}}.$}
 \end{frame}
 
 
-\begin{frame}{Eigenstructure based Invariant computation}
-Let $A\in\mat{n}{n}{R}$, then
-\large{
-\begin{block}{Proposition}
-\center{
-\begin{align*}
- A\cz{[e_1,...,e_n]}{0}{s}   = \cz{[e_1,...,e_n]}{0}{\dg\lt(\lt|\mu_i\rt|\rt)s}
-\end{align*}
-}
-\end{block}
-}
-\center{\includegraphics[scale=0.6]{fig/ContractionCZ.png}}
-\end{frame}
 
 \begin{frame}{Drawback of Simple and Template Complex Zonotopes}
 \begin{itemize}
@@ -228,14 +230,14 @@ Let $A\in\mat{n}{n}{R}$, then
 \eqncol{$\neq$ Complex Zonotope}
 \end{itemize}
 \pause
-{\color{violet}{\bf However!}}
+{\color{violet}{\bf However!} \underline{An encouraging observation}}
 \begin{exampleblock}{Sub-parallelotope constraints}
 Let $K\in\mat{k}{n}{R}$ such that $k\leq n$ and $\lt(KK^T\rt)$ is
 non-singular.  Let
   $\wh{u},\wh{l}\in\comprealset^k$ such that $\wh{l}\leq\wh{u}$.  Then
   a sub-parallelotopic set is $\sptope{K}{\wh{l}}{\wh{u}} = \lt\{x\in\realset^n: \wh{l}\leq Kx \leq \wh{u}\rt\}$.
 \end{exampleblock}
-\begin{block}{Observation: Intersection with alligned sub-parallelotope}
+\begin{block}{Intersection with alligned sub-parallelotope}
 \textcol{\[\bm{
 \zon{\pinv{K}}{l}{u} \bigcap \sptope{K}{\wh{l}}{\wh{u}}
 = \zon{\pinv{K}}{l\bigvee \wh{l}}{u\bigwedge \wh{u}}}
@@ -254,6 +256,11 @@ and upper interval bounds)} such that $l\leq u$.
 \bm{\textcol{\gcz{V}{c}{s}{W}{l}{u} = \cz{V}{c}{s}\oplus\zon{W}{l}{u}}}.
 \end{equation*}
 \end{definition}
+\pause
+\begin{alertblock}{Objective}
+\textcol{Compute Augmented Complex Zonotopic positive Invariant} satisfying {\bf polytopic safety conditions} using \underline{\textcol{one step of convex optimization}}.
+\end{alertblock}
+Regarding this, we discuss \underline{operations} on Augmented complex zonotopes.
 \end{frame}
 
 \begin{frame}{Intersection with Sub-parallelotope}
@@ -356,7 +363,7 @@ T\lt(c+W\lt(\frac{u+l}{2}\rt)\rt)+\lt|T\lt[V,~\pinv{\ptemplate}\rt]\rt|\begin{bm
 \end{block}
 %
 \begin{alertblock}{}
-For fixed \eqncol{primary and secondary templates}, the above inequality defines \textcol{SOCC (convex constraints) on rest variables}.
+For fixed \eqncol{primary and secondary templates}, the above inequality defines \textcol{Linear constraints on rest variables}.
 \end{alertblock}
 \end{frame}
 
@@ -419,6 +426,15 @@ All or some of the following:\pause
 \end{block}
 \end{frame}
 
+\begin{frame}{Implementation}
+\begin{block}{Easy to implement!}
+\begin{itemize}
+\item We just have to {\bf program the set of convex constraints} using \textcol{convex optimization tool}.
+\item Implemented on {\bf three benchmark examples} on \emph{MacBook Air laptop} using the tool \textcol{CVX and Mosek solver}.
+\end{itemize}
+\end{block}
+\end{frame}
+
 \begin{frame}{Example 1: NXT-Lego Robot model}
 \eqncol{Benchmark example} published in \eqncol{ARCH 2014~\cite{heinz2014benchmark}} \textcol{(Heinz, Oehlerking and Woehrle.)}
 
@@ -453,6 +469,7 @@ All or some of the following:\pause
 \end{block}
 \end{frame}
 
+
 \begin{frame}{Verification challege: NXT-Lego Robot model}
 \begin{alertblock}{Task}
 Find/Verify bounds on \textcol{body pitch angle}.
@@ -474,6 +491,7 @@ template with \textcol{$400$ uniformly sampled support vectors}.
 }
 \end{overprint}
 \end{frame}
+
 
 \begin{frame}{Results: NXT-Lego Robot model}
 \center{{\eqncol{\small{\footnotesize UB: $>$1000, ~~NT: Not terminating in more than 180s, \newline
@@ -698,8 +716,8 @@ uniformly sampled support vectors}.
 \begin{itemize}
 \item {\bf Template Complex Zonotopes} had following advantages 
 \begin{enumerate}
-\item \textcol{Efficient invariant computation} based on eigenstructure.
-\item \textcol{Closure} under \eqncol{Linear transformation and Minkowski sum}.
+\item \textcol{Efficient invariant computation} based on \textcol{Eigenstructure}.
+\item \textcol{Closure} under {\color{violet} Linear transformation and Minkowski sum}.
 \end{enumerate}
 \item However, {\color{red} A drawback of TCZ: Not closed under intersection}, so {\color{red} not suitable} in presence of {\color{red} linear guards}.
 \item \underline{Overcoming drawback}: {\bf {Augmented complex zonotopes}} allowed reasonable \textcol{over-approximation of intersection with sub-parallelotopic guards} as an \textcol{affine function of variables}.
