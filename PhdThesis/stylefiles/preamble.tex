@@ -1,0 +1,120 @@
+%% ========================================================
+%% For the cover page
+%% ========================================================
+% la ligne ci-dessous est à insérer obligatoirement dans le préambule du document avant \begin{document}
+\usepackage[a4paper]{./cover/meta-donnees} % for the title page
+
+%% ========================================================
+%% General packages
+%% ========================================================
+
+\usepackage{times,amsmath,amssymb,amsfonts,color,graphicx,latexsym,amsthm}
+% \usepackage{xcolor}
+\usepackage[table,dvipsnames]{xcolor}
+\usepackage{booktabs} % for better tables
+
+\usepackage{tikz,array}
+\usetikzlibrary{arrows,automata,calc,decorations.pathmorphing, backgrounds,fit, shapes}
+
+\usepackage{algorithm, algpseudocode}
+\usepackage{setspace} % used with \begin{spacing}{..}..\end{spacing}  --> needed in book
+% 
+\usepackage[normalem]{ulem}
+
+\usepackage{datetime}
+
+\graphicspath{ {figures/} }
+% \usepackage{caption}
+\usepackage[font={small}]{caption}
+\usepackage{subcaption}
+% \usepackage[labelformat=simple]{subcaption}
+% \renewcommand\thesubfigure{(\alph{subfigure})}  % subfigure with parenthesis, e.g., Figure 1.2(a)
+% \renewcommand\thesubfigure{-\alph{subfigure}}   % subfigure with dash, e.g., Figure 1.2-a
+\usepackage{multirow}
+% \captionsetup{justification=centering}
+% \usepackage[caption=true]{subfig}
+
+\usepackage{enumitem} % to change list styling globally
+
+%% ========================================================
+% % for the geometry of the pages
+%% ========================================================
+% \setlength{\parindent}{3.0em}
+% \setlength{\parskip}{0.5em}
+% \linespread{1.1}  % space between lines
+% \usepackage{fullpage}  % decrease margins
+% \usepackage{a4wide}
+% \usepackage{showframe}   % shows the frames of the pages
+
+%% ========================================================
+% Set depth of TOC
+%% ========================================================
+% \setcounter{tocdepth}{2}
+% \settocdepth{subsection}
+% \setsecnumdepth{subsection}
+
+%% ========================================================
+%% for the mini-toc - have a toc in the beginning of each chapter
+%% ========================================================
+% \usepackage{minitoc}
+% \setcounter{minitocdepth}{1} 
+%\nomtcrule       % removes rules = horizontal lines
+%\nomtcpagenumbers  % remove page numbers from minitocs
+% \dominitoc %% \dominitoc[n] removes contents, \dominitoc[c] centers contents
+
+
+%% ========================================================
+% % %% Make an index list
+%% ========================================================
+% % \usepackage{imakeidx}
+% % \makeindex[title=Index, options= -s ./stylefiles/myIndexStyle.ist, intoc, columns=1]
+
+
+%% ========================================================
+%%%% Style of Chapters 
+%% ========================================================
+
+% \usepackage[Lenny]{fncychap}
+% \usepackage[Sonny]{fncychap}
+% \usepackage[Rejne]{fncychap}
+% \usepackage[Bjarne]{fncychap}
+% \usepackage[Bjornstrup]{fncychap}
+% \usepackage[Conny]{fncychap} %%  incompatible with toc
+
+
+%% My STYLE
+\input{./stylefiles/myChapterFormating}
+
+%% ========================================================
+%%% Add background to all figures
+%% ========================================================
+% 
+% \usepackage{mdframed}
+% 
+% \let\originalfigure=\figure
+% \let\endoriginalfigure=\endfigure
+% 
+% \renewenvironment{figure}[1][]{
+%   \begin{originalfigure}[#1]
+%     \begin{mdframed}[linecolor=black!5,backgroundcolor=black!5]
+% }{
+%     \end{mdframed}
+%   \end{originalfigure}
+% }
+
+%% ========================================================
+%% Hyperef
+%% ========================================================
+
+\usepackage[pagebackref=true]{hyperref} % load hyperref last 
+\hypersetup{linktocpage,linktoc=all}
+\hypersetup{colorlinks=true,linkcolor=blue,urlcolor=blue,citecolor=blue,filecolor=blue}
+
+% for adding backreference in the bibliography
+\renewcommand*{\backref}[1]{}
+\renewcommand*{\backrefalt}[4]{({\it%
+    \ifcase #1 Not cited.%
+          \or Cited on page~#2.%
+          \else Cited on pages #2.%
+    \fi%
+    })}

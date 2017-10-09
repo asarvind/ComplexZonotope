@@ -1,0 +1,73 @@
+\documentclass[11pt,a4paper,twoside,openright]{book}  
+%alt: [11/12pt,a4paper/letterpaper,oneside/twoside,openany/openright]{book/memoir}
+
+\input{./stylefiles/preamble}
+\input{./stylefiles/mymacros}
+
+\begin{document}
+\pagestyle{empty}
+\input{./cover/coverPage}
+
+\frontmatter
+\pagestyle{plain}
+
+% \chapter*{Dedication}
+% To mum and dad
+% 
+% \chapter*{Declaration}
+% I declare that..
+% 
+% \chapter*{Acknowledgements}
+% I want to thank...
+% 
+\chapter{Abstract} \input{chapters/abstract}
+% \newpage
+% 
+% \chapter{Resume}
+% French Abstract goes here
+% \newpage
+% 
+\cleardoublepage
+%\dominitoc
+\currentpdfbookmark{Contents}{name}
+\tableofcontents
+% \addcontentsline{toc}{chapter}{\listalgorithmname}
+% \renewcommand{\listalgorithmname}{List of Algorithms \& Procedures}
+\listofalgorithms
+% \addcontentsline{toc}{chapter}{\listfigurename}
+% \listoffigures
+% \addcontentsline{toc}{chapter}{\listtablename}
+% \listoftables
+
+\chapter*{Notation} \input{chapters/notation}
+
+\mainmatter 
+\pagestyle{fancy}
+
+\chapter{Introduction} \input{chapters/introduction}
+
+\chapter{Preliminaries} \label{sec:prelim} \input{chapters/preliminaries}
+  
+\chapter{Complex Zonotopes} \label{sec:ch1} \input{chapters/chapter1}
+
+\chapter{Chapter Title} \label{sec:ch2} %\input{chapters/chapter2}
+%
+\chapter{Conclusion} \label{sec:concl} \input{chapters/conclusion}
+%  
+
+
+\appendix
+\chapter{Appendix} \input{chapters/appendix}
+
+% \backmatter
+\addcontentsline{toc}{chapter}{Bibliography}
+% plain alpha abbrv acm apalike ieeetr siam unsrt
+\bibliographystyle{alpha}
+\bibliography{./myLib}
+
+%%% Here goes a list of acronyms (if needed)
+
+%%% Here goes the Index
+% \printindex
+
+\end{document}

@@ -1,0 +1,54 @@
+%% Set introduction chapter to 0
+% \setcounter{chapter}{-1}
+
+%% My STYLE 
+\usepackage{fancyhdr}
+\addtolength{\headheight}{\baselineskip}
+\fancyhead{} % clear all header fields
+\fancyhead[RE]{\leftmark}
+\fancyhead[LO]{\rightmark}
+\fancyhead[LE,RO]{\thepage}
+\fancyfoot{} % clear all footer fields
+\fancyfoot[RO,LE]{\textcolor{gray}{\today\ (\currenttime)}}
+
+\usepackage{titlesec}
+% % % % % \titleformat{command}[shape]{format}{label}{sep}{before}[after]
+% % % % % \titlespacing{<command>}{<left>}{<before-sep>}{<after-sep>}[<right>]
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%% % Simple Chapter title aligned right
+% \titleformat{\chapter}[display]{\color{black}\normalfont\LARGE\bfseries\raggedleft}{\chaptertitlename\ \thechapter}{20pt}{\Huge}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%% white Chapter number on black box
+% \titleformat{\chapter}[display]{\color{black}\normalfont\LARGE\bfseries\raggedleft}{\textsc{\chaptertitlename}\ \marginpar{\fontsize{50}{60}\selectfont\textcolor{white}{\colorbox{black!50}{\makebox(64,64)\thechapter}}}}{20pt}{\Huge}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% calligraphic Chapter number in the margin (aurical)
+% \usepackage{aurical}
+% \usepackage[T1]{fontenc}
+% \titleformat{\chapter}[display]{\color{black}\normalfont\LARGE\bfseries\raggedleft}{\textsc{\chaptertitlename}\ \marginpar{\hspace{-1em}\Fontauri\fontsize{100}{120}\selectfont\textcolor{black!30}{\thechapter}}}{20pt}{\Huge}
+
+%%%%% calligraphic Chapter number in the margin (humanist)
+% \usepackage{humanist}
+% \usepackage[T1]{fontenc}
+% \titleformat{\chapter}[display]{\color{black}\normalfont\LARGE\bfseries\raggedleft}{\textsc{\chaptertitlename}\ \marginpar{\hminfamily \fontsize{100}{120}\selectfont\textcolor{black!30}{\thechapter}}}{20pt}{\Huge}
+
+% %%%%%% calligraphic Chapter number in the margin (square caps)
+% \usepackage{sqrcaps}
+% \usepackage[T1]{fontenc}
+% \titleformat{\chapter}[display]{\color{black}\normalfont\LARGE\bfseries\raggedleft}{\textsc{\chaptertitlename}\ \marginpar{\sqrcfamily \fontsize{75}{90}\selectfont\textcolor{black!40}{\colorbox{black!10}{\mbox{\thechapter}}}}}{20pt}{\Huge}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%% %%% Big Gray Chapter number in the margin
+% \titleformat{\chapter}[display]{\color{black}\normalfont\LARGE\bfseries\raggedleft}{\textsc{\chaptertitlename}\ \marginpar{\fontsize{100}{120}\selectfont\textcolor{black!30}{\thechapter}}}{20pt}{\Huge}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%% %% white Chapter number on gray box in the margin - with vertical ``chapter''
+% \titleformat{\chapter}[display]{\color{black}\normalfont\LARGE\bfseries\raggedleft}{\rotatebox{90}{\textsc{\chaptertitlename}}\ \marginpar{\hspace{-.7em}\fontsize{60}{72}\selectfont\textcolor{white}{\colorbox{black!50}{\makebox(64,80)\thechapter}}}}{.5em}{\Huge}
+
+% %% white Chapter number on gray box - with vertical ``chapter''
+% \titleformat{\chapter}[display]{\color{black}\normalfont\LARGE\bfseries\raggedleft}{\rotatebox{90}{\textsc{\chaptertitlename}}\ {\fontsize{60}{72}\selectfont\textcolor{white}{\colorbox{black!50}{\makebox(64,80)\thechapter}}}}{.5em}{\Huge}
+
+% %% white Chapter number on black box inline- with vertical ``chapter''
+\titleformat{\chapter}[display]{\color{black}\normalfont\LARGE\bfseries\raggedleft}{\rotatebox{90}{\textsc{\chaptertitlename}}\ {\hspace{0em}\fontsize{60}{72}\selectfont\textcolor{black!80}{\colorbox{red!20!black!10}{\makebox(64,80)\thechapter}}}}{.5em}{\Huge}

@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<sspaceex xmlns="http://www-verimag.imag.fr/xml-namespaces/sspaceex" version="0.2" math="SpaceEx">
+  <component id="system">
+    <param name="x1" type="real" local="false" d1="1" d2="1" dynamics="any" />
+    <param name="x2" type="real" local="false" d1="1" d2="1" dynamics="any" />
+    <param name="u1" type="real" local="false" d1="1" d2="1" dynamics="any" />
+    <param name="u2" type="real" local="false" d1="1" d2="1" dynamics="any" />
+    <location id="1" name="loc1" x="170.0" y="233.0">
+      <invariant>x1&gt;=0 &amp; x2&gt;=0 &amp;
+-0.4&lt;=u1&lt;=0.4 &amp; -0.4&lt;=u2&lt;=0.4</invariant>
+      <flow>x1'==0 &amp; x2'==0</flow>
+    </location>
+    <location id="2" name="loc2" x="417.0" y="82.0">
+      <invariant>x1&lt;=0 &amp; x2&lt;=0 &amp;
+ -0.4&lt;=u1&lt;=0.4 &amp; -0.4&lt;=u2&lt;=0.4</invariant>
+      <flow>x1'==0 &amp; x2'==0</flow>
+    </location>
+    <location id="3" name="loc3" x="654.0" y="228.0">
+      <invariant>x1&lt;=0 &amp; x2&gt;=0 &amp;
+-0.4&lt;=u1&lt;=0.4 &amp; -0.4&lt;=u2&lt;=0.4</invariant>
+      <flow>x1'==0 &amp; x2'==0</flow>
+    </location>
+    <location id="4" name="loc4" x="431.0" y="358.0">
+      <invariant>x1&gt;=0 &amp; x2&lt;=0 &amp;
+-0.4&lt;=u1&lt;=0.4 &amp; -0.4&lt;=u2&lt;=0.4</invariant>
+      <flow>x1'==0 &amp; x2'==0</flow>
+    </location>
+    <transition source="1" target="2">
+      <guard>-0.4&lt;=u1&lt;=0.4 &amp; -0.4&lt;=u2&lt;=0.4</guard>
+      <assignment>x1:= u1 + 0.4103*x1 + 0.0653*x2 &amp;
+x2:= u2 - 0.29485*x1 + 0.53265*x2</assignment>
+      <labelposition x="20.0" y="20.0" />
+      <middlepoint x="328.5" y="178.0" />
+    </transition>
+    <transition source="2" target="1">
+      <guard>-0.4&lt;=u1&lt;=0.4 &amp; -0.4&lt;=u2&lt;=0.4</guard>
+      <assignment>x1:= u1 + 0.4103*x1 + 0.0653*x2 &amp;
+x2:= u2 - 0.29485*x1 + 0.53265*x2</assignment>
+      <labelposition x="-71.0" y="-86.0" />
+      <middlepoint x="293.5" y="128.0" />
+    </transition>
+    <transition source="4" target="3">
+      <guard>-0.4&lt;=u1&lt;=0.4 &amp; -0.4&lt;=u2&lt;=0.4</guard>
+      <assignment>x1:= u1 + 0.4103*x1 - 0.0653*x2 &amp;
+x2:= u2 + 0.29485*x1 + 0.53265*x2</assignment>
+      <labelposition x="35.0" y="49.0" />
+      <middlepoint x="539.0" y="326.0" />
+    </transition>
+    <transition source="3" target="4">
+      <guard>-0.4&lt;=u1&lt;=0.4 &amp; -0.4&lt;=u2&lt;=0.4</guard>
+      <assignment>x1:= u1 + 0.4103*x1 - 0.0653*x2 &amp;
+x2:= u2 + 0.29485*x1 + 0.53265*x2</assignment>
+      <labelposition x="-55.0" y="-72.0" />
+      <middlepoint x="517.0" y="282.0" />
+    </transition>
+    <transition source="3" target="2">
+      <guard>-0.4&lt;=u1&lt;=0.4 &amp; -0.4&lt;=u2&lt;=0.4</guard>
+      <assignment>x1:= u1 + 0.4103*x1 - 0.0653*x2 &amp;
+x2:= u2 + 0.29485*x1 + 0.53265*x2</assignment>
+      <labelposition x="5.0" y="-100.0" />
+      <middlepoint x="543.0" y="151.0" />
+    </transition>
+    <transition source="2" target="3">
+      <guard>-0.4&lt;=u1&lt;=0.4 &amp; -0.4&lt;=u2&lt;=0.4</guard>
+      <assignment>x1:= u1 + 0.4103*x1 + 0.0653*x2 &amp;
+x2:= u2 - 0.29485*x1 + 0.53265*x2</assignment>
+      <labelposition x="-80.0" y="26.0" />
+      <middlepoint x="495.0" y="179.0" />
+    </transition>
+    <transition source="1" target="4">
+      <guard>-0.4&lt;=u1&lt;=0.4 &amp; -0.4&lt;=u2&lt;=0.4</guard>
+      <assignment>x1:= u1 + 0.4103*x1 + 0.0653*x2 &amp;
+x2:= u2 - 0.29485*x1 + 0.53265*x2</assignment>
+      <labelposition x="28.0" y="-67.0" />
+      <middlepoint x="332.5" y="281.0" />
+    </transition>
+    <transition source="4" target="2">
+      <guard>-0.4&lt;=u1&lt;=0.4 &amp; -0.4&lt;=u2&lt;=0.4</guard>
+      <assignment>x1:= u1 + 0.4103*x1 - 0.0653*x2 &amp;
+x2:= u2 + 0.29485*x1 + 0.53265*x2</assignment>
+      <labelposition x="47.0" y="-5.0" />
+      <middlepoint x="438.0" y="220.0" />
+    </transition>
+    <transition source="2" target="4">
+      <guard>-0.4&lt;=u1&lt;=0.4 &amp; -0.4&lt;=u2&lt;=0.4</guard>
+      <assignment>x1:= u1 + 0.4103*x1 + 0.0653*x2 &amp;
+x2:= u2 - 0.29485*x1 + 0.53265*x2</assignment>
+      <labelposition x="-76.0" y="15.0" />
+      <middlepoint x="403.0" y="220.0" />
+    </transition>
+    <transition source="1" target="3">
+      <guard>-0.4&lt;=u1&lt;=0.4 &amp; -0.4&lt;=u2&lt;=0.4</guard>
+      <assignment>x1:= u1 + 0.4103*x1 + 0.0653*x2 &amp;
+x2:= u2 - 0.29485*x1 + 0.53265*x2</assignment>
+      <labelposition x="-53.0" y="-73.0" />
+      <middlepoint x="409.0" y="197.0" />
+    </transition>
+    <transition source="1" target="1">
+      <guard>-0.4&lt;=u1&lt;=0.4 &amp; -0.4&lt;=u2&lt;=0.4</guard>
+      <assignment>x1:= u1 + 0.4103*x1 + 0.0653*x2 &amp;
+x2:= u2 - 0.29485*x1 + 0.53265*x2</assignment>
+      <labelposition x="-45.0" y="22.0" />
+      <middlepoint x="-68.0" y="6.0" />
+    </transition>
+    <transition source="4" target="4">
+      <guard>-0.4&lt;=u1&lt;=0.4 &amp; -0.4&lt;=u2&lt;=0.4</guard>
+      <assignment>x1:= u1 + 0.4103*x1 - 0.0653*x2 &amp;
+x2:= u2 + 0.29485*x1 + 0.53265*x2</assignment>
+      <labelposition x="33.0" y="-3.0" />
+      <middlepoint x="-24.0" y="66.0" />
+    </transition>
+    <transition source="3" target="3">
+      <guard>-0.4&lt;=u1&lt;=0.4 &amp; -0.4&lt;=u2&lt;=0.4</guard>
+      <assignment>x1:= u1 + 0.4103*x1 - 0.0653*x2 &amp;
+x2:= u2 + 0.29485*x1 + 0.53265*x2</assignment>
+      <labelposition x="43.0" y="0.0" />
+      <middlepoint x="33.0" y="73.0" />
+    </transition>
+    <transition source="2" target="2">
+      <guard>-0.4&lt;=u1&lt;=0.4 &amp; -0.4&lt;=u2&lt;=0.4</guard>
+      <assignment>x1:= u1 + 0.4103*x1 + 0.0653*x2 &amp;
+x2:= u2 - 0.29485*x1 + 0.53265*x2</assignment>
+      <labelposition x="8.0" y="-51.0" />
+      <middlepoint x="76.0" y="-18.0" />
+    </transition>
+    <transition source="4" target="1">
+      <guard>-0.4&lt;=u1&lt;=0.4 &amp; -0.4&lt;=u2&lt;=0.4</guard>
+      <assignment>x1:= u1 + 0.4103*x1 - 0.0653*x2 &amp;
+x2:= u2 + 0.29485*x1 + 0.53265*x2</assignment>
+      <labelposition x="-87.0" y="36.0" />
+      <middlepoint x="285.5" y="322.5" />
+    </transition>
+    <transition source="3" target="1">
+      <guard>-0.4&lt;=u1&lt;=0.4 &amp; -0.4&lt;=u2&lt;=0.4</guard>
+      <assignment>x1:= u1 + 0.4103*x1 - 0.0653*x2 &amp;
+x2:= u2 + 0.29485*x1 + 0.53265*x2</assignment>
+      <labelposition x="59.0" y="3.0" />
+      <middlepoint x="415.0" y="248.5" />
+    </transition>
+  </component>
+</sspaceex>
+

@@ -1,0 +1,93 @@
+%% ========================================================
+%%% Basic symbols
+%% ========================================================
+
+% \def    \s      {\sigma}
+\def    \S      {\Sigma}
+\def    \d      {\delta}
+% \def    \D      {\Delta}
+\def    \ee     {\epsilon}
+\def    \e      {\varepsilon}
+% \def    \g      {\gamma}
+\def    \se     {\subseteq}
+% 
+\def    \N      {\mathbb{N}}
+% \def    \Z      {\mathbb{Z}}
+\def    \Q      {\mathbb{Q}}
+\def    \R      {\mathbb{R}}
+\def    \B      {\mathbb{B}}
+\def    \A      {\mathcal{A}}
+ 
+% 
+\def    \qed    {\hfill\ensuremath{\square}\vspace{.7em}}%                
+\def    \QED    {\hfill\ensuremath{\blacksquare}}%
+
+
+%% ========================================================
+%%% New commands
+%% ========================================================
+
+\newcommand{\sem}[1]{[\![#1]\!]}
+
+%%% membership queries
+\def \mq          {{\textsc{mq}}}
+\def \eq          {{\textsc{eq}}}
+
+
+%% ========================================================
+%%% New operators
+%% ========================================================
+
+\DeclareMathOperator*{\argmax}{\rm arg\max}
+\DeclareMathOperator*{\argmin}{\rm arg\min}
+
+%% ========================================================
+%%% Editing Commands
+%% ========================================================
+\def    \toupdate#1 {\textcolor{Periwinkle}{#1 } }
+\def    \comment#1 { }
+\def    \note#1    {\textbf{[ \marginpar{\texttt{note}}}{ \small #1 }\textbf{] }}
+\def    \todo#1    {\marginpar{ \small \textcolor{red}{TODO: #1}}}
+
+
+%% ========================================================
+%%% Document appearance
+%% ========================================================
+ 
+\def    \ni     {\noindent}
+
+%% centering vertically and horizontally in tabular
+\newcolumntype{C}[1]{>{\centering\arraybackslash}m{#1} } 
+
+%%% Changing the line spacing of the algorithms
+\def \algsp {1.1} % line spacing in algorithms
+
+%% Uniform style for the paragraph titles
+\def \partitle#1 {\vspace{.7em}\ni\textbf{#1. } }
+
+% styling lists (itemize)
+\setlist[itemize]{itemsep=0pt,topsep=6pt}
+\setlist[itemize,1]{label=--}
+
+%% styling tabulars - set line spread
+\newcommand{\ra}[1]{\renewcommand{\arraystretch}{#1}}
+
+%% ========================================================
+%%% New environments
+%% ========================================================
+\theoremstyle{plain}
+\newtheorem{theorem}{Theorem}[chapter]
+\newtheorem{proposition}[theorem]{Proposition}
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{example}[theorem]{Example}
+
+%% ========================================================
+%%% Define colors 
+%% ========================================================
+\definecolor{myred}{RGB}{204,0,0}
+\definecolor{mygreen}{RGB}{0,204,0}
+\definecolor{myblue}{RGB}{0,0,204}
+\definecolor{mypurple}{HTML}{880088}
+
+\colorlet{colorhighlight}{black!10}
