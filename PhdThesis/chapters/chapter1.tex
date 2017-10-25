@@ -1,24 +1,23 @@
 In the previous chapter, we described the set representation called
-simple zonotopes, which are geometrically Minkowski sums of line
-segments.  Henceforth, they are a subclass of polytopes.  They have
-the advantage that common operations in reachability analysis like
-Minkowski sums and linear transformations can be computed exactly and
-efficiently.  Simple zonotopes are represented as a linear combination
-of real-valued vectors, where the combining co-efficients are bounded
-inside real-valued intervals.  However, for linear hybrid systems, the
-eigenstructure of matrices, which can be complex-valued, i.e., have
-both real and imaginary parts, is very useful in computing invariants
-and stability verification, as we shall discuss later.  In this
-respect, we introduce a new set representation called \emph{complex
-  zonotope} in this chapter, which extends simple zonotopes by having
-complex-valued generators and complex-valued combining coefficients,
-so as to utilize the possibly complex eigenstructure in for efficient
-invariant computation.  On the other hand, complex zonotopes still
-retain the advantage of simple zonotopes that linear transformations
-and Minkowski sums are are computed exactly and efficiently.
-Furthermore, they describe a richer class of sets, since geometrically
-their real projections are Minkowski sums of line segments and also
-some ellipsoids which are non-polyhedral.
+simple zonotopes, a sub-class of polytopes, which are geometrically
+Minkowski sums of line segments.  The advantage simple zonotopes have
+is that they are closed the very commonly used operations in reachability analysisunder, matrix multiplication and Minkowski sum, and also 
+these operations can be computed exactly and efficiently.  Simple zonotopes are
+represented as a linear combination of real-valued vectors, where the
+combining co-efficients are bounded inside real-valued intervals.
+However, for linear hybrid systems, the possibly complex-valued
+eigenstructure of matrices, i.e., having both real and imaginary
+parts, can be very useful in computing invariants and stability
+verification, as we shall discuss later.  In this respect, we
+introduce a new set representation called \emph{complex zonotope} in
+this chapter, which extends simple zonotopes by having complex-valued
+generators and complex-valued combining coefficients.  This allows us
+to utilize the possibly complex eigenstructure of matrices for
+efficient invariant computation.  Their real projections describe a
+richer class of sets, which are Minkowski sums of line segments and
+also some ellipsoids.  Still, like simple zonotopes, complex zonotopes
+are also closed under matrix multiplications and Minkowski sums and
+these can be computed efficiently.
 
 This chapter is organized as follows.  Before introducing complex
 zonotopes, we first discuss in detail the motivation behind
