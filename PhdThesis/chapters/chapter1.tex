@@ -1,29 +1,80 @@
 In the previous chapter, we described the set representation called
 simple zonotopes, a sub-class of polytopes, which are geometrically
-Minkowski sums of line segments.  The advantage simple zonotopes have
-is that they are closed the very commonly used operations in reachability analysisunder, matrix multiplication and Minkowski sum, and also 
-these operations can be computed exactly and efficiently.  Simple zonotopes are
-represented as a linear combination of real-valued vectors, where the
-combining co-efficients are bounded inside real-valued intervals.
-However, for linear hybrid systems, the possibly complex-valued
-eigenstructure of matrices, i.e., having both real and imaginary
-parts, can be very useful in computing invariants and stability
-verification, as we shall discuss later.  In this respect, we
-introduce a new set representation called \emph{complex zonotope} in
-this chapter, which extends simple zonotopes by having complex-valued
-generators and complex-valued combining coefficients.  This allows us
-to utilize the possibly complex eigenstructure of matrices for
-efficient invariant computation.  Their real projections describe a
-richer class of sets, which are Minkowski sums of line segments and
-also some ellipsoids.  Still, like simple zonotopes, complex zonotopes
-are also closed under matrix multiplications and Minkowski sums and
-these can be computed efficiently.
+Minkowski sums of line segments.  Simple zonotopes are represented as
+a linear combination of real-valued vectors, where the combining
+co-efficients are bounded inside real-valued intervals.  The advantage
+of simple zonotopes in reachability analysis of linear systems is that
+they are closed under matrix multiplication and Minkowski sum
+operations and these can be efficiently.  However, for linear hybrid
+systems, the possibly complex-valued eigenstructure of matrices, i.e.,
+having both real and imaginary parts, can be very useful in computing
+invariants and stability verification, as we shall discuss later.  In
+this respect, this chapter introduces a new set representation
+called \emph{complex zonotope}, which extends simple zonotopes by
+having complex-valued generators and complex-valued combining
+coefficients, and allows specification of invariants based on the
+complex eigenstructure.  The real projections of complex zonotopes
+describe a richer class of sets than simple zonotopes, which are
+Minkowski sums of some ellipsoids along with line segments.  Still,
+like simple zonotopes, complex zonotopes are also closed under matrix
+multiplications and Minkowski sums and these can be computed
+efficiently.
 
-This chapter is organized as follows.  Before introducing complex
-zonotopes, we first discuss in detail the motivation behind
-introducing complex zonotopes.  Then we introduce the set
-representation of complex zonotopes and discuss operations like linear
-transformation, Minkowski sum, eigenstructure based invariant
-computation and inclusion checking.  Next, we draw comparison of
-complex zonotope with other well known set representations, in terms of
-their geometry and the efficiency in computing relevant set operations.
+This chapter is organized as follows.  PUT ORGANIZATION.  
+
+\section{Motivation}
+When the eigenstructure of a linear system is real, it can be used to
+specify a real zonotopic positive invariant for the system.  This is
+based on the following result.
+%
+\begin{proposition}
+Let us consider a simple zonotope centered at the origin
+$\rztope{V}{0}$, where the column vectors of $V\in\mat{m}{n}{\reals}$
+are the eigenvectors of a matrix $A\in\mat{n}{n}{\reals}$ such that
+$AV = V\diagonal(\mu)$ where $\mu\in\reals^m$ is a vector of eigenvalues
+corresponding to the eigenvectors among the columns of $V$.
+Then \[A\lt(\rztope{V}{0}\rt) = \rztope{V\diagonal{\mu}}{0}.\] If
+$\infnorm{\mu}\leq 1$, then
+$A\lt(\rztope{V}{0}\rt)\subseteq \rztope{V}{0}$.
+\end{proposition}
+\begin{proof}
+We have $A\lt(\rztope{V}{0}\rt) = \rztope{AV}{0}$ according to
+Proposition~\ref{toref}.  Next $\rztope{AV}{0}
+= \rztope{V\diagonal{\mu}}{0}$.  This proves the first part of the
+Proposition.  For the second part, we are given that
+$\infnorm{\mu}\leq 1$.  Let $y\in A\lt(\rztope{V}{0}\rt)
+= \rztope{V\diagonal{\mu}}{0}$.  So, we can write $y$ as $y =
+V\diagonal{\mu}\delta:\infnorm{\delta}\leq 1$.  Let $\epsilon
+= \diagonal{\mu}\delta$. Then
+$\infnorm{\epsilon} \leq \infnorm{\mu}\infnorm{\delta} \leq 1$.  So,
+$y=V\epsilon$ where $\infnorm{\epsilon}\leq 1$,
+and hence $y\in \rztope{V}{0}$.  Therefore,
+$A\lt(\rztope{V}{0}\rt)\subseteq \rztope{V}{0}$.
+\end{proof}
+%
+The above proposition means that we can easily specify a positively
+invariant simple zonotope for a stable discrete time linear system
+with real eigenstructure by having only the (real) eigenvectors of the linear
+system as the generators of the zonotope.
+
+[INCLUDE FIGURE]
+
+%%========================================================================================
+%% In the following, we try to derive the same result for a polytope,
+%% but additional details are required for it to be correct.  So,
+%% we commented it out.
+
+%% \begin{proposition}
+%% Consider a polytope $\polytope{J}{d}: J\in\mat{n}{n}{\reals}$ where the
+%% rows of $T$ are the left eigenvectors of a matrix $A\in\mat{n}{n}{R}$, i.e.,
+%% $\forall i\in\{1,...,n\}$, $J_iA
+%% = \mu_iJ_i:~\mu_i\in\reals$.  We have
+%% $A\lt(\polytope{J}{d}\rt)\subseteq\polytope{J}{\diagonal(\mu)d}$.
+%% \end{proposition}
+%% \begin{proof}
+%% We have $A\lt(\polytope{J}{d}\rt)=A\lt\{x\in\reals^n:Jx\leq
+%% d\rt\}=\lt\{Ax:x\in\reals^n,Jx\leq d\rt\}$.  Consider any $y=Ax\in
+%% A\lt(\polytope{J}{d}\rt)$.  Then $(Jy)_i=J_iAx=\mu_iJ_ix\leq\mu_id_i$.  
+%% \end{proof}
+
+%%========================================================================================

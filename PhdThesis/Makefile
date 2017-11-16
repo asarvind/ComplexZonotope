@@ -15,6 +15,9 @@ all:
 	pdflatex -shell-escape -synctex=1 ${INPUT_FILE}
 #	open main.pdf &
 
+pdf:
+	pdflatex -shell-escape -synctex=1 ${INPUT_FILE}
+
 TEX_FILES := $(wildcard *.tex chapters/*.tex chapters/*/*.tex)
 
 .PHONY: check
@@ -24,7 +27,7 @@ check:
 		$(SPELL_CHECK) $$texfile; \
 		done
 
-clean:
+clean:  \rm -f *.pdf
 	\rm -f  *.dvi
 	\rm -f  *.brf
 	\rm -f  *.gz
@@ -45,3 +48,6 @@ clean:
 	\rm -f  chapters/*.tex~	
 	\rm -f  chapters/*/*.tex~		
 	#\rm -f Figures/*.pdf
+
+upload:
+	make clean; git add .; git commit -m "updated"; git push
