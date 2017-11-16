@@ -27,17 +27,18 @@ check:
 		$(SPELL_CHECK) $$texfile; \
 		done
 
-clean:  \rm -f *.pdf
+clean:  
+	\rm -f *.pdf
 	\rm -f  *.dvi
 	\rm -f  *.brf
 	\rm -f  *.gz
 	\rm -f  *.out
 	\rm -f  *.log
 	\rm -f  *.bak
-	\rm -f	*.aux
-	\rm -f	*.blg
-	\rm -f	*.bbl
-	\rm -f	*.*~
+	\rm -f  *.aux
+	\rm -f  *.blg
+	\rm -f  *.bbl
+	\rm -f  *.*~
 	\rm -f  *.mtc*
 	\rm -f  *.maf
 	\rm -f  *.toc
@@ -47,7 +48,7 @@ clean:  \rm -f *.pdf
 	\rm -f  chapters/*/*.tex.backup		
 	\rm -f  chapters/*.tex~	
 	\rm -f  chapters/*/*.tex~		
-	#\rm -f Figures/*.pdf
+	# git rm -f Figures/*.pdf
 
 upload:
-	make clean; git add .; git commit -m "updated"; git push
+	make clean; git commit -m "cleaned"; git push; git add .; git commit -m "updated"; git push
