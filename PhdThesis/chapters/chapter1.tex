@@ -26,59 +26,96 @@ inclusion relation is a key ingredient for efficient invariant
 computation, as we shall see in the latter chapters.  The organization
 of this chapter is as follows.  PUT ORGANIZATION.
 
-\section{Motivation}
-When the eigenstructure of a linear system is real, it can be used to
-specify a real zonotopic positive invariant for the system.  This is
-based on the following result.
+\section{Basic representation of a complex zonotope}
+The basic representation of a complex zonotope is a generalization of
+the Definition~\ref{} of simple zonotope to complex numbers, which is
+a linear combination of complex valued vectors, called generators,
+where the combining coefficients are bounded in absolute value by
+unity.  However, this representation can be extended to more general
+forms for efficient computation, as we shall discuss later.
 %
-\begin{proposition}
-Let us consider a simple zonotope centered at the origin
-$\rztope{V}{0}$, where the column vectors of $V\in\mat{m}{n}{\reals}$
-are the eigenvectors of a matrix $A\in\mat{n}{n}{\reals}$ such that
-$AV = V\diagonal(\mu)$ where $\mu\in\reals^m$ is a vector of eigenvalues
-corresponding to the eigenvectors among the columns of $V$.
-Then \[A\lt(\rztope{V}{0}\rt) = \rztope{V\diagonal{\mu}}{0}.\] If
-$\infnorm{\mu}\leq 1$, then
+\begin{definition}[Complex zonotope]
+Let $V\in\mat{m}{n}{\compnums}$, which is a complex valued matrix,
+whose columns are called generators, and $c\in\compnums^n$ be a
+complex valued vector called the center.  Then the following is a
+complex zonotope.
+%
+\begin{equation}
+\cztope{V}{c} = \set{V\zeta:~\zeta\in\compnums^m,~\infnorm{\zeta}\leq 1}.
+\end{equation}
+%
+\end{definition}
+%
+Like a simple zonotope, a complex zonotope is also symmetric around
+the center.  To see this, consider a point in a complex zonotope
+centered at the origin, written as $y=V\zeta$ where $V$ defines the
+generator set and $\zeta$ is the vector of combining coefficients.
+Since, $\infnorm{-\zeta}=\infnorm{\zeta}\leq 1$, so even
+$-y=V(-\zeta)$ belongs to the complex zonotope.  However, unlike
+simple zonotopes, the real projection of a complex zonotope can
+describe some non-polytopic sets in addition to polytopic zonotopes,
+since geometrically speaking the real projection of a complex zonotope
+can be a Minkowski sum of line segements as well as some ellipsoids.
+An example of such a non-polyhedral complex zonotope projection in
+real space is illustrated with Figure~\ref{fig:cz}, where the
+generators are $V=\lt(\begin{array}{lll}(1+2i) & 1 & (2+i)\\(1-2i) & 1
+& (2-i)\end{array}\rt)$ and the center is the origin.
+
+A motivation for extending simple zonotopes to complex zonotopes is
+that a complex zonotope with its generators as the complex
+eigenvectors of a discrete time linear system will be a positive
+invariant if the complex eigenvalues corresponding to the generators
+are bounded within unity in their absolute values.  This property is
+described mathematically in the following proposition.
+%
+\begin{proposition}[Invariance based on eigenstructure]
+Let us consider that $\cztope{V}{0}$ is a complex zonotope centered at
+the origin, where the column vectors of $V\in\mat{m}{n}{\compnums}$
+are the complex eigenvectors of a matrix $A\in\mat{n}{n}{\reals}$ such
+that $AV = V\diagonal{\mu}$ and $\mu\in\compnums^m$ is a vector of
+complex eigenvalues corresponding to the column vectors of $V$.
+Then \[A\lt(\cztope{V}{0}\rt) = \cztope{V\diagonal{\mu}}{0}.\]
+Therefore, if $\infnorm{\mu}\leq 1$, then
 $A\lt(\rztope{V}{0}\rt)\subseteq \rztope{V}{0}$.
 \end{proposition}
+% 
 \begin{proof}
-We have $A\lt(\rztope{V}{0}\rt) = \rztope{AV}{0}$ according to
-Proposition~\ref{toref}.  Next $\rztope{AV}{0}
-= \rztope{V\diagonal{\mu}}{0}$.  This proves the first part of the
+We have $A\lt(\cztope{V}{0}\rt) =
+A\set{V\zeta:~\zeta\in\compnums^m,\infnorm{\zeta}\leq 1}$\\
+$=\set{AV\zeta:~\zeta\in\compnums^m,\infnorm{\zeta}\leq 1}
+= \cztope{AV}{0}$.  Next $\cztope{AV}{0}
+= \cztope{V\diagonal{\mu}}{0}$, which proves the first part of the
 Proposition.  For the second part, we are given that
-$\infnorm{\mu}\leq 1$.  Let $y\in A\lt(\rztope{V}{0}\rt)
-= \rztope{V\diagonal{\mu}}{0}$.  So, we can write $y$ as $y =
-V\diagonal{\mu}\delta:\infnorm{\delta}\leq 1$.  Let $\epsilon
-= \diagonal{\mu}\delta$. Then
-$\infnorm{\epsilon} \leq \infnorm{\mu}\infnorm{\delta} \leq 1$.  So,
-$y=V\epsilon$ where $\infnorm{\epsilon}\leq 1$,
-and hence $y\in \rztope{V}{0}$.  Therefore,
-$A\lt(\rztope{V}{0}\rt)\subseteq \rztope{V}{0}$.
+$\infnorm{\mu}\leq 1$.  Consider a point $y\in \cztope{V\diagonal{\mu}}{0}$,
+described by the generators as
+$y = V\diagonal{\mu}\delta:\infnorm{\delta}\leq 1$.
+Let $\zeta = \diagonal{\mu}\delta$. Then
+$\infnorm{\zeta} \leq \infnorm{\mu}\infnorm{\delta} \leq 1$.  So, 
+$y=V\zeta$ where $\infnorm{\zeta}\leq 1$, and this implies $y\in \cztope{V}{0}$.
+Therefore, $A\lt(\cztope{V}{0}\rt)=\cztope{AV}{0}\subseteq \cztope{V}{0}$.
 \end{proof}
 %
-The above proposition means that we can easily specify a positively
-invariant simple zonotope for a stable discrete time linear system
-with real eigenstructure by having only the (real) eigenvectors of the linear
-system as the generators of the zonotope.
-
-[INCLUDE FIGURE]
-
-%%========================================================================================
-%% In the following, we try to derive the same result for a polytope,
-%% but additional details are required for it to be correct.  So,
-%% we commented it out.
-
-%% \begin{proposition}
-%% Consider a polytope $\polytope{J}{d}: J\in\mat{n}{n}{\reals}$ where the
-%% rows of $T$ are the left eigenvectors of a matrix $A\in\mat{n}{n}{R}$, i.e.,
-%% $\forall i\in\{1,...,n\}$, $J_iA
-%% = \mu_iJ_i:~\mu_i\in\reals$.  We have
-%% $A\lt(\polytope{J}{d}\rt)\subseteq\polytope{J}{\diagonal(\mu)d}$.
-%% \end{proposition}
-%% \begin{proof}
-%% We have $A\lt(\polytope{J}{d}\rt)=A\lt\{x\in\reals^n:Jx\leq
-%% d\rt\}=\lt\{Ax:x\in\reals^n,Jx\leq d\rt\}$.  Consider any $y=Ax\in
-%% A\lt(\polytope{J}{d}\rt)$.  Then $(Jy)_i=J_iAx=\mu_iJ_ix\leq\mu_id_i$.  
-%% \end{proof}
-
-%%========================================================================================
+In reachability analysis based verification algorithms, the quality of
+overapproximation of the reachable set computed by the algorithm, i.e,
+the difference in some measure between the actual reachable set and
+the overapproximation, affects the accuracy of verification.  So, for
+any set representation used in reachability analysis, it is desirable
+that there is an efficient way of refining a set so as to obtain
+smaller sets that overapproximate the reachable set.  In this context,
+we note that for a basic representation of a complex zonotope as given
+in the above definition, adding a generator to the representation
+increases the size of the complex zonotope.  Moreover, adding a
+generator can distort the positive invariance of the set itself, as
+illustrated in Figure~\ref{todo}.  Instead, we should be able to
+change and also add generators to the complex zonotope in a way that
+we obtain smaller overapproximations of during reachable set
+computations.  In this regard, we introduce a more general
+representation of a complex zonotope, called a template complex
+zonotope, where in addition to the set of generators, called a
+template, we have a vector of scaling factors that defines the
+magnitude of contribution of each generator to the size of the set.
+The template complex zonotope representation and its advantage
+compared to the previous basic representation of a complex zonotope is
+discussed in the following section.
+%
+\section{Template complex zonotope}
