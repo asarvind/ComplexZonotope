@@ -342,5 +342,6 @@ We define a relation $\order$ between two complex zonotopes as
 follows.  Let $\tcztope{\ptemp}{\cen}{\sfact}$ and
 $\tcztope{\ptemp^\pr}{\cen^\pr}{\sfact^\pr}$ be two complex
 zonotopes such that $\ptemp\in\mat{n}{m}{\compnums}$ and
-$\ptemp^\pr\in\mat{n}{r}{\compnums}$.  
+$\ptemp^\pr\in\mat{n}{r}{\compnums}$.  Then
+$\tcztope{\ptemp}{\cen}{\sfact}\order\tcztope{\ptemp^\pr}{\cen^\pr}{\sfact^\pr}$
 \end{definition}
