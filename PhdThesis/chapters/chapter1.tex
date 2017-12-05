@@ -1,23 +1,23 @@
 In the previous chapter, we described a set representation called
-simple zonotope, which is type of polytope represented as a linear
-combination of real-valued vectors with bounded combining
-co-efficients.  The advantage of simple zonotopes in set based
+simple zonotope, which is a type of polytope represented as a linear
+combination of real valued vectors with bounded combining
+coefficients.  The advantage of simple zonotopes in set based
 computations is that they are closed under matrix multiplication and
-Minkowski sum operations and these can be efficiently.  However, for
-invariant computation, there is no known procedure to choose a
-suitable set of generators for a simple zonotope so as to compute an
-invariant.  In this chapter, we extend simple zonotope a new set
-representation called \emph{complex zonotope} by which we can easily
-specify invariants of a linear system using the eigenstructure of the
-system.  Complex zonotopes have complex valued generators complex
-combining co-efficients bounded in their absolute values, as opposed
-to the real valued generators and real combining co-efficients of
-simple zonotopes.  The real projections of complex zonotopes can
-describe some non-polytopic sets in addition to the polytopic  
-zonotopes, which are Minkowski sums of some ellipsoids along with line
-segments.  Furthermore, complex zonotopes are also closed under matrix
-multiplications and Minkowski sums and these can be computed
-efficiently.
+Minkowski sum operations and these can be computed efficiently.
+However, for computing a positive invariant of a linear system, there
+is no known procedure to choose a suitable set of generators for a
+simple zonotope so as to compute an invariant.  In this chapter, we
+extend simple zonotope a new set representation called \emph{complex
+zonotope} by which we can easily specify invariants of a linear system
+using the eigenstructure of the system.  Complex zonotopes have
+complex valued generators complex combining coefficients bounded in
+their absolute values, as opposed to the real valued generators and
+real combining coefficients of simple zonotopes.  The real projections
+of complex zonotopes can describe some non-polytopic sets in addition
+to the polytopic zonotopes, which are Minkowski sums of some
+ellipsoids along with line segments.  Furthermore, complex zonotopes
+are also closed under matrix multiplications and Minkowski sums and
+these can be computed efficiently.
 
 Apart from discussing operations on complex zonotopes like linear
 transformations and Minkowski sums, in this chapter we derive a convex
@@ -28,37 +28,39 @@ of this chapter is as follows.  PUT ORGANIZATION.
 
 \section{Basic representation of a complex zonotope}
 The basic representation of a complex zonotope is a generalization of
-the Definition~\ref{} of simple zonotope to complex numbers, which is
-a linear combination of complex valued vectors, called generators,
-where the combining coefficients are bounded in absolute value by
-unity.  However, this representation can be extended to more general
-forms for efficient computation, as we shall discuss later.
+the representation of a simple zonotope given in Definition~\ref{todo}
+to a space of complex valued vectors.  A complex zonotope is
+represented as a linear combination of complex valued vectors, called
+generators, such that the combining coefficients are bounded in their
+absolute values by unity.  However, this representation can be
+extended to more general forms for efficient computation, as we shall
+discuss later.
 %
 \begin{definition}[Complex zonotope]
-Let $V\in\mat{m}{n}{\compnums}$, which is a complex valued matrix,
-whose columns are called generators, and $c\in\compnums^n$ be a
+Let $\ptemp\in\mat{m}{n}{\compnums}$ be a complex valued matrix
+whose columns are called generators and $\cen\in\compnums^n$ be a
 complex valued vector called the center.  Then the following is a
 complex zonotope.
 %
 \begin{equation}
-\cztope{V}{c} = \set{V\zeta:~\zeta\in\compnums^m,~\infnorm{\zeta}\leq 1}.
+\cztope{\ptemp}{\cen} = \set{\ptemp\zeta+\cen:~\zeta\in\compnums^m,~\infnorm{\zeta}\leq 1}.
 \end{equation}
 %
 \end{definition}
 %
 Like a simple zonotope, a complex zonotope is also symmetric around
 the center.  To see this, consider a point in a complex zonotope
-centered at the origin, written as $y=V\zeta$ where $V$ defines the
-generator set and $\zeta$ is the vector of combining coefficients.
-Since, $\infnorm{-\zeta}=\infnorm{\zeta}\leq 1$, so even
-$-y=V(-\zeta)$ belongs to the complex zonotope.  However, unlike
+centered at the origin, written as $y=\ptemp\zeta$ where $\ptemp$
+defines the generator set and $\zeta$ is the vector of combining
+coefficients.  Since, $\infnorm{-\zeta}=\infnorm{\zeta}\leq 1$, so
+even $-y=\ptemp(-\zeta)$ belongs to the complex zonotope.  However, unlike
 simple zonotopes, the real projection of a complex zonotope can
 describe some non-polytopic sets in addition to polytopic zonotopes,
 since geometrically speaking the real projection of a complex zonotope
-can be a Minkowski sum of line segements as well as some ellipsoids.
+can be a Minkowski sum of line segments as well as some ellipsoids.
 An example of such a non-polyhedral complex zonotope projection in
 real space is illustrated with Figure~\ref{fig:cz}, where the
-generators are $V=\lt(\begin{array}{lll}(1+2i) & 1 & (2+i)\\(1-2i) & 1
+generators are $\ptemp=\lt(\begin{array}{lll}(1+2i) & 1 & (2+i)\\(1-2i) & 1
 & (2-i)\end{array}\rt)$ and the center is the origin.
 
 A motivation for extending simple zonotopes to complex zonotopes is
@@ -69,53 +71,256 @@ are bounded within unity in their absolute values.  This property is
 described mathematically in the following proposition.
 %
 \begin{proposition}[Invariance based on eigenstructure]
-Let us consider that $\cztope{V}{0}$ is a complex zonotope centered at
-the origin, where the column vectors of $V\in\mat{m}{n}{\compnums}$
+Let us consider that $\cztope{\ptemp}{0}$ is a complex zonotope centered at
+the origin, where the column vectors of $\ptemp\in\mat{m}{n}{\compnums}$
 are the complex eigenvectors of a matrix $A\in\mat{n}{n}{\reals}$ such
-that $AV = V\diagonal{\mu}$ and $\mu\in\compnums^m$ is a vector of
-complex eigenvalues corresponding to the column vectors of $V$.
-Then \[A\lt(\cztope{V}{0}\rt) = \cztope{V\diagonal{\mu}}{0}.\]
+that $A\ptemp = \ptemp\diagonal{\mu}$ and $\mu\in\compnums^m$ is a vector of
+complex eigenvalues corresponding to the column vectors of $\ptemp$.
+Then \[A\lt(\cztope{\ptemp}{0}\rt) = \cztope{\ptemp\diagonal{\mu}}{0}.\]
 Therefore, if $\infnorm{\mu}\leq 1$, then
-$A\lt(\rztope{V}{0}\rt)\subseteq \rztope{V}{0}$.
+$A\lt(\rztope{\ptemp}{0}\rt)\subseteq \rztope{\ptemp}{0}$.
 \end{proposition}
 % 
 \begin{proof}
-We have $A\lt(\cztope{V}{0}\rt) =
-A\set{V\zeta:~\zeta\in\compnums^m,\infnorm{\zeta}\leq 1}$\\
-$=\set{AV\zeta:~\zeta\in\compnums^m,\infnorm{\zeta}\leq 1}
-= \cztope{AV}{0}$.  Next $\cztope{AV}{0}
-= \cztope{V\diagonal{\mu}}{0}$, which proves the first part of the
+We have $A\lt(\cztope{\ptemp}{0}\rt) =
+A\set{\ptemp\zeta:~\zeta\in\compnums^m,\infnorm{\zeta}\leq 1}$\\
+$=\set{A\ptemp\zeta:~\zeta\in\compnums^m,\infnorm{\zeta}\leq 1}
+= \cztope{A\ptemp}{0}$.  Next $\cztope{A\ptemp}{0}
+= \cztope{\ptemp\diagonal{\mu}}{0}$, which proves the first part of the
 Proposition.  For the second part, we are given that
-$\infnorm{\mu}\leq 1$.  Consider a point $y\in \cztope{V\diagonal{\mu}}{0}$,
+$\infnorm{\mu}\leq 1$.  Consider a point $y\in \cztope{\ptemp\diagonal{\mu}}{0}$,
 described by the generators as
-$y = V\diagonal{\mu}\delta:\infnorm{\delta}\leq 1$.
+$y = \ptemp\diagonal{\mu}\delta:\infnorm{\delta}\leq 1$.
 Let $\zeta = \diagonal{\mu}\delta$. Then
 $\infnorm{\zeta} \leq \infnorm{\mu}\infnorm{\delta} \leq 1$.  So, 
-$y=V\zeta$ where $\infnorm{\zeta}\leq 1$, and this implies $y\in \cztope{V}{0}$.
-Therefore, $A\lt(\cztope{V}{0}\rt)=\cztope{AV}{0}\subseteq \cztope{V}{0}$.
+$y=\ptemp\zeta$ where $\infnorm{\zeta}\leq 1$, and this implies $y\in \cztope{\ptemp}{0}$.
+Therefore, $A\lt(\cztope{\ptemp}{0}\rt)=\cztope{A\ptemp}{0}\subseteq \cztope{\ptemp}{0}$.
 \end{proof}
 %
-In reachability analysis based verification algorithms, the quality of
-overapproximation of the reachable set computed by the algorithm, i.e,
-the difference in some measure between the actual reachable set and
-the overapproximation, affects the accuracy of verification.  So, for
-any set representation used in reachability analysis, it is desirable
-that there is an efficient way of refining a set so as to obtain
-smaller sets that overapproximate the reachable set.  In this context,
-we note that for a basic representation of a complex zonotope as given
-in the above definition, adding a generator to the representation
-increases the size of the complex zonotope.  Moreover, adding a
-generator can distort the positive invariance of the set itself, as
-illustrated in Figure~\ref{todo}.  Instead, we should be able to
-change and also add generators to the complex zonotope in a way that
-we obtain smaller overapproximations of during reachable set
-computations.  In this regard, we introduce a more general
-representation of a complex zonotope, called a template complex
-zonotope, where in addition to the set of generators, called a
-template, we have a vector of scaling factors that defines the
-magnitude of contribution of each generator to the size of the set.
-The template complex zonotope representation and its advantage
-compared to the previous basic representation of a complex zonotope is
-discussed in the following section.
-%
 \section{Template complex zonotope}
+In reachability analysis based verification algorithms, the quality of
+over-approximation of the reachable set computed by the algorithm, i.e,
+the difference between the actual reachable set and the
+over-approximation, affects the accuracy of verification.  So, for any
+set representation used in reachability analysis, it is desirable that
+there is an efficient way of refining a set to obtain smaller sets
+that over-approximate the reachable set.  However, in the case of the
+basic representation of a complex zonotope as given in the above
+definition, adding a generator to the representation increases the
+size of the complex zonotope.  Moreover, adding a generator can
+violate positive invariance, as shown in Figure~\ref{todo}.  Instead,
+to refine a complex zonotope, we may try to adjust the magnitude of
+contribution of each generator to the size of the set in a way that
+does not increase the size of the set and also preserves positive
+invariance.  Therefore, in addition to the generators in the
+representation of a complex zonotope, we can consider the magnitude of
+contribution of each generator as a part of the representation.  This
+would be a more general representation of a complex zonotope, which we
+shall call as a template complex zonotope, and is defined as follows.
+
+A template complex zonotope is a linear combination of complex valued
+vectors that constitute the columns of a matrix, which we call as the
+template, such that the magnitude of each combining coefficient is
+bounded in its absolute value by a positive real, called a scaling factor.
+%
+\begin{definition}[Template complex zonotope]
+Let us consider $\ptemp\in\mat{n}{m}{\compnums}$ called the template,
+$\sfact\in\reals^m_{\geq 0}$ called scaling factors and
+$\cen\in\compnums^n$ called the center.  Then the following is a template
+complex zonotope.
+%
+\begin{equation}
+\tcztope{\ptemp}{\cen}{\sfact}
+= \set{\ptemp\zeta+\cen:~\absolute{\zeta_i}\leq \sfact_i~\forall
+i\in\set{1,...,m}}.
+\end{equation}
+\end{definition}
+%
+The scaling factors of a template complex zonotope can be treated as
+variables that can be adjusted to find better over-approximations of a
+reachable set.  For example, Figure~\ref{toref} illustrates the
+different over-approximations of a convex hull of five points by a
+complex zonotopes with a fixed template but different scaling factors.
+%
+\section{Operations on a template complex zonotope}
+In the reachability analysis of affine hybrid systems, linear
+transformation, Minkowski sum, inclusion-checking and intersection
+with linear constraints are the essential operations used in the
+computation of reachable sets.  In this section, we describe the
+computation of linear transformation, Minkowski sum and
+inclusion-checking for template complex zonotopes.  Complex zonotopes
+are not closed under intersection with linear constraints.  We address
+the issue of intersection with linear constraints in a latter chapter
+by using a more general representation of complex zonotopes.
+
+Template complex zonotopes are closed under linear transformation and
+Minkowski sum operations and these are straightforward algebraic
+computations, just like in the case of simple (real) zonotopes.
+%
+\begin{proposition}[Linear transformation: template complex zonotope]
+Let $A\in\mat{n}{n}{\reals}$ and $\ptemp\in\mat{n}{m}{\compnums}$.
+Given a template complex zonotope $\tcztope{\ptemp}{\cen}{\sfact}$, we
+get another template complex zonotope after multiplying the former
+template complex zonotope by the matrix $A$, which is computed as
+follows.
+%
+\begin{equation}
+A\tcztope{\ptemp}{\cen}{\sfact}=\tcztope{A\ptemp}{A\cen}{\sfact}.
+\end{equation}
+%
+\end{proposition}
+%
+\begin{proof}
+First we shall show
+$A\tcztope{\ptemp}{\cen}{\sfact}\subseteq\tcztope{A\ptemp}{A\cen}{\sfact}.$
+Let $y\in\tcztope{\ptemp}{\cen}{\sfact}$.  Then $y=\ptemp\zeta+\cen$
+for some $\zeta\in\compnums^m$ such that
+$\absolute{\zeta}\leq \sfact$.  We have $Ay=A\ptemp\zeta+A\cen$.  So,
+$Ay\in\tcztope{A\ptemp}{Ac}{\sfact}$.  Therefore,
+$A\tcztope{\ptemp}{\cen}{\sfact}\subseteq\tcztope{A\ptemp}{A\cen}{\sfact}.$
+ 
+Now we have to show $\tcztope{A\ptemp}{A\cen}{\sfact}\subseteq
+A\tcztope{\ptemp}{\cen}{\sfact}$.  Let
+$z\in\tcztope{A\ptemp}{Ac}{\sfact}$.  Then $z=A\ptemp\zeta^\pr+A\cen$
+for some $\zeta^\pr\in\compnums^m$ such that
+$\absolute{\zeta^\pr}\leq \sfact$.  Equivalently, $z=
+A(\ptemp\zeta^\pr+\cen)$.  So, $z\in
+A\tcztope{\ptemp}{\cen}{\sfact}$.  Therefore, $\tcztope{A\ptemp}{A\cen}{\sfact}\subseteq
+A\tcztope{\ptemp}{\cen}{\sfact}$.
+From the previous two conclusions, we have
+$A\tcztope{\ptemp}{\cen}{\sfact}=\tcztope{A\ptemp}{A\cen}{\sfact}.$
+\end{proof}
+%
+\begin{proposition}[Minkowski sum: template complex zonotopes]
+Let $\tcztope{\ptemp}{\cen}{\sfact}$ and
+$\tcztope{\ptemp^\pr}{\cen^\pr}{\sfact^\pr}$ be two template complex
+zonotopes which are subsets of $\compnums^n$, i.e.,
+$\cen,\cen^\pr\in\compnums^n$.  The Minkowski sum of the two
+template complex zonotopes is another template complex zonotope,
+which is computed as follows.
+%
+\begin{equation}
+\minsum{\tcztope{\ptemp}{\cen}{\sfact}}{\tcztope{\ptemp^\pr}{\cen^\pr}{\sfact^\pr}}
+= \tcztope{\begin{bmatrix}\ptemp & \ptemp^\pr\end{bmatrix}}{\cen+\cen^\pr}{\begin{bmatrix}\sfact\\\sfact^\pr\end{bmatrix}}
+\end{equation}
+\end{proposition}
+%
+\begin{proof}
+First we shall show that \\$\minsum{\tcztope{\ptemp}{\cen}{\sfact}}{\tcztope{\ptemp^\pr}{\cen^\pr}{\sfact^\pr}}
+\subseteq \tcztope{\begin{bmatrix}\ptemp
+& \ptemp^\pr\end{bmatrix}}{\cen+\cen^\pr}{\begin{bmatrix}\sfact\\\sfact^\pr\end{bmatrix}}$.
+Let $y\in\tcztope{\ptemp}{\cen}{\sfact}$ and
+$y^\pr\in\tcztope{\ptemp^\pr}{\cen^\pr}{\sfact^\pr}$ such that
+$y=\ptemp\zeta+\cen:\absolute{\zeta}\leq \sfact$ and
+$y^\pr=\ptemp^\pr\zeta^\pr+\cen^\pr:\absolute{\zeta^\pr}\leq \sfact^\pr$
+for some complex valued vectors $\zeta$ and $\zeta^\pr$.  Then
+$y+y^\pr = \ptemp\zeta+\ptemp^\pr\zeta^\pr = \begin{bmatrix} \ptemp
+& \ptemp^\pr\end{bmatrix}\begin{bmatrix} \zeta\\\zeta^\pr\end{bmatrix}$.
+We have
+$\absolute{\begin{matrix} \zeta\\\zeta^\pr\end{matrix}}\leq\begin{bmatrix}\sfact\\\sfact^\pr\end{bmatrix}$.
+Therefore,
+$\minsum{\tcztope{\ptemp}{\cen}{\sfact}}{\tcztope{\ptemp^\pr}{\cen^\pr}{\sfact^\pr}}
+\subseteq \tcztope{\begin{bmatrix}\ptemp
+& \ptemp^\pr\end{bmatrix}}{\cen+\cen^\pr}{\begin{bmatrix}\sfact\\\sfact^\pr\end{bmatrix}}$.
+Next we have to show $\tcztope{\begin{bmatrix}\ptemp
+& \ptemp^\pr\end{bmatrix}}{\cen+\cen^\pr}{\begin{bmatrix}\sfact\\\sfact^\pr\end{bmatrix}} \subseteq \minsum{\tcztope{\ptemp}{\cen}{\sfact}}{\tcztope{\ptemp^\pr}{\cen^\pr}{\sfact^\pr}}$.
+Consider that $y\in\tcztope{\begin{bmatrix}\ptemp
+& \ptemp^\pr\end{bmatrix}}{\cen+\cen^\pr}{\begin{bmatrix}\sfact\\\sfact^\pr\end{bmatrix}}$.
+Then $y=\begin{bmatrix}\ptemp
+&\ptemp^\pr\end{bmatrix}\begin{bmatrix}\zeta\\ \zeta^\pr\end{bmatrix}=\ptemp\zeta+\ptemp\zeta^\pr$
+for some complex valued vectors $\zeta$ and $\zeta^\pr$ such that $\absolute{\zeta}\leq \sfact$ and
+$\absolute{\zeta^\pr}\leq\sfact^\pr$.  So,
+$y\in\minsum{\tcztope{\ptemp}{\cen}{\sfact}}{\tcztope{\ptemp^\pr}{\cen^\pr}{\sfact^\pr}}$.
+Therefore, $\tcztope{\begin{bmatrix}\ptemp
+& \ptemp^\pr\end{bmatrix}}{\cen+\cen^\pr}{\begin{bmatrix}\sfact\\\sfact^\pr\end{bmatrix}} \subseteq \minsum{\tcztope{\ptemp}{\cen}{\sfact}}{\tcztope{\ptemp^\pr}{\cen^\pr}{\sfact^\pr}}$.
+From the previous two conclusions, we get
+$\minsum{\tcztope{\ptemp}{\cen}{\sfact}}{\tcztope{\ptemp^\pr}{\cen^\pr}{\sfact^\pr}}
+= \tcztope{\begin{bmatrix}\ptemp
+& \ptemp^\pr\end{bmatrix}}{\cen+\cen^\pr}{\begin{bmatrix}\sfact\\\sfact^\pr\end{bmatrix}}$.
+\end{proof}
+%
+While computing positive invariants using a set representation,
+deciding the inclusion of a given set inside another set is necessary
+for ascertaining the positive invariance of the latter.  In the case
+of complex zonotopes, checking the exact inclusion is a non-convex
+optimization problem.  However, we shall later propose a convex
+relaxation, which is a sufficient condition for checking the
+inclusion.  But first we show the non-convexity of the exact inclusion
+checking problem.  Deciding the inclusion between any two complex
+zonotopes amounts to solving the following optimization problem.
+%
+\begin{lemma}[Exact inclusion: template complex zonotopes]
+Consider two template complex zonotopes
+$\tcztope{\ptemp}{\cen}{\sfact}$ and
+$\tcztope{\ptemp^\pr}{\cen^\pr}{\sfact^\pr}$ such that
+$\ptemp\in\mat{n}{m}{\compnums}$ and $\ptemp^\pr\in\mat{n}{r}{\compnums}$.  The inclusion
+$\tcztope{\ptemp^\pr}{\cen^\pr}{\sfact^\pr}\subseteq\tcztope{\ptemp}{\cen}{\sfact}$
+holds if and only if
+\begin{equation}\label{eqn:exact-inclusion}
+\max_{\set{\zeta^\pr\in\compnums^{r}:\absolute{\zeta^\pr}\leq \sfact^\pr}}\min_{\set{\zeta\in\compnums^m:\ptemp\zeta=\ptemp^\pr\zeta^\pr}}\max_{i=1}^m\lt(\absolute{\zeta}-s\rt)\leq 0
+\end{equation}
+\end{lemma}
+%
+\begin{proof}
+We have
+$\tcztope{\ptemp^\pr}{\cen^\pr}{\sfact^\pr}\subseteq\tcztope{\ptemp}{\cen}{\sfact}$
+iff for every point $\zeta^\pr\in\compnums^r:\absolute{\zeta^\pr}\leq \sfact^\pr$,
+there exists
+$\zeta\in\compnums^m:\ptemp\zeta=\ptemp^\pr\zeta^\pr~\wedge~\absolute{\zeta}\leq
+\sfact$.  The former statement is expressed in terms of optimization
+as \vspace{-2.2em}\[\hspace{6em}\max_{\set{\zeta^\pr\in\compnums^{r}:\absolute{\zeta^\pr}\leq \sfact^\pr}}\min_{\set{\zeta\in\compnums^m:\ptemp\zeta=\ptemp^\pr\zeta^\pr}}\max_{i=1}^m\lt(\absolute{\zeta}-s\rt)\leq
+0. \]
+\end{proof}
+%
+In the above Equation~\ref{eqn:exact-inclusion}, if
+$\ptemp\zeta=\ptemp\zeta^\pr$ has a solution $\zeta^*$, then any other
+solution can be written as $\zeta^*+y$ such that $y$ belongs to the
+complex valued null-space of $\ptemp$.  So, the value computed by the
+term \[\min_{\set{\zeta\in\compnums:\ptemp\zeta=\ptemp^\pr\zeta^\pr}}\max_{i=1}^m\lt(\absolute{\zeta}-s\rt)\]
+is a point-wise minimum of a set of quadratic convex functions, which
+is consequently neither convex nor concave in general.  Therefore, the
+above maximization is defined over a non-concave function, and so does
+not belong to the class of convex optimization.
+
+Now we shall derive a sufficient condition for inclusion between two
+template complex zonotopes, which is expressed as a set of second
+order conic constraints (SOCC) over the scaling factors and some
+auxillary variables.  {\color{blue} More explanation required.}
+
+\begin{lemma}
+Let $\sfact\in\reals^m{\geq 0}$, $\sfact^\pr\in\reals^r_{\geq 0}$ and
+$\zeta^\pr\in\compnums^r$ such that
+$\absolute{\zeta^\pr}\leq\sfact^\pr$.  Let
+$\ptemp\in\mat{n}{m}{\compnums}$ and
+$\ptemp^\pr\in\mat{m}{r}{\compnums}$ be two complex valued matrices
+such that $\ptemp^\pr\diagonal{\sfact^\pr}=\ptemp\tmat$ where $\tmat$
+is a complex valued matrix.  Consider a function
+$\func{\nu}{\reals_{\geq 0}^r}{\reals_{>0}^r}$ as $\forall
+j\in\set{1,...,m}$, $\nu_j(\sfact^\pr)=1$ if $\sfact^\pr_j=0$ and
+$\nu_j(\sfact^\pr)=\sfact^\pr_i$ otherwise.  We have the following
+inequality.
+\begin{equation}\label{eqn:transfer-matrix}
+\min_{\set{\zeta\in\compnums:\ptemp\zeta=\ptemp^\pr\zeta^\pr}}\max_{i=1}^m\lt(\absolute{\zeta}-\sfact\rt)\leq \max_{i=1}^m\lt(\sum_{j=1}^r\absolute{\tmat_{ij}}-\sfact\rt).
+\end{equation}
+\end{lemma}
+\begin{proof}
+Firstly, note that $\diagonal{\nu\lt(\sfact^\pr\rt)}$ is an invertible
+matrix because $\nu\lt(\sfact^\pr\rt)$ is a vector of positive reals by
+definition.  Since $\ptemp^\pr\diagonal{\sfact^\pr}=\ptemp\tmat$, we
+can write $\ptemp^\pr\zeta^\pr
+= \ptemp^\pr\diagonal{\nu\lt(\sfact^\pr\rt)}\lt(\diagonal{\nu\lt(\sfact^\pr\rt)}\rt)^{-1}\zeta^\pr$
+$=\ptemp\tmat\lt(\diagonal{\nu\lt(\sfact^\pr\rt)}\rt)^{-1}\zeta^\pr$.
+This gives
+\begin{equation}\label{eqn:ref1}
+\min_{\set{\zeta\in\compnums:\ptemp\zeta=\ptemp^\pr\zeta^\pr}}\max_{i=1}^m\lt(\absolute{\zeta}-\sfact\rt)\leq
+\max_{i=1}^m\lt(\absolute{\tmat\lt(\diagonal{\nu\lt(\sfact^\pr\rt)}\rt)^{-1}\zeta^\pr}-\sfact\rt).
+\end{equation}
+Since $\absolute{\zeta^\pr}\leq\sfact^\pr$ as given and
+$\sfact^\pr\leq \nu\lt(\sfact^\pr\rt)$ by definition, so
+$\infnorm{\lt(\diagonal{\nu\lt(\sfact^\pr\rt)}\rt)^{-1}\zeta^\pr}\leq
+1$.  So, the R.H.S of Equation~\ref{eqn:ref1} can be bounded above by
+$
+\max_{i=1}^m\lt(\sum_{j=1}^r\absolute{\tmat_{ij}}-\sfact\rt).
+$
+\end{proof}
+
