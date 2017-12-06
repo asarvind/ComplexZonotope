@@ -162,7 +162,7 @@ Let $A\in\mat{n}{n}{\reals}$ and $\ptemp\in\mat{n}{m}{\compnums}$.
 Given a template complex zonotope $\tcztope{\ptemp}{\cen}{\sfact}$, we
 get another template complex zonotope after multiplying the former
 template complex zonotope by the matrix $A$, which is computed as
-follows.
+follows. 
 %
 \begin{equation}
 A\tcztope{\ptemp}{\cen}{\sfact}=\tcztope{A\ptemp}{A\cen}{\sfact}.
@@ -257,70 +257,91 @@ $\ptemp\in\mat{n}{m}{\compnums}$ and $\ptemp^\pr\in\mat{n}{r}{\compnums}$.  The 
 $\tcztope{\ptemp^\pr}{\cen^\pr}{\sfact^\pr}\subseteq\tcztope{\ptemp}{\cen}{\sfact}$
 holds if and only if
 \begin{equation}\label{eqn:exact-inclusion}
-\max_{\set{\zeta^\pr\in\compnums^{r}:\absolute{\zeta^\pr}\leq \sfact^\pr}}\min_{\set{\zeta\in\compnums^m:\ptemp\zeta=\ptemp^\pr\zeta^\pr}}\max_{i=1}^m\lt(\absolute{\zeta}-s\rt)\leq 0
+\max_{\set{\zeta^\pr\in\compnums^{r}:\absolute{\zeta^\pr}\leq \sfact^\pr}}\min_{\set{\zeta\in\compnums^m:\ptemp\zeta=\ptemp^\pr\zeta^\pr+\cen^\pr-\cen}}\max_{i=1}^m\lt(\absolute{\zeta_i}-s_i\rt)\leq 0
 \end{equation}
 \end{lemma}
 %
 \begin{proof}
 We have
 $\tcztope{\ptemp^\pr}{\cen^\pr}{\sfact^\pr}\subseteq\tcztope{\ptemp}{\cen}{\sfact}$
-iff for every point $\zeta^\pr\in\compnums^r:\absolute{\zeta^\pr}\leq \sfact^\pr$,
+iff for every $\zeta^\pr\in\compnums^r:\absolute{\zeta^\pr}\leq \sfact^\pr$,
 there exists
-$\zeta\in\compnums^m:\ptemp\zeta=\ptemp^\pr\zeta^\pr~\wedge~\absolute{\zeta}\leq
+$\zeta\in\compnums^m:\ptemp\zeta+\cen=\ptemp^\pr\zeta^\pr+\cen^\pr~\wedge~\absolute{\zeta}\leq
 \sfact$.  The former statement is expressed in terms of optimization
-as \vspace{-2.2em}\[\hspace{6em}\max_{\set{\zeta^\pr\in\compnums^{r}:\absolute{\zeta^\pr}\leq \sfact^\pr}}\min_{\set{\zeta\in\compnums^m:\ptemp\zeta=\ptemp^\pr\zeta^\pr}}\max_{i=1}^m\lt(\absolute{\zeta}-s\rt)\leq
+as \vspace{-2.2em}\[\hspace{10em}\max_{\set{\zeta^\pr\in\compnums^{r}:\absolute{\zeta^\pr}\leq \sfact^\pr}}\min_{\set{\zeta\in\compnums^m:\ptemp\zeta=\ptemp^\pr\zeta^\pr+\cen-\cen^\pr}}\max_{i=1}^m\lt(\absolute{\zeta_i}-s_i\rt)\leq
 0. \]
 \end{proof}
 %
 In the above Equation~\ref{eqn:exact-inclusion}, if
-$\ptemp\zeta=\ptemp\zeta^\pr$ has a solution $\zeta^*$, then any other
-solution can be written as $\zeta^*+y$ such that $y$ belongs to the
+$\ptemp\zeta=\ptemp\zeta^\pr+\cen^\pr+\cen$ has a solution $\zeta^*$, then any other
+solution can be written as $\zeta^*+v$ such that $v$ belongs to the
 complex valued null-space of $\ptemp$.  So, the value computed by the
-term \[\min_{\set{\zeta\in\compnums:\ptemp\zeta=\ptemp^\pr\zeta^\pr}}\max_{i=1}^m\lt(\absolute{\zeta}-s\rt)\]
+term \[\min_{\set{\zeta\in\compnums:\ptemp\zeta=\ptemp^\pr\zeta^\pr+\cen^\pr-\cen}}\max_{i=1}^m\lt(\absolute{\zeta_i}-s_i\rt)\]
 is a point-wise minimum of a set of quadratic convex functions, which
-is consequently neither convex nor concave in general.  Therefore, the
-above maximization is defined over a non-concave function, and so does
+is consequently neither convex nor concave in general.  As the
+above maximization is defined over a non-concave function, it does
 not belong to the class of convex optimization.
 
-Now we shall derive a sufficient condition for inclusion between two
-template complex zonotopes, which is expressed as a set of second
-order conic constraints (SOCC) over the scaling factors and some
-auxillary variables.  {\color{blue} More explanation required.}
+Now we shall discuss a set of lemmas that lead to a sufficient
+condition for inclusion between two template complex zonotopes, which
+is expressed as a set of second order conic constraints (SOCC) over
+the scaling factors and some auxillary variables.  {\color{blue} More
+  explanation required.}
 
 \begin{lemma}
-Let $\sfact\in\reals^m{\geq 0}$, $\sfact^\pr\in\reals^r_{\geq 0}$ and
-$\zeta^\pr\in\compnums^r$ such that
-$\absolute{\zeta^\pr}\leq\sfact^\pr$.  Let
-$\ptemp\in\mat{n}{m}{\compnums}$ and
-$\ptemp^\pr\in\mat{m}{r}{\compnums}$ be two complex valued matrices
-such that $\ptemp^\pr\diagonal{\sfact^\pr}=\ptemp\tmat$ where $\tmat$
-is a complex valued matrix.  Consider a function
-$\func{\nu}{\reals_{\geq 0}^r}{\reals_{>0}^r}$ as $\forall
-j\in\set{1,...,m}$, $\nu_j(\sfact^\pr)=1$ if $\sfact^\pr_j=0$ and
-$\nu_j(\sfact^\pr)=\sfact^\pr_i$ otherwise.  We have the following
-inequality.
+  Let $\sfact\in\reals^m{\geq 0}$, $\sfact^\pr\in\reals^r_{\geq 0}$
+  and $\zeta^\pr\in\compnums^r$ such that
+  $\absolute{\zeta^\pr}\leq\sfact^\pr$ and
+  $\cen,\cen^\pr\in\compnums^n$.  Let $\ptemp\in\mat{n}{m}{\compnums}$
+  and $\ptemp^\pr\in\mat{r}{m}{\compnums}$ be two complex valued
+  matrices such that $\ptemp^\pr\diagonal{\sfact^\pr}=\ptemp\tmat$
+  where $\tmat$ is a complex valued matrix.  Let $y\in\compnums^m$
+  such that $\ptemp y=\cen^\pr-\cen$.  Consider a function
+  $\func{\nu}{\reals_{\geq 0}^r}{\reals_{>0}^r}$ as $\forall
+  j\in\set{1,...,m}$, $\nu_j(\sfact^\pr)=1$ if $\sfact^\pr_j=0$ and
+  $\nu_j(\sfact^\pr)=\sfact^\pr_i$ otherwise.  We have the following
+  inequality.
 \begin{equation}\label{eqn:transfer-matrix}
-\min_{\set{\zeta\in\compnums:\ptemp\zeta=\ptemp^\pr\zeta^\pr}}\max_{i=1}^m\lt(\absolute{\zeta}-\sfact\rt)\leq \max_{i=1}^m\lt(\sum_{j=1}^r\absolute{\tmat_{ij}}-\sfact\rt).
+\min_{\set{\zeta\in\compnums:\ptemp\zeta=\ptemp^\pr\zeta^\pr+\cen^\pr-\cen}}\max_{i=1}^m\lt(\absolute{\zeta_i}-\sfact_i\rt)\leq \max_{i=1}^m\lt(\sum_{j=1}^r\absolute{\tmat_{ij}}-\sfact_i\rt).
 \end{equation}
+{\color{red} correct lemma}.
 \end{lemma}
 \begin{proof}
-Firstly, note that $\diagonal{\nu\lt(\sfact^\pr\rt)}$ is an invertible
-matrix because $\nu\lt(\sfact^\pr\rt)$ is a vector of positive reals by
-definition.  Since $\ptemp^\pr\diagonal{\sfact^\pr}=\ptemp\tmat$, we
-can write $\ptemp^\pr\zeta^\pr
-= \ptemp^\pr\diagonal{\nu\lt(\sfact^\pr\rt)}\lt(\diagonal{\nu\lt(\sfact^\pr\rt)}\rt)^{-1}\zeta^\pr$
-$=\ptemp\tmat\lt(\diagonal{\nu\lt(\sfact^\pr\rt)}\rt)^{-1}\zeta^\pr$.
-This gives
-\begin{equation}\label{eqn:ref1}
-\min_{\set{\zeta\in\compnums:\ptemp\zeta=\ptemp^\pr\zeta^\pr}}\max_{i=1}^m\lt(\absolute{\zeta}-\sfact\rt)\leq
-\max_{i=1}^m\lt(\absolute{\tmat\lt(\diagonal{\nu\lt(\sfact^\pr\rt)}\rt)^{-1}\zeta^\pr}-\sfact\rt).
-\end{equation}
+{\color{red}{Correct proof}}
+  Firstly, note that $\diagonal{\nu\lt(\sfact^\pr\rt)}$ is an
+  invertible matrix because $\nu\lt(\sfact^\pr\rt)$ is a vector of
+  positive reals by definition.  We can write
+  \[\ptemp^\pr\zeta^\pr+\cen^\pr-\cen =
+  \ptemp^\pr\diagonal{\nu\lt(\sfact^\pr\rt)}\lt(\diagonal{\nu\lt(\sfact^\pr\rt)}\rt)^{-1}\zeta^\pr+\cen^\pr-\cen.\]
+  Since $\ptemp^\pr\diagonal{\sfact^\pr}=\ptemp\tmat$ and $\ptemp
+  y=\cen^\pr-\cen$, by substitution in the above we get
+  \[\ptemp^\pr\zeta^\pr+\cen^\pr-\cen = \ptemp\lt(\tmat\lt(\diagonal{\nu\lt(\sfact^\pr\rt)}\rt)^{-1}\zeta^\pr+y\rt).\]
+  This gives
+\begin{eqnarray}\label{eqn:ref1}
+\begin{split}
+&
+\min_{\set{\zeta\in\compnums:\ptemp\zeta=\ptemp^\pr\zeta^\pr+\cen^\pr-\cen}}\max_{i=1}^m\lt(\absolute{\zeta_i}-\sfact_i\rt)\\
+& \leq
+\max_{i=1}^m\lt(\absolute{\lt(\tmat\lt(\diagonal{\nu\lt(\sfact^\pr\rt)}\rt)^{-1}\zeta^\pr\rt)_i}+\absolute{y_i}-\sfact_i\rt).
+\end{split}
+\end{eqnarray}
 Since $\absolute{\zeta^\pr}\leq\sfact^\pr$ as given and
 $\sfact^\pr\leq \nu\lt(\sfact^\pr\rt)$ by definition, so
 $\infnorm{\lt(\diagonal{\nu\lt(\sfact^\pr\rt)}\rt)^{-1}\zeta^\pr}\leq
-1$.  So, the R.H.S of Equation~\ref{eqn:ref1} can be bounded above by
-$
-\max_{i=1}^m\lt(\sum_{j=1}^r\absolute{\tmat_{ij}}-\sfact\rt).
-$
+1$.  Using this inequality, we get that
+$\max_{i=1}^m\lt(\sum_{j=1}^r\absolute{\tmat_{ij}}-\sfact_i\rt)$ is an
+upper bound on the R.H.S of Equation~\ref{eqn:ref1}.
 \end{proof}
-
+%
+Based on the above lemma, we define a relation between two complex
+zonotopes which is a sufficient condition for the inclusion relation.
+We also show that the relation is a partial order.
+%
+\begin{definition}
+We define a relation $\order$ between two complex zonotopes as
+follows.  Let $\tcztope{\ptemp}{\cen}{\sfact}$ and
+$\tcztope{\ptemp^\pr}{\cen^\pr}{\sfact^\pr}$ be two complex
+zonotopes such that $\ptemp\in\mat{n}{m}{\compnums}$ and
+$\ptemp^\pr\in\mat{n}{r}{\compnums}$.  Then
+$\tcztope{\ptemp}{\cen}{\sfact}\order\tcztope{\ptemp^\pr}{\cen^\pr}{\sfact^\pr}$
+\end{definition}
