@@ -1,10 +1,10 @@
 
-% Text display
+%%% Text display
 \newcommand{\col}[2]{{\color{#1} #2}}
 \newcommand{\textcol}[1]{\col{blue}{#1}}
 \newcommand{\eqncol}[1]{\col{purple}{#1}}
 
-% Symbols
+%%% Symbols
 \newcommand{\ra}{\rightarrow}
 \newcommand{\ov}{\overline}
 \newcommand{\ur}{\underline}
@@ -18,119 +18,66 @@
 \newcommand{\imp}{\implies}
 \newcommand{\dimp}{\Leftrightarrow}
 \newcommand{\wh}{\widehat}
-\newcommand{\dg}{\mc{D}}
 \newcommand{\dpr}{{\prime\prime}}
 
-% Alignment operations
-\newcommand{\Calign}[2]{\begin{array}{l}{#1}\\{#2} \end{array}}
-\newcommand{\vtab}{$~$}
-
-% Sets
-\newcommand{\realset}{\mb{R}}
-\newcommand{\comprealset}{\mb{\ov{R}}}
-\newcommand{\complexset}{\mb{C}}
-\newcommand{\pint}{\mb{Z}_{> 0}}
-\newcommand{\wholenums}{\mb{Z}_{\geq 0}}
-\newcommand{\nzrl}{\mb{R}_{\geq 0}}
-\newcommand{\prl}{\mb{R}_{>0}}
-\newcommand{\rl}{\mb{R}}
-\newcommand{\fin}{\forall i\in\{1,...,n\}}
-\newcommand{\tup}[1]{\{1,...,#1\}}
-\newcommand{\seq}[2]{_{#1=1}^#2}
-\newcommand{\mCnn}{\mb{M}_{n\times n}(\mb{C})}
-\newcommand{\mCmm}{\mb{M}_{m\times m}(\mb{C})}
-\newcommand{\mCpn}{\mb{M}_{p\times n}(\mb{C})}
-\newcommand{\mCnm}{\mb{M}_{n\times m}(\mb{C})}
-\newcommand{\mRnn}{\mb{M}_{n\times n}(\mb{R})}
-\newcommand{\mRpn}{\mb{M}_{p\times n}(\mb{R})}
-\newcommand{\mRnm}{\mb{M}_{n\times m}(\mb{R})}
-\newcommand{\mRno}{{{\mb{R}}}^n_{\geq 0}}
-\newcommand{\mRmo}{{{\mb{R}}}^m_{\geq 0}}
-\newcommand{\mRo}{\mb{R}_{\geq 0}}
-\newcommand{\mRn}{{\mb{R}}^n}
-\newcommand{\mRm}{{\mb{R}}^m}
-\newcommand{\mCn}{\mb{C}^n}
-\newcommand{\mCm}{\mb{C}^m}
-\newcommand{\inv}{\mb{GL}_n(\mb{R})}
-\newcommand{\id}[1]{\mb{I}_{#1\times #1}}
-\newcommand{\mat}[3]{\mb{M}_{#1\times #2}(\mb{#3})}
-
-% constants
-\newcommand{\iu}{{i\mkern1mu}}
-
-
-% matrix operations
-\newcommand{\ColumnJoin}[2]{\left[\begin{array}{c}{#1}\\{#2} \end{array}\right]}
-\newcommand{\cjoin}[3]{\begin{array}{c}#1\\#2\\#3\end{array}}
-\newcommand{\pseudoinverse}[1]{#1^{\bm{\dagger}}}
-\newcommand{\pinv}{\pseudoinverse}
-\newcommand{\conjtranspose}[1]{#1^*}
-
-%% Local macros:
-
-% Operators
-\DeclareMathOperator{\real}{\operatorname{Re}}
-\DeclareMathOperator{\img}{\operatorname{Im}}
-\newcommand{\minaffine}[2]{\widehat{\Lambda}\lt(#1,#2\rt)}
-\newcommand{\maxaffine}[2]{\overline{\Lambda}\lt(#1,#2\rt)}
-\newcommand{\minaffinefunc}{\widehat{\Lambda}}
-\newcommand{\maxaffinefunc}{\overline{\Lambda}}
-\newcommand{\minaffineset}{\widehat{\Delta}}
-\newcommand{\maxaffineset}{\overline{\Delta}}
+%%% Relations
+% ordering between complex zonotopes
 \newcommand{\order}{\sqsubseteq}
-\newcommand{\support}[3]{\rho\lt(#2,#1,#3\rt)}
 
-% Set notations
-\newcommand{\zon}[3]{\mathcal{Z}\lt(#1,#2,#3\rt)}
-\newcommand{\CZ}{\lt(V,c,s\rt)}
-\newcommand{\GCZ}{\gcz{V}{c}{s}{W}{l}{u}}
-\newcommand{\cz}[3]{\mc{C}\lt(#1,#2,#3\rt)}
-\newcommand{\CZO}{\lt(V,0,s\rt)}
-\newcommand{\czo}[2]{\mc{Z}\lt(#1,0,#2\rt)}
-\newcommand{\trj}[2]{{\bf #1}(#2)}
-\newcommand{\IncTcz}[6]{\mc{T}\lt(#1,#2,#3,#4,#5,#6\rt)}
-\newcommand{\IncGcz}[6]{\mc{G}\lt(#1,#2,#3,#4,#5,#6\rt)}
-\newcommand{\Ptope}[3]{\mc{P}\left(#1,#2,#3\right)}
-\newcommand{\polytope}[2]{\mc{J}\lt(#1,#2\rt)}
-\newcommand{\gcz}[6]{\mathcal{G}\lt(#1,#2,#3,#4,#5,#6\rt)}
-\newcommand{\sptope}[3]{\mathcal{P}\lt(#1,#2,#3\rt)}
-\newcommand{\contemp}[1]{#1^T\lt(#1#1^T\rt)^{-1}}
-\newcommand{\sectemp}[1]{\contemp{\ptemplate\lt(#1\rt)}}
+%%% System Description
+% state at a time point in a trajectory
+\newcommand{\ptrj}[2]{\textbf{#1}\left(#2\right)}
+% set of states for all time points in an interval
+\newcommand{\itrj}[3]{\textbf{#1}_{\left[#2,#3\right]}}
+% evolution of reach set or derivative with respect to time
+\newcommand{\dynamic}[4]{f\left(\ptrj{#1}{#2},#3,\itrj{#4}{#2}{#2+#3}\right)}
 
-% System notations
-\newcommand{\system}{\mb{H}}
-\newcommand{\locationset}{Q}
-\newcommand{\edgeset}{E}
-\newcommand{\stay}{\gamma}
-\newcommand{\linearmapset}{\mc{A}}
-\newcommand{\inputset}{U}
-\newcommand{\initialset}{\Omega}
-\newcommand{\edge}{\sigma}
-\newcommand{\loc}{q}
-\newcommand{\map}{\linearmapset}
-\newcommand{\inp}{\inputset}
-\newcommand{\edgemap}{\Theta}
-\newcommand{\edgeinp}{\Omega}
-\newcommand{\ptemplate}{\mc{K}}
-\newcommand{\systrj}[2]{\lt({\bf #1},{\bf #2}\rt)}
-\newcommand{\preloc}[1]{#1_{1}}
-\newcommand{\postloc}[1]{#1_{2}}
-\newcommand{\upperedgebound}[1]{#1^+}
-\newcommand{\loweredgebound}[1]{#1^-}
-\newcommand{\reset}[1]{F_{#1}}
-\newcommand{\locationtransition}[1]{R_{#1}}
-\newcommand{\edgetransition}[1]{R_{#1}}
-\newcommand{\staysptope}[1]{\sptope{\ptemplate_{#1}}{\stay^-_{#1}}{\stay^+_{#1}}}
-\newcommand{\guardsptope}[1]{\sptope{\ptemplate_{\preloc{#1}}}{\loweredgebound{#1}\bigvee\stay^-_{\preloc{#1}}}{\upperedgebound{#1}\bigwedge\stay^+_{\preloc{#1}}}}
-\newcommand{\hybridset}{\Gamma}
-\newcommand{\safeset}{\mc{S}}
+%%% functions/operations
+% infinity norm
+\newcommand{\infnorm}[1]{\left\|\right #1\|_{\infty}}
+% absolute value
+\newcommand{\absolute}[1]{\left|#1\right|}
+% Minkowski sum
+\newcommand{\minkowski}[2]{#1\oplus #2}
 
-% Templates
-\newcommand{\priminptemp}{V_{in}}
-\newcommand{\secinptemp}{W_{in}}
+%%% special matrices
+% diagonal matrix
+\newcommand{\diagonal}[1]{\mathcal{D}\left(#1\right)}
 
-% Equations
-\newcommand{\transfer}[4]{#1#4 = #2\dg\lt(#3\rt)}
+
+%%% Sets
+% real numbers
+\newcommand{\reals}{\mathbb{R}}
+% complex numbers
+\newcommand{\compnums}{\mathbb{C}}
+% set notation
+\newcommand{\set}[1]{\left\{#1\right\}}
+% set of matrices
+\newcommand{\mat}[3]{\mathbb{M}_{#1\times #2}\lt(#3\rt)}
+
+
+%%% Set representations
+% real zonotope
+\newcommand{\rztope}[3]{\mathcal{Z}\left(#1,#2,#3\right)}
+% template complex zonotope
+\newcommand{\tcztope}[3]{\mathcal{C}\left(#1,#2,#3\right)}
+% augmented complex zonotope
+\newcommand{\acztope}[6]{\mathcal{C}\left(#1,#2,#3,#4,#5,#6\right)}
+% Primary template
+\newcommand{\ptemp}{\mathcal{V}}
+% center
+\newcommand{\cen}{c}
+% scaling factors
+\newcommand{\sfact}{s}
+% secondary template
+\newcommand{\stemp}{\mathcal{W}}
+% lower coefficient bound
+\newcommand{\lb}{l}
+% upper coefficient bound
+\newcommand{\ub}{u}
+
+%%% Equations
+\newcommand{\transfer}[4]{#1#4 = #2\diagonal{#3}}
 \newcommand{\centertransfer}[4]{#1#4 = #3-#2}
 \newcommand{\scalebound}[5]{\max_{i=1}^{#4}\lt(\lt|#2_i\rt|+\sum_{j=1}^{#5}\lt|#1_{ij}\rt|-#3_i\rt)}
 
