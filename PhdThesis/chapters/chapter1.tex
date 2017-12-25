@@ -288,60 +288,175 @@ is expressed as a set of second order conic constraints (SOCC) over
 the scaling factors and some auxillary variables.  {\color{blue} More
   explanation required.}
 
-\begin{lemma}
-  Let $\sfact\in\reals^m{\geq 0}$, $\sfact^\pr\in\reals^r_{\geq 0}$
+\begin{lemma}~\label{lem:transfer-matrix}
+  Let $\sfact\in\reals^m_{\geq 0}$, $\sfact^\pr\in\reals^r_{\geq 0}$
   and $\zeta^\pr\in\compnums^r$ such that
   $\absolute{\zeta^\pr}\leq\sfact^\pr$ and
   $\cen,\cen^\pr\in\compnums^n$.  Let $\ptemp\in\mat{n}{m}{\compnums}$
-  and $\ptemp^\pr\in\mat{r}{m}{\compnums}$ be two complex valued
-  matrices such that $\ptemp^\pr\diagonal{\sfact^\pr}=\ptemp\tmat$
-  where $\tmat$ is a complex valued matrix.  Let $y\in\compnums^m$
-  such that $\ptemp y=\cen^\pr-\cen$.  Consider a function
-  $\func{\nu}{\reals_{\geq 0}^r}{\reals_{>0}^r}$ as $\forall
-  j\in\set{1,...,m}$, $\nu_j(\sfact^\pr)=1$ if $\sfact^\pr_j=0$ and
-  $\nu_j(\sfact^\pr)=\sfact^\pr_i$ otherwise.  We have the following
-  inequality.
+  and $\ptemp^\pr\in\mat{n}{r}{\compnums}$ such that $\ptemp\tmat=\ptemp^\pr\diagonal{\sfact^\pr}$ and
+  $\ptemp\tvect=\lt(c^\pr-c\rt)$ for a complex matrix $X$ and a
+  complex vector $y$.  Then,
+  %
 \begin{equation}\label{eqn:transfer-matrix}
-\min_{\set{\zeta\in\compnums:\ptemp\zeta=\ptemp^\pr\zeta^\pr+\cen^\pr-\cen}}\max_{i=1}^m\lt(\absolute{\zeta_i}-\sfact_i\rt)\leq \max_{i=1}^m\lt(\sum_{j=1}^r\absolute{\tmat_{ij}}-\sfact_i\rt).
+\min_{\set{\zeta\in\compnums:\ptemp\zeta=\ptemp^\pr\zeta^\pr+\cen^\pr-\cen}}\max_{i=1}^m\lt(\absolute{\zeta_i}-\sfact_i\rt)\leq \max_{i=1}^m\lt(\absolute{\tvect_i}+\sum_{j=1}^r\absolute{\tmat_{ij}}-\sfact_i\rt).
 \end{equation}
-{\color{red} correct lemma}.
+%
 \end{lemma}
+%
 \begin{proof}
-{\color{red}{Correct proof}}
-  Firstly, note that $\diagonal{\nu\lt(\sfact^\pr\rt)}$ is an
-  invertible matrix because $\nu\lt(\sfact^\pr\rt)$ is a vector of
-  positive reals by definition.  We can write
-  \[\ptemp^\pr\zeta^\pr+\cen^\pr-\cen =
-  \ptemp^\pr\diagonal{\nu\lt(\sfact^\pr\rt)}\lt(\diagonal{\nu\lt(\sfact^\pr\rt)}\rt)^{-1}\zeta^\pr+\cen^\pr-\cen.\]
-  Since $\ptemp^\pr\diagonal{\sfact^\pr}=\ptemp\tmat$ and $\ptemp
-  y=\cen^\pr-\cen$, by substitution in the above we get
-  \[\ptemp^\pr\zeta^\pr+\cen^\pr-\cen = \ptemp\lt(\tmat\lt(\diagonal{\nu\lt(\sfact^\pr\rt)}\rt)^{-1}\zeta^\pr+y\rt).\]
-  This gives
-\begin{eqnarray}\label{eqn:ref1}
-\begin{split}
-&
-\min_{\set{\zeta\in\compnums:\ptemp\zeta=\ptemp^\pr\zeta^\pr+\cen^\pr-\cen}}\max_{i=1}^m\lt(\absolute{\zeta_i}-\sfact_i\rt)\\
-& \leq
-\max_{i=1}^m\lt(\absolute{\lt(\tmat\lt(\diagonal{\nu\lt(\sfact^\pr\rt)}\rt)^{-1}\zeta^\pr\rt)_i}+\absolute{y_i}-\sfact_i\rt).
-\end{split}
-\end{eqnarray}
-Since $\absolute{\zeta^\pr}\leq\sfact^\pr$ as given and
-$\sfact^\pr\leq \nu\lt(\sfact^\pr\rt)$ by definition, so
-$\infnorm{\lt(\diagonal{\nu\lt(\sfact^\pr\rt)}\rt)^{-1}\zeta^\pr}\leq
-1$.  Using this inequality, we get that
-$\max_{i=1}^m\lt(\sum_{j=1}^r\absolute{\tmat_{ij}}-\sfact_i\rt)$ is an
-upper bound on the R.H.S of Equation~\ref{eqn:ref1}.
+Consider $\epsilon\in\compnums^{r}$, where for any $i\in\set{1,...,r}$,
+%
+$\left\{
+\begin{array}{l}
+\epsilon_i=\frac{\zeta^\pr}{s^\pr_i}~\text{if}~ s^\pr_i\neq 0\\
+\epsilon_i=0~\text{otherwise}
+\end{array}
+\right.$.
+%
+Since $\absolute{\zeta^\pr}\leq s^\pr$ as given, so
+we have $\zeta^\pr=\diagonal{s^\pr}\epsilon$ and
+$\max_{j=1}^r\absolute{\epsilon_j}\leq 1$.  By
+using the relations given in the lemma, we henceforth get
+%
+\begin{align*}
+&\ptemp^\pr\zeta^\pr+c-c^\pr
+=\ptemp^\pr\diagonal{\sfact^\pr}\epsilon+c-c^\pr
+=\ptemp\tmat\epsilon+\ptemp\tvect
+=\ptemp\lt(\tmat\epsilon+\tvect\rt)
+\end{align*}
+%
+Therefore,
+%
+\begin{align*}
+& \min_{\set{\zeta\in\compnums:\ptemp\zeta=\ptemp^\pr\zeta^\pr+\cen^\pr-\cen}}\max_{i=1}^m\lt(\absolute{\zeta_i}-\sfact_i\rt)\leq \max_{i=1}^m\lt(\absolute{\lt(X\epsilon+y\rt)_i}-\sfact_i\rt)\\
+&\leq \max_{i=1}^m\lt(\absolute{\tvect_i}+\sum_{j=1}^r\absolute{\tmat_{ij}}\absolute{\epsilon_j}-\sfact_i\rt)
+~~\%\%~\text{Using triangular inequality}\\
+& \leq  \max_{i=1}^m\lt(\absolute{\tvect_i}+\sum_{j=1}^r\absolute{\tmat_{ij}}-\sfact_i\rt)
+~~\%\%~\text{Since}~\max_{j=1}^r\absolute{\epsilon_j}\leq 1.
+\end{align*}
+%
 \end{proof}
 %
-Based on the above lemma, we define a relation between two complex
-zonotopes which is a sufficient condition for the inclusion relation.
-We also show that the relation is a partial order.
+Based on the above lemma, we define a relation between two template
+complex zonotopes, which is a sufficient condition for the inclusion
+relation.
 %
-\begin{definition}
-We define a relation $\order$ between two complex zonotopes as
-follows.  Let $\tcztope{\ptemp}{\cen}{\sfact}$ and
-$\tcztope{\ptemp^\pr}{\cen^\pr}{\sfact^\pr}$ be two complex
-zonotopes such that $\ptemp\in\mat{n}{m}{\compnums}$ and
-$\ptemp^\pr\in\mat{n}{r}{\compnums}$.  Then
+\begin{definition}[A relation between template complex zonotopes]
+For two template complex zonotopes $\tcztope{\ptemp}{\cen}{\sfact}$
+and $\tcztope{\ptemp^\pr}{\cen^\pr}{\sfact^\pr}$ such that
+$\ptemp\in\mat{n}{m}{\compnums}$ and
+$\ptemp^\pr\in\mat{n}{r}{\compnums}$, we say
 $\tcztope{\ptemp}{\cen}{\sfact}\order\tcztope{\ptemp^\pr}{\cen^\pr}{\sfact^\pr}$
+if all of the following is true.
+%
+\begin{align*}
+& \exists \tmat\in\mat{m}{r}{\compnums},\tvect\in\compnums^m~~\text{such
+that}\\
+& \ptemp\tmat=\ptemp^\pr\diagonal{\sfact^\pr},~~\ptemp\tvect=\cen^\pr-\cen\\
+& \max_{i=1}^m\lt(\absolute{\tvect_i}+\sum_{j=1}^r\absolute{\tmat_{ij}}-\sfact_i\rt)\leq
+0.
+\end{align*}
+%
 \end{definition}
+%
+\begin{theorem}[Sufficient condition for inclusion checking]~\label{thm:suff-inclusion}
+The inclusion\\
+$\tcztope{\ptemp}{\cen}{\sfact}\subseteq\tcztope{\ptemp^\pr}{\cen^\pr}{\sfact^\pr}$
+holds if
+$\tcztope{\ptemp}{\cen}{\sfact}\order\tcztope{\ptemp^\pr}{\cen^\pr}{\sfact^\pr}$.
+\end{theorem}
+%
+\begin{proof}
+The R.H.S of Equation~\ref{eqn:transfer-matrix} is an upper bound on
+the L.H.S of Equation~\ref{eqn:exact-inclusion} based on
+Lemma~\ref{lem:transfer-matrix}.  This means that if the R.H.S of
+Equation~\ref{eqn:transfer-matrix} is bounded above by zero, then
+the condition for inclusion in Equation~\ref{eqn:exact-inclusion} is
+satisfied.
+\end{proof}
+%
+Furthermore, the above relation is a partial order.
+%
+\begin{theorem}[Paritial ordering]
+The relation ``$\order$'' between template complex zonotopes is a
+partial order.  That is, for any three template complex zonotopes
+$\tcz{\ptemp}{\cen}{\sfact}$, $\tcz{\ptemp^\pr}{\cen^\pr}{\sfact^\pr}$
+and $\tcz{\ptemp^\dpr}{\cen^\dpr}{\sfact^\dpr}$, all of the following
+conditions are true.
+%
+\begin{enumerate}
+\item Reflexivity:
+$\tcz{\ptemp}{\cen}{\sfact}\order\tcz{\ptemp}{\cen}{\sfact}$.
+\item Antisymmetry: If
+$\tcz{\ptemp}{\cen}{\sfact}\order\tcz{\ptemp^\pr}{\cen^\pr}{\sfact^\pr}$
+and
+$\tcz{\ptemp^\pr}{\cen^\pr}{\sfact^\pr}\order\tcz{\ptemp}{\cen}{\sfact}$,
+then
+$\tcz{\ptemp}{\cen}{\sfact}=\tcz{\ptemp^\pr}{\cen^\pr}{\sfact^\pr}$.
+\item Transitivity: If
+$\tcz{\ptemp}{\cen}{\sfact}\order\tcz{\ptemp^\pr}{\cen^\pr}{\sfact^\pr}$
+and
+$\tcz{\ptemp^\pr}{\cen^\pr}{\sfact^\pr}\order\tcz{\ptemp^\dpr}{\cen^\dpr}{\sfact^\dpr}$,
+then $\tcz{\ptemp}{\cen}{\sfact}\order\tcz{\ptemp^\dpr}{\cen^\dpr}{\sfact^\dpr}$.
+\end{enumerate}
+%
+\end{theorem}
+%
+\begin{proof}
+\begin{enumerate}
+\item {\it Reflexivity}:  Consider $\tmat=\diagonal{\sfact}$ and
+$\tvect=\repmat{m}{1}$.  Then, 
+$\ptemp\tmat=\ptemp\diagonal{\sfact}$,
+$\ptemp\tvect=0=c-c$ and
+%
+\vspace{-1em}
+\begin{align*}
+& \max_{i=1}^m\lt(\absolute{y_i}+\sum_{j=1}^m\absolute{X_{ij}}-\sfact_i\rt)
+=\max_{i=1}^m\lt(0+\sfact_i-\sfact_i\rt)=0\\
+\end{align*}
+%
+So, $\tcz{\ptemp}{\cen}{\sfact}\order\tcz{\ptemp}{\cen}{\sfact}$.
+\item {\it Antisymmetry}: Let
+$\tcz{\ptemp}{\cen}{\sfact}\order\tcz{\ptemp^\pr}{\cen^\pr}{\sfact^\pr}$
+and
+$\tcz{\ptemp^\pr}{\cen^\pr}{\sfact^\pr}\order\tcz{\ptemp}{\cen}{\sfact}$.
+By Theorem~\ref{thm:suff-inclusion}, this also means
+$\tcz{\ptemp}{\cen}{\sfact}\subseteq\tcz{\ptemp^\pr}{\cen^\pr}{\sfact^\pr}$
+and
+$\tcz{\ptemp^\pr}{\cen^\pr}{\sfact^\pr}\subseteq\tcz{\ptemp}{\cen}{\sfact}$.
+So,
+$\tcz{\ptemp}{\cen}{\sfact}=\tcz{\ptemp^\pr}{\cen^\pr}{\sfact^\pr}$.
+%
+\item Consider that $\ptemp\in\mat{n}{m}{\compnums}$,
+$\ptemp^\pr\in\mat{n}{r}{\compnums}$,
+$\ptemp^\dpr\in\mat{n}{k}{\compnums}$ and the orderings
+$\tcz{\ptemp}{\cen}{\sfact}\order\tcz{\ptemp^\pr}{\cen^\pr}{\sfact^\pr}$
+and
+$\tcz{\ptemp^\pr}{\cen^\pr}{\sfact^\pr}\order\tcz{\ptemp^\dpr}{\cen^\dpr}{\sfact^\dpr}$.
+This implies,
+%
+\begin{align*}
+& \exists \tmat\in\mat{m}{r}{\compnums},\tvect\in\compnums^m~~\text{such
+that}\\
+& \ptemp\tmat=\ptemp^\pr\diagonal{\sfact^\pr},~~\ptemp\tvect=\cen^\pr-\cen,\\
+& \max_{i=1}^m\lt(\absolute{\tvect_i}+\sum_{j=1}^r\absolute{\tmat_{ij}}-\sfact_i\rt)\leq
+0
+\end{align*}
+%
+and
+\begin{align*}
+& \exists \tmat^\pr\in\mat{m}{k}{\compnums},\tvect^\pr\in\compnums^m~~\text{such
+that}\\
+& \ptemp^\pr\tmat=\ptemp^\dpr\diagonal{\sfact^\dpr},~~\ptemp\tvect=\cen^\dpr-\cen^\pr,\\
+& \max_{i=1}^m\lt(\absolute{\tvect^\pr_i}+\sum_{j=1}^k\absolute{\tmat^\pr_{ij}}-\sfact_i^\pr\rt)\leq
+0.
+\end{align*}
+%
+Let $\tmat^\dpr=\tmat\tmat^\pr$ and $\tvect^\dpr=\tvect+\tvect^\pr$.
+Then
+\[
+\ptemp\tmat^\dpr=\ptemp\tmat\tmat^\pr=
+\]
+\end{enumerate}
+\end{proof}
+%
