@@ -65,10 +65,10 @@ generators are $\ptemp=\lt(\begin{array}{lll}(1+2i) & 1 & (2+i)\\(1-2i) & 1
 
 A motivation for extending simple zonotopes to complex zonotopes is
 that a complex zonotope with its generators as the complex
-eigenvectors of a discrete time linear system will be a positive
+eigenvectors of a discrete time linear system will be a positively
 invariant if the complex eigenvalues corresponding to the generators
 are bounded within unity in their absolute values.  This property is
-described mathematically in the following proposition.
+explained mathematically in the following proposition.
 %
 \begin{proposition}[Eigenstructure based invariance]
 Consider a complex zonotope centered at the origin
@@ -98,7 +98,6 @@ $y=\ptemp\zeta$ where $\infnorm{\zeta}\leq 1$, and this implies $y\in \cztope{\p
 Therefore, $A\lt(\cztope{\ptemp}{0}\rt)=\cztope{A\ptemp}{0}\subseteq \cztope{\ptemp}{0}$.
 \end{proof}
 %
-\section{Template complex zonotope}
 In reachability analysis based verification algorithms, the quality of
 over-approximation of the reachable set computed by the algorithm, i.e,
 the difference between the actual reachable set and the
@@ -142,6 +141,17 @@ variables that can be adjusted to find better over-approximations of a
 reachable set.  For example, Figure~\ref{toref} illustrates the
 different over-approximations of a convex hull of five points by a
 complex zonotopes with a fixed template but different scaling factors.
+
+In the representation of a tempalte complex zonotope, the floating
+point representation of the entries of the template, center vector and
+scaling factors can be truncated to arbitrary lenghts depending on the
+desired accuracy of representation.  So, in analyzing the complexity
+of computations on a template complex zonotope, the number of rows and
+columns of the template matrix is more relevant, which also determines
+the size of center vector and scaling factors.  Henceforth, in further
+discussions, by the {\it size of representation of a template complex
+zonotope}, we refer to the number of rows and columns of the template
+complex matrix.
 
 {\color{red} Normalization}
 %
@@ -242,6 +252,42 @@ $\minsum{\tcztope{\ptemp}{\cen}{\sfact}}{\tcztope{\ptemp^\pr}{\cen^\pr}{\sfact^\
 & \ptemp^\pr\end{bmatrix}}{\cen+\cen^\pr}{\begin{bmatrix}\sfact\\\sfact^\pr\end{bmatrix}}$.
 \end{proof}
 %
+{\color{red}
+\begin{enumerate}
+\item Minkowki sum with common templates.
+\item Non-closure under intersection.
+\item Over-approximation of sets. Provide figure.
+\item Point inclusion in template complex zonotope.
+\item Linear projection.
+\end{enumerate}
+}
+
+In the above proposition, we see that that the size of the
+representation of a template complex zonotope which is a Minkowski sum
+of two template complex zonotopes is equal to the sum of the sizes of
+latter.  Then based on Equation~\ref{toref}, the size of
+representation of the reach set at any given discrete time in terms of
+a template complex zonotope increases linearly as a function of time.
+We shall explain this computation in a latter section.  However, we
+observe that when the templates of two template complex zonotopes are
+the same, then the size the size of the template matrix and the vector
+of scaling factors of the representation of their Minkowski sum
+remains the same.  Latter, we shall use this observation in
+conjugation with the Lemma~\ref{} about eigenstructure based scaling
+to derive an efficient reachable set computation method for linear
+systems.  The aforementioned observation is explained below.
+%
+\begin{lemma}[Minkowski sum with common template]
+Let
+$\tcztope{\ptemp}{c}{s},\tcztope{\ptemp}{c^\pr}{s^\pr}\subseteq\reals^n$
+be two template complex zonotopes.  Then
+%
+\begin{equation}~\label{eqn:common-minkowski}
+\minsum{\tcztope{\ptemp}{c}{s}}{\tcztope{\ptemp}{c^\pr}{s^\pr}}=\minsum{\ptemp}{c+c^\pr}{s+s^\pr}
+\end{equation}
+%
+\end{lemma}
+%
 While computing positive invariants using a set representation,
 deciding the inclusion of a given set inside another set is necessary
 for ascertaining the positive invariance of the latter.  In the case
@@ -251,8 +297,9 @@ relaxation, which is a sufficient condition for checking the
 inclusion.  But first we show the non-convexity of the exact inclusion
 checking problem.  Deciding the inclusion between any two complex
 zonotopes amounts to solving the following optimization problem.
+
 %
-\begin{lemma}[Exact inclusion: template complex zonotopes]~\label{lem:exact-inclusion}
+\begin{lemma}[Exact inclusion between template complex zonotopes]~\label{lem:exact-inclusion}
 Consider two template complex zonotopes
 $\tcztope{\ptemp}{\cen}{\sfact}$ and
 $\tcztope{\ptemp^\pr}{\cen^\pr}{\sfact^\pr}$ such that
@@ -511,9 +558,9 @@ If we consider the scaling factors and the center as variables, then
 the above sufficient condition for inclusion-checking can be
 efficiently reformulated as a set of second-order conic constraints on
 the center, scaling factors and some auxillary variables.  This is
-explained in the following corollary.
+explained in the following proposition.
 %
-\begin{corollary}
+\begin{proposition}
 If
 $\cen,\cen^\pr\in\compnums^n,\sfact\in\reals^m,\sfact^\pr\in\reals^k$
 are variables and\\
@@ -524,8 +571,37 @@ can be expressed as a collection of $\lt(nk+n+m\rt)$ second order
 conic constraints on a vector variable of size \\$\lt(mk+2n+2m+k\rt)$
 comprising components of $\sfact,\sfact^\pr,\cen,\cen^\pr$ and some
 additional variables.
-\end{corollary}
+\end{proposition}
 %
 \begin{proof}
 {\color{red} TODO}
 \end{proof}
+%
+Although the above relation is a sufficient condition for
+inclusion-checking, it is also a necessary condition when the template
+of the complex zonotope within which the containment is checked is
+invertible.  This is explained in the following theorem.
+%
+\begin{theorem}
+Let
+$\tcztope{\ptemp}{\cen}{\sfact},\tcztope{\ptemp^\pr}{\cen^\pr}{\sfact^\pr}\subseteq\compnums^n$
+be two complex zonotopes such that $\ptemp\in\mat{n}{n}{\compnums}$ is
+an invertible square matrix.  Then
+$\tcztope{\ptemp^\pr}{\cen^\pr}{\sfact^\pr}\subseteq\tcztope{\ptemp}{\cen}{\sfact}$
+if and only if $\tcztope{\ptemp^\pr}{\cen^\pr}{\sfact^\pr}\order\tcztope{\ptemp}{\cen}{\sfact}$.
+\end{theorem}
+%
+\begin{proof}
+{\color{red} TODO}
+\end{proof}
+
+\section{Efficient reachable set computation for linear systems}
+
+{\color{red}
+\begin{enumerate}
+\item Expression for bounded time reachable set.
+\item Efficient representation using eigenvectors.
+\item Computation of positive invariant.
+\item Illustrative example.
+\end{enumerate}
+}
