@@ -49,14 +49,18 @@
 \newcommand{\infnorm}[1]{\left\|#1\right\|_{\infty}}
 % square norm
 \newcommand{\sqnorm}[1]{\left\|#1\right\|_{2}}
+% determinant
+\newcommand{\determinant}[1]{\operatorname{det}\lt(#1\rt)}
 % Minkowski sum
 \newcommand{\minsum}[2]{#1\oplus #2}
+% Meet
+\newcommand{\meet}[2]{#1\bigwedge #2}
+% Join
+\newcommand{\join}[2]{#1\bigvee #2}
 
 %%% functions
 % function specification
 \newcommand{\func}[3]{#1:#2\rightarrow #3}
-% coefficients for generator based representations of a point
-\newcommand{\coeff}[2]{\Theta\lt(#1,#2\rt)}
 
 %%% numbers
 \newcommand{\reals}{\mathbb{R}}
@@ -66,7 +70,7 @@
 % set of matrices
 \newcommand{\mat}[3]{\mathbb{M}_{#1\times#2}\left(#3\right)}
 % diagonal matrix
-\newcommand{\diagonal}[1]{\mathcal{D}\left(#1\right)}
+\newcommand{\diagonal}[1]{\operatorname{diag}\left(#1\right)}
 % repeat elements
 \newcommand{\repmat}[2]{\lt[1\rt]_{#1\times #2}}
 

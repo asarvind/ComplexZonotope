@@ -142,16 +142,16 @@ reachable set.  For example, Figure~\ref{toref} illustrates the
 different over-approximations of a convex hull of five points by a
 complex zonotopes with a fixed template but different scaling factors.
 
-In the representation of a tempalte complex zonotope, the floating
-point representation of the entries of the template, center vector and
-scaling factors can be truncated to arbitrary lenghts depending on the
-desired accuracy of representation.  So, in analyzing the complexity
-of computations on a template complex zonotope, the number of rows and
-columns of the template matrix is more relevant, which also determines
-the size of center vector and scaling factors.  Henceforth, in further
-discussions, by the {\it size of representation of a template complex
-zonotope}, we refer to the number of rows and columns of the template
-complex matrix.
+The floating point representation of the entries of the template,
+center vector and scaling factors can be truncated to arbitrary
+lenghts depending on a desired accuracy.  So, in
+analyzing the complexity of computations on a template complex
+zonotope, the number of rows and columns of the template matrix is
+more relevant, which automatically determines the size of center
+vector and scaling factors.  Henceforth, in further discussions,
+by the {\it size of representation of a template complex zonotope}, we
+refer to the number of rows and columns of the
+template matrix.
 
 {\color{red} Normalization}
 %
@@ -254,7 +254,6 @@ $\minsum{\tcztope{\ptemp}{\cen}{\sfact}}{\tcztope{\ptemp^\pr}{\cen^\pr}{\sfact^\
 %
 {\color{red}
 \begin{enumerate}
-\item Minkowki sum with common templates.
 \item Non-closure under intersection.
 \item Over-approximation of sets. Provide figure.
 \item Point inclusion in template complex zonotope.
@@ -273,21 +272,100 @@ observe that when the templates of two template complex zonotopes are
 the same, then the size the size of the template matrix and the vector
 of scaling factors of the representation of their Minkowski sum
 remains the same.  Latter, we shall use this observation in
-conjugation with the Lemma~\ref{} about eigenstructure based scaling
+conjugation with the Lemma~\ref{toref} about eigenstructure based scaling
 to derive an efficient reachable set computation method for linear
 systems.  The aforementioned observation is explained below.
 %
 \begin{lemma}[Minkowski sum with common template]
-Let
+Let us consider two template complex zonotopes
 $\tcztope{\ptemp}{c}{s},\tcztope{\ptemp}{c^\pr}{s^\pr}\subseteq\reals^n$
-be two template complex zonotopes.  Then
+such that
+$\ptemp\in\mat{n}{m}{\compnums}$.  Then
 %
 \begin{equation}~\label{eqn:common-minkowski}
-\minsum{\tcztope{\ptemp}{c}{s}}{\tcztope{\ptemp}{c^\pr}{s^\pr}}=\minsum{\ptemp}{c+c^\pr}{s+s^\pr}
+\minsum{\tcztope{\ptemp}{\cen}{\sfact}}{\tcztope{\ptemp}{\cen^\pr}{\sfact^\pr}}=\tcztope{\ptemp}{\cen+\cen^\pr}{\sfact+\sfact^\pr}
 \end{equation}
 %
 \end{lemma}
 %
+\begin{proof}
+We have $\minsum{\tcztope{\ptemp}{c}{s}}{\tcztope{\ptemp}{c^\pr}{s^\pr}}=$
+%
+\begin{align}~\label{eqn:proof-commin2}
+&
+\set{\lt(\cen+\ptemp\zeta\rt)+\lt(\cen^\pr+\ptemp\zeta^\pr\rt):\zeta,\zeta^\pr\in\compnums^m,~\absolute{\zeta}\leq
+\sfact,~\absolute{\zeta^\pr}\leq \sfact^\pr}\nonumber\\
+& = \set{\lt(\cen+\cen^\pr\rt)+\ptemp\lt(\zeta+\zeta^\pr\rt):\zeta,\zeta^\pr\in\compnums^m,~\absolute{\zeta}\leq
+\sfact,~\absolute{\zeta^\pr}\leq \sfact^\pr}
+\end{align}
+%
+First, we shall show that
+\begin{equation}~\label{eqn:proof-commin1}
+\set{\zeta+\zeta^\pr:\zeta,\zeta^\pr\in\compnums^m,~\absolute{\zeta}\leq
+\sfact,~\absolute{\zeta^\pr}\leq\sfact^\pr}=\set{\zeta^\dpr:\absolute{\zeta^\dpr}\leq\sfact+\sfact^\pr }.
+\end{equation}
+%
+To prove that the L.H.S of Equation~\ref{eqn:proof-commin1} is
+contained within the R.H.S of Equation~\ref{eqn:proof-commin1},
+consider $\zeta,\zeta^\pr\in\compnums^m$ where $\absolute{\zeta}\leq
+\sfact,~\absolute{\zeta^\pr}\leq\sfact^\pr$.  For any
+$i\in\set{1,...,m}$, we have
+$\absolute{\zeta_i+\zeta^\pr_i}\leq \absolute{\zeta_i}+\absolute{\zeta^\pr_i}=\sfact+\sfact^\pr$
+by the triangular inequality.  This proves that the L.H.S of
+Equation~\ref{eqn:proof-commin1} is contained within the R.H.S of
+Equation~\ref{eqn:proof-commin1}.
+
+To prove the vice-versa, let us
+consider
+$\zeta^\dpr\in\compnums:\absolute{\zeta^\dpr}\leq \sfact+\sfact^\pr$.
+Let
+$\zeta=\sfact\frac{\zeta^\dpr}{\sfact+\sfact^\pr},~\zeta^\pr=\sfact^\pr\frac{\zeta^\dpr}{\sfact+\sfact^\pr}$.
+Then $\absolute{\zeta}\leq \sfact$ and
+$\absolute{\zeta^\pr}\leq\sfact^\pr$ because
+$\absolute{\frac{\zeta^\dpr}{\sfact+\sfact^\pr}}\leq 1$.  So,
+$\zeta^\dpr=\zeta+\zeta^\pr$ where $\absolute{\zeta}\leq \sfact$ and
+$\absolute{\zeta^\pr}\leq \sfact^\pr$.  This proves that the R.H.S of
+Equation~\ref{eqn:proof-commin1}  is contained inside the L.H.S of
+Equation~\ref{eqn:proof-commin1}.
+
+Hence, we have proved Equation~\ref{eqn:proof-commin1}.  Then combining 
+Equation~\ref{eqn:proof-commin1}  with
+Equation~\ref{eqn:proof-commin2} gives us
+%
+\begin{align*}
+&\minsum{\tcztope{\ptemp}{c}{s}}{\tcztope{\ptemp}{c^\pr}{s^\pr}}=\set{\cen+\cen^\pr+\ptemp\zeta^\dpr:\absolute{\zeta^\dpr}\leq\sfact+\sfact^\pr}\\
+&=\tcztope{\ptemp}{\cen+\cen^\pr}{\sfact+\sfact^\pr}.
+\end{align*}
+%
+\end{proof}
+%
+Like the case of simple zonotopes, template complex zonotopes also are
+not closed under mutual intersection.  Moreover, the intersection
+between template complex zonotopes with a common template also need
+not be a tempalte complex zonotope in general.  However, we observe
+that template complex zonotopes with a common non-singular
+(invertible) template and common center are closed under intersection
+and the intersection can be expressed algebraically.  This is
+explained in the following lemma.
+%
+\begin{lemma}[Mutual intersection with common invertible template]
+Let us consider two template complex zonotopes
+$\tcztope{\ptemp}{\cen}{\sfact},\tcztope{\ptemp}{\cen}{\sfact^\pr}\subset\compnums^n$
+where their common template $\ptemp$ is a non-singular (invertible)
+square matrix, i.e., $\determinant{\ptemp}\neq 0$.
+Then
+%
+\begin{equation}~\label{eqn:intersection}
+\tcztope{\ptemp}{\cen}{\sfact}\bigcap\tcztope{\ptemp}{\cen}{\sfact^\pr}=\tcztope{\ptemp}{\cen}{\meet{\sfact}{\sfact^\pr}}
+\end{equation}
+%
+\end{lemma}
+%
+\begin{proof}
+
+\end{proof}
+%
+\section{Checking inclusion}
 While computing positive invariants using a set representation,
 deciding the inclusion of a given set inside another set is necessary
 for ascertaining the positive invariance of the latter.  In the case
@@ -322,8 +400,6 @@ as \vspace{-2.2em}\[\hspace{10em}\max_{\set{\zeta^\pr\in\compnums^{r}:\absolute{
 0. \]
 \end{proof}
 %
-
-\section{Covex condition for inclusion checking}
 Solving Equation~\ref{eqn:exact-inclusion} amounts to solving a
 non-covex optimization problem, which can be inferred as follows.  If
 $\ptemp\zeta=\ptemp\zeta^\pr+\cen^\pr+\cen$ has a solution $\zeta^*$,
