@@ -254,7 +254,6 @@ $\minsum{\tcztope{\ptemp}{\cen}{\sfact}}{\tcztope{\ptemp^\pr}{\cen^\pr}{\sfact^\
 %
 {\color{red}
 \begin{enumerate}
-\item Non-closure under intersection.
 \item Over-approximation of sets. Provide figure.
 \item Point inclusion in template complex zonotope.
 \item Linear projection.
@@ -339,21 +338,24 @@ Equation~\ref{eqn:proof-commin2} gives us
 %
 \end{proof}
 %
-Like the case of simple zonotopes, template complex zonotopes also are
-not closed under mutual intersection.  Moreover, the intersection
-between template complex zonotopes with a common template also need
-not be a tempalte complex zonotope in general.  However, we observe
-that template complex zonotopes with a common non-singular
-(invertible) template and common center are closed under intersection
-and the intersection can be expressed algebraically.  This is
-explained in the following lemma.
+Like in the case of simple zonotopes, template complex zonotopes are
+also not closed under mutual intersection.  Moreover, the intersection
+between template complex zonotopes with a common template and center
+need not also be a tempalte complex zonotope in general.  Therefore,
+even for a fixed template and center, there may not exist the smallest template
+complex zonotope over-approximation of a given set. {\color{red} Explain
+with figure}.
+
+However, we observe that template complex zonotopes with a common
+non-singular (invertible) template and center are closed under
+intersection and the intersection can be expressed algebraically.
+This is explained in the following lemma.
 %
-\begin{lemma}[Mutual intersection with common invertible template]
+\begin{lemma}[Mutual intersection with common invertible template and center]~\label{lem:intersection}
 Let us consider two template complex zonotopes
 $\tcztope{\ptemp}{\cen}{\sfact},\tcztope{\ptemp}{\cen}{\sfact^\pr}\subset\compnums^n$
 where their common template $\ptemp$ is a non-singular (invertible)
-square matrix, i.e., $\determinant{\ptemp}\neq 0$.
-Then
+square matrix.  Then
 %
 \begin{equation}~\label{eqn:intersection}
 \tcztope{\ptemp}{\cen}{\sfact}\bigcap\tcztope{\ptemp}{\cen}{\sfact^\pr}=\tcztope{\ptemp}{\cen}{\meet{\sfact}{\sfact^\pr}}
@@ -362,9 +364,62 @@ Then
 \end{lemma}
 %
 \begin{proof}
+Let us consider a point
+$z\in\tcztope{\ptemp}{\cen}{\meet{\sfact}{\sfact^\pr}}$ which is
+written in as a linear combination of the template vectors plus center
+as $z=c+\ptemp\zeta:~\absolute{\zeta}\leq \meet{\sfact}{\sfact^\pr}$.
+This means that $\absolute{\zeta}\leq\sfact$ and also
+$\absolute{\zeta}\leq \sfact^\pr$.  So,
+$z\in\tcztope{\ptemp}{\cen}{\sfact}$ and also
+$z\in\tcztope{\ptemp}{\cen}{\sfact^\pr}$.  Therefore,
+$\tcztope{\ptemp}{\cen}{\meet{\sfact}{\sfact^\pr}}\subseteq \tcztope{\ptemp}{\cen}{\sfact}\bigcap\tcztope{\ptemp}{\cen}{\sfact^\pr}$.
+
+Next consider another point
+$x\in\tcztope{\ptemp}{\cen}{\sfact}\bigcap\tcztope{\ptemp}{\cen}{\sfact^\pr}$.
+Since $\ptemp$ is an invertible matrix, $x$ is uniquely written as a
+linear combination of tempalte vectors plus center as
+$\cen+\ptemp\lt(\inv{\ptemp}\lt(x-\cen\rt)\rt)$ where
+$\absolute{\inv{\ptemp}\lt(x-\cen\rt)}\leq
+\sfact$ and $\absolute{\inv{\ptemp}\lt(x-\cen\rt)}\leq
+\sfact^\pr$, which means
+$\absolute{\inv{\ptemp}\lt(x-\cen\rt)}\leq\meet{\sfact}{\sfact^\pr}$.  Therefore,
+$\tcztope{\ptemp}{\cen}{\sfact}\bigcap\tcztope{\ptemp}{\cen}{\sfact^\pr}\subseteq\tcztope{\ptemp}{\cen}{\meet{\sfact}{\sfact^\pr}}$.
+
+Combining the above two conclusions, we get that
+$\tcztope{\ptemp}{\cen}{\sfact}\bigcap\tcztope{\ptemp}{\cen}{\sfact^\pr}=\tcztope{\ptemp}{\cen}{\meet{\sfact}{\sfact^\pr}}$.
 
 \end{proof}
 %
+As explained before, in general, even for a fixed template and center,
+there may not exist the smallest template complex zonotope
+over-approximation of a given set.  However, since template complex
+zonotopes with a fixed center and and an invertible square matrix
+template are closed under intersection based on
+Lemma~\ref{lem:intersection}, in this case there exists a smallest
+template complex zonotope over-approximation of a given set.  This
+smallest over-approximation is expressed as follows.
+%
+\begin{theorem}
+Let $\Psi\subseteq\compnums^n$ be a bounded set.  Let
+$\ptemp\in\mat{n}{n}{\compnums}$ be an invertible square matrix and
+$\cen\in\compnums^n$.  Consider the set $S=\set{\sfact\in\reals_{\geq
+0}^n:\Psi\subseteq\tcztope{\ptemp}{\cen}{\sfact}}$.  Then $\sfact\in S$ if
+and only if
+%
+\begin{equation}
+\forall i\in\set{1,...,n},~\max_{x\in\Psi}\lt(\inv{\ptemp}x\rt)_i\leq \sfact_i.
+\end{equation}
+%
+Consequently, if $\sfact^*=\vectormin{s\in S} s$, then
+%
+\begin{equation}
+\Psi\subseteq\tcztope{\ptemp}{\cen}{\sfact^*}=\bigcap_{\sfact\in S}\tcztope{\ptemp}{\cen}{\sfact}.
+\end{equation}
+%
+\end{theorem}
+%
+
+
 \section{Checking inclusion}
 While computing positive invariants using a set representation,
 deciding the inclusion of a given set inside another set is necessary
