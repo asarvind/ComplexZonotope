@@ -170,7 +170,7 @@ Template complex zonotopes are closed under linear transformation and
 Minkowski sum operations and these are straightforward algebraic
 computations, just like in the case of simple (real) zonotopes.
 %
-\begin{proposition}[Linear transformation: template complex zonotope]
+\begin{lemma}[Linear transformation]
 Let $A\in\mat{n}{n}{\reals}$ and $\ptemp\in\mat{n}{m}{\compnums}$.
 Given a template complex zonotope $\tcztope{\ptemp}{\cen}{\sfact}$, we
 get another template complex zonotope after multiplying the former
@@ -181,7 +181,7 @@ follows.
 A\tcztope{\ptemp}{\cen}{\sfact}=\tcztope{A\ptemp}{A\cen}{\sfact}.
 \end{equation}
 %
-\end{proposition}
+\end{lemma}
 %
 \begin{proof}
 First we shall show
@@ -204,7 +204,25 @@ From the previous two conclusions, we have
 $A\tcztope{\ptemp}{\cen}{\sfact}=\tcztope{A\ptemp}{A\cen}{\sfact}.$
 \end{proof}
 %
-\begin{proposition}[Minkowski sum: template complex zonotopes]
+In the above lemma, we see that the template of the complex zonotope
+can change when a linear transformation is applied.  However, we
+observe that when the template column vectors are constituted by the
+eigenvectors of the linear transformation and the center is the
+origin, we can express the resulting transformed set by only changing
+the scaling factors, while keeping the template the same.  This result
+can be seen as an extension of Lemma~\ref{todo} to the case of
+template complex zonotopes, which is explained as follows.  This
+following lemma is later used in the efficient computation of bounded
+time reachable set of a linear system, where the size of the template
+complex zonotope representing the reachable set remains the same in
+successive time steps.
+%
+\begin{lemma}[Eigenstructure based scaling]
+
+\end{lemma}
+%
+
+\begin{proposition}[Minkowski sum]
 Let $\tcztope{\ptemp}{\cen}{\sfact}$ and
 $\tcztope{\ptemp^\pr}{\cen^\pr}{\sfact^\pr}$ be two template complex
 zonotopes which are subsets of $\compnums^n$, i.e.,
@@ -399,37 +417,130 @@ Lemma~\ref{lem:intersection}, in this case there exists a smallest
 template complex zonotope over-approximation of a given set.  This
 smallest over-approximation is expressed as follows.
 %
-\begin{theorem}
+\begin{theorem}~\label{thm:min-abstraction}
 Let $\Psi\subseteq\compnums^n$ be a bounded set.  Let
 $\ptemp\in\mat{n}{n}{\compnums}$ be an invertible square matrix and
 $\cen\in\compnums^n$.  Consider the set $S=\set{\sfact\in\reals_{\geq
-0}^n:\Psi\subseteq\tcztope{\ptemp}{\cen}{\sfact}}$.  Then $\sfact\in S$ if
-and only if
+0}^n:\Psi\subseteq\tcztope{\ptemp}{\cen}{\sfact}}$ and
+$\sfact^*=\vectormin{s\in S} s$.  Then
 %
 \begin{equation}
-\forall i\in\set{1,...,n},~\max_{x\in\Psi}\lt(\inv{\ptemp}x\rt)_i\leq \sfact_i.
+\Psi\subseteq\bigcap_{\sfact\in S}\tcztope{\ptemp}{\cen}{\sfact}=\tcztope{\ptemp}{\cen}{\sfact^*}.
 \end{equation}
 %
-Consequently, if $\sfact^*=\vectormin{s\in S} s$, then
+and
 %
 \begin{equation}
-\Psi\subseteq\tcztope{\ptemp}{\cen}{\sfact^*}=\bigcap_{\sfact\in S}\tcztope{\ptemp}{\cen}{\sfact}.
+\forall i\in\set{1,...,n},~\sfact^*_i=\max_{x\in\Psi}\lt(\inv{\ptemp}\lt(x-\cen\rt)\rt)_i.
 \end{equation}
 %
 \end{theorem}
 %
+\begin{proof}
+Based on Lemma~\ref{lem:intersection}, it follows that
+%
+\[
+\bigcap_{\sfact\in
+S}\tcztope{\ptemp}{\cen}{\sfact}=\tcztope{\ptemp}{\cen}{\vectormin{s\in
+S}s}=\tcztope{\ptemp}{\cen}{\sfact^*}.
+\]
+%
+Furthermore, as $S$ is defined as the set of all scaling factors
+whose corresponding template complex zonotope is an over-approximation
+of $\Psi$, we also get
+%
+\[
+\Psi\subseteq\bigcap_{\sfact\in S}\tcztope{\ptemp}{\cen}{\sfact}=\tcztope{\ptemp}{\cen}{\sfact^*}.
+\]
+Thus, the first part of the theorem is proved.
+
+Next, consider $x\in\Psi$ and $\sfact^\pr\in\reals_{\geq 0}^n$ where
+%
+\[
+\forall
+i\in\set{1,...,n}:~\sfact^\pr=\max_{x\in\Psi}\lt(\inv{\ptemp}\lt(x-\cen\rt)\rt)_i.
+\]
+%
+Since $\ptemp$ is invertible, $x$ is uniquely written as a linear
+combination of template comlumn vectors of $\ptemp$ plus the center
+$\cen$ as $x=\cen+\ptemp\lt(\inv{\ptemp}\lt(x-\cen\rt)\rt)$, where the
+vector of combining coefficients is
+$\lt(\inv{\ptemp}\lt(x-\cen\rt)\rt)$.  So, if
+$x\in\tcztope{\ptemp}{\cen}{\sfact}$, then \[\forall
+i\in\set{1,...,n}:~\lt(\inv{\ptemp}\lt(x-\cen\rt)\rt)_i\leq\sfact_i.\]
+Therefore,
+%
+\begin{equation}~\label{proof-min-abstraction-1}
+\forall
+i\in\set{1,...,n}:~\sfact^\pr_i=\max_{x\in\Psi}\lt(\inv{\ptemp}\lt(x-\cen\rt)\rt)_i\leq\min_{s\in
+S}s_i=\sfact^*_i.
+\end{equation}
+%
+Furthermore, if $x\in\Psi$, then by the definition of $\sfact^\pr$, we
+get $\lt(\inv{\ptemp}\lt(x-\cen\rt)\rt)\leq \sfact^\pr$.  Therefore,
+$\Psi\subseteq\tcztope{\ptemp}{\cen}{\sfact^\pr}$.  This implies
+$\sfact^\pr\in S$.  So, $\sfact^\pr\geq\sfact^*$.  Combining the
+former conclusion with the conclusion in
+Equation~\ref{proof-min-abstraction-1} gives $\sfact^\pr=\sfact^*$,
+which proves the second part of the theorem.
+\end{proof}
 
 
 \section{Checking inclusion}
 While computing positive invariants using a set representation,
-deciding the inclusion of a given set inside another set is necessary
-for ascertaining the positive invariance of the latter.  In the case
-of complex zonotopes, checking the exact inclusion is a non-convex
-optimization problem.  However, we shall later propose a convex
-relaxation, which is a sufficient condition for checking the
-inclusion.  But first we show the non-convexity of the exact inclusion
-checking problem.  Deciding the inclusion between any two complex
-zonotopes amounts to solving the following optimization problem.
+ascertaining the positive invariance of a set requires deciding the
+inclusion of the next reachable set inside the given set.  In the case
+of complex zonotopes, we shall show that checking the exact inclusion
+amounts to solving a is a non-convex optimization problem.  However,
+we shall later propose a convex relaxation, which is a sufficient
+condition for checking the inclusion.  Specifically, we shall express
+derive a sufficient covex condition for inclusion checking expressed
+as a set of second-order conic constraints on some variables, where a
+second order conic constraint is defined as follows.
+%
+\begin{definition}[Second order conic constraint]
+A second order conic constraint on a variable $x$ taking values in
+$\reals^n$ is one of the following expressions.
+\begin{enumerate}
+\item  $\sqnorm{a^Tx+b}\leq c^Tx+d$ where $a,c\in\reals^n$ and
+$b,d\in\reals$ are constants.
+\item $p^Tx=q$ where $p\in\reals^n$ and $q\in\reals$ are constants.
+\end{enumerate}
+\end{definition}
+%
+Given a set of second order conic constraints on a variable
+$x\in\reals^n$, solving the constraints refers to finding a value
+$x^*\in\reals^n$ that satisfies the constraints.  A value
+$x^\pr\in\reals^n$ is called an approximate solution within a
+precision $\epsilon\in\reals_{\geq 0}$ if there exists a solution
+$x^*\in\reals^n$ such that $\sqnorm{x^\pr-x^*}\leq \epsilon$.  There
+are numerical algorithms based on interior point methods~\cite{todo}
+that can efficiently find approximate solutions with very high
+precision to second order conic constraints (SOCC).
+
+Before deriving the non-convex condition for checking inclusion
+between template complex zonotopes, we need to look at the inclusion
+of a point inside a template complex zonotope, which is however
+expressed as a set of convex constraints.
+%
+\begin{lemma}[Inclusion of a point]
+Let us consider a template complex zonotope
+$\tcztope{\ptemp}{\cen}{\sfact}\subset\compnums^n$ where
+$\ptemp\in\mat{n}{m}{\compnums}$ and a point $x\in\compnums^n$.  Then
+$x\in\tcztope{\ptemp}{\cen}{\sfact}\subset\compnums^n$ if and only if
+all of the following is collectively true.
+%
+\begin{align}
+& \exists\zeta\in\compnums^m:\nonumber\\
+& \ptemp\zeta = x-c~\label{eqn:lem-point-inclusion-1}\\
+& \absolute{\zeta}\leq \sfact.~\label{eqn:lem-point-inclusion-2}
+\end{align}
+%
+\end{lemma}
+%
+the non-convexity of the exact inclusion checking problem.  Deciding
+the inclusion between any two complex zonotopes amounts to solving the
+following optimization problem.
 
 %
 \begin{lemma}[Exact inclusion between template complex zonotopes]~\label{lem:exact-inclusion}
@@ -483,26 +594,7 @@ convex constraints called second order conic constraints that can be
 solved efficiently using interior point methods~\cite{todo}.  We shall
 first explain second order conic constraints before deriving
 the convex condition for inclusion checking.
-%
-\begin{definition}[Second order conic constraint]
-A second order conic constraint on a variable $x\in\reals^n$ is one of
-the following expressions.
-\begin{enumerate}
-\item  $\sqnorm{a^Tx+b}\leq c^Tx+d$ where $a,c\in\reals^n$ and
-$b,d\in\reals$ are constants.
-\item $p^Tx=q$ where $p\in\reals^n$ and $q\in\reals$ are constants.
-\end{enumerate}
-\end{definition}
-%
-Given a set of second order conic constraints on a variable
-$x\in\reals^n$, solving the constraints refers to finding a value of
-$x^*\in\reals^n$ that satisfies the constraints.  A value
-$x^\pr\in\reals^n$ is called an approximate solution within a
-precision $\epsilon\in\reals_{\geq 0}$ if there exists a solution
-$x^*\in\reals^n$ such that $\sqnorm{x^\pr-x^*}\leq \epsilon$.  There
-are numerical algorithms based on interior point methods~\cite{todo}
-that can efficiently find approximate solutions with very high
-precision to second order conic constraints (SOCC).
+
 
 Now we shall discuss the derivation of the set of convex constraints
 as sufficient condition for inclusion-checking between two
