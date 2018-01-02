@@ -276,14 +276,14 @@ Template complex zonotopes are closed under linear transformation and
 Minkowski sum operations and these are straightforward algebraic
 computations, just like in the case of simple (real) zonotopes.
 %
-\begin{lemma}[Linear transformation]
+\begin{lemma}[Linear transformation]~\label{lem:lin-transform}
 Let $A\in\mat{n}{n}{\reals}$ and $\ptemp\in\mat{n}{m}{\compnums}$.
 Given a template complex zonotope $\tcztope{\ptemp}{\cen}{\sfact}$, we
 get another template complex zonotope after multiplying the former
 template complex zonotope by the matrix $A$, which is computed as
 follows. 
 %
-\begin{equation}~\label{eqn:lin-transform}
+\begin{equation}[Linear transformation]~\label{eqn:lin-transform}
 A\tcztope{\ptemp}{\cen}{\sfact}=\tcztope{A\ptemp}{A\cen}{\sfact}.
 \end{equation}
 %
@@ -352,7 +352,7 @@ Then using Equation~\ref{eqn:normalization}, we get
 \]
 \end{proof}
 
-\begin{proposition}[Minkowski sum]
+\begin{lemma}[Minkowski sum]~\label{lem:min-sum}
 Let $\tcztope{\ptemp}{\cen}{\sfact}$ and
 $\tcztope{\ptemp^\pr}{\cen^\pr}{\sfact^\pr}$ be two template complex
 zonotopes which are subsets of $\compnums^n$, i.e.,
@@ -364,7 +364,7 @@ which is computed as follows.
 \minsum{\tcztope{\ptemp}{\cen}{\sfact}}{\tcztope{\ptemp^\pr}{\cen^\pr}{\sfact^\pr}}
 = \tcztope{\begin{bmatrix}\ptemp & \ptemp^\pr\end{bmatrix}}{\cen+\cen^\pr}{\begin{bmatrix}\sfact\\\sfact^\pr\end{bmatrix}}
 \end{equation}
-\end{proposition}
+\end{lemma}
 %
 \begin{proof}
 First we shall show that \\$\minsum{\tcztope{\ptemp}{\cen}{\sfact}}{\tcztope{\ptemp^\pr}{\cen^\pr}{\sfact^\pr}}
@@ -402,8 +402,6 @@ $\minsum{\tcztope{\ptemp}{\cen}{\sfact}}{\tcztope{\ptemp^\pr}{\cen^\pr}{\sfact^\
 %
 {\color{red}
 \begin{enumerate}
-\item Over-approximation of sets. Provide figure.
-\item Point inclusion in template complex zonotope.
 \item Linear projection.
 \end{enumerate}
 }
@@ -1038,7 +1036,41 @@ and
 Therefore, $\tcztope{\ptemp^\pr}{\cen^\pr}{\sfact^\pr}\order\tcztope{\ptemp}{\cen}{\sfact}$.
 \end{proof}
 
-\section{Efficient bounded time reachable set computation for linear systems}
+\section{Reachable set computation for linear systems}
+
+Similar to simple zonotopes, template complex zonotopes can also
+efficiently represent the bounded time reachable set of a discrete
+time linear system
+%
+\begin{align*}
+\trj{x}{t+1}=A\trj{x}{t}+ \inptrj{t}\\
+\trj{x}{0}\in\init~,\forall t\in\integers_{\geq 0}~\trj{t}\in\inputset
+\end{align*}
+%
+due to its closure under linear transformation and Minkowski sum
+operations and efficient computations of the same.  Based on
+Lemmas~\ref{lem:lin-transform}
+and~\ref{lem:min-sum}, if the initial set is
+$\init=\tcztope{\inittemp}{\initcen}{\initsfact}$ and the input set is
+$\inputset=\tcztope{\inputtemp}{\inputcen}{\inputsfact}$, then the
+reachable set at a time point is computed as
+%
+\begin{align}
+& \reachset{t}=\tcztope
+{% template
+\minsum{A^t\inittemp}{\lt(\sum_{i=0}^{t-1}A^i\rt)\inputtemp}
+}
+{% center
+A^t\initcen+\lt(\sum_{i=0}^{t-1}A^i\rt)\inputcen
+}
+{% scaling factors
+\lt[\begin{matrix}
+\initsfact \\
+\inputsfact
+\end{matrix}
+\rt]
+}.
+\end{align}
 
 {\color{red}
 \begin{enumerate}

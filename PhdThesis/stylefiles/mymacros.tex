@@ -69,6 +69,7 @@
 %%% numbers
 \newcommand{\reals}{\mathbb{R}}
 \newcommand{\compnums}{\mathbb{C}}
+\newcommand{\integers}{\mathbb{Z}}
 
 %%% arrays
 % set of matrices
@@ -117,6 +118,32 @@
 \newcommand{\tmat}{X}
 % transfer vector in inclusion-checking
 \newcommand{\tvect}{y}
+
+%%% System specifications
+% trajectory
+\newcommand{\trj}[2]{{\bf #1}\lt(#2\rt)}
+%
+\newcommand{\inptrj}[1]{{\bf u}\lt(#1\rt)}
+% input set
+\newcommand{\inputset}{\mathcal{U}}
+% initial set
+\newcommand{\init}{\Psi_0}
+% initial template 
+\newcommand{\inittemp}{\ptemp^{\operatorname{init}}}
+% initial center
+\newcommand{\initcen}{\cen^{\operatorname{init}}}
+% initial scaling factors
+\newcommand{\initsfact}{\sfact^{\operatorname{init}}}
+% input template
+\newcommand{\inputtemp}{\ptemp^{\operatorname{input}}}
+% input center
+\newcommand{\inputcen}{\cen^{\operatorname{input}}}
+% input scaling factors
+\newcommand{\inputsfact}{\sfact^{\operatorname{input}}}
+% Reachable set at a time
+\newcommand{\reachset}[1]{\mathcal{R}\lt(#1\rt)}
+
+
 
 
 %% ========================================================
