@@ -142,18 +142,124 @@ reachable set.  For example, Figure~\ref{toref} illustrates the
 different over-approximations of a convex hull of five points by a
 complex zonotopes with a fixed template but different scaling factors.
 
-The floating point representation of the entries of the template,
-center vector and scaling factors can be truncated to arbitrary
-lenghts depending on a desired accuracy.  So, in
-analyzing the complexity of computations on a template complex
-zonotope, the number of rows and columns of the template matrix is
-more relevant, which automatically determines the size of center
-vector and scaling factors.  Henceforth, in further discussions,
-by the {\it size of representation of a template complex zonotope}, we
-refer to the number of rows and columns of the
-template matrix.
+If the template of a complex zonotope is multiplied by a diagonal
+matrix, then it is equivalent to multiplying the vector scaling
+factors by the absolute value of the diagonal matrix.  This result
+will be latter used in deriving a result for efficient reachable set
+computation of linear system.  But as a simple consequence, we can
+represent a template complex zonotope by a complex zonotope in the
+normal form by multiplying the template with the diagonal matrix of
+scaling factors.  This is explained mathematically as follows.
+%
+\begin{lemma}[Normalization]~\label{lem:normalization}
+Let $\tcztope{\ptemp}{\cen}{\sfact}\subset\compnums^n$ be a template
+complex zonotope where $\ptemp\in\mat{n}{m}{\compnums}$ and
+$\mu\in\compnums^m$.  Then
+%
+\begin{equation}~\label{eqn:normalization}
+\tcztope{\ptemp\diagonal{\mu}}{\cen}{\sfact}=\tcztope{\ptemp}{\cen}{\diagonal{\absolute{\mu}}\sfact}.
+\end{equation}
+%
+Therefore,
+%
+\[
+\tcztope{\ptemp}{\cen}{\sfact}=\cztope{\diagonal{\sfact}\ptemp}{\cen}.
+\]
+%
+\end{lemma}
+%
+\begin{proof}
+Consider a point $x\in\tcztope{\ptemp\diagonal{\mu}}{\cen}{\sfact}$,
+written as
+$x=\cen+\ptemp\diagonal{\mu}\zeta:\absolute{\zeta}\leq\sfact$.
+Let $\zeta^\pr=\diagonal{\mu}\zeta$.  Then,
+$\absolute{\zeta^\pr}=\diagonal{\absolute{\mu}}\absolute{\zeta}\leq\diagonal{\absolute{\mu}}\sfact$.
+Therefore, $x\in\tcztope{\ptemp}{\cen}{\diagonal{\mu}\sfact}$.  This
+means,
+%
+\[
+\tcztope{\ptemp\diagonal{\mu}}{\cen}{\sfact}\subseteq\tcztope{\ptemp}{\cen}{\diagonal{\absolute{\mu}}\sfact}
+\]
+%
+Next consider a point
+$y\in\tcztope{\ptemp}{\cen}{\diagonal{\absolute{\mu}\sfact}}$ written
+as
+$y=\cen+\ptemp\epsilon:~\absolute{\epsilon}\leq \diagonal{\absolute{\mu}}\sfact$.
+Let $\epsilon^\pr\in\compnums^m$, where for any
+$i\in\set{1,...,m}$,
+%
+$
+\epsilon_i=\left\{
+\begin{array}{l}
+\frac{\epsilon_i}{\mu_i}~\text{if}~\mu_i\neq 0\\
+0~\text{if}~\mu_i=0.
+\end{array}
+\right.
+$
+%
+We shall show that $\epsilon=\epsilon^\pr\diagonal{\mu}$, i.e., for
+any $i\in\set{1,...,m}$, $\epsilon_i=\epsilon^\pr_i\mu_i$.  We prove
+it in the following two cases.
+\begin{enumerate}
+\item Let $\epsilon_i\neq 0$.  As
+$\absolute{\epsilon}\leq\absolute{\diagonal{\mu_i}}\sfact$, so
+$\mu_i\neq 0$.  Therefore, $\epsilon_i=\frac{\epsilon_i}{\mu_i}\mu_i=\epsilon^\pr_i\mu_i$.
+\item Let $\epsilon_i=0$.  As
+$\absolute{\epsilon}\leq\absolute{\diagonal{\mu_i}}\sfact$, so
+$\mu_i= 0$.  So, $0=\epsilon=\epsilon^\pr_i\times
+0=\epsilon^\pr_i\mu_i$.
+\end{enumerate}
+%
+So, $y=\cen+\ptemp\diagonal{\mu_i}\epsilon^\pr$.  By the definition of
+$\epsilon^\pr$, we get that for any $i\in\set{1,...,m}$,
+%
+\[
+\absolute{\epsilon^\pr_i}\leq
+\left\{
+\begin{array}{l}
+\absolute{\frac{\epsilon_i}{\mu_i}}\leq\frac{\absolute{\mu_i}\sfact_i}{\absolute{\mu_i}}=\sfact_i~\text{if}~\mu_i\neq
+0\\
+0~\text{if}~\mu_i=0
+\end{array}
+\right.
+\]
+%
+Therefore, $\absolute{\epsilon^\pr}\leq\sfact$.  So,
+$y\in\tcztope{\ptemp\diagonal{\mu}}{\cen}{\sfact}$.  Therefore,
+%
+\[
+\tcztope{\ptemp}{\cen}{\diagonal{\absolute{\mu}}\sfact}\subseteq\tcztope{\ptemp\diagonal{\mu}}{\cen}{\sfact}.
+\]
+%
+Combining the previous two conclusions,
+Equation~\ref{eqn:normalization} is proved.
 
-{\color{red} Normalization}
+Next, by definition
+%
+\[
+\cztope{\ptemp\diagonal{\sfact},\cen}=\tcztope{\diagonal{\sfact}\ptemp}{\cen}{\repmat{1}{m}{1}}.
+\]
+%
+So, using Equation~\ref{eqn:normalization}, we get
+%
+\[
+\cztope{\ptemp\diagonal{\sfact},\cen}=\tcztope{\ptemp\diagonal{\sfact}}{\cen}{\sfact}=\tcztope{\ptemp}{\cen}{\diagonal{\absolute{\mu}}\sfact}.
+\]
+%
+\end{proof}
+%
+\paragraph{Representation size of template complex zonotope:}  The
+floating point representation of the entries of the template, center
+vector and scaling factors of a template complex zonotope can be
+truncated to arbitrary lenghts depending on a desired accuracy.  So,
+in analyzing the complexity of computations on a template complex
+zonotope, the number of entries in the template matrix, center and
+scaling factors is more relevant, which is automatically determined by
+the number of rows and columns of the template complex zonotope.
+Henceforth, in our discussions, by the {\it representation size of a
+template complex zonotope}, we refer to the number of rows and columns
+of the template matrix.
+
 %
 \section{Operations on a template complex zonotope}
 In the reachability analysis of affine hybrid systems, linear
@@ -177,7 +283,7 @@ get another template complex zonotope after multiplying the former
 template complex zonotope by the matrix $A$, which is computed as
 follows. 
 %
-\begin{equation}
+\begin{equation}~\label{eqn:lin-transform}
 A\tcztope{\ptemp}{\cen}{\sfact}=\tcztope{A\ptemp}{A\cen}{\sfact}.
 \end{equation}
 %
@@ -218,9 +324,33 @@ complex zonotope representing the reachable set remains the same in
 successive time steps.
 %
 \begin{lemma}[Eigenstructure based scaling]
-
+Let $A\in\mat{n}{n}{\reals}$ and $\mu\in\compnums^n$ be the vector of
+eigenvalues of $A$ whose corresponding eigenvectors are the column
+vectors of a matrix $\ptemp\in\mat{n}{n}{\compnums}$, i.e.,
+$A\ptemp=\ptemp\diagonal{\mu}$.  Let
+$\tcztope{\ptemp}{0}{\sfact}\subset\compnums^n$ be a template complex
+zonotope.  Then,
+%
+\begin{equation}~\label{eqn:eigen-scaling}
+A\tcztope{\ptemp}{0}{\sfact}=\tcztope{\ptemp}{0}{\diagonal{\absolute{\mu}}\sfact}.
+\end{equation}
+%
 \end{lemma}
 %
+\begin{proof}
+Based on Equation~\ref{eqn:lin-transform} and the fact that
+$A\ptemp=\ptemp\diagonal{\mu}$, we get
+%
+\[
+A\tcztope{\ptemp}{0}{\sfact}=\tcztope{A\ptemp}{0}{\sfact}=\tcztope{\ptemp\diagonal{\mu}}{0}{\sfact}.
+\]
+%
+Then using Equation~\ref{eqn:normalization}, we get
+%
+\[
+\tcztope{\ptemp\diagonal{\mu}}{0}{\sfact}=\tcztope{\ptemp}{0}{\diagonal{\absolute{\mu}}\sfact}
+\]
+\end{proof}
 
 \begin{proposition}[Minkowski sum]
 Let $\tcztope{\ptemp}{\cen}{\sfact}$ and
@@ -452,8 +582,7 @@ of $\Psi$, we also get
 \[
 \Psi\subseteq\bigcap_{\sfact\in S}\tcztope{\ptemp}{\cen}{\sfact}=\tcztope{\ptemp}{\cen}{\sfact^*}.
 \]
-Thus, the first part of the theorem is proved.
-
+%
 Next, consider $x\in\Psi$ and $\sfact^\pr\in\reals_{\geq 0}^n$ where
 %
 \[
@@ -465,8 +594,8 @@ Since $\ptemp$ is invertible, $x$ is uniquely written as a linear
 combination of template comlumn vectors of $\ptemp$ plus the center
 $\cen$ as $x=\cen+\ptemp\lt(\inv{\ptemp}\lt(x-\cen\rt)\rt)$, where the
 vector of combining coefficients is
-$\lt(\inv{\ptemp}\lt(x-\cen\rt)\rt)$.  So, if
-$x\in\tcztope{\ptemp}{\cen}{\sfact}$, then \[\forall
+$\lt(\inv{\ptemp}\lt(x-\cen\rt)\rt)$.  So, if $s\in S$, then 
+$x\in\Psi\subseteq\tcztope{\ptemp}{\cen}{\sfact}$ and hence \[\forall
 i\in\set{1,...,n}:~\lt(\inv{\ptemp}\lt(x-\cen\rt)\rt)_i\leq\sfact_i.\]
 Therefore,
 %
@@ -538,16 +667,28 @@ all of the following is collectively true.
 %
 \end{lemma}
 %
-the non-convexity of the exact inclusion checking problem.  Deciding
-the inclusion between any two complex zonotopes amounts to solving the
-following optimization problem.
-
+\begin{proof}
+The above result follows from the fact that any point 
+$x\in\tcztope{\ptemp}{\cen}{\sfact}$ is of the form
+$x=\cen+\ptemp\zeta$ for some $\zeta\in\compnums^m$ such that
+$\absolute{\zeta}\leq \sfact$.
+\end{proof}
+%
+Equation~\ref{eqn:lem-point-inclusion-1} is an equality constraint on
+$\zeta$, which is therefore an SOCC.  We know that the absolute value
+of a complex number is the square norm of a two dimensional vector.
+So, Equation~\ref{eqn:lem-point-inclusion-2} is equivalent to a set of
+square norm constraints on the real and imaginary components of
+$\zeta$, which are therefore SOCC constraints.  Hence, the inclusion
+of a point inside a template complex zonotope can be checked by
+solving second order conic constraints.
 %
 \begin{lemma}[Exact inclusion between template complex zonotopes]~\label{lem:exact-inclusion}
-Consider two template complex zonotopes
-$\tcztope{\ptemp}{\cen}{\sfact}$ and
-$\tcztope{\ptemp^\pr}{\cen^\pr}{\sfact^\pr}$ such that
-$\ptemp\in\mat{n}{m}{\compnums}$ and $\ptemp^\pr\in\mat{n}{r}{\compnums}$.  The inclusion
+Let us consider two template complex zonotopes
+$\tcztope{\ptemp}{\cen}{\sfact},
+\tcztope{\ptemp^\pr}{\cen^\pr}{\sfact^\pr}\subseteq\compnums^n$ such
+that $\ptemp\in\mat{n}{m}{\compnums}$ and
+$\ptemp^\pr\in\mat{n}{r}{\compnums}$.  The inclusion
 $\tcztope{\ptemp^\pr}{\cen^\pr}{\sfact^\pr}\subseteq\tcztope{\ptemp}{\cen}{\sfact}$
 holds if and only if
 \begin{equation}\label{eqn:exact-inclusion}
@@ -561,30 +702,38 @@ $\tcztope{\ptemp^\pr}{\cen^\pr}{\sfact^\pr}\subseteq\tcztope{\ptemp}{\cen}{\sfac
 iff for every $\zeta^\pr\in\compnums^r:\absolute{\zeta^\pr}\leq \sfact^\pr$,
 there exists
 $\zeta\in\compnums^m:\ptemp\zeta+\cen=\ptemp^\pr\zeta^\pr+\cen^\pr~\wedge~\absolute{\zeta}\leq
-\sfact$.  The former statement is expressed in terms of optimization
-as \vspace{-2.2em}\[\hspace{10em}\max_{\set{\zeta^\pr\in\compnums^{r}:\absolute{\zeta^\pr}\leq \sfact^\pr}}\min_{\set{\zeta\in\compnums^m:\ptemp\zeta=\ptemp^\pr\zeta^\pr+\cen-\cen^\pr}}\max_{i=1}^m\lt(\absolute{\zeta_i}-s_i\rt)\leq
-0. \]
+\sfact$.  This is equivalently expressed as the constraint
+as \[\max_{\set{\zeta^\pr\in\compnums^{r}:\absolute{\zeta^\pr}\leq \sfact^\pr}}\min_{\set{\zeta\in\compnums^m:\ptemp\zeta=\ptemp^\pr\zeta^\pr+\cen-\cen^\pr}}\max_{i=1}^m\lt(\absolute{\zeta_i}-s_i\rt)\leq
+0.\text{\hspace{5em}\qedhere}\]
 \end{proof}
 %
-Solving Equation~\ref{eqn:exact-inclusion} amounts to solving a
-non-covex optimization problem, which can be inferred as follows.  If
-$\ptemp\zeta=\ptemp\zeta^\pr+\cen^\pr+\cen$ has a solution $\zeta^*$,
-then any other solution can be written as $\zeta^*+v$ such that $v$
-belongs to the complex valued null-space of $\ptemp$.  The absolute
-value of a complex variable is a convex quadratic function.  So, the
-the
-term \[\min_{\set{\zeta\in\compnums:\ptemp\zeta=\ptemp^\pr\zeta^\pr+\cen^\pr-\cen}}\max_{i=1}^m\lt(\absolute{\zeta_i}-s_i\rt)\]
-is a point-wise minimum (for points represented by $\zeta$) of a set
-of quadratic convex functions over $\zeta^\pr$, which is therefore
-neither convex nor concave function of $\zeta^\pr$ in general.  So the
-maximization
+We shall now explain how solving Equation~\ref{eqn:exact-inclusion}
+amounts to solving a non-covex optimization problem.  Let us consider
+that $\ptemp$ has a pseudo-inverse $\pinv{\ptemp}$.  Then any solution
+for $\zeta$ satisfying $\ptemp\zeta=\ptemp\zeta^\pr+\cen^\pr-\cen$ can
+be written as $\pinv{\ptemp}\lt(\zeta^\pr-c\rt)+v$ where $v$ belongs
+to the complex valued null-space of $\ptemp$.  Let us denote the
+null-space of $\ptemp$ as $\nullspace{\ptemp}$.  So,
+%
+\begin{align*}
+& \min_{\set{\zeta\in\compnums:\ptemp\zeta=\ptemp^\pr\zeta^\pr+\cen^\pr-\cen}}\max_{i=1}^m\lt(\absolute{\zeta_i}-s_i\rt)\\
+&
+=\min_{\set{v\in\nullspace{\ptemp}}}\max_{i=1}^m\lt(\absolute{\pinv{\ptemp}\lt(\zeta^\pr-c\rt)+v}-s_i\rt)
+\end{align*}
+%
+The absolute value of a complex variable is a convex quadratic
+function of the real and imaginary components of the variable.  So,
+the above function is a point-wise minimum (for points $v$ in the null
+space $\null{\ptemp}$) of a set of convex quadratic functions over
+$\zeta^\pr$, which is therefore not a concave function of $\zeta^\pr$.
+So the maximization
 %
 \[
 \max_{\set{\zeta^\pr\in\compnums^{r}:\absolute{\zeta^\pr}\leq \sfact^\pr}}\min_{\set{\zeta\in\compnums^m:\ptemp\zeta=\ptemp^\pr\zeta^\pr+\cen^\pr-\cen}}\max_{i=1}^m\lt(\absolute{\zeta_i}-s_i\rt)
 \]
 %
-is defined over a non-concave function, whose maximum can not be
-computed by convex optimization.
+is equivalent to maximizing a non-concave function of $\zeta^\pr$.
+Maximizing a non-concave function is a non-covex optimization problem.
 
 However, we will derive a sufficient condition expressed as a set of
 convex constraints on the center and scaling factors and some
@@ -815,10 +964,81 @@ if and only if $\tcztope{\ptemp^\pr}{\cen^\pr}{\sfact^\pr}\order\tcztope{\ptemp}
 \end{theorem}
 %
 \begin{proof}
-{\color{red} TODO}
+By Theorem~\ref{thm:suff-inclusion}, we know that if
+$\tcztope{\ptemp^\pr}{\cen^\pr}{\sfact^\pr}\order\tcztope{\ptemp}{\cen}{\sfact}$
+is true,
+then
+$\tcztope{\ptemp^\pr}{\cen^\pr}{\sfact^\pr}\subseteq\tcztope{\ptemp}{\cen}{\sfact}$.
+So, we are left to prove that if
+$\tcztope{\ptemp^\pr}{\cen^\pr}{\sfact^\pr}\subseteq\tcztope{\ptemp}{\cen}{\sfact}$,
+then
+$\tcztope{\ptemp^\pr}{\cen^\pr}{\sfact^\pr}\order\tcztope{\ptemp}{\cen}{\sfact}$.
+
+Let us consider
+$\tcztope{\ptemp^\pr}{\cen^\pr}{\sfact^\pr}\subseteq\tcztope{\ptemp}{\cen}{\sfact}$.
+Let $y=\inv{\ptemp}\lt(\cen^\pr-\cen\rt)$ and
+$X=\inv{\ptemp}\ptemp^\pr\diagonal{\sfact^\pr}$.  
+According
+to Lemma~\ref{lem:normalization},
+$\tcztope{\ptemp^\pr}{\cen^\pr}{\sfact^\pr}=\cztope{\ptemp^\pr\diagonal{\sfact^\pr}}{\cen^\pr}$.
+Let us consider a point
+$x\in\cztope{\ptemp^\pr\diagonal{\sfact^\pr}}{\cen^\pr}$ described as the
+linear combination of generators as
+$x=\cen^\pr+\ptemp^\pr\diagonal{\sfact^\pr}\zeta^\pr$ where
+$\infnorm{\zeta^\pr}\leq 1$.  As $\ptemp$ is invertible, so $x$ can be
+written uniquely by linear combination of column vector of $\ptemp$
+plus the center $\cen$ as 
+%
+\begin{align*}
+&
+x=\cen+\ptemp\lt(\inv{\ptemp}(x-c)\rt)\\
+&
+= \cen+\ptemp\inv{\ptemp}\lt(\cen^\pr+\ptemp^\pr\diagonal{\sfact^\pr}\zeta^\pr-\cen\rt)\\
+& = \cen+\ptemp\lt(y+X\zeta^\pr\rt)
+\end{align*}
+%
+where the vector of combining coefficients is
+%
+\[
+y+X\zeta^\pr.
+\]
+%
+As
+%
+\[
+\cztope{\ptemp^\pr\diagonal{\sfact^\pr}}{\cen^\pr}=\tcztope{\ptemp^\pr}{\cen^\pr}{\sfact^\pr}\subseteq\tcztope{\ptemp}{\cen}{\sfact},
+\]
+%
+we get that for all
+$\zeta^\pr\in\compnums^n:\infnorm{\zeta^\pr}\leq 1$ and $\forall i\in\set{1,...,n}$,
+%
+\[
+\absolute{y_i}+\sum_{j=1}^n\absolute{X_{ij}\zeta^\pr_j}=\absolute{y_i}+\sum_{j=1}^n\absolute{X_{ij}}\absolute{\zeta^\pr_j}\leq s_i.
+\]
+%
+As the above is true for all
+$\zeta^\pr\in\compnums^n:\infnorm{\zeta^\pr}\leq 1$, so by substituting
+$\zeta^\pr_j=1$  we get that for all $i\in\set{1,...,n}$,
+%
+\[
+\absolute{y_i}+\sum_{j=1}^n\absolute{X_{ij}}-s_i.
+\]
+%
+Furthermore,
+%
+\[
+\ptemp y= \ptemp\inv{\ptemp}\lt(\cen^\pr-\cen\rt) = \cen^\pr-\cen
+\]
+%
+and
+\[
+\ptemp X=\ptemp\inv{\ptemp}\ptemp^\pr\diagonal{\sfact^\pr}=\ptemp^\pr\diagonal{\sfact^\pr}.
+\]
+%
+Therefore, $\tcztope{\ptemp^\pr}{\cen^\pr}{\sfact^\pr}\order\tcztope{\ptemp}{\cen}{\sfact}$.
 \end{proof}
 
-\section{Efficient reachable set computation for linear systems}
+\section{Efficient bounded time reachable set computation for linear systems}
 
 {\color{red}
 \begin{enumerate}

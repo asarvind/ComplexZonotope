@@ -61,6 +61,7 @@
 \newcommand{\vectormin}[1]{\underset{#1}{\bigwedge}}
 
 
+
 %%% functions
 % function specification
 \newcommand{\func}[3]{#1:#2\rightarrow #3}
@@ -75,9 +76,11 @@
 % diagonal matrix
 \newcommand{\diagonal}[1]{\operatorname{diag}\left(#1\right)}
 % repeat elements
-\newcommand{\repmat}[2]{\lt[1\rt]_{#1\times #2}}
+\newcommand{\repmat}[3]{\lt[1\rt]_{#2\times #3}}
 % inverse matrix
 \newcommand{\inv}[1]{#1^{-1}}
+%
+\newcommand{\pinv}[1]{#1^\dagger}
 
 %%% relations
 % convex order relation between complex zonotopes
@@ -86,6 +89,8 @@
 %%% set representations
 % set 
 \newcommand{\set}[1]{\left\{#1\right\}}
+%
+\newcommand{\nullspace}[1]{\operatorname{null}\lt(#1\rt)}
 % polytope
 \newcommand{\polytope}[2]{\mathit{Poly}\lt(#1,#2\rt)}
 % real zonotope
@@ -93,7 +98,7 @@
 % complex zonotope
 \newcommand{\cztope}[2]{\mathit{\mathcal{C}}\lt(#1,#2\rt)}
 % template complex zonotope
-\newcommand{\tcztope}[3]{\mathit{\mathcal{C}}\lt(#1,#2,#3\rt)}
+\newcommand{\tcztope}[3]{\mathit{\mathcal{T}}\lt(#1,#2,#3\rt)}
 
 %%% variables in set representation 
 % primary template
