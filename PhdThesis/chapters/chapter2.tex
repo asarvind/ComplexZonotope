@@ -1,0 +1,1082 @@
+In the previous chapter, we described a set representation called
+simple zonotope, which is a type of polytope represented as a linear
+combination of real valued vectors with bounded combining
+coefficients.  The advantage of simple zonotopes in set based
+computations is that they are closed under matrix multiplication and
+Minkowski sum operations and these can be computed efficiently.
+However, for computing a positive invariant of a linear system, there
+is no known procedure to choose a suitable set of generators for a
+simple zonotope so as to compute an invariant.  In this chapter, we
+extend simple zonotope a new set representation called \emph{complex
+zonotope} by which we can easily specify invariants of a linear system
+using the eigenstructure of the system.  Complex zonotopes have
+complex valued generators complex combining coefficients bounded in
+their absolute values, as opposed to the real valued generators and
+real combining coefficients of simple zonotopes.  The real projections
+of complex zonotopes can describe some non-polytopic sets in addition
+to the polytopic zonotopes, which are Minkowski sums of some
+ellipsoids along with line segments.  Furthermore, complex zonotopes
+are also closed under matrix multiplications and Minkowski sums and
+these can be computed efficiently.
+
+Apart from discussing operations on complex zonotopes like linear
+transformations and Minkowski sums, in this chapter we derive a convex
+program for checking inclusion between two complex zonotopes.  The
+inclusion relation is a key ingredient for efficient invariant
+computation, as we shall see in the latter chapters.  The organization
+of this chapter is as follows.  PUT ORGANIZATION.
+
+\section{Basic representation of a complex zonotope}
+The basic representation of a complex zonotope is a generalization of
+the representation of a simple zonotope given in Definition~\ref{todo}
+to a space of complex valued vectors.  A complex zonotope is
+represented as a linear combination of complex valued vectors, called
+generators, such that the combining coefficients are bounded in their
+absolute values by unity.  However, this representation can be
+extended to more general forms for efficient computation, as we shall
+discuss later.
+%
+\begin{definition}[Complex zonotope]
+Let $\ptemp\in\mat{m}{n}{\compnums}$ be a complex valued matrix
+whose columns are called generators and $\cen\in\compnums^n$ be a
+complex valued vector called the center.  Then the following is a
+complex zonotope.
+%
+\begin{equation}
+\cztope{\ptemp}{\cen} = \set{\ptemp\zeta+\cen:~\zeta\in\compnums^m,~\infnorm{\zeta}\leq 1}.
+\end{equation}
+%
+\end{definition}
+%
+Like a simple zonotope, a complex zonotope is also symmetric around
+the center.  To see this, consider a point in a complex zonotope
+centered at the origin, written as $y=\ptemp\zeta$ where $\ptemp$
+defines the generator set and $\zeta$ is the vector of combining
+coefficients.  Since, $\infnorm{-\zeta}=\infnorm{\zeta}\leq 1$, so
+even $-y=\ptemp(-\zeta)$ belongs to the complex zonotope.  However, unlike
+simple zonotopes, the real projection of a complex zonotope can
+describe some non-polytopic sets in addition to polytopic zonotopes,
+since geometrically speaking the real projection of a complex zonotope
+can be a Minkowski sum of line segments as well as some ellipsoids.
+An example of such a non-polyhedral complex zonotope projection in
+real space is illustrated with Figure~\ref{fig:cz}, where the
+generators are $\ptemp=\lt(\begin{array}{lll}(1+2i) & 1 & (2+i)\\(1-2i) & 1
+& (2-i)\end{array}\rt)$ and the center is the origin.
+
+A motivation for extending simple zonotopes to complex zonotopes is
+that a complex zonotope with its generators as the complex
+eigenvectors of a discrete time linear system will be a positively
+invariant if the complex eigenvalues corresponding to the generators
+are bounded within unity in their absolute values.  This property is
+explained mathematically in the following proposition.
+%
+\begin{proposition}[Eigenstructure based invariance]
+Consider a complex zonotope centered at the origin
+$\cztope{\ptemp}{0}$, where the column vectors of
+$\ptemp\in\mat{m}{n}{\compnums}$ are the complex eigenvectors of a
+matrix $A\in\mat{n}{n}{\reals}$ and $\mu\in\compnums^m$ is a vector of complex
+eigenvalues corresponding to the column vectors of $\ptemp$, i.e., $A\ptemp
+= \ptemp\diagonal{\mu}$.
+Then \[A\lt(\cztope{\ptemp}{0}\rt)
+= \cztope{\ptemp\diagonal{\mu}}{0}.\] Furthermore, if $\infnorm{\mu}\leq
+1$, then $A\lt(\rztope{\ptemp}{0}\rt)\subseteq \rztope{\ptemp}{0}$.
+\end{proposition}
+% 
+\begin{proof}
+We have $A\lt(\cztope{\ptemp}{0}\rt) =
+A\set{\ptemp\zeta:~\zeta\in\compnums^m,\infnorm{\zeta}\leq 1}$\\
+$=\set{A\ptemp\zeta:~\zeta\in\compnums^m,\infnorm{\zeta}\leq 1}
+= \cztope{A\ptemp}{0}$.  Next $\cztope{A\ptemp}{0}
+= \cztope{\ptemp\diagonal{\mu}}{0}$, which proves the first part of the
+Proposition.  For the second part, we are given that
+$\infnorm{\mu}\leq 1$.  Consider a point $y\in \cztope{\ptemp\diagonal{\mu}}{0}$,
+described by the generators as
+$y = \ptemp\diagonal{\mu}\delta:\infnorm{\delta}\leq 1$.
+Let $\zeta = \diagonal{\mu}\delta$. Then
+$\infnorm{\zeta} \leq \infnorm{\mu}\infnorm{\delta} \leq 1$.  So, 
+$y=\ptemp\zeta$ where $\infnorm{\zeta}\leq 1$, and this implies $y\in \cztope{\ptemp}{0}$.
+Therefore, $A\lt(\cztope{\ptemp}{0}\rt)=\cztope{A\ptemp}{0}\subseteq \cztope{\ptemp}{0}$.
+\end{proof}
+%
+In reachability analysis based verification algorithms, the quality of
+over-approximation of the reachable set computed by the algorithm, i.e,
+the difference between the actual reachable set and the
+over-approximation, affects the accuracy of verification.  So, for any
+set representation used in reachability analysis, it is desirable that
+there is an efficient way of refining a set to obtain smaller sets
+that over-approximate the reachable set.  However, in the case of the
+basic representation of a complex zonotope as given in the above
+definition, adding a generator to the representation increases the
+size of the complex zonotope.  Moreover, adding a generator can
+violate positive invariance, as shown in Figure~\ref{todo}.  Instead,
+to refine a complex zonotope, we may try to adjust the magnitude of
+contribution of each generator to the size of the set in a way that
+does not increase the size of the set and also preserves positive
+invariance.  Therefore, in addition to the generators in the
+representation of a complex zonotope, we can consider the magnitude of
+contribution of each generator as a part of the representation.  This
+would be a more general representation of a complex zonotope, which we
+shall call as a template complex zonotope, and is defined as follows.
+
+A template complex zonotope is a linear combination of complex valued
+vectors that constitute the columns of a matrix, which we call as the
+template, such that the magnitude of each combining coefficient is
+bounded in its absolute value by a positive real, called a scaling factor.
+%
+\begin{definition}[Template complex zonotope]
+Let us consider $\ptemp\in\mat{n}{m}{\compnums}$ called the template,
+$\sfact\in\reals^m_{\geq 0}$ called scaling factors and
+$\cen\in\compnums^n$ called the center.  Then the following is a template
+complex zonotope.
+%
+\begin{equation}
+\tcztope{\ptemp}{\cen}{\sfact}
+= \set{\ptemp\zeta+\cen:~\absolute{\zeta_i}\leq \sfact_i~\forall
+i\in\set{1,...,m}}.
+\end{equation}
+\end{definition}
+%
+The scaling factors of a template complex zonotope can be treated as
+variables that can be adjusted to find better over-approximations of a
+reachable set.  For example, Figure~\ref{toref} illustrates the
+different over-approximations of a convex hull of five points by a
+complex zonotopes with a fixed template but different scaling factors.
+
+If the template of a complex zonotope is multiplied by a diagonal
+matrix, then it is equivalent to multiplying the vector scaling
+factors by the absolute value of the diagonal matrix.  This result
+will be latter used in deriving a result for efficient reachable set
+computation of linear system.  But as a simple consequence, we can
+represent a template complex zonotope by a complex zonotope in the
+normal form by multiplying the template with the diagonal matrix of
+scaling factors.  This is explained mathematically as follows.
+%
+\begin{lemma}[Normalization]~\label{lem:normalization}
+Let $\tcztope{\ptemp}{\cen}{\sfact}\subset\compnums^n$ be a template
+complex zonotope where $\ptemp\in\mat{n}{m}{\compnums}$ and
+$\mu\in\compnums^m$.  Then
+%
+\begin{equation}~\label{eqn:normalization}
+\tcztope{\ptemp\diagonal{\mu}}{\cen}{\sfact}=\tcztope{\ptemp}{\cen}{\diagonal{\absolute{\mu}}\sfact}.
+\end{equation}
+%
+Therefore,
+%
+\[
+\tcztope{\ptemp}{\cen}{\sfact}=\cztope{\diagonal{\sfact}\ptemp}{\cen}.
+\]
+%
+\end{lemma}
+%
+\begin{proof}
+Consider a point $x\in\tcztope{\ptemp\diagonal{\mu}}{\cen}{\sfact}$,
+written as
+$x=\cen+\ptemp\diagonal{\mu}\zeta:\absolute{\zeta}\leq\sfact$.
+Let $\zeta^\pr=\diagonal{\mu}\zeta$.  Then,
+$\absolute{\zeta^\pr}=\diagonal{\absolute{\mu}}\absolute{\zeta}\leq\diagonal{\absolute{\mu}}\sfact$.
+Therefore, $x\in\tcztope{\ptemp}{\cen}{\diagonal{\mu}\sfact}$.  This
+means,
+%
+\[
+\tcztope{\ptemp\diagonal{\mu}}{\cen}{\sfact}\subseteq\tcztope{\ptemp}{\cen}{\diagonal{\absolute{\mu}}\sfact}
+\]
+%
+Next consider a point
+$y\in\tcztope{\ptemp}{\cen}{\diagonal{\absolute{\mu}\sfact}}$ written
+as
+$y=\cen+\ptemp\epsilon:~\absolute{\epsilon}\leq \diagonal{\absolute{\mu}}\sfact$.
+Let $\epsilon^\pr\in\compnums^m$, where for any
+$i\in\set{1,...,m}$,
+%
+$
+\epsilon_i=\left\{
+\begin{array}{l}
+\frac{\epsilon_i}{\mu_i}~\text{if}~\mu_i\neq 0\\
+0~\text{if}~\mu_i=0.
+\end{array}
+\right.
+$
+%
+We shall show that $\epsilon=\epsilon^\pr\diagonal{\mu}$, i.e., for
+any $i\in\set{1,...,m}$, $\epsilon_i=\epsilon^\pr_i\mu_i$.  We prove
+it in the following two cases.
+\begin{enumerate}
+\item Let $\epsilon_i\neq 0$.  As
+$\absolute{\epsilon}\leq\absolute{\diagonal{\mu_i}}\sfact$, so
+$\mu_i\neq 0$.  Therefore, $\epsilon_i=\frac{\epsilon_i}{\mu_i}\mu_i=\epsilon^\pr_i\mu_i$.
+\item Let $\epsilon_i=0$.  As
+$\absolute{\epsilon}\leq\absolute{\diagonal{\mu_i}}\sfact$, so
+$\mu_i= 0$.  So, $0=\epsilon=\epsilon^\pr_i\times
+0=\epsilon^\pr_i\mu_i$.
+\end{enumerate}
+%
+So, $y=\cen+\ptemp\diagonal{\mu_i}\epsilon^\pr$.  By the definition of
+$\epsilon^\pr$, we get that for any $i\in\set{1,...,m}$,
+%
+\[
+\absolute{\epsilon^\pr_i}\leq
+\left\{
+\begin{array}{l}
+\absolute{\frac{\epsilon_i}{\mu_i}}\leq\frac{\absolute{\mu_i}\sfact_i}{\absolute{\mu_i}}=\sfact_i~\text{if}~\mu_i\neq
+0\\
+0~\text{if}~\mu_i=0
+\end{array}
+\right.
+\]
+%
+Therefore, $\absolute{\epsilon^\pr}\leq\sfact$.  So,
+$y\in\tcztope{\ptemp\diagonal{\mu}}{\cen}{\sfact}$.  Therefore,
+%
+\[
+\tcztope{\ptemp}{\cen}{\diagonal{\absolute{\mu}}\sfact}\subseteq\tcztope{\ptemp\diagonal{\mu}}{\cen}{\sfact}.
+\]
+%
+Combining the previous two conclusions,
+Equation~\ref{eqn:normalization} is proved.
+
+Next, by definition
+%
+\[
+\cztope{\ptemp\diagonal{\sfact},\cen}=\tcztope{\diagonal{\sfact}\ptemp}{\cen}{\repmat{1}{m}{1}}.
+\]
+%
+So, using Equation~\ref{eqn:normalization}, we get
+%
+\[
+\cztope{\ptemp\diagonal{\sfact},\cen}=\tcztope{\ptemp\diagonal{\sfact}}{\cen}{\sfact}=\tcztope{\ptemp}{\cen}{\diagonal{\absolute{\mu}}\sfact}.
+\]
+%
+\end{proof}
+%
+\paragraph{Representation size of template complex zonotope:}  The
+floating point representation of the entries of the template, center
+vector and scaling factors of a template complex zonotope can be
+truncated to arbitrary lenghts depending on a desired accuracy.  So,
+in analyzing the complexity of computations on a template complex
+zonotope, the number of entries in the template matrix, center and
+scaling factors is more relevant, which is automatically determined by
+the number of rows and columns of the template complex zonotope.
+Henceforth, in our discussions, by the {\it representation size of a
+template complex zonotope}, we refer to the number of rows and columns
+of the template matrix.
+
+%
+\section{Operations on a template complex zonotope}
+In the reachability analysis of affine hybrid systems, linear
+transformation, Minkowski sum, inclusion-checking and intersection
+with linear constraints are the essential operations used in the
+computation of reachable sets.  In this section, we describe the
+computation of linear transformation, Minkowski sum and
+inclusion-checking for template complex zonotopes.  Complex zonotopes
+are not closed under intersection with linear constraints.  We address
+the issue of intersection with linear constraints in a latter chapter
+by using a more general representation of complex zonotopes.
+
+Template complex zonotopes are closed under linear transformation and
+Minkowski sum operations and these are straightforward algebraic
+computations, just like in the case of simple (real) zonotopes.
+%
+\begin{lemma}[Linear transformation]~\label{lem:lin-transform}
+Let $A\in\mat{n}{n}{\reals}$ and $\ptemp\in\mat{n}{m}{\compnums}$.
+Given a template complex zonotope $\tcztope{\ptemp}{\cen}{\sfact}$, we
+get another template complex zonotope after multiplying the former
+template complex zonotope by the matrix $A$, which is computed as
+follows. 
+%
+\begin{equation}[Linear transformation]~\label{eqn:lin-transform}
+A\tcztope{\ptemp}{\cen}{\sfact}=\tcztope{A\ptemp}{A\cen}{\sfact}.
+\end{equation}
+%
+\end{lemma}
+%
+\begin{proof}
+First we shall show
+$A\tcztope{\ptemp}{\cen}{\sfact}\subseteq\tcztope{A\ptemp}{A\cen}{\sfact}.$
+Let $y\in\tcztope{\ptemp}{\cen}{\sfact}$.  Then $y=\ptemp\zeta+\cen$
+for some $\zeta\in\compnums^m$ such that
+$\absolute{\zeta}\leq \sfact$.  We have $Ay=A\ptemp\zeta+A\cen$.  So,
+$Ay\in\tcztope{A\ptemp}{Ac}{\sfact}$.  Therefore,
+$A\tcztope{\ptemp}{\cen}{\sfact}\subseteq\tcztope{A\ptemp}{A\cen}{\sfact}.$
+ 
+Now we have to show $\tcztope{A\ptemp}{A\cen}{\sfact}\subseteq
+A\tcztope{\ptemp}{\cen}{\sfact}$.  Let
+$z\in\tcztope{A\ptemp}{Ac}{\sfact}$.  Then $z=A\ptemp\zeta^\pr+A\cen$
+for some $\zeta^\pr\in\compnums^m$ such that
+$\absolute{\zeta^\pr}\leq \sfact$.  Equivalently, $z=
+A(\ptemp\zeta^\pr+\cen)$.  So, $z\in
+A\tcztope{\ptemp}{\cen}{\sfact}$.  Therefore, $\tcztope{A\ptemp}{A\cen}{\sfact}\subseteq
+A\tcztope{\ptemp}{\cen}{\sfact}$.
+From the previous two conclusions, we have
+$A\tcztope{\ptemp}{\cen}{\sfact}=\tcztope{A\ptemp}{A\cen}{\sfact}.$
+\end{proof}
+%
+In the above lemma, we see that the template of the complex zonotope
+can change when a linear transformation is applied.  However, we
+observe that when the template column vectors are constituted by the
+eigenvectors of the linear transformation and the center is the
+origin, we can express the resulting transformed set by only changing
+the scaling factors, while keeping the template the same.  This result
+can be seen as an extension of Lemma~\ref{todo} to the case of
+template complex zonotopes, which is explained as follows.  This
+following lemma is later used in the efficient computation of bounded
+time reachable set of a linear system, where the size of the template
+complex zonotope representing the reachable set remains the same in
+successive time steps.
+%
+\begin{lemma}[Eigenstructure based scaling]
+Let $A\in\mat{n}{n}{\reals}$ and $\mu\in\compnums^n$ be the vector of
+eigenvalues of $A$ whose corresponding eigenvectors are the column
+vectors of a matrix $\ptemp\in\mat{n}{n}{\compnums}$, i.e.,
+$A\ptemp=\ptemp\diagonal{\mu}$.  Let
+$\tcztope{\ptemp}{0}{\sfact}\subset\compnums^n$ be a template complex
+zonotope.  Then,
+%
+\begin{equation}~\label{eqn:eigen-scaling}
+A\tcztope{\ptemp}{0}{\sfact}=\tcztope{\ptemp}{0}{\diagonal{\absolute{\mu}}\sfact}.
+\end{equation}
+%
+\end{lemma}
+%
+\begin{proof}
+Based on Equation~\ref{eqn:lin-transform} and the fact that
+$A\ptemp=\ptemp\diagonal{\mu}$, we get
+%
+\[
+A\tcztope{\ptemp}{0}{\sfact}=\tcztope{A\ptemp}{0}{\sfact}=\tcztope{\ptemp\diagonal{\mu}}{0}{\sfact}.
+\]
+%
+Then using Equation~\ref{eqn:normalization}, we get
+%
+\[
+\tcztope{\ptemp\diagonal{\mu}}{0}{\sfact}=\tcztope{\ptemp}{0}{\diagonal{\absolute{\mu}}\sfact}
+\]
+\end{proof}
+
+\begin{lemma}[Minkowski sum]~\label{lem:min-sum}
+Let $\tcztope{\ptemp}{\cen}{\sfact}$ and
+$\tcztope{\ptemp^\pr}{\cen^\pr}{\sfact^\pr}$ be two template complex
+zonotopes which are subsets of $\compnums^n$, i.e.,
+$\cen,\cen^\pr\in\compnums^n$.  The Minkowski sum of the two
+template complex zonotopes is another template complex zonotope,
+which is computed as follows.
+%
+\begin{equation}
+\minsum{\tcztope{\ptemp}{\cen}{\sfact}}{\tcztope{\ptemp^\pr}{\cen^\pr}{\sfact^\pr}}
+= \tcztope{\begin{bmatrix}\ptemp & \ptemp^\pr\end{bmatrix}}{\cen+\cen^\pr}{\begin{bmatrix}\sfact\\\sfact^\pr\end{bmatrix}}
+\end{equation}
+\end{lemma}
+%
+\begin{proof}
+First we shall show that \\$\minsum{\tcztope{\ptemp}{\cen}{\sfact}}{\tcztope{\ptemp^\pr}{\cen^\pr}{\sfact^\pr}}
+\subseteq \tcztope{\begin{bmatrix}\ptemp
+& \ptemp^\pr\end{bmatrix}}{\cen+\cen^\pr}{\begin{bmatrix}\sfact\\\sfact^\pr\end{bmatrix}}$.
+Let $y\in\tcztope{\ptemp}{\cen}{\sfact}$ and
+$y^\pr\in\tcztope{\ptemp^\pr}{\cen^\pr}{\sfact^\pr}$ such that
+$y=\ptemp\zeta+\cen:\absolute{\zeta}\leq \sfact$ and
+$y^\pr=\ptemp^\pr\zeta^\pr+\cen^\pr:\absolute{\zeta^\pr}\leq \sfact^\pr$
+for some complex valued vectors $\zeta$ and $\zeta^\pr$.  Then
+$y+y^\pr = \ptemp\zeta+\ptemp^\pr\zeta^\pr = \begin{bmatrix} \ptemp
+& \ptemp^\pr\end{bmatrix}\begin{bmatrix} \zeta\\\zeta^\pr\end{bmatrix}$.
+We have
+$\absolute{\begin{matrix} \zeta\\\zeta^\pr\end{matrix}}\leq\begin{bmatrix}\sfact\\\sfact^\pr\end{bmatrix}$.
+Therefore,
+$\minsum{\tcztope{\ptemp}{\cen}{\sfact}}{\tcztope{\ptemp^\pr}{\cen^\pr}{\sfact^\pr}}
+\subseteq \tcztope{\begin{bmatrix}\ptemp
+& \ptemp^\pr\end{bmatrix}}{\cen+\cen^\pr}{\begin{bmatrix}\sfact\\\sfact^\pr\end{bmatrix}}$.
+Next we have to show $\tcztope{\begin{bmatrix}\ptemp
+& \ptemp^\pr\end{bmatrix}}{\cen+\cen^\pr}{\begin{bmatrix}\sfact\\\sfact^\pr\end{bmatrix}} \subseteq \minsum{\tcztope{\ptemp}{\cen}{\sfact}}{\tcztope{\ptemp^\pr}{\cen^\pr}{\sfact^\pr}}$.
+Consider that $y\in\tcztope{\begin{bmatrix}\ptemp
+& \ptemp^\pr\end{bmatrix}}{\cen+\cen^\pr}{\begin{bmatrix}\sfact\\\sfact^\pr\end{bmatrix}}$.
+Then $y=\begin{bmatrix}\ptemp
+&\ptemp^\pr\end{bmatrix}\begin{bmatrix}\zeta\\ \zeta^\pr\end{bmatrix}=\ptemp\zeta+\ptemp\zeta^\pr$
+for some complex valued vectors $\zeta$ and $\zeta^\pr$ such that $\absolute{\zeta}\leq \sfact$ and
+$\absolute{\zeta^\pr}\leq\sfact^\pr$.  So,
+$y\in\minsum{\tcztope{\ptemp}{\cen}{\sfact}}{\tcztope{\ptemp^\pr}{\cen^\pr}{\sfact^\pr}}$.
+Therefore, $\tcztope{\begin{bmatrix}\ptemp
+& \ptemp^\pr\end{bmatrix}}{\cen+\cen^\pr}{\begin{bmatrix}\sfact\\\sfact^\pr\end{bmatrix}} \subseteq \minsum{\tcztope{\ptemp}{\cen}{\sfact}}{\tcztope{\ptemp^\pr}{\cen^\pr}{\sfact^\pr}}$.
+From the previous two conclusions, we get
+$\minsum{\tcztope{\ptemp}{\cen}{\sfact}}{\tcztope{\ptemp^\pr}{\cen^\pr}{\sfact^\pr}}
+= \tcztope{\begin{bmatrix}\ptemp
+& \ptemp^\pr\end{bmatrix}}{\cen+\cen^\pr}{\begin{bmatrix}\sfact\\\sfact^\pr\end{bmatrix}}$.
+\end{proof}
+%
+{\color{red}
+\begin{enumerate}
+\item Linear projection.
+\end{enumerate}
+}
+
+In the above proposition, we see that that the size of the
+representation of a template complex zonotope which is a Minkowski sum
+of two template complex zonotopes is equal to the sum of the sizes of
+latter.  Then based on Equation~\ref{toref}, the size of
+representation of the reach set at any given discrete time in terms of
+a template complex zonotope increases linearly as a function of time.
+We shall explain this computation in a latter section.  However, we
+observe that when the templates of two template complex zonotopes are
+the same, then the size the size of the template matrix and the vector
+of scaling factors of the representation of their Minkowski sum
+remains the same.  Latter, we shall use this observation in
+conjugation with the Lemma~\ref{toref} about eigenstructure based scaling
+to derive an efficient reachable set computation method for linear
+systems.  The aforementioned observation is explained below.
+%
+\begin{lemma}[Minkowski sum with common template]
+Let us consider two template complex zonotopes
+$\tcztope{\ptemp}{c}{s},\tcztope{\ptemp}{c^\pr}{s^\pr}\subseteq\reals^n$
+such that
+$\ptemp\in\mat{n}{m}{\compnums}$.  Then
+%
+\begin{equation}~\label{eqn:common-minkowski}
+\minsum{\tcztope{\ptemp}{\cen}{\sfact}}{\tcztope{\ptemp}{\cen^\pr}{\sfact^\pr}}=\tcztope{\ptemp}{\cen+\cen^\pr}{\sfact+\sfact^\pr}
+\end{equation}
+%
+\end{lemma}
+%
+\begin{proof}
+We have $\minsum{\tcztope{\ptemp}{c}{s}}{\tcztope{\ptemp}{c^\pr}{s^\pr}}=$
+%
+\begin{align}~\label{eqn:proof-commin2}
+&
+\set{\lt(\cen+\ptemp\zeta\rt)+\lt(\cen^\pr+\ptemp\zeta^\pr\rt):\zeta,\zeta^\pr\in\compnums^m,~\absolute{\zeta}\leq
+\sfact,~\absolute{\zeta^\pr}\leq \sfact^\pr}\nonumber\\
+& = \set{\lt(\cen+\cen^\pr\rt)+\ptemp\lt(\zeta+\zeta^\pr\rt):\zeta,\zeta^\pr\in\compnums^m,~\absolute{\zeta}\leq
+\sfact,~\absolute{\zeta^\pr}\leq \sfact^\pr}
+\end{align}
+%
+First, we shall show that
+\begin{equation}~\label{eqn:proof-commin1}
+\set{\zeta+\zeta^\pr:\zeta,\zeta^\pr\in\compnums^m,~\absolute{\zeta}\leq
+\sfact,~\absolute{\zeta^\pr}\leq\sfact^\pr}=\set{\zeta^\dpr:\absolute{\zeta^\dpr}\leq\sfact+\sfact^\pr }.
+\end{equation}
+%
+To prove that the L.H.S of Equation~\ref{eqn:proof-commin1} is
+contained within the R.H.S of Equation~\ref{eqn:proof-commin1},
+consider $\zeta,\zeta^\pr\in\compnums^m$ where $\absolute{\zeta}\leq
+\sfact,~\absolute{\zeta^\pr}\leq\sfact^\pr$.  For any
+$i\in\set{1,...,m}$, we have
+$\absolute{\zeta_i+\zeta^\pr_i}\leq \absolute{\zeta_i}+\absolute{\zeta^\pr_i}=\sfact+\sfact^\pr$
+by the triangular inequality.  This proves that the L.H.S of
+Equation~\ref{eqn:proof-commin1} is contained within the R.H.S of
+Equation~\ref{eqn:proof-commin1}.
+
+To prove the vice-versa, let us
+consider
+$\zeta^\dpr\in\compnums:\absolute{\zeta^\dpr}\leq \sfact+\sfact^\pr$.
+Let
+$\zeta=\sfact\frac{\zeta^\dpr}{\sfact+\sfact^\pr},~\zeta^\pr=\sfact^\pr\frac{\zeta^\dpr}{\sfact+\sfact^\pr}$.
+Then $\absolute{\zeta}\leq \sfact$ and
+$\absolute{\zeta^\pr}\leq\sfact^\pr$ because
+$\absolute{\frac{\zeta^\dpr}{\sfact+\sfact^\pr}}\leq 1$.  So,
+$\zeta^\dpr=\zeta+\zeta^\pr$ where $\absolute{\zeta}\leq \sfact$ and
+$\absolute{\zeta^\pr}\leq \sfact^\pr$.  This proves that the R.H.S of
+Equation~\ref{eqn:proof-commin1}  is contained inside the L.H.S of
+Equation~\ref{eqn:proof-commin1}.
+
+Hence, we have proved Equation~\ref{eqn:proof-commin1}.  Then combining 
+Equation~\ref{eqn:proof-commin1}  with
+Equation~\ref{eqn:proof-commin2} gives us
+%
+\begin{align*}
+&\minsum{\tcztope{\ptemp}{c}{s}}{\tcztope{\ptemp}{c^\pr}{s^\pr}}=\set{\cen+\cen^\pr+\ptemp\zeta^\dpr:\absolute{\zeta^\dpr}\leq\sfact+\sfact^\pr}\\
+&=\tcztope{\ptemp}{\cen+\cen^\pr}{\sfact+\sfact^\pr}.
+\end{align*}
+%
+\end{proof}
+%
+Like in the case of simple zonotopes, template complex zonotopes are
+also not closed under mutual intersection.  Moreover, the intersection
+between template complex zonotopes with a common template and center
+need not also be a tempalte complex zonotope in general.  Therefore,
+even for a fixed template and center, there may not exist the smallest template
+complex zonotope over-approximation of a given set. {\color{red} Explain
+with figure}.
+
+However, we observe that template complex zonotopes with a common
+non-singular (invertible) template and center are closed under
+intersection and the intersection can be expressed algebraically.
+This is explained in the following lemma.
+%
+\begin{lemma}[Mutual intersection with common invertible template and center]~\label{lem:intersection}
+Let us consider two template complex zonotopes
+$\tcztope{\ptemp}{\cen}{\sfact},\tcztope{\ptemp}{\cen}{\sfact^\pr}\subset\compnums^n$
+where their common template $\ptemp$ is a non-singular (invertible)
+square matrix.  Then
+%
+\begin{equation}~\label{eqn:intersection}
+\tcztope{\ptemp}{\cen}{\sfact}\bigcap\tcztope{\ptemp}{\cen}{\sfact^\pr}=\tcztope{\ptemp}{\cen}{\meet{\sfact}{\sfact^\pr}}
+\end{equation}
+%
+\end{lemma}
+%
+\begin{proof}
+Let us consider a point
+$z\in\tcztope{\ptemp}{\cen}{\meet{\sfact}{\sfact^\pr}}$ which is
+written in as a linear combination of the template vectors plus center
+as $z=c+\ptemp\zeta:~\absolute{\zeta}\leq \meet{\sfact}{\sfact^\pr}$.
+This means that $\absolute{\zeta}\leq\sfact$ and also
+$\absolute{\zeta}\leq \sfact^\pr$.  So,
+$z\in\tcztope{\ptemp}{\cen}{\sfact}$ and also
+$z\in\tcztope{\ptemp}{\cen}{\sfact^\pr}$.  Therefore,
+$\tcztope{\ptemp}{\cen}{\meet{\sfact}{\sfact^\pr}}\subseteq \tcztope{\ptemp}{\cen}{\sfact}\bigcap\tcztope{\ptemp}{\cen}{\sfact^\pr}$.
+
+Next consider another point
+$x\in\tcztope{\ptemp}{\cen}{\sfact}\bigcap\tcztope{\ptemp}{\cen}{\sfact^\pr}$.
+Since $\ptemp$ is an invertible matrix, $x$ is uniquely written as a
+linear combination of tempalte vectors plus center as
+$\cen+\ptemp\lt(\inv{\ptemp}\lt(x-\cen\rt)\rt)$ where
+$\absolute{\inv{\ptemp}\lt(x-\cen\rt)}\leq
+\sfact$ and $\absolute{\inv{\ptemp}\lt(x-\cen\rt)}\leq
+\sfact^\pr$, which means
+$\absolute{\inv{\ptemp}\lt(x-\cen\rt)}\leq\meet{\sfact}{\sfact^\pr}$.  Therefore,
+$\tcztope{\ptemp}{\cen}{\sfact}\bigcap\tcztope{\ptemp}{\cen}{\sfact^\pr}\subseteq\tcztope{\ptemp}{\cen}{\meet{\sfact}{\sfact^\pr}}$.
+
+Combining the above two conclusions, we get that
+$\tcztope{\ptemp}{\cen}{\sfact}\bigcap\tcztope{\ptemp}{\cen}{\sfact^\pr}=\tcztope{\ptemp}{\cen}{\meet{\sfact}{\sfact^\pr}}$.
+
+\end{proof}
+%
+As explained before, in general, even for a fixed template and center,
+there may not exist the smallest template complex zonotope
+over-approximation of a given set.  However, since template complex
+zonotopes with a fixed center and and an invertible square matrix
+template are closed under intersection based on
+Lemma~\ref{lem:intersection}, in this case there exists a smallest
+template complex zonotope over-approximation of a given set.  This
+smallest over-approximation is expressed as follows.
+%
+\begin{theorem}~\label{thm:min-abstraction}
+Let $\Psi\subseteq\compnums^n$ be a bounded set.  Let
+$\ptemp\in\mat{n}{n}{\compnums}$ be an invertible square matrix and
+$\cen\in\compnums^n$.  Consider the set $S=\set{\sfact\in\reals_{\geq
+0}^n:\Psi\subseteq\tcztope{\ptemp}{\cen}{\sfact}}$ and
+$\sfact^*=\vectormin{s\in S} s$.  Then
+%
+\begin{equation}
+\Psi\subseteq\bigcap_{\sfact\in S}\tcztope{\ptemp}{\cen}{\sfact}=\tcztope{\ptemp}{\cen}{\sfact^*}.
+\end{equation}
+%
+and
+%
+\begin{equation}
+\forall i\in\set{1,...,n},~\sfact^*_i=\max_{x\in\Psi}\lt(\inv{\ptemp}\lt(x-\cen\rt)\rt)_i.
+\end{equation}
+%
+\end{theorem}
+%
+\begin{proof}
+Based on Lemma~\ref{lem:intersection}, it follows that
+%
+\[
+\bigcap_{\sfact\in
+S}\tcztope{\ptemp}{\cen}{\sfact}=\tcztope{\ptemp}{\cen}{\vectormin{s\in
+S}s}=\tcztope{\ptemp}{\cen}{\sfact^*}.
+\]
+%
+Furthermore, as $S$ is defined as the set of all scaling factors
+whose corresponding template complex zonotope is an over-approximation
+of $\Psi$, we also get
+%
+\[
+\Psi\subseteq\bigcap_{\sfact\in S}\tcztope{\ptemp}{\cen}{\sfact}=\tcztope{\ptemp}{\cen}{\sfact^*}.
+\]
+%
+Next, consider $x\in\Psi$ and $\sfact^\pr\in\reals_{\geq 0}^n$ where
+%
+\[
+\forall
+i\in\set{1,...,n}:~\sfact^\pr=\max_{x\in\Psi}\lt(\inv{\ptemp}\lt(x-\cen\rt)\rt)_i.
+\]
+%
+Since $\ptemp$ is invertible, $x$ is uniquely written as a linear
+combination of template comlumn vectors of $\ptemp$ plus the center
+$\cen$ as $x=\cen+\ptemp\lt(\inv{\ptemp}\lt(x-\cen\rt)\rt)$, where the
+vector of combining coefficients is
+$\lt(\inv{\ptemp}\lt(x-\cen\rt)\rt)$.  So, if $s\in S$, then 
+$x\in\Psi\subseteq\tcztope{\ptemp}{\cen}{\sfact}$ and hence \[\forall
+i\in\set{1,...,n}:~\lt(\inv{\ptemp}\lt(x-\cen\rt)\rt)_i\leq\sfact_i.\]
+Therefore,
+%
+\begin{equation}~\label{proof-min-abstraction-1}
+\forall
+i\in\set{1,...,n}:~\sfact^\pr_i=\max_{x\in\Psi}\lt(\inv{\ptemp}\lt(x-\cen\rt)\rt)_i\leq\min_{s\in
+S}s_i=\sfact^*_i.
+\end{equation}
+%
+Furthermore, if $x\in\Psi$, then by the definition of $\sfact^\pr$, we
+get $\lt(\inv{\ptemp}\lt(x-\cen\rt)\rt)\leq \sfact^\pr$.  Therefore,
+$\Psi\subseteq\tcztope{\ptemp}{\cen}{\sfact^\pr}$.  This implies
+$\sfact^\pr\in S$.  So, $\sfact^\pr\geq\sfact^*$.  Combining the
+former conclusion with the conclusion in
+Equation~\ref{proof-min-abstraction-1} gives $\sfact^\pr=\sfact^*$,
+which proves the second part of the theorem.
+\end{proof}
+
+
+\section{Checking inclusion}
+While computing positive invariants using a set representation,
+ascertaining the positive invariance of a set requires deciding the
+inclusion of the next reachable set inside the given set.  In the case
+of complex zonotopes, we shall show that checking the exact inclusion
+amounts to solving a is a non-convex optimization problem.  However,
+we shall later propose a convex relaxation, which is a sufficient
+condition for checking the inclusion.  Specifically, we shall express
+derive a sufficient covex condition for inclusion checking expressed
+as a set of second-order conic constraints on some variables, where a
+second order conic constraint is defined as follows.
+%
+\begin{definition}[Second order conic constraint]
+A second order conic constraint on a variable $x$ taking values in
+$\reals^n$ is one of the following expressions.
+\begin{enumerate}
+\item  $\sqnorm{a^Tx+b}\leq c^Tx+d$ where $a,c\in\reals^n$ and
+$b,d\in\reals$ are constants.
+\item $p^Tx=q$ where $p\in\reals^n$ and $q\in\reals$ are constants.
+\end{enumerate}
+\end{definition}
+%
+Given a set of second order conic constraints on a variable
+$x\in\reals^n$, solving the constraints refers to finding a value
+$x^*\in\reals^n$ that satisfies the constraints.  A value
+$x^\pr\in\reals^n$ is called an approximate solution within a
+precision $\epsilon\in\reals_{\geq 0}$ if there exists a solution
+$x^*\in\reals^n$ such that $\sqnorm{x^\pr-x^*}\leq \epsilon$.  There
+are numerical algorithms based on interior point methods~\cite{todo}
+that can efficiently find approximate solutions with very high
+precision to second order conic constraints (SOCC).
+
+Before deriving the non-convex condition for checking inclusion
+between template complex zonotopes, we need to look at the inclusion
+of a point inside a template complex zonotope, which is however
+expressed as a set of convex constraints.
+%
+\begin{lemma}[Inclusion of a point]
+Let us consider a template complex zonotope
+$\tcztope{\ptemp}{\cen}{\sfact}\subset\compnums^n$ where
+$\ptemp\in\mat{n}{m}{\compnums}$ and a point $x\in\compnums^n$.  Then
+$x\in\tcztope{\ptemp}{\cen}{\sfact}\subset\compnums^n$ if and only if
+all of the following is collectively true.
+%
+\begin{align}
+& \exists\zeta\in\compnums^m:\nonumber\\
+& \ptemp\zeta = x-c~\label{eqn:lem-point-inclusion-1}\\
+& \absolute{\zeta}\leq \sfact.~\label{eqn:lem-point-inclusion-2}
+\end{align}
+%
+\end{lemma}
+%
+\begin{proof}
+The above result follows from the fact that any point 
+$x\in\tcztope{\ptemp}{\cen}{\sfact}$ is of the form
+$x=\cen+\ptemp\zeta$ for some $\zeta\in\compnums^m$ such that
+$\absolute{\zeta}\leq \sfact$.
+\end{proof}
+%
+Equation~\ref{eqn:lem-point-inclusion-1} is an equality constraint on
+$\zeta$, which is therefore an SOCC.  We know that the absolute value
+of a complex number is the square norm of a two dimensional vector.
+So, Equation~\ref{eqn:lem-point-inclusion-2} is equivalent to a set of
+square norm constraints on the real and imaginary components of
+$\zeta$, which are therefore SOCC constraints.  Hence, the inclusion
+of a point inside a template complex zonotope can be checked by
+solving second order conic constraints.
+%
+\begin{lemma}[Exact inclusion between template complex zonotopes]~\label{lem:exact-inclusion}
+Let us consider two template complex zonotopes
+$\tcztope{\ptemp}{\cen}{\sfact},
+\tcztope{\ptemp^\pr}{\cen^\pr}{\sfact^\pr}\subseteq\compnums^n$ such
+that $\ptemp\in\mat{n}{m}{\compnums}$ and
+$\ptemp^\pr\in\mat{n}{r}{\compnums}$.  The inclusion
+$\tcztope{\ptemp^\pr}{\cen^\pr}{\sfact^\pr}\subseteq\tcztope{\ptemp}{\cen}{\sfact}$
+holds if and only if
+\begin{equation}\label{eqn:exact-inclusion}
+\max_{\set{\zeta^\pr\in\compnums^{r}:\absolute{\zeta^\pr}\leq \sfact^\pr}}\min_{\set{\zeta\in\compnums^m:\ptemp\zeta=\ptemp^\pr\zeta^\pr+\cen^\pr-\cen}}\max_{i=1}^m\lt(\absolute{\zeta_i}-s_i\rt)\leq 0
+\end{equation}
+\end{lemma}
+%
+\begin{proof}
+We have
+$\tcztope{\ptemp^\pr}{\cen^\pr}{\sfact^\pr}\subseteq\tcztope{\ptemp}{\cen}{\sfact}$
+iff for every $\zeta^\pr\in\compnums^r:\absolute{\zeta^\pr}\leq \sfact^\pr$,
+there exists
+$\zeta\in\compnums^m:\ptemp\zeta+\cen=\ptemp^\pr\zeta^\pr+\cen^\pr~\wedge~\absolute{\zeta}\leq
+\sfact$.  This is equivalently expressed as the constraint
+as \[\max_{\set{\zeta^\pr\in\compnums^{r}:\absolute{\zeta^\pr}\leq \sfact^\pr}}\min_{\set{\zeta\in\compnums^m:\ptemp\zeta=\ptemp^\pr\zeta^\pr+\cen-\cen^\pr}}\max_{i=1}^m\lt(\absolute{\zeta_i}-s_i\rt)\leq
+0.\text{\hspace{5em}\qedhere}\]
+\end{proof}
+%
+We shall now explain how solving Equation~\ref{eqn:exact-inclusion}
+amounts to solving a non-covex optimization problem.  Let us consider
+that $\ptemp$ has a pseudo-inverse $\pinv{\ptemp}$.  Then any solution
+for $\zeta$ satisfying $\ptemp\zeta=\ptemp\zeta^\pr+\cen^\pr-\cen$ can
+be written as $\pinv{\ptemp}\lt(\zeta^\pr-c\rt)+v$ where $v$ belongs
+to the complex valued null-space of $\ptemp$.  Let us denote the
+null-space of $\ptemp$ as $\nullspace{\ptemp}$.  So,
+%
+\begin{align*}
+& \min_{\set{\zeta\in\compnums:\ptemp\zeta=\ptemp^\pr\zeta^\pr+\cen^\pr-\cen}}\max_{i=1}^m\lt(\absolute{\zeta_i}-s_i\rt)\\
+&
+=\min_{\set{v\in\nullspace{\ptemp}}}\max_{i=1}^m\lt(\absolute{\pinv{\ptemp}\lt(\zeta^\pr-c\rt)+v}-s_i\rt)
+\end{align*}
+%
+The absolute value of a complex variable is a convex quadratic
+function of the real and imaginary components of the variable.  So,
+the above function is a point-wise minimum (for points $v$ in the null
+space $\null{\ptemp}$) of a set of convex quadratic functions over
+$\zeta^\pr$, which is therefore not a concave function of $\zeta^\pr$.
+So the maximization
+%
+\[
+\max_{\set{\zeta^\pr\in\compnums^{r}:\absolute{\zeta^\pr}\leq \sfact^\pr}}\min_{\set{\zeta\in\compnums^m:\ptemp\zeta=\ptemp^\pr\zeta^\pr+\cen^\pr-\cen}}\max_{i=1}^m\lt(\absolute{\zeta_i}-s_i\rt)
+\]
+%
+is equivalent to maximizing a non-concave function of $\zeta^\pr$.
+Maximizing a non-concave function is a non-covex optimization problem.
+
+However, we will derive a sufficient condition expressed as a set of
+convex constraints on the center and scaling factors and some
+additional variables, which would be sufficient to guarantee inclusion
+between two complex zonotopes.  More precisely, we derive a class of
+convex constraints called second order conic constraints that can be
+solved efficiently using interior point methods~\cite{todo}.  We shall
+first explain second order conic constraints before deriving
+the convex condition for inclusion checking.
+
+
+Now we shall discuss the derivation of the set of convex constraints
+as sufficient condition for inclusion-checking between two
+complex-zonotopes.
+%
+\begin{lemma}~\label{lem:transfer-matrix}
+  Let $\sfact\in\reals^m_{\geq 0}$, $\sfact^\pr\in\reals^r_{\geq 0}$
+  and $\zeta^\pr\in\compnums^r$ such that
+  $\absolute{\zeta^\pr}\leq\sfact^\pr$ and
+  $\cen,\cen^\pr\in\compnums^n$.  Let $\ptemp\in\mat{n}{m}{\compnums}$
+  and $\ptemp^\pr\in\mat{n}{r}{\compnums}$ such that $\ptemp\tmat=\ptemp^\pr\diagonal{\sfact^\pr}$ and
+  $\ptemp\tvect=\lt(c^\pr-c\rt)$ for a complex matrix $X$ and a
+  complex vector $y$.  Then,
+  %
+\begin{equation}\label{eqn:transfer-matrix}
+\min_{\set{\zeta\in\compnums:\ptemp\zeta=\ptemp^\pr\zeta^\pr+\cen^\pr-\cen}}\max_{i=1}^m\lt(\absolute{\zeta_i}-\sfact_i\rt)\leq \max_{i=1}^m\lt(\absolute{\tvect_i}+\sum_{j=1}^r\absolute{\tmat_{ij}}-\sfact_i\rt).
+\end{equation}
+%
+\end{lemma}
+%
+\begin{proof}
+Consider $\epsilon\in\compnums^{r}$, where for any $i\in\set{1,...,r}$,
+%
+$\left\{
+\begin{array}{l}
+\epsilon_i=\frac{\zeta^\pr}{s^\pr_i}~\text{if}~ s^\pr_i\neq 0\\
+\epsilon_i=0~\text{otherwise}
+\end{array}
+\right.$.
+%
+Since $\absolute{\zeta^\pr}\leq s^\pr$ as given, so
+we have $\zeta^\pr=\diagonal{s^\pr}\epsilon$ and
+$\max_{j=1}^r\absolute{\epsilon_j}\leq 1$.  By
+using the relations given in the lemma, we henceforth get
+%
+\begin{align*}
+&\ptemp^\pr\zeta^\pr+c-c^\pr
+=\ptemp^\pr\diagonal{\sfact^\pr}\epsilon+c-c^\pr
+=\ptemp\tmat\epsilon+\ptemp\tvect
+=\ptemp\lt(\tmat\epsilon+\tvect\rt)
+\end{align*}
+%
+Therefore,
+%
+\begin{align*}
+& \min_{\set{\zeta\in\compnums:\ptemp\zeta=\ptemp^\pr\zeta^\pr+\cen^\pr-\cen}}\max_{i=1}^m\lt(\absolute{\zeta_i}-\sfact_i\rt)\leq \max_{i=1}^m\lt(\absolute{\lt(X\epsilon+y\rt)_i}-\sfact_i\rt)\\
+&\leq \max_{i=1}^m\lt(\absolute{\tvect_i}+\sum_{j=1}^r\absolute{\tmat_{ij}}\absolute{\epsilon_j}-\sfact_i\rt)
+~~\%\%~\text{Using triangular inequality}\\
+& \leq  \max_{i=1}^m\lt(\absolute{\tvect_i}+\sum_{j=1}^r\absolute{\tmat_{ij}}-\sfact_i\rt)
+~~\%\%~\text{Since}~\max_{j=1}^r\absolute{\epsilon_j}\leq 1.
+\end{align*}
+%
+\end{proof}
+%
+Based on the above lemma, we define a relation between two template
+complex zonotopes, which is a sufficient condition for the inclusion
+relation.
+%
+\begin{definition}[Relation for inclusion-checking]
+For two template complex zonotopes $\tcztope{\ptemp}{\cen}{\sfact}$
+and $\tcztope{\ptemp^\pr}{\cen^\pr}{\sfact^\pr}$ such that
+$\ptemp\in\mat{n}{m}{\compnums}$ and
+$\ptemp^\pr\in\mat{n}{r}{\compnums}$, we say
+$\tcztope{\ptemp}{\cen}{\sfact}\order\tcztope{\ptemp^\pr}{\cen^\pr}{\sfact^\pr}$
+if all of the following are collectively true.
+%
+\begin{align*}
+& \exists \tmat\in\mat{m}{r}{\compnums},\tvect\in\compnums^m~~\text{such
+that}\\
+& \ptemp\tmat=\ptemp^\pr\diagonal{\sfact^\pr},~~\ptemp\tvect=\cen^\pr-\cen\\
+& \max_{i=1}^m\lt(\absolute{\tvect_i}+\sum_{j=1}^r\absolute{\tmat_{ij}}-\sfact_i\rt)\leq
+0.
+\end{align*}
+%
+\end{definition}
+%
+\begin{theorem}[Sufficient condition for inclusion checking]~\label{thm:suff-inclusion}
+The inclusion\\
+$\tcztope{\ptemp}{\cen}{\sfact}\subseteq\tcztope{\ptemp^\pr}{\cen^\pr}{\sfact^\pr}$
+holds if the relation
+$\tcztope{\ptemp}{\cen}{\sfact}\order\tcztope{\ptemp^\pr}{\cen^\pr}{\sfact^\pr}$
+is true.
+\end{theorem}
+%
+\begin{proof}
+We have shown in Lemma~\ref{lem:exact-inclusion} that the inclusion
+$\tcztope{\ptemp}{\cen}{\sfact}\subseteq\tcztope{\ptemp^\pr}{\cen^\pr}{\sfact^\pr}$
+holds iff the L.H.S of Equation~\ref{eqn:exact-inclusion} is bounded
+above by zero.  Based on Lemma~\ref{lem:transfer-matrix}, the R.H.S of
+Equation~\ref{eqn:transfer-matrix} is an upper bound on the L.H.S of
+Equation~\ref{eqn:exact-inclusion}.  So, if
+$\tcztope{\ptemp}{\cen}{\sfact}\order\tcztope{\ptemp^\pr}{\cen^\pr}{\sfact^\pr}$,
+then the R.H.S of Equation~\ref{eqn:transfer-matrix} would be
+bounded above by zero and the condition for inclusion in
+Equation~\ref{eqn:exact-inclusion} would be satisfied.
+\end{proof}
+%
+%% Furthermore, the above relation is a partial order.
+%
+%% \begin{theorem}[Paritial ordering]
+%% The relation ``$\order$'' between template complex zonotopes is a
+%% partial order.  That is, for any three template complex zonotopes
+%% $\tcz{\ptemp}{\cen}{\sfact}$, $\tcz{\ptemp^\pr}{\cen^\pr}{\sfact^\pr}$
+%% and $\tcz{\ptemp^\dpr}{\cen^\dpr}{\sfact^\dpr}$, all of the following
+%% conditions are true.
+%% %
+%% \begin{enumerate}
+%% \item Reflexivity:
+%% $\tcz{\ptemp}{\cen}{\sfact}\order\tcz{\ptemp}{\cen}{\sfact}$.
+%% \item Antisymmetry: If
+%% $\tcz{\ptemp}{\cen}{\sfact}\order\tcz{\ptemp^\pr}{\cen^\pr}{\sfact^\pr}$
+%% and
+%% $\tcz{\ptemp^\pr}{\cen^\pr}{\sfact^\pr}\order\tcz{\ptemp}{\cen}{\sfact}$,
+%% then
+%% $\tcz{\ptemp}{\cen}{\sfact}=\tcz{\ptemp^\pr}{\cen^\pr}{\sfact^\pr}$.
+%% \item Transitivity: If
+%% $\tcz{\ptemp^\pr}{\cen^\pr}{\sfact^\pr}\order\tcz{\ptemp}{\cen}{\sfact}$
+%% and
+%% $\tcz{\ptemp^\dpr}{\cen^\dpr}{\sfact^\dpr}\order\tcz{\ptemp^\pr}{\cen^\pr}{\sfact^\pr}$,
+%% then $\tcz{\ptemp^\dpr}{\cen^\dpr}{\sfact^\dpr}\order\tcz{\ptemp}{\cen}{\sfact}$.
+%% \end{enumerate}
+%% %
+%% \end{theorem}
+%% %
+%% \begin{proof}
+%% \begin{enumerate}
+%% \item {\it Reflexivity}:  Consider $\tmat=\diagonal{\sfact}$ and
+%% $\tvect=\repmat{m}{1}$.  Then, 
+%% $\ptemp\tmat=\ptemp\diagonal{\sfact}$,
+%% $\ptemp\tvect=0=c-c$ and
+%% %
+%% \vspace{-1em}
+%% \begin{align*}
+%% & \max_{i=1}^m\lt(\absolute{y_i}+\sum_{j=1}^m\absolute{X_{ij}}-\sfact_i\rt)
+%% =\max_{i=1}^m\lt(0+\sfact_i-\sfact_i\rt)=0\\
+%% \end{align*}
+%% %
+%% So, $\tcz{\ptemp}{\cen}{\sfact}\order\tcz{\ptemp}{\cen}{\sfact}$.
+%% \item {\it Antisymmetry}: Let
+%% $\tcz{\ptemp}{\cen}{\sfact}\order\tcz{\ptemp^\pr}{\cen^\pr}{\sfact^\pr}$
+%% and
+%% $\tcz{\ptemp^\pr}{\cen^\pr}{\sfact^\pr}\order\tcz{\ptemp}{\cen}{\sfact}$.
+%% By Theorem~\ref{thm:suff-inclusion}, this implies
+%% $\tcz{\ptemp}{\cen}{\sfact}\subseteq\tcz{\ptemp^\pr}{\cen^\pr}{\sfact^\pr}$
+%% and
+%% $\tcz{\ptemp^\pr}{\cen^\pr}{\sfact^\pr}\subseteq\tcz{\ptemp}{\cen}{\sfact}$.
+%% So,
+%% $\tcz{\ptemp}{\cen}{\sfact}=\tcz{\ptemp^\pr}{\cen^\pr}{\sfact^\pr}$.
+%% %
+%% \item Consider that $\ptemp\in\mat{n}{m}{\compnums}$,
+%% $\ptemp^\pr\in\mat{n}{r}{\compnums}$,
+%% $\ptemp^\dpr\in\mat{n}{k}{\compnums}$ and the orderings
+%% $\tcz{\ptemp}{\cen}{\sfact}\order\tcz{\ptemp^\pr}{\cen^\pr}{\sfact^\pr}$
+%% and
+%% $\tcz{\ptemp^\pr}{\cen^\pr}{\sfact^\pr}\order\tcz{\ptemp^\dpr}{\cen^\dpr}{\sfact^\dpr}$.
+%% This implies,
+%% %
+%% \begin{align*}
+%% & \exists \tmat\in\mat{m}{r}{\compnums},\tvect\in\compnums^m~~\text{such
+%% that}\\
+%% & \ptemp\tmat=\ptemp^\pr\diagonal{\sfact^\pr},~~\ptemp\tvect=\cen^\pr-\cen,\\
+%% & \max_{i=1}^m\lt(\absolute{\tvect_i}+\sum_{j=1}^r\absolute{\tmat_{ij}}-\sfact_i\rt)\leq
+%% 0
+%% \end{align*}
+%% %
+%% and
+%% \begin{align*}
+%% & \exists \tmat^\pr\in\mat{m}{k}{\compnums},\tvect^\pr\in\compnums^m~~\text{such
+%% that}\\
+%% & \ptemp^\pr\tmat^\pr=\ptemp^\dpr\diagonal{\sfact^\dpr},~~\ptemp\tvect^\pr=\cen^\dpr-\cen^\pr,\\
+%% & \max_{i=1}^m\lt(\absolute{\tvect^\pr_i}+\sum_{j=1}^k\absolute{\tmat^\pr_{ij}}-\sfact_i^\pr\rt)\leq
+%% 0.
+%% \end{align*}
+%% %
+%% Let $\tmat^\dpr=\tmat\tmat^\pr$ and $\tvect^\dpr=\tvect+\tvect^\pr$.
+%% Then
+%% \[
+%% \ptemp\tmat^\dpr=\ptemp\tmat\tmat^\pr=
+%% \]
+%% \end{enumerate}
+%% \end{proof}
+%
+If we consider the scaling factors and the center as variables, then
+the above sufficient condition for inclusion-checking can be
+efficiently reformulated as a set of second-order conic constraints on
+the center, scaling factors and some auxillary variables.  This is
+explained in the following proposition.
+%
+\begin{proposition}
+If
+$\cen,\cen^\pr\in\compnums^n,\sfact\in\reals^m,\sfact^\pr\in\reals^k$
+are variables and\\
+$\ptemp\in\mat{n}{m}{\compnums},\ptemp^\pr\in\mat{n}{k}{\compnums}$
+are constants, the relation between template complex zonotopes
+$\tcztope{\ptemp}{\cen}{\sfact}\order\tcztope{\ptemp^\pr}{\cen^\pr}{\sfact^\pr}$
+can be expressed as a collection of $\lt(nk+n+m\rt)$ second order
+conic constraints on a vector variable of size \\$\lt(mk+2n+2m+k\rt)$
+comprising components of $\sfact,\sfact^\pr,\cen,\cen^\pr$ and some
+additional variables.
+\end{proposition}
+%
+\begin{proof}
+{\color{red} TODO}
+\end{proof}
+%
+Although the above relation is a sufficient condition for
+inclusion-checking, it is also a necessary condition when the template
+of the complex zonotope within which the containment is checked is
+invertible.  This is explained in the following theorem.
+%
+\begin{theorem}
+Let
+$\tcztope{\ptemp}{\cen}{\sfact},\tcztope{\ptemp^\pr}{\cen^\pr}{\sfact^\pr}\subseteq\compnums^n$
+be two complex zonotopes such that $\ptemp\in\mat{n}{n}{\compnums}$ is
+an invertible square matrix.  Then
+$\tcztope{\ptemp^\pr}{\cen^\pr}{\sfact^\pr}\subseteq\tcztope{\ptemp}{\cen}{\sfact}$
+if and only if $\tcztope{\ptemp^\pr}{\cen^\pr}{\sfact^\pr}\order\tcztope{\ptemp}{\cen}{\sfact}$.
+\end{theorem}
+%
+\begin{proof}
+By Theorem~\ref{thm:suff-inclusion}, we know that if
+$\tcztope{\ptemp^\pr}{\cen^\pr}{\sfact^\pr}\order\tcztope{\ptemp}{\cen}{\sfact}$
+is true,
+then
+$\tcztope{\ptemp^\pr}{\cen^\pr}{\sfact^\pr}\subseteq\tcztope{\ptemp}{\cen}{\sfact}$.
+So, we are left to prove that if
+$\tcztope{\ptemp^\pr}{\cen^\pr}{\sfact^\pr}\subseteq\tcztope{\ptemp}{\cen}{\sfact}$,
+then
+$\tcztope{\ptemp^\pr}{\cen^\pr}{\sfact^\pr}\order\tcztope{\ptemp}{\cen}{\sfact}$.
+
+Let us consider
+$\tcztope{\ptemp^\pr}{\cen^\pr}{\sfact^\pr}\subseteq\tcztope{\ptemp}{\cen}{\sfact}$.
+Let $y=\inv{\ptemp}\lt(\cen^\pr-\cen\rt)$ and
+$X=\inv{\ptemp}\ptemp^\pr\diagonal{\sfact^\pr}$.  
+According
+to Lemma~\ref{lem:normalization},
+$\tcztope{\ptemp^\pr}{\cen^\pr}{\sfact^\pr}=\cztope{\ptemp^\pr\diagonal{\sfact^\pr}}{\cen^\pr}$.
+Let us consider a point
+$x\in\cztope{\ptemp^\pr\diagonal{\sfact^\pr}}{\cen^\pr}$ described as the
+linear combination of generators as
+$x=\cen^\pr+\ptemp^\pr\diagonal{\sfact^\pr}\zeta^\pr$ where
+$\infnorm{\zeta^\pr}\leq 1$.  As $\ptemp$ is invertible, so $x$ can be
+written uniquely by linear combination of column vector of $\ptemp$
+plus the center $\cen$ as 
+%
+\begin{align*}
+&
+x=\cen+\ptemp\lt(\inv{\ptemp}(x-c)\rt)\\
+&
+= \cen+\ptemp\inv{\ptemp}\lt(\cen^\pr+\ptemp^\pr\diagonal{\sfact^\pr}\zeta^\pr-\cen\rt)\\
+& = \cen+\ptemp\lt(y+X\zeta^\pr\rt)
+\end{align*}
+%
+where the vector of combining coefficients is
+%
+\[
+y+X\zeta^\pr.
+\]
+%
+As
+%
+\[
+\cztope{\ptemp^\pr\diagonal{\sfact^\pr}}{\cen^\pr}=\tcztope{\ptemp^\pr}{\cen^\pr}{\sfact^\pr}\subseteq\tcztope{\ptemp}{\cen}{\sfact},
+\]
+%
+we get that for all
+$\zeta^\pr\in\compnums^n:\infnorm{\zeta^\pr}\leq 1$ and $\forall i\in\set{1,...,n}$,
+%
+\[
+\absolute{y_i}+\sum_{j=1}^n\absolute{X_{ij}\zeta^\pr_j}=\absolute{y_i}+\sum_{j=1}^n\absolute{X_{ij}}\absolute{\zeta^\pr_j}\leq s_i.
+\]
+%
+As the above is true for all
+$\zeta^\pr\in\compnums^n:\infnorm{\zeta^\pr}\leq 1$, so by substituting
+$\zeta^\pr_j=1$  we get that for all $i\in\set{1,...,n}$,
+%
+\[
+\absolute{y_i}+\sum_{j=1}^n\absolute{X_{ij}}-s_i.
+\]
+%
+Furthermore,
+%
+\[
+\ptemp y= \ptemp\inv{\ptemp}\lt(\cen^\pr-\cen\rt) = \cen^\pr-\cen
+\]
+%
+and
+\[
+\ptemp X=\ptemp\inv{\ptemp}\ptemp^\pr\diagonal{\sfact^\pr}=\ptemp^\pr\diagonal{\sfact^\pr}.
+\]
+%
+Therefore, $\tcztope{\ptemp^\pr}{\cen^\pr}{\sfact^\pr}\order\tcztope{\ptemp}{\cen}{\sfact}$.
+\end{proof}
+
+\section{Reachable set computation for linear systems}
+
+Similar to simple zonotopes, template complex zonotopes can also
+efficiently represent the bounded time reachable set of a discrete
+time linear system
+%
+\begin{align*}
+\trj{x}{t+1}=A\trj{x}{t}+ \inptrj{t}\\
+\trj{x}{0}\in\init~,\forall t\in\integers_{\geq 0}~\trj{t}\in\inputset
+\end{align*}
+%
+due to its closure under linear transformation and Minkowski sum
+operations and efficient computations of the same.  Based on
+Lemmas~\ref{lem:lin-transform}
+and~\ref{lem:min-sum}, if the initial set is
+$\init=\tcztope{\inittemp}{\initcen}{\initsfact}$ and the input set is
+$\inputset=\tcztope{\inputtemp}{\inputcen}{\inputsfact}$, then the
+reachable set at a time point is computed as
+%
+\begin{align}
+& \reachset{t}=\tcztope
+{% template
+\minsum{A^t\inittemp}{\lt(\sum_{i=0}^{t-1}A^i\rt)\inputtemp}
+}
+{% center
+A^t\initcen+\lt(\sum_{i=0}^{t-1}A^i\rt)\inputcen
+}
+{% scaling factors
+\lt[\begin{matrix}
+\initsfact \\
+\inputsfact
+\end{matrix}
+\rt]
+}.
+\end{align}
+
+{\color{red}
+\begin{enumerate}
+\item Expression for bounded time reachable set.
+\item Efficient representation using eigenvectors.
+\item Computation of positive invariant.
+\item Illustrative example.
+\end{enumerate}
+}
