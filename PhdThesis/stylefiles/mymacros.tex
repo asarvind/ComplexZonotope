@@ -66,10 +66,14 @@
 % function specification
 \newcommand{\func}[3]{#1:#2\rightarrow #3}
 
+
+
 %%% numbers
 \newcommand{\reals}{\mathbb{R}}
 \newcommand{\compnums}{\mathbb{C}}
 \newcommand{\integers}{\mathbb{Z}}
+
+
 
 %%% arrays
 % set of matrices
@@ -80,12 +84,18 @@
 \newcommand{\repmat}[3]{\lt[1\rt]_{#2\times #3}}
 % inverse matrix
 \newcommand{\inv}[1]{#1^{-1}}
-%
+% pseudo-inverse
 \newcommand{\pinv}[1]{#1^\dagger}
+% transpose
+\newcommand{\transpose}[1]{#1^T}
+
+
 
 %%% relations
 % convex order relation between complex zonotopes
 \newcommand{\order}{\sqsubseteq}
+
+
 
 %%% set representations
 % set 
@@ -99,7 +109,14 @@
 % complex zonotope
 \newcommand{\cztope}[2]{\mathit{\mathcal{C}}\lt(#1,#2\rt)}
 % template complex zonotope
-\newcommand{\tcztope}[3]{\mathit{\mathcal{T}}\lt(#1,#2,#3\rt)}
+\newcommand{\tcztope}[3]{\mathit{\operatorname{\mathcal{T}}}\lt(#1,#2,#3\rt)}
+% interval zonotope
+\newcommand{\iztope}[3]{\mathit{\operatorname{\mathcal{I}}}\lt(#1,#2,#3\rt)}
+% sub-parallelotope
+\newcommand{\ptope}[3]{\mathcal{P}\left(#1,#2,#3\right)}
+
+
+
 
 %%% variables in set representation 
 % primary template
@@ -112,12 +129,28 @@
 \newcommand{\cen}{c}
 % scaling factors
 \newcommand{\sfact}{s}
+% secondary template
+\newcommand{\stemp}{\mathcal{W}}
+% lower interval bound
+\newcommand{\lb}{l}
+% upper interval bound
+\newcommand{\ub}{u}
+% parallelotope template
+\newcommand{\qtemp}{\mathcal{K}}
+% lower parallelotope bound
+\newcommand{\plb}{\widehat{\lb}}
+% upper parallelotope bound
+\newcommand{\pub}{\widehat{\ub}}
+
+
 
 %%% Variables in equations
 % transfer matrix inclusion-checking
 \newcommand{\tmat}{X}
 % transfer vector in inclusion-checking
 \newcommand{\tvect}{y}
+
+
 
 %%% System specifications
 % trajectory
