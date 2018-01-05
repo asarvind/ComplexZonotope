@@ -1,0 +1,63 @@
+In the previous chapter, we derived a second order conic program for
+unbounded time safety verification of linear systems, which was based
+on approximating the reachable set by a template complex zonotope with
+an apriori fixed template.  In that procedure, the scaling factors and
+the center of the template complex zonotope were treated as variables
+that were solved by convex optimization.  This was possible because of
+the following reasons.
+%
+\begin{enumerate}
+\item Template complex zonotopes are closed under Minkowski sum and
+  linear transformation operations.
+\item For apriori fixed templates, the scaling factors and the centers
+  of resultant template complex zonotopes after linear transformation
+  or Minkowski sum are expressed as affine functions.
+\item For apriori fixed template, our sufficient condition for
+  inclusion between template complex zonotopes is expressed as a
+  set of second order conic constraints on the scaling factors, centers
+  and some additional variables.
+\end{enumerate}
+%
+But in the more general case of hybrid dynamical systems, a transition
+may be controlled by constraints on the state variables which act as
+preconditions for the transition.  For example, the transitions in an
+affine hybrid system are controlled by linear constraints on the
+variables, as we shall discuss in a latter chapter.  So,
+over-approximating the reachable set of an affine hybrid system using
+a set representation would require over-approximating, using the set
+representation, the intersection with the sub-level sets of some
+linear inequalities.  In this regard, complex zonotopes share the same
+drawback as simple zonotopes that they are not closed under
+intersection with sub-level sets of linear inequalities.  One way to
+address this problem is to introduce a more general set representation
+than template complex zonotope, which should serve the following
+purposes.
+%
+\begin{enumerate}
+\item The set representation should provide non-trivial approximation
+  of the intersection with sub-level sets of linear constraints.  By a
+  non-trivial over-approximation, we mean that if the actual
+  intersected set is a smaller set than the original set, then the
+  over-approximation should be a smaller set.
+\item Similar to the case of template complex zonotopes, we should
+  have variables in the set representation such that a sufficient
+  condition for checking inclusion between any two sets is expresssed as
+  convex constraints on the variables.  Furthermore, the sufficient
+  condition should be strong enough to check inclusion in many
+  practical cases.  Then we can derive an efficient convex program for
+  unbounded time safety verification.
+\end{enumerate}
+%
+Before we discuss our new set representation addressing the above problem, we review some
+related work.
+
+\paragraph{Related work.} {\color{red} TODO.}
+
+
+
+Our new set representation, called {\it augmented complex zonotope} is
+specified as a Minkowski sum of a template complex zonotope and
+another representation called {\it interval zonotope}.  We shall first
+discuss the interval zonotope representation and its intersection with
+linear inequalities, which would provide a motivation for introducing the
+augmented complex zonotope representation.
