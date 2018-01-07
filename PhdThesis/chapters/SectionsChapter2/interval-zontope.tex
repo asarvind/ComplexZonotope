@@ -1,16 +1,13 @@
-\section{Interval zonotope}
-Geometrically, an interval zonotope is the same as a simple (real)
-zonotope, but the difference is that in their respective
-representations.  In an interval zonotope, we specify the bounds on
-the combining coefficients as real valued intervals without specifying
-the center.  We shall explain latter how this would allow us to
-represent the intersection with a certain class of linear inequalities
-as another interval zonotope whose interval bounds are a simple
-algebraic function of the original interval bounds.
+\section{Interval zonotope and Sub-parallelotope}
+We introduce a set representation called interval zonotope, which is
+geometrically the same as a simple (real) zonotope, but the difference
+is in their respective specifications.  In an interval zonotope, we
+specify the intervals in which the combining coefficients are
+constrained, without explicitly specifying the center.
 %
-\begin{definition}
-Let us consider $\stemp\in\mat{n}{k}{\reals}$ called the {\it
-  template} and $\lb,\ub\in\reals^k$ called the upper and lower
+\begin{definition}[Interval Zonotope]
+Let us consider $\stemp\in\mat{n}{k}{\reals}$, called the {\it
+  template}, and $\lb,\ub\in\reals^k$, called the upper and lower
 interval bounds, respectively, such that $\lb\leq \ub$.  The following
 is the representation of an interval zonotope.
 %
@@ -21,13 +18,13 @@ is the representation of an interval zonotope.
 \end{definition}
 %
 An interval zonotope can be equivalently represented as a simple
-zonotope as follows.
+zonotope, which is described in the following proposition.
 %
 \begin{proposition}
 We have
 %
 \[
-\iztope{\stemp}{\lb}{\ub}=\rztope{\stemp\diagonal{\frac{\ub-\lb}{2}}}{\frac{\ub+\lb}{2}}
+\iztope{\stemp}{\lb}{\ub}=\rztope{\stemp\diagonal{\frac{\ub-\lb}{2}}}{\frac{\ub+\lb}{2}}.
 \]
 %
 \end{proposition}
@@ -35,18 +32,20 @@ We have
 Although, in general, interval zonotopes are not closed under
 intersection with the sub-level sets of linear inequalities, if the
 linear inequalities are oriented with the interval zonotope, then the
-intersection is closed and can be expressed algebraically.  This is
-explained as follows.  We consider a class of sub-level sets of
-linear inequalities, which we call as {\it sub-parallelotopes}, that
-represent possibly unbounded parallelotopes, defined as follows.
+intersection gives another interval zonotope which is computed
+algebraically.  We consider the intersection with a class of sub-level
+sets of linear inequalities, called sub-parallelotopes, defined as
+follows.  A sub-parallelotope can be seen as a generalization of
+parallelotopes to possibly unbounded sets.
 %
-\begin{definition}
-Let us consider ${\qtemp}\in\mat{k}{n}{\set{-\infty,\infty,\reals}}$
-such that $\lt(\qtemp\transpose{\qtemp}\rt)$ is an invertible square
-matrix, called a {\it sub-parallelotopic template}, and
-$\plb,\pub\in\reals^k$ such that $\plb\leq\pub$, called {\it lower and
-  upper offsets}, respectively.  The following is the representation
-of a sub-parallelotope.
+\begin{definition}[Sub-parallelotope]
+Let us consider ${\qtemp}\in\mat{k}{n}{\reals}$ such that
+$\lt(\qtemp\transpose{\qtemp}\rt)$ is an invertible square matrix.  We
+call such a matrix $\qtemp$ as a sub-paralleotopic template.  Let us
+consider a pair of vectors with possibly unbounded components,
+$\plb,\pub\in\set{\reals,-\infty,\infty}^k$ such that $\plb\leq\pub$,
+called {\it lower and upper offsets}, respectively.  The following is
+the representation of a sub-parallelotope.
 %
 \[
 \ptope{\qtemp}{\plb}{\pub}=\set{x\in\reals^n:~\plb\leq\qtemp x\leq\pub}.
@@ -54,15 +53,22 @@ of a sub-parallelotope.
 %
 \end{definition}
 %
-In other words, a sub-level set of linear inequalities is a
+In other words, a sub-level set of a set of linear inequalities is a
 sub-parallelotope if and only if the linear functions on which the
 inequalities are defined are linearly independent. For example, the
-sub-level set of linear inequalities $-1\leq x+y-z\leq 1~\wedge~~
-x-y+z\leq 3$ is equivalent to a sub-parallelotope
+sub-level set of the linear inequalities
+%
+\begin{align*}
+-1\leq x+y-z\leq 1\\
+x-y+z\leq 3
+\end{align*}
+%
+is a sub-parallelotope
+%
 \[
 \ptope{\lt[\begin{matrix}
-    1~~~1~-1\\
-    1~-1~1
+    1 & 1 & -1\\
+    1 & 1 & 1
   \end{matrix}
   \rt]}
 {\lt[
@@ -80,17 +86,30 @@ x-y+z\leq 3$ is equivalent to a sub-parallelotope
     \right]
 },
 \]
-because the rows of the sub-parallelotopic template are linearly
-independent.  On the other hand, the sub-level set of $-1\leq
-x+y-z\leq 1~\wedge~~x+y+z\leq 2\wedge~~-1\leq x+y$ do not constitute a
-sub-parallelotope, because the three row vectors $\lt[\begin{array}{c
-      c c}1 & 1 & -1\end{array}\rt]$, $\lt[\begin{array}{c c c}1 & 1 &
-    1\end{array}\rt]$, and $\lt[\begin{array}{c c c}1 & 1 &
-    0\end{array}\rt]$ together are linearly dependent.
-Sub-parallelotopes are related to interval zonotopes in the sense that
-we can express a sub-parallelotope as a linear combination of real
-vectors with corresponding interval bounds on the combining coefficients as
-follows.
+because the row vectors $\lt[\begin{matrix}1 & 1 &
+    -1 \end{matrix}\rt]$ and $\lt[\begin{matrix}1 & 1 &
+    1 \end{matrix}\rt]$, which correspond to the linear functions in the
+above inequalities, are linearly independent.  On the other hand, the
+sub-level set of
+%
+\begin{align*}
+  -1\leq x+y-z\leq 1\\
+  x+y+z\leq 2\\
+  -1\leq x+y
+\end{align*}
+%
+is not a sub-parallelotope, because there is linear dependence among
+the row vectors $\lt[\begin{matrix} 1 & 1 & -1\end{matrix}\rt]$,
+$\lt[\begin{matrix} 1 & 1 & 1\end{matrix}\rt]$, and
+$\lt[\begin{matrix} 1 & 1 & 0 \end{matrix}\rt]$.
+
+Sub-parallelotopes have a similarity to interval zonotopes, in the
+sense that we can express a sub-parallelotope as a linear combination
+of real vectors with corresponding interval bounds on the combining
+coefficients, as follows.  In the following proposition, recall that
+$\pinv{\qtemp}=\transpose{\qtemp}\inv{\lt(\qtemp\transpose{\qtemp}\rt)}$,
+which exists because $\lt(\qtemp\transpose{\qtemp}\rt)$ is defined to
+be invertible for a sub-parallelotopic template $\qtemp$.
 %
 \begin{proposition}
   Consider a sub-parallelotope
@@ -112,7 +131,7 @@ follows.
 %
 We observe that when a sub-parallelotope has its template aligned with
 that of an interval zonotope, their intersection can be exactly
-represented by another interval zontope.  As a simple example, the
+represented by another interval zontope.  As an example, the
 intersection of
 %
 \[
@@ -135,15 +154,18 @@ gives
 \]
 %
 The general case is described in the following lemma, where the
-interval of the resultant interval zonotope after intersection is
-a simple algebraic expression of the interval bounds of the original
-zonotope and the offsets of th
+interval bounds of the resultant interval zonotope after intersection
+is given by a simple algebraic expression.
 %
 \begin{lemma}~\label{lem:motivation}
-Let $K\in\mat{k}{n}{R}$ such that $k\leq n$ and $\lt(\qtemp\transpose{\qtemp}\rt)$ is
-non-singular.  Then
+Let $K\in\mat{k}{n}{R}$ be a sub-parallelotopic template.  Then
 \[
 \iztope{\pinv{\qtemp}}{\lb}{\ub} \bigcap \ptope{\qtemp}{\plb}{\pub}
 = \iztope{\pinv{\qtemp}}{\lb\bigvee \plb}{\ub\bigwedge \pub}
 \]
 \end{lemma}
+%
+\begin{proof}
+{\color{red} TODO}.
+\end{proof}
+
