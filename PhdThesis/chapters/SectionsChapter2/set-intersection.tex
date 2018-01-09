@@ -141,15 +141,20 @@ $w\in \intersection{S_2}{S_3}$ and $v\in\reals^n$.  Then
   S_3\rt)}-\support{w}{v}{\lt(S_1\oplus S_2\rt)\bigcap S_3} \nonumber\\
   & = \left\{
   \begin{array}{l}
-   0~~~~~~~~\text{if}~~~\minsum{\real\lt(S_1\rt)}{S_2}\subseteq S_3\\
-   \support{w}{v}{S_1}~~~~\text{otherwise}.
+   0~~\text{if}~~~~~~~~\support{0}{v}{\real\lt(S_1\rt)}+\support{w}{v}{S_2}\leq
+   \support{w}{v}{S_3}\\
+   \support{w}{v}{\real\lt(S_1\rt)}~~\text{otherwise}.
   \end{array}
   \right.
 \end{align}
 %
 
-Then $\lt(S_1\oplus S_2\rt)\bigcap S_3\subseteq S_1\oplus\lt(S_2\cap
-S_3\rt)$.
+Consequently,
+%
+\[
+\intersection{\lt(S_1\oplus S_2\rt)}{S_3}\subseteq S_1\oplus\lt(\intersection{S_2}{S_3}\rt).
+\]
+%
 \end{lemma}
 \begin{proof}
 Firstly, the imaginary parts of both sides of above inequality are
