@@ -189,13 +189,13 @@ over-approximation error in unbounded time reach set approximation}.
 \begin{itemize}
 \item {\color{blue}Zonotopes} with {\color{blue} stable eigenvectors as generators} are
 {\color{blue} invariant} w.r.t linear transformation.
-\item Let {\color{blue} $A$} be a {\color{blue}matrix} with
+\item Let {\color{blue} $A$} be a {\color{blue}stable matrix} with
 {\color{blue}$e$: vector of real eigenvectors} and {\color{blue}$\mu$:
 vector of real eigenvalues}.  Then,
 %
 {\color{purple}
 \begin{align*}
- A\rztope{[e_1,...,e_n]}{l}{u}   = \tcztope{[e_1,...,e_n]}{\diagonal{\absolute{\mu}}l}{\diagonal{\absolute{\mu}}u}
+ A\rztope{[e_1,...,e_n]}{l}{u}   = \rztope{[e_1,...,e_n]}{\diagonal{\absolute{\mu}}l}{\diagonal{\absolute{\mu}}u}
 \end{align*}
 }
 %
