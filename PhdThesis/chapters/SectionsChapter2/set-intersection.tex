@@ -45,7 +45,7 @@ that the support of all vectors relative to common point is smaller in
 $S_1$ than $S_2$.  The following lemma describes this equivalence
 mathematically.
 %
-\begin{lemma}~\label{supp-inclusion}
+\begin{lemma}~\label{lem:support-inclusion}
 Let $S_1,S_2\subseteq \reals^n$ be two closed convex sets such that
 $\intersection{S_1}{S_2}\neq \emptyset$.  Let $w\in \intersection{S_1}{S_2}$.
 Then $S_1\subseteq S_2$ if and only if
@@ -65,7 +65,7 @@ The support of a vector with respect to the sum of two points is
 equal to the sum of supports of the vector with respect to each of the
 points.  This is described in the following lemma.
 %
-\begin{lemma}
+\begin{lemma}~\label{lem:support-minsum}
 Let us consider two bounded sets $S,S^\pr\subset\reals^n$ and two
 vectors $w,v\in\reals^n$.  Then
 %
@@ -83,7 +83,7 @@ The support of a vector in the intersection of two sets is the minimum
 of the supports of the vector in the two sets.  This is described in
 the following lemma.
 %
-\begin{lemma}
+\begin{lemma}~\label{lem:support-intersection}
 Let us consider two bounded sets $S_1,S_2\subset\reals^n$ and a two
 vectors $v,w\in\reals^n$.  Then
 %
@@ -127,62 +127,44 @@ that is computing first the intersection (which can be done
 efficiently) and then the Minkowski sum.  Indeed, we can find the
 required condition for a more general case of any three closed convex
 sets $S_1,S_2,S_3$, where $\lt(S_1\oplus S_2\rt)\bigcap S_3$ can be
-overapproximated by $S_1\oplus\lt(S_2\bigcap S_3\rt)$. Then the result
-can be applied to augmented complex zonotopes. We state this condition
-as follows.
+overapproximated by $S_1\oplus\lt(S_2\bigcap S_3\rt)$. 
 %
 \begin{lemma}~\label{gen-int}
 Let $S_1\subseteq \compnums^n$ and $S_2,S_3\in\reals^n$ be closed
-convex sets such that $S_2\cap S_3\neq \emptyset$ and $0\in S_1$.  Let
-$w\in \intersection{S_2}{S_3}$ and $v\in\reals^n$.  Then
+convex sets such that $\intersection{S_2}{S_3}\neq \emptyset$ and $0\in S_1$.  Let
+$w\in \intersection{S_2}{S_3}$ and $v\in\reals^n$.  Let 
+%
+\[
+h = \support{w}{v}{\real\lt(S_1\rt)\oplus\lt(S_2\bigcap
+  S_3\rt)}-\support{w}{v}{\lt(\real\lt(S_1\rt)\oplus S_2\rt)\bigcap
+  S_3} 
+\]
+%
+Then
 %
 \begin{align}
-& \support{w}{v}{S_1\oplus\lt(S_2\cap
-  S_3\rt)}-\support{w}{v}{\lt(S_1\oplus S_2\rt)\bigcap S_3} \nonumber\\
-  & = \left\{
+  &  \left\{
   \begin{array}{l}
-   0~~\text{if}~~~~~~~~\support{0}{v}{\real\lt(S_1\rt)}+\support{w}{v}{S_2}\leq
+   h = 0~~\text{if}~~~~~~~~\support{0}{v}{\real\lt(S_1\rt)}+\support{w}{v}{S_2}\leq
    \support{w}{v}{S_3}\\
-   \support{w}{v}{\real\lt(S_1\rt)}~~\text{otherwise}.
+   0\leq h \leq \support{w}{v}{\real\lt(S_1\rt)}~~\text{otherwise}.
   \end{array}
-  \right.
+  \right.\label{eqn:support-inequality}
 \end{align}
 %
-
 Consequently,
 %
-\[
-\intersection{\lt(S_1\oplus S_2\rt)}{S_3}\subseteq S_1\oplus\lt(\intersection{S_2}{S_3}\rt).
-\]
+\begin{align}~\label{eqn:minsum-intersection}
+& \intersection{\lt(S_1\oplus S_2\rt)}{S_3}\subseteq S_1\oplus\lt(\intersection{S_2}{S_3}\rt).
+\end{align}
 %
 \end{lemma}
+%
 \begin{proof}
-Firstly, the imaginary parts of both sides of above inequality are
-equal to $\img(S_1)$ because $\img(S_2)=\img(S_3)=0$. So, we have to
-show the inclusion of the real parts.  Let $w\in S_2\bigcap S_3 $.
-As $0\in S_1$, so
-%
-\begin{align*}
-  & w=0+w\in \minsum{S_1}{S_2}\\
-  & \%\%~\text{As $w\in \intersection{S_2}{S_3}$ and $w$ is real}\\  
-  & \imp w\in \lt(\real\lt(S_1\rt)\oplus
-  S_2\rt)\bigcap S_3.
-\end{align*}
-%
-Then based on
-Lemma~\ref{supp-inclusion}, it sufficient to prove that for all
-$v\in\realset^n$, $$\support{w}{v}{\lt(\real\lt(S_1\rt)\oplus
-  S_2\rt)\bigcap S_3}\leq
-\support{w}{v}{\real\lt(S_1\rt)\oplus\lt(S_2\cap S_3\rt)}.$$ Let us
+Let us
 define $a = \support{0}{v}{\real\lt(S_1\rt)}$, $b=\support{w}{v}{S_2}$
-and $c = \support{w}{v}{S_3}$.  Since, $0\in\real\lt(S_1\rt)$, so we get
-%
-\[
-a=\max_{x\in\real\lt(S_1\rt)}v^Tx\geq v^T0 =0,
-\]
-%
-i.e., $a\geq 0$.
-Next based on Lemma~\ref{todo}, we get
+and $c = \support{w}{v}{S_3}$.  
+Based on Lemma~\ref{lem:support-intersection}, we get
 %
 \begin{align*}
 & \support{w}{v}{\lt(\real\lt(S_1\rt)\oplus S_2\rt)\bigcap
@@ -191,11 +173,80 @@ Next based on Lemma~\ref{todo}, we get
     S_2},\support{w}{v}{S_3}\rt).
 \end{align*}
 %
-As $w=w+0$, so the above equals
-$\min\lt(\support{0}{v}{\real\lt(S_1\rt)}+\support{w}{v}{S_2},\support{w}{v}{S_3}\rt)
-= \min(a+b,c)$.  By a similar calculation, we can show
-$\support{w}{v}{\real\lt(S_1\rt)\oplus\lt(S_2\cap S_3\rt)} =
-a+min(b,c)$.  So, we need to prove that $\min(a+b,c)\leq a+min(b,c)$.
-Since $a\geq 0$, so $\min(a+b,c)\leq \min(a+b,a+c) =
-a+\min(b,c)$.
+Next based on Lemma~\ref{lem:support-minsum}, the above equals
+\begin{align*}
+\min\lt(\support{0}{v}{\real\lt(S_1\rt)}+\support{w}{v}{S_2},\support{w}{v}{S_3}\rt)
+= \min(a+b,c).
+\end{align*}
+%
+  By a similar calculation, we also get
+%
+\[
+\support{w}{v}{\real\lt(S_1\rt)\oplus\lt(S_2\cap S_3\rt)} =
+a+min(b,c).  
+\]
+%
+Therefore, 
+%
+\begin{align}
+& h = a+min(b,c)-min(a+b,c)\nonumber\\
+& = min(a+b,a+c)-min(a+b,c).\nonumber\\
+& \implies \lt\{\begin{array}{l}
+h=0~~\text{if}~~a+b\leq c\\
+0\leq h\leq (a+c)-c = a~~\text{otherwise}.
+\end{array}
+\rt.
+\end{align}
+%
+The above proves Equation~\ref{eqn:support-inequality}.
+
+Since $h\geq0$, based on Lemma~\ref{lem:support-inclusion}, we get
+%
+\begin{equation}~\label{eqn:proof-support1}
+\intersection{\lt(\real\lt(S_1\rt)\oplus S_2\rt)}{S_3}\subseteq \real\lt(S_1\rt)\oplus\lt(\intersection{S_2}{S_3}\rt).
+\end{equation}
+%
+Also, since $S_2$ and $S_3$ are real sets, we have
+%
+\begin{align}
+& \img\lt(\intersection{\lt(S_1\oplus S_2\rt)}{S_3}\rt)\\
+& \%\%~\text{as}~\img\lt(S_2\rt)=\img\lt(S_3\rt)=0\nonumber\\
+& = \intersection{\img\lt(S_1\rt)}{\set{0}}=\set{0}\nonumber\\
+& \subseteq
+\img\lt(S_1\rt)\nonumber\\
+& =
+\img\lt(S_1\rt)\oplus\img\lt(\intersection{S_2}{S_3}\rt)\\
+& = \img\lt(S_1\oplus\lt(\intersection{S_2}{S_3}\rt)\rt).~\label{eqn:proof-support2}
+\end{align}
+%
+Based on Equations~\ref{eqn:proof-support1} and~\ref{eqn:proof-support2}, we
+get the inequality in Equation~\ref{eqn:support-inequality}.
 \end{proof}
+%
+Now we state the main result about intersection of an augmented
+complex zonotope and a suitably aligned sub-parallelotope.
+%
+\begin{theorem}~\label{thm:acz-ptope-intersection}
+Let us consider a sub-parallelotope $\ptope{\qtemp}{\plb}{\pub}\subseteq\reals^n$ and an
+augmented complex zonotope
+$\acztope{\ptemp}{\cen}{\sfact}{\pinv{\qtemp}}{\lb}{\ub}\subset\compnums^n$
+such that 
+%
+\begin{align}
+& \exists z\in\compnums^n:~~\ptemp z=\cen~~\text{and}~~\absolute{z}\leq \sfact.~\label{eqn:contain-origin}
+\end{align}
+%
+Then
+%
+\begin{align}
+&
+\intersection{\acztope{\ptemp}{\cen}{\sfact}{\pinv{\qtemp}}{\lb}{\ub}}{\ptope{\qtemp}{\plb}{\pub}}\nonumber\\
+& \subseteq\acztope{\ptemp}{\cen}{\sfact}{\pinv{\qtemp}}{\join{\ub}{\pub}}{\meet{\lb}{\plb}}.~\label{eqn:thm:acz-ptope-intersection}
+\end{align}
+%
+\end{theorem}
+%
+\begin{proof}
+{\color{red} TODO}.
+\end{proof}
+%
