@@ -1,0 +1,83 @@
+
+%%% Text display
+\newcommand{\col}[2]{{\color{#1} #2}}
+\newcommand{\textcol}[1]{\col{blue}{#1}}
+\newcommand{\eqncol}[1]{\col{purple}{#1}}
+
+%%% Symbols
+\newcommand{\ra}{\rightarrow}
+\newcommand{\ov}{\overline}
+\newcommand{\ur}{\underline}
+\newcommand{\pr}{\prime}
+\newcommand{\tbf}{\textbf}
+\newcommand{\omg}{\Omega}
+\newcommand{\mc}{\mathcal}
+\newcommand{\lt}{\left}
+\newcommand{\rt}{\right}
+\newcommand{\mb}{\mathbb}
+\newcommand{\imp}{\implies}
+\newcommand{\dimp}{\Leftrightarrow}
+\newcommand{\wh}{\widehat}
+\newcommand{\dpr}{{\prime\prime}}
+
+%%% Relations
+% ordering between complex zonotopes
+\newcommand{\order}{\sqsubseteq}
+
+%%% System Description
+% state at a time point in a trajectory
+\newcommand{\ptrj}[2]{\textbf{#1}\left(#2\right)}
+% set of states for all time points in an interval
+\newcommand{\itrj}[3]{\textbf{#1}_{\left[#2,#3\right]}}
+% evolution of reach set or derivative with respect to time
+\newcommand{\dynamic}[4]{f\left(\ptrj{#1}{#2},#3,\itrj{#4}{#2}{#2+#3}\right)}
+
+%%% functions/operations
+% infinity norm
+\newcommand{\infnorm}[1]{\left\|\right #1\|_{\infty}}
+% absolute value
+\newcommand{\absolute}[1]{\left|#1\right|}
+% Minkowski sum
+\newcommand{\minkowski}[2]{#1\oplus #2}
+
+%%% special matrices
+% diagonal matrix
+\newcommand{\diagonal}[1]{\mathcal{D}\left(#1\right)}
+
+
+%%% Sets
+% real numbers
+\newcommand{\reals}{\mathbb{R}}
+% complex numbers
+\newcommand{\compnums}{\mathbb{C}}
+% set notation
+\newcommand{\set}[1]{\left\{#1\right\}}
+% set of matrices
+\newcommand{\mat}[3]{\mathbb{M}_{#1\times #2}\lt(#3\rt)}
+
+
+%%% Set representations
+% real zonotope
+\newcommand{\rztope}[3]{\mathcal{Z}\left(#1,#2,#3\right)}
+% template complex zonotope
+\newcommand{\tcztope}[3]{\mathcal{C}\left(#1,#2,#3\right)}
+% augmented complex zonotope
+\newcommand{\acztope}[6]{\mathcal{C}\left(#1,#2,#3,#4,#5,#6\right)}
+% Primary template
+\newcommand{\ptemp}{\mathcal{V}}
+% center
+\newcommand{\cen}{c}
+% scaling factors
+\newcommand{\sfact}{s}
+% secondary template
+\newcommand{\stemp}{\mathcal{W}}
+% lower coefficient bound
+\newcommand{\lb}{l}
+% upper coefficient bound
+\newcommand{\ub}{u}
+
+%%% Equations
+\newcommand{\transfer}[4]{#1#4 = #2\diagonal{#3}}
+\newcommand{\centertransfer}[4]{#1#4 = #3-#2}
+\newcommand{\scalebound}[5]{\max_{i=1}^{#4}\lt(\lt|#2_i\rt|+\sum_{j=1}^{#5}\lt|#1_{ij}\rt|-#3_i\rt)}
+
