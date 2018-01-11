@@ -3,7 +3,7 @@
 
 \input{macros}
 
-\title{Complex Zonotopes for Safety Verification of Discrete Time Affine Hybrid Systems}
+\title{Augmented complex zonotopes for computing invariants of affine hybrid systems}
 \setbeamercolor{author}{fg=blue}
 \author[shortname]{{  \bf \hspace{-1em} Arvind\ Adimoolam~\inst{1}\hspace{1em} Thao\ Dang~\inst{2}}}
 \setbeamercolor{institute}{fg=blue}
@@ -21,61 +21,89 @@
 \maketitle
 
 \begin{frame}{Discrete time dynamical system}
+Models \textcol{evolution of system state} at \textcol{discrete time instants} by a
+possibly \textcol{non-deterministic transition function}.
+\begin{block}{}
 %
-Models evolution of system state measured at discrete instants of time.
+{
+\begin{align*}
+& \trj{x}{t+1}\subseteq f\lt(\trj{x}{t},\trj{u}{t}\rt)\\
+& f:\reals^n\ra 2^{\reals^n}~~\text{(transition function)}\\
+& \trj{x}{0}\in\init~~\text{(initial set)}\\
+& \trj{u}{t}\in\inputset ~~\text{(input set).}
+\end{align*}
+}
+%
+\end{block}
+%
 \begin{figure}
-\includegraphics[scale=0.4]{figures/dynamical-system.png}
+\includegraphics[scale=0.35]{figures/dynamical-system.png}
 \end{figure}
 %
-\begin{itemize}
-\item {\color{blue} Discrete time linear system}:\\
-Let {\color{purple} $\bm{x}(t)$} denote {\color{blue} state of system}
-at time $t$, {\color{purple} $\bm{u}(t)$} denote {\color{blue} input},
-which {\color{blue} belongs} to a set {\color{purple}
-$U\subseteq \mathbb{R}^p$}.
-%
-{\color{purple}
-\[
-\bm{x}(t+1)=A\bm{x}(t)+\bm{u}.
-\]
-}
-\end{itemize}
 \end{frame}
 
 \begin{frame}{Discrete time affine hybrid system}
+Let \textcol{$x\in\reals^n$ (continuous state)} and \textcol{$q\in\set{1,...,l}$ (discrete state)}.
 
-{\color{blue} Collection of linear systems} with {\color{blue} conditions for switching}.
+Transition function $f$ is of the following form:
 %
-\begin{figure}
-\includegraphics[scale=0.5]{figures/affine-hybrid.png}
-\end{figure}
+\begin{block}{}
+%
+\begin{align*}
+& f(x,q)=\bigcup_{i=1}^h\lt(f_i(x),g_i(q)\rt)
+\end{align*}
+\vspace{-2em}
+%
+{\bf
+\begin{align*}
+ & \lt\{
+\begin{array}{l}
+\text{if}~~T x\leq d\\
+~~~f_i(x,q) \subseteq \lt(A_ix\oplus\inputset_i\rt)\bigcap S_{g_i(q)}\\
+\text{else}\\
+~~~\emptyset.
+\end{array}
+\rt.
+\end{align*}
+}
+%
+\end{block}
 %
 \end{frame}
 
-
-
-\begin{frame}{Safety verification}
-
-{\color{violet} Verify:} {\color{blue} Set of all reachable states} is {\color{blue} contained inside a safe set.}
-
-{\color{purple} \[ R_t(X_0)  = A^tX_0\oplus A^{t-1}U\oplus A^{t-2}U\oplus ...\oplus AU+U\].}\vspace{-2em}
-
-{\color{purple} \[\text{Reachable set} = \bigcup_{t=0}^\infty R_t(X_0)\]}.
+%
+\begin{frame}{Reachable set}
+The \textcol{reachable set} at time \textcol{$t$} is defined inductively as
+%
+\eqncol{
+\[
+\reachset{t}=\bigcup_{x\in\reachset{t-1},u\in\inputset}f\lt(x,u\rt).
+\]
+}
+%
+{Applications} of reachable set computation:
+%
+\begin{enumerate}
+\item \textcol{Safety verification}.
+\item \textcol{Stability verification}.~\cite{todo}
+\end{enumerate}
 %
 \begin{figure}
-\includegraphics[scale=0.5]{figures/safety.png}
+\includegraphics[scale=0.4]{figures/safety.png}
 \end{figure}
 %
 \end{frame}
+%
 
-\begin{frame}{Over-approximating reach set using a set representation}
+\begin{frame}{Set-representation for approximating reachable sets}.
 \begin{itemize}
-\item {\color{purple} Exact reachable set} can be {\color{purple} computationally expensive} to {\color{purple} represent}.
+\item For a \emph{discrete time affine hybrid system}, the \emph{reachable set at a
+time point} is a \eqncol{union} of number of sets \eqncol{exponential in the number of
+discrete variables}.\pause
+% \item \eqncol{Intractable computational complexity} of exact computation.
+\item Instead, use a \textcol{set of smaller representation size} to
+\textcol{over-approximate} reachable set.\pause
 \end{itemize}
-%
-Instead, {\color{blue}compute} a {\color{blue} concise set
-representation} that is {\color{blue} over-approximation} of exact
-reach set.
 %
 \begin{alertblock}{}
 {\bf Set representation}: {\color{blue} Data structure} used to denote
@@ -89,45 +117,81 @@ a {\color{blue} geometric shape}.  Eg. {\color{purple} Polytope}: $\lt(T,d\rt): 
 %
 \end{frame}
 
+\begin{frame}{Bounded time reachable set approximation}
+\begin{itemize}
+\item Reachable set over a \textcol{finite time horizon} is
+approximated as a \textcol{finite union of sets}, the \textcol{number
+of sets} are equal to the \textcol{number of time points}.
+%
+{
+\begin{align*}
+& \reachset{\lt[\begin{matrix}0 & T\end{matrix}\rt]}\subseteq\bigcup_{t=1}^T\alpha(t)\\
+& \reachset{t}\subseteq\alpha(t).
+\end{align*}
+}
+%
+\end{itemize}
+%
+\end{frame}
 
-\begin{frame}{Features of good set representation}
-\begin{enumerate}
+\begin{frame}{Unbounded time reachable set approximation}
+%
+\begin{block}{Positive invariant}
+$P\subseteq\reals^n$ is a positive invariant if
+%
+$
+\bm{\forall x\in P, f(x)\in P}.
+$
+%
+\end{block}
+%
+\begin{itemize}
 \item
-\begin{minipage}{0.4\textwidth}
-{\color{blue} Accuracy} of approximating reach set.
-\end{minipage}
-%
-\hfill\hfill
-%
-\begin{minipage}{0.5\textwidth}
-\begin{figure}
-\includegraphics[scale=0.3]{figures/accuracy-approximation.png}
-\end{figure}
-\end{minipage}
-%
-\pause
-%
-\item Efficiently compute {\color{blue} positive invariants}.
-{\color{purple} Positive invariance $\Rightarrow$} Proof of
-{\color{purple} valid over-approximation} for \underline{unbounded time}.
+{\color{blue} Positive invariance $\Rightarrow$} Proof of
+{\color{blue} valid over-approximation} for \underline{unbounded
+time}.
+\item {$\init\in \operatorname{Positive~Invariant}$}
+$\implies$ {$\operatorname{Reachable~Set}\subseteq \operatorname{Positive~Invariant}$}.
+\end{itemize}
 %
 \begin{figure}
 \includegraphics[scale=0.35]{figures/positive-invariant.png}
 \end{figure}
 %
+\end{frame}
+
+\begin{frame}{Desirable features of a good set representation}
+%
+\begin{enumerate}
+\item \textcol{Efficient closure} under \textcol{reachable set
+computations} like {\it matrix
+multiplication, Minkowski sum, intersection with linear constraints}, $\Rightarrow$
+ Good \textcol{approximation quality}.
+%
+\begin{itemize}
+\item \eqncol{Polytopes} efficiently closed under \eqncol{intersection with linear
+constraints}.
+\item \eqncol{Ellipsoids} efficiently closed under \eqncol{matrix multiplication}.
+\item \eqncol{Zonotopes} closed under \eqncol{matrix multiplication} and \eqncol{Minkowski sum}.
+\end{itemize}
+\pause
+%
+\item Existence of \textcol{efficiently computable positive invariants} in the
+\textcol{linear case}.  Example: \eqncol{Ellipsoids}.
 \end{enumerate}
+%
 \end{frame}
 
 \begin{frame}{Simple Zonotope}
 %
 \begin{itemize}
-\item Let {\color{purple} $W\in\mat{n}{k}{\reals}$} called {\color{blue}
-generator matrix}, {\color{purple} $l,u\in\reals^k:~l\leq u$} called
-{\color{blue} upper and lower coefficient bounds}.
+\item Let {\color{purple} $\stemp\in\mat{n}{k}{\reals}$} called {\color{blue}
+generator matrix} and {\color{purple} $\cen\in\reals^n$} called the
+{\color{blue} center.}
 %
 \[
 {\color{purple}
-\rztope{W}{l}{u}=\set{V\zeta:\zeta\in\reals^k,~l\leq \zeta\leq u}
+\rztope{\stemp}{\cen}=\set{\cen+\stemp\zeta:\zeta\in\reals^k,\infnorm{\zeta}\leq 1}
 }
 \]
 \item Geometrically, {\color{blue} Minkowski sum of line segments}.
@@ -156,71 +220,40 @@ Antoine Girard.
 }
 \end{frame}
 
-
-\begin{frame}{Advantage of Simple zonotope over other representations}
-Consider {\color{purple} box disturbance input} and {\color{purple}
-box initial set}
-%
-{\color{purple} \[ R_t(X_0)  = A^tX_0\oplus A^{t-1}U\oplus
-A^{t-2}U\oplus ...\oplus AU+U\].}\vspace{-2em}
-%
+\begin{frame}{Advantage of zonotopes}
 \begin{itemize}
-\item
-\begin{enumerate}
-\item   {\color{blue} Linear transformation} and
-{\color{blue} Minkowski sum} are {\color{blue} closed operations on zonotopes} and
-{\color{blue} representation size is same}.
-\item {\color{blue} Using zonotope}, representing $R_t(X_0)$ requires {\color{blue} $tn$} vectors.
-\end{enumerate}
-\item {\color{purple} Using polytope}, respresenting $R_t(X_0)$
-requires {\color{purple}$t\choose n$: exponential} no. generators.
-\item {\color{purple} Ellipsoids have smooth boundary}, tend to have
-{\color{purple} large
-over-approximation error}.
+\item Zonotopes are \textcol{efficiently closed} under \textcol{matrix
+multiplication} and {Minkowski sum}.
+\item Good for approximating \textcol{ bounded time reachable set}
+of \textcol{uncertain linear systems} and some classes
+of \textcol{affine hybrid systems}.
 \end{itemize}
-%
-{\color{black} Accurate bounded time computation} $\Rightarrow$
-{\color{black} Reduces
-over-approximation error in unbounded time reach set approximation}.
+\pause
+\eqncol{What about unbounded time, i.e., computation of positive invariant?}
 \end{frame}
 
+\begin{frame}{Disadvantage of zonotope}
 %
-\begin{frame}{Positive invariant zonotopes based on eigenvectors}
 \begin{itemize}
-\item {\color{blue}Zonotopes} with {\color{blue} stable eigenvectors as generators} are
-{\color{blue} invariant} w.r.t linear transformation.
-\item Let {\color{blue} $A$} be a {\color{blue}stable matrix} with
-{\color{blue}$e$: vector of real eigenvectors} and {\color{blue}$\mu$:
-vector of real eigenvalues}.  Then,
-%
-{\color{purple}
-\begin{align*}
- A\rztope{[e_1,...,e_n]}{l}{u}   = \rztope{[e_1,...,e_n]}{\diagonal{\absolute{\mu}}l}{\diagonal{\absolute{\mu}}u}
-\end{align*}
-}
-%
-\begin{figure}
-\includegraphics[scale=0.5]{figures/contraction-zonotope.png}
-\end{figure}
-%
+\item \eqncol{Existence of positive invariant zonotope} for a {\it deterministic linear
+system} is \eqncol{not guaranteed}.
 \end{itemize}
+\pause
+%
+Our solution:
+%
+\textcol{Extend} simple zonotope to \textcol{complex domain} to
+capture invariance based on \textcol{complex eigenstructure}.
 \end{frame}
 
 \begin{frame}{Complex zonotope}
+%
 
-\begin{alertblock}{Problem}
-{\color{purple} How to incorporate} {\color{blue} complex-valued eigenvectors} in
-{\color{purple} generators to define} {\color{blue} positive invariants ?}
-\end{alertblock}
-%
-\pause
-%
-\begin{block}{Answer: Complex zonotope}
-{\color{blue} Linear combination} of
-{\color{blue} complex-valued eigenvectors} such that {\color{blue}
-complex combining coefficients} are \underline{{\color{purple} bounded in absolute
-values (quadratic constraint)}}.
-\end{block}
+\emph{Linear combination} of
+\emph{ complex-valued eigenvectors} such that \emph{
+complex combining coefficients} are  bounded in \emph{absolute
+values}.
+
 %
 \begin{block}{}
 Let \eqncol{$\ptemp\in\mat{n}{m}{\compnums}$} called \textcol{template},
@@ -241,11 +274,11 @@ s}
 
 \begin{frame}{Geometric visualization: Complex zonotope}
 \begin{itemize}
-\item Represent {\color{blue} wider class of sets} than {\color{purple} real zonotopes}.
-\item {\color{blue} Minkowski sum} of {\color{purple}line segments}
-and also {\color{blue} some ellipsoids}.
-\item Can represent some {\color{blue} non-polyhedral} sets in
-addition to {\color{purple} polytopic real zonotopes}.
+\item Represent {\color{blue} wider class of sets} than {\it real zonotopes}.
+\item {\it Minkowski sum} of {\color{blue} some ellipsoids} in
+addition to {\color{blue}line segments}.
+\item Can represent some {\color{blue} non-polyhedral sets} in
+along with {\color{blue} polytopic real zonotopes}.
 \end{itemize}
 %
 \begin{figure}
@@ -255,7 +288,7 @@ addition to {\color{purple} polytopic real zonotopes}.
 %
 \end{frame}
 
-\begin{frame}{Advantage: Complex eigenstructure based Contraction}
+\begin{frame}{Advantage: Complex eigenstructure based positive invariance}
 Consider {\color{blue} matrix $A\in\mat{n}{n}{R}$} with {\color{blue} eigenvectors $e_1,...,e_n$}
 and {\color{blue} $\mu$: vector of eigenvalues}.
 %
@@ -268,51 +301,330 @@ and {\color{blue} $\mu$: vector of eigenvalues}.
 \center{\includegraphics[scale=0.6      ]{figures/ContractionCZ.png}}
 \end{frame}
 
-
-\begin{frame}{Ambiguity in over-approximation using
-limited generators}
-\begin{block}{Need to fix maximum number of generators}
-{\color{purple} Complexity} of representing of {\color{purple}
-reach set after large time} reach set is {\color{purple} high}.  But we
-{\color{blue} can only use limited number of generators} and compute
-over-approximation depending on {\color{purple} computation resources}.
-\end{block}
+\begin{frame}{A drawback of complex zonotope}
 %
-\begin{block}{Ambiguity in over-approximation}
-For a {\color{blue} fixed number of generators}, there is {\color{purple} no smallest zonotope}
-approximating a given set.
-\end{block}
+\begin{itemize}
+\item {\it Complex zonotopes} are \eqncol{not closed} under \eqncol{intersection} with
+\eqncol{ sub-level sets of linear inequalities}.
+\pause
+\item
+Solution:
+\textcol{Augmented complex zonotope}: {\it Minkowski sum} of {\it complex
+zonotope} and \textcol{interval zonotope}.
+\end{itemize}
+%
 \end{frame}
 
-\begin{frame}{Our approach}
-We have to solve:
+\begin{frame}{Interval zonotope}
+%
+\begin{itemize}
+\item Let {\color{purple} $W\in\mat{n}{k}{\reals}$} called {\color{blue}
+template}, {\color{purple} $l,u\in\reals^k:~l\leq u$} called
+{\color{blue} upper and lower coefficient bounds}.
+%
+\[
 {\color{purple}
+\iztope{W}{l}{u}=\set{W\zeta:\zeta\in\reals^k,~l\leq \zeta\leq u}
+}
+\]
+\item \eqncol{Geometrically} the \eqncol{same as real zonotope}, but has \textcol{different
+representation} that \textcol{facilitates computing intersection} with
+a \underline{class of linear inequalities}.
+\end{itemize}
+%
+\end{frame}
+
+\begin{frame}{Sub-parallelotope}
+Equivalent to possibly \textcol{ unbounded parallelotopes}.
+%
+\begin{block}{Definition}
+Let \eqncol{${\qtemp}\in\mat{k}{n}{\reals}$} such that
+\eqncol{$\lt(\qtemp\transpose{\qtemp}\rt)$} is an \textcol{invertible square matrix}.  We
+call such a matrix $\qtemp$ as a \textcol{sub-paralleotopic template}.
+Let \eqncol{$\plb,\pub\in\set{\reals,-\infty,\infty}^k$} such that
+\eqncol{$\plb\leq\pub$}, called \textcol{ lower and upper offsets}, respectively.
+%
+
+\[\bm{
+\ptope{\qtemp}{\plb}{\pub}=\set{x\in\reals^n:~\plb\leq\qtemp x\leq\pub}.
+}
+\]
+%
+\end{block}
+%
+\end{frame}
+
+\begin{frame}{Relation of Sub-parallelotope to generator representation}
+Notation: $\pinv{\qtemp}=\transpose{\qtemp}\inv{\lt(\qtemp\transpose{\qtemp}\rt)}$.
+%
+\begin{proposition}[Relation to generator representation]
+  Consider a sub-parallelotope
+  \eqncol{$\ptope{\qtemp}{\plb}{\pub}$} where \eqncol{$\qtemp\in\mat{k}{n}{\reals}$}.
+  Then, $\bm{\ptope{\qtemp}{\plb}{\pub}}$\vspace{-1em}
+  %
+  \[
+   \bm{=\set{\cen+\pinv{\qtemp}\zeta:~c\in\reals^n,\zeta\in\reals^k,~\qtemp
+  \cen=0,~\plb\leq
+  \zeta\leq \pub
+  }.
+  }
+  \]
+  %
+\end{proposition}
+%
+\end{frame}
+
+\begin{frame}{Intersection: Interval Zonotope and Sub-parallelotope}
+
+\textcol{Interval zonotopes} are \textcol{efficiently closed} under \textcol{intersection}
+with \textcol{aligned} \textcol{ sub-parallelotopes}.  
+%
+\begin{lemma}~\label{lem:motivation}
+Let \eqncol{$K\in\mat{k}{n}{R}$} be a sub-parallelotopic template.  Then
+%
+\[\bm{
+\iztope{\pinv{\qtemp}}{\lb}{\ub} \bigcap \ptope{\qtemp}{\plb}{\pub}
+= \iztope{\pinv{\qtemp}}{\lb\bigvee \plb}{\ub\bigwedge \pub}
+}
+\]
+\end{lemma}
+%
+\end{frame}
+
+\begin{frame}{A Useful Theorem about Convex Sets}
+\begin{lemma}~\label{gen-int}
+Let {\it $S_1\subseteq \compnums^n$} and {\it $S_2,S_3\in\reals^n$}
+be {\it closed
+convex sets} such that {$\intersection{S_2}{S_3}\neq \emptyset$} and
+{$0\in S_1$}.
+%
+\begin{align}~\label{eqn:minsum-intersection}
+& \bm{\intersection{\lt(S_1\oplus S_2\rt)}{S_3}\subseteq S_1\oplus\lt(\intersection{S_2}{S_3}\rt)}.
+\end{align}
+%
+\end{lemma}
+\pause
+%
+\begin{exampleblock}{Result}
+Let $S_1=\tcztope{\ptemp}{\cen}{\sfact}: 0\in S_1$,
+$S_2=\iztope{\pinv{\qtemp}}{\lb}{\ub}$,
+$S_3=\ptope{\qtemp}{\plb}{\pub}$.
+%
+\eqncol{
 \begin{align*}
-& A\tcztope{V}{c}{s}\oplus U\subseteq \tcztope{V}{c}{s}\\
-& \tcztope{V}{c}{s}\subseteq S~\text{(safe set)}\\
-& X_0~\text{(Initial set)}~\subseteq \tcztope{V}{c}{s}
+& \intersection{\lt(\minsum{\tcztope{\ptemp}{\cen}{\sfact}}{\iztope{\pinv{\qtemp}}{\lb}{\ub}}\rt)}{\ptope{\qtemp}{\plb}{\pub}}\\
+& \subseteq \minsum{\tcztope{\ptemp}{\cen}{\sfact}}{\lt(\intersection{\iztope{\pinv{\qtemp}}{\ptope{\qtemp}{\plb}{\pub}}}\rt)}\\
+& = \minsum{\tcztope{\ptemp}{\cen}{\sfact}}{\iztope{\pinv{\qtemp}}{\join{\lb}{\plb}}{\meet{\ub}{\pub}}}.
 \end{align*}
 }
 %
-\begin{block}{Solution: Derive convex relaxation}
-For a {\color{purple} fixed template ($V$)}, we derive
-{\color{blue} convex constraints on
-$c$ and $s$} as {\color{blue} sufficient conditions} for above.
+\end{exampleblock}
+%
+\end{frame}
+
+\begin{frame}{Augmented complex zonotope}
+
+\begin{block}{Definition}
+Let us consider \eqncol{complex matrix $\ptemp$}, called \textcol{primary
+template}, \eqncol{complex vector $\cen$}, called \textcol{primary offset}, \eqncol{real matrix
+$\stemp$}, called \eqncol{secondary template} and \eqncol{real vectors
+$\lb,\ub:~\lb\leq\ub$}, called \textcol{lower and upper interval bounds}.
+%
+\[
+\bm{\acztope{\ptemp}{\cen}{\sfact}{\stemp}{\lb}{\ub}=\minsum{\tcztope{\ptemp}{\cen}{\sfact}}{\iztope{\stemp}{\lb}{\ub}}}.
+\]
+%
 \end{block}
 %
-\begin{thebibliography}{1}
+\textcol{Reason for abover representation}: If $0\in\tcztope{\ptemp}{\cen}{\sfact}$, then
+%
+\begin{theorem}[Intersection with Sub-parallelotope]
+\vspace{-1em}
+%
+\begin{align*}
+& \acztope{\ptemp}{\cen}{\sfact}{\pinv{\qtemp}}{\lb}{\ub}\bigcap\ptope{\qtemp}{\plb}{\pub}\\
+& \subseteq \acztope{\ptemp}{\cen}{\sfact}{\pinv{\qtemp}}{\join{\lb}{\plb}}{\meet{\ub}{\pub}}.
+\end{align*}
+%
+\end{theorem}
+%
+\eqncol{Over-approximation error} along any direction is proportional
+to \eqncol{orientation between primary and secondary templates}.
+\end{frame}
 
-\bibitem{adimoolam2017augmented}
+
+
+
+
+
+\begin{frame}{Affine over-approximation of intersection}
+\begin{exampleblock}{Affine approximation of multi-variable Min and Max functions}
 {\small
-Arvind Adimoolam and Thao Dang.
-\newblock Augmented complex zonotopes for computing invariants of affine hybrid
-  systems.
-\newblock In {\em International Conference on Formal Modeling and Analysis of
-  Timed Systems}, pages 97--115. Springer, 2017.
-  }
-\end{thebibliography}
+\begin{itemize}
+\item \textcol{Min-approximation function}:
+$\lt(\minaffine{u}{\wh{u}}\rt)_i = \left\{
+\begin{array}{l}
+\wh{u}_i~~\text{if}~\wh{u}_i<\infty\\
+u_i~~\text{if}~\wh{u}_i=\infty
+\end{array}
+\right..$\\
+\item \textcol{Max-approximation function}:
+$\lt(\maxaffine{l}{\wh{l}}\rt)_i = \left\{
+\begin{array}{l}
+\wh{l}_i~~\text{if}~\wh{l}_i>\infty\\
+l_i~~\text{if}~\wh{l}_i=-\infty
+\end{array}
+\right..$
+\end{itemize}
+}
+\end{exampleblock}
+\begin{block}{Corollary}~\label{thm:acz-int}
+{\small Given sub-parallelotope {$\sptope{\ptemplate}{\wh{l}}{\wh{u}}$},
+augmented complex zonotope {$\gcz{V}{c}{s}{\pinv{\ptemplate}}{l}{u}$}
+such that {$V\conjtranspose{V}$ is non-singular, $\lt|\pinv{V}c\rt|\leq s$, $l\leq
+\maxaffine{l}{\wh{l}}\leq \minaffine{u}{\wh{u}}\leq u$}:}
+\vspace{-1em}
+{\color{purple}
+\begin{align*}
+\begin{split}
+&{\gcz{V}{c}{s}{\pinv{\ptemplate}}{l}{u}\bigcap\sptope{\ptemplate}{\wh{l}}{\wh{u}}}\\
+& {\subseteq \gcz{V}{c}{s}{\pinv{\ptemplate}}{\maxaffine{l}{\wh{l}}}{\minaffine{u}{\wh{u}}}}
+\end{split}
+\end{align*}
+}
+\end{block}
+\end{frame}
+
+
+\begin{frame}{Minkowski sum and Linear Transformation}
+\begin{block}{Affine function for fixed templates}
+\begin{enumerate}
+\item $A\gcz{V}{c}{s}{W}{l}{u} = \gcz{AV}{Ac}{s}{AW}{l}{u}$.
+\item $~$\vspace{-2em}\hspace{-2em}\begin{align*}
+&\gcz{V}{c}{s}{W}{l}{u}\oplus\gcz{V^\pr}{c^\pr}{s^\pr}{W^\pr}{l^\pr}{u^\pr}\\
+&= \gcz{\lt[V~V^\pr\rt]}{c+c^\pr}{\ColumnJoin{s}{s^\pr}}{\lt[W~W^\pr\rt]}{\ColumnJoin{l}{l^\pr}}{\ColumnJoin{u}{u^\pr}}.
+\end{align*}
+\end{enumerate}
+\end{block}
+%
+%% \begin{alertblock}{}
+%% \begin{itemize}
+%% \item For \eqncol{fixed primary and secondary templates} of augmented complex zonotopes, {\bf Linear transformation and Minkowski sums} of are \textcol{Affine functions of rest variables}.
+%% \end{itemize}
+%% \end{alertblock}
+\end{frame}
+%
+\begin{frame}{Inclusion between Template Complex Zonotopes}
+Let \textcol{$\cz{V^\pr_{n\times
+    m^\pr}}{c^\pr}{s^\pr}\order \cz{V_{n\times m}}{c}{s}$} if
+\eqncol{\begin{align*}~\label{eqn:tcz-inc}
+\begin{split}
+& \exists X\in\mat{m}{m^\pr}{\mb{C}}~\text{and}~y\in\mb{C}^{m}~\text{s.t.}\\
+& \transfer{V}{V^\pr}{s^\pr}{X},~~~\centertransfer{V}{c}{c^\pr}{y},~\text{and}~
+ \scalebound{X}{y}{s}{m}{m^\pr}\leq 0\\
+\end{split}
+\end{align*}
+}
+\textcol{Theorem}: \eqncol{$(\order)\implies(\subseteq)$} among \eqncol{Template Complex zonotopes}.
+%
+\begin{alertblock}{}
+For fixed \eqncol{template}, \textcol{$\order$} defines \textcol{SOCC (convex constraints) on remaining variables}.
+\end{alertblock}
+\end{frame}
+%
+\begin{frame}{Real Inclusion between Augmented Complex Zonotopes}
+\begin{block}{}
+Let \textcol{$\gcz{V^\pr}{c^\pr}{s^\pr}{W^\pr}{l^\pr}{u^\pr}\order
+\gcz{V}{c}{s}{W}{l}{u}$} if\\ \eqncol{$\cz{\lt[V^\pr~W^\pr\rt]}{c^\pr+W^\pr\lt(\frac{u^\pr+l^\pr}{2}\rt)}{\ColumnJoin{s^\pr}{\frac{u-l}{2}}}
+\order
+\cz{\lt[V~W\rt]}{c+W\lt(\frac{u+l}{2}\rt)}{\ColumnJoin{s}{\frac{u-l}{2}}}$}\\
+\end{block}
+\textcol{Theorem}: \eqncol{$(\order)\implies(\subseteq)$} among \eqncol{Real Projections of Augmented Complex zonotopes}.
+\begin{alertblock}{}
+For fixed \eqncol{primary and secondary templates}, \textcol{$\order$} defines \textcol{SOCC (convex constraints) on remaining variables}.
+\end{alertblock}
+\end{frame}
+%
+\begin{frame}{Inclusion inside Polytopic safe set}
+Consider a \eqncol{Safe set} defined by a \eqncol{Polytope $S=Tx\leq d$}.  Then \eqncol{$\real\lt(\gcz{V}{c}{s}{W}{l}{u}\rt)\subseteq S$} if
+%
+\begin{block}{}
+\textcol{
+\[
+T\lt(c+W\lt(\frac{u+l}{2}\rt)\rt)+\lt|T\lt[V,~\pinv{\ptemplate}\rt]\rt|\begin{bmatrix}s\\ \frac{u-l}{2}\end{bmatrix}\leq d.
+\]
+}
+\end{block}
+%
+\begin{alertblock}{}
+For fixed \eqncol{primary and secondary templates}, the above inequality defines \textcol{Linear constraints on remaining variables}.
+\end{alertblock}
+\end{frame}
+
+
+\begin{frame}{Assumptions Before Computing Positive Invariant}
+
+\begin{exampleblock}{}
+\begin{enumerate}
+\item Let \eqncol{Guards and Staying sets of Hybrid system} are specified by
+\textcol{Sub-parallelotopes with common template}.
+\item {\color{violet} Fix primary and Secondary templates} of
+augmented complex zonotopes, and consider
+\textcol{Variables := primary offsets, scaling factors, lower and
+upper interval bounds}.
+\end{enumerate}
+\end{exampleblock}
+%
+\end{frame}
+
+
+\begin{frame}{Convex Program for Computing Positive Invariant}
+
+
+\begin{block}{Observe}
+\begin{itemize}
+\item \eqncol{Linear Transformation and Minkowski sum} - \textcol{Affine function}
+\item \eqncol{Overapproximation of Intersection with
+Sub-parallelotopic constraints when aligned} - \textcol{Affine function}
+\item \eqncol{Inclusion between Augmented Complex Zonotopes (sufficient condition)} - \textcol{SOCC (convex) constraints}
+\item \eqncol{Inclusion inside Polytopic (Safe) set} - \textcol{Linear  constraints}
+\end{itemize}
+\end{block}
+\pause
+\begin{alertblock}{Result}
+{Using above, we can derive \textcol{\bf Second order conic (convex)
+constraints} in
+above variables to compute \textcol{Positive Invariant} inside
+a \textcol{Safe set} containing  an \textcol{Initial zonotopic set!}}
+\end{alertblock}
 
 \end{frame}
+
+\begin{frame}{Choosing Templates}
+\begin{itemize}
+\item \textcol{Secondary template} is fixed as \textcol{Pseudo-Inverse} of system \textcol{Sub-Parallelotopic template}.\pause
+\end{itemize}
+\begin{block}{Chosing Primary Template}
+All or some of the following:\pause
+\begin{enumerate}
+\item Eigenvectors of the transformation matrices and their products, for
+   the different transition maps.  \pause  
+\item  The primary and
+   secondary templates of the zonotopes which overapproximate the
+   additive disturbance input sets and their products with the linear
+   matrices of the transition maps.  \pause
+\item
+   Orthogonal projections of the above vectors on the null space of
+   the subparallelotopic template.  \pause
+\item Adding any set of arbitrary vectors will increase the
+   chance of computing a desired invariant, but at a computational
+   expense.  This is because the scaling factors will be adjusted
+   accordingly by the optimizer.
+\end{enumerate}
+\end{block}
+\end{frame}
+
+
 
 \begin{frame}{Example 1: NXT-Lego Robot model}
 \eqncol{Benchmark example} published in \eqncol{ARCH 2014~\cite{heinz2014benchmark}} \textcol{(Heinz, Oehlerking and Woehrle.)}
@@ -643,6 +955,18 @@ Adimoolam and Thao Dang}. \url{https://sites.google.com/site/arvind23adi/researc
 {\Huge {\color{blue} Thank you!}}
 \end{frame}
 
+
+
+
+
+
+
+
+
+
+
+
+
 \bibliographystyle{plain}
 \bibliography{ref}
 
@@ -650,8 +974,3 @@ Adimoolam and Thao Dang}. \url{https://sites.google.com/site/arvind23adi/researc
 
 \end{document}
 
-%% Hi Hadas,
-
-%% During my visit, I would like to discuss a idea about verification and falsification of component based systems. I could not yet prepare a clear write-up about it.  But an informal description is below.
-
-%% In component based systems, there could be dependency (correlation) between states of the system, in which case only a part of the state space is reachable by the system.  If we could compute a reasonable over-approximation of the projection of the behavior of the system on a few components that are highly correlated with the system behavior, then the projection could be used to verify the system.  To compute such a projection efficiently, I come up with a notion called correlation invariant which expresses the dependency of the system on a given subset of components.  I could show that the correlation invariant can be computed efficiently.
