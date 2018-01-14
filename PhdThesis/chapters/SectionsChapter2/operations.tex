@@ -1,0 +1,68 @@
+\section{Other Operations on Augmented Complex Zonotope}
+Earlier, we had discussed about the intersection of an augmented
+complex zonotope with a suitably aligned sub-parallelotope.  We shall
+now discuss about other operations on augmented complex zonotopes which
+are linear transformation, Minkowski sum, projection along a direction
+and checking inclusion.
+
+Augmented complex zonotopes are closed under matrix multiplication and
+Minkowski sum, which are described in the following two lemmas.
+%
+\begin{lemma}[Linear transformation]
+Let us consider an augmented complex zonotope
+$\acztope{\ptemp}{\cen}{\sfact}{\stemp}{\lb}{\ub}\subset \compnums^n$
+and a matrix $A\in\mat{n}{n}{\reals}$.  Then
+%
+\[
+A\acztope{\ptemp}{\cen}{\sfact}{\stemp}{\lb}{\ub}=\acztope{A\ptemp}{A\cen}{\sfact}{A\stemp}{\lb}{\ub}.
+\]
+%
+\end{lemma}
+%
+\begin{proof}
+{\color{red} TODO}.
+\end{proof}
+%
+\begin{lemma}
+Let us consider two augmented complex zonotopes
+$\acztope{\ptemp}{\cen}{\sfact}{\stemp}{\lb}{\ub},
+\acztope{\ptemp^\pr}{\cen^\pr}{\sfact^\pr}{\stemp^\pr}{\lb^\pr}{\ub^\pr}\subset\compnums^n$.
+Then
+%
+\begin{align*}
+\minsum{\acztope{\ptemp}{\cen}{\sfact}{\stemp}{\lb}{\ub}
+  \acztope{\ptemp^\pr}{\cen^\pr}{\sfact^\pr}{\stemp^\pr}{\lb^\pr}{\ub^\pr}}
+= \acztope
+{\begin{matrix}
+    \ptemp\\
+    \ptemp^\pr
+  \end{matrix}
+}
+{\begin{matrix}
+    \cen+\cen^\pr
+  \end{matrix}
+}
+{\begin{matrix}
+    \sfact\\
+    \sfact^\pr
+  \end{matrix}
+}
+{\begin{matrix}
+    \stemp\\
+    \stemp^\pr
+  \end{matrix}
+}
+{\begin{matrix}
+    \lb\\
+    \lb^\pr
+  \end{matrix}
+}
+{\begin{matrix}
+    \ub\\
+    \ub^\pr
+  \end{matrix}
+}
+\end{align*}
+%
+\end{lemma}
+%

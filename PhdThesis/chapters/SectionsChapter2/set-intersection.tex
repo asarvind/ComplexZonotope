@@ -250,3 +250,37 @@ Then
 {\color{red} TODO}.
 \end{proof}
 %
+The error in over-approximation of the intersection in the above
+theorem is positively correlated to the orientation between the
+vectors in the half-space representation of the sub-parallelotope and
+the column vectors of the primary template of the augmented complex
+zonotope.  This is described in the following theorem.
+%
+\begin{theorem}[Error in over-approximating intersection].
+Let us consider the following measure of difference between two
+bounded sets, $\Psi_1,\Psi_2\subset\compnums^n$ such that
+$0\in\intersection{\Psi_1}{\Psi_2}$.
+%
+\[
+\approxerror{\Psi_1}{\Psi_2}=\max_{v\in\reals^n:~\norm{v}\leq 1}\absolute{\support{0}{v}{\real\lt(\Psi_1\rt)}-\support{0}{v}{\real\lt(\Psi_2\rt)}}
+\]
+%
+Let us consider a sub-parallelotope $\ptope{\qtemp}{\plb}{\pub}$ and
+an augmented complex zonotope
+$\acztope{\ptemp}{\cen}{\sfact}{\pinv{\qtemp}}{\lb}{\ub}$ such that
+$0\in\tcztope{\ptemp}{\cen}{\sfact}$.  Let us consider that $\qtemp^*$
+is an orthonormal basis of row vectors in the linear span of the row
+vectors of $\qtemp$.  Then
+%
+\begin{align}
+& \approxerror{\acztope{\ptemp}{\cen}{\sfact}{\pinv{\qtemp}}{\join{\plb}{\lb}}{\meet{\pub}{\ub}}}
+  {\intersection{\acztope{\ptemp}{\cen}{\sfact}{\pinv{\qtemp}}{\lb}{\ub}}{\ptope{\qtemp}{\plb}{\pub}}}
+  \nonumber \\
+& \leq \qtemp^*\ptemp\diagonal{\sfact}.
+\end{align}
+%
+\end{theorem}
+%
+\begin{proof}
+{\color{red}{TODO}}.
+\end{proof}
