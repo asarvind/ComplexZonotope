@@ -1,11 +1,11 @@
-\section{Other Operations on Augmented Complex Zonotope}
+\section{Other Operations on Augmented Complex Zonotopes}
 Earlier, we had discussed about the intersection of an augmented
 complex zonotope with a suitably aligned sub-parallelotope.  We shall
 now discuss about other operations on augmented complex zonotopes which
 are linear transformation, Minkowski sum, projection along a direction
 and checking inclusion.
 
-Augmented complex zonotopes are closed under matrix multiplication and
+Augmented complex zonotopes are closed under linear transformation and
 Minkowski sum, which are described in the following two lemmas.
 %
 \begin{lemma}[Linear transformation]
@@ -23,46 +23,209 @@ A\acztope{\ptemp}{\cen}{\sfact}{\stemp}{\lb}{\ub}=\acztope{A\ptemp}{A\cen}{\sfac
 {\color{red} TODO}.
 \end{proof}
 %
-\begin{lemma}
+\begin{lemma}[Minkowski sum]
 Let us consider two augmented complex zonotopes
 $\acztope{\ptemp}{\cen}{\sfact}{\stemp}{\lb}{\ub},
 \acztope{\ptemp^\pr}{\cen^\pr}{\sfact^\pr}{\stemp^\pr}{\lb^\pr}{\ub^\pr}\subset\compnums^n$.
 Then
 %
 \begin{align*}
-\minsum{\acztope{\ptemp}{\cen}{\sfact}{\stemp}{\lb}{\ub}
-  \acztope{\ptemp^\pr}{\cen^\pr}{\sfact^\pr}{\stemp^\pr}{\lb^\pr}{\ub^\pr}}
-= \acztope
-{\begin{matrix}
-    \ptemp\\
+& \minsum{\acztope{\ptemp}{\cen}{\sfact}{\stemp}{\lb}{\ub}}
+  {\acztope{\ptemp^\pr}{\cen^\pr}{\sfact^\pr}{\stemp^\pr}{\lb^\pr}{\ub^\pr}}\\
+& = \acztope
+{\lt[\begin{matrix}
+    \ptemp &
     \ptemp^\pr
-  \end{matrix}
+  \end{matrix}\rt]
 }
 {\begin{matrix}
     \cen+\cen^\pr
   \end{matrix}
 }
-{\begin{matrix}
+{\lt[\begin{matrix}
     \sfact\\
     \sfact^\pr
-  \end{matrix}
+  \end{matrix}\rt]
 }
-{\begin{matrix}
-    \stemp\\
+{\lt[\begin{matrix}
+    \stemp &
     \stemp^\pr
-  \end{matrix}
+  \end{matrix}\rt]
 }
-{\begin{matrix}
+{\lt[\begin{matrix}
     \lb\\
     \lb^\pr
-  \end{matrix}
+  \end{matrix}\rt]
 }
-{\begin{matrix}
+{\lt[\begin{matrix}
     \ub\\
     \ub^\pr
-  \end{matrix}
+  \end{matrix}\rt]
 }
 \end{align*}
 %
 \end{lemma}
+%
+To problem of checking inclusion between two augmented complex
+zonotopes can be equivalently expressed as the problem of checking
+inclusion between two geometrically equivalent template complex
+zonotopes.  For this, we propose the following conversion between the
+real projection of an augmented complex zonotope and a template
+complex zonotope.
+%
+\begin{lemma}
+Let us consider an augmented complex zonotope
+$\acztope{\ptemp}{\cen}{\sfact}{\stemp}{\lb}{\ub}$.  Then we have the
+following equivalence to the real projection of a template complex zonotope.
+%
+\begin{align*}
+  \real\lt(\acztope{\ptemp}{\cen}{\sfact}{\stemp}{\lb}{\ub}\rt)
+  = \real\lt(\tcztope
+  {\lt[\begin{matrix}
+      \ptemp &
+      \stemp
+    \end{matrix}\rt]
+  }
+  {\begin{matrix}
+      \cen+\frac{\ub+\lb}{2}
+    \end{matrix}
+  }
+  {\lt[\begin{matrix}
+      \sfact\\
+      \frac{\ub-\lb}{2}
+    \end{matrix}\rt]
+  }
+  \rt)
+\end{align*}
+%
+\end{lemma}
+%
+So, to check inclusion between real projections of two augmented
+complex zonotopes, we can equivalently check inclusion between the
+real projections of corresponding template complex zonotopes.  In the
+Definition~\ref{defn:inclusion-tcz} of the previous chapter, we had
+proposed a relation $''\order''$, stated as a set of second order
+conic program, for checking inclusion between two template complex
+zonotopes.  Then based on the aforementioned equivalence between
+augmented complex zonotopes and template complex zonotope, we extend
+the inclusion checking relation to augmented complex zonotopes as
+follows.
+%
+\begin{definition}[Relation between augmented complex zonotopes]
+Given two augmented complex zonotopes $\acztope{\ptemp}{\cen}{\sfact}{\stemp}{\lb}{\ub},
+\acztope{\ptemp^\pr}{\cen^\pr}{\sfact^\pr}{\stemp^\pr}{\lb^\pr}{\ub^\pr}\subset\compnums^n$,
+we say that
+%
+\[
+\acztope{\ptemp^\pr}{\cen^\pr}{\sfact^\pr}{\stemp^\pr}{\lb^\pr}{\ub^\pr} \order
+ \acztope{\ptemp}{\cen}{\sfact}{\stemp}{\lb}{\ub}
+\]
+%
+if and only if
+%
+\[
+\real\lt(\tcztope
+  {\lt[\begin{matrix}
+      \ptemp^\pr &
+      \stemp^\pr
+    \end{matrix}\rt]
+  }
+  {\begin{matrix}
+      \cen^\pr+\frac{\ub^\pr+\lb^\pr}{2}
+    \end{matrix}
+  }
+  {\lt[\begin{matrix}
+      \sfact^\pr\\
+      \frac{\ub^\pr-\lb^\pr}{2}
+    \end{matrix}\rt]
+  }
+  \rt)
+  \order
+  \real\lt(\tcztope
+  {\lt[\begin{matrix}
+      \ptemp &
+      \stemp
+    \end{matrix}\rt]
+  }
+  {\begin{matrix}
+      \cen+\frac{\ub+\lb}{2}
+    \end{matrix}
+  }
+  {\lt[\begin{matrix}
+      \sfact\\
+      \frac{\ub-\lb}{2}
+    \end{matrix}\rt]
+  }
+  \rt).
+\]
+%
+\end{definition}
+%
+\begin{theorem}[Inclusion checking]~\label{thm:acz-inclusion}
+Let us consider two augmented complex zonotopes $\acztope{\ptemp}{\cen}{\sfact}{\stemp}{\lb}{\ub},
+\acztope{\ptemp^\pr}{\cen^\pr}{\sfact^\pr}{\stemp^\pr}{\lb^\pr}{\ub^\pr}\subset\compnums^n$.
+Then the following inclusion
+of the real projections is true
+%
+\[
+\real\lt(\acztope{\ptemp^\pr}{\cen^\pr}{\sfact^\pr}{\stemp^\pr}{\lb^\pr}{\ub^\pr}\rt)\subseteq\real\lt(\acztope{\ptemp}{\cen}{\sfact}{\stemp}{\lb}{\ub}\rt)
+\]
+%
+if the following relation is true
+%
+\[
+\acztope{\ptemp^\pr}{\cen^\pr}{\sfact^\pr}{\stemp^\pr}{\lb^\pr}{\ub^\pr}\order\acztope{\ptemp}{\cen}{\sfact}{\stemp}{\lb}{\ub}.
+\]
+%
+\end{theorem}
+%
+\begin{proof}
+  {\color{red} TODO}
+\end{proof}
+%
+The following propostion states that the above sufficient condition
+for checking the inclusion between the real projections of augmented
+complex zonotopes is equivalently a second order conic constraint on a
+variable of size proportional to the representation size of the
+augmented complex zonnotopes.
+%
+\begin{proposition}
+Let us consider two augmented complex zonotopes\\
+$\acztope{\ptemp}{\cen}{\sfact}{\stemp}{\lb}{\ub},
+\acztope{\ptemp^\pr}{\cen^\pr}{\sfact^\pr}{\stemp^\pr}{\lb^\pr}{\ub^\pr}\subset\compnums^n$.
+If $\ptemp$ and $\ptemp^\pr$ are considered constants, then the
+relation
+%
+\[
+\acztope{\ptemp^\pr}{\cen^\pr}{\sfact^\pr}{\stemp^\pr}{\lb^\pr}{\ub^\pr} \order
+ \acztope{\ptemp}{\cen}{\sfact}{\stemp}{\lb}{\ub}
+\]
+%
+is equivalent to a second order conic constraint on a variable of
+length {\color{red} todo}, which comprises the primary offset $\cen$, scaling
+factors $\sfact$ and lower and upper interval bounds $\lb$ and $\ub$,
+respectively.
+\end{proposition}
+%
+The support of an augmented complex zonotope along any direction is as
+an affine function of the primary offset, scaling factors and the
+upper and lower interval bounds.  This is described in the following
+lemma.
+%
+\begin{lemma}[Linear projection]
+Let us consider an augmented complex zonotope
+$\acztope{\ptemp}{\cen}{\sfact}{\stemp}{\lb}{\ub}$ and a vector
+$v\in\compnums^n$.  Then
+%
+\begin{align*}
+  & \support{w}{v}{\acztope{\ptemp}{\cen}{\sfact}{\stemp}{\lb}{\ub}}\\
+  & = \mymatrix{\ptemp &
+    \stemp}\lt(\cen+\frac{\ub+\lb}{2}-w\rt)+v^T\mymatrix{\ptemp & \stemp}\mymatrix{\sfact\\\frac{\ub-\lb}{2}}.
+\end{align*}
+%
+\end{lemma}
+%
+\begin{proof}
+{\color{red} todo}.
+\end{proof}
 %
