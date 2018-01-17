@@ -17,30 +17,15 @@ is the representation of an interval zonotope.
 %
 \end{definition}
 %
-An interval zonotope can be equivalently represented as a simple
-zonotope, which is stated in the following lemma.
-%
-\begin{lemma}
-We have
-%
-\[
-\iztope{\stemp}{\lb}{\ub}=\rztope{\stemp\diagonal{\frac{\ub-\lb}{2}}}{\stemp\frac{\ub+\lb}{2}}.
-\]
-%
-\end{lemma}
-%
-\begin{proof}
-  {\color{red}
-\end{proof}
-%
-Although, in general, interval zonotopes are not closed under
-intersection with the sub-level sets of linear inequalities, if the
-linear inequalities are oriented with the interval zonotope, then the
-intersection gives another interval zonotope which is computed
-algebraically.  We consider the intersection with a class of sub-level
-sets of linear inequalities, called sub-parallelotopes, defined as
-follows.  A sub-parallelotope can be seen as a generalization of
-parallelotopes to possibly unbounded sets.
+In general, interval zonotopes are not closed under intersection with
+the sub-level sets of linear inequalities. But we shall describe an
+observation latter that for a class of sub-level sets of linear
+inequalities, called \emph{sub-parallelotopes}, which are oriented in
+a certain way with the interval zonotope, the aforementioned
+intersection is a closed operation on interval zonotopes and computed
+by a simple algebraic expression. A sub-parallelotope can be seen as a
+generalization of parallelotopes to possibly unbounded sets, defined
+as follows.
 %
 \begin{definition}[Sub-parallelotope]
 Let us consider ${\qtemp}\in\mat{k}{n}{\reals}$ such that
@@ -109,11 +94,12 @@ $\lt[\begin{matrix} 1 & 1 & 0 \end{matrix}\rt]$.
 
 Sub-parallelotopes have a similarity to interval zonotopes, in the
 sense that we can express a sub-parallelotope as a linear combination
-of real vectors with corresponding interval bounds on the combining
-coefficients, as follows.  In the following proposition, recall that
+of real vectors with relevant interval bounds on the combining
+coefficients.  This is stated in the following proposition.  Recall
+our notation that
 $\pinv{\qtemp}=\transpose{\qtemp}\inv{\lt(\qtemp\transpose{\qtemp}\rt)}$,
-which exists because $\lt(\qtemp\transpose{\qtemp}\rt)$ is required to
-be invertible for a sub-parallelotopic template $\qtemp$.
+which exists for a sub-parallelotopic template $\qtemp$ because
+$\lt(\qtemp\transpose{\qtemp}\rt)$ is required to be invertible.
 %
 \begin{proposition}
   Consider a sub-parallelotope
@@ -130,13 +116,41 @@ be invertible for a sub-parallelotopic template $\qtemp$.
 \end{proposition}
 %
 \begin{proof}
-{\color{red} TODO}.
+Let $\zeta\in\reals^k$ and $x^*=\pinv{\qtemp}\zeta$.  Then
+%
+\[
+\qtemp x^*=\qtemp\pinv{\qtemp}\zeta = \qtemp\qtemp^T\inv{\lt(\qtemp\qtemp^T\rt)}\zeta=\zeta.
+\]
+%
+By the rank-nullity theorem, $\qtemp x^* = \zeta$ implies
+%
+\begin{equation}
+\set{x\in\reals^n:\qtemp x=\zeta}=\set{c+x^*:\qtemp c=0}.
+\end{equation}
+%
+Combining the above two resuls we get,
+%
+\begin{equation}
+\set{x\in\reals^n:\qtemp x=\zeta}=\set{c+\pinv{\qtemp}\zeta:~\qtemp c=0}.
+\end{equation}
+%
+Based on the above equation, we get
+%
+\begin{align*}
+& \ptope{\qtemp}{\plb}{\pub} = \set{x\in\reals^n:~\plb\leq \qtemp x\leq\pub}\nonumber\\
+& = \set{x\in\reals^n:\qtemp
+  x=\zeta, \plb\leq \zeta\leq\pub}\nonumber\\
+& = \set{c+\pinv{\qtemp}\zeta:\qtemp c=0,~\plb\leq\zeta\leq\pub}.~~~\qedhere
+\end{align*}
+%
 \end{proof}
 %
-We observe that when a sub-parallelotope has its template aligned with
-that of an interval zonotope, their intersection can be exactly
-represented by another interval zontope.  As an example, the
-intersection of
+The above similarity between a sub-parallelotope and an interval
+zonotope is a motivation for considering the intersection of interval
+zonotopes with sub-parallelotopes.  We observe that when a
+sub-parallelotope has its template aligned with that of an interval
+zonotope, their intersection can be exactly represented by another
+interval zontope.  As an example, the intersection of
 %
 \[
 \iztope{\lt[\begin{array}{l l}1 & 0 \\ 0 &
@@ -217,7 +231,7 @@ complex zonotope, which is in turn used in
 Theorem~\ref{thm:acz-inclusion} to derive a convex program for checking
 inclusion between augmented complex zonotopes.
 %
-\begin{lemma}
+\begin{lemma}~\label{lem:iz-tcz-conversion}
 We have the following equivalence between an interval zonotope and the
 real projection of a template complex zonotope.
 %
@@ -228,18 +242,99 @@ real projection of a template complex zonotope.
 \end{lemma}
 %
 \begin{proof}
-Let us consider a point $x\in\iztope{\stemp}{\lb}{\ub}$ written as
-$x=\stemp\zeta:\zeta\in\reals^n,\lb\leq\zeta\leq\ub$.  Let $\zeta^\pr=
-\zeta-\frac{\ub-\lb}{2}$.  Then we get,
+Let us consider a point $x\in\iztope{\stemp}{\lb}{\ub}$ expressed as
+%
+\[
+x=\stemp\zeta:\zeta\in\reals^n,\lb\leq\zeta\leq\ub.
+\]
+%
+  Let $\zeta^\pr=
+\zeta-\frac{\ub+\lb}{2}$.
+Then we get,
 %
 \begin{align*}
-& x=\stemp\zeta=\stemp\frac{\ub+\lb}{2}+\stemp\lt(\zeta-\frac{\ub-\lb}{2}\rt)\\
-= \stemp\frac{\ub+\lb}{2}+\stemp\zeta^\pr.\\
-& \absolute{\zeta^\pr}=\absolute{\zeta
+& x=\stemp\zeta=\stemp\frac{\ub+\lb}{2}+\stemp\lt(\zeta-\frac{\ub+\lb}{2}\rt)\\
+& = \stemp\frac{\ub+\lb}{2}+\stemp\zeta^\pr~~\text{and}\\
+& \absolute{\zeta^\pr}=\absolute{\zeta-\frac{\ub+\lb}{2}}\\
+& \%\%~\text{As $\zeta$ is a real vector and $\lb\leq\zeta\leq\ub$}\\
+& \leq \join{\absolute{\lb-\frac{\ub+\lb}{2}}}{\absolute{\ub-\frac{\ub+\lb}{2}}}
+= \absolute{\frac{\ub-\lb}{2}}.
 \end{align*}
 %
-  Then,
-
+So,
+$x\in\real\lt(\tcztope{\stemp}{\stemp\frac{\ub+\lb}{2}}{\frac{\ub-\lb}{2}}\rt)$.  Therefore,
+%
+\[
+\iztope{\stemp}{\lb}{\ub}\subseteq\real\lt(\tcztope{\stemp}{\stemp\frac{\ub+\lb}{2}}{\frac{\ub-\lb}{2}}\rt).
+\]
+%
+Next consider $y\in\real\lt(\tcztope{\stemp}{\stemp\frac{\ub+\lb}{2}}{\frac{\ub-\lb}{2}}\rt)$,
+expressed as
+\[
+y=\stemp\zeta+\stemp\frac{\ub+\lb}{2}:~\absolute{\zeta}\leq\frac{\ub-\lb}{2}.
+\]
+%
+Let $\zeta^\dpr=\zeta+\frac{\ub+\lb}{2}$.
+As
+$\absolute{\zeta}\leq\frac{\ub-\lb}{2}$, so we get
+%
+\begin{align*}
+&
+\frac{\ub+\lb}{2}-\frac{\ub-\lb}{2}\leq\zeta^\dpr\leq\frac{\ub-\lb}{2}+\frac{\ub+\lb}{2}\\
+& \equivalent \lb\leq\zeta^\dpr\leq\ub
+\end{align*}
+%
+Furthermore, $y=\stemp\zeta+\stemp\frac{\ub+\lb}{2}=\stemp\zeta^\dpr$.
+So, $y\in\iztope{\stemp}{\lb}{\ub}$.  Therefore,
+%
+\[
+\iztope{\stemp}{\lb}{\ub}\supseteq\real\lt(\tcztope{\stemp}{\stemp\frac{\ub+\lb}{2}}{\frac{\ub-\lb}{2}}\rt).
+\]
+%
+Combining the previous two conclusions about the set inclusions, we get
+%
+\[
+\iztope{\stemp}{\lb}{\ub}=\real\lt(\tcztope{\stemp}{\stemp\frac{\ub+\lb}{2}}{\frac{\ub-\lb}{2}}\rt).~~~~~~\qedhere
+\]
+%
+\end{proof}
+%
+An interval zonotope can be equivalently represented as a simple
+zonotope, which is stated in the following lemma.
+%
+\begin{lemma}
+We have
+%
+\[
+\iztope{\stemp}{\lb}{\ub}=\rztope{\stemp\diagonal{\frac{\ub-\lb}{2}}}{\stemp\frac{\ub+\lb}{2}}.
+\]
+%
+\end{lemma}
+%
+\begin{proof}
+Based on Lemma~\label{lem:iz-tcz-conversion}, we have 
+%
+\[
+\iztope{\stemp}{\lb}{\ub}=\real\lt(\tcztope{\stemp}{\stemp\frac{\ub+\lb}{2}}{\frac{\ub-\lb}{2}}\rt).
+\]
+%
+Next based on Lemma~\ref{lem:normalization}, we have 
+%
+\[
+\tcztope{\stemp}{\stemp\frac{\ub+\lb}{2}}{\frac{\ub-\lb}{2}}=\cztope{\ptemp\diagonal{\frac{\ub-\lb}{2}}}{\stemp\frac{\ub-\lb}{2}}.
+\]
+%
+As $\ptemp$ is real, so
+%
+\[
+\real\lt(\cztope{\ptemp\diagonal{\frac{\ub-\lb}{2}}}{\stemp\frac{\ub-\lb}{2}}\rt)=\rztope{\ptemp\diagonal{\frac{\ub-\lb}{2}}}{\stemp\frac{\ub-\lb}{2}}.
+\]
+%
+Combining the above results, we get
+\[
+\iztope{\stemp}{\lb}{\ub}=\rztope{\stemp\diagonal{\frac{\ub-\lb}{2}}}{\stemp\frac{\ub+\lb}{2}}.~~~~\qedhere
+\]
+%
 \end{proof}
 %
 The support of an interval zonotope along a vector is an affine
@@ -256,3 +351,64 @@ two real vectors $w,v\in\reals^n$.  Then
 %
 \end{lemma}
 %
+\begin{proof}
+{\color{red}TODO}.
+\end{proof}
+%
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
