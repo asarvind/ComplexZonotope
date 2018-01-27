@@ -1,4 +1,5 @@
-INPUT_FILE=summary.tex
+INPUT_FILE_LONG=summary.tex
+INPUT_FILE_SHORT=ShortSummary.tex
 SPELL_CHECK=aspell -c
 
 #submission:
@@ -9,14 +10,23 @@ SPELL_CHECK=aspell -c
 
 all:
 #	latexmk -f main.tex -pdfdvi
-	pdflatex -shell-escape -synctex=1 ${INPUT_FILE}
+	make clean
+	ln -s ../../PhdThesis
+	ln -s ../stylefiles
+	ln -s ../../figures
+	pdflatex -shell-escape -synctex=1 ${INPUT_FILE_LONG}
 	bibtex summary
-	pdflatex -shell-escape -synctex=1 ${INPUT_FILE}
-	pdflatex -shell-escape -synctex=1 ${INPUT_FILE}
+	pdflatex -shell-escape -synctex=1 ${INPUT_FILE_LONG}
+	pdflatex -shell-escape -synctex=1 ${INPUT_FILE_LONG}
 #	open main.pdf &
 
-pdf:
-	pdflatex -shell-escape -synctex=1 ${INPUT_FILE}
+short_pdf:
+#xs	latexmk -f main.tex -pdfdvi
+	pdflatex -shell-escape -synctex=1 ${INPUT_FILE_SHORT}
+	bibtex ShortSummary
+	pdflatex -shell-escape -synctex=1 ${INPUT_FILE_SHORT}
+	pdflatex -shell-escape -synctex=1 ${INPUT_FILE_SHORT}
+#	open main.pdf &
 
 TEX_FILES := $(wildcard *.tex chapters/*.tex chapters/*/*.tex)
 
@@ -49,6 +59,10 @@ clean:
 	\rm -f  chapters/*.tex~	
 	\rm -f  chapters/*/*.tex~
 	\rm -f *~
+	\rm -f  Phd*
+	\rm -f -f stylefiles
+	\rm -f figures
+	\rm -f *syntex*
 	# git rm -f Figures/*.pdf
 
 upload:

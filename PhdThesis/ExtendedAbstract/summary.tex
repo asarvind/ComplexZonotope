@@ -8,100 +8,108 @@
 
 \begin{document}
 
-\maketitle Models of cyber-physical systems, that describe the
-interplay between continuous and discrete variables in the dynamics of
-the system, pose a significant challenge for formal verification.
-Verification of some of the properties of these systems, like safety
-and stability, usually requires computing the set of reachable states
-of the system.  For a very general class of these models that have
-non-linear differential or difference equations and discrete modes for
-switching, exact computation of the reachable set over any span of
-time is undecidable.  Even in a simpler case like a discrete time
-affine hybrid system, the exact reachable set at any given time is a
-union of exponential number of convex sets in the magnitude of the
-time, which is computationally expensive to represent.  Instead,
-usually the goal is to find a small enough over-approximation of the
-reachable set that is easier to compute than the exact reachable set.
-The approximation of a reachable set is stored as a data structure
-called a {\it set representation}.  Examples of a set representation
-include {\it convex polyhedron}, represented by either linear
+\maketitle Models of hybrid systems, that describe the system dynamics
+as an interaction between continuous and discrete variables, pose a
+significant challenge for formal verification.  Verification of some
+of the properties of these systems, like safety and stability, usually
+requires computing the set of reachable states of the system.  For a
+general class of these models that have differential equations and
+discrete modes for switching, exact computation of the reachable set
+is undecidable~\cite{todo}, except in particular cases.  Even in a
+simpler case like a discrete time affine hybrid system, the exact
+reachable set at any given time is a union of exponential number of
+convex sets in the number of time steps.  Instead, we can find a
+sufficiently accurate over-approximation of the infinite set of
+reachable states.  To do so, we need to represent an infinite set of
+states symbolically by a {\it set representation}, which can be
+efficiently manipulated for the computation of the desired
+over-approximation.  Some examples of a set representation are {\it
+  convex polyhedron}, represented by either linear
 inequalities~\cite{cousot1978automatic,Sankaranarayanan+Dang+Ivancic-08-Symbolic}
-or a finite set of points whose convex hull is the
-polyhedron~\cite{kvasnica2004multi}; {\it
+or a convex hull of a finite set of points~\cite{kvasnica2004multi};
+{\it
   ellipsoid}~\cite{DBLP:journals/tecs/AllamigeonGSGP16,kurzhanskiy2006ellipsoidal},
-represented by a positive semi-definite matrix; {\it polynomial
+represented by a positive semi-definite matrix and a center; {\it polynomial
   sub-level sets}~\cite{DBLP:conf/esop/AdjeGG10,prajna2004safety} ;
 etc.  In numerical abstract interpretation, a set representation is
 usually an {\it abstract domain}, which is a lattice with an
 abstraction and a concretization map~\cite{jeannet2009apron}.
 
 \section{Problem and related work}
-Our research is related to discrete time affine hybrid systems.  We
-consider the problem of efficiently computing a small enough
-over-approximation of the unbounded time reachable set that is useful
-for verifying properties like safety and stability of the system.  The
+We consider the problem of efficiently computing a sufficiently
+accurate over-approximation of the unbounded time reachable set that
+is useful for verifying properties like invariance and stability.  The
 unbounded time reachable set is usually approximated as a {\it
   positive invariant}, which is a set of states whose next set of
 reachable states is contained within itself.  The potentiality of a
-set representation in efficient computation of a positive invariant
-is affected by the following characteristics.  (i) Efficient closure
-under system operations like linear transformation, Minkowski sum,
-mutual intersection and intersection with sub-level sets of linear
-inequalities.  (ii) Existence of an efficiently representable positive
-invariant for the simple case of linear transformation.  Well known
-set representations for reach set approximation have some of the above
-characteristics, but not all.  For example, polytopes are efficiently
-closed under mutual intersection and intersection with linear
-constraints.  But even for the simpler case of a stable linear
-transformation, a positively invariant polytope can require
-arbitrarily large representation size.  Ellipsoids are closed under
-linear transformation and can also efficiently represent the positive
-invariant of a stable linear transformation.  But ellipsoids are not
-closed under Minkowski sum and approximating the Minkowski sum of
-ellipsoids by another ellipsoid can incur a large over-approximation
-error.
+set representation for efficient computation of a positive invariant
+of a hybrid system is affected by the following characteristics.  (i)
+Closure of the set representation under set operations like linear
+transformation, Minkowski sum, intersection and inclusion-checking,
+etc, and efficient computation of the same.  (ii) Existence of a
+positive invariant for the system that can be encoded by the set
+representation. (iii) Efficient encoding of the positive invariant by
+the set representation.  Well known set representations for computing
+reachable sets have some of the above characteristics, but not all.
+For example, polytopes have the advantage that they are closed under
+linear transformation, Minkowski sum and intersection and for a stable
+linear transformation, there exists a polytopic invariant.  However,
+the Minkowski sum operation is costly because it can lead to a
+quadratic increase in the number of vertices and an exponential
+increase in the number of faces.  Also, the number of faces of a
+polytopic positive invariant for a stable linear system can be
+arbitrarily large.  Ellipsoids have the advantage that they are closed
+under linear transformation and can also efficiently represent the
+positive invariant of a stable linear transformation.  But ellipsoids
+are not closed under Minkowski sum.  Recently work computes the
+over-approximation of the Minkowski sum of ellipsoids by a minimum
+volume ellipsoid~\cite{}.  Still, there can be significant
+approximation error in the ellipsoidal approximation of the Minkowski
+sum.
+
 
 \paragraph{Real zonotope, its usefulness and drawback.}
 Zonotope~\cite{DBLP:conf/hybrid/Girard05} is yet another set
 representation, which is specified as a linear combination of real
 vectors and a center, such that the absolute values of the combining
-coefficients are bounded within unity.  Geometrically, a zonotope is a
-Minkowski sum of line segments and hence a type of polytope.
+coefficients are bounded within unity.  Geometrically, a zonotope is
+the Minkowski sum of line segments and hence a type of polytope.
 Zonotopes have also been extended to the more general quadratic
 zonotopes~\cite{DBLP:conf/aplas/AdjeGW15}, which is a quadratic
 function of real valued intervals.  Zonotopes have the advantage that
 they are efficiently closed under linear transformation and Minkowski
 sum operations.  Therefore, they have been successfully applied to the
-computation of bounded time reachable sets of uncertain linear systems
-and some examples of affine hybrid systems.  But concerning the
-over-approximation of the unbounded time reachable set by a positively
-invariant real zonotope, we have the following drawback.  It is not
-known whether a positively invariant zonotope even exists for the
-simpler case of a stable linear transformation having complex
-eigenvalues.  When the eigenvectors of a stable linear transformation
-are real, then collecting the eigenvectors of the matrix among the
-generators of the zonotope gives a positive invariant.  However, this
-result does not hold when the eigenvectors have complex values, i.e.,
-have non-zero imaginary and real parts.
+computation of bounded time reachable sets of uncertain continuous
+linear systems~\cite{todo} and affine hybrid systems with large dwell
+time for switching~\cite{todo}.  But for over-approximation of the
+unbounded time reachable set by a positive invariant, real zonotopes
+have the have the following drawback.  We can not guarantee the
+existence of a positively invariant real zonotope for the case of a
+stable linear transformation having complex eigenvalues.  When the
+eigenvectors of a stable linear transformation are real valued, then
+collecting the eigenvectors of the matrix among the generators of the
+zonotope gives a positive invariant.  However, this result does not
+hold when the eigenvectors have complex values, i.e., have non-zero
+imaginary and real parts.
 
 
 
 \section {Contribution}
 \paragraph{Complex zonotope.}  To address the above drawback of real
-zonotopes, we extend them to the complex valued domain by a set
-representation called {\it complex zonotope}.  The most basic
-representation of a complex zonotope is a linear combination of
-complex valued vectors with complex combining coefficients, whose
-absolute values are bounded within unity.  We show that a complex
-zonotope captures contraction along the complex valued eigenvectors of
-a linear transformation, which relates to existence of a positively
-invariant complex zonotope.  The real projection of a complex zonotope
-can represent not only Minkowski sums of line segments, but also some
+zonotopes, we extend them to the complex valued domain to yeild a set
+representation called {\it complex zonotope}.  A basic representation
+of the complex zonotope is a linear combination of complex valued
+vectors with complex combining coefficients, whose absolute values are
+bounded within unity.  We show that a complex zonotope captures
+contraction along the complex valued eigenvectors of a linear
+transformation, which relates to existence of a positively invariant
+complex zonotope.  The real projection of a complex zonotope can
+represent not only Minkowski sums of line segments, but also some
 ellipsoids.  Hence, they can represent non-polyhedral sets as well as
-polytopic zonotopes.  They are different from quadratic zonotopes,
-because while the latter is a quadratic function of real valued
-intervals, a complex zonotope is a complex linear combination of
-circles in the complex plane.
+polytopic zonotopes.  They are different from quadratic
+zonotopes~\cite{DBLP:conf/aplas/AdjeGW15xs}, because while the latter is
+a quadratic function of real valued intervals, a complex zonotope is a
+complex linear combination of circles in the complex plane.
 %
 \begin{figure}
   \begin{minipage}{0.5\textwidth}
@@ -253,7 +261,7 @@ The concluding remarks are stated in Chapter 6.
 
 
 \bibliographystyle{plain}
-\bibliography{PhdThesis/mylib}
+\bibliography{PhdThesis/myLib}
 
 
 
