@@ -1,7 +1,7 @@
 \section{Augmented Complex Zonotope and Intersection with Sub-parallelotope}
 We shall now introduce the augmented complex zonotope set
 representation and describe the over-approximation of its intersection
-with a sub-parallelotope.  In Lemma~\ref{}, we have shown that the
+with a sub-parallelotope.  In Lemma~\ref{lem:motivation}, we have shown that the
 intersection of a suitably aligned interval zonotope with a
 sub-parallelotope can be computed exactly by a simple algebraic
 formula.  Motivated by this, we specify an augmented complex zonotope
@@ -58,7 +58,36 @@ v\in\reals^n:~\support{w}{v}{S_1}\leq \support{w}{v}{S_2}.
 \end{lemma}
 %
 \begin{proof}
-{\color{red} TO COMPLETE}.
+  As $S_1$ and $S_2$ are closed sets, for any $v\in\reals^n$, there
+  exist optimal points $\optimal{x}\in S_1$ and $\optimal{y}\in S_2$,
+  such that
+  %
+  \begin{align*}
+&    \max_{x\in S_1} v^Tx=v^T\optimal{x},\\
+& \max_{y\in S_2} v^T y=v^T\optimal{y},   
+ \end{align*}
+  %
+  i.e., $\support{w}{v}{S}=v^T\optimal{x}$ and $\support{w}{v}{S_2}=v^T\optimal{y}$.
+  
+  We prove the required result by considering the following two cases.
+  
+  {\it Case 1}: Let us consider that $S_1\subseteq  S_2$.  By definition, for any $v\in\reals^n$, 
+  %
+  \[
+\support{w}{v}{S_1}=\max_{x\in S_1}v^T(x-w)
+  \]
+  %
+ As $\optimal{x}\in S_1\subseteq S_2$, we get
+  %
+  \begin{align*}
+    & \support{w}{v}{S_2}=\max_{x\in S_2}v^Tx\geq v^T\optimal{x}= \support{w}{v}{S_1}. 
+  \end{align*}
+  %
+  Therefore, if $S_1\subseteq S_2$, then for all $v\in\reals^n$, $\support{w}{v}{S_1}\leq\support{w}{v}{S_2}$
+  
+  {\it Case 2}: Let us consider that there $S_1\nsubseteq S_2$.  Then
+  there exists $x^\pr\in S_1\setminus S_2$.   
+  
 \end{proof}
 %
 The support of a vector with respect to the sum of two points is
@@ -76,7 +105,14 @@ vectors $w,v\in\reals^n$.  Then
 \end{lemma}
 %
 \begin{proof}
-  {\color{red} TODO}.
+  %
+  \begin{align*}
+& \support{w}{v}{\minsum{S}{S^\pr}}=\max_{x\in S,~y\in
+      S^\pr}v^T\lt(x+y-w\rt)\\
+    & = \max_{x\in S}v^T\lt(x-w\rt)+\max_{y\in S^\pr}v^Ty\\
+    & = \support{w}{v}{S}+\support{w}{v}{S^\pr}.~~~~~~~~~~\qedhere
+  \end{align*}
+  %
 \end{proof}
 %
 The support of a vector in the intersection of two sets is the minimum
@@ -92,6 +128,10 @@ vectors $v,w\in\reals^n$.  Then
 \]
 %
 \end{lemma}
+%
+\begin{proof}
+  {\color{red} TODO}.
+\end{proof}
 %
 Recall that an augmented complex zonotope is a Minkowski sum of a
 template complex zonotope and an interval zonotope, i.e.,
@@ -129,7 +169,7 @@ required condition for a more general case of any three closed convex
 sets $S_1,S_2,S_3$, where $\lt(S_1\oplus S_2\rt)\bigcap S_3$ can be
 overapproximated by $S_1\oplus\lt(S_2\bigcap S_3\rt)$. 
 %
-\begin{lemma}~\label{gen-int}
+\begin{lemma}~\label{lem:gen-int}
 Let $S_1\subseteq \compnums^n$ and $S_2,S_3\in\reals^n$ be closed
 convex sets such that $\intersection{S_2}{S_3}\neq \emptyset$ and $0\in S_1$.  Let
 $w\in \intersection{S_2}{S_3}$ and $v\in\reals^n$.  Let 
@@ -236,18 +276,65 @@ such that
 & \exists z\in\compnums^n:~~\ptemp z=\cen~~\text{and}~~\absolute{z}\leq \sfact.~\label{eqn:contain-origin}
 \end{align}
 %
+and $\join{\lb}{\plb}\leq\meet{\ub}{\pub}$.
 Then
 %
 \begin{align}
 &
-\intersection{\acztope{\ptemp}{\cen}{\sfact}{\pinv{\qtemp}}{\lb}{\ub}}{\ptope{\qtemp}{\plb}{\pub}}\nonumber\\
-& \subseteq\acztope{\ptemp}{\cen}{\sfact}{\pinv{\qtemp}}{\join{\ub}{\pub}}{\meet{\lb}{\plb}}.~\label{eqn:thm:acz-ptope-intersection}
+\intersection{\acztope{\ptemp}{\cen}{\sfact}{\pinv{\qtemp}}{\lb}{\ub}}{\ptope{\qtemp}{\plb}{\pub}}\nonumber
+ \subseteq\acztope{\ptemp}{\cen}{\sfact}{\pinv{\qtemp}}{\join{\ub}{\pub}}{\meet{\lb}{\plb}}.~\label{eqn:thm:acz-ptope-intersection}
 \end{align}
 %
 \end{theorem}
 %
 \begin{proof}
-{\color{red} TODO}.
+Let $S_1=\tcztope{\ptemp}{\cen}{\sfact}$,
+$S_2=\iztope{\pinv{\qtemp}}{\lb}{\ub}$ and
+$S_3=\ptope{\qtemp}{\plb}{\pub}$.  We get
+%
+\[
+0=\cen-\cen=\cen-\ptemp z:~~\absolute{-z}\leq\sfact~~\text{(as given)}.
+\]
+%
+So, $0\in \tcztope{\ptemp}{\lb}{\ub}=S_1$.  Since by definition $\lb$ and $\ub$ are finite real
+vectors and by what is given
+%
+\begin{equation}~\label{proof:acz-ptope-intersection1}
+  \lb\leq\join{\lb}{\plb}\leq\meet{\ub}{\pub}\leq \ub,
+\end{equation}
+%
+ we get that $\join{\lb}{\plb}$ is a finite vector.  Let
+ $w=\pinv{\qtemp}\lt(\join{\lb}{\plb}\rt)$.  Then by Equation~\ref{proof:acz-ptope-intersection1},
+ we get that $w\in\iztope{\pinv{\qtemp}}{\lb}{\ub}=S_1$.  Also,
+%
+ \begin{align*}
+   &\%\%~~\text{Since}~~\join{\lb}{\plb}\leq\meet{\ub}{\pub}\\
+& \plb\leq\join{\lb}{\plb}=\qtemp\lt(\pinv{\qtemp}\lt(\join{\lb}\plb\rt)\rt)=\qtemp
+w
+\leq\meet{\ub}{\pub}.
+\end{align*}
+%
+So, $w\in\ptope{\qtemp}{\plb}{\pub}=S_2$.  Also, we previously showed
+that $w\in\ptope{\qtemp}{\plb}{\pub}=S_2$.  Therefore, $w\in
+\intersection{S_1}{S_2}$ and as previously shown, $0\in S_1$.  Then by
+using Lemma~\ref{lem:gen-int} and the facts that
+$\acztope{\ptemp}{\cen}{\sfact}{\pinv{\qtemp}}{\lb}{\ub}=\minsum{S_1}{S_2}$,
+we get
+%
+\begin{align*}
+  & \intersection{\acztope{\ptemp}{\cen}{\sfact}{\pinv{\qtemp}}{\lb}{\ub}}{\ptope{\qtemp}{\plb}{\pub}}\\
+&
+  \intersection{\lt(\minsum{S_1}{S_2}\rt)}{S_3}\subseteq\minsum{S_1}{\lt(\intersection{S_2}{S_3}\rt)}\\
+  & =
+  \minsum{S_1}{\lt(\intersection{\iztope{\pinv{\qtemp}}{\lb}{\ub}}{\ptope{\qtemp}{\plb}{\pub}}\rt)}\\
+  & \%\%~~\text{by Lemma~\ref{lem:motivation}}\\
+  &
+  = \minsum{S_1}{\iztope{\pinv{\qtemp}}{\join{\lb}{\plb}}{\meet{\ub}{\pub}}}\\
+  & =
+  \minsum{\tcztope{\ptemp}{\cen}{\sfact}}{\iztope{\pinv{\qtemp}}{\join{\lb}{\plb}}{\meet{\ub}{\pub}}}\\
+  & = \acztope{\ptemp}{\cen}{\sfact}{\pinv{\qtemp}}{\join{\ub}{\pub}}{\meet{\lb}{\plb}}.~~~~~~~~~~\qedhere
+\end{align*}
+%
 \end{proof}
 %
 The error in over-approximation of the intersection in the above

@@ -184,43 +184,74 @@ Let $K\in\mat{k}{n}{R}$ be a sub-parallelotopic template.  Then
 \end{lemma}
 %
 \begin{proof}
-{\color{red} TODO}.
-\end{proof}
-%
-After linear transformation or Minkowski sum operations, the
-parameters in the resultant interval zonotopes are expressed as an
-affine transformation of the original parameters.  This is described
-in the following lemmas.
-%
-\begin{lemma}[Linear transformation]
-  Let us consider an interval zonotope a matrix
-  $A\in\mat{n}{n}{\reals}$ and an
-  $\iztope{\stemp}{\lb}{\ub}\subset\compnums^n$.  Then
+Let us consider any point $x\in\lt[\iztope{\pinv{\qtemp}}{\lb}{\ub} \bigcap
+  \ptope{\qtemp}{\plb}{\pub}\rt]$, specified as
 %
 \[
-A\iztope{\stemp}{\lb}{\ub}=\iztope{A\stemp}{\lb}{\ub}.
+x=\pinv{\qtemp}\zeta:
+\zeta\in\reals^k\wedge~\lb\leq\zeta\leq \ub.
 \]
-\end{lemma}
 %
-\begin{proof}
-{\color{red} TODO}.
-\end{proof}
-%
-\begin{lemma}[Minkowski sum]
-  Let us consider two interval zonotopes\\
-  $\iztope{\stemp}{\lb}{\ub},~\iztope{\stemp^\pr}{\lb^\pr}{\ub^\pr}\subset\compnums^n$.
-  Then 
+We have
 %
 \[
-\minsum{\iztope{\stemp}{\lb}{\ub}}{\iztope{\stemp^\pr}{\lb^\pr}{\ub^\pr}}
-= \iztope{\mymatrix{\stemp &
-    \stemp^\pr}}{\mymatrix{\lb\\\lb^\pr}}{\mymatrix{\ub\\\ub^\pr}}. 
+\qtemp x=\qtemp\pinv{\qtemp}\zeta=\zeta.
 \]
 %
-\end{lemma}
+Since
+$x\in\ptope{\qtemp}{\plb}{\pub}$, using the above result we get
 %
-\begin{proof}
-{\color{red} TODO}.
+\[
+\plb\leq\ptemp x=\zeta\leq\pub.
+\]
+%
+Since we also have $\lb\leq\zeta\leq \ub$, therefore
+%
+\[
+\join{\plb}{\lb}\leq\zeta\leq\meet{\pub}{\ub}.
+\]
+%
+So $x\in\iztope{\pinv{\qtemp}}{\lb\bigvee \plb}{\ub\bigwedge
+  \pub}$.  This shows that
+%
+\[
+\iztope{\pinv{\qtemp}}{\lb}{\ub} \bigcap \ptope{\qtemp}{\plb}{\pub}
+\subseteq \iztope{\pinv{\qtemp}}{\lb\bigvee \plb}{\ub\bigwedge \pub}
+\]
+%
+Next consider any point $y\in\iztope{\pinv{\qtemp}}{\lb\bigvee
+  \plb}{\ub\bigwedge \pub}$, specified as
+%
+\[
+y=\pinv{\qtemp}\zeta^\pr:~\join{\lb}{\plb}\leq\zeta^\pr\leq\meet{\ub}{\pub}.
+\]
+%
+Consequently, $y\in\iztope{\pinv{\qtemp}}{\lb}{\ub}$.
+We also get,
+%
+\begin{align*}
+  & \qtemp y=\qtemp\pinv{\qtemp}\zeta^\pr=\zeta^\pr\\
+  & \%\% ~~\text{As}~\join{\lb}{\plb}\leq\zeta^\pr\leq\meet{\ub}{\pub}\\
+  & \implies \plb\leq \qtemp y\leq\pub\\
+  & y\in\ptope{\qtemp}{\plb}{\pub}.
+\end{align*}
+%
+So, we get $y\in\iztope{\pinv{\qtemp}}{\lb}{\ub} \bigcap
+\ptope{\qtemp}{\plb}{\pub}$.  Therefore,
+%
+\[
+\iztope{\pinv{\qtemp}}{\lb}{\ub} \bigcap \ptope{\qtemp}{\plb}{\pub}
+\supseteq \iztope{\pinv{\qtemp}}{\lb\bigvee \plb}{\ub\bigwedge \pub}
+\]
+%
+Combing the above with the previous conclusion above containment, we
+get,
+%
+\[
+\iztope{\pinv{\qtemp}}{\lb}{\ub} \bigcap \ptope{\qtemp}{\plb}{\pub}
+= \iztope{\pinv{\qtemp}}{\lb\bigvee \plb}{\ub\bigwedge \pub}.~~~\qedhere
+\]
+%
 \end{proof}
 %
 An interval zonotope can be equivalently specified as the real
@@ -302,7 +333,7 @@ Combining the previous two conclusions about the set inclusions, we get
 An interval zonotope can be equivalently represented as a simple
 zonotope, which is stated in the following lemma.
 %
-\begin{lemma}
+\begin{lemma}~\label{lem:iz-rz-conversion}
 We have
 %
 \[
@@ -312,7 +343,7 @@ We have
 \end{lemma}
 %
 \begin{proof}
-Based on Lemma~\label{lem:iz-tcz-conversion}, we have 
+Based on Lemma~\ref{lem:iz-tcz-conversion}, we have 
 %
 \[
 \iztope{\stemp}{\lb}{\ub}=\real\lt(\tcztope{\stemp}{\stemp\frac{\ub+\lb}{2}}{\frac{\ub-\lb}{2}}\rt).
@@ -338,9 +369,9 @@ Combining the above results, we get
 \end{proof}
 %
 Interval zonotopes are closed under linear transformation and
-Minkowski sum operations.  The resultant interval zonotopes can be
-computed as affine functions of the parameters of the original
-interval zonotopes, as stated in the following two lemmas.
+Minkowski sum operations.  The parameters of the resultant interval
+zonotopes are an affine transformation of the original parameters.
+This is described in the following lemmas.
 %
 \begin{lemma}[Linear transformation]
 Let us consider an interval zonotope $\iztope{\stemp}{\lb}{\ub}$ and a
@@ -353,7 +384,68 @@ A\iztope{\stemp}{\lb}{\ub}=\iztope{A\stemp}{\lb}{\ub}.
 \end{lemma}
 %
 \begin{proof}
-{\color{red} TODO}.
+Based on Lemma~\ref{lem:iz-rz-conversion}, we get
+%
+\begin{align*}
+&  A\iztope{\stemp}{\lb}{\ub}\\
+  & =
+  A\rztope{\stemp\diag{\frac{\ub-\lb}{2}}}{\frac{\ub+\lb}{2}}\\
+  & ~~\%\%~~\text{by Lemma~\ref{todo}}\\
+  & = \rztope{A\stemp\diag{\frac{\ub-\lb}{2}}}{\frac{\ub+\lb}{2}}\\
+  & ~~\%\%~~\text{by Lemma~\ref{lem:iz-rz-conversion}}\\
+  & = \iztope{A\stemp}{\lb}{\ub}.~~~~~\qedhere
+\end{align*}
+%
+\end{proof}
+%
+\begin{lemma}[Minkowski sum]
+  Let us consider two interval zonotopes\\
+  $\iztope{\stemp}{\lb}{\ub},~\iztope{\stemp^\pr}{\lb^\pr}{\ub^\pr}\subset\compnums^n$.
+  Then 
+%
+\[
+\minsum{\iztope{\stemp}{\lb}{\ub}}{\iztope{\stemp^\pr}{\lb^\pr}{\ub^\pr}}
+= \iztope{\mymatrix{\stemp &
+    \stemp^\pr}}{\mymatrix{\lb\\\lb^\pr}}{\mymatrix{\ub\\\ub^\pr}}. 
+\]
+%
+\end{lemma}
+%
+\begin{proof}
+We get
+%
+\begin{align*}
+  & \%\%~~\text{by Lemma~\ref{lem:iz-rz-conversion}}\\
+  &
+  \minsum{\iztope{\stemp}{\lb}{\ub}}{\iztope{\stemp^\pr}{\lb^\pr}{\ub^\pr}}\\
+  & =
+  \minsum{\rztope{\stemp\diag{\frac{\ub-\lb}{2}}}{\frac{\ub+\lb}{2}}}{\rztope{\stemp\diag{\frac{\ub^\pr-\lb^\pr}{2}}}{\frac{\ub^\pr+\lb^\pr}{2}}}\\
+  & \%\%~~\text{by Lemma~\ref{todo}}\\
+  &= \rztope{\mymatrix{\stemp\diag{\frac{\ub-\lb}{2}} &
+      \stemp^\pr\diag{\frac{\ub^\pr-\lb^\pr}{2}}}}{\frac{\ub+\lb}{2}+\frac{\ub^\pr+\lb^\pr}{2}}\\
+  & = \rztope{\mymatrix{
+      \stemp & \stemp^\pr
+      }
+    \diag{
+      \frac{
+        \mymatrix{
+\ub\\\ub^\pr
+          }-\mymatrix{
+\lb\\\lb^\pr
+          }
+      }{2}
+    }
+    }{\frac{
+        \mymatrix{
+\ub\\\ub^\pr
+          }+\mymatrix{
+\lb\\\lb^\pr
+          }
+    }{2}}\\
+  & \%\%~~\text{by Lemma~\ref{lem:iz-rz-conversion}}\\
+  & = \iztope{\mymatrix{\stemp &
+    \stemp^\pr}}{\mymatrix{\lb\\\lb^\pr}}{\mymatrix{\ub\\\ub^\pr}}.~~~~~\qedhere
+\end{align*}
 \end{proof}
 %
 The support of an interval zonotope along a vector is an affine
@@ -365,13 +457,22 @@ Let us consider $\iztope{\stemp}{\lb}{\ub}\subset\reals^n$ and
 two real vectors $w,v\in\reals^n$.  Then
 %
 \[
-\support{w}{v}{\real\lt(\iztope{\stemp}{\lb}{\ub}\rt)}=v^T\stemp\lt(\frac{\ub+\lb}{2}\rt)+\absolute{v^T\stemp}\absolute{\frac{\ub-\lb}{2}}.
+\support{w}{v}{\iztope{\stemp}{\lb}{\ub}}=v^T\stemp\lt(\frac{\ub+\lb}{2}\rt)+\absolute{v^T\stemp}\absolute{\frac{\ub-\lb}{2}}.
 \]
 %
 \end{lemma}
 %
 \begin{proof}
-{\color{red}TODO}.
+We get
+%
+\begin{align*}
+  & \support{w}{v}{\iztope{\stemp}{\lb}{\ub}} = \\
+  & \%\%~~\text{by Lemma~\ref{lem:iz-tcz-conversion}}\\
+  & \support{w}{v}{\rztope{\diagonal{\frac{\ub-\lb}{2}}}{\frac{\ub+\lb}{2}}}=\\
+  & \%\%~~\text{by Lemma~\ref{todo}}\\
+  & v^T\stemp\lt(\frac{\ub+\lb}{2}\rt)+\absolute{v^T\stemp}\absolute{\frac{\ub-\lb}{2}}.
+\end{align*}
+%
 \end{proof}
 %
 

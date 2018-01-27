@@ -9,6 +9,7 @@ SPELL_CHECK=aspell -c
 
 all:
 #	latexmk -f main.tex -pdfdvi
+	make clean
 	pdflatex -shell-escape -synctex=1 ${INPUT_FILE}
 	bibtex main 
 	pdflatex -shell-escape -synctex=1 ${INPUT_FILE}

@@ -1,0 +1,75 @@
+\begin{thebibliography}{10}
+
+\bibitem{DBLP:conf/aplas/AdjeGW15}
+Assal{\'{e}} Adj{\'{e}}, Pierre{-}Lo{\"{\i}}c Garoche, and Alexis Werey.
+\newblock Quadratic zonotopes - an extension of zonotopes to quadratic
+  arithmetics.
+\newblock In {\em Programming Languages and Systems - 13th Asian Symposium,
+  {APLAS} 2015, Proceedings}, pages 127--145, 2015.
+
+\bibitem{DBLP:conf/esop/AdjeGG10}
+Assal{\'{e}} Adj{\'{e}}, St{\'{e}}phane Gaubert, and Eric Goubault.
+\newblock Coupling policy iteration with semi-definite relaxation to compute
+  accurate numerical invariants in static analysis.
+\newblock In {\em Programming Languages and Systems, 19th European Symposium on
+  Programming, {ESOP} 2010, Held as Part of the Joint European Conferences on
+  Theory and Practice of Software, {ETAPS} 2010, Paphos, Cyprus, March 20-28,
+  2010. Proceedings}, pages 23--42, 2010.
+
+\bibitem{DBLP:journals/tecs/AllamigeonGSGP16}
+Xavier Allamigeon, St{\'{e}}phane Gaubert, Nikolas Stott, Eric Goubault, and
+  Sylvie Putot.
+\newblock A scalable algebraic method to infer quadratic invariants of switched
+  systems.
+\newblock {\em {ACM} Trans. Embedded Comput. Syst.}, 15(4):69:1--69:20, 2016.
+
+\bibitem{cousot1978automatic}
+Patrick Cousot and Nicolas Halbwachs.
+\newblock Automatic discovery of linear restraints among variables of a
+  program.
+\newblock In {\em Proceedings of the 5th ACM SIGACT-SIGPLAN symposium on
+  Principles of programming languages}, pages 84--96. ACM, 1978.
+
+\bibitem{DBLP:conf/hybrid/Girard05}
+Antoine Girard.
+\newblock Reachability of uncertain linear systems using zonotopes.
+\newblock In {\em Hybrid Systems: Computation and Control, 8th International
+  Workshop, {HSCC} 2005, Zurich, Switzerland, March 9-11, 2005, Proceedings},
+  pages 291--305, 2005.
+
+\bibitem{jeannet2009apron}
+Bertrand Jeannet and Antoine Min{\'e}.
+\newblock Apron: A library of numerical abstract domains for static analysis.
+\newblock In {\em Computer Aided Verification}, pages 661--667. Springer, 2009.
+
+\bibitem{kurzhanskiy2006ellipsoidal}
+Alex~A Kurzhanskiy and Pravin Varaiya.
+\newblock Ellipsoidal toolbox (et).
+\newblock In {\em Decision and Control, 2006 45th IEEE Conference on}, pages
+  1498--1503. IEEE, 2006.
+
+\bibitem{kvasnica2004multi}
+Michal Kvasnica, Pascal Grieder, Mato Baotic, and Manfred Morari.
+\newblock Multi-parametric toolbox (mpt).
+\newblock In {\em HSCC}, pages 448--462. Springer, 2004.
+
+\bibitem{prajna2004safety}
+Stephen Prajna and Ali Jadbabaie.
+\newblock Safety verification of hybrid systems using barrier certificates.
+\newblock In {\em International Workshop on Hybrid Systems: Computation and
+  Control}, pages 477--492. Springer, 2004.
+
+\bibitem{Sankaranarayanan+Dang+Ivancic-08-Symbolic}
+Sriram Sankaranarayanan, Thao Dang, and Franjo Ivancic.
+\newblock Symbolic model checking of hybrid systems using template polyhedra.
+\newblock In {\em TACAS}, volume 4963 of {\em Lecture Notes in Computer
+  Science}, pages 188--202. Springer-Verlag, 2008.
+
+\bibitem{scott2016constrained}
+Joseph~K Scott, Davide~M Raimondo, Giuseppe~Roberto Marseglia, and Richard~D
+  Braatz.
+\newblock Constrained zonotopes: A new tool for set-based estimation and fault
+  detection.
+\newblock {\em Automatica}, 69:126--136, 2016.
+
+\end{thebibliography}
