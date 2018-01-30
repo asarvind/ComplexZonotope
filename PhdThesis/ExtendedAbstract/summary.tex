@@ -1,8 +1,9 @@
+
 \documentclass[11pt,a4paper,twoside,openright]{article}  
 %alt: [11/12pt,a4paper/letterpaper,oneside/twoside,openany/openright]{book/memoir}
 \usepackage{graphicx}
 
-\title{Calculus of Complex Zonotopes}
+\title{A Calculus of Complex Zonotopes for Invariance and Stability Verification of Hybrid Systems}
 \author{Santosh Arvind Adimoolam}
 \date{}
 
@@ -12,30 +13,31 @@
 as an interaction between continuous and discrete variables, pose a
 significant challenge for formal verification.  Verification of some
 of the properties of these systems, like safety and stability, usually
-requires computing the set of reachable states of the system.  For a
-general class of these models that have differential equations and
-discrete modes for switching, exact computation of the reachable set
-is undecidable~\cite{todo}, except in particular cases.  Even in a
-simpler case like a discrete time affine hybrid system, the exact
-reachable set at any given time is a union of exponential number of
-convex sets in the number of time steps.  Instead, we can find a
-sufficiently accurate over-approximation of the infinite set of
-reachable states.  To do so, we need to represent an infinite set of
-states symbolically by a {\it set representation}, which can be
-efficiently manipulated for the computation of the desired
-over-approximation.  Some examples of a set representation are {\it
-  convex polyhedron}, represented by either linear
-inequalities~\cite{cousot1978automatic,Sankaranarayanan+Dang+Ivancic-08-Symbolic}
+requires computing the set of reachable states of the system.  For
+hybrid systems that have differential equations, exact computation of
+the reachable set is undecidable~\cite{alur1995algorithmic}, except in
+particular cases~\cite{lafferriere1998decidable}.  Even in a simpler
+case like a discrete time affine hybrid system, the exact reachable
+set at any given time is a union of sets whose number is exponential
+in the number of time steps.  An alternative is find a sufficiently
+accurate over-approximation of the infinite set of reachable states.
+To do so, we need to represent an infinite set of states symbolically
+by a {\it set representation}, which can be efficiently manipulated
+for the computation of the desired over-approximation.  Some examples
+of a set representation are {\it convex polyhedron}, represented by
+either linear
+inequalities~\cite{cousot1978automatic,Sankaranarayanan+Dang+Ivancic-08-Symbolic,FLD+11}
 or a convex hull of a finite set of points~\cite{kvasnica2004multi};
 {\it
   ellipsoid}~\cite{DBLP:journals/tecs/AllamigeonGSGP16,kurzhanskiy2006ellipsoidal},
-represented by a positive semi-definite matrix and a center; {\it polynomial
-  sub-level sets}~\cite{DBLP:conf/esop/AdjeGG10,prajna2004safety} ;
-etc.  In numerical abstract interpretation, a set representation is
-usually an {\it abstract domain}, which is a lattice with an
-abstraction and a concretization map~\cite{jeannet2009apron}.
+represented by a positive semi-definite matrix and a center; {\it
+  polynomial sub-level
+  sets}~\cite{DBLP:conf/esop/AdjeGG10,prajna2004safety} ; etc.  In
+numerical abstract interpretation, a set representation is usually an
+{\it abstract domain}, which is a lattice with an abstraction and a
+concretization map~\cite{jeannet2009apron}.
 
-\section{Problem and related work}
+\section{Motivation}
 We consider the problem of efficiently computing a sufficiently
 accurate over-approximation of the unbounded time reachable set that
 is useful for verifying properties like invariance and stability.  The
@@ -63,7 +65,7 @@ under linear transformation and can also efficiently represent the
 positive invariant of a stable linear transformation.  But ellipsoids
 are not closed under Minkowski sum.  Recently work computes the
 over-approximation of the Minkowski sum of ellipsoids by a minimum
-volume ellipsoid~\cite{}.  Still, there can be significant
+volume ellipsoid~\cite{allamigeon2017fast}.  Still, there can be significant
 approximation error in the ellipsoidal approximation of the Minkowski
 sum.
 
@@ -80,36 +82,39 @@ function of real valued intervals.  Zonotopes have the advantage that
 they are efficiently closed under linear transformation and Minkowski
 sum operations.  Therefore, they have been successfully applied to the
 computation of bounded time reachable sets of uncertain continuous
-linear systems~\cite{todo} and affine hybrid systems with large dwell
-time for switching~\cite{todo}.  But for over-approximation of the
-unbounded time reachable set by a positive invariant, real zonotopes
-have the have the following drawback.  We can not guarantee the
-existence of a positively invariant real zonotope for the case of a
-stable linear transformation having complex eigenvalues.  When the
-eigenvectors of a stable linear transformation are real valued, then
-collecting the eigenvectors of the matrix among the generators of the
-zonotope gives a positive invariant.  However, this result does not
-hold when the eigenvectors have complex values, i.e., have non-zero
-imaginary and real parts.
+linear systems~\cite{DBLP:conf/hybrid/Girard05} and affine hybrid
+systems with simple
+switching~\cite{makhlouf2014networked,girard2008zonotope}.  But for
+over-approximation of the {\it unbounded time reachable set by a
+  positive invariant}, real zonotopes have the have the following
+drawback.  We can not guarantee the existence of real zonotope which
+is a positive invariant, for the case of a stable linear transformation
+having complex eigenvalues.  When the eigenvectors of a stable linear
+transformation are real valued, then collecting the eigenvectors of
+the matrix among the generators of the zonotope gives a positively
+invariant real zonotope.  However, this result does not hold when the
+eigenvectors have complex values, i.e., have non-zero imaginary and
+real parts.
 
 
 
-\section {Contribution}
+\section {Main Contribution}
 \paragraph{Complex zonotope.}  To address the above drawback of real
-zonotopes, we extend them to the complex valued domain to yeild a set
+zonotopes, we extend them to the complex valued domain to yield a set
 representation called {\it complex zonotope}.  A basic representation
-of the complex zonotope is a linear combination of complex valued
-vectors with complex combining coefficients, whose absolute values are
-bounded within unity.  We show that a complex zonotope captures
-contraction along the complex valued eigenvectors of a linear
-transformation, which relates to existence of a positively invariant
-complex zonotope.  The real projection of a complex zonotope can
-represent not only Minkowski sums of line segments, but also some
-ellipsoids.  Hence, they can represent non-polyhedral sets as well as
-polytopic zonotopes.  They are different from quadratic
-zonotopes~\cite{DBLP:conf/aplas/AdjeGW15xs}, because while the latter is
-a quadratic function of real valued intervals, a complex zonotope is a
-complex linear combination of circles in the complex plane.
+of a complex zonotope, which is a straightforward extension of the real
+zonotope, is a linear combination of complex valued vectors with
+complex combining coefficients, whose absolute values are bounded
+within unity.  We show that a complex zonotope captures contraction
+along the complex valued eigenvectors of a linear transformation,
+which relates to existence of a positively invariant complex zonotope.
+The real projection of a complex zonotope can represent not only
+Minkowski sums of line segments, but also some ellipsoids.  Hence,
+they can represent non-polyhedral sets as well as polytopic zonotopes.
+They are different from quadratic
+zonotopes~\cite{DBLP:conf/aplas/AdjeGW15}, because while the latter
+is a quadratic function of real valued intervals, a complex zonotope
+is a complex linear combination of circles in the complex plane.
 %
 \begin{figure}
   \begin{minipage}{0.5\textwidth}
@@ -125,60 +130,86 @@ complex linear combination of circles in the complex plane.
   \caption{Figure of a complex zonotope}
 \end{figure}
 %
-\paragraph{Template complex zonotope.}  In order to easily refine a
-complex zonotope by adding arbitrary generators while approximating a
-given set, we introduce the {\it template complex zonotope}
-representation.  In a template complex zonotope, the absolute values
-of combining coefficients have variable bounds called scaling factors.
-The scaling factors can be adjusted to find better over-approximations
-while adding arbitrary generators in a {\it template}.  Just like
-simple zonotopes, template complex zonotopes are also efficiently
-closed under linear transformation and Minkowski sum operations.  But
-in addition, template complex zonotope can easily represent a positive
-invariant for a linear transformation based on the eigenstructure of
-the matrix, as described previously.  We propose a sufficient
-condition for checking inclusion between template complex zonotopes,
-expressed as a set of second-order conic (convex) constraints on the
-scaling factors and other auxiliary variables.  This condition is
-useful in practice, which we demonstrate through our experiments in
-safety and stability verification on some benchmark examples.
+\paragraph{Template complex zonotope.}  To find more accurate approximations
+of a given set using a basic representation of a complex zonotope, we
+can not simply add more generators because it only increases the size
+of the complex zonotope.  Moreover, adding generators can violate the
+positive invariance of the complex zonotope.  An alternative way of
+refining the complex zonotope is to modify the measure of contribution
+of each generator to the size of the set.  In this regard, we propose
+the more general {\it template complex zonotope} representation, where
+the absolute values of combining coefficients have variable bounds
+called scaling factors.  The scaling factors can be adjusted to find
+better over-approximations.  Furthermore, it allows adding arbitrary
+generators to the collection of generators, called the {\it template},
+because the scaling factors can adjusted to any value equal to or
+greater than zero.
+
+{\it Advantage over other set representations}: Just like simple
+zonotopes, template complex zonotopes are also closed under linear
+transformation and Minkowski sum operations and the resultant complex
+zonotopes can be computed efficiently.  This is an advantage over
+ellipsoids which are not closed under Minkowski sum.  Additionally, we
+show that template complex zonotope can efficiently represent a
+positive invariant for a linear transformation, by collecting the
+eigenvectors of the linear transformation as vectors in the template.
+This is an an advantage over real zonotopes, where we can not
+guarantee if a positive invariant, represented as a real zonotope,
+exists when the eigenvectors are complex valued.  This is also an
+advantage over polytopes, where the representation size of a positive
+invariant as a polytope can be arbitrarily large.
+
+{\it Inclusion-checking}: We propose a sufficient condition for
+checking inclusion between template complex zonotopes, expressed as a
+second-order conic (convex) constraint on the scaling factors
+and other auxiliary variables.  This condition is useful in practice,
+which we demonstrate through our experiments in invariance and stability
+verification on some benchmark examples.
 
 \paragraph{Augmented complex zonotope.}  Template complex
 zonotopes are not closed under intersection with sub-level sets of
 linear inequalities.  This is also a drawback of real zonotopes.
 Previous work addressed this drawback for real zonotopes by allowing
-linear constraints on the combining coefficients, in a more general
-representation called {\it constrained
-  zonotopes}~\cite{scott2016constrained}.  But if we emulate this
-approach for complex zonotopes, we get linear constraints on the
-complex valued combining co-coefficients in addition to the quadratic
-absolute value bounds.  However, for the resultant set representation
-having quadratic absolute value constraints as well as linear
-constraints, the problem of finding a reasonable convex-relaxation for
-inclusion-checking, that works well in practice, seems intractable.
-Instead, we define a different representation called {\it augmented
-  complex zonotope}, which is geometrically equivalent to a complex
-zonotope, but whose representation allows efficient computation of a
-non-trivial over-approximation of the intersection with a class of
-linear constraints.  The over-approximation is computed as a simple
-algebraic expression of the parameters of the augmented complex
-zonotope.  In the course of the derivation of this result, we also
-find a general mathematical result about intersection of Minkowski sum
-of convex sets with another convex set.
+linear constraints on the combining coefficients, in more general
+representations like constrained affine sets~\cite{Ghorbal2010} and
+{\it constrained zonotopes}~\cite{scott2016constrained}.  But we face
+the following problem if we were to emulate these approach for complex
+zonotopes.  The absolute value bounds on combining co-coefficients,
+which are quadratic functions, are necessary because they capture the
+contraction along complex valued eigenvectors of a linear
+transformation.  Consider that we additionally define linear
+constraints on the complex valued combining co-coefficients to reason
+about intersection.  Then the problem of finding a reasonable
+convex-relaxation for inclusion-checking between elements in the
+resultant set representation, which works well in practice, seems
+intractable.  Instead, we define a representation called {\it
+  augmented complex zonotope}, which is geometrically equivalent to a
+complex zonotope, but whose representation is more general and allows
+efficient computation of a non-trivial over-approximation of the
+intersection with a class of linear constraints.  The
+over-approximation is computed as a simple algebraic expression of the
+parameters of the augmented complex zonotope.  The augmented complex
+zonotope representation is motivated by the constrained affine
+sets~\cite{Ghorbal2010} abstract domain.  But the difference is that
+while a constrained affine set is geometrically not a zonotope, an
+augmented complex zonotope is geometrically equivalent and can be
+converted efficiently to the template complex zonotope.  Therefore, we
+can efficiently check-inclusion between augmented complex zonotopes
+using the condition for checking-inclusion between template complex
+zonotopes.  In the course of the derivation of this result about
+intersection, we also find a general mathematical result about
+intersection of Minkowski sum of convex sets with another convex set.
 
-\paragraph{Unbounded time safety verification.}
-We express operations on augmented complex zonotopes like linear
-transformation, Minkowski sum, over-approximation of intersection with
-constraints and support of a vector as affine expressions of some of
-the specification parameters.   We also derive a second order conic
-program for checking inclusion between two augmented complex
-zonotopes.  Henceforth, we derive a second order conic
-program for checking the safety of an affine hybrid system.  The fact
-that a complex zonotope can both capture the contraction along complex
-eigenvectors and also efficiently represent linear transformation and
-Minkowski sum makes it an efficient set representation for unbounded
-time safety verification.  We demonstrate the efficiency of the safety
-verification approach by implementing on some benchmark examples.
+\paragraph{Invariance verification.}
+Henceforth, we derive a second order conic program for checking the
+invariance of linear constraints for a discrete time affine hybrid
+system.  The fact that a complex zonotope can both capture the
+contraction along complex eigenvectors and also efficiently represent
+linear transformation and Minkowski sum makes it an efficient set
+representation for unbounded time safety verification.  We demonstrate
+the efficiency of the safety verification approach by implementing on
+some benchmark examples and comparing with the SpaceEx
+tool~\cite{FLD+11} and available results for previous approaches.
 
 \paragraph{Stability verification of nearly periodic linear impulsive
   systems.}  %% The specification of an augmented complex
@@ -192,15 +223,12 @@ verification approach by implementing on some benchmark examples.
 %% expressions are affine functions of the primary offset, scaling
 %% factors and lower and upper interval bounds. 
   Our analysis of template complex zonotopes for the case of discrete
-  time switched linear systems is extended to verify stability of {\it nearly
-    periodic linear impulsive systems}.  We first derive bounds on the
-  amount of contraction of a complex zonotope after a linear
-  transformation.  Then we derive a second order conic program to
-  synthesize a contractive complex zonotope for a collection of linear
-  transformations.  We apply these results to verify the exponential
-  stability of nearly periodic linear impulsive systems.  We implement
-  the procedure on some benchmark examples to demonstrate its
-  efficiency.
+  time switched linear systems is extended to verify stability of {\it
+    nearly periodic linear impulsive systems}.  The efficiency of our
+  approach to stability verification is demonstrated by our
+  experiments on some benchmark experiments.  We obtain either larger
+  or competitive bounds on the maximum uncertainty in sampling times
+  compared to previous approaches.
 
 \section {Organization}
 The dissertation contains five main chapters and a conclusive chapter.

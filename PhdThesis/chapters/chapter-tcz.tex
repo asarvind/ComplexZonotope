@@ -400,12 +400,6 @@ $\minsum{\tcztope{\ptemp}{\cen}{\sfact}}{\tcztope{\ptemp^\pr}{\cen^\pr}{\sfact^\
 & \ptemp^\pr\end{bmatrix}}{\cen+\cen^\pr}{\begin{bmatrix}\sfact\\\sfact^\pr\end{bmatrix}}$.
 \end{proof}
 %
-{\color{red}
-\begin{enumerate}
-\item Linear projection.
-\end{enumerate}
-}
-
 In the above proposition, we see that that the size of the
 representation of a template complex zonotope which is a Minkowski sum
 of two template complex zonotopes is equal to the sum of the sizes of
@@ -484,13 +478,20 @@ Equation~\ref{eqn:proof-commin2} gives us
 %
 \end{proof}
 %
-Like in the case of simple zonotopes, template complex zonotopes are
-also not closed under mutual intersection.  Moreover, the intersection
-between template complex zonotopes with a common template and center
-need not also be a tempalte complex zonotope in general.  Therefore,
-even for a fixed template and center, there may not exist the smallest template
-complex zonotope over-approximation of a given set. {\color{red} Explain
-with figure}.
+The support of a template complex zonotope along any real vector is computed by a simple affine expression, as follows
+%
+\begin{lemma}[Support of a real vector]~\label{lem:support-tcz}
+{\color{red} TODO}
+\end{lemma}
+%
+Like in the case of simple
+zonotopes, template complex zonotopes are also not closed under mutual
+intersection.  Moreover, the intersection between template complex
+zonotopes with a common template and center need not also be a
+tempalte complex zonotope in general.  Therefore, even for a fixed
+template and center, there may not exist the smallest template complex
+zonotope over-approximation of a given set. {\color{red} Explain with
+figure}.
 
 However, we observe that template complex zonotopes with a common
 non-singular (invertible) template and center are closed under
@@ -1072,11 +1073,3 @@ A^t\initcen+\lt(\sum_{i=0}^{t-1}A^i\rt)\inputcen
 }.
 \end{align}
 
-{\color{red}
-\begin{enumerate}
-\item Expression for bounded time reachable set.
-\item Efficient representation using eigenvectors.
-\item Computation of positive invariant.
-\item Illustrative example.
-\end{enumerate}
-}

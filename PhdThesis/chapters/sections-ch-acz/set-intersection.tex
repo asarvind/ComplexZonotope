@@ -103,7 +103,7 @@ vectors $w,v\in\reals^n$.  Then
 \]
 %
 \end{lemma}
-%
+x%
 \begin{proof}
   %
   \begin{align*}
@@ -263,10 +263,35 @@ Based on Equations~\ref{eqn:proof-support1} and~\ref{eqn:proof-support2}, we
 get the inequality in Equation~\ref{eqn:support-inequality}.
 \end{proof}
 %
-Now we state the main result about intersection of an augmented
-complex zonotope and a suitably aligned sub-parallelotope.
+We consider the maximum difference in projections along any direction
+for any two sets as a measure of difference between the sets.  We use
+this measure to estimate the error in over-approximation error of the
+intersection of an augmented complex zonotope and a
+sub-parallelotope.  We define this measure in terms of support
+functions as,
 %
-\begin{theorem}~\label{thm:acz-ptope-intersection}
+\begin{definition}[A measure of over-approximation]
+For two
+bounded sets, $\Psi_1,\Psi_2\subset\compnums^n$,
+we define the following measure of difference between the two sets;
+\[
+\approxerror{\Psi_1}{\Psi_2}=\max_{w,v\in\reals^n:~\norm{w-v}\leq
+  1}\absolute{\support{w}{v}{\real\lt(\Psi_1\rt)}-\support{w}{v}{\real\lt(\Psi_2\rt)}}
+\]
+%
+\end{definition}
+%
+The following theorem states that gives a valid over-approximation of the
+intersection of an augmented complex zonotope and a sub-parallelotope
+whose template is aligned with the secondary template of the former,
+by another augmented complex zonotope.  Furthermore, it states that
+the over-approximation error is bounded by a value
+which is proportional to the alignment between the primary template
+and the sub-parallelotopic template.  Therefore, the
+over-approximation error is zero when the primary template is
+orthogonal to the sub-parallelotopic template.
+%
+\begin{theorem}[Over-approximation of intersection]~\label{thm:acz-ptope-intersection}
 Let us consider a sub-parallelotope $\ptope{\qtemp}{\plb}{\pub}\subseteq\reals^n$ and an
 augmented complex zonotope
 $\acztope{\ptemp}{\cen}{\sfact}{\pinv{\qtemp}}{\lb}{\ub}\subset\compnums^n$
@@ -276,14 +301,18 @@ such that
 & \exists z\in\compnums^n:~~\ptemp z=\cen~~\text{and}~~\absolute{z}\leq \sfact.~\label{eqn:contain-origin}
 \end{align}
 %
-and $\join{\lb}{\plb}\leq\meet{\ub}{\pub}$.
-Then
+and $\join{\lb}{\plb}\leq\meet{\ub}{\pub}$.  Let us consider that $\qtemp^*$
+is an orthonormal basis of row vectors for the linear span of the row
+vectors of $\qtemp$.  Let
+$\Psi_1=\real\lt(\acztope{\ptemp}{\cen}{\sfact}{\pinv{\qtemp}}{\join{\ub}{\pub}}{\meet{\lb}{\plb}}\rt)$ and
+$\Psi_2=\real\lt(\intersection{\acztope{\ptemp}{\cen}{\sfact}{\pinv{\qtemp}}{\lb}{\ub}}{\ptope{\qtemp}{\plb}{\pub}}\rt)$.
 %
-\begin{align}
-&
-\intersection{\acztope{\ptemp}{\cen}{\sfact}{\pinv{\qtemp}}{\lb}{\ub}}{\ptope{\qtemp}{\plb}{\pub}}\nonumber
- \subseteq\acztope{\ptemp}{\cen}{\sfact}{\pinv{\qtemp}}{\join{\ub}{\pub}}{\meet{\lb}{\plb}}.~\label{eqn:thm:acz-ptope-intersection}
-\end{align}
+\begin{enumerate}
+\item Valid over-approximation: $\Psi_2\subseteq\Psi_1$.
+\item Error in over-approximation of real
+  projection: \[\approxerror{\real\lt(\Psi_1\rt)}{\real\lt(\Psi_2\rt)}\leq
+  \sqnorm{\qtemp^*\ptemp\sfact}+\sqnorm{\qtemp^*\cen}.\]
+\end{enumerate}
 %
 \end{theorem}
 %
@@ -316,58 +345,111 @@ w
 %
 So, $w\in\ptope{\qtemp}{\plb}{\pub}=S_2$.  Also, we previously showed
 that $w\in\ptope{\qtemp}{\plb}{\pub}=S_2$.  Therefore, $w\in
-\intersection{S_1}{S_2}$ and as previously shown, $0\in S_1$.  Then by
-using Lemma~\ref{lem:gen-int} and the facts that
-$\acztope{\ptemp}{\cen}{\sfact}{\pinv{\qtemp}}{\lb}{\ub}=\minsum{S_1}{S_2}$,
-we get
+\intersection{S_1}{S_2}$ and as previously shown, $0\in S_1$.
+\begin{enumerate}
+\item {\it Valid over-approximation}:
 %
 \begin{align*}
-  & \intersection{\acztope{\ptemp}{\cen}{\sfact}{\pinv{\qtemp}}{\lb}{\ub}}{\ptope{\qtemp}{\plb}{\pub}}\\
-&
-  \intersection{\lt(\minsum{S_1}{S_2}\rt)}{S_3}\subseteq\minsum{S_1}{\lt(\intersection{S_2}{S_3}\rt)}\\
-  & =
+  & \intersection{\acztope{\ptemp}{\cen}{\sfact}{\pinv{\qtemp}}{\lb}{\ub}}{\ptope{\qtemp}{\plb}{\pub}}=
+  \intersection{\lt(\minsum{S_1}{S_2}\rt)}{S_3}\\
+  &\%\%~~ \text{by Lemma~\ref{lem:gen-int}}\\
+  & \subseteq\minsum{S_1}{\lt(\intersection{S_2}{S_3}\rt)}=
   \minsum{S_1}{\lt(\intersection{\iztope{\pinv{\qtemp}}{\lb}{\ub}}{\ptope{\qtemp}{\plb}{\pub}}\rt)}\\
   & \%\%~~\text{by Lemma~\ref{lem:motivation}}\\
   &
   = \minsum{S_1}{\iztope{\pinv{\qtemp}}{\join{\lb}{\plb}}{\meet{\ub}{\pub}}}\\
   & =
   \minsum{\tcztope{\ptemp}{\cen}{\sfact}}{\iztope{\pinv{\qtemp}}{\join{\lb}{\plb}}{\meet{\ub}{\pub}}}\\
-  & = \acztope{\ptemp}{\cen}{\sfact}{\pinv{\qtemp}}{\join{\ub}{\pub}}{\meet{\lb}{\plb}}.~~~~~~~~~~\qedhere
+  & = \acztope{\ptemp}{\cen}{\sfact}{\pinv{\qtemp}}{\join{\lb}{\plb}}{\meet{\ub}{\pub}}.
 \end{align*}
+\item {\it Error in over-approximation}: For any $w,v\in\reals^n$, let
+  us denote
+  %
+  \begin{align*}
+    & h(w,v)\\ & =\support{w}{v}{\real\lt(S_1\rt)\oplus\lt(S_2\bigcap
+  S_3\rt)}-\support{w}{v}{\lt(\real\lt(S_1\rt)\oplus S_2\rt)\bigcap
+      S_3}.
+  \end{align*}
+  %
+  Then,
+  %
+  \begin{align*}
+&
+    \approxerror{\Psi_1}{\Psi_2}=\approxerror{\minsum{\real\lt(S_1\rt)}{\lt(\intersection{S_2}{S_3}\rt)}}{\intersection{\lt(\minsum{\real\lt(S_1\rt)}{S_2}\rt)}{S_3}}\\
+    & = \max_{w,v\in\reals^n:~\sqnorm{w-v}\leq 1}\lt(\support{w}{v}{\real\lt(S_1\rt)\oplus\lt(S_2\bigcap
+      S_3\rt)}\rt.\\
+    & \lt.\hspace{9em}-\support{w}{v}{\lt(\real\lt(S_1\rt)\oplus S_2\rt)\bigcap
+      S_3}\rt)\\
+    & = \max_{w,v\in\reals^n:~\sqnorm{w-v}\leq 1}h(w,v).
+  \end{align*}
+  %
+  Let us consider a vector 
+  $v\in\reals^n$, such that $\sqnorm{v-w}\leq 1$.  
+  By the rank-nullity theorem,
+  the vector $w-v$ can be written as
+  %
+  \[
+w-z=(\qtemp^*)^Te+u;
+  \]
+  %
+  such that $\qtemp^* u=0$.  Since $\orthnorm{\qtemp}$ is an
+  orthornormal basis, so $\sqnorm{w-v}=\sqnorm{e}+\sqnorm{u}\leq 1$.
+  We analyze the following two cases:
+
+  {\it Case 1}:  Let us consider the case where $u=0$.
+  \begin{align*}
+& h(w,z) = \\
+    & \%\%~~\text{by Lemma~\ref{lem:gen-int}},\\
+    &\leq \absolute{\support{w}{v}{\real\lt(S_1\rt)}}\\
+    & \%\%~~\text{by Lemma~\ref{lem:support-tcz} and the fact that}~u=0,\\
+    & = \absolute{\lt(\absolute{e^T\qtemp^*\ptemp\sfact}+e^T\qtemp^*\cen\rt)}\\
+    & \%\%~\text{since}~\sqnorm{e}\leq 1\\
+    & \leq \sqnorm{\qtemp^*\ptemp\sfact}+\sqnorm{\qtemp^*\cen}.
+  \end{align*}
+  %
+      {\it Case 2}: Let us consider the case where $u\neq 0$.  Let us
+  consider a point $y\in\ptope{\qtemp}{\plb}{\pub}$.
+  %
+  \begin{align*}
+    & \forall\lambda\in\reals,\nonumber\\
+    & \qtemp(y+\lambda u)=\qtemp y +\lambda\qtemp u=\qtemp y.\nonumber\\
+    & \%\%~\text{since}~y\in\ptope{\qtemp}{\plb}{\pub}\nonumber\\
+    & \implies~\plb\leq\qtemp(y+\lambda u)=\qtemp y\leq \pub\nonumber\\
+    & \implies y+\lambda u\in\ptope{\qtemp}{\plb}{\pub}.\\
+  \end{align*}
+  %
+  So we get,
+  \begin{align*}
+    & \support{w}{v}{S_3}=\max_{x\in\ptope{\qtemp}{\plb}{\pub}}\lt(e^T\qtemp^*+u^T\rt)x\\
+    & \%\%~\text{since}~\forall\lambda\in\reals:~y+\lambda u\in\ptope{\qtemp}{\plb}{\pub}\\
+    & \geq \max_{\lambda\in\reals}\lt(e^T\qtemp^*+u^T\rt)\lt(y+\lambda u\rt)\\
+    & \geq \lt(e^T\qtemp^*+u^T\rt)y+\max_{\lambda\in\reals}\lambda e^T\qtemp^*u+\lambda\sqnorm{u}\\
+    & \%\%~\text{since}~\qtemp^* u=0\\
+    & \geq \lt(e^T\qtemp^*+u^T\rt)y+\max_{\lambda\in\reals}\lambda\sqnorm{u}\\
+    & = \infty.
+  \end{align*}
+  %
+  Since $S_1$ and $S_2$ are bounded sets, we get
+  %
+  \begin{equation}~\label{eqn:approx-error1}
+    \support{0}{v}{\real\lt(S_1\rt)}+\support{w}{v}{S_2}<\infty=\support{w}{v}{S_3}.
+  \end{equation}
+  %
+  Then by Lemma~\ref{lem:gen-int} and
+  Equation~\ref{eqn:approx-error1}, we get $h(w,z)=0$.
+
+  By the results in both the above cases, we conclude that
+  %
+  \begin{align*}
+& \forall w,v\in\reals^n:~\sqnorm{v-w}\leq 1:~~h(w,z)\leq
+    \sqnorm{\qtemp^*\ptemp\sfact}+\sqnorm{\qtemp^*\cen}.\\
+& \implies \approxerror{\Psi_1}{\Psi_2}=\max_{w,v\in\reals^n:~\sqnorm{v-w}\leq
+      1:~~h(w,z)}h(w,z)\\
+&  \leq \sqnorm{\qtemp^*\ptemp\sfact}+\sqnorm{\qtemp^*\cen}.~~~~~~~~~~~\qedhere
+  \end{align*}
+  %
+\end{enumerate}
 %
 \end{proof}
 %
-The error in over-approximation of the intersection in the above
-theorem is positively correlated to the orientation between the
-vectors in the half-space representation of the sub-parallelotope and
-the column vectors of the primary template of the augmented complex
-zonotope.  This is described in the following theorem.
-%
-\begin{theorem}[Error in over-approximating intersection].
-Let us consider the following measure of difference between two
-bounded sets, $\Psi_1,\Psi_2\subset\compnums^n$ such that
-$0\in\intersection{\Psi_1}{\Psi_2}$.
-%
-\[
-\approxerror{\Psi_1}{\Psi_2}=\max_{v\in\reals^n:~\norm{v}\leq 1}\absolute{\support{0}{v}{\real\lt(\Psi_1\rt)}-\support{0}{v}{\real\lt(\Psi_2\rt)}}
-\]
-%
-Let us consider a sub-parallelotope $\ptope{\qtemp}{\plb}{\pub}$ and
-an augmented complex zonotope
-$\acztope{\ptemp}{\cen}{\sfact}{\pinv{\qtemp}}{\lb}{\ub}$ such that
-$0\in\tcztope{\ptemp}{\cen}{\sfact}$.  Let us consider that $\qtemp^*$
-is an orthonormal basis of row vectors in the linear span of the row
-vectors of $\qtemp$.  Then
-%
-\begin{align}
-& \approxerror{\acztope{\ptemp}{\cen}{\sfact}{\pinv{\qtemp}}{\join{\plb}{\lb}}{\meet{\pub}{\ub}}}
-  {\intersection{\acztope{\ptemp}{\cen}{\sfact}{\pinv{\qtemp}}{\lb}{\ub}}{\ptope{\qtemp}{\plb}{\pub}}}
-  \nonumber \\
-& \leq \qtemp^*\ptemp\diagonal{\sfact}.
-\end{align}
-%
-\end{theorem}
-%
-\begin{proof}
-{\color{red}{TODO}}.
-\end{proof}
+

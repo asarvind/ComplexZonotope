@@ -23,7 +23,17 @@ A\acztope{\ptemp}{\cen}{\sfact}{\stemp}{\lb}{\ub}=\acztope{A\ptemp}{A\cen}{\sfac
 \end{lemma}
 %
 \begin{proof}
-{\color{red} TODO}.
+  We get,
+  %
+  \begin{align*}
+    & A\acztope{\ptemp}{\cen}{\sfact}{\stemp}{\lb}{\ub}=
+    A\lt(\minsum{\tcztope{\ptemp}{\cen}{\sfact}}{\iztope{\stemp}{\lb}{\ub}}\rt)\\
+    & \%\%~\text{by Lemmas~\ref{lem:lin-transform} and~\ref{lem:iz-lin-transform}}\\
+    &
+    = \minsum{\tcztope{A\ptemp}{A\cen}{\sfact}}{\iztope{A\stemp}{\lb}{\ub}}\\
+    & = \acztope{A\ptemp}{A\cen}{\sfact}{A\stemp}{\lb}{\ub}.~~~~~~~~~~~~~\qedhere
+  \end{align*}
+  %
 \end{proof}
 %
 \begin{lemma}[Minkowski sum]
@@ -69,8 +79,59 @@ Then
 %
 \end{lemma}
 %
+\begin{proof}
+  We get,
+  %
+  \begin{align*}
+& \minsum{\acztope{\ptemp}{\cen}{\sfact}{\stemp}{\lb}{\ub}}
+    {\acztope{\ptemp^\pr}{\cen^\pr}{\sfact^\pr}{\stemp^\pr}{\lb^\pr}{\ub^\pr}}\\
+& =
+    \minsum{\tcztope{\ptemp}{\cen}{\sfact}}{\iztope{\stemp}{\lb}{\ub}}
+    \oplus\minsum{\tcztope{\ptemp^\pr}{\cen^\pr}{\sfact^\pr}}{\iztope{\stemp^\pr}{\lb^\pr}{\ub^\pr}}\\
+&
+    =\lt(\minsum{\tcztope{\ptemp}{\cen}{\sfact}}{\tcztope{\ptemp^\pr}{\cen^\pr}{\sfact^\pr}}\rt)
+    \oplus\lt(\minsum{\iztope{\stemp}{\lb}{\ub}}{\iztope{\stemp^\pr}{\lb^\pr}{\ub^\pr}}\rt)\\
+    & \%\%~\text{by Lemmas~\ref{lem:min-sum} and~\ref{lem:iz-min-sum}}\\
+& = \minsum{\tcztope{\begin{bmatrix}\ptemp &
+          \ptemp^\pr\end{bmatrix}}{\cen+\cen^\pr}{\begin{bmatrix}\sfact\\\sfact^\pr\end{bmatrix}}}
+             {\iztope{\mymatrix{\stemp &
+                   \stemp^\pr}}{\mymatrix{\lb\\\lb^\pr}}{\mymatrix{\ub\\\ub^\pr}}}\\
+& =  \acztope
+{\lt[\begin{matrix}
+    \ptemp &
+    \ptemp^\pr
+  \end{matrix}\rt]
+}
+{\begin{matrix}
+    \cen+\cen^\pr
+  \end{matrix}
+}
+{\lt[\begin{matrix}
+    \sfact\\
+    \sfact^\pr
+  \end{matrix}\rt]
+}
+{\lt[\begin{matrix}
+    \stemp &
+    \stemp^\pr
+  \end{matrix}\rt]
+}
+{\lt[\begin{matrix}
+    \lb\\
+    \lb^\pr
+  \end{matrix}\rt]
+}
+{\lt[\begin{matrix}
+    \ub\\
+    \ub^\pr
+  \end{matrix}\rt]
+}.~~~~~~~~~~~~~~~~~~~\qedhere            
+    \end{align*}
+%
+\end{proof}
+%
 To problem of checking inclusion between two augmented complex
-zonotopes can be equivalently expressed as the problem of checking
+zonotopes can be expressed as the problem of checking
 inclusion between two geometrically equivalent template complex
 zonotopes.  For this, we propose the following conversion between the
 real projection of an augmented complex zonotope and a template
@@ -103,16 +164,14 @@ following equivalence to the real projection of a template complex zonotope.
 %
 \end{lemma}
 %
-So, to check inclusion between real projections of two augmented
-complex zonotopes, we can equivalently check inclusion between the
-real projections of corresponding template complex zonotopes.  In the
-Definition~\ref{defn:inclusion-tcz} of the previous chapter, we had
-proposed a relation $''\order''$, stated as a set of second order
-conic program, for checking inclusion between two template complex
-zonotopes.  Then based on the aforementioned equivalence between
-augmented complex zonotopes and template complex zonotope, we extend
-the inclusion checking relation to augmented complex zonotopes as
-follows.
+ In the Definition~\ref{defn:inclusion-tcz} of the previous chapter,
+ we had proposed a partial order $''\order''$ as a sufficient
+ condition for the inclusion between two
+ template complex zonotopes, which could be checked by second order
+ conic programming.  Then based on the aforementioned
+ equivalence between an augmented complex zonotope and a template complex
+ zonotope, we extend the inclusion-checking relation to augmented
+ complex zonotopes as follows.
 %
 \begin{definition}[Relation between augmented complex zonotopes]
 Given two augmented complex zonotopes $\acztope{\ptemp}{\cen}{\sfact}{\stemp}{\lb}{\ub},
@@ -127,7 +186,7 @@ we say that
 if and only if
 %
 \[
-\real\lt(\tcztope
+\tcztope
   {\lt[\begin{matrix}
       \ptemp^\pr &
       \stemp^\pr
@@ -141,10 +200,9 @@ if and only if
       \sfact^\pr\\
       \frac{\ub^\pr-\lb^\pr}{2}
     \end{matrix}\rt]
-  }
-  \rt)
+  }  
   \order
-  \real\lt(\tcztope
+  \tcztope
   {\lt[\begin{matrix}
       \ptemp &
       \stemp
@@ -158,17 +216,21 @@ if and only if
       \sfact\\
       \frac{\ub-\lb}{2}
     \end{matrix}\rt]
-  }
-  \rt).
+  }.
 \]
 %
 \end{definition}
 %
-\begin{theorem}[Inclusion checking]~\label{thm:acz-inclusion}
+\begin{proof}
+{\color{red} TODO}.
+\end{proof}
+%
+\begin{theorem}[Inclusion-checking and partial order]~\label{thm:acz-inclusion}
 Let us consider two augmented complex zonotopes $\acztope{\ptemp}{\cen}{\sfact}{\stemp}{\lb}{\ub},
 \acztope{\ptemp^\pr}{\cen^\pr}{\sfact^\pr}{\stemp^\pr}{\lb^\pr}{\ub^\pr}\subset\compnums^n$.
-Then the following inclusion
-of the real projections is true
+Then the both the following statements are true:
+\begin{enumerate}
+  \item Sufficient condition for inclusion:
 %
 \[
 \real\lt(\acztope{\ptemp^\pr}{\cen^\pr}{\sfact^\pr}{\stemp^\pr}{\lb^\pr}{\ub^\pr}\rt)\subseteq\real\lt(\acztope{\ptemp}{\cen}{\sfact}{\stemp}{\lb}{\ub}\rt)
@@ -179,6 +241,10 @@ if the following relation is true
 \[
 \acztope{\ptemp^\pr}{\cen^\pr}{\sfact^\pr}{\stemp^\pr}{\lb^\pr}{\ub^\pr}\order\acztope{\ptemp}{\cen}{\sfact}{\stemp}{\lb}{\ub}.
 \]
+%
+\item The relation ``$\order$'' is a partial order on the set of
+  augmented complex zonotopes.
+\end{enumerate}
 %
 \end{theorem}
 %
@@ -229,7 +295,7 @@ $v\in\compnums^n$.  Then
 \end{lemma}
 %
 \begin{proof}
-{\color{red} todo}.
+{\color{red} }.
 \end{proof}
 %
 

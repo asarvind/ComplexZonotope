@@ -95,13 +95,13 @@ $\lt[\begin{matrix} 1 & 1 & 0 \end{matrix}\rt]$.
 Sub-parallelotopes have a similarity to interval zonotopes, in the
 sense that we can express a sub-parallelotope as a linear combination
 of real vectors with relevant interval bounds on the combining
-coefficients.  This is stated in the following proposition.  Recall
+coefficients.  This is stated in the following lemma.  Recall
 our notation that
 $\pinv{\qtemp}=\transpose{\qtemp}\inv{\lt(\qtemp\transpose{\qtemp}\rt)}$,
 which exists for a sub-parallelotopic template $\qtemp$ because
 $\lt(\qtemp\transpose{\qtemp}\rt)$ is required to be invertible.
 %
-\begin{proposition}
+\begin{lemma}~\label{lem:ptope-iz-conversion}
   Consider a sub-parallelotope
   $\ptope{\qtemp}{\plb}{\pub}$ where $\qtemp\in\mat{k}{n}{\reals}$.
   Then,
@@ -113,7 +113,7 @@ $\lt(\qtemp\transpose{\qtemp}\rt)$ is required to be invertible.
   }.
   \]
 %
-\end{proposition}
+\end{lemma}
 %
 \begin{proof}
 Let $\zeta\in\reals^k$ and $x^*=\pinv{\qtemp}\zeta$.  Then
@@ -373,7 +373,7 @@ Minkowski sum operations.  The parameters of the resultant interval
 zonotopes are an affine transformation of the original parameters.
 This is described in the following lemmas.
 %
-\begin{lemma}[Linear transformation]
+\begin{lemma}[Linear transformation]~\label{lem:iz-lin-transform}
 Let us consider an interval zonotope $\iztope{\stemp}{\lb}{\ub}$ and a
 matrix $A\in\mat{n}{n}{\reals^n}$.  Then,
 %
@@ -398,7 +398,7 @@ Based on Lemma~\ref{lem:iz-rz-conversion}, we get
 %
 \end{proof}
 %
-\begin{lemma}[Minkowski sum]
+\begin{lemma}[Minkowski sum]~\label{lem:iz-min-sum}
   Let us consider two interval zonotopes\\
   $\iztope{\stemp}{\lb}{\ub},~\iztope{\stemp^\pr}{\lb^\pr}{\ub^\pr}\subset\compnums^n$.
   Then 
