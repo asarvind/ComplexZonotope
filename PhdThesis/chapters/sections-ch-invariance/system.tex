@@ -1,0 +1,110 @@
+In a discrete time affine hybrid system, the state of the system is
+specified by a discrete valued variable, called location, and a
+continuous variable whose valuation is in the real Euclidean space of
+a finite dimenstion.  The state of the system in each location has to
+stay within a polyhedral set, called the staying condition.  The state
+of the system can change by two kinds of transitions, {\it continuous
+  transition} and {\it discrete transiton}.  In a continuous
+transition, the discrete state of the system remains constant while
+the continuous state changes by an affine transformation.  The affine
+transformation has possible additive disturbance input, which is
+bounded.  The parameters of the affine transformation of a continuous
+transition depend on the location in which the transition takes place.
+In a discrete transition, there is a change in the discrete variable
+accompanied by an affine transformation of the continuous variable.
+The transition is has precondition specified by a linear constraint,
+called a guard, while the post-condition is the staying condition in
+the location reached after transition.  A set of edges specifies
+the possible discrete transitions, vis a vis, the locations between
+which a discrete transition takes place, the parameters of the affine
+transformation and the guard.   
+
+{\it Sub-parallelotopic guards and staying conditions}: In this paper,
+we consider hybrid systems where the guards and staying conditions can
+be specified by a sub-parallelotope with a common template.  We note
+that the class of sub-parallelotopic constraints are quite general and
+can be used in the specification of many practical affine hybrid
+systems.  
+
+{\bf Model.}  We specify the discrete time affine hybrid system
+by a tuple 
+ %
+\[
+\system = \lt(\locations,\qtemp,\stay,\linmap,\inputset,\edgeset,\Psi\rt).
+\]
+%
+The finite set of locations is $\locations$.  The sub-parallelotopic
+template for specifying the guards and staying conditions is
+$\qtemp\in\mat{k}{n}{\reals}$.  The staying set in a location
+$\loc\in\locations$ is a sub-parallelotope
+$\ptope{\qtemp}{\lsys{\stay_\loc}}{\usys{\stay_\loc}}$, whose pair of
+lower and upper interval bounds is
+$\stay_\loc=\lt(\lsys{\stay_\loc},\usys{\stay_\loc}\rt)$ .  The
+parameters affine transformation in a location $\loc\in\locations$
+consist of a linear transformation, specified by a matrix
+$\linmap_\loc\in\mat{n}{n}{\reals}$, and a bounded additive
+disturbance input set $\inputset_\loc\subset\reals^n$.  The set of
+edges is $E$.  An edge $\edge\in\edgeset$ is specified by a tuple
+%
+\[
+\edge=\lt(\edge_1,\edge_2,\usys{\edge},\lsys{\edge},\linmap_\edge,\inputset_\edge\rt).
+\]
+%
+The before and after locations of a discrete transition along an edge
+$\edge$ are $\edge_1,\edge_2$.  The guard on the transition along the
+edge $\edge$ is the sub-parallelotope
+$\ptope{\qtemp}{\lsys{\edge}}{\usys{\edge}}$, whose pair of
+lower and upper interval bounds is
+$\lt({\lsys{\edge}},{\usys{\edge}}\rt)$.
+The parameters of the affine transformation for the discrete
+transition along the edge $\edge$ consists of a linear map specified
+by the matrix $\linmap_\edge\in\mat{n}{n}{\reals}$ and a bounded
+additive disturbance input set $\inputset_\edge\subset\reals^n$.  The
+set of initial states of the system is $\Psi\subseteq\locations\times\reals^n$.
+
+{\bf Dynamics.}  A state of the hybrid system is a pair $(x,\loc)$,
+where $x\in\reals^n$, called the {\it continuous state}, and
+$\loc\in\locations$, called the {\it discrete state}.  A {\it
+  trajectory} specifies the evolution of the state of the system as a
+function of discrete time instants.  A trajectory is a function
+$\maphtrj:\integers_{\geq 0}\ra\reals^n\times\locations$, such that
+$\forall t\in\integers_{\geq 0}$, one of the following conditions is
+true.
+%
+\begin{enumerate}
+\item todo
+\item todo
+\end{enumerate}
+%
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+{\color{red} TODO.}

@@ -42,6 +42,7 @@
 \newcommand{\imp}{\implies}
 \newcommand{\realset}{\reals}
 \newcommand{\diag}{\diagonal}
+\newcommand{\tbf}{\textbf}
 
 
 %%% operations
@@ -176,14 +177,42 @@
 
 
 %%% System specifications
+% system notation
+\newcommand{\system}{\mathbb{H}}
+% locations
+\newcommand{\locations}{Q}
+% location dynamics map
+\newcommand{\locmap}{\Gamma}
+% staying bounds
+\newcommand{\stay}{\gamma}
+% linear map
+\newcommand{\linmap}{\mathcal{A}}
+% Set of edges
+\newcommand{\edgeset}{E}
 % trajectory
 \newcommand{\trj}[2]{{\bf #1}\lt(#2\rt)}
-%
+% continuous trajectory
+\newcommand{\ctrj}[1]{\trj{x}{#1}}
+% discrete trajectory
+\newcommand{\dtrj}[1]{\trj{q}{#1}}
+% hybrid trajectory
+\newcommand{\htrj}[1]{\lt(\ctrj{#1},\dtrj{#1}\rt)}
+% hybrid trajectory map
+\newcommand{\maphtrj}{\lt(\tbf{x},\tbf{\loc}\rt)}
+% input trajectory
 \newcommand{\inptrj}[1]{{\bf u}\lt(#1\rt)}
 % input set
-\newcommand{\inputset}{\mathcal{U}}
+\newcommand{\inputset}{U}
 % initial set
 \newcommand{\init}{\Psi_0}
+% location
+\newcommand{\loc}{q}
+% edge
+\newcommand{\edge}{\sigma}
+% upper bound
+\newcommand{\usys}[1]{#1^+}
+% lower bound
+\newcommand{\lsys}[1]{#1^-}
 % initial template 
 \newcommand{\inittemp}{\ptemp^{\operatorname{init}}}
 % initial center

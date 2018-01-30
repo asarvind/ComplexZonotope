@@ -1,0 +1,51 @@
+
+An invariant property of a system is a property that is true about the
+state of the sytem at all time instants.  In many cases, a
+safety condition can be expressed as an invariance property.  For
+example, if a set of states of a system are considered safe, then the
+safety condition is the invariance property that the state of the
+system at all time instants should belong to the safe set.  We
+consider the problem of verifying {\it linear invariance} property of
+discrete time affine hybrid systems.  A linear invariance property is
+a linear constraint (inequality) that will be true for the
+state of the system at every time instant.   To prove a linear
+invariance property, it suffices to compute a positive invariant
+containing the initial state and contained within the intersection of
+sub-level set of linear inequalities.  Our approach is to compute an
+augmented complex zonotope, which is a positive invariant and
+satisfies the given linear constraints.  We derive a second order
+conic program to compute the required augmented complex zonotope
+positive invariant.
+
+This chapter is organized as follows.  In the following section, we
+discuss some of the related work on the problem of computing positive
+invariants for affine hybrid systems.  We discuss the advantage of the
+complex zonotope set representation in comparison to the other
+approaches, which was discussed in more detail in the introductory
+chapter.  In Section~\ref{sec:hybrid-system}, we define a discrete time affine
+hybrid system.  In Section~\ref{sec:linear-invariance}, we define a linear invariance
+property, positive invariant and show how we can verify linear
+invariance by finding a positive invariant.  In Section~\ref{sec:verification-invariance}, we
+discuss our procedure for verification of linear invariance based on
+computing an augmented complex zonotope positive invariant.  We derive
+a set of convex constraints, which are collectively equivalently to
+second order conic constraint, compute the desired augmented complex
+zonotope.  We also explain how to choose the template of the augmented
+complex template, which is fixed apriori, while other parameters are
+found by convex optimization.  In Sections~\ref{todo},~\ref{todo},
+and~\ref{todo}, we discuss our experiments on three benchmark examples
+that demonstrate the efficiency of our approach.
+
+\section{Related Work}~\label{sec:invariance-related-work}
+\input{chapters/sections-ch-invariance/related-work.tex}  
+
+\section{Discrete time affine hybrid system}~\label{sec:hybrid-system}
+\input{chapters/sections-ch-invariance/system.tex}x
+
+\section{Linear invariance property}~\label{sec:linear-invariance}
+\input{chapters/sections-ch-invariance/property.tex}
+
+\section{Verification using complex zonotope}~\label{sec:verification-invariance}
+\input{chapters/sections-ch-invariance/verification.tex}
+
+\section{TODO}
