@@ -30,7 +30,7 @@ systems.
 by a tuple 
  %
 \[
-\system = \lt(\locations,\qtemp,\stay,\linmap,\inputset,\edgeset,\Psi\rt).
+\system = \lt(\locations,\qtemp,\stay,\linmap,\inputset,\edgeset\rt).
 \]
 %
 The finite set of locations is $\locations$.  The sub-parallelotopic
@@ -51,7 +51,7 @@ edges is $E$.  An edge $\edge\in\edgeset$ is specified by a tuple
 \]
 %
 The before and after locations of a discrete transition along an edge
-$\edge$ are $\edge_1,\edge_2$.  The guard on the transition along the
+$\edge$ are $\edge_1,\edge_2\in\locations$.  The guard on the transition along the
 edge $\edge$ is the sub-parallelotope
 $\ptope{\qtemp}{\lsys{\edge}}{\usys{\edge}}$, whose pair of
 lower and upper interval bounds is
@@ -62,19 +62,171 @@ by the matrix $\linmap_\edge\in\mat{n}{n}{\reals}$ and a bounded
 additive disturbance input set $\inputset_\edge\subset\reals^n$.  The
 set of initial states of the system is $\Psi\subseteq\locations\times\reals^n$.
 
-{\bf Dynamics.}  A state of the hybrid system is a pair $(x,\loc)$,
+{\bf Dynamics.}  A state of the hybrid system, called a \emph{hybrid
+  state}, is a pair $(x,\loc)$,
 where $x\in\reals^n$, called the {\it continuous state}, and
 $\loc\in\locations$, called the {\it discrete state}.  A {\it
   trajectory} specifies the evolution of the state of the system as a
-function of discrete time instants.  A trajectory is a function
-$\maphtrj:\integers_{\geq 0}\ra\reals^n\times\locations$, such that
-$\forall t\in\integers_{\geq 0}$, one of the following conditions is
-true.
+function of discrete time instants.  
+
+A trajectory is a function $\maphtrj:\integers_{\geq
+  0}\ra\reals^n\times\locations$, such that $\forall
+t\in\integers_{\geq 0}$, one of the following conditions is true.
 %
 \begin{enumerate}
-\item todo
-\item todo
+\item Continuous transition:
+%
+\begin{align}
+& \exists u\in\inputset_{\dtrj{t}}~\text{such that all of the following are collectively true.}\nonumber\\
+& \ctrj{t+1}=\linmap_{\dtrj{t}}+u,~~~\text{(affine map with uncertain input)}\nonumber\\
+& \dtrj{t+1}=\dtrj{t}~~~\text{(location does not change)}\nonumber\\
+& \ctrj{t},\ctrj{t+1}\in\ptope{\qtemp}{\lsys{\stay_{\dtrj{t}}}}{\usys{\stay_{\dtrj{t}}}}~~\text{(staying condition)}~~\label{eqn:cont-transition}
+\end{align}
+\item Discrete transition:
+\begin{align}
+& \exists \edge\in\edgeset~\text{and}~u\in\inputset_{\edge}~\text{all the following are collectively true.}\nonumber\\
+& \dtrj{t}=\edge_1,~~\dtrj{t+1}=\edge_2~~~\text{(possible change in location)}\nonumber\\
+& \%\%~~\text{satisfaction of guard and staying condition before transition:}\nonumber\\
+& \ctrj{t}\in\ptope{\qtemp}{\join{\lsys{\edge}}{\lsys{\stay_{\dtrj{t}}}}}{\meet{\usys{\edge}}{\usys{\stay_{\dtrj{t}}}}}\nonumber\\
+& \%\%~~\text{satisfaction of staying condition after transition:}\nonumber\\
+& \ctrj{t+1}\in\ptope{\qtemp}{\lsys{\stay_{\dtrj{t+1}}}}{\usys{\stay_{\dtrj{t}}}}~~\label{eqn:dis-transition}
+\end{align}
 \end{enumerate}
+%
+In the definition, we use the following notation for the set of
+continuous states corresponding to a set of hybrid states $\Psi$ for a
+fixed location $\loc$.  
+%
+\[
+\Psi_\loc=\set{x\in\reals^n:~(x,\loc)\in\Psi}.
+\]
+%
+We denote the set of all possible trajectories of the system as
+$\trajectoryset$.  We denote the set of next reachable states by every
+possible transition from a set of states $\Psi$ as $\nextset{\Psi}$,
+which is mathematically defined as follows.
+%
+\begin{definition}[Next set of reachable states]
+  Let us consider a subset of states
+  $\Psi\subset\reals^n\times\locations$.  The next set of reachable
+  states of $\Psi$ is
+%
+\[
+\nextset{\Psi}=\set{\htrj{t}:~\htrj{0}\in\Psi,~\maphtrj\in\trajectoryset}\subseteq.
+\]
+%
+\end{definition}
+%
+So, we define the set of reachable states at a time $t$ starting from an intial
+set of states $\Psi$, denoted $\reachset{t}{\Psi}$, as
+follows.
+%
+\begin{definition}[Reachable states at a time point]
+Let us consider a subset of states
+$\Psi\subseteq\reals^n\times\locations$.  For all $t\in\integers_{\geq
+0}$, we define $\reachset{t}{\Psi}$ inductively as follows.
+%
+\begin{enumerate}
+\item $\reachset{0}{\Psi}=\Psi$.
+\item If $t\geq 1$, $\reachset{t}{\Psi}=\nextset{\reachset{t-1}{\Psi}}$.
+\end{enumerate}
+%
+\end{definition}
+%
+Based on Equation~\ref{eqn:cont-transition}, the continuous projection
+of the set of reachable states of a system from a set of
+states $\Psi$, after a continuous transition in a location $\loc$,
+denoted $\contreach{\loc}{\Psi}$, can be represented as follows.
+%
+\begin{align*}
+&
+\contreach{\loc}{\Psi}=\linmap_\loc\lt(\Psi_q\bigcap{\ptope{\qtemp}{\lsys{\stay_\loc}}{\usys{\stay_\loc}}}\rt)\bigcap
+\ptope{\qtemp}{\lsys{\stay_\loc}}{\usys{\stay_\loc}}\\
+\end{align*}
+%
+Similarly, based on Equation~\ref{eqn:dis-transition}, the continuous
+projection of the set of reachable states of a system from a set of
+states $\Psi$, after a discrete transition along an edge $\edge$,
+denoted $\contreach{\edge}{\Psi}$, can be represented as follows.
+%
+\begin{align*}
+&
+\contreach{\edge}{\Psi}=\linmap_\edge\lt(\Psi_{\edge_1}\bigcap\ptope{\qtemp}{\join{\lsys{\edge}}{\lsys{\stay_{\dtrj{t}}}}}{\meet{\usys{\edge}}{\usys{\stay_{\dtrj{t}}}}}\rt)\bigcap 
+\ptope{\qtemp}{\lsys{\stay_{\edge_2}}}{\usys{\stay_{\edge_2}}}
+\end{align*}
+%
+Therefore, we can represented the set of reachable states of the
+system in one time step from a set of states $\Psi$ as follows.
+%
+\begin{align*}
+& \nextset{\Psi}=\bigcup_{\loc\in\locations}\pair{\contreach{\loc}{\Psi}}{\loc}\bigcup_{\edge\in\edgeset}\pair{\contreach{\edge}{\Psi}}{\edge_2}.
+\end{align*}
+%
+If a set of states of the system are such that its next set of states
+is contained within itself, then it is called a {\it positive invariant}.
+%
+\begin{definition}[Positive invariant]
+A subset of states $\Omega\subseteq\reals^n\times\locations$ is a
+positive invariant iff $\nextset{\Omega}\subseteq\Omega$.
+\end{definition}
+%
+The reachable set of states for all time instants can be
+over-approximated by computing a positive invariant which contains the
+initial set.  This is described in the following lemma.
+%
+\begin{lemma}[Positive invariant based over-approximation of reachable
+  states]
+Let us consider a positive invariant $\Omega$ such that
+$\Psi\subseteq\Omega$.  Then 
+%
+\[
+\forall t\in\integers_{\geq 0}~\reachset{t}{\Psi}\subseteq\Omega
+\]
+%
+\end{lemma}
+%
+\begin{proof}
+We prove the result by induction.  We have
+$\reachset{0}{t}=\Psi\subseteq\Omega$ as given, which means that the
+result holds for $t=0$.  Assume that for a $t\geq 0$,
+$\reachset{t}{\Psi}\subseteq\Omega$.  Then 
+%
+\begin{align*}
+&
+\reachset{t+1}{\Psi}=\nextset{\reachset{t}{\Psi}}\subseteq\nextset{\Omega}\\
+& \%\%~~\text{by the definition of positive invariant}\\
+& \subseteq \Omega.
+\end{align*}
+%
+The lemma can therefore be proved follows by the principle of induction.
+\end{proof}
+%
+The union of all reachable state of the system at all discrete time
+instants is itself a positive invariant.  This is described in the
+following lemma.
+%
+\begin{lemma}~\label{lem:exact-pi}
+Let us consider a subset of states
+$\Psi\subseteq\reals^n\times\locations$ and
+%
+\[
+\Omega=\bigcup_{t=0}^\infty\reachset{t}{\Psi}.
+\]
+%
+Then $\Omega$ is a positive invariant.
+\end{lemma}
+%
+\begin{proof}
+We have 
+%
+\begin{align*}
+& \nextset{\Omega}=\nextset{\bigcup_{t=0}^\infty\reachset{t}{\Psi}} = \bigcup_{t=0}^\infty\nextset{\reachset{t}{\Psi}}\\
+& = \bigcup_{t=0}^\infty\reachset{t+1}{\Psi}= \bigcup_{t=1}^\infty\reachset{t}{\Psi}\\
+& \subseteq  \bigcup_{t=0}^\infty\reachset{t}{\Psi}=\Omega.
+\end{align*}
+%
+Therefore, $\Omega$ is a positive invariant.
+\end{proof}
 %
 
 
@@ -98,13 +250,3 @@ true.
 
 
 
-
-
-
-
-
-
-
-
-
-{\color{red} TODO.}

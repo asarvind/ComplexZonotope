@@ -43,6 +43,7 @@
 \newcommand{\realset}{\reals}
 \newcommand{\diag}{\diagonal}
 \newcommand{\tbf}{\textbf}
+\newcommand{\pair}[2]{\lt(#1,#2\rt)}
 
 
 %%% operations
@@ -194,7 +195,7 @@
 % continuous trajectory
 \newcommand{\ctrj}[1]{\trj{x}{#1}}
 % discrete trajectory
-\newcommand{\dtrj}[1]{\trj{q}{#1}}
+\newcommand{\dtrj}[1]{\trj{\loc}{#1}}
 % hybrid trajectory
 \newcommand{\htrj}[1]{\lt(\ctrj{#1},\dtrj{#1}\rt)}
 % hybrid trajectory map
@@ -225,9 +226,18 @@
 \newcommand{\inputcen}{\cen^{\operatorname{input}}}
 % input scaling factors
 \newcommand{\inputsfact}{\sfact^{\operatorname{input}}}
-% Reachable set at a time
-\newcommand{\reachset}[1]{\mathcal{R}\lt(#1\rt)}
-
+% Next reachable set from a given set of states
+\newcommand{\nextset}[1]{\mathcal{R}\lt(#1\rt)}
+% Next continuous reachable set 
+\newcommand{\contreach}[2]{\mathcal{R}_{#1}\lt(#2\rt)}
+% Reachable set at a time point from an initial set of states
+\newcommand{\reachset}[2]{\mathcal{R}^{#1}\lt(#2\rt)}
+% Set of trajectories
+\newcommand{\trajectoryset}{\Gamma}
+% Linear Invariance property
+\newcommand{\invariance}[2]{\lt(#1,#2\rt)}
+% continuous projection
+\newcommand{\proj}[2]{#1_#2}
 
 
 

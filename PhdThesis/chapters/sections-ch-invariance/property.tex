@@ -1,1 +1,70 @@
-{\color{red} TODO.}
+A linear invariance property is a set of linear inequalities that are
+satisfied by the state of the system at all time instants for every
+trajectory starting in a given initial set.  We define a linear
+invariance property mathematically as follows.  
+%
+\begin{definition}[Linear Invariance]
+Let us consider a subset of states
+$\Psi\subseteq\reals^n\times\locations$, a matrix
+$T\in\mat{r}{n}{\reals}$ and a real vector $d\in\reals^r$.  Then we
+say that \[\lt(\system,\Psi\rt)\models\invariance{T}{d}~~\text{iff}\] 
+%
+\begin{align*}\
+& \forall t\in\integers_{\geq 0},\forall
+ x\in\bigcup_{q\in\locations}\lt(\reachset{t}{\Psi}\rt)_\loc:~~
+ Tx\leq d.
+\end{align*}
+%
+\end{definition}
+%
+To prove that a set of initial states satisfies a linear invariance
+property is equivalent to showing that there exists a positive
+invariant containing which contains the initial states and satisfies
+the linear invariance property.  This described in the following
+lemma.
+%
+\begin{lemma}~\label{lem:pi-ver}
+We have
+$\lt(\system,\Psi\rt)\models\invariance{T}{d}$ iff there
+exists a positive invariant $\Omega$ such that $\Psi\subseteq\Omega$
+and $\pair{\system}{\Omega}\models\pair{T}{d}$.
+\end{lemma}
+%
+\begin{proof}
+{\it Case 1:}  Let us consider that there exists a
+positive invariant $\Omega$ such that
+$\Psi\subseteq\Omega$ and $\pair{\system}{\Omega}\models\pair{T}{d}$.  Then,
+%
+\begin{align*}
+& \forall t\in\integers_{\geq 0},\forall
+ x\in\bigcup_{q\in\locations}\lt(\reachset{t}{\Omega}\rt)_\loc:~~
+ Tx\leq d\\
+& \%\%~~\text{since}~\Psi\subseteq\Omega\\
+& \implies \forall t\in\integers_{\geq 0},\forall
+ x\in\bigcup_{q\in\locations}\lt(\reachset{t}{\Psi}\rt)_\loc:~~
+ Tx\leq d\\
+& \implies \lt(\system,\Psi\rt)\models\invariance{T}{d}.
+\end{align*}
+%
+{\it Case 2:}  Let us consider that $\lt(\system,\Psi\rt)\models\invariance{T}{d}$.  Let us denote 
+%
+\[
+\Omega=\bigcup_{t=0}^\infty\reachset{t}{\Psi}.
+\]
+% 
+Then by Lemma~\ref{lem:exact-pi}, $\Omega$ is a positve invariant.  By
+the definition of linear invariant property, we get 
+%
+\begin{align*}
+& \forall t\in\integers_{\geq 0},\forall
+ x\in\bigcup_{q\in\locations}\lt(\reachset{t}{\Psi}\rt)_\loc:~~
+ Tx\leq d\\
+& \equivalent \forall
+x\in\bigcup_{t=0}^\infty\reachset{t}{\Psi}_\loc:~~Tx\leq d\\
+& \equivalent \forall x\in\Omega_\loc:~~Tx\leq d
+\equivalent \lt(\system,\Omega\rt)\models\invariance{T}{d}.
+\end{align*}
+%
+The lemma thus follows from the results in both the above cases.
+\end{proof}
+%
