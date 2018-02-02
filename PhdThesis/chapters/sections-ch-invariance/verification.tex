@@ -34,25 +34,125 @@ between the augmented complex zonotope and the guards and staying
 conditions, using Theorem~\ref{thm:acz-ptope-intersection}.  The choice
 of the primary template will be explained later.  Firstly, we shall
 derive convex conditions on the rest of variables for verifying a
-linear invariance property.
-
-
-For $\Omega$ to be a positive invariant, it is necessary that the set
-of continuous reachable states after a continuous transition in a
-location are contained within the continuous states of $\Omega$ in the
-location.  In this regard, let us consider the following relation.  In
-the below definition, recall the notation "$\order$" in
-Definition~\ref{defn:inclusion-acz}, which is a sufficient condition
-for checking inclusion between two augmented complex zonotopes.  We
-extend meaning of the notation as follows.
+linear invariance property.  Furthermore, we consider an
+over-approximation of the input
+disturbance set for any transition by an
+augmented complex zonotope as follows.
 %
-\begin{definition}
-We say that $\contreach{\loc}{\Omega}\order\Omega_\loc$ iff all of the
-following is collectively true.
+\begin{align}
+& \forall
+\loc\in\locations,~\inputset_\loc\subseteq\acztope{\inputtemp_\loc}{\inputcen_\loc}{\inputsfact_\loc}{\inputstemp_\loc}{\inputlb_\loc}{\inputub_\loc}\\
+& \forall \edge\in\edgeset,~\inputset_\edge\subseteq\acztope{\inputtemp_\edge}{\inputcen_\edge}{\inputsfact_\edge}{\inputstemp_\edge}{\inputlb_\edge}{\inputub_\edge}.
+\end{align}
+%
+
+{\bf Min and Max-approximation functions:} The over-approximation of
+the intersection of an augmented complex zonotope and a
+sub-parallelotope given in Theorem~\ref{thm:acz-ptope-intersection}
+requires computing componentwise minimum (meet) and maximum (join) of
+two real vectors.  The meet and join operations on real vectors are in
+general not affine functions of the arguments.  However, under a
+certain affine constraint on the variables that shall be explained
+later in Lemma~\ref{lem:min-max-approximation}, the meet and join operations can be
+expressed as affine expressions of the variables.  In the context, we
+introduce the following functions.  A function
+$\minapproxsymbol:\reals^k\times\lt(\reals\cup\infty\rt)^k$ is a
+min-approximation function if for all $i\in\set{1,...,k}$
+%
+\[
+\lt(\minapprox{\ub}{\pub}\rt)_i=
+\lt\{
+\begin{array}{l}
+\ub_i~\text{if}~\pub_i=\infty\\
+\pub_i~\text{if}~\pub_i<\infty
+\end{array}
+\rt.
+\]
+%
+By the above definition, $\minapprox{\ub}{\pub}$ is an affine function of its
+first argument $\ub$, which is a finite valued real vector.
+%
+\begin{equation}~\label{eqn:minapprox}
+\minapprox{\ub}{\pub}\geq\meet{\ub}{\pub}.
+\end{equation}
+%
+Similarly, a function
+$\maxapproxsymbol:\reals^k\times\lt(\reals\cup\lt(-\infty\rt)^k\rt)$
+is a max-approximation function if for all $i\in\set{1,...,k}$
+%
+\[
+\lt(\maxapprox{\lb}{\plb}\rt)_i=
+\lt\{
+\begin{array}{l}
+\lb_i~\text{if}~\plb_i=-\infty\\
+\plb_i~\text{if}~\plb_i>-\infty
+\end{array}
+\rt.
+\]
+%
+By the above definition, $\maxapprox{\lb}{\plb}$ is an affine function
+of its first argument $\lb$, which is a finite valued real vector.
+%
+\begin{equation}~\label{eqn:minapprox}
+\minapprox{\lb}{\plb}\geq\join{\lb}{\plb}.
+\end{equation}
+%
+Then, we have the following lemma about representing the meet and join
+operations using min and max-approximation functions under a certain
+condition.
+%
+\begin{lemma}~\label{lem:min-max-approximation}
+Let us consider vectors $\lb,\ub\in\reals^k$ and
+$\plb,\pub\in\set{\reals,-\infty,\infty}^k$.  If
+$\lb\leq\maxapprox{\lb}{\plb}\leq\minapprox{\ub}{\pub}\leq\ub$, then
 %
 \begin{align*}
-
+& \join{\lb}{\plb}=\maxapprox{\lb}{\plb}\\
+& \meet{\ub}{\pub}=\minapprox{\ub}{\pub}.
 \end{align*}
 %
+\end{lemma}
+%
+{\bf Deriving sufficient conditions for positive invariance.}  We want
+the set of continuous reachable states $\contreach{\loc}{\Omega}$ in
+any location to be contained within the continuous states of $\Omega$
+in the location.  In this regard, we introduce the following
+condition, which we shall later show is sufficient for
+$\contreach{\loc}{\Omega}\subseteq\Omega_\loc$.
+%
+\begin{definition}
+  For $\loc\in\locations$, we say that
+  $\continvariant{\Omega}{q}$ iff  all of the following is
+  collectively true.
+%
+\begin{align}
+& \exists l^\pr,u^\pr,l^\dpr,u^\dpr\in\reals^k:\nonumber\\
+& \lb_\loc\leq\maxapprox{\lb_\loc}{\lsys{\stay_\loc}},~~\ub_\loc\geq\minapprox{\ub_\loc}{\usys{\stay_\loc}}\\
+& l^\pr= \maxapprox{\lb_\loc}{\lsys{\stay_\loc}},~~u^\pr= \minapprox{\ub_\loc}{\usys{\stay_\loc}}\\
+& \acztope{
+\mymatrix{\linmap_\loc\ptemp_\loc & \inputtemp_\loc}
+}
+{
+\cen_\loc+\inputcen_\loc
+}
+{
+\mymatrix{\sfact_\loc\\ \inputsfact_\loc}
+}
+{
+\mymatrix{\linmap_\loc\qtemp & \inputstemp_\loc}
+}
+{
+\mymatrix{l^\pr\\\inputlb_\loc}
+}
+{
+\mymatrix{u^\pr\\ \inputub_\loc}
+}\nonumber\\
+& \order 
+\acztope{\ptemp_\loc}{\cen_\loc}{\sfact_\loc}{\qtemp}{l^\dpr}{u^\dpr}\\
+&
+l^\dpr\leq\maxapprox{l^\dpr}{\lsys{\stay_\loc}},~~u^\dpr\ge\minapprox{u^\dpr}{\usys{\stay_\loc}}\\
+& \lb_\loc\leq\maxapprox{l^\dpr}{\lsys{\stay_\loc}},~~\minapprox{u^\dpr}{\usys{\stay_\loc}}\leq\ub_\loc.
+\end{align}
+%
 \end{definition}
-% 
+%
