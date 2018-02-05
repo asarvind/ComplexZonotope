@@ -1,16 +1,17 @@
 \section{Augmented Complex Zonotope and Intersection with Sub-parallelotope}
-We shall now introduce the augmented complex zonotope set
-representation and describe the over-approximation of its intersection
-with a sub-parallelotope.  In Lemma~\ref{lem:motivation}, we have shown that the
-intersection of a suitably aligned interval zonotope with a
-sub-parallelotope can be computed exactly by a simple algebraic
-formula.  Motivated by this, we specify an augmented complex zonotope
-as a Minkowski sum of a template complex zonotope and an interval
-zonotope.  The idea behind such a representation is that the interval
-zonotope part is used to compute the intersection with a
-sub-parallelotope, while the template complex zonotope may capture
-positive invariance based on complex eigenstructure.  We will
-mathematically formalize this idea latter.
+In Lemma~\ref{lem:motivation}, we have shown that the intersection of
+a possibly translated interval zonotope and a sub-parallelotope, with
+aligned templates, can be represented as another translated interval
+zonotope that can be computed by a simple algebraic formula.
+Motivated by this, we extend template complex zonotope to a more
+general representation called {\it augmented complex zonotope},
+which is specified as a Minkowski sum of a template complex zonotope
+and an interval zonotope.  The idea behind such a representation is
+that the interval zonotope part is used to approximate the
+intersection with a sub-parallelotope, while the template complex
+zonotope may capture positive invariance using a complex
+eigenstructure.  An augmented complex zonotope is
+mathematically represented as follows.
 %
 \begin{definition}
 Let us consider a template complex zonotope
@@ -24,295 +25,57 @@ following is the representation of an augmented complex zonotope.
 %
 \end{definition}
 %
-For deriving a formula for the intersection of an augmented complex
-zonotope and a sub-parallelotope, we first derive some results about
-intersection between convex sets.  Below we shall describe some
-related results.
-
-Let us define the support of a real vector $v\in\reals^n$ in a set
-$S\subset\reals^n$ relative to a point $w\in\reals^n$ as
+The following lemma gives a formula for the intersection between
+an augmented complex zonotope and a sub-parallelotope, which is later
+used to derive an over-approximation of the intersection by another
+augmented complex zonotope.  In the below result, we require that the
+secondary template of the augmented complex zonotope is aligned with
+the sub-parallelotopic template, similar the case of Lemma~\ref{lem:motivation}.
 %
-\[
-\support{w}{v}{S}=\max_{x\in S}v^T\lt(x-w\rt).
-\]
-%
-According to the above definition, the support of a vector $v$
-relative to a point $W$ in a set $S$ gives the maximum possible
-displacement along the direction of $v$ multiplied by the magnitude of
-$v$.  Therefore, in the case of two closed convex sets $S_1$ and
-$S_2$, to say that $S_1$ is contained in $S_2$ is equivalent to saying
-that the support of all vectors relative to common point is smaller in
-$S_1$ than $S_2$.  The following lemma describes this equivalence
-mathematically.
-%
-\begin{lemma}~\label{lem:support-inclusion}
-Let $S_1,S_2\subseteq \reals^n$ be two closed convex sets such that
-$\intersection{S_1}{S_2}\neq \emptyset$.  Let $w\in \intersection{S_1}{S_2}$.
-Then $S_1\subseteq S_2$ if and only if
-%
-\[
-\forall
-v\in\reals^n:~\support{w}{v}{S_1}\leq \support{w}{v}{S_2}.
-\]
-%
-\end{lemma}
-%
-\begin{proof}
-  As $S_1$ and $S_2$ are closed sets, for any $v\in\reals^n$, there
-  exist optimal points $\optimal{x}\in S_1$ and $\optimal{y}\in S_2$,
-  such that
-  %
-  \begin{align*}
-&    \max_{x\in S_1} v^Tx=v^T\optimal{x},\\
-& \max_{y\in S_2} v^T y=v^T\optimal{y},   
- \end{align*}
-  %
-  i.e., $\support{w}{v}{S}=v^T\optimal{x}$ and $\support{w}{v}{S_2}=v^T\optimal{y}$.
-  
-  We prove the required result by considering the following two cases.
-  
-  {\it Case 1}: Let us consider that $S_1\subseteq  S_2$.  By definition, for any $v\in\reals^n$, 
-  %
-  \[
-\support{w}{v}{S_1}=\max_{x\in S_1}v^T(x-w)
-  \]
-  %
- As $\optimal{x}\in S_1\subseteq S_2$, we get
-  %
-  \begin{align*}
-    & \support{w}{v}{S_2}=\max_{x\in S_2}v^Tx\geq v^T\optimal{x}= \support{w}{v}{S_1}. 
-  \end{align*}
-  %
-  Therefore, if $S_1\subseteq S_2$, then for all $v\in\reals^n$, $\support{w}{v}{S_1}\leq\support{w}{v}{S_2}$
-  
-  {\it Case 2}: Let us consider that there $S_1\nsubseteq S_2$.  Then
-  there exists $x^\pr\in S_1\setminus S_2$.   
-  
-\end{proof}
-%
-The support of a vector with respect to the sum of two points is
-equal to the sum of supports of the vector with respect to each of the
-points.  This is described in the following lemma.
-%
-\begin{lemma}~\label{lem:support-minsum}
-Let us consider two bounded sets $S,S^\pr\subset\reals^n$ and two
-vectors $w,v\in\reals^n$.  Then
-%
-\[
-\support{w}{v}{\minsum{S}{S^\pr}}=\support{w}{v}{S}+\support{0}{v}{S^\pr}.
-\]
-%
-\end{lemma}
-x%
-\begin{proof}
-  %
-  \begin{align*}
-& \support{w}{v}{\minsum{S}{S^\pr}}=\max_{x\in S,~y\in
-      S^\pr}v^T\lt(x+y-w\rt)\\
-    & = \max_{x\in S}v^T\lt(x-w\rt)+\max_{y\in S^\pr}v^Ty\\
-    & = \support{w}{v}{S}+\support{w}{v}{S^\pr}.~~~~~~~~~~\qedhere
-  \end{align*}
-  %
-\end{proof}
-%
-The support of a vector in the intersection of two sets is the minimum
-of the supports of the vector in the two sets.  This is described in
-the following lemma.
-%
-\begin{lemma}~\label{lem:support-intersection}
-Let us consider two bounded sets $S_1,S_2\subset\reals^n$ and a two
-vectors $v,w\in\reals^n$.  Then
-%
-\[
-\support{w}{v}{\intersection{S_1}{S_2}}=\min\lt(\support{w}{v}{S_1},\support{w}{v}{S_2}\rt).
-\]
-%
-\end{lemma}
-%
-\begin{proof}
-  {\color{red} TODO}.
-\end{proof}
-%
-Recall that an augmented complex zonotope is a Minkowski sum of a
-template complex zonotope and an interval zonotope, i.e.,
-%
-\[
-\acztope{\ptemp}{\cen}{\sfact}{\stemp}{\lb}{\ub}=\minsum{\tcztope{\ptemp}{\cen}{\sfact}}{\iztope{\stemp}{\lb}{\ub}}.
-\]
-%
-From
-Lemma~\ref{lem:motivation}, we know that the intersection of a
-sub-parallelotope $\ptope{\qtemp}{\plb}{\pub}$ with an interval
-zonotope $\iztope{\stemp}{\lb}{\ub}$ can be computed by a simple
-algebraic formula when
-$\stemp=\pinv{\qtemp}$.  Based on this, we want to find a condition
-under which we can over-approximate the following intersection of an
-augmented complex zonotope and a sub-parallelotope
+\begin{lemma}
+Let $\qtemp$ be a sub-paralleotopic template.  Then,
 %
 \begin{align*}
-& \intersection{\acztope{\ptemp}{\cen}{\sfact}{\pinv{\qtemp}}{\lb}{\ub}}{\ptope{\qtemp}{\plb}{\pub}}\\
-& =\intersection{\lt(\minsum{\tcztope{\ptemp}{\cen}{\sfact}}{\iztope{\pinv{\qtemp}}{\lb}{\ub}\rt)}}{\ptope{\qtemp}{\plb}{\pub}}
+&
+\acztope{\ptemp}{\cen}{\sfact}{\pinv{\qtemp}}{\lb}{\ub}\bigcap\ptope{\qtemp}{\plb}{\pub}=\\
+&
+\bigcup_{x\in\tcztope{\ptemp}{\cen}{\sfact}}\lt(x\oplus\iztope{\pinv{\qtemp}}{\join{\lb}{\lt(\plb-\qtemp
+  x\rt)}}{\meet{\ub}{\lt(\pub-\qtemp x}\rt)}\rt).
 \end{align*}
 %
-by another augmented complex zonotope given as
+\end{lemma}
+%
+\begin{proof}
+We get $\acztope{\ptemp}{\cen}{\sfact}{\pinv{\qtemp}}{\lb}{\ub}\bigcap\ptope{\qtemp}{\plb}{\pub}=$
 %
 \begin{align*}
-& \minsum{\tcztope{\ptemp}{\cen}{\sfact}}{\intersection{\lt(\iztope{\pinv{\qtemp}}{\lb}{\ub}}{\ptope{\qtemp}{\plb}{\pub}\rt)}}\\
+& \lt(\tcztope{\ptemp}{\cen}{\sfact}\oplus\iztope{\pinv{\qtemp}}{\lb}{\ub}\rt)\bigcap\ptope{\qtemp}{\plb}{\pub}\\
 & =
-  \minsum{\tcztope{\ptemp}{\cen}{\sfact}}{\iztope{\pinv{\qtemp}}{\join{\lb}{\plb}}{\meet{\ub}{\pub}}}\\
-& = \acztope{\ptemp}{\cen}{\sfact}{\pinv{\qtemp}}{\join{\lb}{\plb}}{\meet{\ub}{\pub}},
+\bigcup_{x\in\tcztope{\ptemp}{\cen}{\sfact}}\lt(\lt(x\oplus\iztope{\pinv{\qtemp}}{\lb}{\ub}\rt)\bigcap\ptope{\qtemp}{\plb}{\pub}\rt)\\
+& =\bigcup_{x\in\tcztope{\ptemp}{\cen}{\sfact}}\lt(\lt(x\oplus\iztope{\pinv{\qtemp}}{\lb}{\ub}\rt)\bigcap\ptope{\qtemp}{\plb}{\pub}\rt)\\
+& \%\%~~\text{by Lemma~\ref{lem:motivation}}\\
+& = \bigcup_{x\in\tcztope{\ptemp}{\sfact}{\cen}}\lt(x\oplus\iztope{\pinv{\qtemp}}{\join{\lb}{\lt(\plb-\qtemp
+  x}\rt)}{\meet{\ub}{\lt(\pub-\qtemp x\rt)}}\rt).\hspace{4em}\qedhere
 \end{align*}
 %
-that is computing first the intersection (which can be done
-efficiently) and then the Minkowski sum.  Indeed, we can find the
-required condition for a more general case of any three closed convex
-sets $S_1,S_2,S_3$, where $\lt(S_1\oplus S_2\rt)\bigcap S_3$ can be
-overapproximated by $S_1\oplus\lt(S_2\bigcap S_3\rt)$. 
-%
-\begin{lemma}~\label{lem:gen-int}
-Let $S_1\subseteq \compnums^n$ and $S_2,S_3\in\reals^n$ be closed
-convex sets such that $\intersection{S_2}{S_3}\neq \emptyset$ and $0\in S_1$.  Let
-$w\in \intersection{S_2}{S_3}$ and $v\in\reals^n$.  Let 
-%
-\[
-h = \support{w}{v}{\real\lt(S_1\rt)\oplus\lt(S_2\bigcap
-  S_3\rt)}-\support{w}{v}{\lt(\real\lt(S_1\rt)\oplus S_2\rt)\bigcap
-  S_3} 
-\]
-%
-Then
-%
-\begin{align}
-  &  \left\{
-  \begin{array}{l}
-   h = 0~~\text{if}~~~~~~~~\support{0}{v}{\real\lt(S_1\rt)}+\support{w}{v}{S_2}\leq
-   \support{w}{v}{S_3}\\
-   0\leq h \leq \support{w}{v}{\real\lt(S_1\rt)}~~\text{otherwise}.
-  \end{array}
-  \right.\label{eqn:support-inequality}
-\end{align}
-%
-Consequently,
-%
-\begin{align}~\label{eqn:minsum-intersection}
-& \intersection{\lt(S_1\oplus S_2\rt)}{S_3}\subseteq S_1\oplus\lt(\intersection{S_2}{S_3}\rt).
-\end{align}
-%
-\end{lemma}
-%
-\begin{proof}
-Let us
-define $a = \support{0}{v}{\real\lt(S_1\rt)}$, $b=\support{w}{v}{S_2}$
-and $c = \support{w}{v}{S_3}$.  
-Based on Lemma~\ref{lem:support-intersection}, we get
-%
-\begin{align*}
-& \support{w}{v}{\lt(\real\lt(S_1\rt)\oplus S_2\rt)\bigcap
-  S_3}\\
-& = \min\lt(\support{w}{v}{\real\lt(S_1\rt)\oplus
-    S_2},\support{w}{v}{S_3}\rt).
-\end{align*}
-%
-Next based on Lemma~\ref{lem:support-minsum}, the above equals
-\begin{align*}
-\min\lt(\support{0}{v}{\real\lt(S_1\rt)}+\support{w}{v}{S_2},\support{w}{v}{S_3}\rt)
-= \min(a+b,c).
-\end{align*}
-%
-  By a similar calculation, we also get
-%
-\[
-\support{w}{v}{\real\lt(S_1\rt)\oplus\lt(S_2\cap S_3\rt)} =
-a+min(b,c).  
-\]
-%
-Therefore, 
-%
-\begin{align}
-& h = a+min(b,c)-min(a+b,c)\nonumber\\
-& = min(a+b,a+c)-min(a+b,c).\nonumber\\
-& \implies \lt\{\begin{array}{l}
-h=0~~\text{if}~~a+b\leq c\\
-0\leq h\leq (a+c)-c = a~~\text{otherwise}.
-\end{array}
-\rt.
-\end{align}
-%
-The above proves Equation~\ref{eqn:support-inequality}.
-
-Since $h\geq0$, based on Lemma~\ref{lem:support-inclusion}, we get
-%
-\begin{equation}~\label{eqn:proof-support1}
-\intersection{\lt(\real\lt(S_1\rt)\oplus S_2\rt)}{S_3}\subseteq \real\lt(S_1\rt)\oplus\lt(\intersection{S_2}{S_3}\rt).
-\end{equation}
-%
-Also, since $S_2$ and $S_3$ are real sets, we have
-%
-\begin{align}
-& \img\lt(\intersection{\lt(S_1\oplus S_2\rt)}{S_3}\rt)\\
-& \%\%~\text{as}~\img\lt(S_2\rt)=\img\lt(S_3\rt)=0\nonumber\\
-& = \intersection{\img\lt(S_1\rt)}{\set{0}}=\set{0}\nonumber\\
-& \subseteq
-\img\lt(S_1\rt)\nonumber\\
-& =
-\img\lt(S_1\rt)\oplus\img\lt(\intersection{S_2}{S_3}\rt)\\
-& = \img\lt(S_1\oplus\lt(\intersection{S_2}{S_3}\rt)\rt).~\label{eqn:proof-support2}
-\end{align}
-%
-Based on Equations~\ref{eqn:proof-support1} and~\ref{eqn:proof-support2}, we
-get the inequality in Equation~\ref{eqn:support-inequality}.
 \end{proof}
-%
-We consider the maximum difference in projections along any direction
-for any two sets as a measure of difference between the sets.  We use
-this measure to estimate the error in over-approximation error of the
-intersection of an augmented complex zonotope and a
-sub-parallelotope.  We define this measure in terms of support
-functions as,
-%
-\begin{definition}[A measure of over-approximation]
-For two
-bounded sets, $\Psi_1,\Psi_2\subset\compnums^n$,
-we define the following measure of difference between the two sets;
-\[
-\approxerror{\Psi_1}{\Psi_2}=\max_{w,v\in\reals^n:~\norm{w-v}\leq
-  1}\absolute{\support{w}{v}{\real\lt(\Psi_1\rt)}-\support{w}{v}{\real\lt(\Psi_2\rt)}}
-\]
-%
-\end{definition}
-%
-The following theorem states that gives a valid over-approximation of the
-intersection of an augmented complex zonotope and a sub-parallelotope
-whose template is aligned with the secondary template of the former,
-by another augmented complex zonotope.  Furthermore, it states that
-the over-approximation error is bounded by a value
-which is proportional to the alignment between the primary template
-and the sub-parallelotopic template.  Therefore, the
-over-approximation error is zero when the primary template is
-orthogonal to the sub-parallelotopic template.
 %
 \begin{theorem}[Over-approximation of intersection]~\label{thm:acz-ptope-intersection}
 Let us consider a sub-parallelotope $\ptope{\qtemp}{\plb}{\pub}\subseteq\reals^n$ and an
 augmented complex zonotope
-$\acztope{\ptemp}{\cen}{\sfact}{\pinv{\qtemp}}{\lb}{\ub}\subset\compnums^n$
-such that 
+$\acztope{\ptemp}{\cen}{\sfact}{\pinv{\qtemp}}{\lb}{\ub}\subset\compnums^n$. Let us denote
+$S_1=\real\lt(\intersection{\acztope{\ptemp}{\cen}{\sfact}{\pinv{\qtemp}}{\lb}{\ub}}{\ptope{\qtemp}{\plb}{\pub}}\rt)$ and\\
+$S_2=\real\lt(\acztope{\ptemp}{\cen}{\sfact}{\pinv{\qtemp}}{\join{\ub}{\pub}}{\meet{\lb}{\plb}}\rt)$.
+Let us consider the Hausdorff distance between $S_1$ and $S_2$, given by
 %
-\begin{align}
-& \exists z\in\compnums^n:~~\ptemp z=\cen~~\text{and}~~\absolute{z}\leq \sfact.~\label{eqn:contain-origin}
-\end{align}
+\[
+\hausdorff{S_1}{S_2}=\max\lt(\sup_{w\in S_1}\inf_{v\in S_2}\sqnorm{w-v},\sup_{w\in S_2}\inf_{v\in S_1}\sqnorm{w-v}\rt).
+\]
+Then $S_1\subseteq S_2$ and 
 %
-and $\join{\lb}{\plb}\leq\meet{\ub}{\pub}$.  Let us consider that $\qtemp^*$
-is an orthonormal basis of row vectors for the linear span of the row
-vectors of $\qtemp$.  Let
-$\Psi_1=\real\lt(\acztope{\ptemp}{\cen}{\sfact}{\pinv{\qtemp}}{\join{\ub}{\pub}}{\meet{\lb}{\plb}}\rt)$ and
-$\Psi_2=\real\lt(\intersection{\acztope{\ptemp}{\cen}{\sfact}{\pinv{\qtemp}}{\lb}{\ub}}{\ptope{\qtemp}{\plb}{\pub}}\rt)$.
-%
-\begin{enumerate}
-\item Valid over-approximation: $\Psi_2\subseteq\Psi_1$.
-\item Error in over-approximation of real
-  projection: \[\approxerror{\real\lt(\Psi_1\rt)}{\real\lt(\Psi_2\rt)}\leq
-  \sqnorm{\qtemp^*\ptemp\sfact}+\sqnorm{\qtemp^*\cen}.\]
-\end{enumerate}
+\[
+\hausdorff{S_1}{S_2}\leq \sup_{x\in \tcztope{\ptemp}{\cen}{\sfact}}\hausdorff{\iztope{\qtemp{}{}}{}
+\]
 %
 \end{theorem}
 %

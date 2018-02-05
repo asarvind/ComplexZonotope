@@ -95,13 +95,13 @@ $\lt[\begin{matrix} 1 & 1 & 0 \end{matrix}\rt]$.
 Sub-parallelotopes have a similarity to interval zonotopes, in the
 sense that we can express a sub-parallelotope as a linear combination
 of real vectors with relevant interval bounds on the combining
-coefficients.  This is stated in the following lemma.  Recall
+coefficients.  This is stated in the following proposition.  Recall
 our notation that
 $\pinv{\qtemp}=\transpose{\qtemp}\inv{\lt(\qtemp\transpose{\qtemp}\rt)}$,
 which exists for a sub-parallelotopic template $\qtemp$ because
 $\lt(\qtemp\transpose{\qtemp}\rt)$ is required to be invertible.
 %
-\begin{lemma}~\label{lem:ptope-iz-conversion}
+\begin{proposition}~\label{lem:ptope-iz-conversion}
   Consider a sub-parallelotope
   $\ptope{\qtemp}{\plb}{\pub}$ where $\qtemp\in\mat{k}{n}{\reals}$.
   Then,
@@ -113,7 +113,7 @@ $\lt(\qtemp\transpose{\qtemp}\rt)$ is required to be invertible.
   }.
   \]
 %
-\end{lemma}
+\end{proposition}
 %
 \begin{proof}
 Let $\zeta\in\reals^k$ and $x^*=\pinv{\qtemp}\zeta$.  Then
@@ -171,11 +171,76 @@ gives
       1\end{array}\rt]}{\lt[\begin{array}{c}-1\\ 0.5\end{array}\rt]}{\lt[\begin{array}{c}1\\ 2\end{array}\rt]}.
 \]
 %
-The general case is described in the following lemma, where the
-interval bounds of the resultant interval zonotope after intersection
-is given by a simple algebraic expression.
+In the general case, we compute compute the intersection between a
+possibly a sub-parallelotope and a possibly translated interval
+zonotope by a simple algebraic expression as follows.
 %
 \begin{lemma}~\label{lem:motivation}
+  Let us consider a sub-parallelotopic template
+  $\qtemp\in\mat{k}{n}{R}$ and a real vector
+  $c\in\reals^n$.  Then
+%
+\begin{align}~\label{eqn:motivation}
+& \lt(\cen+\iztope{\pinv{\qtemp}}{\lb}{\ub}\rt)\bigcap\ptope{\qtemp}{\plb}{\pub}\nonumber\\
+& =\cen+\iztope{\pinv{\qtemp}}{\join{\lb}{\lt(\plb-\qtemp\cen\rt)}}{\meet{\ub}{\lt(\pub-\qtemp\cen\rt)}}.
+\end{align}
+%
+\end{lemma}
+%
+\begin{proof}
+Let us denote
+$S_1=\lt(\cen+\iztope{\pinv{\qtemp}}{\lb}{\ub}\rt)\bigcap\ptope{\qtemp}{\plb}{\pub}$
+and\\
+$S_2=\cen+\iztope{\pinv{\qtemp}}{\join{\lb}{\lt(\plb-\qtemp\cen\rt)}}{\meet{\ub}{\lt(\pub-\qtemp\cen\rt)}}$.
+We shall first prove that $S_1\subseteq S_2$.  Let us consider that
+$x\in S_1$.  So, $\exists
+\zeta\in\reals^k:~x=\cen+\pinv{\qtemp}\zeta,~\lb\leq\zeta\leq\ub$
+and $x\in\ptope{\qtemp}{\plb}{\pub}$. Then we get
+%
+\begin{align*}
+& \plb\leq\qtemp x\leq \pub\\
+& \equivalent \plb\leq \qtemp\lt(\cen+\pinv{\qtemp}\zeta\rt)\leq \pub\\
+& \equivalent \plb-\qtemp\cen\leq\zeta\leq\pub-\qtemp\zeta.
+\end{align*}
+%
+Also, we have $\lb\leq \zeta\leq \ub$ as given previously.
+Therefore,
+\[\join{\lb}{\lt(\plb-\qtemp\cen\rt)}\leq\zeta\leq\meet{\ub}{\lt(\pub-\qtemp\cen\rt)},\]
+which implies that $x=\cen+\pinv{\qtemp}\zeta\in S_2$.  This shows that $S_1\subseteq S_2$.
+
+Now, we shall prove $S_2\subseteq S_1$.  Since
+\begin{align}
+&\lb\leq\join{\lb}{\lt(\plb-\qtemp\cen\rt)}~~\text{and}~~\meet{\ub}{\lt(\pub-\qtemp\cen\rt)}\leq
+\ub,~~\text{we get}\nonumber\\
+&
+S_2=\cen+\iztope{\pinv{\qtemp}}{\join{\lb}{\lt(\plb-\qtemp\cen\rt)}}{\meet{\ub}{\lt(\pub-\qtemp\cen\rt)}}
+\subseteq \cen+\iztope{\pinv{\qtemp}}{\lb}{\ub}~\label{eqn:proof-motivation1}
+\end{align}
+%
+Next, let us condier that $y\in S_2$.  So, $\exists
+\zeta^\pr\in\reals^k:$ \[y=\cen+\pinv{\qtemp}\zeta^\pr,~\join{\lb}{\lt(\plb-\cen\rt)}\leq\zeta^\pr
+\leq\meet{\ub}{\lt(\pub-\cen\rt)}.\]
+Then
+%
+\begin{align*}
+& \qtemp y=\qtemp\lt(\cen+\pinv{\qtemp}\zeta^\pr\rt)=\qtemp\cen+\zeta^\pr\\
+& \%\%~~\text{since}~\join{\lb}{\lt(\plb-\cen\rt)}\leq\zeta^\pr\leq
+\meet{\ub}{\lt(\pub-\cen\rt)}\\
+& \implies \qtemp\cen+\lt(\join{\lb}{\lt(\plb-\cen\rt)}\rt)\leq \qtemp
+y\leq \qtemp\cen+\lt(\meet{\ub}{\lt(\pub-\qtemp\cen\rt)}\rt)\\
+& \implies \qtemp\cen+\plb-\qtemp\cen\leq\qtemp y\leq
+\qtemp\cen+\pub-\qtemp\cen\\
+& \implies \plb\leq\qtemp y\leq\pub.
+\end{align*}
+%
+Therefore, $y\in\ptope{\qtemp}{\plb}{\pub}$.  This shows that
+$S_2\subseteq \ptope{\qtemp}{\plb}{\pub}$.  This combined with the
+containment in Equation~\ref{eqn:proof-motivation1}, we get that
+$S_2\subseteq S_1$.  Earlier, we have shown that $S_1\subseteq S_2$.
+Therefore, $S_1=S_2$.
+\end{proof}
+%
+\begin{lemma}
 Let $K\in\mat{k}{n}{R}$ be a sub-parallelotopic template.  Then
 \[
 \iztope{\pinv{\qtemp}}{\lb}{\ub} \bigcap \ptope{\qtemp}{\plb}{\pub}
