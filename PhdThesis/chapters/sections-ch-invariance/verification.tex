@@ -113,22 +113,23 @@ $\lb\leq\maxapprox{\lb}{\plb}\leq\minapprox{\ub}{\pub}\leq\ub$, then
 %
 \end{lemma}
 %
-{\bf Deriving sufficient conditions for positive invariance.}  We want
-the set of continuous reachable states $\contreach{\loc}{\Omega}$ in
-any location to be contained within the continuous states of $\Omega$
-in the location.  In this regard, we introduce the following
-condition, which we shall later show is sufficient for
+{\bf Deriving sufficient conditions for positive invariance.}  For the
+set of continuous reachable states $\contreach{\loc}{\Omega}$ in any
+location to be contained within the continuous states of $\Omega$, we
+introduce the following condition.  We shall show in
+Lemma~\ref{lem:pi-cont} that this
+condition is sufficient for
 $\contreach{\loc}{\Omega}\subseteq\Omega_\loc$.
 %
 \begin{definition}
   For $\loc\in\locations$, we say that
-  $\continvariant{\Omega}{q}$ iff  all of the following is
+  $\posinv{\Omega}{q}$ iff  all of the following is
   collectively true.
 %
 \begin{align}
 & \exists l^\pr,u^\pr,l^\dpr,u^\dpr\in\reals^k:\nonumber\\
-& \lb_\loc\leq\maxapprox{\lb_\loc}{\lsys{\stay_\loc}},~~\ub_\loc\geq\minapprox{\ub_\loc}{\usys{\stay_\loc}}\\
-& l^\pr= \maxapprox{\lb_\loc}{\lsys{\stay_\loc}},~~u^\pr= \minapprox{\ub_\loc}{\usys{\stay_\loc}}\\
+& \lb_\loc\leq\maxapprox{\lb_\loc}{\lsys{\stay_\loc}},~~\ub_\loc\geq\minapprox{\ub_\loc}{\usys{\stay_\loc}},~\label{eqn:continv1}\\
+& l^\pr= \maxapprox{\lb_\loc}{\lsys{\stay_\loc}},~~u^\pr= \minapprox{\ub_\loc}{\usys{\stay_\loc}},~\label{eqn:continv2}\\
 & \acztope{
 \mymatrix{\linmap_\loc\ptemp_\loc & \inputtemp_\loc}
 }
@@ -146,13 +147,224 @@ $\contreach{\loc}{\Omega}\subseteq\Omega_\loc$.
 }
 {
 \mymatrix{u^\pr\\ \inputub_\loc}
-}\nonumber\\
+},\nonumber\\
 & \order 
-\acztope{\ptemp_\loc}{\cen_\loc}{\sfact_\loc}{\qtemp}{l^\dpr}{u^\dpr}\\
+\acztope{\ptemp_\loc}{\cen_\loc}{\sfact_\loc}{\qtemp}{l^\dpr}{u^\dpr},~\label{eqn:continv3}\\
 &
-l^\dpr\leq\maxapprox{l^\dpr}{\lsys{\stay_\loc}},~~u^\dpr\ge\minapprox{u^\dpr}{\usys{\stay_\loc}}\\
-& \lb_\loc\leq\maxapprox{l^\dpr}{\lsys{\stay_\loc}},~~\minapprox{u^\dpr}{\usys{\stay_\loc}}\leq\ub_\loc.
+l^\dpr\leq\maxapprox{l^\dpr}{\lsys{\stay_\loc}},~~u^\dpr\geq\minapprox{u^\dpr}{\usys{\stay_\loc}},~\label{eqn:continv4}\\
+& \lb_\loc\leq\maxapprox{l^\dpr}{\lsys{\stay_\loc}},~~\minapprox{u^\dpr}{\usys{\stay_\loc}}\leq\ub_\loc~\label{eqn:continv5}.
 \end{align}
 %
 \end{definition}
+%
+\begin{lemma}~\label{lem:pi-cont}
+For a location $\loc\in\locations$, if $\posinv{\Omega}{\loc}$, then
+$\contreach{\loc}{\Omega}\subseteq\Omega$.
+\end{lemma}
+%
+\begin{proof}
+Based on Equations~\ref{eqn:continv1},~\ref{eqn:continv2}, and Lemma~\ref{lem:min-max-approximation}, we get
+%
+\begin{align*}
+& l^\pr=\join{\lb_\loc}{\lsys{\stay_\loc}},~~u^\pr=\meet{\ub_\loc}{\usys{\stay_\loc}}
+\end{align*}
+%
+Then by Theorem~\ref{thm:acz-ptope-intersection}, we get
+%
+\begin{align*}
+& \Omega_q\bigcap{\ptope{\qtemp}{\lsys{\stay_\loc}}{\usys{\stay_\loc}}}=\acztope{\ptemp_\loc}{\cen_\loc}{\sfact_\loc}{\qtemp}{\lb_\loc}{\ub_\loc}\bigcap\ptope{\qtemp}{\lsys{\stay_\loc}}{\usys{\stay_\loc}}\nonumber\\
+& \subseteq \acztope{\ptemp_\loc}{\cen_\loc}{\sfact_\loc}{\qtemp}{l^\pr}{u^\pr}.
+\end{align*}
+%
+Using the above over-approximation and the expressions for the linear
+transformation and Minkowski sum of augmented complex zonotopes, we
+get
+%
+\begin{align}
+& \minsum{A\lt(\Omega_q\bigcap{\ptope{\qtemp}{\lsys{\stay_\loc}}{\usys{\stay_\loc}}}\rt)}{\inputset_\loc}\nonumber\\
+& \subseteq \acztope{
+\mymatrix{\linmap_\loc\ptemp_\loc & \inputtemp_\loc}
+}
+{
+\cen_\loc+\inputcen_\loc
+}
+{
+\mymatrix{\sfact_\loc\\ \inputsfact_\loc}
+}
+{
+\mymatrix{\linmap_\loc\qtemp & \inputstemp_\loc}
+}
+{
+\mymatrix{l^\pr\\\inputlb_\loc}
+}
+{
+\mymatrix{u^\pr\\ \inputub_\loc}
+}\nonumber\\
+& \%\%~~\text{by Equation~\ref{eqn:continv3}}\nonumber\\
+& \subseteq \acztope{\ptemp_\loc}{\cen_\loc}{\sfact_\loc}{\qtemp}{l^\dpr}{u^\dpr}~\label{eqn:proof-continv1}.
+\end{align}
+%
+Based on Lemma~\ref{lem:min-max-approximation}, we get
+%
+\begin{align*}
+& \join{l^\dpr}{\lsys{\stay_\loc}}=\maxapprox{l^\dpr}{\lsys{\stay_\loc}},~~
+\meet{u^\dpr}{\usys{\stay_\loc}}=\minapprox{u^\dpr}{\usys{\stay_\loc}}.
+\end{align*}
+%
+By Theorem~\ref{thm:acz-ptope-intersection} and the above equation, we get
+%
+\begin{align}
+& \acztope{\ptemp_\loc}{\cen_\loc}{\sfact_\loc}{\qtemp}{l^\dpr}{u^\dpr}\bigcap\ptope{\qtemp}{\lsys{\stay_{\edge_2}}}{\usys{\stay_{\edge_2}}}\nonumber\\
+& \subseteq \acztope{\ptemp_\loc}{\cen_\loc}{\sfact_\loc}{\qtemp}{\maxapprox{l^\dpr}{\lsys{\stay_\loc}}}{\minapprox{u^\dpr}{\usys{\stay_\loc}}}\nonumber\\
+& \%\%~~\text{by Equation~\ref{eqn:continv5}}\nonumber\\
+& \subseteq \acztope{\ptemp_\loc}{\cen_\loc}{\sfact_\loc}{\qtemp}{\lb_\loc}{\ub_\loc}=\Omega_\loc~\label{eqn:proof-continv2}.
+\end{align}
+%
+Using Equations~\ref{eqn:proof-continv2} and~\ref{eqn:proof-continv1},
+we get
+\begin{align*}
+& \contreach{\loc}{\Omega}=\lt(\minsum{A\lt(\Omega_q\bigcap{\ptope{\qtemp}{\lsys{\stay_\loc}}{\usys{\stay_\loc}}}\rt)}{\inputset_\loc}\rt)\bigcap
+\ptope{\qtemp}{\lsys{\stay_{\edge_2}}}{\usys{\stay_{\edge_2}}}\\
+& \subseteq \Omega_\loc.\hspace{25em}\qedhere
+\end{align*}
+%
+\end{proof}
+%
+If we consider the templates of the augmented complex zonotope as
+constants, then the above condition is equivalent to a set of second
+order conic constraints on other parameters of the augmented complex
+zonotope and some auxillary variables.  This is stated in the
+following lemma.
+%
+\begin{lemma}
+For constant $\ptemp_{\loc}$ and $\qtemp$, the relation
+$\posinv{\Omega}{\loc}$ is equivalent to a set of second order conic
+constraints on $\cen_\loc$, $\sfact_\loc$, $\lb_\loc$ and $\ub_\loc$
+and some additional variables.
+\end{lemma}
+%
+\begin{proof}
+{\color{red} TODO}.
+\end{proof}
+%
+For the set of continuous states reached from $\Omega$ after a
+discrete transition, $\contreach{\edge}{\Omega}$, to be contained
+within 
+$\Omega_{\edge_2}$, we introduce the following condition.  We shall
+show in Lemma~\ref{lem:pi-dis} that this condition is sufficient for
+$\contreach{\edge}{\Omega}\subseteq\Omega_{\edge_2}$.
+%
+\begin{definition}
+For an edge $\edge\in\edgeset$, we say that $\posinv{\Omega}{\edge}$
+iff all of the following is collectively true.
+%
+\begin{align}
+& \exists l^\pr,u^\pr,l^\dpr,u^\dpr\in\reals^k:\nonumber\\
+& \lb_{\edge_1}\leq \maxapprox{\lb_{\edge_1}}{\join{\lsys{\edge}}{\lsys{\stay_{\edge_1}}}},~~
+\ub_{\edge_1}\geq\minapprox{\ub_{\edge_1}}{\meet{\usys{\edge}}{\usys{\stay_{\edge_1}}}}~\label{eqn:disinv1}\\
+&
+l^\pr=\maxapprox{\lb_{\edge_1}}{\join{\lsys{\edge}}{\lsys{\stay_{\edge_1}}}},~~
+u^\pr=\minapprox{\ub_{\edge_1}}{\meet{\usys{\edge}}{\usys{\stay_{\edge_1}}}}~\label{eqn:disinv2}\\
+& \acztope{
+\mymatrix{\linmap_{\edge}\ptemp_{\edge_1} & \inputtemp_{\edge}}
+}
+{
+\cen_{\edge_1}+\inputcen_{\edge}
+}
+{
+\mymatrix{\sfact_{\edge_1}\\ \inputsfact_{\edge}}
+}
+{
+\mymatrix{\linmap_{\edge_1}\qtemp & \inputstemp_{\edge}}
+}
+{
+\mymatrix{l^\pr\\\inputlb_{\edge}}
+}
+{
+\mymatrix{u^\pr\\ \inputub_{\edge}}
+},\nonumber\\
+& \order 
+\acztope{\ptemp_{\edge_2}}{\cen_{\edge_2}}{\sfact_{\edge_2}}{\qtemp}{l^\dpr}{u^\dpr},~\label{eqn:disinv3}\\
+&
+l^\dpr\leq\maxapprox{l^\dpr}{\lsys{\stay_{\edge_2}}},~~u^\dpr\geq\minapprox{u^\dpr}{\usys{\stay_{\edge_2}}},~\label{eqn:disinv4}\\
+& \lb_{\edge_2}\leq\maxapprox{l^\dpr}{\lsys{\stay_{\edge_2}}},~~\minapprox{u^\dpr}{\usys{\stay_{\edge_2}}}\leq\ub_{\edge_2}~\label{eqn:disinv5}.
+\end{align}
+%
+\end{definition}
+%
+\begin{lemma}~\label{lem:pi-dis}
+For an edge $\edge\in\edgeset$, if $\posinv{\Omega}{\edge}$, then $\contreach{\edge}{\Omega}\subseteq\Omega_{\edge_2}$.
+\end{lemma}
+%
+\begin{proof}
+Based on Equations~\ref{eqn:disinv1},~\ref{eqn:disinv2}, and Lemma~\ref{lem:min-max-approximation}, we get
+%
+\begin{align*}
+&
+l^\pr=\join{\lb_{\edge_1}}{\join{\lsys{\edge}}{\lsys{\stay_{\edge_1}}}},
+~~u^\pr=\meet{\ub_{\edge_1}}{\meet{\usys{\edge}}{\usys{\stay_{\edge_1}}}}
+\end{align*}
+%
+Then by Theorem~\ref{thm:acz-ptope-intersection}, we get
+%
+\begin{align*}
+& \Omega_{\edge_1}\bigcap\ptope{\qtemp}{\join{\lsys{\edge}}{\lsys{\stay_{\edge_1}}}}{\meet{\usys{\edge}}{\usys{\stay_{\edge_1}}}}\\
+& =\acztope{\ptemp_{\edge_1}}{\cen_{\edge_1}}{\sfact_{\edge_1}}{\qtemp}{\lb_{\edge_1}}{\ub_{\edge_1}}\bigcap\ptope{\qtemp}{\join{\lsys{\edge}}{\lsys{\stay_{\edge_1}}}}{\meet{\usys{\edge}}{\usys{\stay_{\edge_1}}}}\\
+& \subseteq \acztope{\ptemp_{\edge_1}}{\cen_{\edge_1}}{\sfact_{\edge_1}}{\qtemp}{l^\pr}{u^\pr}.
+\end{align*}
+%
+Using the above over-approximation and the expressions for the linear
+transformation and Minkowski sum of augmented complex zonotopes, we
+get
+%
+\begin{align}
+& \minsum{A\lt(\Omega_{\edge_1}\bigcap\ptope{\qtemp}{\join{\lsys{\edge}}{\lsys{\stay_{\edge_1}}}}{\meet{\usys{\edge}}{\usys{\stay_{\edge_1}}}}\rt)}{\inputset_{\edge}}\nonumber\\
+& \subseteq \acztope{
+\mymatrix{\linmap_{\edge_1}\ptemp_{\edge_1} & \inputtemp_\edge}
+}
+{
+\cen_{\edge_1}+\inputcen_\edge
+}
+{
+\mymatrix{\sfact_{\edge_1}\\ \inputsfact_\edge}
+}
+{
+\mymatrix{\linmap_{\edge_1}\qtemp & \inputstemp_\edge}
+}
+{
+\mymatrix{l^\pr\\\inputlb_\edge}
+}
+{
+\mymatrix{u^\pr\\ \inputub_\edge}
+}\nonumber\\
+& \%\%~~\text{by Equation~\ref{eqn:continv3}}\nonumber\\
+& \subseteq \acztope{\ptemp_{\edge_2}}{\cen_{\edge_2}}{\sfact_{\edge_2}}{\qtemp}{l^\dpr}{u^\dpr}~\label{eqn:proof-continv1}.
+\end{align}
+%
+Based on Lemma~\ref{lem:min-max-approximation}, we get
+%
+\begin{align*}
+& \join{l^\dpr}{\lsys{\stay_{\edge_2}}}=\maxapprox{l^\dpr}{\lsys{\stay_{\edge_2}}},~~
+\meet{u^\dpr}{\usys{\stay_{\edge_2}}}=\minapprox{u^\dpr}{\usys{\stay_{\edge_2}}}.
+\end{align*}
+%
+By Theorem~\ref{thm:acz-ptope-intersection} and the above equation, we get
+%
+\begin{align}
+& \acztope{\ptemp_{\edge_2}}{\cen_{\edge_2}}{\sfact_{\edge_2}}{\qtemp}{l^\dpr}{u^\dpr}\bigcap\ptope{\qtemp}{\lsys{\stay_{\edge_2}}}{\usys{\stay_{\edge_2}}}\nonumber\\
+& \subseteq \acztope{\ptemp_{\edge_2}}{\cen_{\edge_2}}{\sfact_{\edge_2}}{\qtemp}{\maxapprox{l^\dpr}{\lsys{\stay_{\edge_2}}}}{\minapprox{u^\dpr}{\usys{\stay_{\edge_2}}}}\nonumber\\
+& \%\%~~\text{by Equation~\ref{eqn:continv5}}\nonumber\\
+& \subseteq \acztope{\ptemp_{\edge_2}}{\cen_{\edge_2}}{\sfact_{\edge_2}}{\qtemp}{\lb_{\edge_2}}{\ub_{\edge_2}}=\Omega_{\edge_2}~\label{eqn:proof-continv2}.
+\end{align}
+%
+Using Equations~\ref{eqn:proof-continv2} and~\ref{eqn:proof-continv1},
+we get
+\begin{align*}
+& \contreach{\edge}{\Psi}\\
+& =\lt(\minsum{\linmap_\edge\lt(\Psi_{\edge_1}\bigcap\ptope{\qtemp}{\join{\lsys{\edge}}{\lsys{\stay_{\edge_1}}}}{\meet{\usys{\edge}}{\usys{\stay_{\edge_1}}}}\rt)}{\inputset_{\edge}}\rt)\bigcap 
+\ptope{\qtemp}{\lsys{\stay_{\edge_2}}}{\usys{\stay_{\edge_2}}}\\
+& \subseteq \Omega_\loc.\hspace{25em}\qedhere
+\end{align*}
+%
+\end{proof}
 %
