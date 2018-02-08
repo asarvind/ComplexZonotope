@@ -1,4 +1,3 @@
-\section{Interval zonotope and Sub-parallelotope}
 We introduce a set representation called interval zonotope, which is
 geometrically the same as a simple (real) zonotope, but the difference
 is in their respective specifications.  In an interval zonotope, we
@@ -238,85 +237,6 @@ $S_2\subseteq \ptope{\qtemp}{\plb}{\pub}$.  This combined with the
 containment in Equation~\ref{eqn:proof-motivation1}, we get that
 $S_2\subseteq S_1$.  Earlier, we have shown that $S_1\subseteq S_2$.
 Therefore, $S_1=S_2$.
-\end{proof}
-%
-\begin{lemma}
-Let $K\in\mat{k}{n}{R}$ be a sub-parallelotopic template.  Then
-\[
-\iztope{\pinv{\qtemp}}{\lb}{\ub} \bigcap \ptope{\qtemp}{\plb}{\pub}
-= \iztope{\pinv{\qtemp}}{\lb\bigvee \plb}{\ub\bigwedge \pub}
-\]
-\end{lemma}
-%
-\begin{proof}
-Let us consider any point $x\in\lt[\iztope{\pinv{\qtemp}}{\lb}{\ub} \bigcap
-  \ptope{\qtemp}{\plb}{\pub}\rt]$, specified as
-%
-\[
-x=\pinv{\qtemp}\zeta:
-\zeta\in\reals^k\wedge~\lb\leq\zeta\leq \ub.
-\]
-%
-We have
-%
-\[
-\qtemp x=\qtemp\pinv{\qtemp}\zeta=\zeta.
-\]
-%
-Since
-$x\in\ptope{\qtemp}{\plb}{\pub}$, using the above result we get
-%
-\[
-\plb\leq\ptemp x=\zeta\leq\pub.
-\]
-%
-Since we also have $\lb\leq\zeta\leq \ub$, therefore
-%
-\[
-\join{\plb}{\lb}\leq\zeta\leq\meet{\pub}{\ub}.
-\]
-%
-So $x\in\iztope{\pinv{\qtemp}}{\lb\bigvee \plb}{\ub\bigwedge
-  \pub}$.  This shows that
-%
-\[
-\iztope{\pinv{\qtemp}}{\lb}{\ub} \bigcap \ptope{\qtemp}{\plb}{\pub}
-\subseteq \iztope{\pinv{\qtemp}}{\lb\bigvee \plb}{\ub\bigwedge \pub}
-\]
-%
-Next consider any point $y\in\iztope{\pinv{\qtemp}}{\lb\bigvee
-  \plb}{\ub\bigwedge \pub}$, specified as
-%
-\[
-y=\pinv{\qtemp}\zeta^\pr:~\join{\lb}{\plb}\leq\zeta^\pr\leq\meet{\ub}{\pub}.
-\]
-%
-Consequently, $y\in\iztope{\pinv{\qtemp}}{\lb}{\ub}$.
-We also get,
-%
-\begin{align*}
-  & \qtemp y=\qtemp\pinv{\qtemp}\zeta^\pr=\zeta^\pr\\
-  & \%\% ~~\text{As}~\join{\lb}{\plb}\leq\zeta^\pr\leq\meet{\ub}{\pub}\\
-  & \implies \plb\leq \qtemp y\leq\pub\\
-  & y\in\ptope{\qtemp}{\plb}{\pub}.
-\end{align*}
-%
-So, we get $y\in\iztope{\pinv{\qtemp}}{\lb}{\ub} \bigcap
-\ptope{\qtemp}{\plb}{\pub}$.  Therefore,
-%
-\[
-\iztope{\pinv{\qtemp}}{\lb}{\ub} \bigcap \ptope{\qtemp}{\plb}{\pub}
-\supseteq \iztope{\pinv{\qtemp}}{\lb\bigvee \plb}{\ub\bigwedge \pub}
-\]
-%
-Combing the above with the previous conclusion above containment, we
-get,
-%
-\[
-\iztope{\pinv{\qtemp}}{\lb}{\ub} \bigcap \ptope{\qtemp}{\plb}{\pub}
-= \iztope{\pinv{\qtemp}}{\lb\bigvee \plb}{\ub\bigwedge \pub}.~~~\qedhere
-\]
-%
 \end{proof}
 %
 An interval zonotope can be equivalently specified as the real
