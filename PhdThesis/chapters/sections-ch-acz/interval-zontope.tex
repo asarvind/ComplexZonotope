@@ -239,6 +239,146 @@ $S_2\subseteq S_1$.  Earlier, we have shown that $S_1\subseteq S_2$.
 Therefore, $S_1=S_2$.
 \end{proof}
 %
+{\bf Min and Max-approximation functions:} The
+the intersection of an interval zonotope and a
+sub-parallelotope given in Lemma~\ref{thm:acz-ptope-intersection}
+requires computing componentwise minimum (meet) and maximum (join) of
+two real vectors.  The meet and join operations on real vectors are in
+general not affine functions of the arguments.  However, under a
+certain affine constraint on the variables that shall be explained
+later in Lemma~\ref{lem:min-max-approximation}, the meet and join operations can be
+expressed as affine expressions of the variables.  In the context, we
+introduce the following functions.  A function
+$\minapproxsymbol:\reals^k\times\lt(\reals\cup\infty\rt)^k$ is a
+min-approximation function if for all $i\in\set{1,...,k}$
+%
+\[
+\lt(\minapprox{\ub}{\pub}\rt)_i=
+\lt\{
+\begin{array}{l}
+\ub_i~\text{if}~\pub_i=\infty\\
+\pub_i~\text{if}~\pub_i<\infty
+\end{array}
+\rt.
+\]
+%
+By the above definition, $\minapprox{\ub}{\pub}$ is an affine function of its
+first argument $\ub$, which is a finite valued real vector.
+%
+\begin{equation}~\label{eqn:minapprox}
+\minapprox{\ub}{\pub}\geq\meet{\ub}{\pub}.
+\end{equation}
+%
+Similarly, a function
+$\maxapproxsymbol:\reals^k\times\lt(\reals\cup\lt(-\infty\rt)^k\rt)$
+is a max-approximation function if for all $i\in\set{1,...,k}$
+%
+\[
+\lt(\maxapprox{\lb}{\plb}\rt)_i=
+\lt\{
+\begin{array}{l}
+\lb_i~\text{if}~\plb_i=-\infty\\
+\plb_i~\text{if}~\plb_i>-\infty
+\end{array}
+\rt.
+\]
+%
+By the above definition, $\maxapprox{\lb}{\plb}$ is an affine function
+of its first argument $\lb$, which is a finite valued real vector.
+%
+\begin{equation}~\label{eqn:minapprox}
+\minapprox{\lb}{\plb}\geq\join{\lb}{\plb}.
+\end{equation}
+%
+Then, we have the following lemma about representing the meet and join
+operations using min and max-approximation functions under a certain
+condition.
+%
+\begin{lemma}~\label{lem:min-max-approximation}
+Let us consider vectors $\lb,\ub\in\reals^k$ and
+$\plb,\pub\in\set{\reals,-\infty,\infty}^k$.  If
+$\lb\leq\maxapprox{\lb}{\plb}\leq\minapprox{\ub}{\pub}\leq\ub$, then
+%
+\begin{align*}
+& \join{\lb}{\plb}=\maxapprox{\lb}{\plb}\\
+& \meet{\ub}{\pub}=\minapprox{\ub}{\pub}.
+\end{align*}
+%
+\end{lemma}
+%
+The following lemma states relation between the support function of a
+sub-parallelotope and an interval zonotope.  This relation
+is later used for deriving the over-approximation of the intersection
+between an augmented complex zonotope and a sub-parallelotope.
+%
+\begin{lemma}
+Let $v\in\reals^n$ such that
+$\supp{v}{\ptope{\qtemp}{\plb}{\pub}}<\infty$ and
+%
+\[
+\lb\leq\maxapprox{\lb}{\plb}\leq\minapprox{\ub}{\pub}\leq\ub.
+\]
+%
+Then, there exists $x\in\iztope{\pinv{\qtemp}}{\lb}{\ub}$ such that
+$\supp{v}{\ptope{\qtemp}{\plb}{\pub}}=v^Tx$.
+\end{lemma}
+%
+\begin{proof}
+  By Lemma~\ref{lem:ptope-iz-conversion}, we get
+  %
+  \begin{align*}
+  & \supp{v}{\ptope{\qtemp}{\plb}{\pub}}=\supp{v}{\nullspace{\qtemp}}\oplus\supp{v}{\Psi}~~\text{where},\\
+& \Psi=\set{\zeta\in\reals^k:~\plb\leq\zeta\leq\pub}.
+  \end{align*}
+%
+As $\nullspace{\qtemp}$ is a vector space, so if
+$\supp{v}{\nullspace{\qtemp}}\neq 0$, then
+$\supp{v}{\nullspace{\qtemp}}=\infty$.  But since
+$\supp{v}{\ptope{\qtemp}{\plb}{\pub}}<\infty$ as given, we get
+$\supp{v}{\nullspace{\qtemp}}=0$ and
+%
+\begin{align*}
+&\supp{v}{\ptope{\qtemp}{\plb}{\pub}}=\supp{v}{\Psi}\setminus{\infty}\\
+&
+  \%\% ~~\text{since support of a function can not be} -\infty
+  \nonumber\\
+& = \supp{v}{\Psi}\bigcap\reals
+=
+  \lt(\max_{x\in\Psi}v^Tx\rt)\bigcap\reals=\lt(\max_{\zeta:\plb\leq\zeta\leq\pub}v^T\pinv{\qtemp}\zeta\rt)\bigcap\reals\nonumber\\
+&
+  =
+  \sum_{i=1}^k\lt(\max\lt(\lt(v^T\pinv\qtemp\rt)_i\set{\plb_i,\pub_i}\rt)\bigcap\reals\rt).\nonumber\\
+&
+  \subseteq\bigoplus_{i=1}^k
+  \lt(v^T\pinv{\qtemp}\rt)\lt(\set{\plb_i,\pub_i}\bigcap\reals\rt)\nonumber\\
+&
+  \%\% ~~\text{From the definition of}\nonumber\\
+& \%\%
+  ~~\text{min-approximation and max-approximation
+    functions},\nonumber\\
+& \subseteq
+  \bigoplus_{i=1}^k\lt(v^T\pinv{\qtemp}\rt)_i\lt(\set{\lt(\maxapprox{\lb}{\plb}\rt)_i,\lt(\minapprox{\ub}{\pub}\rt)_i}\rt)\nonumber\\
+&
+  \subseteq
+  v^T\pinv{\qtemp}\set{\zeta\in\reals^k:\zeta_i\in\set{\lt(\maxapprox{\lb}{\plb}\rt)_i,\lt(\minapprox{\ub}{\pub}\rt)_i}}\nonumber\\
+&
+  \%\%~~\text{since}~\lb\leq\maxapprox{\lb}{\plb}\leq\minapprox{\ub}{\pub}\leq\ub\nonumber\\
+&
+  \subseteq v^T\pinv{\qtemp}\set{\zeta\in\reals^k:\lb\leq
+    \zeta\leq\ub}\nonumber\\ & = v^T\iztope{\pinv{\qtemp}}{\lb}{\ub}.
+\end{align*}
+%
+Therefore,
+%
+\[
+\exists
+x\in\iztope{\pinv{\qtemp}}{\lb}{\ub}:\supp{v}{\ptope{\qtemp}{\plb}{\pub}}=\supp{v}{\Psi}=v^Tx.\vspace{3em}~\qedhere
+\]
+%
+\end{proof}
+
+\subsubsection*{Other computations on interval zonotopes}
+%
 An interval zonotope can be equivalently specified as the real
 projection of the following template complex zonotope.  This result is
 latter used in Lemma~\ref{lem:acz-tcz-conversion} to convert between

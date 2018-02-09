@@ -75,6 +75,8 @@
 \newcommand{\func}[3]{#1:#2\rightarrow #3}
 % support of a vector
 \newcommand{\support}[3]{\rho\left(#1,#2,#3\right)}
+% \support function
+\newcommand{\supp}[2]{\rho\lt(#1,#2\rt)}
 % over approximation error
 \newcommand{\approxerror}[2]{\delta\lt(#1,#2\rt)}
 % min-approximation 
@@ -87,8 +89,12 @@
 \newcommand{\maxapproxsymbol}[2]{\llbracket\bigvee\rrbracket}
 % Hausdorff distance
 \newcommand{\hausdorff}[2]{\d_H\lt(#1,#2\rt)}
-% over-approximation erro
-\newcommand{\err}[3]{\theta\lt(#1,#2,#3\rt)}
+% over-approximation error
+\newcommand{\err}[4]{\Delta\lt(#1,#2,#3,#4\rt)}
+% shifted lower bound
+\newcommand{\slb}[4]{\overline{l}_{#4}\lt(#1,#2,#3\rt)}
+% shifted upper bound
+\newcommand{\sub}[4]{\overline{u}_{#4}\lt(#1,#2,#3\rt)}
 
 
 
@@ -150,7 +156,11 @@
 % augmented complex zonotope
 \newcommand{\acztope}[6]{\mathcal{G}\left(#1,#2,#3,#4,#5,#6\right)}
 % error interval zonotope
-\newcommand{\errtope}[4]{\Delta_{#3}\lt(#1,#2,#4\rt)}
+\newcommand{\errtope}[5]{\Delta_{#5}\lt(#1,#2,#3,#4\rt)}
+% boundary of a set
+\newcommand{\boundary}[1]{\operatorname{\bm{Bd}}\lt(#1\rt)}
+% null space
+%\newcommand{\null}[1]{\operatorname{\bm{Null}}}
 
 
 
