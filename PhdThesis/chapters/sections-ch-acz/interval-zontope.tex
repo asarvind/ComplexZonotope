@@ -319,62 +319,121 @@ $\supp{v}{\ptope{\qtemp}{\plb}{\pub}}<\infty$ and
 \lb\leq\maxapprox{\lb}{\plb}\leq\minapprox{\ub}{\pub}\leq\ub.
 \]
 %
-Then, there exists $x\in\iztope{\pinv{\qtemp}}{\lb}{\ub}$ such that
+Then there exists $x\in\iztope{\pinv{\qtemp}}{\lb}{\ub}$ such that
 $\supp{v}{\ptope{\qtemp}{\plb}{\pub}}=v^Tx$.
 \end{lemma}
 %
 \begin{proof}
-  By Lemma~\ref{lem:ptope-iz-conversion}, we get
+  Let $\Psi=\set{\zeta\in\reals^k:~\plb\leq\zeta\leq\pub}$.  By
+  Lemma~\ref{lem:ptope-iz-conversion}, we get
   %
   \begin{align*}
-  & \supp{v}{\ptope{\qtemp}{\plb}{\pub}}=\supp{v}{\nullspace{\qtemp}}\oplus\supp{v}{\Psi}~~\text{where},\\
-& \Psi=\set{\zeta\in\reals^k:~\plb\leq\zeta\leq\pub}.
+  & \supp{v}{\ptope{\qtemp}{\plb}{\pub}}=\supp{v}{\nullspace{\qtemp}}\oplus\supp{v}{\Psi}
   \end{align*}
 %
-As $\nullspace{\qtemp}$ is a vector space, so if
+The null-space $\nullspace{\qtemp}$ is a vector space.  Therefore, if
 $\supp{v}{\nullspace{\qtemp}}\neq 0$, then
 $\supp{v}{\nullspace{\qtemp}}=\infty$.  But since
 $\supp{v}{\ptope{\qtemp}{\plb}{\pub}}<\infty$ as given, we get
 $\supp{v}{\nullspace{\qtemp}}=0$ and
+$\supp{v}{\ptope{\qtemp}{\plb}{\pub}}=\supp{v}{\Psi}<\infty$.  We have
 %
-\begin{align*}
-&\supp{v}{\ptope{\qtemp}{\plb}{\pub}}=\supp{v}{\Psi}\setminus{\infty}\\
+\begin{align}
+& \supp{v}{\ptope{\qtemp}{\plb}{\pub}}=\supp{v}{\Psi}=
+\max_{x\in\Psi}v^Tx}
+=\max_{\zeta\in\reals^k:\plb\leq\zeta\leq\pub}v^T\pinv{\qtemp}\zeta\nonumber\\
 &
-  \%\% ~~\text{since support of a function can not be} -\infty
-  \nonumber\\
-& = \supp{v}{\Psi}\bigcap\reals
-=
-  \lt(\max_{x\in\Psi}v^Tx\rt)\bigcap\reals=\lt(\max_{\zeta:\plb\leq\zeta\leq\pub}v^T\pinv{\qtemp}\zeta\rt)\bigcap\reals\nonumber\\
-&
-  =
-  \sum_{i=1}^k\lt(\max\lt(\lt(v^T\pinv\qtemp\rt)_i\set{\plb_i,\pub_i}\rt)\bigcap\reals\rt).\nonumber\\
-&
-  \subseteq\bigoplus_{i=1}^k
-  \lt(v^T\pinv{\qtemp}\rt)\lt(\set{\plb_i,\pub_i}\bigcap\reals\rt)\nonumber\\
-&
-  \%\% ~~\text{From the definition of}\nonumber\\
-& \%\%
-  ~~\text{min-approximation and max-approximation
-    functions},\nonumber\\
-& \subseteq
-  \bigoplus_{i=1}^k\lt(v^T\pinv{\qtemp}\rt)_i\lt(\set{\lt(\maxapprox{\lb}{\plb}\rt)_i,\lt(\minapprox{\ub}{\pub}\rt)_i}\rt)\nonumber\\
-&
-  \subseteq
-  v^T\pinv{\qtemp}\set{\zeta\in\reals^k:\zeta_i\in\set{\lt(\maxapprox{\lb}{\plb}\rt)_i,\lt(\minapprox{\ub}{\pub}\rt)_i}}\nonumber\\
-&
-  \%\%~~\text{since}~\lb\leq\maxapprox{\lb}{\plb}\leq\minapprox{\ub}{\pub}\leq\ub\nonumber\\
-&
-  \subseteq v^T\pinv{\qtemp}\set{\zeta\in\reals^k:\lb\leq
-    \zeta\leq\ub}\nonumber\\ & = v^T\iztope{\pinv{\qtemp}}{\lb}{\ub}.
-\end{align*}
+\%\%~~\text{since}~\set{\zeta\in\reals^k:\plb\leq\zeta\leq\pub}~\text{is
+a cartesian product of intervals}\nonumber\\
+& =
+\sum_{i=1}^k\supp{\lt(v^T\pinv{\qtemp}\rt)_i}{\set{\zeta\in\reals^k:\plb\leq\zeta\leq\pub}}~\label{eqn:proof-supp1}
+\end{align}
 %
-Therefore,
+As $\supp{v}{\Psi}\leq\infty$, so by the above equation,
+%
+\begin{equation}~\label{eqn:proof-supp2}
+\forall
+i\in\set{1,...,k}:~\supp{\lt(v^T\pinv{\qtemp}\rt)_i}{\set{\zeta\in\reals^k:\plb\leq\zeta\leq\pub}}\leq \infty.
+\end{equation}
+%
+Let us define $\epsilon\in\reals^k: \maxapprox{\lb}{\plb}\leq x\leq \minapprox{\ub}{\pub}$
+as follows.  For any $i\in \set{1,...,k}$, we
 %
 \[
-\exists
-x\in\iztope{\pinv{\qtemp}}{\lb}{\ub}:\supp{v}{\ptope{\qtemp}{\plb}{\pub}}=\supp{v}{\Psi}=v^Tx.\vspace{3em}~\qedhere
+\epsilon_i=\lt\{
+\begin{array}{l}
+  \lt(\maxapprox{\lb}{\plb}\rt)_i~~\text{if}~\lt(v^T\pinv{\qtemp}\rt)_i\leq 0
+  \lt(\minapprox{\ub}{\pub}\rt)_i~~\text{otherwise}.
+\end{array}
+\rt.
 \]
 %
+We shall show that for any $i\in\set{1,...,k}$.
+%
+\[
+\supp{\lt(v^T\pinv{\qtemp}\rt)_i}{\set{\zeta\in\reals^k:\plb\leq\zeta\leq\pub}}=\lt(v^T\pinv{\qtemp}\rt)_i\epsilon_i
+\]
+%
+by considering the following three possible cases.
+
+{\it Case 1:} Let  us consider that $\lt(v^T\pinv{\qtemp}\rt)_i=0$.
+Then
+%
+\begin{align*}
+&
+  \supp{\lt(v^T\pinv{\qtemp}\rt)_i}{\set{\zeta\in\reals^k:\plb\leq\zeta\leq\pub}}\\
+& \supp{0}{\set{\zeta\in\reals^k:\plb\leq\zeta\leq\pub}}=0=\lt(v^T\pinv{\qtemp}\rt)_i\epsilon_i.
+\end{align*}
+%
+{\it Case 2:} Let us consider that $\lt(v^T\pinv{\qtemp}\rt)_i<0$.
+Then
+%
+\begin{align*}
+&
+  \supp{\lt(v^T\pinv{\qtemp}\rt)_i}{\set{\zeta\in\reals^k:\plb\leq\zeta\leq\pub}}=\lt(v^T\pinv{\qtemp}\rt)_i\plb_i\\
+\end{align*}
+%
+Then by Equation~\ref{eqn:proof-supp2}, we get $\plb_i>-\infty$.  So,
+by the definition of maxapproximation function, we get
+$\plb_i=\lt(\maxapprox{\lb}{\plb}\rt)_i=\epsilon_i$.  Therefore,
+%
+\begin{align*}
+&
+  \supp{\lt(v^T\pinv{\qtemp}\rt)_i}{\set{\zeta\in\reals^k:\plb\leq\zeta\leq\pub}}=\lt(v^T\pinv{\qtemp}\rt)_i\epsilon_i\\
+\end{align*}
+%
+{\it Case 3:}  Let us consider that
+$\lt(v^T\pinv{\qtemp}\rt)_i>0$. Then
+%
+\begin{align*}
+&
+  \supp{\lt(v^T\pinv{\qtemp}\rt)_i}{\set{\zeta\in\reals^k:\plb\leq\zeta\leq\pub}}=\lt(v^T\pinv{\qtemp}\rt)_i\pub_i\\
+\end{align*}
+%
+Then by Equation~\ref{eqn:proof-supp2}, we get $\pub_i<\infty$.  So,
+by the definition of minapproximation function, we get
+$\pub_i=\lt(\minapprox{\lb}{\plb}\rt)_i=\epsilon_i$.  Therefore,
+%
+\begin{align*}
+&
+  \supp{\lt(v^T\pinv{\qtemp}\rt)_i}{\set{\zeta\in\reals^k:\plb\leq\zeta\leq\pub}}=\lt(v^T\pinv{\qtemp}\rt)_i\epsilon_i\\
+\end{align*}
+%
+Based on the conclusions in the above three
+cases and Equation~\ref{eqn:proof-supp1}, we get
+%
+\begin{align*}
+& \supp{v}{\ptope{\qtemp}{\plb}{\pub}}=\supp{v}{\Psi}\\
+& =
+  \sum_{i=1}^k\supp{\lt(v^T\pinv{\qtemp}\rt)_i}{\set{\zeta\in\reals^k:\plb\leq\zeta\leq\pub}}
+  & = \sum_{i=1}^k\lt(v^T\pinv{\qtemp}\rt)_i\epsilon_i=v^T\pinv{\qtemp}\epsilon.
+\end{align*}
+%
+Let $x=\pinv{\qtemp}\epsilon$.  Then,
+$\supp{v}{\ptope{\qtemp}{\plb}{\pub}}=v^Tx$.  Since
+$\maxapprox{\lb}{\plb}\epsilon\leq\minapprox{\ub}{\pub}$ and
+$\lb\leq\maxapprox{\lb}{\plb}\leq\minapprox{\ub}{\pub}\leq\ub$, we get
+$x\in\iztope{\lb}{\ub}$.
 \end{proof}
 
 \subsubsection*{Other computations on interval zonotopes}
@@ -384,8 +443,8 @@ projection of the following template complex zonotope.  This result is
 latter used in Lemma~\ref{lem:acz-tcz-conversion} to convert between
 reals projections of an augmented complex zonotope and a template
 complex zonotope, which is in turn used in
-Theorem~\ref{thm:acz-inclusion} to derive a convex program for checking
-inclusion between augmented complex zonotopes.
+Theorem~\ref{thm:acz-inclusion} to derive a convex program for
+checking inclusion between augmented complex zonotopes.
 %
 \begin{lemma}~\label{lem:iz-tcz-conversion}
 We have the following equivalence between an interval zonotope and the
