@@ -138,22 +138,22 @@ of the set of reachable states of a system from a set of
 states $\Psi$, after a continuous transition in a location $\loc$,
 denoted $\contreach{\loc}{\Psi}$, can be represented as follows.
 %
-\begin{align*}
+\begin{align}
 &
-\contreach{\loc}{\Psi}=\minsum{\linmap_\loc\lt(\Psi_q\bigcap{\ptope{\qtemp}{\lsys{\stay_\loc}}{\usys{\stay_\loc}}}\rt)}{\inputset_\loc}\bigcap
-\ptope{\qtemp}{\lsys{\stay_\loc}}{\usys{\stay_\loc}}\\
-\end{align*}
+\contreach{\loc}{\Psi}=\lt(\minsum{\linmap_\loc\lt(\Psi_q\bigcap{\ptope{\qtemp}{\lsys{\stay_\loc}}{\usys{\stay_\loc}}}\rt)}{\inputset_\loc}\rt)\bigcap
+\ptope{\qtemp}{\lsys{\stay_\loc}}{\usys{\stay_\loc}}~\label{eqn:contreach}.
+\end{align}
 %
 Similarly, based on Equation~\ref{eqn:dis-transition}, the continuous
 projection of the set of reachable states of a system from a set of
 states $\Psi$, after a discrete transition along an edge $\edge$,
 denoted $\contreach{\edge}{\Psi}$, can be represented as follows.
 %
-\begin{align*}
+\begin{align}
 &
 \contreach{\edge}{\Psi}=\lt(\minsum{\linmap_\edge\lt(\Psi_{\edge_1}\bigcap\ptope{\qtemp}{\join{\lsys{\edge}}{\lsys{\stay_{\edge_1}}}}{\meet{\usys{\edge}}{\usys{\stay_{\edge_1}}}}\rt)}{\inputset_{\edge}}\rt)\bigcap 
-\ptope{\qtemp}{\lsys{\stay_{\edge_2}}}{\usys{\stay_{\edge_2}}}
-\end{align*}
+\ptope{\qtemp}{\lsys{\stay_{\edge_2}}}{\usys{\stay_{\edge_2}}}~\label{eqn:disreach}.
+\end{align}
 %
 Therefore, we can represented the set of reachable states of the
 system in one time step from a set of states $\Psi$ as follows.

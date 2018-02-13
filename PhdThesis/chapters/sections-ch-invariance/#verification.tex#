@@ -266,6 +266,6 @@ T\lt(\cen+\pinv{\qtemp}\frac{\lb+\ub}{2}\rt)+\absolute{T\mymatrix{\ptemp
 %
 \begin{proof}
 The result follows from the expression for the support function of an
-augmented complex zonotope given in Lemma~\ref{lem:support-acz}.
+augmented complex zonotop
 \end{proof}
 %

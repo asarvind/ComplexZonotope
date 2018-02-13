@@ -331,16 +331,21 @@ $\supp{v}{\ptope{\qtemp}{\plb}{\pub}}=v^Tx$.
   & \supp{v}{\ptope{\qtemp}{\plb}{\pub}}=\supp{v}{\nullspace{\qtemp}}\oplus\supp{v}{\Psi}
   \end{align*}
 %
-The null-space $\nullspace{\qtemp}$ is a vector space.  Therefore, if
-$\supp{v}{\nullspace{\qtemp}}\neq 0$, then
-$\supp{v}{\nullspace{\qtemp}}=\infty$.  But since
-$\supp{v}{\ptope{\qtemp}{\plb}{\pub}}<\infty$ as given, we get
+The set $\nullspace{\qtemp}$ is a vector space.  So,
+%
+\[
+\lt(\supp{v}{\nullspace{\qtemp}}\neq 0\rt)\implies
+\lt(\supp{v}{\nullspace{\qtemp}}=\infty\rt).
+\]
+%
+But since we are given
+$\supp{v}{\ptope{\qtemp}{\plb}{\pub}}<\infty$, so
 $\supp{v}{\nullspace{\qtemp}}=0$ and
-$\supp{v}{\ptope{\qtemp}{\plb}{\pub}}=\supp{v}{\Psi}<\infty$.  We have
+$\supp{v}{\ptope{\qtemp}{\plb}{\pub}}=\supp{v}{\Psi}<\infty$.  Then we derive
 %
 \begin{align}
 & \supp{v}{\ptope{\qtemp}{\plb}{\pub}}=\supp{v}{\Psi}=
-\max_{x\in\Psi}v^Tx}
+\max_{x\in\Psi}v^Tx
 =\max_{\zeta\in\reals^k:\plb\leq\zeta\leq\pub}v^T\pinv{\qtemp}\zeta\nonumber\\
 &
 \%\%~~\text{since}~\set{\zeta\in\reals^k:\plb\leq\zeta\leq\pub}~\text{is
@@ -349,20 +354,20 @@ a cartesian product of intervals}\nonumber\\
 \sum_{i=1}^k\supp{\lt(v^T\pinv{\qtemp}\rt)_i}{\set{\zeta\in\reals^k:\plb\leq\zeta\leq\pub}}~\label{eqn:proof-supp1}
 \end{align}
 %
-As $\supp{v}{\Psi}\leq\infty$, so by the above equation,
+As $\supp{v}{\Psi}<\infty$, by the above equation we get
 %
 \begin{equation}~\label{eqn:proof-supp2}
 \forall
-i\in\set{1,...,k}:~\supp{\lt(v^T\pinv{\qtemp}\rt)_i}{\set{\zeta\in\reals^k:\plb\leq\zeta\leq\pub}}\leq \infty.
+i\in\set{1,...,k}:~\supp{\lt(v^T\pinv{\qtemp}\rt)_i}{\set{\zeta\in\reals^k:\plb\leq\zeta\leq\pub}}<\infty.
 \end{equation}
 %
-Let us define $\epsilon\in\reals^k: \maxapprox{\lb}{\plb}\leq x\leq \minapprox{\ub}{\pub}$
-as follows.  For any $i\in \set{1,...,k}$, we
+Let us consider $\epsilon\in\reals^k: \maxapprox{\lb}{\plb}\leq \epsilon\leq \minapprox{\ub}{\pub}$
+where $i\in \set{1,...,k}$, 
 %
 \[
 \epsilon_i=\lt\{
 \begin{array}{l}
-  \lt(\maxapprox{\lb}{\plb}\rt)_i~~\text{if}~\lt(v^T\pinv{\qtemp}\rt)_i\leq 0
+  \lt(\maxapprox{\lb}{\plb}\rt)_i~~\text{if}~\lt(v^T\pinv{\qtemp}\rt)_i\leq 0\\
   \lt(\minapprox{\ub}{\pub}\rt)_i~~\text{otherwise}.
 \end{array}
 \rt.
@@ -393,8 +398,9 @@ Then
   \supp{\lt(v^T\pinv{\qtemp}\rt)_i}{\set{\zeta\in\reals^k:\plb\leq\zeta\leq\pub}}=\lt(v^T\pinv{\qtemp}\rt)_i\plb_i\\
 \end{align*}
 %
-Then by Equation~\ref{eqn:proof-supp2}, we get $\plb_i>-\infty$.  So,
-by the definition of maxapproximation function, we get
+Byy Equation~\ref{eqn:proof-supp2}, the above value is finite, which
+means $\plb_i>-\infty$.  Then
+by the definition of max-approximation function, we get
 $\plb_i=\lt(\maxapprox{\lb}{\plb}\rt)_i=\epsilon_i$.  Therefore,
 %
 \begin{align*}
@@ -410,8 +416,9 @@ $\lt(v^T\pinv{\qtemp}\rt)_i>0$. Then
   \supp{\lt(v^T\pinv{\qtemp}\rt)_i}{\set{\zeta\in\reals^k:\plb\leq\zeta\leq\pub}}=\lt(v^T\pinv{\qtemp}\rt)_i\pub_i\\
 \end{align*}
 %
-Then by Equation~\ref{eqn:proof-supp2}, we get $\pub_i<\infty$.  So,
-by the definition of minapproximation function, we get
+By Equation~\ref{eqn:proof-supp2}, the above value is finite, which
+means $\pub_i<\infty$.  Then by
+by the definition of min-approximation function, we get
 $\pub_i=\lt(\minapprox{\lb}{\plb}\rt)_i=\epsilon_i$.  Therefore,
 %
 \begin{align*}
@@ -431,9 +438,9 @@ cases and Equation~\ref{eqn:proof-supp1}, we get
 %
 Let $x=\pinv{\qtemp}\epsilon$.  Then,
 $\supp{v}{\ptope{\qtemp}{\plb}{\pub}}=v^Tx$.  Since
-$\maxapprox{\lb}{\plb}\epsilon\leq\minapprox{\ub}{\pub}$ and
-$\lb\leq\maxapprox{\lb}{\plb}\leq\minapprox{\ub}{\pub}\leq\ub$, we get
-$x\in\iztope{\lb}{\ub}$.
+$\maxapprox{\lb}{\plb}\leq\epsilon\leq\minapprox{\ub}{\pub}$ and as
+given $\lb\leq\maxapprox{\lb}{\plb}\leq\minapprox{\ub}{\pub}\leq\ub$,
+we get $x\in\iztope{\pinv{\qtemp}}{\lb}{\ub}$.
 \end{proof}
 
 \subsubsection*{Other computations on interval zonotopes}

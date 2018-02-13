@@ -109,13 +109,13 @@
 
 
 
-%%% arrays
+%%% arrays and vectors
 % set of matrices
 \newcommand{\mat}[3]{\mathbb{M}_{#1\times#2}\left(#3\right)}
 % diagonal matrix
 \newcommand{\diagonal}[1]{\operatorname{diag}\left(#1\right)}
 % repeat elements
-\newcommand{\repmat}[3]{\lt[1\rt]_{#2\times #3}}
+\newcommand{\repmat}[3]{\lt[#1\rt]_{#2\times #3}}
 % inverse matrix
 \newcommand{\inv}[1]{{#1}^{-1}}
 % pseudo-inverse
@@ -126,6 +126,10 @@
 \newcommand{\mymatrix}[1]{\lt[\begin{matrix}#1\end{matrix}\rt]}
 % orthonormal basis
 \newcommand{\orthnorm}[1]{#1^*}
+% column vector of identity matrix
+\newcommand{\idvec}[1]{\bm{e}_{#1}}
+% identity matrix
+\newcommand{\identity}[2]{\bm{Id}_{#1\times #2}}
 
 
 
@@ -269,7 +273,7 @@
 % continuous projection
 \newcommand{\proj}[2]{#1_#2}
 % positive invariance with respect to a transition
-\newcommand{\posinv}[2]{#1\vdash\pair{\system}{#2}}
+\newcommand{\posinv}[2]{#1\order\pair{\system}{#2}}
 
 
 
