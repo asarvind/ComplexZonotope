@@ -127,35 +127,48 @@ A^T\Psi}v^Tx=\supp{v}{A^T\Psi}.$
 Let us denote the $i^{th}$ column vector of the identity matrix by
 $\idvec{i}$, where $\lt(\idvec{i}\rt)_j=1$ if $i=j$ and $0$ otherwise.
 Let us consider that $Y\in\mat{n}{n-k}{\reals}$ is a basis for
-$\nullspace{\qtemp}$ when $k<n$.  If $k=n$ then $Y=0$.
-
-The following
-lemma gives an expression for the support function of the intersection
-of a sub-parallelotope an augmented complex zonotope.  In the lemma, we
-write a vector in terms of the basis $\mymatrix{\transpose{\qtemp} & Y}$.
-%
-\begin{lemma}[Support function of intersection]~\label{lem:supp-intersection}
-Let us consider a vector $v\in\reals^n$. Since $\mymatrix{\qtemp^T &
-Y}$ is a basis of $\reals^n$, there exists $\alpha\in\reals^n$ such that
-$v=\mymatrix{\qtemp^T & Y}\alpha$.  Let us consider $\xi\in\reals^n$ such
-that $\forall i\in\set{1,...,n}$
+$\nullspace{\qtemp}$ when $k<n$.  If $k=n$ then $Y=0$.  For any
+$\alpha\in\reals^n$, let us define $\ind{\alpha}\in\reals^n$ as
+follows. 
 %
 \[
-\xi_i=
+\forall i\in\set{1,...,n}:~\ind{\alpha}=
 \lt\{\begin{array}{l}
-0~~\text{if}~\supp{\alpha_i}{\lt(\plb_i~~\pub_i\rt)}<\infty~\text{and}~i\leq k\\
+0~~\text{if}~\supp{\alpha_i}{\lt(\plb_i,\pub_i\rt)}<\infty~\text{and}~i\leq k\\
 1~~\text{otherwise}.
 \end{array}
 \right.
 \]
 %
-Let $\lb\leq\maxapprox{\lb}{\plb}\leq\minapprox{\ub}{\pub}\leq\ub$ and
-let us denote
+
+The following lemma gives an expression for the support function of
+the intersection of a sub-parallelotope an augmented complex zonotope.
+In the lemma, we write a vector in terms of the basis
+$\mymatrix{\transpose{\qtemp} & Y}$.  We denote
 $\Psi_1=\acztope{\ptemp}{\cen}{\sfact}{\pinv{\qtemp}}{\plb}{\pub}$ and
-$\Psi_2=\ptope{\pinv{\qtemp}}{\plb}{\pub}$. .  Then,
+$\Psi_2=\ptope{\pinv{\qtemp}}{\plb}{\pub}$.
+%
+\begin{lemma}[Support function of intersection]~\label{lem:supp-intersection}
+Let $S\in\reals^n$ be a closed and convex set and
+$\lb\leq\maxapprox{\lb}{\plb}\leq\minapprox{\ub}{\pub}\leq\ub$. Then,
+%
+\begin{align*}
+& \mymatrix{\qtemp\\ Y^T}\lt(\lt(S\oplus \iztope{\pinv{\qtemp}}{\lb}{\ub}\rt)\bigcap\ptope{\qtemp}{\plb}{\pub}\rt)\\
+&= \diagonal{\ind{\alpha}}\mymatrix{\qtemp\\ Y}S
+ \oplus\iztope{\mymatrix{\qtemp\\ Y^T}\pinv{\qtemp}}{\maxapprox{\lb}{\plb}}{\minapprox{\ub}{\pub}}.
+\end{align*}
+%
+\end{lemma}
+%
+\begin{lemma}[Support function of intersection]~\label{lem:supp-intersection}
+Let us consider a vector $v\in\reals^n$. Since $\mymatrix{\qtemp^T &
+Y}$ is a basis of $\reals^n$, there exists $\alpha\in\reals^n$ such
+that $v=\mymatrix{\qtemp^T & Y}\alpha$.  Let
+$\lb\leq\maxapprox{\lb}{\plb}\leq\minapprox{\ub}{\pub}\leq\ub$. Then,
+%
 \begin{align*}
 & \supp{v}{\Psi_1\bigcap\Psi_2}=\\
-& \supp{\alpha}{\diagonal{\xi}\tcztope{\mymatrix{\qtemp\\
+& \supp{\alpha}{\diagonal{\ind{\alpha}}}{\tcztope{\mymatrix{\qtemp\\
 Y^T}\ptemp}{\cen}{\sfact}}
  +\supp{v}{\iztope{\pinv{\qtemp}}{\maxapprox{\lb}{\plb}}{\minapprox{\ub}{\pub}}}.
 \end{align*}
@@ -163,36 +176,94 @@ Y^T}\ptemp}{\cen}{\sfact}}
 \end{lemma}
 %
 \begin{proof}
-We derive
+We get $\supp{\mymatrix{\qtemp^T & Y}\alpha}{\Psi_1\bigcap\Psi_2}\leq$
 %
 \begin{align}
-\supp{\mymatrix{\qtemp^T & Y}\alpha}{\Psi_1\bigcap\Psi_2}
-\leq \nonumber\\
-\supp{\mymatrix{\qtemp^T &
-Y}\diagonal{\xi}\alpha}{\Psi_1\bigcap\Psi_2}
-& +\supp{\mymatrix{\qtemp^T
-& Y}\lt(\alpha-\diagonal{\xi}\alpha\rt)}{\Psi_1\bigcap\Psi_2}\nonumber\\
-\leq \supp{\mymatrix{\qtemp^T &
-Y}\diagonal{\xi}\alpha}{\Psi_1}
-& +\supp{\mymatrix{\qtemp^T &
-Y}\lt(\alpha-\diagonal{\xi}\rt)}{\Psi_2}\nonumber\\
-\%\%~~\text{By Lemma~\ref{lem:supp-mult-matrix}}\nonumber\\
-= \supp{\diagonal{\xi}\alpha}{\mymatrix{\qtemp \\
+& \lt(\supp{\mymatrix{\qtemp^T &
+Y}\diagonal{\ind{\alpha}}\alpha}{\Psi_1\bigcap\Psi_2}\right.\nonumber\\
+& \left.+\supp{\mymatrix{\qtemp^T
+& Y}\lt(\alpha-\diagonal{\ind{\alpha}}\alpha\rt)}{\Psi_1\bigcap\Psi_2}\right)\nonumber\\
+& \leq \supp{\mymatrix{\qtemp^T &
+Y}\diagonal{\ind{\alpha}}\alpha}{\Psi_1}
++\supp{\mymatrix{\qtemp^T &
+Y}\lt(\alpha-\diagonal{\ind{\alpha}}\rt)}{\Psi_2}\nonumber\\
+& \%\%~~\text{By Lemma~\ref{lem:supp-mult-matrix}}\nonumber\\
+& = \supp{\diagonal{\ind{\alpha}}\alpha}{\mymatrix{\qtemp \\
 Y^T}\Psi_1}
-& +\supp{\lt(\alpha-\diagonal{\xi}\alpha\rt)}{\mymatrix{\qtemp \\
++\supp{\lt(\alpha-\diagonal{\ind{\alpha}}\alpha\rt)}{\mymatrix{\qtemp \\
 Y^T}\Psi_2}\nonumber\\
-\%\%~~\text{since}~~\forall i>k:\xi_i=1\nonumber\\
-= \supp{\diagonal{\xi}\alpha}{\mymatrix{\qtemp \\
+& \%\%~~\text{since}~~\forall i>k:\lt(\ind{\alpha}\rt)_i=1\nonumber\\
+& = \supp{\diagonal{\ind{\alpha}}\alpha}{\mymatrix{\qtemp \\
 Y^T}\Psi_1}
-& +\supp{\lt(\alpha-\diagonal{\xi}\alpha\rt)}{\mymatrix{\qtemp \\
-0}\Psi_2}.
++\supp{\lt(\alpha-\diagonal{\ind{\alpha}}\alpha\rt)}{\mymatrix{\qtemp \\
+0}\Psi_2}.~\label{proof-supp1}\\
+& \supp{\lt(\alpha-\diagonal{\ind{\alpha}}\alpha\rt)}{\mymatrix{\qtemp \\
+0}\Psi_2}=\supp{\lt(\alpha-\diagonal{\ind{\alpha}}\alpha\rt)}{\mymatrix{\qtemp \\
+0}\ptope{\qtemp}{\plb}{\pub}}\nonumber\\
+& \%\%~~\text{By Lemma~\ref{lem:ptope-iz-conversion}}\nonumber\\
+& = \supp{\lt(\alpha-\diagonal{\ind{\alpha}}\alpha\rt)}{\mymatrix{\qtemp \\
+0}\lt(\nullspace{\qtemp}\oplus \set{\pinv{\qtemp}\zeta:~\zeta\in\reals^k,~\plb\leq\zeta\leq\pub}\rt)}\nonumber\\
+& = \supp{\lt(\alpha-\diagonal{\ind{\alpha}}\alpha\rt)}{\set{\zeta\in\reals^k:\plb\leq\zeta\leq\pub}}\nonumber\\
+& = \sum_{i=1}^n\supp{\lt(1-\ind{\alpha}_i\rt)\alpha_i}{\lt(\plb_i,\pub_i\rt)}\nonumber\\
+& \%\%~~\text{since}~\lt(\ind{\alpha}\rt)_i=0~\text{iff}~\supp{\alpha_i}{\lt(\plb_i,\pub_i\rt)}<\infty
+~\text{and}~i\leq k\nonumber\\
+& = \sum_{i:\lt(\ind{\alpha}\rt)_i=0}\supp{\alpha_i}{\lt(\plb_i,\pub_i\rt)}.
 \end{align}
 %
-We get
+When $\supp{\alpha_i}{\lt(\plb_i,\pub_i\rt)}<\infty$, we have the
+following three cases.
+
+Case 1: $\alpha_i< 0$.  Then
+$\supp{\alpha_i}{\lt(\plb_i,\pub_i\rt)}=\alpha_i\plb_i<\infty$.  So,
+$\plb_i>-\infty$ which implies $\plb_i=\lt(\maxapprox{\lb}{\plb}\rt)_i$.
+Since, $\maxapprox{\lb}{\plb}\leq\minapprox{\ub}{\pub}$ as given, we
+get
+$\supp{\alpha_i}{\lt(\lt(\maxapprox{\lb}{\plb}\rt)_i,\lt(\minapprox{\ub}{\pub}\pub\rt)_i\rt)}
+=\alpha_i\lt(\maxapprox{\lb}{\plb}\rt)_i
+=\alpha_i\plb_i=\supp{\alpha_i}{\lt(\plb_i,\pub_i\rt)}$.
+
+Case 2: $\alpha_i> 0$.  Then
+$\supp{\alpha_i}{\lt(\plb_i,\pub_i\rt)}=\alpha_i\pub_i<\infty$.  So,
+$\pub_i<\infty$ which implies $\pub_i=\lt(\minapprox{\ub}{\pub}\rt)_i$.
+Since, $\maxapprox{\lb}{\plb}\leq\minapprox{\ub}{\pub}$ as given, we
+get
+$\supp{\alpha_i}{\lt(\lt(\maxapprox{\lb}{\plb}\rt)_i,\lt(\minapprox{\ub}{\pub}\pub\rt)_i\rt)}=
+\alpha_i\lt(\minapprox{\ub}{\pub}\rt)_i
+=\alpha_i\pub_i=\supp{\alpha_i}{\lt(\plb_i,\pub_i\rt)}$.
+
+Case 3: $\alpha_i=0$.  Then
+$0=\supp{\alpha_i}{\lt(\plb_i,\pub_i\rt)}=\supp{0}{\lt(\plb_i,\pub_i\rt)}$\\
+$=
+\supp{0}{\lt(\lt(\maxapprox{\lb}{\plb}\rt)_i,\lt(\minapprox{\ub}{\pub}\pub\rt)_i\rt)}
+= \supp{\alpha_i}{\lt(\lt(\maxapprox{\lb}{\plb}\rt)_i,\lt(\minapprox{\ub}{\pub}\pub\rt)_i\rt)}$.
+
+So, we get
 %
-\begin{align*}
+\begin{align}
+& \supp{\lt(\alpha-\diagonal{\ind{\alpha}}\alpha\rt)}{\mymatrix{\qtemp \\
+0}\Psi_2}\nonumber\\
+& =\sum_{i:1\leq i\leq
+k\lt(\ind{\alpha}\rt)_i=0}\supp{\alpha_i}{\lt(\lt(\maxapprox{\lb}{\plb}\rt)_i,\lt(\minapprox{\ub}{\pub}\pub\rt)_i\rt)}.~\label{proof-supp3}\\
+& \supp{\diagonal{\ind{\alpha}}\alpha}{\mymatrix{\qtemp \\
+Y^T}\Psi_1}\nonumber\\
+& =\supp{\diagonal{\ind{\alpha}}\alpha}{\mymatrix{\qtemp \\
+Y^T}\lt(\tcztope{\ptemp}{\cen}{\sfact}\oplus\iztope{\pinv{\qtemp}}{\lb}{\ub}\rt)}\nonumber\\
+& =\supp{\diagonal{\ind{\alpha}}\alpha}{\mymatrix{\qtemp \\
+Y^T}\tcztope{\ptemp}{\cen}{\sfact}}+\supp{\diagonal{\ind{\alpha}}\alpha}{\mymatrix{\qtemp \\
+Y^T}\iztope{\pinv{\qtemp}}{\lb}{\ub}}.~\label{proof-supp4}\\
+& \supp{\diagonal{\ind{\alpha}}\alpha}{\mymatrix{\qtemp \\
+Y^T}\iztope{\pinv{\qtemp}}{\lb}{\ub}}\nonumber\\
+& = \supp{\diagonal{\ind{\alpha}}\alpha}{\mymatrix{\qtemp \\
+Y^T}\set{\pinv{\qtemp} \zeta:~\zeta in\reals^n:\lb\leq \zeta\leq\ub}}\nonumber\\
+& = \supp{\diagonal{\ind{\alpha}}\alpha}{\set{x\in\reals^n:~\forall i:
+1\leq i\leq k,~\lb_i\leq \ub_i,~\forall i>k,x_i=0}}\nonumber\\
+&
+= \sum_{i=1}^k\supp{\ind{\alpha}_i\alpha_i}{\lt(\lb_i,\ub_i\rt)}.~\label{proof-supp5}
+\end{align}
+%
+\begin{align}
 todo
-\end{align*}
+\end{align}
 %
 \end{proof}
 %
