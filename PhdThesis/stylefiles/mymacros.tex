@@ -165,8 +165,8 @@
 \newcommand{\errtope}[5]{\Delta_{#5}\lt(#1,#2,#3,#4\rt)}
 % boundary of a set
 \newcommand{\boundary}[1]{\operatorname{\bm{Bd}}\lt(#1\rt)}
-% null space
-%\newcommand{\null}[1]{\operatorname{\bm{Null}}}
+% convexhull
+\newcommand{\convexhull}[1]{\bm{Conv}\lt(#1\rt)}
 
 
 
@@ -278,6 +278,12 @@
 \newcommand{\posinv}[2]{#1\order\pair{\system}{#2}}
 
 
+%% ========================================================
+%%% Referencing miscellaneous
+%% ========================================================
+
+% number equation inside align*
+\newcommand\numberthis{\addtocounter{equation}{1}\tag{\theequation}}
 
 %% ========================================================
 %%% New operators
