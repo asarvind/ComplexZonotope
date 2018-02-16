@@ -25,15 +25,91 @@ following is the representation of an augmented complex zonotope.
 %
 \end{definition}
 %
-Now we give an over-approximation as
+Now we state an over-approximation by
 an augmented complex zonotope for the
 the intersection between an augmented complex zonotope and a
 sub-parallelotope.  We also derive a bound on the over-approximation
 error expressed in terms of the Haussdorf distance.
 
 We recall the notation used in Lemma~\ref{lem:minsum-intersection}.
+We define the Haussdorff distance as follows.
+%
+\[
+\hausdorff{S_1}{S_2}=\max\lt(\max_{x\in S_1}\min_{y\in
+S_2}\norm{x-y},\max_{x\in S_2}\min_{y\in S_1}\norm{x-y}\rt).
+\]
 %
 \begin{theorem}
-Let us consider an augmented complex zonotope 
+Let us denote
+$\Psi_1=\acztope{\ptemp}{\cen}{\sfact}{\pinv{\qtemp}}{\lb}{\ub}\bigcap\ptope{\qtemp}{\plb}{\pub}$,\\
+$\Psi_2=\ptope{\qtemp}{\plb}{\pub}$ and
+$\Psi_3=\acztope{\ptemp}{\cen}{\sfact}{\pinv{\qtemp}}{\join{\lb}{\plb}}{\meet{\ub}{\pub}}$.
+Let us consider that
+%
+\begin{align*}
+& \lb\leq\join{\lb}{\plb}\leq\meet{\ub}{\pub}\leq\ub~\text{and}\\
+& \forall
+ i\in \set{1,...,k}~\tcztope{\compid{i}\qtemp\ptemp}{\compid{i}\qtemp\cen}{\sfact}\order\tcztope{\qtemp\ptemp}{\qtemp\cen}{\sfact}.~\numberthis\label{eqn:acz-intersection2}\\
+\text{Then}~~&\Psi_1\bigcap\Psi_2\subseteq\Psi_3~\text{and}~\numberthis\label{eqn:acz-intersection3}\\
+& \hausdorff{\Psi_1\bigcap\Psi_2}{\Psi_3}\leq\norm{\mymatrix{\pinv{\qtemp}
+ & \pinv{Y}}}\hausdorff{\tcztope{\qtemp\ptemp}{\qtemp\cen}{\sfact}}{0}.~\numberthis\label{eqn:acz-intersection4}
+\end{align*}
+%
 \end{theorem}
+%
+\begin{proof}
+Let us denote $S=\tcztope{\ptemp}{\cen}{\sfact}$.  We get by
+Equation~\ref{eqn:acz-intersection2} and
+Theorem~\ref{thm:suff-inclusion} that
+%
+\begin{equation}
+\forall i\in\set{1,...,k},~\compid{i}\qtemp S\subseteq \qtemp S.
+\end{equation}
+%
+Then by Lemma~\ref{lem:minsum-intersection}, we get
+%
+\begin{align*}
+& \text{Then}~~\mymatrix{0\\ Y^T}S \oplus\mymatrix{\qtemp\\
+ Y^T}\iztope{\pinv{\qtemp}}{\join{\lb}{\plb}}{\meet{\ub}{\pub}}
+ \\ & \subseteq\mymatrix{\qtemp\\
+ Y^T}\lt(\lt(S\oplus \iztope{\pinv{\qtemp}}{\lb}{\ub}\rt)\bigcap\ptope{\qtemp}{\plb}{\pub}\rt)~\numberthis\label{proof-acz-intersection1}\\
+ &\subseteq \mymatrix{\qtemp\\
+ Y^T}\lt(S \oplus\iztope{\pinv{\qtemp}}{\join{\lb}{\plb}}{\meet{\ub}{\pub}}\rt).\numberthis~\label{proof-acz-intersection2}
+\end{align*}
+%
+By the definition of an augmented complex zonotope, we have
+%
+\[
+\Psi_1=S\oplus\iztope{\pinv{\qtemp}}{\lb}{\ub},~~
+\Psi_3=S \oplus\iztope{\pinv{\qtemp}}{\join{\lb}{\plb}}{\meet{\ub}{\pub}}.
+\]
+%
+Therefore, we get by Equation~\ref{proof-acz-intersection2} that
+%
+\[
+\mymatrix{\qtemp\\ Y^T}\lt(\Psi_1\bigcap\Psi_2\rt)\subseteq\mymatrix{\qtemp\\ Y^T}\Psi_3.
+\]
+%
+As $\mymatrix{\qtemp\\ Y^T}$ is a non-singular matrix, we get
+Equation~\ref{eqn:acz-intersection3}.
+
+Next, we shall prove Equation~\ref{eqn:acz-intersection4}.
+%
+By Equation~\ref{proof-acz-intersection1}
+and~\ref{proof-acz-intersection2} we get
+%
+\begin{align*}
+& \hausdorff{\mymatrix{\qtemp\\
+Y^T}\lt(\Psi_1\bigcap\Psi_2\rt)}{\mymatrix{\qtemp\\ Y^T}\lt(\Psi_3\rt)}
+\leq\hausdorff{\qtemp S}{0}.\\
+&\implies \hausdorff{\Psi_1\bigcap\Psi_2}{\Psi_3}\\
+& \leq\norm{\mymatrix{\pinv{\qtemp}
+& \pinv{Y}}}\hausdorff{\mymatrix{\qtemp\\
+Y^T}\lt(\Psi_1\bigcap\Psi_2\rt)}{\mymatrix{\qtemp\\ Y^T}\lt(\Psi_3\rt)}\\
+& \leq \norm{\mymatrix{\pinv{\qtemp} &
+ \pinv{Y}}}\hausdorff{\qtemp S}{0}=\norm{\mymatrix{\pinv{\qtemp}
+ & \pinv{Y}}}\hausdorff{\tcztope{\qtemp\ptemp}{\qtemp\cen}{\sfact}}{0}.~\hspace{2em}\qedhere
+\end{align*}
+%
+\end{proof}
 %
