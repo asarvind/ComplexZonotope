@@ -18,6 +18,7 @@ A\acztope{\ptemp}{\cen}{\sfact}{\stemp}{\lb}{\ub}=\acztope{A\ptemp}{A\cen}{\sfac
 \end{lemma}
 %
 \begin{proof}
+  We derive the following.
   %
   \begin{align*}
     & A\acztope{\ptemp}{\cen}{\sfact}{\stemp}{\lb}{\ub}=
@@ -71,6 +72,7 @@ The following is true.
 \end{lemma}
 %
 \begin{proof}
+  We derive the following.
   %
   \begin{align*}
 & \minsum{\acztope{\ptemp}{\cen}{\sfact}{\stemp}{\lb}{\ub}}
@@ -121,16 +123,14 @@ The following is true.
 \end{proof}
 %
 To problem of checking inclusion between two augmented complex
-zonotopes can be expressed as the problem of checking
+zonotopes can be equivalently expressed as the problem of checking
 inclusion between two geometrically equivalent template complex
-zonotopes.  For this, we propose the following conversion between the
-real projection of an augmented complex zonotope and a template
+zonotopes.  For this, we use the following equivalence between the
+real projections of an augmented complex zonotope and a template
 complex zonotope.
 %
 \begin{lemma}~\label{lem:acz-tcz-conversion}
-Let us consider an augmented complex zonotope
-$\acztope{\ptemp}{\cen}{\sfact}{\stemp}{\lb}{\ub}$.  Then we have the
-following equivalence to the real projection of a template complex zonotope.
+The following is true.
 %
 \begin{align*}
   \real\lt(\acztope{\ptemp}{\cen}{\sfact}{\stemp}{\lb}{\ub}\rt)
@@ -149,12 +149,13 @@ following equivalence to the real projection of a template complex zonotope.
       \frac{\ub-\lb}{2}
     \end{matrix}\rt]
   }
-  \rt)
+  \rt).
 \end{align*}
 %
 \end{lemma}
 %
 \begin{proof}
+  We derive the following.
   %
   \begin{align*}
     & \real\lt(\acztope{\ptemp}{\cen}{\sfact}{\stemp}{\lb}{\ub}\rt)
@@ -185,10 +186,10 @@ following equivalence to the real projection of a template complex zonotope.
 \end{proof}
 %
  In Definition~\ref{defn:inclusion-tcz} of the previous chapter, we
- introduced a partial order $''\order''$, as a sufficient condition
- for checking inclusion between two template complex zonotopes.  The
- relation could be checking by second order conic programming.  We
- extend the inclusion-checking relation to augmented complex zonotopes.
+ introduced a partial order $''\order''$, as a sufficient convex
+ condition for checking inclusion between two template complex
+ zonotopes.  We extend the relation for checking inclusion between two
+ augmented complex zonotopes as follows.
 %
 \begin{definition}[Ordering between augmented complex zonotopes]~\label{defn:inclusion-acz}
 We say that
@@ -226,14 +227,10 @@ We say that
       \sfact\\
       \frac{\ub-\lb}{2}
     \end{matrix}\rt]
-  }.
+  }.~\numberthis\label{eqn:order-acz}
 \end{align*}
 %
 \end{definition}
-%
-\begin{proof}
-{\color{red} TODO}.
-\end{proof}
 %
 \begin{theorem}[Inclusion-checking and partial order]~\label{thm:acz-inclusion}
 All of the following is true.
@@ -245,60 +242,145 @@ All of the following is true.
 &\implies \real\lt(\acztope{\ptemp^\pr}{\cen^\pr}{\sfact^\pr}{\stemp^\pr}{\lb^\pr}{\ub^\pr}\rt)\subseteq\real\lt(\acztope{\ptemp}{\cen}{\sfact}{\stemp}{\lb}{\ub}\rt).
 \end{align*}
 %
-\item The relation ``$\order$'' is a partial order on the set of
+\item The relation ``$\order$'' is a partial order on
   augmented complex zonotopes.
 \end{enumerate}
 %
 \end{theorem}
 %
 \begin{proof}
-  {\color{red} TODO}
+  We derive the following.
+  %
+  \begin{align*}
+&    \acztope{\ptemp^\pr}{\cen^\pr}{\sfact^\pr}{\stemp^\pr}{\lb^\pr}{\ub^\pr}\order\acztope{\ptemp}{\cen}{\sfact}{\stemp}{\lb}{\ub}\\
+& \equivalent   \tcztope
+  {\lt[\begin{matrix}
+      \ptemp^\pr &
+      \stemp^\pr
+    \end{matrix}\rt]
+  }
+  {\begin{matrix}
+      \cen^\pr+\frac{\ub^\pr+\lb^\pr}{2}
+    \end{matrix}
+  }
+  {\lt[\begin{matrix}
+      \sfact^\pr\\
+      \frac{\ub^\pr-\lb^\pr}{2}
+    \end{matrix}\rt]
+  }  
+  \order
+  \tcztope
+  {\lt[\begin{matrix}
+      \ptemp &
+      \stemp
+    \end{matrix}\rt]
+  }
+  {\begin{matrix}
+      \cen+\frac{\ub+\lb}{2}
+    \end{matrix}
+  }
+  {\lt[\begin{matrix}
+      \sfact\\
+      \frac{\ub-\lb}{2}
+    \end{matrix}\rt]
+  }\\
+  & \%\%~~\text{By Theorem~\ref{thm:suff-inclusion}}\\
+  & \implies
+  \tcztope
+  {\lt[\begin{matrix}
+      \ptemp^\pr &
+      \stemp^\pr
+    \end{matrix}\rt]
+  }
+  {\begin{matrix}
+      \cen^\pr+\frac{\ub^\pr+\lb^\pr}{2}
+    \end{matrix}
+  }
+  {\lt[\begin{matrix}
+      \sfact^\pr\\
+      \frac{\ub^\pr-\lb^\pr}{2}
+    \end{matrix}\rt]
+  }  
+  \subseteq
+  \tcztope
+  {\lt[\begin{matrix}
+      \ptemp &
+      \stemp
+    \end{matrix}\rt]
+  }
+  {\begin{matrix}
+      \cen+\frac{\ub+\lb}{2}
+    \end{matrix}
+  }
+  {\lt[\begin{matrix}
+      \sfact\\
+      \frac{\ub-\lb}{2}
+    \end{matrix}\rt]
+  }\\
+  & \%\%~~\text{By Lemma~\ref{lem:acz-tcz-conversion}}\\
+&\implies
+  \real\lt(\acztope{\ptemp^\pr}{\cen^\pr}{\sfact^\pr}{\stemp^\pr}{\lb^\pr}{\ub^\pr}\rt)\subseteq\real\lt(\acztope{\ptemp}{\cen}{\sfact}{\stemp}{\lb}{\ub}\rt).
+  \end{align*}
+  %
+Since ``$\order$'' is a partial order on template complex zonotopes,
+Equation~\ref{eqn:order-acz} implies that it is also a partial order on augmented
+complex zonotopes.
 \end{proof}
 %
-The following propostion states that the above sufficient condition
-for checking the inclusion between the real projections of augmented
-complex zonotopes is equivalently a second order conic constraint on a
-variable of size proportional to the representation size of the
-augmented complex zonnotopes.
+\begin{remark}
+We have explained for template complex zonotopes that the relation
+``$\order$'' is equivalent to second order conic constraints on the
+center, scaling factors and some auxillary variables.  Therefore,
+according to Equation~\ref{eqn:order-acz}, the extension of ``$\order$''
+to augmented complex zonotopes is equivalent to second order conic
+constraints on the primary offset, scaling factors, lower and upper
+interval bounds and some auxillary variables.
+\end{remark}
 %
-\begin{proposition}
-Let us consider two augmented complex zonotopes\\
-$\acztope{\ptemp}{\cen}{\sfact}{\stemp}{\lb}{\ub},
-\acztope{\ptemp^\pr}{\cen^\pr}{\sfact^\pr}{\stemp^\pr}{\lb^\pr}{\ub^\pr}\subset\compnums^n$.
-If $\ptemp$ and $\ptemp^\pr$ are considered constants, then the
-relation
-%
-\[
-\acztope{\ptemp^\pr}{\cen^\pr}{\sfact^\pr}{\stemp^\pr}{\lb^\pr}{\ub^\pr} \order
- \acztope{\ptemp}{\cen}{\sfact}{\stemp}{\lb}{\ub}
-\]
-%
-is equivalent to a second order conic constraint on a variable of
-length {\color{red} todo}, which comprises the primary offset $\cen$, scaling
-factors $\sfact$ and lower and upper interval bounds $\lb$ and $\ub$,
-respectively.
-\end{proposition}
-%
-The support function of an augmented complex zonotope for a fixed
-vector is as an affine expression of the primary offset, scaling
-factors and the upper and lower interval bounds.  This is described in
-the following lemma.
+The support function of an augmented complex zonotope is as an affine
+expression of the primary offset, scaling factors and the upper and
+lower interval bounds.  This is described in the following lemma.
 %
 \begin{lemma}[Support function]~\label{lem:support-acz}
-Let us consider an augmented complex zonotope
-$\acztope{\ptemp}{\cen}{\sfact}{\stemp}{\lb}{\ub}$ and a vector
-$v\in\compnums^n$.  Then
+Let us consider
+$v\in\reals^n$.  Then
 %
 \begin{align*}
-  & \support{w}{v}{\acztope{\ptemp}{\cen}{\sfact}{\stemp}{\lb}{\ub}}\\
-  & = \mymatrix{\ptemp &
-    \stemp}\lt(\cen+\frac{\ub+\lb}{2}-w\rt)+v^T\mymatrix{\ptemp & \stemp}\mymatrix{\sfact\\\frac{\ub-\lb}{2}}.
+  & \supp{v}{\real\lt(\acztope{\ptemp}{\cen}{\sfact}{\stemp}{\lb}{\ub}\rt)}\\
+  & = \real\lt(v^T\mymatrix{\ptemp &
+    \stemp}\lt(\cen+\frac{\ub+\lb}{2}\rt)\rt)+\absolute{v^T\mymatrix{\ptemp & \stemp}}\mymatrix{\sfact\\\frac{\ub-\lb}{2}}.
 \end{align*}
 %
 \end{lemma}
 %
 \begin{proof}
-{\color{red} }.
+  We derive the following:
+  %
+  \begin{align*}
+& \%\%~~\text{by Lemma~\ref{lem:acz-tcz-conversion}}\\
+&
+    \supp{v}{\real\lt(\acztope{\ptemp}{\cen}{\sfact}{\stemp}{\lb}{\ub}\rt)}\\
+& = \supp{v}{\real\lt(\tcztope
+  {\lt[\begin{matrix}
+      \ptemp &
+      \stemp
+    \end{matrix}\rt]
+  }
+  {\begin{matrix}
+      \cen+\frac{\ub+\lb}{2}
+    \end{matrix}
+  }
+  {\lt[\begin{matrix}
+      \sfact\\
+      \frac{\ub-\lb}{2}
+    \end{matrix}\rt]
+  }
+  \rt)}\\
+    & \%\%~\text{by Lemma~\ref{lem:support-tcz}}\\
+    & =\real\lt(v^T\mymatrix{\ptemp &
+    \stemp}\lt(\cen+\frac{\ub+\lb}{2}\rt)\rt)+\absolute{v^T\mymatrix{\ptemp & \stemp}}\mymatrix{\sfact\\\frac{\ub-\lb}{2}}.~\hspace{2em}\qedhere
+  \end{align*}
+  %
 \end{proof}
 %
 
