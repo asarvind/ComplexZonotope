@@ -1,20 +1,15 @@
-\section{Other Operations on Augmented Complex Zonotopes}
-Earlier, we had discussed about the intersection of an augmented
-complex zonotope with a suitably aligned sub-parallelotope.  We shall
-now discuss about other operations on augmented complex zonotopes, which
-are linear transformation, Minkowski sum, projection along a direction
-and checking inclusion.
+We shall discuss about other operations on augmented complex zonotopes
+like are linear transformation, Minkowski sum, support function and
+checking inclusion.
 
 Augmented complex zonotopes are closed under linear transformation and
-Minkowski sum, which are described in the following two lemmas.  This
+Minkowski sum, as described in the following two lemmas.  This
 is because an augmented complex is specified as a Minkowski sum of a template
-complex zonotope and an interval zonotope both of which are closed
-under the aforementioned operations.
+complex zonotope and an interval zonotope, both of which are closed
+under these operations.
 %
 \begin{lemma}[Linear transformation]
-Let us consider an augmented complex zonotope
-$\acztope{\ptemp}{\cen}{\sfact}{\stemp}{\lb}{\ub}\subset \compnums^n$
-and a matrix $A\in\mat{n}{n}{\reals}$.  Then
+Let us consider $A\in\mat{n}{n}{\reals}$.  Then
 %
 \[
 A\acztope{\ptemp}{\cen}{\sfact}{\stemp}{\lb}{\ub}=\acztope{A\ptemp}{A\cen}{\sfact}{A\stemp}{\lb}{\ub}.
@@ -23,7 +18,6 @@ A\acztope{\ptemp}{\cen}{\sfact}{\stemp}{\lb}{\ub}=\acztope{A\ptemp}{A\cen}{\sfac
 \end{lemma}
 %
 \begin{proof}
-  We get,
   %
   \begin{align*}
     & A\acztope{\ptemp}{\cen}{\sfact}{\stemp}{\lb}{\ub}=
@@ -37,10 +31,7 @@ A\acztope{\ptemp}{\cen}{\sfact}{\stemp}{\lb}{\ub}=\acztope{A\ptemp}{A\cen}{\sfac
 \end{proof}
 %
 \begin{lemma}[Minkowski sum]
-Let us consider two augmented complex zonotopes
-$\acztope{\ptemp}{\cen}{\sfact}{\stemp}{\lb}{\ub},
-\acztope{\ptemp^\pr}{\cen^\pr}{\sfact^\pr}{\stemp^\pr}{\lb^\pr}{\ub^\pr}\subset\compnums^n$.
-Then
+The following is true.
 %
 \begin{align*}
 & \minsum{\acztope{\ptemp}{\cen}{\sfact}{\stemp}{\lb}{\ub}}
@@ -80,7 +71,6 @@ Then
 \end{lemma}
 %
 \begin{proof}
-  We get,
   %
   \begin{align*}
 & \minsum{\acztope{\ptemp}{\cen}{\sfact}{\stemp}{\lb}{\ub}}
@@ -164,29 +154,49 @@ following equivalence to the real projection of a template complex zonotope.
 %
 \end{lemma}
 %
- In the Definition~\ref{defn:inclusion-tcz} of the previous chapter,
- we had proposed a partial order $''\order''$ as a sufficient
- condition for the inclusion between two
- template complex zonotopes, which could be checked by second order
- conic programming.  Then based on the aforementioned
- equivalence between an augmented complex zonotope and a template complex
- zonotope, we extend the inclusion-checking relation to augmented
- complex zonotopes as follows.
+\begin{proof}
+  %
+  \begin{align*}
+    & \real\lt(\acztope{\ptemp}{\cen}{\sfact}{\stemp}{\lb}{\ub}\rt)
+    =
+    \real\lt(\tcztope{\ptemp}{\cen}{\sfact}\rt)\oplus\iztope{\stemp}{\lb}{\ub}\\
+    & \%\%~\text{By Lemma~\ref{lem:iz-tcz-conversion}}\\
+    & =
+    \real\lt(\tcztope{\ptemp}{\cen}{\sfact}\rt)\oplus\real\lt(\tcztope{\stemp}{\stemp\frac{\ub+\lb}{2}}{\frac{\ub-\lb}{2}}\rt)\\
+    &
+  = \real\lt(\tcztope
+  {\lt[\begin{matrix}
+      \ptemp &
+      \stemp
+    \end{matrix}\rt]
+  }
+  {\begin{matrix}
+      \cen+\frac{\ub+\lb}{2}
+    \end{matrix}
+  }
+  {\lt[\begin{matrix}
+      \sfact\\
+      \frac{\ub-\lb}{2}
+    \end{matrix}\rt]
+  }
+  \rt).\hspace{4em}\qedhere
+   \end{align*}
+  %
+\end{proof}
 %
-\begin{definition}[Relation between augmented complex zonotopes]~\label{defn:inclusion-acz}
-Given two augmented complex zonotopes $\acztope{\ptemp}{\cen}{\sfact}{\stemp}{\lb}{\ub},
-\acztope{\ptemp^\pr}{\cen^\pr}{\sfact^\pr}{\stemp^\pr}{\lb^\pr}{\ub^\pr}\subset\compnums^n$,
-we say that
+ In Definition~\ref{defn:inclusion-tcz} of the previous chapter, we
+ introduced a partial order $''\order''$, as a sufficient condition
+ for checking inclusion between two template complex zonotopes.  The
+ relation could be checking by second order conic programming.  We
+ extend the inclusion-checking relation to augmented complex zonotopes.
 %
-\[
-\acztope{\ptemp^\pr}{\cen^\pr}{\sfact^\pr}{\stemp^\pr}{\lb^\pr}{\ub^\pr} \order
- \acztope{\ptemp}{\cen}{\sfact}{\stemp}{\lb}{\ub}
-\]
+\begin{definition}[Ordering between augmented complex zonotopes]~\label{defn:inclusion-acz}
+We say that
 %
-if and only if
-%
-\[
-\tcztope
+\begin{align*}
+& \acztope{\ptemp^\pr}{\cen^\pr}{\sfact^\pr}{\stemp^\pr}{\lb^\pr}{\ub^\pr} \order
+ \acztope{\ptemp}{\cen}{\sfact}{\stemp}{\lb}{\ub}~~\text{iff}\\
+& \tcztope
   {\lt[\begin{matrix}
       \ptemp^\pr &
       \stemp^\pr
@@ -217,7 +227,7 @@ if and only if
       \frac{\ub-\lb}{2}
     \end{matrix}\rt]
   }.
-\]
+\end{align*}
 %
 \end{definition}
 %
@@ -226,21 +236,14 @@ if and only if
 \end{proof}
 %
 \begin{theorem}[Inclusion-checking and partial order]~\label{thm:acz-inclusion}
-Let us consider two augmented complex zonotopes $\acztope{\ptemp}{\cen}{\sfact}{\stemp}{\lb}{\ub},
-\acztope{\ptemp^\pr}{\cen^\pr}{\sfact^\pr}{\stemp^\pr}{\lb^\pr}{\ub^\pr}\subset\compnums^n$.
-Then the both the following statements are true:
+All of the following is true.
 \begin{enumerate}
   \item Sufficient condition for inclusion:
 %
-\[
-\real\lt(\acztope{\ptemp^\pr}{\cen^\pr}{\sfact^\pr}{\stemp^\pr}{\lb^\pr}{\ub^\pr}\rt)\subseteq\real\lt(\acztope{\ptemp}{\cen}{\sfact}{\stemp}{\lb}{\ub}\rt)
-\]
-%
-if the following relation is true
-%
-\[
-\acztope{\ptemp^\pr}{\cen^\pr}{\sfact^\pr}{\stemp^\pr}{\lb^\pr}{\ub^\pr}\order\acztope{\ptemp}{\cen}{\sfact}{\stemp}{\lb}{\ub}.
-\]
+    \begin{align*}
+& \acztope{\ptemp^\pr}{\cen^\pr}{\sfact^\pr}{\stemp^\pr}{\lb^\pr}{\ub^\pr}\order\acztope{\ptemp}{\cen}{\sfact}{\stemp}{\lb}{\ub}\\    
+&\implies \real\lt(\acztope{\ptemp^\pr}{\cen^\pr}{\sfact^\pr}{\stemp^\pr}{\lb^\pr}{\ub^\pr}\rt)\subseteq\real\lt(\acztope{\ptemp}{\cen}{\sfact}{\stemp}{\lb}{\ub}\rt).
+\end{align*}
 %
 \item The relation ``$\order$'' is a partial order on the set of
   augmented complex zonotopes.
