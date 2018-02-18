@@ -1,19 +1,18 @@
 Before we introduce an augmented complex zonotope, we shall describe a
-particular case when zonotopes are closed under intersection with
-sub-level sets of linear inequalities.  For explaining our observation
-succinctly, we introduce a slight variation of the representation of a
-real zonotope, called an \emph{interval zonotope}.  In an interval
-zonotope, we specify interval bounds on the combining coefficients,
-without explicitly specifying the center.  By such a representation,
-we can express the resultant interval zonotope of the aforementioned
-intersection by a simple algebraic expression.  However, we note that
-an interval zonotope is geometrically the same as a real zonotope.
+particular case when real zonotopes are closed under intersection with
+sub-level sets of linear inequalities.  We introduce a slight
+variation of the representation of a real zonotope, called
+an \emph{interval zonotope}, so as to express the intersection by a
+succinct algebraic expression.  In an interval zonotope, we specify
+interval bounds on the combining coefficients, without explicitly
+specifying the center.  However, we note that an interval zonotope is
+geometrically the same as a real zonotope.
 %
 \begin{definition}[Interval Zonotope]
 Let us consider $\stemp\in\mat{n}{k}{\reals}$, called the {\it
-  template}, and $\lb,\ub\in\reals^k$, called the upper and lower
-interval bounds, respectively, such that $\lb\leq \ub$.  The following
-is the representation of an interval zonotope.
+  template}, and $\lb,\ub\in\reals^k$ such that $\lb\leq \ub$, called
+  the upper and lower interval bounds, respectively.  The following is
+  the representation of an interval zonotope.
 %
 \[
 \iztope{\stemp}{\lb}{\ub}:=\set{\stemp\zeta:~\zeta\in\reals^k,~\lb\leq\zeta\leq\ub}.
@@ -21,8 +20,8 @@ is the representation of an interval zonotope.
 %
 \end{definition}
 %
-We consider a particular class of sub-level sets of linear
-inequalities, which we call \emph{sub-parallelotopes}, for which the
+We consider a particular type of sub-level set of linear
+inequalities, which we call as \emph{sub-parallelotope}, for which the
 intersection with a suitably aligned interval zonotope gives another
 interval zonotope.  Furthermore, the intersection can be computed by a
 simple algebraic expression.  A sub-parallelotope can be seen as a
@@ -47,7 +46,8 @@ the representation of a sub-parallelotope.
 In other words, a sub-level set of a set of linear inequalities is a
 sub-parallelotope when the linear functions on which the inequalities
 are defined are linearly independent. For example, because the row
-vectors $\lt[\begin{matrix}1 & 1 & -1 \end{matrix}\rt]$ are linearly
+vectors $\lt[\begin{matrix}1 & 1 & -1 \end{matrix}\rt]$ and
+$\mymatrix{1 & -1 & 1}$ are linearly
 independent, the sub-level set of
 the linear inequalities
 %
@@ -56,7 +56,7 @@ the linear inequalities
 x-y+z\leq 3
 \end{align*}
 %
-is a sub-parallelotope specified as
+can be specified as a sub-parallelotope
 %
 \[
 \ptope{\lt[\begin{matrix}
@@ -126,10 +126,10 @@ by the rank-nullity theorem we get
 %
 \end{proof}
 %
-The above similarity between sub-parallelotopes and an interval
-zonotopes gives an apparent intuition that interval zonotopes can be
+The above similarity between sub-parallelotopes and interval
+zonotopes provides an intuition that interval zonotopes can be
 closed under intersection with suitably aligned
-sub-parallelotopes.  We observe that when a
+sub-parallelotopes.  In fact, we observe that when a
 sub-parallelotope has its template aligned with that of an interval
 zonotope, their intersection can be exactly represented by another
 interval zontope.  As an example, the intersection of
@@ -147,17 +147,16 @@ x_1\leq 1,\hspace{1em}
       1\end{array}\rt]}{\lt[\begin{array}{c}-1\\ 0.5\end{array}\rt]}{\lt[\begin{array}{c}1\\ 2\end{array}\rt]}.
 \end{align*}
 %
-In the general case, we compute compute the intersection between a
-possibly a sub-parallelotope and a possibly translated interval
-zonotope by a simple algebraic expression as follows.
+In the general case, we express the intersection between a
+a sub-parallelotope and a possibly translated interval
+zonotope as follows.
 %
 \begin{lemma}~\label{lem:motivation}
-  Let us consider a sub-parallelotopic template
-  $\qtemp\in\mat{k}{n}{R}$ and a real vector
-  $c\in\reals^n$.  Then
+  Let $\qtemp\in\mat{k}{n}{\reals}$ be a sub-parallelotopic template
+  and  ${c\in\reals^n}$.
 %
 \begin{align}~\label{eqn:motivation}
-& \lt(\cen+\iztope{\pinv{\qtemp}}{\lb}{\ub}\rt)\bigcap\ptope{\qtemp}{\plb}{\pub}\nonumber\\
+& \text{Then}~~\lt(\cen+\iztope{\pinv{\qtemp}}{\lb}{\ub}\rt)\bigcap\ptope{\qtemp}{\plb}{\pub}\nonumber\\
 & =\cen+\iztope{\pinv{\qtemp}}{\join{\lb}{\lt(\plb-\qtemp\cen\rt)}}{\meet{\ub}{\lt(\pub-\qtemp\cen\rt)}}.
 \end{align}
 %
@@ -169,58 +168,62 @@ $S_1=\lt(\cen+\iztope{\pinv{\qtemp}}{\lb}{\ub}\rt)\bigcap\ptope{\qtemp}{\plb}{\p
 and\\
 $S_2=\cen+\iztope{\pinv{\qtemp}}{\join{\lb}{\lt(\plb-\qtemp\cen\rt)}}{\meet{\ub}{\lt(\pub-\qtemp\cen\rt)}}$.
 We shall first prove that $S_1\subseteq S_2$.  Let us consider that
-$x\in S_1$.  So, $\exists
-\zeta\in\reals^k:~x=\cen+\pinv{\qtemp}\zeta,~\lb\leq\zeta\leq\ub$
-and $x\in\ptope{\qtemp}{\plb}{\pub}$. Then we get
+$x\in S_1$.  So, $x\in\ptope{\qtemp}{\plb}{\pub}$ and
+%
+\[
+\exists
+\zeta\in\reals^k:~x=\cen+\pinv{\qtemp}\zeta,~\lb\leq\zeta\leq\ub.
+\]
+%
+Then we get
 %
 \begin{align*}
-& \plb\leq\qtemp x\leq \pub\\
-& \equivalent \plb\leq \qtemp\lt(\cen+\pinv{\qtemp}\zeta\rt)\leq \pub\\
-& \equivalent \plb-\qtemp\cen\leq\zeta\leq\pub-\qtemp\zeta.
+& \plb\leq\qtemp x\leq \pub~~
+ \equivalent~~ \plb\leq \qtemp\lt(\cen+\pinv{\qtemp}\zeta\rt)\leq \pub\\
+& \equivalent~~ \plb-\qtemp\cen\leq\zeta\leq\pub-\qtemp\zeta.
 \end{align*}
 %
 Also, we have $\lb\leq \zeta\leq \ub$ as given previously.
 Therefore,
-\[\join{\lb}{\lt(\plb-\qtemp\cen\rt)}\leq\zeta\leq\meet{\ub}{\lt(\pub-\qtemp\cen\rt)},\]
-which implies that $x=\cen+\pinv{\qtemp}\zeta\in S_2$.  This shows that $S_1\subseteq S_2$.
+\[\join{\lb}{\lt(\plb-\qtemp\cen\rt)}\leq\zeta\leq\meet{\ub}{\lt(\pub-\qtemp\cen\rt)}.\]
+As $x=\cen+\pinv{\qtemp}\zeta$, the above constraint implies $x\in S_2$.  This shows that $S_1\subseteq S_2$.
 
 Now, we shall prove $S_2\subseteq S_1$.  Since
 \begin{align}
 &\lb\leq\join{\lb}{\lt(\plb-\qtemp\cen\rt)}~~\text{and}~~\meet{\ub}{\lt(\pub-\qtemp\cen\rt)}\leq
-\ub,~~\text{we get}\nonumber\\
+\ub,~~\text{we derive}\nonumber\\
 &
 S_2=\cen+\iztope{\pinv{\qtemp}}{\join{\lb}{\lt(\plb-\qtemp\cen\rt)}}{\meet{\ub}{\lt(\pub-\qtemp\cen\rt)}}
 \subseteq \cen+\iztope{\pinv{\qtemp}}{\lb}{\ub}~\label{eqn:proof-motivation1}
 \end{align}
 %
-Next, let us condier that $y\in S_2$.  So, $\exists
-\zeta^\pr\in\reals^k:$ \[y=\cen+\pinv{\qtemp}\zeta^\pr,~\join{\lb}{\lt(\plb-\cen\rt)}\leq\zeta^\pr
-\leq\meet{\ub}{\lt(\pub-\cen\rt)}.\]
-Then
+Now, let us consider a point $y\in S_2$.  So, $\exists
+\zeta^\pr\in\reals^k:$
 %
 \begin{align*}
-& \qtemp y=\qtemp\lt(\cen+\pinv{\qtemp}\zeta^\pr\rt)=\qtemp\cen+\zeta^\pr\\
-& \%\%~~\text{since}~\join{\lb}{\lt(\plb-\cen\rt)}\leq\zeta^\pr\leq
-\meet{\ub}{\lt(\pub-\cen\rt)}\\
-& \implies \qtemp\cen+\lt(\join{\lb}{\lt(\plb-\cen\rt)}\rt)\leq \qtemp
-y\leq \qtemp\cen+\lt(\meet{\ub}{\lt(\pub-\qtemp\cen\rt)}\rt)\\
-& \implies \qtemp\cen+\plb-\qtemp\cen\leq\qtemp y\leq
-\qtemp\cen+\pub-\qtemp\cen\\
+& y=\cen+\pinv{\qtemp}\zeta^\pr,~\join{\lb}{\lt(\plb-\qtemp\cen\rt)}\leq\zeta^\pr
+\leq\meet{\ub}{\lt(\pub-\qtemp\cen\rt)}.\\
+& \text{Then}~~
+\qtemp y=\qtemp\lt(\cen+\pinv{\qtemp}\zeta^\pr\rt)=\qtemp\cen+\zeta^\pr\\
+& \%\%~~\text{since}~\join{\lb}{\lt(\plb-\qtemp\cen\rt)}\leq\zeta^\pr\leq
+\meet{\ub}{\lt(\pub-\qtemp\cen\rt)}\\
+& \implies \qtemp\cen+\lt(\plb-\qtemp\cen\rt)\leq\qtemp y\leq
+\qtemp\cen+\lt(\pub-\qtemp\cen\rt)\\
 & \implies \plb\leq\qtemp y\leq\pub.
 \end{align*}
 %
 Therefore, $y\in\ptope{\qtemp}{\plb}{\pub}$.  This shows that
-$S_2\subseteq \ptope{\qtemp}{\plb}{\pub}$.  This combined with the
-containment in Equation~\ref{eqn:proof-motivation1}, we get that
-$S_2\subseteq S_1$.  Earlier, we have shown that $S_1\subseteq S_2$.
-Therefore, $S_1=S_2$.
+$S_2\subseteq \ptope{\qtemp}{\plb}{\pub}$.  Using this result along with
+Equation~\ref{eqn:proof-motivation1}, we get that $S_2\subseteq S_1$.
+We have also shown earlier that ${S_1\subseteq S_2}$.  Therefore, $S_1=S_2$.
 \end{proof}
 %
-We shall derive an over-approximation of intersection of a
+Now, we shall derive an over-approximation of intersection of a
 sub-parallelotope with the Minkowski sum of an interval zonotope and a
 general convex set.  Before that, we describe the following result
-about convex sets which is used in the deriving the over-approximation.
-We use the following notation.
+about convex sets which is latter used in the proof of the over-approximation.
+We use the following notation for the rest of this chapter, unless
+otherwise specified.
 %
 \begin{align*}
 & \lb,\ub\in\reals^k:
@@ -267,17 +270,19 @@ Now we state a reusult about over-approximating the intersection
 of a sub-parallelotope with the Minkowski sum
 of a convex set and interval zonotope.  We also find an
 under-approximation of the former so that we can bound the error in
-over-approximation.
+over-approximation.  We use the following notation for the rest of
+this chapter.
 
-We use the following notation.  If $k<n$, then the column vectors of a
-matrix $Y\in\mat{n}{(n-k)}{\reals}$ comprises the basis of $\null{\qtemp}$.
-If $k=n$, then we consider $Y=0$.
+If $k<n$, then we consider $Y\in\mat{n}{(n-k)}{\reals}$ such that the
+column vectors of $Y$ form
+the basis of $\null{\qtemp}$.
+Othewise when $k=n$, we consider $Y=0$.
 %
 \begin{lemma}[Intersection with Minkowski sum]~\label{lem:minsum-intersection}
 Let $S\in\reals^n$ be a convex set and
 %
 \begin{align*}
-& \forall i\in\set{1,...,k}~\compid{i}\qtemp S\subseteq\qtemp S~\numberthis\label{eqn:intersection3}\\
+& \forall i\in\set{1,...,k}~\compid{i}\qtemp S\subseteq\qtemp S,~\numberthis\label{eqn:intersection3}\\
 & \lb\leq\join{\lb}{\plb}\leq\meet{\ub}{\pub}\leq\ub~\numberthis\label{eqn:intersection4}.\\
 & \text{Then}~~\mymatrix{0\\ Y^T}S \oplus\mymatrix{\qtemp\\
  Y^T}\iztope{\pinv{\qtemp}}{\join{\lb}{\plb}}{\meet{\ub}{\pub}}
@@ -294,23 +299,26 @@ Let $S\in\reals^n$ be a convex set and
 First we shall prove Equation~\ref{eqn:intersection1}.
 By Equation~\ref{eqn:intersection3}, we get $0\in\qtemp S$.  So,
 %
-\[
-\mymatrix{0\\ Y^T}S\subseteq\mymatrix{\qtemp\\ Y^T}S.
-\]
+\begin{align*}
+\mymatrix{0\\ Y^T}S\subseteq\mymatrix{\qtemp\\ Y^T}S.~\numberthis\label{eqn:corr-proof-intersection1}
+\end{align*}
 %
 By
 Equation~\ref{eqn:intersection4} we get
-\[
-\mymatrix{\qtemp\\Y^T}\iztope{\pinv{\qtemp}}{\meet{\lb}{\plb}}{\join{\ub}{\pub}}\subseteq\mymatrix{\qtemp\\Y^T}\iztope{\pinv{\qtemp}}{\lb}{\ub}.
-\]
 %
-Then, Equation~\ref{eqn:intersection1} follows from the above two results.
+\begin{align*}
+\mymatrix{\qtemp\\Y^T}\iztope{\pinv{\qtemp}}{\meet{\lb}{\plb}}{\join{\ub}{\pub}}\subseteq\mymatrix{\qtemp\\Y^T}\iztope{\pinv{\qtemp}}{\lb}{\ub}.~\numberthis\label{eqn:corr-proof-intersection2}
+\end{align*}
+%
+Then, Equation~\ref{eqn:intersection1} follows from Equations~\ref{eqn:corr-proof-intersection1} and~\ref{eqn:corr-proof-intersection2}.
 
 Now we shall prove Equation~\ref{eqn:intersection2}.
 
 Let us consider
+$x\in \lt(S\oplus \iztope{\pinv{\qtemp}}{\lb}{\ub}\rt)\bigcap\ptope{\qtemp}{\plb}{\pub}$
+where
+%
 \begin{align*}
-& x\in \lt(S\oplus \iztope{\pinv{\qtemp}}{\lb}{\ub}\rt)\bigcap\ptope{\qtemp}{\plb}{\pub}~~\text{where}\\
 & x=v+\pinv{\qtemp}\zeta:~v\in S,~\lb\leq\zeta\leq\ub.\\
 & \text{ As
 $x\in\ptope{\qtemp}{\plb}{\pub}$, we get}~
@@ -343,28 +351,45 @@ any $i\in\set{1,...,k},$ we analyze the following cases.
 
 {\it Case 1:} Let us consider $\zeta_i>\min\set{\ub_i,\pub_i}$.  Then
 $\epsilon_i=\min\set{\ub_i,\pub_i}$.  Since $\zeta_i\leq\ub_i$, we get
-$\min\set{\ub_i,\pub_i}=\pub_i$.  By using
-Equation~\ref{proof-intersection1}, we get
-$\qtemp_iw=\qtemp_iv+\zeta_i-\epsilon_i\leq\pub_i-\min\set{\ub_i,\pub_i}=\pub_i-\pub_i=0$.
-Also by using Equation~\ref{proofnew-intersection1}, we get
-$\qtemp_iw=\qtemp_iv+\zeta_i-\epsilon_i\geq \qtemp_iv+\min\set{\ub_i,\pub_i}-\min\set{\ub_i,\pub_i}=\qtemp
-v_i.$  Therefore,
+${\min\set{\ub_i,\pub_i}=\pub_i}$.  Then by using
+Equation~\ref{proof-intersection1}, we derive
 %
 \begin{align*}
-& \qtemp_iw\in\convexhull{\set{0,\qtemp_iv}}.~\numberthis\label{proofnew-intersection2}
+&\qtemp_iw=\qtemp_iv+\zeta_i-\epsilon_i\\
+& \leq\pub_i-\min\set{\ub_i,\pub_i}=\pub_i-\pub_i=0.
+\end{align*}
+%
+Also by using Equation~\ref{proofnew-intersection1}, we get
+%
+\begin{align*}
+& \qtemp_iw=\qtemp_iv+\zeta_i-\epsilon_i\\
+& \geq \qtemp_iv+\min\set{\ub_i,\pub_i}-\min\set{\ub_i,\pub_i}=\qtemp
+v_i.
+\end{align*}
+%
+\begin{align*}
+& \text{Therefore}~~ \qtemp_iw\in\convexhull{\set{0,\qtemp_iv}}.~\numberthis\label{proofnew-intersection2}
 \end{align*}
 %
 {\it Case 2:} Let us consider that $\zeta_i<\max\set{\lb_i,\plb_i}$.
 Then $\epsilon_i=\max{\set{\lb_i,\plb_i}}$.  Since $\zeta_i\geq\lb_i$,
-we get $\max{\set{\lb_i,\plb_i}}=\plb_i$.  By using
-Equation~\ref{proof-intersection1}, we get
-$\qtemp_iw=\qtemp_iv+\zeta_i-\epsilon_i\geq\plb_i-\min\set{\ub_i,\pub_i}=\plb_i-\plb_i=0$.
-Also by using Equation~\ref{proofnew-intersection1}, we get
-$\qtemp_iw=\qtemp_iv+\zeta_i-\epsilon_i\leq \qtemp_iv+\max\set{\lb_i,\plb_i}-\max\set{\lb_i,\plb_i}=\qtemp
-v_i$.  Therefore,
+we get $\max{\set{\lb_i,\plb_i}}=\plb_i$.  Then by using
+Equation~\ref{proof-intersection1}, we derive
 %
 \begin{align*}
-& \qtemp_iw\in\convexhull{\set{0,\qtemp_iv}}.~\numberthis\label{proofnew-intersection3}
+& \qtemp_iw=\qtemp_iv+\zeta_i-\epsilon_i\\
+& \geq\plb_i-\min\set{\ub_i,\pub_i}=\plb_i-\plb_i=0.
+\end{align*}
+%
+Also by using Equation~\ref{proofnew-intersection1}, we derive
+\begin{align*}
+& \qtemp_iw=\qtemp_iv+\zeta_i-\epsilon_i\\
+& \leq \qtemp_iv+\max\set{\lb_i,\plb_i}-\max\set{\lb_i,\plb_i}=\qtemp
+v_i.
+\end{align*}
+%
+\begin{align*}
+& \text{Therefore}~~    \qtemp_iw\in\convexhull{\set{0,\qtemp_iv}}.~\numberthis\label{proofnew-intersection3}
 \end{align*}
 %
 {\it Case 3:}  Let us consider that the above two cases are not true.
@@ -374,20 +399,26 @@ Then $\epsilon_i=\zeta_i$.  So,
 & \qtemp_iw=\qtemp_iv+\zeta_i-\epsilon_i=\qtemp_iv+\zeta_i-\zeta_i=v_i.~\numberthis\label{proofnew-intersection4}
 \end{align*}
 %
-From Equations~\ref{proofnew-intersection2}-\ref{proofnew-intersection4}, we
+From Equations~\ref{proofnew-intersection2}\textendash\ref{proofnew-intersection4}, we
 get
 %
 \begin{align*}
-& \qtemp w\in\prod_{i=1}^k\convexhull{\set{0,v_i}}.~\numberthis\label{proofnew-intersection5}
+& \qtemp w\in\prod_{i=1}^k\convexhull{\set{0,v_i}}.\label{proofnew-intersection5}
 \end{align*}
 %
-As $S$ is a convex set and $v\in S$, by Lemma~\ref{lem:convexhull} and
-Equations~\ref{eqn:intersection3} and~\ref{proofnew-intersection5}, we
-get $\qtemp w\in\qtemp S$.  As $Y^T$ is orthogonal to $\qtemp$, we get
-$Y^Tw=Yv+Y\qtemp(\zeta-\epsilon)=Y^Tv+0=Y^Tv\in Y^TS$ .  So,
+As $S$ is a convex set and $v\in S$, using Lemma~\ref{lem:convexhull} and
+Equations~\ref{eqn:intersection3}, we get
 %
 \begin{align*}
-& \mymatrix{\qtemp\\ Y^T}w\in S.
+& \prod_{i=1}^k\convexhull{\set{0,v_i}}\subseteq \qtemp S\\
+\implies \qtemp w\in S.
+\end{align*}
+%
+As $Y^T$ is orthogonal to $\qtemp$, we get
+%
+\begin{align*}
+& Y^Tw=Yv+Y\qtemp(\zeta-\epsilon)=Y^Tv+0=Y^Tv\in Y^TS.\\
+& \text{So,}~~\mymatrix{\qtemp\\ Y^T}w\in S.
 \end{align*}
 %
 By
@@ -407,12 +438,10 @@ we have proved Equation~\ref{eqn:intersection2}.
 \subsubsection*{Other computations on interval zonotopes}
 %
 An interval zonotope can be equivalently specified as the real
-projection of the following template complex zonotope.  This result is
-latter used in Lemma~\ref{lem:acz-tcz-conversion} to convert between
-reals projections of an augmented complex zonotope and a template
-complex zonotope, which is in turn used in
-Theorem~\ref{thm:acz-inclusion} to derive a convex program for
-checking inclusion between augmented complex zonotopes.
+projection of a template complex zonotope, as described in the
+following lemma.  We use this result to compute other operations on
+interval zonotopes, like linear trasnformation, Minkowski sum,
+inclusion-checking and support function.
 %
 \begin{lemma}~\label{lem:iz-tcz-conversion}
 We have the following equivalence between an interval zonotope and the
@@ -539,8 +568,8 @@ A\iztope{\stemp}{\lb}{\ub}=\iztope{A\stemp}{\lb}{\ub}.
 Based on Lemma~\ref{lem:iz-rz-conversion}, we get
 %
 \begin{align*}
-&  A\iztope{\stemp}{\lb}{\ub}\\
-  & =
+&  A\iztope{\stemp}{\lb}{\ub}
+ =
   A\rztope{\stemp\diag{\frac{\ub-\lb}{2}}}{\frac{\ub+\lb}{2}}\\
   & ~~\%\%~~\text{by Lemma~\ref{todo}}\\
   & = \rztope{A\stemp\diag{\frac{\ub-\lb}{2}}}{\frac{\ub+\lb}{2}}\\
@@ -564,10 +593,9 @@ Based on Lemma~\ref{lem:iz-rz-conversion}, we get
 \end{lemma}
 %
 \begin{proof}
-We get
+Byy Lemma~\ref{lem:iz-rz-conversion}, we get
 %
 \begin{align*}
-  & \%\%~~\text{by Lemma~\ref{lem:iz-rz-conversion}}\\
   &
   \minsum{\iztope{\stemp}{\lb}{\ub}}{\iztope{\stemp^\pr}{\lb^\pr}{\ub^\pr}}\\
   & =
@@ -596,7 +624,7 @@ We get
     }{2}}\\
   & \%\%~~\text{by Lemma~\ref{lem:iz-rz-conversion}}\\
   & = \iztope{\mymatrix{\stemp &
-    \stemp^\pr}}{\mymatrix{\lb\\\lb^\pr}}{\mymatrix{\ub\\\ub^\pr}}.~~~~~\qedhere
+    \stemp^\pr}}{\mymatrix{\lb\\\lb^\pr}}{\mymatrix{\ub\\\ub^\pr}}.~\hspace{8em}\qedhere
 \end{align*}
 \end{proof}
 %
@@ -615,14 +643,12 @@ two real vectors $w,v\in\reals^n$.  Then
 \end{lemma}
 %
 \begin{proof}
-We get
+By Lemma~\ref{lem:iz-tcz-conversion}, we get
 %
 \begin{align*}
-  & \support{w}{v}{\iztope{\stemp}{\lb}{\ub}} = \\
-  & \%\%~~\text{by Lemma~\ref{lem:iz-tcz-conversion}}\\
-  & \support{w}{v}{\rztope{\diagonal{\frac{\ub-\lb}{2}}}{\frac{\ub+\lb}{2}}}=\\
+  & \support{w}{v}{\iztope{\stemp}{\lb}{\ub}} = \support{w}{v}{\rztope{\stemp\diagonal{\frac{\ub-\lb}{2}}}{\frac{\ub+\lb}{2}}}\\
   & \%\%~~\text{by Lemma~\ref{todo}}\\
-  & v^T\stemp\lt(\frac{\ub+\lb}{2}\rt)+\absolute{v^T\stemp}\absolute{\frac{\ub-\lb}{2}}.
+  & = v^T\stemp\lt(\frac{\ub+\lb}{2}\rt)+\absolute{v^T\stemp}\absolute{\frac{\ub-\lb}{2}}.~\hspace{8em}\qedhere
 \end{align*}
 %
 \end{proof}
