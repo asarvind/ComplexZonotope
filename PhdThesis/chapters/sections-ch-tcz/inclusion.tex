@@ -233,19 +233,20 @@ Equation~\ref{eqn:transfer-matrix} is bounded above by zero.
   %
   \[
 \forall
-i\in\set{1,...,m}~\absolute{\mymatrix{\real\lt(X^T_i\rt)\\\img\lt(X^T_i\rt)\\\real\lt(y_i\rt)\\\img\lt(y_i\rt)}}\leq\sfact_i,
+i\in\set{1,...,m}~\absolute{\mymatrix{\real\lt(X^T_i\rt)\\\img\lt(X^T_i\rt)\\\real\lt(y_i\rt)\\\img\lt(y_i\rt)}}\leq\sfact_i.
   \]
 %
-  which is equal to $m$ second order conic constraints on a vector of
-  size $mr+2m$, which comprises the scaling factors and the additional
-  variables.  We see that Equation~\ref{eqn:inclusion-tcz2} is a set
-  of $2n$ linear constraints on a vector of size $mr+2m+n$, which
+  The above is equivalent to $m$ second order conic constraints on a
+  \emph{real vector} of size $2mr+3m$, which comprises the scaling
+  factors and the additional variables.  Next, for a fixed template,
+  Equation~\ref{eqn:inclusion-tcz2} is a set of $n(n+r)$ linear
+  constraints on a \emph{complex vector} of size $mr+2m+n$, which
   comprises the center, scaling factors and the additional variables.
   On the other hand, the representation size of both the template
   complex zonotopes together is $(m+r)n$.  Therefore, the size of the
   second order conic program for checking the inclusion between two
-  template complex zonotopes can be at most of the order cubic in
-  the size of the template complex zonotopes.
+  template complex zonotopes can be at most of the order cubic in the
+  size of the template complex zonotopes.
 \end{remark}
 %
 %% Furthermore, the above relation is a partial order.

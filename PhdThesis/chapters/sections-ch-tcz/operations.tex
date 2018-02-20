@@ -368,14 +368,36 @@ As the above is true for any $x\in\Psi$, we have proved
 Equation~\ref{proof-abstraction1}.  By
 Equation~\ref{proof-abstraction1} and the definition of $S$,
 we get $\vectormax{x\in
-  \Psi}\absolute{\inv{\ptemp}\lt(x-\cen\rt)}\in S$.  Therefore, for any
-$i\in\set{1,...,n}$, we get
+  \Psi}\absolute{\inv{\ptemp}\lt(x-\cen\rt)}\in S$.  Therefore,
 %
-\[
-\min_{s\in S}s_i\leq\max_{x\in\Psi}\lt(\inv{\ptemp}\lt(x-\cen\rt)\rt).
-\]
+\begin{align*}
+\vectormin{s\in S}s\leq\vectormax{x\in\Psi}\absolute{\inv{\ptemp}\lt(x-\cen\rt)}.~\numberthis\label{proof-abstraction2}
+\end{align*}
 %
-Based on the above equation and Equation~\ref{eqn:min-abstraction1},
+By Equation~\ref{eqn:min-abstraction1}, which we have proved earlier, and
+the fact that $x\in\Psi$, we
+get
+%
+\begin{align*}
+& x\in\tcztope{\ptemp}{\cen}{\vectormin{s\in
+      S}s}.
+\end{align*}
+%
+Since $\inv{\ptemp}\lt(x-\cen\rt)$ is the unique vector of combining
+coefficients when $x$ is expressed as a linear combination of column
+vector of $\ptemp$, the above implies
+%
+\begin{align*}
+& \absolute{\inv{\ptemp}\lt(x-\cen\rt)}\leq\vectormin{s\in S}s.
+\end{align*}
+%
+As the above equation is true for any $x$ in $\Psi$, we get
+%
+\begin{align*}
+\vectormax{x\in\Psi}\absolute{\inv{\ptemp}\lt(x-\cen\rt)}\leq\vectormin{s\in\Psi}s.
+\end{align*}
+%
+Based on the above equation and Equation~\ref{proof-abstraction2},
 we get Equation~\ref{eqn:min-abstraction2}.
 \end{proof}
 
