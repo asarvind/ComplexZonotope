@@ -1,0 +1,124 @@
+%
+For any $\rho:0\leq \rho\leq \epsilon$, we want to derive a bound on the
+contraction of the operator $H_{t+\rho}$ as a function of $H_t$ and
+$\epsilon$.  Using Taylor expansion of an order $r$, we
+can write
+\begin{align*}
+&
+  H_{t+\rho}=e^{(A_c\rho)}H_t=P_r(\rho)H_t+E_r(\delta)H_t~~\text{where}\\
+&  P_r(\rho)=\sum_{i=0}^r\frac{A_c^i\rho^i}{i!},~~~~~~
+ E_r(\delta)=\frac{A_c^{r+1}\delta^{r+1}}{(r+1)!}:~~\delta\in[0,\epsilon].~\numberthis\label{eqn:taylor}
+\end{align*}
+%
+To use the above expansion for deriving the bound on contraction, we
+shall describe some properties of contraction.  The following
+lemma states that the amount of contraction under transformation
+by the product of two matrices is bounded by the product of amount of
+contraction of individual matrices.  Also, the amount of contraction
+under transformation by the sum of two matrices is bounded by the sum
+of the amount of contraction of individual matrices.
+%
+\begin{lem}\label{lem:composition}
+Let $J_1$ and $J_2$ be two linear operators and $\Psi$ be a $C$-set.
+  Then the all of the following is true.
+\begin{enumerate}
+\item $\chi(\Psi,J_1+J_2)\leq\chi(\Psi,J_1)+\chi(\Psi,J_2)$.
+\item $\chi(\Psi,J_1J_2)\leq\chi(\Psi,J_1)\chi(\Psi,J_2)$.
+\end{enumerate}
+\end{lem}
+%
+\begin{proof}
+  For proving the first part, we derive the following.
+  %
+  \begin{align*}
+&  \text{Since}\hspace{1em}   J_1\Psi\subseteq
+    \chi(\Psi,J_1)\Psi~\text{ and }
+    J_2\Psi\subseteq \chi(\Psi,J_2),~\text{we get}\\
+&  (J_1+J_2)\Psi\subseteq
+  \chi(\Psi,J_1)\Psi \oplus \chi(\Psi,J_2)\Psi=
+  (\chi(\Psi,J_1) + \chi(\Psi,J_2))\Psi.
+  \end{align*}
+  %
+For proving the second part, we derive the following.
+\begin{align*}
+  &  J_1J_2\Psi=J_1(J_2\Psi)\subseteq J_1(\chi(\Psi,J_2)\Psi)\\
+ &=\chi(\Psi,J_2)\lt(J_1\Psi\rt)\subseteq
+  \chi(\Psi,J_1)\chi(\Psi,J_2)\Psi.\hspace{3em}\qedhere
+\end{align*}
+%
+\end{proof}
+%
+If a matrix is embedded inside the convex hull of a set of matrices,
+then we get the following bound on contraction by the matrix.
+%
+\begin{lemma}
+Let us consider that $J\in\convexhull{\set{A_1,...,A_r}}$ and
+$\Psi\subset\reals^n$.  Then
+%
+\begin{align*}
+& \contraction{J}{\Psi}\leq\max_{i=1}^r\contraction{A_i}{\Psi}.
+\end{align*}
+%
+\end{lemma}
+%
+\begin{proof}
+As $J\in\convexhull{\set{A_1,...,A_r}}$, there exists
+$\alpha_1,...,\alpha_r\in\reals_{\geq 0}$ such that
+$\sum_{i=1}^r\alpha_i=1$ and $J=\sum_{i=1}^r\alpha_iA_i$.  Then by
+using Lemma~\ref{lem:composition}, we get
+%
+\begin{align*}
+  & \contraction{J}{\Psi}\leq\sum_{i=1}^r\contraction{A_i}{\Psi}\\
+  & \leq \lt(\sum_{i=1}^r\alpha_i\rt)\max_{i=1}^r\contraction{A_i}{\Psi}=\max_{i=1}^r\contraction{A_i}{\Psi}.\hspace{3em}\qedhere
+\end{align*}
+%
+\end{proof}
+%
+\begin{lem}~\label{lem:convex}~\cite{todo}
+Let us consider $\set{A_0,A_1,...,A_r}\subseteq\mat{n}{n}\reals$ such
+that 
+%
+\[
+\forall j\in\{0,...,r\},~ U_j(\rho)=\sum_{i=0}^jA_i\rho^i.
+\]
+%
+If
+$0\leq\rho\leq \epsilon$, then $U_r(\rho)\in
+\convexhull{U_0(\epsilon),U_1(\epsilon),...,U_r(\epsilon)}$.
+\end{lem}
+\begin{proof}
+This has been proved in~\cite{todo}.
+\end{proof}
+
+Using the above results, we derive the following bound on contraction
+by the operator $H_{t+\rho}$, when $\rho\in[0,\epsilon]$.
+%
+\begin{lemma}\label{lem:conv}
+Let us consider $\Psi\subset\reals^n$ and $\rho\in[0,\epsilon]$.  If
+$0\leq \rho\leq \epsilon$, then
+%
+\begin{align*}
+& \contraction{H_{t+\rho}}{\Psi}\leq\max_{i=1}^r\contraction{P_r(\epsilon)H_t}{\Psi}+\contraction{\frac{A_c^{r+1}}{(r+1)!}H_t}{\Psi}\epsilon^{r+1}.
+\end{align*}
+%
+\end{lemma}
+%
+\begin{proof}
+Using Equation~\ref{eqn:taylor}, there exists
+$\delta\in[0,\epsilon]$ such that,
+%
+\begin{align*}
+&
+  \contraction{H_{t+\rho}}{\Psi}=\contraction{P_r(\rho)+E_r(\delta)}{\Psi}\\
+& \%\%~~\text{by Lemma~\ref{lem:composition}}\\
+&
+  \leq\contraction{P_r(\rho)H_t}+\contraction{\frac{A_c^{r+1}}{(r+1)!}H_t}{\Psi}\delta^{r+1}\\
+  & \%\%~~\text{by Lemma~\ref{lem:convex}}\\
+&
+  \leq\max_{i=1}^r\contraction{P_r(\epsilon)H_t}{\Psi}+\contraction{\frac{A_c^{r+1}}{(r+1)!}H_t}{\Psi}\delta^{r+1}\\
+& \leq\max_{i=1}^r\contraction{P_r(\epsilon)H_t}{\Psi}+\contraction{\frac{A_c^{r+1}}{(r+1)!}H_t}{\Psi}\epsilon^{r+1}.\hspace{3em}\qedhere
+\end{align*}
+%
+\end{proof}
+%
+As $P_r(\epsilon)$ is a function of $H_t$ and 

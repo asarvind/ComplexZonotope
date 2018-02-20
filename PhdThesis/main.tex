@@ -3,6 +3,7 @@
 
 \input{./stylefiles/preamble}
 \input{./stylefiles/mymacros}
+\input{./stylefiles/additional}
 
 \begin{document}
 \pagestyle{empty}
@@ -44,15 +45,17 @@
 \mainmatter 
 \pagestyle{fancy}
 
-\chapter{Introduction} \input{chapters/introduction}
+\chapter{Introduction} \label{ch:intro} \input{chapters/introduction}
 %
-\chapter{Preliminaries} \label{sec:prelim} \input{chapters/preliminaries}
+\chapter{Preliminaries} \label{ch:review} \input{chapters/preliminaries}
 % 
-\chapter{Complex Zonotopes} \label{sec:ch1} \input{chapters/chapter-tcz}
+\chapter{Complex Zonotopes} \label{ch:tcz} \input{chapters/chapter-tcz}
 %
-\chapter{Augmented Complex Zonotopes} \label{sec:ch2} \input{chapters/chapter-acz}
+\chapter{Augmented Complex Zonotopes} \label{ch:acz} \input{chapters/chapter-acz}
 %
-\chapter{Invariance Verification for Discrete Time Affine Hybrid Systems} ~\label{sec:ch3} \input{chapters/ch-verification-invariance.tex}
+\chapter{Invariance Verification for Discrete Time Affine Hybrid Systems} ~\label{ch:invariance} \input{chapters/ch-verification-invariance.tex}
+%
+\chapter{Stability Verification of Nearly Periodic Linear Impulsive Systems} ~\label{ch:lis} \input{chapters/ch-lis.tex}
 %
 \chapter{Conclusion} \label{sec:concl} \input{chapters/conclusion}
 %  

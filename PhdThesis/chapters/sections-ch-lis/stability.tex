@@ -1,0 +1,82 @@
+A nearly periodic linear impulsive system is globally exponentially
+stable (GES) if any point in the state space reaches arbitrarily close
+to the origin at an exponential rate.  This property is mathematically
+stated as follows.
+%
+\begin{defn}\label{defn:exp-stable}[Global exponential stability] The
+system~(\ref{eqn:system}) is said to be globally exponentially stable
+(GES) if there exist $\lambda\in[0,1)$ and $c>0$ such that for all $\initstate
+\in\mb{R}^n$ and $k\in\mb{Z}_+$,
+$||\tbf{x}_k||\leq c\lambda^k||\tbf{x}_0||$.
+\end{defn}
+%
+The GES of a system is related to the reachable sets of the
+system. Indeed if all bounded sets containing the origin eventually
+contract to arbitrarily small sets around the origin, then every point
+eventually reaches close to the origin and the system is thus
+GES. Instead of verifying the contraction of all bounded sets
+containing the origin, we can verify the contraction of any compact
+and convex set containing the origin, because it can be scaled to
+include any bounded set. We
+call such sets as $C$-sets.
+
+The contractiveness of a set is defined as follows.
+%
+\begin{definition}[\cite{todo:all}]
+Given $\lambda\in[0,1]$, a set $C$-set $\Psi\subset\reals^n$ is
+$\lambda$-contractive for the system $\system$ iff
+\[\forall x\in\Psi,~\forall t\in\Delta,~H_tx\in\lambda\Psi.\]
+\end{definition}
+%
+The following is the stability verification problem.
+%
+\begin{problem}
+Given a sampling period interval $\Delta=[\lsb,\usb]$, verify
+that the system $H$ is globally exponentially stable.
+\end{problem}
+%
+\begin{remark} It has been shown previously
+in~(\cite{2014-fiacchini-set,athanasopoulos2014alternative,AlKhatib2015})
+that the globally exponentially stablility of the system is equivalent
+to the existence of a $\lambda$-contractive $C$-set for a
+$\lambda\in[0,1)$, as stated in the following theorem.
+\end{remark}
+%
+Therefore, the global exponential stability of the system can be
+verified by finding a contractive $C$-set.  A stability verification
+algorithm was proposed in~\cite{todo} that definitely computes a
+contractive $C$-set for a globally exponentially stable system.
+However, the algorithm in~\cite{todo} involves iterative
+intersections, where the complexity of the set can grow in size during
+recursion.  Therefore, the algorithm can be costly, especially in
+higher dimensions.  Alternatively, in this paper we propose an
+algorithm that synthesizes a possibly contractive complex zonotope by
+convex optimization and later verifies its contraction.  Although the
+existence of a contractive complex zonotope is only a sufficient
+condition for global exponential stability, we demostrate that our
+procedure by experiments on some benchmar examples.  Our procedure for
+stability verification, which we describe in the next section, shall
+use some properties of contraction of sets that we shall discuss now.
+
+Since the state change of the system can be identified by the
+transformation by a reachability operator, we define contraction by
+a matrix as follows.  From here on, $J$ denotes an
+$n\times n$ real matrix.
+%
+\begin{defn} The amount of contraction of a set
+  $\Psi\subset\mathbb{R}^n$ upon transformation by the matrix $J$,
+  denoted as $\chi(\Psi,J)$, is $$\chi(\Psi,J) =
+  \inf\{a\in\mathbb{R}_{\geq 0} : J(\Psi)\subseteq a
+  \Psi\}.$$ \end{defn}
+% \begin{defn} The amount of contraction of a set $\Psi\subset\mathbb{R}^n$
+% after $k$ steps for some $k\in\mathbb{Z}^+$, denoted by  $\chi_k(\Psi)$, is
+% $$\chi_k(\Psi)=\inf\{a\in\mathbb{R}_{\geq 0} : R^k(\Psi)\subseteq a\Psi\}.$$  
+% %We shall denote the contraction of $\Psi$ after $k$ steps as $\chi_k(\Psi)$.
+% \end{defn}
+The amount of contraction being greater than one would indicate that
+the set is actually \emph{expanding}, which also will be referred in
+general
+as ``contraction'' sense in our paper.
+%
+\input{./chapters/sections-ch-lis/contractiveness.tex}
+

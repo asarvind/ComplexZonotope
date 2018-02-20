@@ -1,0 +1,40 @@
+
+An example in the section on experimental results will illustrate how
+sampled-data control can be modeled using the above impulsive systems.
+%    Since computers work with digital signals and the physical system they
+% control operates in the analog world, sampling is required.
+
+\subsection*{Related work} 
+A major approach to stability analysis of aperiodic sampling control uses time-delay 
+systems, and stability can be proved using Lyapunov Krakovskii functionals 
+\cite{Mikheev1988,Teel1998,2010-liu-stability,Mazenc2013}, 
+or time-dependent Lyapunov functionals \cite{2010-fridman-refined}. Using a continuous-time model,  
+discrete-time Lyapunov functions is proposed for stability condition \cite{2012-seuret-novel}, 
+which can be checked using Sum of Squares (SOS) \cite{2013-seuret-stability}. Robust stability with respect to 
+time-varying input delay can also be handled by input/output approach 
+\cite{Mirkin2007,DBLP:journals/automatica/Fujioka09,DBLP:conf/amcc/KaoW14,Omran2013,Omran2014}.
+Another important approach is based on the hybrid systems modeling framework, in particular time-varying impulsive systems 
+\cite{Hu2003,nevsic2004framework,Goebel2009,Cai 2008,BauLoo_NECSYS12a} and employs Lyapunov-based 
+methods in various forms including discontinuous time-independent \cite{2008-naghshtabrizi-exponential} 
+or time-dependent Lyapunov functions \cite{2010-fridman-refined}. Another popular 
+approach involves using convex embedding \cite{HetelDaafouz2006,Fujioka2009,HetelKruszewski2011,2013hetel,Omran2014}. 
+In this approach, stability tests can be formulated as parametric Linear Matrix Inequalities (LMIs) \cite{HetelDaafouz2006}, 
+or as set contractiveness (such as, polytopic set contractiveness is equivalent to polyhedral Lyapunov 
+functions) \cite{2014-fiacchini-set,2013-briat-convex,Lazar2013,athanasopoulos2014alternative,AlKhatib2015}. 
+In this work, we focus on exponential stability and are inspired by
+set theory conditions
+\cite{2014-fiacchini-set,athanasopoulos2014alternative,AlKhatib2015} to derive a stability condition which is more conservative 
+but can be efficiently verified. The novelty of our work lies in the use of complex zonotopes to efficiently 
+find contractive sets. Computationally speaking, our approach is close in spirit to abstract interpretation
+and hybrid systems analysis. Indeed the way we find contractive sets using such zonotopes is similar 
+to the way invariant sets are computed using some zonotopic
+\cite{Girard05reachabilityof,Althoff2011,DBLP:conf/sas/GoubaultPV12} and
+template-polyhedral abstract domains \cite{S riram2008,jeannet2009apron}.
+
+
+
+\section{Dynamics}
+\input{chapters/sections-ch-lis/system.tex}
+
+\section{Globally exponential stability and set contraction}
+\input{chapters/sections-ch-lis/stability.tex}

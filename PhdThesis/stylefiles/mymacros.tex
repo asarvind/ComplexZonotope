@@ -44,6 +44,7 @@
 \newcommand{\diag}{\diagonal}
 \newcommand{\tbf}{\textbf}
 \newcommand{\pair}[2]{\lt(#1,#2\rt)}
+\newcommand{\mc}{\mathcal}
 
 
 %%% operations
@@ -97,7 +98,8 @@
 \newcommand{\slb}[4]{\overline{l}_{#4}\lt(#1,#2,#3\rt)}
 % shifted upper bound
 \newcommand{\sub}[4]{\overline{u}_{#4}\lt(#1,#2,#3\rt)}
-
+% contraction
+\newcommand{\contraction}[2]{\chi\lt(#1,#2\rt)}
 
 
 
@@ -281,6 +283,10 @@
 \newcommand{\proj}[2]{#1_#2}
 % positive invariance with respect to a transition
 \newcommand{\posinv}[2]{#1\order\pair{\system}{#2}}
+% lower sampling bound
+\newcommand{\lsb}{\bm{\underline{\tau}}}
+% upper sampling bound
+\newcommand{\usb}{\bm{\overline{\tau}}}
 
 
 %% ========================================================
@@ -332,7 +338,7 @@
 %%% New environments
 %% ========================================================
 \theoremstyle{plain}
-\newtheorem{theorem}{Theorem}[chapter]
+\newtheorem{theorem}{Theorem}[section]
 \newtheorem{proposition}[theorem]{Proposition}
 \newtheorem{lemma}[theorem]{Lemma}
 \newtheorem{corollary}[theorem]{Corollary}
@@ -340,6 +346,14 @@
 \newtheorem{definition}[theorem]{Definition}
 \newtheorem{example}[theorem]{Example}
 \newtheorem{remark}[theorem]{Remark}
+\newtheorem{problem}[theorem]{Problem}
+\newtheorem{thm}{Theorem}[section]
+
+\newtheorem{lem}[theorem]{Lemma} \newtheorem{prop}[thm]{Proposition}
+\newtheorem{cor}[theorem]{Corollary} \newtheorem{defn}[thm]{Definition}
+\newtheorem{rem}[theorem]{Remark} \newtheorem{prp}[thm]{Property}
+\newtheorem{prem}[theorem]{Premise} \newtheorem{egp}[thm]{Example}
+\newcommand{\initstate}{\tbf{x}_0} \newcommand{\camount}{\mathcal{\xi}}
 
 %% ========================================================
 %%% Define colors 
