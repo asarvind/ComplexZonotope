@@ -354,29 +354,13 @@ $v\in\reals^n$.  Then
 \end{lemma}
 %
 \begin{proof}
-  We derive the following:
+  By using Lemmas~\ref{lem:support-tcz} and~\ref{lem:support-iz}, we get
   %
   \begin{align*}
-& \%\%~~\text{by Lemma~\ref{lem:acz-tcz-conversion}}\\
-&
+    &
     \supp{v}{\real\lt(\acztope{\ptemp}{\cen}{\sfact}{\stemp}{\lb}{\ub}\rt)}\\
-& = \supp{v}{\real\lt(\tcztope
-  {\lt[\begin{matrix}
-      \ptemp &
-      \stemp
-    \end{matrix}\rt]
-  }
-  {\begin{matrix}
-      \cen+\frac{\ub+\lb}{2}
-    \end{matrix}
-  }
-  {\lt[\begin{matrix}
-      \sfact\\
-      \frac{\ub-\lb}{2}
-    \end{matrix}\rt]
-  }
-  \rt)}\\
-    & \%\%~\text{by Lemma~\ref{lem:support-tcz}}\\
+    & = \supp{v}{\real\lt(\tcztope{\ptemp}{\cen}{\sfact}\rt)}+\supp{v}{\iztope{\stemp}{\lb}{\ub}}\\
+    & = v^T\cen+\absolute{v^TW}\sfact+v^T\lt(\frac{\ub+\lb}{2}\rt)+\absolute{v^TW}\lt(\frac{\ub-\lb}{2}\rt)\\
     & =\real\lt(v^T\mymatrix{\ptemp &
     \stemp}\lt(\cen+\frac{\ub+\lb}{2}\rt)\rt)+\absolute{v^T\mymatrix{\ptemp & \stemp}}\mymatrix{\sfact\\\frac{\ub-\lb}{2}}.~\hspace{2em}\qedhere
   \end{align*}

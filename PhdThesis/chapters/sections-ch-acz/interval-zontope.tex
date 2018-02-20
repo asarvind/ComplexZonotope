@@ -444,8 +444,7 @@ interval zonotopes, like linear trasnformation, Minkowski sum,
 inclusion-checking and support function.
 %
 \begin{lemma}~\label{lem:iz-tcz-conversion}
-We have the following equivalence between an interval zonotope and the
-real projection of a template complex zonotope.
+The following is true.
 %
 \[
 \iztope{\stemp}{\lb}{\ub}=\real\lt(\tcztope{\stemp}{\stemp\frac{\ub+\lb}{2}}{\frac{\ub-\lb}{2}}\rt).
@@ -515,7 +514,7 @@ An interval zonotope can be equivalently represented as a simple
 zonotope, which is stated in the following lemma.
 %
 \begin{lemma}~\label{lem:iz-rz-conversion}
-We have
+The following is true.
 %
 \[
 \iztope{\stemp}{\lb}{\ub}=\rztope{\stemp\diagonal{\frac{\ub-\lb}{2}}}{\stemp\frac{\ub+\lb}{2}}.
@@ -555,8 +554,7 @@ zonotopes are an affine transformation of the original parameters.
 This is described in the following lemmas.
 %
 \begin{lemma}[Linear transformation]~\label{lem:iz-lin-transform}
-Let us consider an interval zonotope $\iztope{\stemp}{\lb}{\ub}$ and a
-matrix $A\in\mat{n}{n}{\reals^n}$.  Then,
+Let us consider $A\in\mat{n}{n}{\reals^n}$.  Then,
 %
 \[
 A\iztope{\stemp}{\lb}{\ub}=\iztope{A\stemp}{\lb}{\ub}.
@@ -580,9 +578,7 @@ Based on Lemma~\ref{lem:iz-rz-conversion}, we get
 \end{proof}
 %
 \begin{lemma}[Minkowski sum]~\label{lem:iz-min-sum}
-  Let us consider two interval zonotopes\\
-  $\iztope{\stemp}{\lb}{\ub},~\iztope{\stemp^\pr}{\lb^\pr}{\ub^\pr}\subset\compnums^n$.
-  Then 
+The following is true.
 %
 \[
 \minsum{\iztope{\stemp}{\lb}{\ub}}{\iztope{\stemp^\pr}{\lb^\pr}{\ub^\pr}}
@@ -593,7 +589,7 @@ Based on Lemma~\ref{lem:iz-rz-conversion}, we get
 \end{lemma}
 %
 \begin{proof}
-Byy Lemma~\ref{lem:iz-rz-conversion}, we get
+By Lemma~\ref{lem:iz-rz-conversion}, we get
 %
 \begin{align*}
   &
@@ -632,12 +628,11 @@ The support of an interval zonotope along a vector is an affine
 function of the lower and upper interval bounds, which is stated in
 the following proposition.
 %
-\begin{lemma}[Support of a vector]
-Let us consider $\iztope{\stemp}{\lb}{\ub}\subset\reals^n$ and
-two real vectors $w,v\in\reals^n$.  Then
+\begin{lemma}[Support of a vector]~\label{lem:support-iz}
+Let $v\in\reals^n$.  Then
 %
 \[
-\support{w}{v}{\iztope{\stemp}{\lb}{\ub}}=v^T\stemp\lt(\frac{\ub+\lb}{2}\rt)+\absolute{v^T\stemp}\absolute{\frac{\ub-\lb}{2}}.
+\supp{v}{\iztope{\stemp}{\lb}{\ub}}=v^T\stemp\lt(\frac{\ub+\lb}{2}\rt)+\absolute{v^T\stemp}\lt({\frac{\ub-\lb}{2}}\rt).
 \]
 %
 \end{lemma}
@@ -646,9 +641,9 @@ two real vectors $w,v\in\reals^n$.  Then
 By Lemma~\ref{lem:iz-tcz-conversion}, we get
 %
 \begin{align*}
-  & \support{w}{v}{\iztope{\stemp}{\lb}{\ub}} = \support{w}{v}{\rztope{\stemp\diagonal{\frac{\ub-\lb}{2}}}{\frac{\ub+\lb}{2}}}\\
-  & \%\%~~\text{by Lemma~\ref{todo}}\\
-  & = v^T\stemp\lt(\frac{\ub+\lb}{2}\rt)+\absolute{v^T\stemp}\absolute{\frac{\ub-\lb}{2}}.~\hspace{8em}\qedhere
+  & \supp{v}{\iztope{\stemp}{\lb}{\ub}} = \supp{v}{\real\lt(\tcztope{\stemp}{\frac{\ub+\lb}{2}}{{\frac{\ub-\lb}{2}}}\rt)}\\
+  & \%\%~~\text{by Lemma~\ref{lem:support-tcz}}\\
+  & v^T\stemp\lt(\frac{\ub+\lb}{2}\rt)+\absolute{v^T\stemp}\lt({\frac{\ub-\lb}{2}}\rt).~\hspace{8em}\qedhere
 \end{align*}
 %
 \end{proof}

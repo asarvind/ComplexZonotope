@@ -1,0 +1,386 @@
+While computing positive invariants using a set representation,
+ascertaining the positive invariance of a set requires deciding the
+inclusion of the next reachable set inside the given set.  In the case
+of complex zonotopes, we shall show that checking the exact inclusion
+amounts to solving a is a non-convex optimization problem.  Therefore,
+we later find a sufficient condition expressed by convex constraints
+for checking the inclusion.  The convex constraints we derive later
+are specifically second order conic constraints, which are described
+below.
+%
+\begin{definition}[Second order conic constraint]
+A second order conic constraint on a variable $x$ taking values in
+$\reals^n$ is one of the following expressions.
+\begin{enumerate}
+\item $\sqnorm{Ax+b}\leq c^Tx+d$ where $A\in\mat{r}{n}{\reals}$,
+  $b\in\reals^r$, $c\in\reals^n$ and $d\in\reals$.
+\item $p^Tx=q$ where $p\in\reals^n$ and $q\in\reals$.
+\end{enumerate}
+\end{definition}
+%
+Given a set of second order conic constraints on a variable
+$x\in\reals^n$, solving the constraints refers to finding a value
+$x^*\in\reals^n$ that satisfies the constraints.  A value
+$x^\pr\in\reals^n$ is called an approximate solution within a
+precision $\epsilon\in\reals_{\geq 0}$ if there exists a solution
+$x^*\in\reals^n$ such that $\sqnorm{x^\pr-x^*}\leq \epsilon$.  There
+are numerical algorithms based on interior point methods~\cite{todo}
+that can efficiently find approximate solutions with very high
+precision to second order conic constraints (SOCC).
+
+Checking inclusion of a single point inside a template complex
+zonotope is equivalent to solving SOCC, as described below.
+%
+\begin{lemma}[Inclusion of a point]
+Let us consider a point $x\in\compnums^n$.  Then
+$x\in\tcztope{\ptemp}{\cen}{\sfact}\subset\compnums^n$ if and only if
+all of the following is collectively true.
+%
+\begin{align}
+& \exists\zeta\in\compnums^m:\nonumber\\
+& \ptemp\zeta = x-c~\label{eqn:lem-point-inclusion-1}\\
+& \absolute{\zeta}\leq \sfact.~\label{eqn:lem-point-inclusion-2}
+\end{align}
+%
+\end{lemma}
+%
+\begin{proof}
+The above result follows from the fact that any point 
+$x\in\tcztope{\ptemp}{\cen}{\sfact}$ is of the form
+$x=\cen+\ptemp\zeta$ for some $\zeta\in\compnums^m$ such that
+$\absolute{\zeta}\leq \sfact$.
+\end{proof}
+%
+Equation~\ref{eqn:lem-point-inclusion-1} is an equality constraint on
+$\zeta$, which is therefore an SOCC.  We know that the absolute value
+of a complex number is the square norm of a two dimensional vector.
+So, Equation~\ref{eqn:lem-point-inclusion-2} is equivalent to a set of
+square norm constraints on the real and imaginary components of
+$\zeta$, which are therefore SOCC constraints.  Hence, the inclusion
+of a point inside a template complex zonotope can be checked by
+solving second order conic constraints.
+
+Now we state the necessary and sufficient condition for checking
+inclusion between two template complex zonotopes.
+%
+\begin{lemma}[Exact inclusion between template complex zonotopes]~\label{lem:exact-inclusion}
+Let us consider $\ptemp\in\mat{n}{m}{\compnums}$ and
+$\ptemp^\pr\in\mat{n}{r}{\compnums}$.  The inclusion
+$\tcztope{\ptemp^\pr}{\cen^\pr}{\sfact^\pr}\subseteq\tcztope{\ptemp}{\cen}{\sfact}$
+holds if and only if
+\begin{equation}\label{eqn:exact-inclusion}
+\max_{\set{\zeta^\pr\in\compnums^{r}:\absolute{\zeta^\pr}\leq \sfact^\pr}}\min_{\set{\zeta\in\compnums^m:\ptemp\zeta=\ptemp^\pr\zeta^\pr+\cen^\pr-\cen}}\max_{i=1}^m\lt(\absolute{\zeta_i}-s_i\rt)\leq 0
+\end{equation}
+\end{lemma}
+%
+\begin{proof}
+  We have
+  %
+  \begin{align*}
+    &\tcztope{\ptemp}{\cen}{\sfact}=\set{\cen+\ptemp\zeta:~\zeta\in\compnums^m,~\absolute{\zeta}\leq\sfact},\\
+    &\tcztope{\ptemp^\pr}{\cen^\pr}{\sfact^\pr}=\set{\cen^\pr+\ptemp^\pr\zeta^\pr:~\zeta^\pr\in\compnums^r,~\absolute{\zeta^\pr}\leq\sfact^\pr}.
+  \end{align*}
+  %
+Therefore, we get
+$\tcztope{\ptemp^\pr}{\cen^\pr}{\sfact^\pr}\subseteq\tcztope{\ptemp}{\cen}{\sfact}$
+if and only if
+for every $\zeta^\pr\in\compnums^r:\absolute{\zeta^\pr}\leq \sfact^\pr$,
+there exists
+$\zeta\in\compnums^m:\ptemp\zeta+\cen=\ptemp^\pr\zeta^\pr+\cen^\pr~\wedge~\absolute{\zeta}\leq
+\sfact$.  This is equivalently expressed as the constraint in Equation~\ref{eqn:exact-inclusion}.
+\end{proof}
+%
+The reason solving Equation~\ref{eqn:exact-inclusion}
+requires non-covex optimization is explained as follows.  Let us consider
+that $\ptemp$ has a pseudo-inverse $\pinv{\ptemp}$.  Then by the
+rank-nullity theorem
+%
+\[
+\set{\zeta:~\ptemp\zeta=\ptemp\zeta^\pr+\cen^\pr-\cen}=\set{\pinv{\ptemp}\lt(\zeta^\pr-c\rt)+v:~v\in\nullspace{\ptemp}}
+\]
+%
+So,
+%
+\begin{align*}
+& \min_{\set{\zeta\in\compnums:\ptemp\zeta=\ptemp^\pr\zeta^\pr+\cen^\pr-\cen}}\max_{i=1}^m\lt(\absolute{\zeta_i}-s_i\rt)\\
+&
+=\min_{\set{v\in\nullspace{\ptemp}}}\max_{i=1}^m\lt(\absolute{\pinv{\ptemp}\lt(\zeta^\pr-c\rt)+v}-s_i\rt)
+\end{align*}
+%
+The absolute value of a complex variable is a convex quadratic
+function of the real and imaginary components of the variable.  So,
+the above function is a point-wise minimum (for points $v$ in the null
+space $\null{\ptemp}$) of a set of convex quadratic functions over
+$\zeta^\pr$, which is therefore a non-concave function of $\zeta^\pr$.
+So the maximization
+%
+\[
+\max_{\set{\zeta^\pr\in\compnums^{r}:\absolute{\zeta^\pr}\leq \sfact^\pr}}\min_{\set{\zeta\in\compnums^m:\ptemp\zeta=\ptemp^\pr\zeta^\pr+\cen^\pr-\cen}}\max_{i=1}^m\lt(\absolute{\zeta_i}-s_i\rt)
+\]
+%
+is equivalent to maximizing a non-concave function of $\zeta^\pr$.
+Maximizing a non-concave function is a non-covex optimization problem.
+
+We shall now derive a sufficient condition, equivalent to a set of
+second order conic constraints, for checking inclusion between two
+template complex zonotopes.  The following result is used to later derive
+the sufficient condition.
+%
+\begin{lemma}~\label{lem:transfer-matrix}
+  Let us consider ${\sfact\in\reals^m_{\geq 0}}$,
+  ${\sfact^\pr\in\reals^r_{\geq 0}}$, ${\zeta^\pr\in\compnums^r}$,
+  ${\cen,\cen^\pr\in\compnums^n}$,${\ptemp\in\mat{n}{m}{\compnums}}$, ${\ptemp^\pr\in\mat{n}{r}{\compnums}}$ 
+  ${\absolute{\zeta^\pr}\leq\sfact^\pr}$,
+  ${\tmat\in\mat{m}{r}{\compnums}}$  and ${y\in\compnums^m}$ such that
+  %
+  \begin{align*}
+&
+    \ptemp\tmat=\ptemp^\pr\diagonal{\sfact^\pr},\hspace{1em}\ptemp\tvect=\lt(c^\pr-c\rt).~\numberthis\label{eqn:inclusion1}
+    \\
+&\text{Then}\hspace{2em}\min_{\set{\zeta\in\compnums:\ptemp\zeta=\ptemp^\pr\zeta^\pr+\cen^\pr-\cen}}\max_{i=1}^m\lt(\absolute{\zeta_i}-\sfact_i\rt)\leq \max_{i=1}^m\lt(\absolute{\tvect_i}+\sum_{j=1}^r\absolute{\tmat_{ij}}-\sfact_i\rt).~\numberthis\label{eqn:transfer-matrix}
+\end{align*}
+%
+\end{lemma}
+%
+\begin{proof}
+  Let us consider $\epsilon\in\compnums^{r}$, xsuch that for any $i\in\set{1,...,r}$,
+%
+\[\left\{
+\begin{array}{l}
+\epsilon_i=\frac{\zeta^\pr}{s^\pr_i}~\text{if}~ s^\pr_i\neq 0\\
+\epsilon_i=0~\text{otherwise}
+\end{array}
+\right..\]
+%
+From the above definition and the fact that $\absolute{\zeta^\pr}\leq
+s^\pr$, we get $\zeta^\pr=\diagonal{s^\pr}\epsilon$ and
+$\max_{j=1}^r\absolute{\epsilon_j}\leq 1$.  Then we derive
+%
+\begin{align*}
+&\ptemp^\pr\zeta^\pr+c-c^\pr
+=\ptemp^\pr\diagonal{\sfact^\pr}\epsilon+c-c^\pr
+=\ptemp\tmat\epsilon+\ptemp\tvect
+=\ptemp\lt(\tmat\epsilon+\tvect\rt)
+\end{align*}
+%
+According the above equation,
+%
+\begin{align*}
+& \tmat\epsilon+\tvect\in\set{\zeta\in\compnums:\ptemp\zeta=\ptemp^\pr\zeta^\pr+\cen^\pr-\cen}.\\
+& \implies
+  \min_{\set{\zeta\in\compnums:\ptemp\zeta=\ptemp^\pr\zeta^\pr+\cen^\pr-\cen}}\max_{i=1}^m\lt(\absolute{\zeta_i}-\sfact_i\rt)\leq
+  \max_{i=1}^m\lt(\absolute{\lt(X\epsilon+y\rt)_i}-\sfact_i\rt)\\
+&   ~~\%\%~\text{Using triangular inequality}\\
+&\leq \max_{i=1}^m\lt(\absolute{\tvect_i}+\sum_{j=1}^r\absolute{\tmat_{ij}}\absolute{\epsilon_j}-\sfact_i\rt)\\
+& ~~\%\%~\text{Since}~\max_{j=1}^r\absolute{\epsilon_j}\leq 1\\
+& \leq  \max_{i=1}^m\lt(\absolute{\tvect_i}+\sum_{j=1}^r\absolute{\tmat_{ij}}-\sfact_i\rt).\hspace{3em}\qedhere
+\end{align*}
+%
+\end{proof}
+%
+We define the following relation between two template
+complex zonotopes, which we shall prove is a sufficient condition for
+the inclusion between them.
+%
+\begin{definition}[Relation for inclusion-checking]~\label{defn:inclusion-tcz}
+Let us consider $\ptemp\in\mat{n}{m}{\compnums}$ and
+$\ptemp^\pr\in\mat{n}{r}{\compnums}$.  We say
+$\tcztope{\ptemp}{\cen}{\sfact}\order\tcztope{\ptemp^\pr}{\cen^\pr}{\sfact^\pr}$
+iff all of the following is collectively true.
+%
+\begin{align*}
+& \exists \tmat\in\mat{m}{r}{\compnums},\tvect\in\compnums^m~~\text{such
+that}\\
+& \ptemp\tmat=\ptemp^\pr\diagonal{\sfact^\pr},~~\ptemp\tvect=\cen^\pr-\cen~\numberthis\label{eqn:inclusion-tcz1}\\
+& \max_{i=1}^m\lt(\absolute{\tvect_i}+\sum_{j=1}^r\absolute{\tmat_{ij}}-\sfact_i\rt)\leq
+0~\numberthis\label{eqn:inclusion-tcz2}.
+\end{align*}
+%
+\end{definition}
+%
+\begin{theorem}[Sufficient condition for inclusion checking]~\label{thm:suff-inclusion}
+  The following is true.
+%
+\begin{align*}
+&  \tcztope{\ptemp}{\cen}{\sfact}\order\tcztope{\ptemp^\pr}{\cen^\pr}{\sfact^\pr}\\
+&\implies \tcztope{\ptemp}{\cen}{\sfact}\subseteq\tcztope{\ptemp^\pr}{\cen^\pr}{\sfact^\pr}.
+\end{align*}
+%
+\end{theorem}
+%
+\begin{proof}
+The theorem follows from Lemmas~\ref{lem:exact-inclusion}
+and~\ref{lem:transfer-matrix}.  According to
+Lemma~\ref{lem:exact-inclusion}, the inclusion
+$\tcztope{\ptemp}{\cen}{\sfact}\subseteq\tcztope{\ptemp^\pr}{\cen^\pr}{\sfact^\pr}$
+holds iff the L.H.S of Equation~\ref{eqn:exact-inclusion} is bounded
+above by zero.  According to Lemma~\ref{lem:transfer-matrix}, if there
+exists a $\tmat$ and $\tvect$ satisfying
+Equation~\ref{eqn:inclusion1}, then the R.H.S of
+Equation~\ref{eqn:transfer-matrix} is an upper bound on the L.H.S of
+Equation~\ref{eqn:exact-inclusion}.  So, if there exist $\tmat$ and
+$\tvect$ satisfying Equation~\ref{eqn:inclusion1} such that the R.H.S
+of Equation~\ref{eqn:transfer-matrix} is bounded above by zero, then
+the inclusion holds.  The relation
+$\tcztope{\ptemp}{\cen}{\sfact}\order\tcztope{\ptemp^\pr}{\cen^\pr}{\sfact^\pr}$
+implies that there exists $\tmat$ and $\tvect$ satisfying
+Equations~\ref{eqn:inclusion1} such that the R.H.S of
+Equation~\ref{eqn:transfer-matrix} is bounded above by zero.
+\end{proof}
+%
+\begin{remark}
+  We can write Equation~\ref{eqn:inclusion-tcz2} as
+  %
+  \[
+\forall
+i\in\set{1,...,m}~\absolute{\mymatrix{\real\lt(X^T_i\rt)\\\img\lt(X^T_i\rt)\\\real\lt(y_i\rt)\\\img\lt(y_i\rt)}}\leq\sfact_i,
+  \]
+%
+  which is equal to $m$ second order conic constraints on a vector of
+  size $mr+2m$, which comprises the scaling factors and the additional
+  variables.  We see that Equation~\ref{eqn:inclusion-tcz2} is a set
+  of $2n$ linear constraints on a vector of size $mr+2m+n$, which
+  comprises the center, scaling factors and the additional variables.
+  On the other hand, the representation size of both the template
+  complex zonotopes together is $(m+r)n$.  Therefore, the size of the
+  second order conic program for checking the inclusion between two
+  template complex zonotopes can be at most of the order cubic in
+  the size of the template complex zonotopes.
+\end{remark}
+%
+%% Furthermore, the above relation is a partial order.
+%
+%% The relation ``$\order$'' is a partial order on the set of template
+%% complex zonotopes, as stated in the following theorem.
+%% %
+%% \begin{theorem}[Partial ordering]
+%% For any three template complex zonotopes\\
+%% ${\tcz{\ptemp}{\cen}{\sfact},\tcz{\ptemp^\pr}{\cen^\pr}{\sfact^\pr}\text{
+%%     and }\tcz{\ptemp^\dpr}{\cen^\dpr}{\sfact^\dpr}}$,
+%% all of the following conditions are true.
+%% %
+%% \begin{enumerate}
+%% \item Reflexivity:
+%% $\tcz{\ptemp}{\cen}{\sfact}\order\tcz{\ptemp}{\cen}{\sfact}$.
+%% \item Anti-symmetry: If~
+%% $\tcz{\ptemp}{\cen}{\sfact}\order\tcz{\ptemp^\pr}{\cen^\pr}{\sfact^\pr}$
+%% and
+%% $\tcz{\ptemp^\pr}{\cen^\pr}{\sfact^\pr}\order\tcz{\ptemp}{\cen}{\sfact}$,
+%% then
+%% $\tcz{\ptemp}{\cen}{\sfact}=\tcz{\ptemp^\pr}{\cen^\pr}{\sfact^\pr}$.
+%% \item Transitivity: If~
+%% $\tcz{\ptemp^\pr}{\cen^\pr}{\sfact^\pr}\order\tcz{\ptemp}{\cen}{\sfact}$
+%% and
+%% $\tcz{\ptemp^\dpr}{\cen^\dpr}{\sfact^\dpr}\order\tcz{\ptemp^\pr}{\cen^\pr}{\sfact^\pr}$,
+%% then $\tcz{\ptemp^\dpr}{\cen^\dpr}{\sfact^\dpr}\order\tcz{\ptemp}{\cen}{\sfact}$.
+%% \end{enumerate}
+%% %
+%% \end{theorem}
+
+%% \begin{proof}
+%% We prove reflexivity, antisymmetry and transitivity separately as follows.
+%% \begin{enumerate}
+%% \item {\it Reflexivity}:  Let us consider
+%%   %
+%%   \begin{align*}
+%% &  \tmat=\diagonal{\sfact}\text{ and }
+%%   \tvect=\repmat{m}{1}{0}.\\
+%% &\text{Then we get }~\ptemp\tmat=\ptemp\diagonal{\sfact},~~
+%% \ptemp\tvect=0=c-c\text{ and }\\
+%% & \max_{i=1}^m\lt(\absolute{y_i}+\sum_{j=1}^m\absolute{X_{ij}}-\sfact_i\rt)
+%% =\max_{i=1}^m\lt(0+\sfact_i-\sfact_i\rt)=0\\
+%% & \text{So}, \tcz{\ptemp}{\cen}{\sfact}\order\tcz{\ptemp}{\cen}{\sfact}.
+%% \end{align*}
+%% %
+%% \item {\it Anti-symmetry}: Let us consider that
+%% %
+%% \begin{align*}
+%% &
+%% \tcz{\ptemp}{\cen}{\sfact}\order\tcz{\ptemp^\pr}{\cen^\pr}{\sfact^\pr}
+%% \text{ and }
+%% \tcz{\ptemp^\pr}{\cen^\pr}{\sfact^\pr}\order\tcz{\ptemp}{\cen}{\sfact}.\\
+%% & \text{Then by Theorem~\ref{thm:suff-inclusion}, we get}\\ 
+%% & \tcz{\ptemp}{\cen}{\sfact}\subseteq\tcz{\ptemp^\pr}{\cen^\pr}{\sfact^\pr}
+%% \text{ and }
+%% \tcz{\ptemp^\pr}{\cen^\pr}{\sfact^\pr}\subseteq\tcz{\ptemp}{\cen}{\sfact}\\
+%% &\implies
+%% \tcz{\ptemp}{\cen}{\sfact}=\tcz{\ptemp^\pr}{\cen^\pr}{\sfact^\pr}.
+%% \end{align*}
+%% %
+%% \item {\it Transitivity:}  
+%% \end{enumerate}
+%% \end{proof}
+
+
+When the template of the complex zonotope inside which containment is
+checked is invertible, and the centers of the template complex
+zonotope are same, then the above sufficient condition for inclusion
+checking is also a necessary condition.  This is described in the
+following theorem.
+%
+\begin{theorem}
+Let us consider
+$\ptemp\in\mat{n}{n}{\compnums}$ and
+$\ptemp^\pr\in\mat{n}{m}{\compnums}$ such that $\ptemp$ is a non-singular matrix.
+Then
+$\tcztope{\ptemp^\pr}{\cen^\pr}{\sfact^\pr}\subseteq\tcztope{\ptemp}{\cen}{\sfact}$
+if and only if
+$\tcztope{\ptemp^\pr}{\cen}{\sfact^\pr}\order\tcztope{\ptemp}{\cen}{\sfact}$.
+\end{theorem}
+%
+\begin{proof}
+By Theorem~\ref{thm:suff-inclusion}, we know that if
+$\tcztope{\ptemp^\pr}{\cen}{\sfact^\pr}\order\tcztope{\ptemp}{\cen}{\sfact}$
+is true,
+then we get
+$\tcztope{\ptemp^\pr}{\cen}{\sfact^\pr}\subseteq\tcztope{\ptemp}{\cen}{\sfact}$.
+So, we have to prove the converse that if
+$\tcztope{\ptemp^\pr}{\cen}{\sfact^\pr}\subseteq\tcztope{\ptemp}{\cen}{\sfact}$,
+then
+$\tcztope{\ptemp^\pr}{\cen}{\sfact^\pr}\order\tcztope{\ptemp}{\cen}{\sfact}$.
+
+Let us consider
+$\tcztope{\ptemp^\pr}{\cen}{\sfact^\pr}\subseteq\tcztope{\ptemp}{\cen}{\sfact}$.
+Using
+Lemma~\ref{lem:normalization}, we get
+%
+\begin{align*}
+&
+  \tcztope{\ptemp^\pr}{\cen}{\sfact^\pr}=\cztope{\ptemp^\pr\diagonal{\sfact^\pr}}{\cen^\pr}\subseteq\tcztope{\ptemp}{\cen}{\sfact}\\ &\equivalent~\set{\cen^\pr+\ptemp^\pr\diagonal{\sfact^\pr}\zeta^\pr:~\zeta^\pr\in\compnums^m,~\infnorm{\zeta^\pr}\leq
+    1}\subseteq\set{\cen+\ptemp\zeta:~\zeta\in\compnums^n,~\absolute{\zeta}\leq
+    \sfact}\\ & \%\%~\text{since}~\ptemp~\text{is non-singular}\\ &
+  \equivalent~
+  \set{\inv{\ptemp}\lt(\cen-\cen\rt)+\inv{\ptemp}\ptemp^\pr\diagonal{\sfact^\pr}\zeta^\pr:~\zeta^\pr\in\compnums^m,~\infnorm{\zeta^\pr}\leq
+    1}\\&\subseteq
+  \set{\zeta:\zeta\in\compnums^n,~\absolute{\zeta}\leq\sfact}\\
+ & \equivalent~\set{\inv{\ptemp}\ptemp^\pr\diagonal{\sfact^\pr}\zeta^\pr:~\zeta^\pr\in\compnums^m,~\infnorm{\zeta^\pr}\leq
+    1}\subseteq
+  \set{\zeta:\zeta\in\compnums^n,~\absolute{\zeta}\leq\sfact} ~\numberthis\label{proof-necc-inc1}
+\end{align*}
+%
+Let $\tmat=\inv{\ptemp}\ptemp^\pr\diagonal{\sfact^\pr}$ and
+$\tvect=0$.  Then by
+Equation~\ref{proof-necc-inc1}, we get for any $i\in\set{1,...,n}$
+%
+\begin{align*}
+\forall
+& \max_{\zeta^\pr\in\compnums^m:~\infnorm{\zeta}}\tmat_i\zeta^\pr_i\leq
+  1}\absolute{\sum_{i=1}^m\tmat_{ij}\zeta_i}\leq\sfact_i
+& \implies \sum_{i=1}^n\tmat_i\frac{\absolute{\tmat_i}}{\tmat_i}
+    \leq\sfact_i\\
+    & \%\%~~\text{since}~y_i=0
+& \implies \sum_{i=1}^n\absolute{\tmat_{ij}}  +\absolute{\tvect_i}\leq \sfact_i .~\numberthis\label{proof-necc-inc2}
+\end{align*}
+%
+Furthermore, we have
+%
+\begin{align*}
+&
+  \ptemp\tmat=\ptemp\inv{\ptemp}\ptemp^\pr\diagonal{\sfact}=\ptemp^\pr\diagonal{\sfact^\pr}~\text{
+    and }\\
+& \ptemp\tvect=0=\cen-\cen.~\numberthis\label{proof-necc-inc3}      
+\end{align*}
+%
+By Equations~\ref{proof-necc-inc2} and~\ref{proof-necc-inc4}, we get $\tcztope{\ptemp^\pr}{\cen}{\sfact^\pr}\order\tcztope{\ptemp}{\cen}{\sfact}$.
+\end{proof}
+

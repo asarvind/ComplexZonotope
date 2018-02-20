@@ -1,15 +1,14 @@
-We shall discuss the computation of some basic operations on template complex zonotopes
-like linear transformation, Minkowski sum and intersection in special
-cases.  In the next section, we shall discuss how to check inclusion
-between two template complex zonotopes.  For the rest of this chapter,
-we shall consider
+We now discuss the computation of some basic operations on template
+complex zonotopes like linear transformation, Minkowski sum and
+intersection in special cases.  In the next section, we shall discuss
+how to check inclusion between two template complex zonotopes.  For
+the rest of this chapter, we use the following notation, unless
+otherwise specified.
 %
 \begin{align*}
-\ptemp\in\mat{n}{m}{\compnums},~~\sfact\in\reals^m_{\geq 0},~~\cen\in\reals^n,
+\ptemp\in\mat{n}{m}{\compnums},~~\sfact\in\reals^m_{\geq 0},~~\cen\in\reals^n.
 \end{align*}
 %
-unless otherwise specified.
-
 The set of template complex zonotopes is closed under linear transformation and
 {Minkowski sum} operations, which are straightforward algebraic
 computations just like in the case of simple (real) zonotopes.
@@ -38,23 +37,24 @@ Let $A\in\mat{n}{n}{\reals}$ and $\ptemp\in\mat{n}{m}{\compnums}$.
 \end{proof}
 %
 We see that the template of a complex zonotope can change after a
-linear transformation.  But when the column vectors of the
-template are the eigenvectors of the linear transformation and the
-center is the origin, we can represent the transformed complex
-zonotope using the same template by changing the scaling factors.
-This result can be seen as an extension of Proposition~\ref{lem:eig-invariance} to the
-case of template complex zonotopes.
+linear transformation.  But when the column vectors of the template
+are the eigenvectors of the linear transformation and the center is
+the origin, we can represent the transformed complex zonotope using
+the same template by multiplying the scaling factors with the
+magnitudes of eigenvalues.  So, when the magnitudes of eigenvalues are
+less than one, the transformed template complex zonotope contains the
+original template complex zonotope.  This result can be seen as an
+extension of Proposition~\ref{lem:eig-invariance} to the case of
+template complex zonotopes.
 %
 \begin{proposition}[Eigenstructure based scaling]
 Let us consider $\ptemp\in\mat{n}{n}{\compnums}$ consists of the complex
-eigenvectors of a matrix $A\in\mat{n}{n}{\reals}$ as column vectors
-and $\mu\in\compnums^n$ be the vector of eigenvalues such that
-$A\ptemp=\ptemp\diagonal{\mu}$.  Let
-$\tcztope{\ptemp}{0}{\sfact}\subset\compnums^n$ be a template complex
-zonotope.  Then,
+eigenvectors of a matrix $A\in\mat{n}{n}{\reals}$ as the column vectors.
+Let $\mu\in\compnums^n$ be the vector of eigenvalues such that
+$A\ptemp=\ptemp\diagonal{\mu}$.
 %
 \begin{equation}~\label{eqn:eigen-scaling}
-A\tcztope{\ptemp}{0}{\sfact}=\tcztope{\ptemp}{0}{\diagonal{\absolute{\mu}}\sfact}.
+\text{Then}~~A\tcztope{\ptemp}{0}{\sfact}=\tcztope{\ptemp}{0}{\diagonal{\absolute{\mu}}\sfact}.
 \end{equation}
 %
 \end{proposition}
@@ -70,16 +70,16 @@ A\tcztope{\ptemp}{0}{\sfact}=\tcztope{A\ptemp}{0}{\sfact}=\tcztope{\ptemp\diagon
 Then using Equation~\ref{eqn:normalization}, we get
 %
 \[
-\tcztope{\ptemp\diagonal{\mu}}{0}{\sfact}=\tcztope{\ptemp}{0}{\diagonal{\absolute{\mu}}\sfact}
+\tcztope{\ptemp\diagonal{\mu}}{0}{\sfact}=\tcztope{\ptemp}{0}{\diagonal{\absolute{\mu}}\sfact}.~\hspace{3em}\qedhere
 \]
 \end{proof}
 
-The resultant template complex zonotope from the Minkowski sum of two
-template complex zonotopes can be computed as follows.
+The Minkowski sum of two template complex zonotopes is another
+template complex zonotope, which is computed as follows.
 %
 \begin{lemma}[Minkowski sum]~\label{lem:min-sum}
-Let us consider $\ptemp\in\mat{n}{m}{\compnums^m}$ and
-$\ptemp^\pr\in\mat{n}{m}{\compnums^r}$.  Then
+Let us consider two templates ${\ptemp\in\mat{n}{m}{\compnums}}$ and
+${\ptemp^\pr\in\mat{n}{r}{\compnums^r}}$.  We get
 %
 \begin{equation}
 \minsum{\tcztope{\ptemp}{\cen}{\sfact}}{\tcztope{\ptemp^\pr}{\cen^\pr}{\sfact^\pr}}
@@ -94,11 +94,11 @@ We derive the following.
 &
   \tcztope{\ptemp}{\cen}{\sfact}\oplus\tcztope{\ptemp^\pr}{\cen^\pr}{\sfact^\pr}\\
 & =
-  \set{\cen+\ptemp\zeta:~\zeta\in\compnums^n,~\absolute{\zeta}\leq\sfact}\oplus\set{\cen+\ptemp\zeta:~\zeta\in\compnums^n,~\absolute{\zeta}\leq\sfact}\\
+  \set{\cen+\ptemp\zeta:~\zeta\in\compnums^m,~\absolute{\zeta}\leq\sfact}\oplus\set{\cen^\pr+\ptemp\zeta^\pr:~\zeta^\pr\in\compnums^r,~\absolute{\zeta^\pr}\leq\sfact^\pr}\\
 & =
   \set{\lt(\cen+\cen^\pr\rt)+\ptemp\zeta+\ptemp^\pr\zeta^\pr:~\zeta\in\compnums^m,~\zeta^\pr\in\compnums^r,~\absolute{\zeta}\leq\sfact,~\absolute{\zeta^\pr}\leq\sfact^\pr}\\
 & =
-  \set{\lt(\cen+\cen^\pr\rt)+\mymatrix{\ptemp&\ptemp^\pr}\mymatrix{\zeta\\\zeta^\pr}:~\mymatrix{\zeta\\\zeta^\pr}\in\compnums^{m+r},~\absolute{\mymatrix{\zeta\\\zeta^\pr}\leq\mymatrix{\sfact\\\sfact^\pr}}}\\
+  \set{\lt(\cen+\cen^\pr\rt)+\mymatrix{\ptemp&\ptemp^\pr}\mymatrix{\zeta\\\zeta^\pr}:~\mymatrix{\zeta\\\zeta^\pr}\in\compnums^{m+r},~\absolute{\mymatrix{\zeta\\\zeta^\pr}}\leq\mymatrix{\sfact\\\sfact^\pr}}\\
 & =  \tcztope{\begin{bmatrix}\ptemp & \ptemp^\pr\end{bmatrix}}{\cen+\cen^\pr}{\begin{bmatrix}\sfact\\\sfact^\pr\end{bmatrix}}.~\hspace{3em}\qedhere
 \end{align*}
 %
@@ -131,182 +131,251 @@ We have $\minsum{\tcztope{\ptemp}{c}{s}}{\tcztope{\ptemp}{c^\pr}{s^\pr}}=$
 \sfact,~\absolute{\zeta^\pr}\leq \sfact^\pr}
 \end{align}
 %
-First, we shall show that
+We shall show that
 \begin{equation}~\label{eqn:proof-commin1}
 \set{\zeta+\zeta^\pr:\zeta,\zeta^\pr\in\compnums^m,~\absolute{\zeta}\leq
 \sfact,~\absolute{\zeta^\pr}\leq\sfact^\pr}=\set{\zeta^\dpr:\absolute{\zeta^\dpr}\leq\sfact+\sfact^\pr }.
 \end{equation}
 %
-To prove that the L.H.S of Equation~\ref{eqn:proof-commin1} is
-contained within the R.H.S of Equation~\ref{eqn:proof-commin1},
-consider $\zeta,\zeta^\pr\in\compnums^m$ where $\absolute{\zeta}\leq
-\sfact,~\absolute{\zeta^\pr}\leq\sfact^\pr$.  For any
-$i\in\set{1,...,m}$, we have
-$\absolute{\zeta_i+\zeta^\pr_i}\leq \absolute{\zeta_i}+\absolute{\zeta^\pr_i}=\sfact+\sfact^\pr$
-by the triangular inequality.  This proves that the L.H.S of
-Equation~\ref{eqn:proof-commin1} is contained within the R.H.S of
-Equation~\ref{eqn:proof-commin1}.
-
-To prove the vice-versa, let us
-consider
-$\zeta^\dpr\in\compnums:\absolute{\zeta^\dpr}\leq \sfact+\sfact^\pr$.
-Let
-$\zeta=\sfact\frac{\zeta^\dpr}{\sfact+\sfact^\pr},~\zeta^\pr=\sfact^\pr\frac{\zeta^\dpr}{\sfact+\sfact^\pr}$.
-Then $\absolute{\zeta}\leq \sfact$ and
-$\absolute{\zeta^\pr}\leq\sfact^\pr$ because
-$\absolute{\frac{\zeta^\dpr}{\sfact+\sfact^\pr}}\leq 1$.  So,
-$\zeta^\dpr=\zeta+\zeta^\pr$ where $\absolute{\zeta}\leq \sfact$ and
-$\absolute{\zeta^\pr}\leq \sfact^\pr$.  This proves that the R.H.S of
-Equation~\ref{eqn:proof-commin1}  is contained inside the L.H.S of
-Equation~\ref{eqn:proof-commin1}.
-
-Hence, we have proved Equation~\ref{eqn:proof-commin1}.  Then combining 
-Equation~\ref{eqn:proof-commin1}  with
-Equation~\ref{eqn:proof-commin2} gives us
+First we shall show that the L.H.S of Equation~\ref{eqn:proof-commin1} is
+contained within the R.H.S of Equation~\ref{eqn:proof-commin1}, as follows.  Let
+us consider
+%
+\[
+\zeta,\zeta^\pr\in\compnums^m:~~\absolute{\zeta}\leq
+\sfact,~\absolute{\zeta^\pr}\leq\sfact^\pr.
+\]
+%
+Then using the triangular inequality, we get
 %
 \begin{align*}
-&\minsum{\tcztope{\ptemp}{c}{s}}{\tcztope{\ptemp}{c^\pr}{s^\pr}}=\set{\cen+\cen^\pr+\ptemp\zeta^\dpr:\absolute{\zeta^\dpr}\leq\sfact+\sfact^\pr}\\
-&=\tcztope{\ptemp}{\cen+\cen^\pr}{\sfact+\sfact^\pr}.
+\absolute{\zeta_i+\zeta^\pr_i}\leq
+\absolute{\zeta_i}+\absolute{\zeta^\pr_i}=\sfact+\sfact^\pr
 \end{align*}
 %
+First we shall show that the R.H.S of Equation~\ref{eqn:proof-commin1} is
+contained within the L.H.S of Equation~\ref{eqn:proof-commin1}, as follows.  
+Let us consider
+%
+\[
+\zeta^\dpr\in\compnums:~\absolute{\zeta^\dpr}\leq \sfact+\sfact^\pr.
+\]
+%
+Let us consider
+%
+\[
+\zeta=\sfact\frac{\zeta^\dpr}{\sfact+\sfact^\pr},~~\zeta^\pr=\sfact^\pr\frac{\zeta^\dpr}{\sfact+\sfact^\pr}.
+\]
+%
+So, $\zeta^\dpr=\zeta+\zeta^\pr$.  As
+$\absolute{\frac{\zeta^\dpr}{\sfact+\sfact^\pr}}\leq 1$, we get
+$\absolute{\zeta}\leq \sfact$ and
+$\absolute{\zeta^\pr}\leq\sfact^\pr$.  This proves that
+the R.H.S of Equation~\ref{eqn:proof-commin1} is contained inside the
+L.H.S of Equation~\ref{eqn:proof-commin1}.
+
+Hence, we have proved Equation~\ref{eqn:proof-commin1}.  Then the
+proposition follows from
+Equations~\ref{eqn:proof-commin2} and~\ref{eqn:proof-commin1}.
 \end{proof}
 %
-The support of a template complex zonotope along any real vector is computed by a simple affine expression, as follows
+The support function of a template complex zonotope is an affine
+expression of the scaling factors and the center, as described in the
+following lemma.
 %
-\begin{lemma}[Support of a real vector]~\label{lem:support-tcz}
-{\color{red} TODO}
+\begin{lemma}[Support function]~\label{lem:support-tcz}
+Let $v\in\reals^n$.  Then
+%
+\begin{align*}
+& \supp{v}{\real\lt(\tcztope{\ptemp}{\cen}{\sfact}\rt)}=v^Tc+\absolute{v^T\ptemp}\sfact.
+\end{align*}
+%
 \end{lemma}
 %
 \begin{proof}
-{\color{red}TODO}.
+We derive
+%
+\begin{align*}
+&
+  \supp{v}{\real\lt(\tcztope{\ptemp}{\cen}{\sfact}\rt)}=\max_{x\in\real\lt(\tcztope{\ptemp}{\cen}{\sfact}\rt)}v^Tx\\
+& =
+  v^T\cen+\max_{\zeta\in\compnums^m:~\absolute{\zeta}\leq\sfact}\real\lt(v^T\ptemp\zeta\rt)~\numberthis\label{proof-supp-tcz3}\\
+& \leq
+  v^T\cen+\max_{\zeta\in\compnums^m:~\absolute{\zeta}\leq\sfact}\absolute{v^T\ptemp}\absolute{\zeta}\\
+& \leq v^T\cen+\max_{y\in\reals_{\geq 0}^m:y\leq \sfact}\absolute{v^T\ptemp}y=v^T\cen+\absolute{v^T\ptemp}\sfact.~\numberthis\label{proof-support-tcz}
+\end{align*}
+%
+Let us consider
+$\epsilon\in\compnums^m$ where
+%
+\[
+\forall i\in\set{1,...,m},~\epsilon_i=\frac{\absolute{v^T\ptemp}_i}{\lt(v^T\ptemp\rt)_i}\sfact_i.
+\]
+%
+Then we derive the following.
+%
+\begin{align*}
+& \forall
+  i\in\set{1,...,m},~\absolute{\epsilon_i}=\frac{\absolute{v^T\ptemp}_i}{\absolute{v^T\ptemp}_i}\absolute{\sfact_i}=\sfact_i.~\numberthis\label{proof-supp-tcz1}\\
+&
+  v^T\epsilon=\sum_{i=1}^m\lt(v^T\ptemp\rt)_i\frac{\absolute{v^T\ptemp}_i}{\lt(v^T\ptemp\rt)_i}\sfact_i\\
+& = \absolute{v^T\ptemp}\sfact.~\numberthis\label{proof-supp-tcz2}
+\end{align*}
+%
+By Equations~\ref{proof-supp-tcz3},~\ref{proof-supp-tcz1},
+and~\ref{proof-supp-tcz2}, we get
+%
+\begin{equation}
+\supp{v}{\real\lt(\tcztope{\ptemp}{\cen}{\sfact}\rt)}\geq v^T\cen+\absolute{v^T\ptemp}\sfact~\label{proof-supp-tcz4}
+\end{equation}
+%
+The Lemma follows from Equations~\ref{proof-support-tcz} and~\ref{proof-supp-tcz4}.
 \end{proof}
 %
-Like in the case of simple
-zonotopes, template complex zonotopes are also not closed under mutual
-intersection.  Moreover, the intersection between template complex
-zonotopes with a common template and center need not also be a
-tempalte complex zonotope in general.  Therefore, even for a fixed
-template and center, there may not exist the smallest template complex
-zonotope over-approximation of a given set. {\color{red} Explain with
-figure}.
-
-However, we observe that template complex zonotopes with a common
-non-singular (invertible) template and center are closed under
-intersection and the intersection can be expressed algebraically.
-This is explained in the following lemma.
+Like real zonotopes, complex zonotopes are also not closed under
+mutual intersection.  Even the intersection between template complex
+zonotopes with a common template and center need not be a closed.  But
+when the common template is a non-singular (invertible) matrix and
+the center is common, then the intersection is a closed operation and
+can be expressed algebraically.  This is described in the following
+lemma.
 %
-\begin{lemma}[Mutual intersection with common invertible template and center]~\label{lem:intersection}
-Let us consider two template complex zonotopes
-$\tcztope{\ptemp}{\cen}{\sfact},\tcztope{\ptemp}{\cen}{\sfact^\pr}\subset\compnums^n$
-where their common template $\ptemp$ is a non-singular (invertible)
-square matrix.  Then
+\begin{lemma}[Mutual intersection]~\label{lem:intersection}
+Let ${\ptemp\in\mat{n}{n}{\compnums}}$ be a non-singular matrix.  
+
 %
 \begin{equation}~\label{eqn:intersection}
-\tcztope{\ptemp}{\cen}{\sfact}\bigcap\tcztope{\ptemp}{\cen}{\sfact^\pr}=\tcztope{\ptemp}{\cen}{\meet{\sfact}{\sfact^\pr}}
+\text{Then}\hspace{1em}\tcztope{\ptemp}{\cen}{\sfact}\bigcap\tcztope{\ptemp}{\cen}{\sfact^\pr}=\tcztope{\ptemp}{\cen}{\meet{\sfact}{\sfact^\pr}}.
 \end{equation}
 %
 \end{lemma}
 %
 \begin{proof}
-Let us consider a point
-$z\in\tcztope{\ptemp}{\cen}{\meet{\sfact}{\sfact^\pr}}$ which is
-written in as a linear combination of the template vectors plus center
-as $z=c+\ptemp\zeta:~\absolute{\zeta}\leq \meet{\sfact}{\sfact^\pr}$.
-This means that $\absolute{\zeta}\leq\sfact$ and also
-$\absolute{\zeta}\leq \sfact^\pr$.  So,
-$z\in\tcztope{\ptemp}{\cen}{\sfact}$ and also
-$z\in\tcztope{\ptemp}{\cen}{\sfact^\pr}$.  Therefore,
-$\tcztope{\ptemp}{\cen}{\meet{\sfact}{\sfact^\pr}}\subseteq \tcztope{\ptemp}{\cen}{\sfact}\bigcap\tcztope{\ptemp}{\cen}{\sfact^\pr}$.
+  Let us consider a
+point $z\in\tcztope{\ptemp}{\cen}{\meet{\sfact}{\sfact^\pr}}$ where
+%
+\begin{align*}
+& z=c+\ptemp\zeta:~\absolute{\zeta}\leq \meet{\sfact}{\sfact^\pr}.
+ \text{Then}\hspace{1em}\absolute{\zeta}\leq\sfact,\hspace{1em}
+  \absolute{\zeta}\leq \sfact^\pr\\
+& \implies {z\in\tcztope{\ptemp}{\cen}{\sfact}}~\wedge~
+           {z\in\tcztope{\ptemp}{\cen}{\sfact^\pr}}
+ \implies z\in
+\tcztope{\ptemp}{\cen}{\sfact}\bigcap\tcztope{\ptemp}{\cen}{\sfact^\pr}.           
+\end{align*}
+%
+This proves that the L.H.S of Equation~\ref{eqn:intersection}
+is contained inside the R.H.S.
 
-Next consider another point
+Now let us consider a point
 $x\in\tcztope{\ptemp}{\cen}{\sfact}\bigcap\tcztope{\ptemp}{\cen}{\sfact^\pr}$.
-Since $\ptemp$ is an invertible matrix, $x$ is uniquely written as a
-linear combination of tempalte vectors plus center as
-$\cen+\ptemp\lt(\inv{\ptemp}\lt(x-\cen\rt)\rt)$ where
-$\absolute{\inv{\ptemp}\lt(x-\cen\rt)}\leq
-\sfact$ and $\absolute{\inv{\ptemp}\lt(x-\cen\rt)}\leq
-\sfact^\pr$, which means
-$\absolute{\inv{\ptemp}\lt(x-\cen\rt)}\leq\meet{\sfact}{\sfact^\pr}$.  Therefore,
-$\tcztope{\ptemp}{\cen}{\sfact}\bigcap\tcztope{\ptemp}{\cen}{\sfact^\pr}\subseteq\tcztope{\ptemp}{\cen}{\meet{\sfact}{\sfact^\pr}}$.
-
-Combining the above two conclusions, we get that
-$\tcztope{\ptemp}{\cen}{\sfact}\bigcap\tcztope{\ptemp}{\cen}{\sfact^\pr}=\tcztope{\ptemp}{\cen}{\meet{\sfact}{\sfact^\pr}}$.
-
+Let us express $x$ as 
+%
+\[
+x=\cen+\ptemp\zeta.
+\]
+%
+Since $\ptemp$ is an invertible matrix, we have a unique solution for
+$\zeta$, i.e.,
+$\zeta=\ptemp^{-1}\lt(x-\cen\rt)$.  As
+${x\in\tcztope{\ptemp}{\cen}{\sfact}}
+\bigcap\tcztope{\ptemp}{\cen}{\sfact^\pr}$ and $\zeta$ has unique solution, we get
+%
+\begin{align*}
+  &  \absolute{\zeta}
+ \leq
+\sfact~\wedge~\absolute{\zeta}\leq
+\sfact^\pr.\\
+& \implies \absolute{\zeta}\leq\meet{\sfact}{\sfact^\pr}
+\implies x\in\tcztope{\ptemp}{\cen}{\meet{\sfact}{\sfact^\pr}}.
+\end{align*}
+%
+The above means that the R.H.S of Equation~\ref{eqn:intersection} is
+contained inside the L.H.S.  The converse was proved earlier.  So, we
+have proved the Lemma.
 \end{proof}
 %
-As explained before, in general, even for a fixed template and center,
-there may not exist the smallest template complex zonotope
-over-approximation of a given set.  However, since template complex
-zonotopes with a fixed center and and an invertible square matrix
-template are closed under intersection based on
-Lemma~\ref{lem:intersection}, in this case there exists a smallest
-template complex zonotope over-approximation of a given set.  This
-smallest over-approximation is expressed as follows.
+Since template complex zonotopes are not closed under intersection,
+generally there is no smallest over-approximation of a given set by a
+template complex zonotope.  But according to
+Lemma~\ref{lem:intersection}, template complex zonotopes with a fixed
+invertible template matrix and fixed center are closed under mutual
+intersection.  Therefore, for a fixed invertible template and fixed center, there
+exists a smallest template complex zonotope approximation of a given
+set, expressed as follows.
 %
 \begin{theorem}~\label{thm:min-abstraction}
-Let $\Psi\subseteq\compnums^n$ be a bounded set.  Let
-$\ptemp\in\mat{n}{n}{\compnums}$ be an invertible square matrix and
-$\cen\in\compnums^n$.  Consider the set $S=\set{\sfact\in\reals_{\geq
-0}^n:\Psi\subseteq\tcztope{\ptemp}{\cen}{\sfact}}$ and
-$\sfact^*=\vectormin{s\in S} s$.  Then
+Let $\Psi\subseteq\compnums^n$ be a bounded set and
+$\ptemp\in\mat{n}{n}{\compnums}$ be an invertible square matrix.
+Let us consider %
+\[
+S=\set{\sfact\in\reals_{\geq
+    0}^n:\Psi\subseteq\tcztope{\ptemp}{\cen}{\sfact}}
+\]
+Then all of the following is true.
 %
-\begin{equation}
-\Psi\subseteq\bigcap_{\sfact\in S}\tcztope{\ptemp}{\cen}{\sfact}=\tcztope{\ptemp}{\cen}{\sfact^*}.
-\end{equation}
-%
-and
-%
-\begin{equation}
-\forall i\in\set{1,...,n},~\sfact^*_i=\max_{x\in\Psi}\lt(\inv{\ptemp}\lt(x-\cen\rt)\rt)_i.
-\end{equation}
+\begin{align*}
+& \Psi\subseteq\bigcap_{\sfact\in
+    S}\tcztope{\ptemp}{\cen}{\sfact}=\tcztope{\ptemp}{\cen}{\vectormin{s\in
+  S}s}.~\numberthis\label{eqn:min-abstraction1}\\
+& \vectormin{s\in S}s=\vectormax{x\in \Psi}\absolute{\inv{\ptemp}\lt(x-\cen\rt)}.~\numberthis\label{eqn:min-abstraction2}
+\end{align*}
 %
 \end{theorem}
 %
 \begin{proof}
+  First, we shall prove Equation~\ref{eqn:min-abstraction1}.
 Based on Lemma~\ref{lem:intersection}, it follows that
 %
 \[
 \bigcap_{\sfact\in
 S}\tcztope{\ptemp}{\cen}{\sfact}=\tcztope{\ptemp}{\cen}{\vectormin{s\in
-S}s}=\tcztope{\ptemp}{\cen}{\sfact^*}.
+S}s}.
 \]
 %
-Furthermore, as $S$ is defined as the set of all scaling factors
+As $S$ is the set of all scaling factors
 whose corresponding template complex zonotope is an over-approximation
 of $\Psi$, we also get
 %
 \[
-\Psi\subseteq\bigcap_{\sfact\in S}\tcztope{\ptemp}{\cen}{\sfact}=\tcztope{\ptemp}{\cen}{\sfact^*}.
+\Psi\subseteq\bigcap_{\sfact\in
+  S}\tcztope{\ptemp}{\cen}{\sfact}=\tcztope{\ptemp}{\cen}{\vectormin{s\in
+  S}s}.
 \]
 %
-Next, consider $x\in\Psi$ and $\sfact^\pr\in\reals_{\geq 0}^n$ where
+So, we have proved Equation~\ref{eqn:min-abstraction1}.
+
+Now we shall prove Equation~\ref{eqn:min-abstraction2}.  We shall
+first prove
 %
-\[
-\forall
-i\in\set{1,...,n}:~\sfact^\pr=\max_{x\in\Psi}\lt(\inv{\ptemp}\lt(x-\cen\rt)\rt)_i.
-\]
-%
-Since $\ptemp$ is invertible, $x$ is uniquely written as a linear
-combination of template comlumn vectors of $\ptemp$ plus the center
-$\cen$ as $x=\cen+\ptemp\lt(\inv{\ptemp}\lt(x-\cen\rt)\rt)$, where the
-vector of combining coefficients is
-$\lt(\inv{\ptemp}\lt(x-\cen\rt)\rt)$.  So, if $s\in S$, then 
-$x\in\Psi\subseteq\tcztope{\ptemp}{\cen}{\sfact}$ and hence \[\forall
-i\in\set{1,...,n}:~\lt(\inv{\ptemp}\lt(x-\cen\rt)\rt)_i\leq\sfact_i.\]
-Therefore,
-%
-\begin{equation}~\label{proof-min-abstraction-1}
-\forall
-i\in\set{1,...,n}:~\sfact^\pr_i=\max_{x\in\Psi}\lt(\inv{\ptemp}\lt(x-\cen\rt)\rt)_i\leq\min_{s\in
-S}s_i=\sfact^*_i.
+\begin{equation}
+  \Psi\subseteq\tcztope{\ptemp}{\cen}{\vectormax{x\in \Psi}\absolute{\inv{\ptemp}\lt(x-\cen\rt)}}.~\label{proof-abstraction1}
 \end{equation}
 %
-Furthermore, if $x\in\Psi$, then by the definition of $\sfact^\pr$, we
-get $\lt(\inv{\ptemp}\lt(x-\cen\rt)\rt)\leq \sfact^\pr$.  Therefore,
-$\Psi\subseteq\tcztope{\ptemp}{\cen}{\sfact^\pr}$.  This implies
-$\sfact^\pr\in S$.  So, $\sfact^\pr\geq\sfact^*$.  Combining the
-former conclusion with the conclusion in
-Equation~\ref{proof-min-abstraction-1} gives $\sfact^\pr=\sfact^*$,
-which proves the second part of the theorem.
+Let us
+consider a point $x\in\Psi$.  Since $\ptemp$ is invertible, $x$ can be
+written as a linear combination of template comlumn vectors
+of $\ptemp$ plus the center $\cen$ as
+\[x=\cen+\ptemp\lt(\inv{\ptemp}\lt(x-\cen\rt)\rt),\] where the vector of
+combining coefficients is $\lt(\inv{\ptemp}\lt(x-\cen\rt)\rt)$.  Since
+%
+\begin{align*}
+& \absolute{\inv{\ptemp}\lt(x-\cen\rt)}\leq\vectormax{x\in \Psi}\absolute{\inv{\ptemp}\lt(x-\cen\rt)},\\
+  & \text{we get},\hspace{1em} x\in\tcztope{\ptemp}{\cen}{\vectormax{x\in \Psi}\absolute{\inv{\ptemp}\lt(x-\cen\rt)}}.
+\end{align*}
+%
+As the above is true for any $x\in\Psi$, we have proved
+Equation~\ref{proof-abstraction1}.  By
+Equation~\ref{proof-abstraction1} and the definition of $S$,
+we get $\vectormax{x\in
+  \Psi}\absolute{\inv{\ptemp}\lt(x-\cen\rt)}\in S$.  Therefore, for any
+$i\in\set{1,...,n}$, we get
+%
+\[
+\min_{s\in S}s_i\leq\max_{x\in\Psi}\lt(\inv{\ptemp}\lt(x-\cen\rt)\rt).
+\]
+%
+Based on the above equation and Equation~\ref{eqn:min-abstraction1},
+we get Equation~\ref{eqn:min-abstraction2}.
 \end{proof}
 
