@@ -346,12 +346,12 @@ Lemma~\ref{lem:normalization}, we get
 %
 \begin{align*}
 &
-  \tcztope{\ptemp^\pr}{\cen}{\sfact^\pr}=\cztope{\ptemp^\pr\diagonal{\sfact^\pr}}{\cen^\pr}\subseteq\tcztope{\ptemp}{\cen}{\sfact}\\ &\equivalent~\set{\cen^\pr+\ptemp^\pr\diagonal{\sfact^\pr}\zeta^\pr:~\zeta^\pr\in\compnums^m,~\infnorm{\zeta^\pr}\leq
+  \tcztope{\ptemp^\pr}{\cen}{\sfact^\pr}=\cztope{\ptemp^\pr\diagonal{\sfact^\pr}}{\cen}\subseteq\tcztope{\ptemp}{\cen}{\sfact}\\ &\equivalent~\set{\cen+\ptemp^\pr\diagonal{\sfact^\pr}\zeta^\pr:~\zeta^\pr\in\compnums^m,~\infnorm{\zeta^\pr}\leq
     1}\subseteq\set{\cen+\ptemp\zeta:~\zeta\in\compnums^n,~\absolute{\zeta}\leq
-    \sfact}\\ & \%\%~\text{since}~\ptemp~\text{is non-singular}\\ &
-  \equivalent~
+    \sfact}\\ & \%\%~\text{since}~\ptemp~\text{is non-singular}\\ 
+  \equivalent&
   \set{\inv{\ptemp}\lt(\cen-\cen\rt)+\inv{\ptemp}\ptemp^\pr\diagonal{\sfact^\pr}\zeta^\pr:~\zeta^\pr\in\compnums^m,~\infnorm{\zeta^\pr}\leq
-    1}\\&\subseteq
+    1}\\& \subseteq
   \set{\zeta:\zeta\in\compnums^n,~\absolute{\zeta}\leq\sfact}\\
  & \equivalent~\set{\inv{\ptemp}\ptemp^\pr\diagonal{\sfact^\pr}\zeta^\pr:~\zeta^\pr\in\compnums^m,~\infnorm{\zeta^\pr}\leq
     1}\subseteq
@@ -363,13 +363,11 @@ $\tvect=0$.  Then by
 Equation~\ref{proof-necc-inc1}, we get for any $i\in\set{1,...,n}$
 %
 \begin{align*}
-\forall
-& \max_{\zeta^\pr\in\compnums^m:~\infnorm{\zeta}}\tmat_i\zeta^\pr_i\leq
-  1}\absolute{\sum_{i=1}^m\tmat_{ij}\zeta_i}\leq\sfact_i
-& \implies \sum_{i=1}^n\tmat_i\frac{\absolute{\tmat_i}}{\tmat_i}
+& \max_{\zeta^\pr\in\compnums^m:~\infnorm{\zeta}\leq 1}\absolute{\sum_{i=1}^m\tmat_{ij}\zeta_i}\leq\sfact_i.
+\hspace{1em}\therefore \sum_{i=1}^n\absolute{\tmat_i\frac{\absolute{\tmat_i}}{\tmat_i}}
     \leq\sfact_i\\
-    & \%\%~~\text{since}~y_i=0
-& \implies \sum_{i=1}^n\absolute{\tmat_{ij}}  +\absolute{\tvect_i}\leq \sfact_i .~\numberthis\label{proof-necc-inc2}
+    & \%\%~~\text{since}~y_i=0\\
+& \therefore \sum_{i=1}^n\absolute{\tmat_{ij}}  +\absolute{\tvect_i}\leq \sfact_i .~\numberthis\label{proof-necc-inc2}
 \end{align*}
 %
 Furthermore, we have
@@ -381,6 +379,6 @@ Furthermore, we have
 & \ptemp\tvect=0=\cen-\cen.~\numberthis\label{proof-necc-inc3}      
 \end{align*}
 %
-By Equations~\ref{proof-necc-inc2} and~\ref{proof-necc-inc4}, we get $\tcztope{\ptemp^\pr}{\cen}{\sfact^\pr}\order\tcztope{\ptemp}{\cen}{\sfact}$.
+By Equations~\ref{proof-necc-inc2} and~\ref{proof-necc-inc3}, we get $\tcztope{\ptemp^\pr}{\cen}{\sfact^\pr}\order\tcztope{\ptemp}{\cen}{\sfact}$.
 \end{proof}
 
