@@ -1,41 +1,40 @@
 A nearly periodic linear impulsive system is specified by a tuple
 %
 \[\system=\left(\reals^n,A_r,A_c,\Delta\right)\] where $\reals^n$ is the state
-space with dimension $n\in\mathbb{Z}_+$, $A_r$ and $A_c$ are $n\times
-n$ real matrices called the impulse matrix and the linear vector field
-matrix, respectively.  The time interval $\Delta=[\tau_m,\tau_M]$ such
-that $0<\tau_m<\tau_M$ is called the sampling period interval.  A
-\emph{trajectory} of the nearly periodic linear impulsive system is
-described by a function $\tbf{x}:\mathbb{R}_{\geq 0}\rightarrow
+space with dimension $n\in\mathbb{Z}_{>0}$, $A_r$ and $A_c$ are
+$n\times n$ real matrices called the impulse matrix and the linear
+vector field matrix, respectively.  The interval
+$\Delta=[\lsb,\usb]$, where
+that $0<\tau_m<\tau_M$, is called the \emph{sampling interval}.  A
+\emph{trajectory} of the system is
+a function $\tbf{x}:\mathbb{R}_{\geq 0}\rightarrow
 \reals^n$, such that there exists a sequence of sampling times
-$(t_k)_{k=0}^\infty$ satisfying all the following.
+$(t_k)_{k=0}^\infty$ satisfying all the following for any $k\in\integers_{\geq 0}$.
 %
-\begin{equation}\label{eqn:system} \begin{split}
-&{\trj{\dot{x}}{t}}=A_c\tbf{x}(t)~~\forall t\in [t_k,t_{k+1})~~\forall k\in\mb{Z}_{\geq 0}\\
-&\trj{x}{t_k^+}=A_r\tbf{x}(t_k^-)~~\forall k\in\mb{Z}_{>0}\\ 
-&t_{k+1}-t_k\in\Delta~~~\forall k\in\mb{Z}_{\geq 0}\\
+\begin{align*}
+&{\trj{\dot{x}}{t}}=A_c\tbf{x}(t)~~\forall t\in [t_k,t_{k+1})\\
+&\trj{x}{t_k^+}=A_r\tbf{x}(t_k^-)~\numberthis\label{eqn:reset1}\\ 
+&t_{k+1}-t_k\in\Delta\\
 &\tbf{x}(0)=\initstate
-\end{split} \end{equation}
+\end{align*}
 %
 Here, $\tbf{x}(t)\in\mathbb{R}^n$ is the state of the system at a time
-instant $t$.  For any $k\in\mathbb{N}$, we shall denote
-$\tbf{x}_k=\tbf{x}(t_k^+)$.  When there is continuous evolution of a
-state $x$ until time $t$, then the state reached at time $t$ is
-$\trj{x}{t}=e^{A_ct}x$.  If the system experiences a reset at time
-$t=0$, then the state reached immediately afterwards is
-$A_r\initstate$.  Then the state reached at time $t$ after a reset at
-time $t=0$ is
+instant $t$.  For any $k\in\mathbb{N}$, we shall denote the state
+reached just after the impulse at $t_k$ as $\tbf{x}_k=\tbf{x}(t_k^+)$.
+When there is continuous evolution of a state $x$ until time $t$, then
+the state reached at time $t$ is $\trj{x}{t}=e^{A_ct}x$.  If there is
+an impulse at time $t=0$, then the state reached immediately
+afterwards is $A_r\initstate$.  Therefore, using
+Equation~\ref{eqn:reset1}, we get
 %
 \[
-\trj{x}{t}=e^{A_ct}A_r\initstate.
+\tbf{x}_{k+1}{t}\in \set{e^{A_ct}A_r\tbf{x}_k:~t\in\Delta}.
 \]
 %
-We call the change in the state of the system from just before one
-switch to another switch as \emph{a step}.  Without loss of
-generality, let us assume that the first switch occurs at time
-$t_0=0$.  Since the impulse period can range in the interval $\Delta$,
+We call the change in the state of the system from the time just
+before one impulse to the next impulse as \emph{a step}.  Therefore,
 for any set $\Psi\subset \mathbb{R}^n$, the set of all reachable
-points after the first step is
+points from a state $x$ in one step is 
         %
         \[ R(\Psi)=\{e^{A_ct}A_r \initstate:
         \initstate \in \Psi, t\in\Delta\}.
@@ -44,34 +43,26 @@ points after the first step is
 Then, the set of all points
         reachable after $k$ steps is
 %
-\begin{equation*}%\label{eqn:reach}
+\begin{equation*}~x\label{eqn:reach}
 R^k(\Psi)=\left\{\left(\Pi_{i=1}^ke^{A_ct_i}A_r\right)\initstate: \initstate\in
 \Psi, \forall i\in\{1,...,k\} t_i\in\Delta\right\}. 
 \end{equation*}
 %
-Therefore, we define the {\em
-$k$-step reachability operator} corresponding to a sequence of $k$ switching times
+Therefore, we define a {\em
+reachability operator} as follows.
 %        
 \begin{align*}
-& t_1, \ldots ,t_k:~\forall
-  i\in\{1,\ldots,k-1\}:(t_{i+1}-t_{i})\in\Delta\\
-& \text{ as } H_{t_1,...,t_k}=\Pi_{i=1}^k\lt(e^{A_ct_i}A_r\rt).
+& \forall t\in\Delta,
+ \text{  } H_t=e^{A_ct}A_r.
 \end{align*}
 %
-A $k$-step reachability operator when acting on a state gives another
-state that is reachable after $k$ steps.  Mathematically, we get
-%
-\[
-R^k(\Psi)=\set{H_\tau\Psi:~\tau\in\Delta^k}.
-\]
-%
 Since the the sampling period interval $\Delta$ is an uncountable set,
-have a uncountable number of $k$-step reachability operators.  For a
-sub-interval $[\tau_1,\tau_2]\subseteq\Delta$, we shall denote the
-$k$-step reachability operators as
+we have a uncountable number of reachability operators.  For a
+sub-interval $[\tau_1,\tau_2]\subseteq\Delta$, we shall denote the set of
+reachability operators as
 %
 \begin{equation}\label{eqn:operators}
-O_k([\tau_1,\tau_2])=\left\{H_\tau:\tau\in[\tau_1,\tau_2]^k\right\}.
+O([\tau_1,\tau_2])=\left\{H_\tau:\tau\in[\tau_1,\tau_2]\right\}.
 \end{equation}
 
 

@@ -1,0 +1,223 @@
+We verify global exponential stability by finding a contractive
+complex zonotope that contains the origin in its interior.  A
+motivation for considering complex zonotope for stability verification
+is that they can capture the contraction along the eigenvectors, which
+was earlier explained in Proposition~\ref{prop:eig-scaling}.
+Therefore, we find a complex zonotope by samling the eigenvectors of
+some of the reachability operators and latter verifying that the
+complex zonotope contracts.  Our algorithm for stability verification
+has two stages.  In the first stage, we synthesize a complex zonotope
+that contracts with respect to a few sampled operators.  In the next
+stage, we verify that the synthesized complex zonotope contracts with
+respect to all the sampled operators.  We fix the template apriori by
+a set of eigenvectors of selected reachability operators, because of
+which we have control over the representation size of the contractive
+set.
+
+{\bf Synthesizing a candidate template complex zonotope.}  
+Let us sample uniformy $k$ time points in the interval $\Delta$ as
+%
+\begin{align*}
+  & \omega_k^i=\lsb+i\frac{(\usb-\lsb)}{k}.
+\end{align*}
+%
+Let us denote $\Theta_i^k$ as a matrix with $n$ columns consisting of
+all possible unit eigenvectors of $H_{\omega_i^k}$ with possible
+repetition.  Let us consider $\eigenvectors_k$ as the matrix
+containing all the eigenvectors of $k$ uniformly sampled operators,
+i.e.,
+%
+\[
+\eigenvectors_k=\mymatrix{\Theta^k_1 &\ldots&\Theta^k_k}.
+\]
+%
+We fix $\eigenvectors_k$ as the template of the complex zonotope and
+synthesize suitable scaling factors based on the following theorem.
+The theorem uses the inclusion checking condition from
+Theorem~\ref{thm:suff-inclusion}.
+%
+\begin{thm}
+For a vector of scaling factors $\sfact\in\mb{R}^{m}_{\geq 0}$, the
+template complex zonotope $\tcz{\eigenvectors_k}{0}{s}$ would
+represent a $C$-set containing the origin in its interior, such that
+for any $t\in\Lambda_k$ and ${\lambda\in [0,1)}$, $H_t\tcztope{\eigenvectors_k}{0}{\sfact}\subseteq
+  \lambda\tcztope{\eigenvectors_k}{0}{\sfact}$, if all of following is true.
+%
+\begin{align*}
+  & \tcztope{\identity{n}{n}}{0}{\repmat{1}{n}{1}}\order\tcztope{\eigenvectors_k}{0}{\sfact}~\numberthis\label{eqn:cset}\\
+  & \tcztope{H_t\eigenvectors_k}{0}{\sfact}\order\tcztope{\eigenvectors}{0}{\lambda\sfact}.~\numberthis\label{eqn:contractive}
+\end{align*}
+\end{thm}
+%
+\begin{proof}
+The real projection of
+$\tcztope{\identity{n}{n}}{0}{\repmat{1}{n}{1}}$ is the hypercube
+containing $0$.  So, by Theorem~\ref{thm:suff-inclusion} and
+Equation~\ref{eqn:cset}, $\tcztope{\eigenvectors_k}{0}{\sfact}$
+contains the origin in its interior.  By Lemma~\ref{lem:lin-transform},
+Theorem~\ref{thm:suff-inclusion} and Equations~\ref{eqn:normalization}
+and~\ref{eqn:contractive},
+we get $H_t\tcztope{\eigenvectors_k}{0}{\sfact}\subseteq
+  \lambda\tcztope{\eigenvectors_k}{0}{\sfact}$.
+\end{proof}
+%
+
+{\bf Verifying contraction:} To verify that the template complex
+zonotope synthesized in the first stage contracts with respect to all
+the reachability operators $H_t:~t\in\Delta$, we divide the sampling
+interval into small enough sub-intervals and verify contraction in
+each interval.  For this, we need to find a bound on contraction of a
+complex zonotope with respect to any reachability operator.  When the
+synthesized complex zonotope contains the eigenvectors of a
+reachability operator, then the contraction by the operator is bounded
+by the maximum magnitude of the eigenvalues of the operator.  This is
+described in the following lemma.
+%
+\begin{lemma}
+Let us consider that
+$H_{\omega_i^k}\Theta_i^k=\Theta^k_i\diagonal{\mu}:~\mu\in\compnums^n$.
+Let $\sfact\in\reals_{\geq 0}^n$.  Then,
+%
+\[
+\contraction{H_{\omega^k_i}}{\tcztope{\eigenvectors}{0}{\sfact}}=\max_{i=1}^n\absolute{\mu_i}.
+\]
+%
+\end{lemma}
+%
+\begin{proof}
+  By using Lemma~\ref{lem:eig-scaling}, we get
+%
+\begin{align*}
+&
+ H_{\omega^k_i}\tcztope{\Theta^k_i}{0}{\sfact} =
+ \tcztope{\Theta^k_i}{0}{\diagonal{\absolute{\mu}}{\sfact}}.\\
+& \therefore  \contraction{H_{\omega^k_i}}{\tcztope{\Theta^k_i}{0}{\sfact}}\leq\max_{i=1}^n\absolute{\mu_i}.~\hspace{3em}\qedhere.
+\end{align*}
+\end{proof}
+%
+However, when the eigenvectors of multiple reachability operators are
+sampled to form the template, the above lemma can not be used to
+compute the contraction bound.  In the latter case, we compute the
+contraction bound using convex optimization, as follows.  Let us
+define
+\[\beta_k(\sfact,J)=\min\{\|\tmat\|_\infty:\tmat\in\mat{m}{m}{\compnums}~\wedge~
+\eigenvectors_k\diagonal{\sfact}X=J\eigenvectors_k\diagonal{\sfact}\}\] 
+%
+\begin{lemma}\label{lem:contLin}
+We get $\chi\lt(J,\tcztope{\eigenvectors_k}{0}{\sfact}\rt)\leq \beta_k(\sfact,J)$.
+%
+\end{lemma}
+%
+\begin{proof}
+Let us consider
+$J\eigenvectors_k\diagonal{\sfact}=\eigenvectors_k\diagonal{\sfact}X$.
+We have to prove that
+\[
+J\tcz{\eigenvectors_k}{0}{s}=\tcztope{J\eigenvectors_k}{0}{\sfact}\subseteq
+\|\tmat\|_\infty\tcztope{\eigenvectors_k}{0}{\sfact}.
+\]
+We derive the following.  By using Lemma~\ref{lem:normalization}, we get
+%
+\begin{align*}
+&  \tcztope{J\eigenvectors_k}{0}{s}=\cztope{J\eigenvectors_k\diagonal{\sfact}}{0}\\
+&=
+  \{J\eigenvectors_k\diagonal{\sfact}\zeta^\pr:\|\zeta^\pr\|_{\infty} \leq 1\}\\
+ & =
+  \{J\diagonal{\sfact}\tmat\zeta^\pr:\|\zeta^\pr\|_\infty\leq 1\}\\
+ & \subseteq
+  \|\tmat\|_\infty\{\eigenvectors_k\diagonal{\sfact}\zeta^\pr:\|\zeta^\pr\|_{\infty}\leq 1\}\\
+ & =\|\tmat\|_\infty\cztope{\eigenvectors_k\diagonal{\sfact}}{0}
+=
+\|X\|_{\infty}\tcztope{\eigenvectors_k}{0}{\sfact}.\hspace{3em}\qedhere
+\end{align*}
+\end{proof}
+%
+In our verification procedure, we verify contraction in the
+neighborhoods of a finite set of time points in the sampling interval,
+such that the union of neighborhoods contains the time interval.
+Therefore, we derive a bound on the contraction in a
+neighborhood of a time point, as follows.  For any $t\in\Delta$,
+$r\in\integers_{\geq 0}$ and
+$\epsilon\geq 0$, let us denote
+%
+\[
+\cont{k}{r}{\sfact,t,\epsilon}=\max_{i=1}^k\beta_k\lt(\sfact,P_i\lt(\epsilon\rt)H_t\rt)+\beta_k\lt(\frac{A_c^{r+1}}{(r+1)!}H_t\rt)\epsilon^{r+1}.
+\]
+%
+\begin{theorem}~\label{thm:main-contraction}
+  The following is true.
+  %
+  \begin{align*}
+& \max_{\rho\in[t,t+\epsilon]}\contraction{H_\rho}{\tcztope{\eigenvectors_k}{0}{\sfact}}\leq\cont{k}{r}{\sfact,t,\epsilon}.
+  \end{align*}
+  %
+\end{theorem}
+%
+\begin{proof}
+Let us denote $\Psi=\tcztope{\eigenvectors_k}{0}{\sfact}$.  Using
+Lemma~\ref{lem:conv}, for any
+$\rho\in[t,t+\epsilon]$, we derive the following.
+  %
+  \begin{align*}
+&
+    \contraction{H_\rho}{\Psi}\leq\max_{i=1}^r\contraction{P_r(\epsilon)H_t}{\Psi}+\contraction{\frac{A_c^{r+1}}{(r+1)!}H_t}{\Psi}\epsilon^{r+1}\\
+    & \%\%~~\text{by Lemma~\ref{lem:contLin}}\\
+& \leq \max_{i=1}^k\beta_k\lt(\sfact,P_i\lt(\epsilon\rt)H_t\rt)+\beta_k\lt(\frac{A_c^{r+1}}{(r+1)!}H_t\rt)\epsilon^{r+1}.\hspace{3em}\qedhere  
+  \end{align*}
+  %
+\end{proof}
+%
+ \begin{algorithm}
+\caption{Exponential stability verification of $\system$}
+\label{alg:1step}
+\begin{algorithmic}[1]
+\State Initialize $k=3$.
+\State Choose an $M\in\integers_{>3}$ as the bound of $k$ and a $tol>0$ as
+the discretization parameter.
+\State Find a vector of scaling factors $\sfact$ solving Equtations~\ref{eqn:cset} and~\ref{eqn:contractive}.
+\State Initialize $t=\lsb$, $h=tol$, $r:=$ order of Taylor
+expansion (typically $\leq 2$).
+\While{$k \leq M$ and $t<\usb$ and $h\geq \; tol$}
+\If{$\cont{k}{r}{\sfact,t,h}<1$}
+\State $t\gets t+h; h\gets h+tol$
+\Else
+\State $h\gets h-tol$
+\EndIf
+\If{$h<tol$}
+\State $k\gets k+1$.  
+\EndIf
+\EndWhile
+\If {$t \geq \usb$}
+\State \emph{System is exponentially stable}
+\Else
+\State \emph{Inconclusive}
+\EndIf
+\end{algorithmic}
+ \end{algorithm}
+%
+{\bf Verification algorithm.} We begin with $k=3$ reference
+ operators that correspond to the two end points of the sampling
+ interval and the middle point.  The algorithm first finds suitable
+ scaling factors $\sfact$ such that the template complex zonotope with
+ $\eigenvectors_k$ as the template operators contracts with respect to
+ $\omega_i^k\forall i\in\set{1,\ldots,k}$.  Then we check whether the
+ contraction of the template complex zonotope by all the reachability
+ operators is less than one. For checking contraction, we first
+ discretize the sampling interval by a grid of size $tol>0$ and then
+ compute the bound on contraction in the forward $tol$ neighborhood of
+ each gird point using Theorem~\ref{thm:main-contraction}.  We choose
+ an order of Taylor expansion, typically not greater than two.
+ Starting with $t=\lsb$ and $h=tol$, for any $t$ and $h$, we check
+ that $\cont{k}{r}{\sfact,t,h}<1$.  If sucessfull, we increment the
+ value of $t$ to $t+h$ and $h$ to $h+tol$.  If not successful, we
+ reduce the value of $h$ to $h-tol$.  If we have verified contraction
+ until a point $t>\usb$, then we have successfully verified global
+ exponential stability of the system.  Otherwise, if $h$ becomes less
+ than zero at some point, we start another loop by increasing $k$ to
+ $k+1$ and repeat the procedure.  We hope to verify contraction within
+ a reasonable value of $k$.  Otherwise, we terminate without any
+ conclusion.  The steps fo the procedure are systematically described
+ in Algorithm~\ref{alg:1step}.  We shall discuss the experimental results
+ based on this algorithm in the next section.
+%
+

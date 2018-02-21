@@ -3,9 +3,9 @@ stable (GES) if any point in the state space reaches arbitrarily close
 to the origin at an exponential rate.  This property is mathematically
 stated as follows.
 %
-\begin{defn}\label{defn:exp-stable}[Global exponential stability] The
-system~(\ref{eqn:system}) is said to be globally exponentially stable
-(GES) if there exist $\lambda\in[0,1)$ and $c>0$ such that for all $\initstate
+\begin{defn}\label{defn:exp-stable}[Global exponential stability (GES)] The
+system $\system$ is globally exponentially stable
+(GES) if there exists $\lambda\in[0,1)$ and $c>0$ such that for all $\initstate
 \in\mb{R}^n$ and $k\in\mb{Z}_+$,
 $||\tbf{x}_k||\leq c\lambda^k||\tbf{x}_0||$.
 \end{defn}
@@ -39,28 +39,28 @@ that the system $H$ is globally exponentially stable.
 in~(\cite{2014-fiacchini-set,athanasopoulos2014alternative,AlKhatib2015})
 that the globally exponentially stablility of the system is equivalent
 to the existence of a $\lambda$-contractive $C$-set for a
-$\lambda\in[0,1)$, as stated in the following theorem.
+$\lambda\in[0,1)$.  Therefore, the global exponential stability of the
+  system can be verified by finding a contractive $C$-set.
 \end{remark}
 %
-Therefore, the global exponential stability of the system can be
-verified by finding a contractive $C$-set.  A stability verification
-algorithm was proposed in~\cite{todo} that definitely computes a
-contractive $C$-set for a globally exponentially stable system.
-However, the algorithm in~\cite{todo} involves iterative
-intersections, where the complexity of the set can grow in size during
-recursion.  Therefore, the algorithm can be costly, especially in
-higher dimensions.  Alternatively, in this paper we propose an
-algorithm that synthesizes a possibly contractive complex zonotope by
-convex optimization and later verifies its contraction.  Although the
-existence of a contractive complex zonotope is only a sufficient
-condition for global exponential stability, we demostrate that our
-procedure by experiments on some benchmar examples.  Our procedure for
-stability verification, which we describe in the next section, shall
-use some properties of contraction of sets that we shall discuss now.
+  A stability verification algorithm was proposed
+  in~\cite{2014-fiacchini-set} that definitely computes a contractive
+  $C$-set for a globally exponentially stable system.  But the
+  algorithm involves iterative intersections, where the complexity of
+  representing the set can grow uncontrollably during the recursion.
+  So, the algorithm~\cite{2014-fiacchini-set} can be costly,
+  especially in higher dimensions.  Alternatively, we propose a
+  stability verification algorithm using complex zonotope and convex
+  optimization, where the size of the template is fixed apriori.
+  Although the existence of a contractive complex zonotope is only a
+  sufficient condition for global exponential stability, we demostrate
+  the efficiency of our procedure by experiments on some benchmark
+  examples.  Our algorithm, described in the next section, uses some
+  properties of contraction of sets, which we shall discuss now.
 
 Since the state change of the system can be identified by the
 transformation by a reachability operator, we define contraction by
-a matrix as follows.  From here on, $J$ denotes an
+a matrix as follows.  From here on, we denote $J$ as an
 $n\times n$ real matrix.
 %
 \begin{defn} The amount of contraction of a set
@@ -74,9 +74,8 @@ $n\times n$ real matrix.
 % %We shall denote the contraction of $\Psi$ after $k$ steps as $\chi_k(\Psi)$.
 % \end{defn}
 The amount of contraction being greater than one would indicate that
-the set is actually \emph{expanding}, which also will be referred in
-general
-as ``contraction'' sense in our paper.
+the set is actually \emph{expanding}, which will also be referred
+mathematically as ``contraction'' parameter, in a general sense.
 %
 \input{./chapters/sections-ch-lis/contractiveness.tex}
 

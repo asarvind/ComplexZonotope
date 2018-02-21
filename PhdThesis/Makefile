@@ -1,6 +1,10 @@
 INPUT_FILE=main.tex
 SPELL_CHECK=aspell -c
 
+# Symbolic link
+
+SYMBOLIC_LINK_NAME1=reflis.bib
+
 #submission:
 #	latex ${INPUT_FILE}
 #	latex ${INPUT_FILE}
@@ -10,6 +14,7 @@ SPELL_CHECK=aspell -c
 all:
 #	latexmk -f main.tex -pdfdvi
 	make clean
+	make sym
 	pdflatex -shell-escape -synctex=1 ${INPUT_FILE}
 	bibtex main 
 	pdflatex -shell-escape -synctex=1 ${INPUT_FILE}
@@ -20,6 +25,10 @@ pdf:
 	pdflatex -shell-escape -synctex=1 ${INPUT_FILE}
 
 TEX_FILES := $(wildcard *.tex chapters/*.tex chapters/*/*.tex)
+
+sym:
+	ln -s ~/Dropbox/Invariants/complex-zonotope/ref.bib ${SYMBOLIC_LINK_NAME1}
+
 
 .PHONY: check
 
@@ -48,7 +57,8 @@ clean:
 	\rm -f  chapters/*.tex.backup	
 	\rm -f  chapters/*/*.tex.backup		
 	\rm -f  chapters/*.tex~	
-	\rm -f  chapters/*/*.tex~		
+	\rm -f  chapters/*/*.tex~
+	\rm -f  ${SYMBOLIC_LINK_NAME1}
 	# git rm -f Figures/*.pdf
 
 upload:

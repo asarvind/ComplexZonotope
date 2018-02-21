@@ -11,16 +11,16 @@ can write
 \end{align*}
 %
 To use the above expansion for deriving the bound on contraction, we
-shall describe some properties of contraction.  The following
-lemma states that the amount of contraction under transformation
-by the product of two matrices is bounded by the product of amount of
-contraction of individual matrices.  Also, the amount of contraction
-under transformation by the sum of two matrices is bounded by the sum
-of the amount of contraction of individual matrices.
+shall describe some of its properties.  The following
+lemma states that the contraction upon transformation
+by the product of any two matrices is bounded by the product of the
+contractions by individual matrices.  Also, the contraction
+upon transformation by the sum of two matrices is bounded by the sum
+of the contractions by the individual matrices.
 %
 \begin{lem}\label{lem:composition}
-Let $J_1$ and $J_2$ be two linear operators and $\Psi$ be a $C$-set.
-  Then the all of the following is true.
+Let us consider $J_1,J_2\in\mat{n}{n}{\reals^n}$ and
+  $\Psi\subset\reals^n$.  Then the all of the following is true.
 \begin{enumerate}
 \item $\chi(\Psi,J_1+J_2)\leq\chi(\Psi,J_1)+\chi(\Psi,J_2)$.
 \item $\chi(\Psi,J_1J_2)\leq\chi(\Psi,J_1)\chi(\Psi,J_2)$.
@@ -51,7 +51,7 @@ For proving the second part, we derive the following.
 If a matrix is embedded inside the convex hull of a set of matrices,
 then we get the following bound on contraction by the matrix.
 %
-\begin{lemma}
+\begin{lemma}~\label{lem:conv-bound}
 Let us consider that $J\in\convexhull{\set{A_1,...,A_r}}$ and
 $\Psi\subset\reals^n$.  Then
 %
@@ -112,8 +112,8 @@ $\delta\in[0,\epsilon]$ such that,
   \contraction{H_{t+\rho}}{\Psi}=\contraction{P_r(\rho)+E_r(\delta)}{\Psi}\\
 & \%\%~~\text{by Lemma~\ref{lem:composition}}\\
 &
-  \leq\contraction{P_r(\rho)H_t,\Psi}+\contraction{\frac{A_c^{r+1}}{(r+1)!}H_t}{\Psi}\delta^{r+1}\\
-  & \%\%~~\text{by Lemma~\ref{lem:convex}}\\
+  \leq\contraction{P_r(\rho)H_t}{\Psi}+\contraction{\frac{A_c^{r+1}}{(r+1)!}H_t}{\Psi}\delta^{r+1}\\
+  & \%\%~~\text{by Lemmas~\ref{lem:conv-bound} and~\ref{lem:convex}}\\
 &
   \leq\max_{i=1}^r\contraction{P_r(\epsilon)H_t}{\Psi}+\contraction{\frac{A_c^{r+1}}{(r+1)!}H_t}{\Psi}\delta^{r+1}\\
 & \leq\max_{i=1}^r\contraction{P_r(\epsilon)H_t}{\Psi}+\contraction{\frac{A_c^{r+1}}{(r+1)!}H_t}{\Psi}\epsilon^{r+1}.\hspace{3em}\qedhere
@@ -121,4 +121,4 @@ $\delta\in[0,\epsilon]$ such that,
 %
 \end{proof}
 %
-As $P_r(\epsilon)$ is a function of $H_t$ and 
+
