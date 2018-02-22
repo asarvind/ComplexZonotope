@@ -30,10 +30,10 @@ explained mathematically in the following proposition.
 \begin{proposition}[Eigenstructure based invariance]~\label{lem:eig-invariance}
 Let us consider $\ptemp\in\mat{n}{n}{\compnums}$ consists
 of the complex eigenvectors of a matrix $A\in\mat{n}{n}{\reals}$ as
-its column vectors and $\mu\in\compnums^m$ be the vector of complex
-eigenvalues such that $A\ptemp
+its column vectors and $\mu\in\compnums^n$ be the vector of complex
+eigenvalues, i.e., $A\ptemp
 = \ptemp\diagonal{\mu}$.  Then \[A\lt(\cztope{\ptemp}{0}\rt)
-= \cztope{\ptemp\diagonal{\mu}}{0}.\] Furthermore, if
+= \cztope{\ptemp\diagonal{\mu}}{0}.\] If
 $\infnorm{\mu}\leq 1$, then
 $A\lt(\rztope{\ptemp}{0}\rt)\subseteq \rztope{\ptemp}{0}$.
 \end{proposition}
@@ -43,8 +43,8 @@ We derive
   %
 \begin{align*}
 & A\lt(\cztope{\ptemp}{0}\rt) =
-A\set{\ptemp\zeta:~\zeta\in\compnums^m,\infnorm{\zeta}\leq 1}\\
-& =\set{A\ptemp\zeta:~\zeta\in\compnums^m,\infnorm{\zeta}\leq 1}
+A\set{\ptemp\zeta:~\zeta\in\compnums^n,\infnorm{\zeta}\leq 1}\\
+& =\set{A\ptemp\zeta:~\zeta\in\compnums^n,\infnorm{\zeta}\leq 1}
 = \cztope{A\ptemp}{0}=\cztope{\ptemp\diagonal{\mu}}{0}.
 \end{align*}
 %
@@ -55,7 +55,7 @@ For the second part, we are given that $\infnorm{\mu}\leq 1$.
 Consider a point
 %
 \begin{align*}
-  & y\in \cztope{\ptemp\diagonal{\mu}}{0}~~\text{where}\\
+  & y\in A\cztope{\ptemp}{0}=\cztope{\ptemp\diagonal{\mu}}{0}~~\text{where}\\
   &y = \ptemp\diagonal{\mu}\delta:\infnorm{\delta}\leq
 1.
 \end{align*}
@@ -68,8 +68,9 @@ Let $\zeta = \diagonal{\mu}\delta$. Then $\infnorm{\zeta} \leq
   \infnorm{\zeta}\leq 1.
 \end{align*}
 %
-This implies $y\in \cztope{\ptemp}{0}$.
-Therefore, $A\lt(\cztope{\ptemp}{0}\rt)\subseteq
+So, we get $y\in \cztope{\ptemp}{0}$.  As this is true for all
+$y\in\cztope{\ptemp}{0}$, we have
+$A\lt(\cztope{\ptemp}{0}\rt)\subseteq
 \cztope{\ptemp}{0}$ when $\infnorm{\mu}\leq 1$.
 \end{proof}
 %

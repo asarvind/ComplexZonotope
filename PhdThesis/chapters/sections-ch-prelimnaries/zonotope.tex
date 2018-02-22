@@ -1,0 +1,164 @@
+A simple zonotope is a linear combination of real valued vectors plus a
+center, such that the absolute values of the real valued combining
+co-efficients are bounded within unity.  Geometrically speaking, a
+simple zonotope is a Minkowski sum of line segments.  The
+representation of a simple zonotope is given below.
+%
+\begin{definition}[Simple zonotope]
+Let us consider $\ptemp\in\reals^m$, whose column vectors are called
+{\it generators}, and $\cen\in\reals^n$.  The following is the
+representation of a real zonotope.
+%
+\begin{align*}
+\rztope{\ptemp}{\cen}=\set{\cen+\ptemp\zeta:~\zeta\in\reals^m,~\infnorm{\zeta}\leq 1}.
+\end{align*}
+%
+\end{definition}
+%
+A main advantage of the zonotope set representation is not only that
+they are closed under linear transformation and Minkowski sum, but
+these can also be computed efficiently.  The linear transformation of
+a zonotope is computed as follows.  For the rest of this chapter, we
+use the notation $\ptemp\in\reals^m$ and $\cen\in\reals^n$, unless
+otherwise sepcified.
+%
+\begin{lemma}[Linear transformation]
+Let $A\in\mat{n}{n}{\reals}$.  Then
+%
+\begin{align*}
+A\rztope{\ptemp}{\cen}=\rztope{A\ptemp}{A\cen}
+\end{align*}
+%
+\end{lemma} 
+%
+\begin{proof}
+We derive the following.
+%
+\begin{align*}
+&
+  A\rztope{\ptemp}{\cen}=A\set{\cen+\ptemp\zeta:~\zeta\in\reals^m,~\infnorm{\zeta}\leq
+    1}\\
+& = \set{A\cen+A\ptemp\zeta:~\zeta\in\reals^m,~\infnorm{\zeta}\leq 1}=\rztope{A\ptemp}{A\cen}.\hspace{3em}\qedhere
+\end{align*}
+%
+\end{proof}
+%
+The Minkowski sum of two zonotopes can be computed as follows.
+%
+\begin{lemma}[Minkowski sum]
+Let us consider two matrices $\ptemp\in\mat{n}{m}{\reals}$ and
+$\ptemp^\pr\in\mat{n}{r}{\reals}$.  Then the following is true.
+%
+\begin{align*}
+& \rztope{\ptemp}{\cen}\oplus\rztope{\ptemp^\pr}{\cen^\pr}
+ \rztope{\mymatrix{\ptemp & \ptemp^\pr}}{\cen+\cen^\pr}.  
+\end{align*}
+%
+\end{lemma}
+%
+\begin{proof}
+We derive the following.
+%
+\begin{align*}
+& \rztope{\ptemp}{\cen}\oplus\rztope{\ptemp^\pr}{\cen^\pr}\\
+& = \set{\cen+\ptemp\zeta:~\zeta\in\reals^m,~\infnorm{\zeta}\leq
+    1}\oplus\set{\cen^\pr+\ptemp^\pr\zeta^\pr:~\zeta^\pr\in\reals^r,~\infnorm{\zeta^\pr}\leq
+    1}\\
+& =
+  \set{\lt(\cen+\cen^\pr\rt)+\ptemp\zeta+\ptemp\zeta^\pr:~\zeta\in\reals^m,\zeta^\pr\in\reals^r,~\infnorm{\zeta}\leq
+    1,\infnorm{\zeta^\pr}\leq 1}\\
+& = \set{\lt(\cen+\cen^\pr\rt)+\mymatrix{\ptemp
+      &\ptemp^\pr}\mymatrix{\zeta\\\zeta^\pr}:~\mymatrix{\zeta\\\zeta^\pr}\in\reals^{m+r},~\infnorm{\mymatrix{\zeta\\\zeta^\pr}}\leq
+    1}\\
+& =  \rztope{\mymatrix{\ptemp & \ptemp^\pr}}{\cen+\cen^\pr}.\hspace{3em}\qedhere
+\end{align*}
+%
+\end{proof}
+%
+Because of efficient computation of linear transformation and
+Minkowski sum operations, simple zonotopes have been sucessfully
+applied for bounded time computation of uncertain linear systems and
+some hybrid systems with simple switching conditions~\cite{todo}.
+However, for unbounded time computation of reachable sets, which
+generally requires computing positive invariants, zonotopes have the
+following drawback.  For the simple case of a stable linear system, we
+do not know if a positively invariant non-zero zonotope exists.  For a
+special case when a stable linear system (say discrete
+time) has real eigenvalues, there exists a positively invariant
+zonotope zonotope based on the following proposition.
+%
+\begin{proposition}
+Let us consider $\ptemp\in\mat{n}{n}{\reals}$ consists
+of the real eigenvectors of a matrix $A\in\mat{n}{n}{\reals}$ as
+its column vectors and $\mu\in\reals^n$ be the vector of complex
+eigenvalues, i.e., $A\ptemp
+= \ptemp\diagonal{\mu}$.  Then \[A\lt(\rztope{\ptemp}{0}\rt)
+= \rztope{\ptemp\diagonal{\mu}}{0}.\] If
+$\infnorm{\mu}\leq 1$, then
+$A\lt(\rztope{\ptemp}{0}\rt)\subseteq \rztope{\ptemp}{0}$.
+\end{proposition}
+% 
+\begin{proof}
+We derive
+  %
+\begin{align*}
+& A\lt(\rztope{\ptemp}{0}\rt) =
+A\set{\ptemp\zeta:~\zeta\in\reals^n,\infnorm{\zeta}\leq 1}\\
+& =\set{A\ptemp\zeta:~\zeta\in\reals^n,\infnorm{\zeta}\leq 1}
+= \rztope{A\ptemp}{0}=\rztope{\ptemp\diagonal{\mu}}{0}.
+\end{align*}
+%
+which proves the first part of the
+Proposition.
+
+For the second part, we are given that $\infnorm{\mu}\leq 1$.
+Consider a point
+%
+\begin{align*}
+  & y\in \rztope{\ptemp}{0}=\rztope{\ptemp\diagonal{\mu}}{0}~~\text{where}\\
+  &y = \ptemp\diagonal{\mu}\delta:\infnorm{\delta}\leq
+1.
+\end{align*}
+%
+Let $\zeta = \diagonal{\mu}\delta$. Then $\infnorm{\zeta} \leq
+\infnorm{\mu}\infnorm{\delta} \leq 1$.  So,
+%
+\begin{align*}
+  & y=\ptemp\zeta~~\text{ where }~
+  \infnorm{\zeta}\leq 1.
+\end{align*}
+%
+So, we get $y\in \rztope{\ptemp}{0}$.  As this is true for all $y\in
+A\rztope{\ptemp}{0}$, we have
+$A\lt(\rztope{\ptemp}{0}\rt)\subseteq
+\rztope{\ptemp}{0}$ when $\infnorm{\mu}\leq 1$.
+\end{proof}
+%
+A zonotope is not closed under mutual intersection or intersection
+with half-spaces.  The computation of intersection with half-spaces is
+used in reachability analysis of system having linear guards
+(pre-conditions) for switching.  To address this problem, we may want
+to convert a zonotope to a polytope and compute the intersection.
+However, a zonotope with $m$ generators in an $n$ dimensional space
+can have as many as $^{2m}C_{n-1}$ faces~\cite{todo}, which can be
+exponential in $n$.  Therefore, the conversion of a zonotope to a
+polytope can be costly in higher dimensions.  However, an algorithm
+for the tight over-approximation of the intersection between a
+zonotope and a hyperplane is proposed in~\cite{todo}, that is based on
+the projection of the zonotope onto 2-dimensional hyperplanes.
+Another approach is to extend the zonotope to a more general set
+representation in which the intersection with a half-space is a closed
+operation and can be computed efficiently.  Contrained zonotopes and
+constrained affine sets are examples of such extensions, which are
+closed under intersection with hyperplanes and halfspaces,
+respectively.
+
+In a constrained zonotope, in addition to the bound on the absolute
+values of the combining coefficients, we can have linear equality
+constraints.  Then, we can represent the intersection with a
+hyperplane as a constrained zonotope.
+%
+\begin{definition}[Constrained zonotope]
+
+\end{definition}
+%
