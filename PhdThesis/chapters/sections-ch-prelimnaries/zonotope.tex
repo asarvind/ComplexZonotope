@@ -1,3 +1,5 @@
+
+{\color{red}Mention related work here.}
 A simple zonotope is a linear combination of real valued vectors plus a
 center, such that the absolute values of the real valued combining
 co-efficients are bounded within unity.  Geometrically speaking, a
@@ -134,29 +136,37 @@ $A\lt(\rztope{\ptemp}{0}\rt)\subseteq
 \rztope{\ptemp}{0}$ when $\infnorm{\mu}\leq 1$.
 \end{proof}
 %
-A zonotope is not closed under mutual intersection or intersection
-with half-spaces.  The computation of intersection with half-spaces is
-used in reachability analysis of system having linear guards
-(pre-conditions) for switching.  To address this problem, we may want
-to convert a zonotope to a polytope and compute the intersection.
-However, a zonotope with $m$ generators in an $n$ dimensional space
-can have as many as $^{2m}C_{n-1}$ faces~\cite{todo}, which can be
-exponential in $n$.  Therefore, the conversion of a zonotope to a
-polytope can be costly in higher dimensions.  However, an algorithm
-for the tight over-approximation of the intersection between a
-zonotope and a hyperplane is proposed in~\cite{todo}, that is based on
-the projection of the zonotope onto 2-dimensional hyperplanes.
-Another approach is to extend the zonotope to a more general set
-representation in which the intersection with a half-space is a closed
-operation and can be computed efficiently.  Contrained zonotopes and
-constrained affine sets are examples of such extensions, which are
-closed under intersection with hyperplanes and halfspaces,
-respectively.
+However, the eigenvalues of a linear matrix can have non-zero
+imaginary part, in addition to the real part.  Whereas, simple
+zonotopes are defined on real numbers.  Therefore, in the next chapter
+we introduce complex zonotopes that can capture contraction along
+complex vectors.
+
+Another drawback of simple zonotopes is that they not closed under
+mutual intersection and intersection with half-spaces.  The
+computation of intersection with half-spaces and hyperplanes is
+required in reachability analysis of hybrid systems having linear
+guards (pre-conditions) for switching.  To compute the intersection,
+we can try to convert a zonotope to a polytope, compute the
+intersection with the polytope and over-approximate the intersection
+by another zonotope.  However, a zonotope with $m$ generators in an
+$n$ dimensional space can have as many as $^{2m}C_{n-1}$
+faces~\cite{todo}, which is exponential in $n$.  Therefore, the
+conversion of a zonotope to a polytope can be costly in higher
+dimensions.  To address this problem, an algorithm for the tight
+over-approximation of the intersection between a zonotope and a
+hyperplane is proposed in~\cite{todo}, that is based on the projection
+of the zonotope onto 2-dimensional hyperplanes.  Another approach is
+to extend the zonotope to a more general set representation in which
+the intersection with a half-space is a closed operation and can be
+computed efficiently.  Contrained zonotopes and constrained affine
+sets are examples of such extensions, which are closed under
+intersection with hyperplanes and halfspaces, respectively.
 
 In a constrained zonotope, in addition to the bound on the absolute
 values of the combining coefficients, we can have linear equality
-constraints.  Then, we can represent the intersection with a
-hyperplane as a constrained zonotope.
+constraints.  Therefore, the intersection of a hyperplane and a constrained
+zonotope can be represented another constrained zonotope.
 %
 \begin{definition}[Constrained zonotope]
 
