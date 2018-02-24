@@ -1,0 +1,127 @@
+Polytopes are sets that can be represented by boolean combinations of
+linear inequalities.  Their popularity in reachability analysis is
+mainly because they are easy to manipulate, either through algebraic
+means or algorithmically by linear programming.  They have been used
+in a number of tools and algorithms~\cite{todo}.  A convex polytope is
+a special case where a polytope is convex.  A general polytope can be
+seen as a union of a finite number of convex polytopes.  The
+representations of a convex polytope can be broadly classified into
+two main categories, i.e., half-space representation
+($H$-representation) and the vertex representation
+($V$-representation).  There are other possible representations for
+some sub-classes of polytopes, like zonotopes.  We shall discuss
+zonotopes in a separate section.
+
+Convex polytopes are closed under linear transformation, Minkowski
+sum, checking inclusion, mutual intersection and intersection with
+half-spaces.  However, the complexity of computing these operations
+depends on the way the polytope is represented.  For some operations,
+like Minkowski sum and linear transformation, the $V$-representation
+is more efficient.  Whereas, for the intersection with half-spaces and
+mutual intersection, the $H$-representation is more efficient.
+
+\paragraph*{$H$-representation}
+A $H$-representation of a polytope is an intersection of a number of
+half-spaces.  It is mathematically defined as follows.
+%
+\begin{definition}[$H$-representation]
+Let us consider a matrix $T\in\mat{r}{n}{\reals}$ and $d\in\reals^r$.
+The $H$-representation of a convex polytope is a tuple $\lt(T,d\rt)$
+that is assigned to the set
+%
+\[
+\concrete{T,d}=\set{x\in\reals^n:~Tx\leq d}.
+\]
+%
+\end{definition}
+%
+The row vectors of $T$ are sometimes called \emph{support vectors} of
+the convex polytope~\cite{todo}.
+
+We can easily compute an invertible linear transformation in a
+$H$-representation by the following formula.  Let $A$ be an inverible
+matrix.  Then
+%
+\[
+A\concrete{T,d}=\concrete{TA^{-1},d}.
+\]
+%
+But when the matrix $A$ is not invertible, the computation of the
+transformed polytope may require conversion to the $V$ representation,
+which can be computationally expensive in higher dimensions.
+
+The Minkowski sum of two bounded polytopes in an $n$-dimensional
+space, specified by the $H$-representation, can require ellimination
+of at least $n$-variables in a system of more than $2n$ linear
+inequalities, as described in~\cite{kvasnica2005minkowski}.  The
+complexity of variable ellimination by known algorithms is more than
+exponential.  Therefore, computation of Minkowski sum of polytopes via the
+$H$-representation can be costly in higher dimensions.  
+
+The intersection of two $H$-representations having the same set of
+supporting hyperplanes can be be computed easily as follows.  
+%
+\begin{align*}
+& \concrete{T,d}\bigcap\concrete{T,e}=\concrete{T,\meet{d}{e}}.~\numberthis\label{eqn:half-intersection}
+\end{align*}
+%
+The above operation also generalizes to intersection with half-spaces
+as follows.  We can include the support vector of a half-space among
+the support vectors of a $H$-representation and compute the
+intersection using Equation~\ref{eqn:half-intersection}.  Therefore, a
+$H$-representation is efficient for computing intersections with
+linear guards of hybrid systems.
+
+As we have explained earlier, computing Minkowski sum and
+transformation by singular matrices can be costly in a
+$H$-representation.  However, for a fixed set of support vectors, it
+has been shown that the tightest possible approximations of Minkowski
+sums and linear transformations can be computed by linear
+programming~\cite{todo}.  In some cases, the tigtest possible
+approximation can be computed even more efficiently by algebraic
+means~\cite{todo}.  Examples of such representations with a fixed set
+of support vectors include template polyhedra~\cite{todo} and
+octagons~\cite{todo}.
+
+\paragraph*{$V$-representation}
+In a $V$-representation, a convex polytope is a convex hull of a
+finite set of points.
+%
+\[
+\convexhull{\set{v_1,\ldots,v_m}}:~v_1,\ldots,v_n\in\reals^n.
+\]
+%
+The linear transformation and Mikowski sum of $V$-representations can
+be more efficiently computed than the $H$-representation, as follows.
+%
+\begin{align*}
+&
+  A\convexhull{\set{v_1,\ldots,v_m}}=\convexhull{\set{Av_1,\ldots,Av_m}}.\\
+&
+  \convexhull{\set{v_1,\ldots,v_m}}\oplus\convexhull{\set{w_1,\ldots,w_k}}\\&=\convexhull{\set{v_i+w_j:1\leq
+      i\leq m,~1\leq j\leq k}}.
+\end{align*}
+%
+As we have described above, the complexity of computing a Minkowski sum
+in a $V$-representation can be quadratic, while in a
+$H$-representation, it can be exponential.  On the other hand, as we
+shall see later, zonotopes have the advantage that the complexity
+of Minkowski sum and linear transformations is only linear.
+
+Computing intersection of a $V$-representation with a half-space can
+be performed by coverting the $V$-representation to the
+$H$-representation and then using
+Equation~\ref{eqn:half-intersection}.  But conversion from a
+$V$-representation to a $H$-representation by known methods has
+exponential complexity in the dimension of the space.  Therefore,
+computing the intersection of a $V$-representation with a half-space
+can be costly in higher dimensions.
+
+\paragraph*{Computing positive invariant for linear systems}
+It has been shown that for any stable linear system, there exists a
+positively invariant polytope~\cite{todo}.  However, for any dimension, the
+complexity of computing the positive invariant can be arbitrarily
+high~\cite{todo}.  This is a drawback of polytopes.  This drawback is overcome by
+our complex zonotope representation introduced later, where positive
+invariants for linear systems can be easily found using the possibly
+complex eigenstructure.
