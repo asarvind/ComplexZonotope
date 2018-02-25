@@ -1,0 +1,55 @@
+Our third example is a model of a networked cooperative platoon of
+vehicles, which is presented as a benchmark in the ARCH
+workshop~\cite{makhlouf2014networked}.  The platoon consists of three
+vehicles $M_1$, $M_2$ and $M_3$ along with a leader board ahead $M_4$.
+The movement of the vehicles is dependent on the communication between
+them their relative distances, velocities and accelerations.  The
+distance between a vehicle $M_i$ and its next
+vechicle $M_{i+1}$, relative to a reference distances $d_i^{ref}$ is
+denoted $e_i$.  The acceleration of the leader vehicle is $a_L$ which
+ranges between $[-9,1]m/s$.  The state of the system is denoted
+by a vector
+$x=\lt[e_1,\dot{e}_1,\ddot{e}_1,e_2,\dot{e}_2,\ddot{e}_2,e_3,\dot{e}_3,\ddot{e}_3\rt]$.
+The dynamics of the platoon is different in the two cases when there
+is full communication and when there is total failure of
+communication.  These dynamics are described by differential equations,
+%
+\begin{align*}
+& \dot{x}=A_cx+B_ca_L~\text{when there is communication}\\
+& \dot{x}=A_nx+B_na_L~\text{when there is failure of communication}.
+\end{align*}
+%
+where the pairs of matrices $(A_c,B_c)$ and $(A_n,B_n)$ are different.
+The matrices are given in the appendix.  In any given mode, the
+dynamics of the system is exponentially stable.  So, the system is
+more stable when the minimum time for switching between the dynamics
+is larger and less stable otherwise.  Therefore, in our case study, we
+also experiment on a less stable system having integer switching time.
+Therefore, in our evaluation of the benchmark, we also consider a less
+stable system having integer switching times.
+
+{\bf Time discretized models: } We could discretized the dynamics of
+both models with large minimum switching time and integer switching
+time.  The time discretized model having a large minimum switching
+time has 2 locations and 4 edges, as given in Figure~\ref{todo}.  The
+corresponding matrices Whereas, the model with integer switching times
+is given has 2 locations and 2 edges, as given in Figure~\ref{todo}.
+The continuous state is a 9-dimensional vector.  The matrices in the model
+specifications described in the figures is given in Table~\ref{todo}.
+
+{\bf Linear invariance property: } The verification challege proposed
+in~\cite{makhlouf2014networked} is to find the minimum possible reference distances
+$d_i^{ref}~\forall i\in\set{1,2,3}$, such that the vehicles do not
+collide.  Any set of upper bounds on $-e_1$, $-e_2$, and $-e_3$ are
+safe lower limits on the respective reference distances.  We express
+the verification challege in terms of linear invariance properties, we
+follows.  For each ${T_i:~1\leq
+i\leq 3}$, where
+%
+$ T_1=\mymatrix{-1 & \repmat{0}{1}{8}},~
+T_2=\mymatrix{\repmat{0}{1}{3} & -1 &\repmat{0}{5}{3}}$ and
+ ${T_3=\mymatrix{\repmat{0}{1}{6}& -1 &\repmat{0}{2}{3}}},
+$
+%
+find an upper bound on each $d_i:~i\in\set{1,2,3}$ such that
+$\lt(T_i,d_i\rt)$ is a linear invariance property of the system.

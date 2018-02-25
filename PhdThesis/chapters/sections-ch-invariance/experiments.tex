@@ -1,45 +1,9 @@
 \subsection{Robot with a saturated controller}
-Our first example is a veriication problem for the model of a
-self-balancing two wheeled robot called
-NXTway-GS1\footnote{\url{http://www.mathworks.com/matlabcentral/fileexchange/19147-nxtway-gs-self-balancing-two-wheeled-robot-controller-design}}
-by Yorihisa Yamamoto, which was presented in the ARCH
-workshop~\cite{heinz2014benchmark}. We consider the linearized sampled
-data (discrete time) networked control system model from the paper.
-The state of the plant is represented by a 6-dimensional vector
-$x_p=(\dot{\theta},\theta,\dot{\psi},\psi,\dot{\phi},\phi)^T$, where
-$\theta$ is the average angle of the left and right wheel, $\psi$ is
-the body pitch angle, $\phi$ is the body yaw angle, and the rest
-coordinates are their respective angular velocities.  The output of
-the plant is represented by a 3-dimensional vector
-$\lt(\dot{\psi}_{\operatorname*{out}},\theta_{m_1},\theta_{m_r}\rt)^T$
-such that $y_p=C_px_p$.  The input to the plant is a two dimensional
-vector $u_p$.  The dynamics of the plant is given by the differential
-equation $\dot{x}_p=A_px_p+B_pu_p$.  In the sampled data system, the
-state of the plant is sampled every 4s.
+\input{./chapters/sections-ch-invariance/robot}
 
-The controller state is represented by a 6-dimensional vector $x_c$,
-and the input to the controller is denoted
-$u_c=\lt({\hat{u}^T}_c,u^\dpr_c\rt)$.  The controller inputs
-${\hat{u}^T}_c$ and $u^\dpr_c$ are both 2-dimensional inputs.  The
-controller has a 2-dimensional output $y_c$ which is processed to
-provide input to the plant as $u_p=D_py_c$.  The discrete time
-controller dynamics is given by the equation
-%
-\begin{align*}
-  & x_c(t+1)=\hat{A}_cx_c(t)+\hat{B}_cu_c(t),\\
-  & y_c(t+1)=C_cx_c(t)+D_cu_c(t).
-\end{align*}
-%
+\subsection{Networked platoon of vehicles}
+\input{./chapters/sections-ch-invariance/vehicleplatoon}
+{\color{red} TODO explain lyapunov exponent}
 
-
-
-
-In our experiment, we decoupled some unbounded directions of
-the dynamics of the system from bounded directions by making an
-appropriate linear transformation of the coordinates.  The
-transformation is such that the coordinates corresponding to the
-\emph{body pitch angle} and controller inputs are among the bounded
-directions.  We do not explain the transformation here because it is
-beyond the scope of this paper.
-
-
+\subsection{Perturbed double integrator}
+\input{./chapters/sections-ch-invariance/integrator}

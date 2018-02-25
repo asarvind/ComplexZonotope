@@ -1,0 +1,74 @@
+Our second example is a perturbed double integrator system given
+in~\cite{rakovic2004computation}.  The closed loop system with a
+feedback control is piecewise affine, having four different affine
+dynamics in four different regions of space, as
+$\trj{x}{t+1}=M_i\trj{x}{t}+w$, $i\in\{1,2,3,4\}$.  (the matrices and the regions are given in Appendix)
+{\scriptsize
+\begin{align*}~\label{eqn:pwa-regions}
+i=\left\{\begin{array}{l}
+1,~\text{if}~x_1\geq 0~\text{and}~x_2\geq 0\\
+2,~\text{if}~x_1\leq 0~\text{and}~x_2\leq 0\\
+3,~\text{if}~x_1\leq 0~\text{and}~x_2\geq 0\\
+4,~\text{if}~x_1\geq 0~\text{and}~x_2\leq 0\\
+\end{array} \rt.,
+~M_1=M_2=\lt[\begin{matrix}
+0.4103  &  0.0653\\
+  -0.2949  &  0.5327
+\end{matrix}\rt],~M_3=M_4=\lt[\begin{matrix}
+0.4103  &  -0.0653\\
+  0.2949  &  0.5327
+\end{matrix}\rt]
+\end{align*}}
+
+The additive disturbance input $w$ is bounded as $\|w\|_{\infty}\leq
+0.2$.  
+
+We perform two different experiments on this system.  In the first
+experiment, we try to verify the smallest possible magnitude of bounds
+on the two coordinates, denoted $x_1$ and $x_2$. We compare these
+bounds with that found by the SpaceEx tool.  In the second experiment,
+we try to quickly compute a large invariant for the system under the
+safety constraints given in~\cite{rakovic2004computation}.  The given
+safety constraints are $\|x\|_{\infty}\leq 5$ and $\lt|K_i(x)\leq
+1\rt|~\forall i\in\lt\{1,2\rt\}$.  In the latter case, we maximize the
+sum of the scaling factors and differences of the upper and lower
+interval bounds of the augmented complex zonotopic invaraint.
+Furthermore, we decompose the given safety constraints as the
+intersection of four different sets of safety constraints.  For each
+set of safety constraints, we compute a large augmented complex
+zonotopic invariant.  Then the desired invariant is the intersection
+of four augmented complex zonotopic invariants.  Although we may not
+find the largest possible (maximal) invariant by this approach, still
+the optimizer would find a large invariant.  We draw comparison in
+terms of the computation time with the reported result for the MPT
+tool~\cite{rakovic2004computation}.
+
+In our formalism, we model the system with $4$ locations and $12$
+edges connecting all the locations.  Appropriate staying conditions
+are specified in each location, reflecting the division of the state
+space into different regions where the dynamics is affine. The initial
+set is the origin. The same model is specified in SpaceEx.
+
+\tbf{Size of model}: 2 dimensions, 4 locations and 12 edges.
+
+\tbf{Experiment settings}.  For the primary template, we collected the
+(complex) eigenvectors of all linear matrices of the affine maps and
+their binary products. For the SpaceEx tool, we experimented with two
+different templates, the octagon template and a template with 100
+uniformly sampled support vectors.
+
+\tbf{Results.}  In the first experiment, we verified smaller bounds
+for $x_2$ than that of SpaceEx, while the bounds verified for $x_1$
+were equal for both methods.  In our second experiment on this
+example, the computation time for finding a large invariant by our
+method is significantly smaller than that of the reported result for
+the MPT tool.  The results are summarized in the
+Tables~\ref{tab:smallinv-pdi} and~\ref{tab:largeinv-pdi}.
+
+%% \tbf{Remark.}  The overapproximation quality of SpaceEx reduces when
+%% there are large number of edges, because then in each step, a union of
+%% many different polytopes has to be overapproximated using support
+%% vectors.  In contrast, our approach uses optimization to learn an
+%% appropriate invariant, avoiding the union operations.  Possibly
+%% because of this reason, we verified smaller bounds than SpaceEx on
+%% this example.

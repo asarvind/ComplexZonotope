@@ -1,0 +1,247 @@
+Our first example is a veriication problem for the model of a
+self-balancing two wheeled robot called
+NXTway-GS1\footnote{\url{http://www.mathworks.com/matlabcentral/fileexchange/19147-nxtway-gs-self-balancing-two-wheeled-robot-controller-design}}
+by Yorihisa Yamamoto, which was presented in the ARCH
+workshop~\cite{heinz2014benchmark}. We consider the linearized sampled
+data (discrete time) networked control system model from the paper.
+The state of the plant is represented by a 6-dimensional vector
+$x_p=(\dot{\theta},\theta,\dot{\psi},\psi,\dot{\phi},\phi)^T$, where
+$\theta$ is the average angle of the left and right wheel, $\psi$ is
+the body pitch angle, $\phi$ is the body yaw angle, and the rest
+coordinates are their respective angular velocities.  The output of
+the plant is represented by a 3-dimensional vector
+$\lt(\dot{\psi}_{\operatorname*{out}},\theta_{m_1},\theta_{m_r}\rt)^T$
+such that $y_p=C_px_p$.  The input to the plant is a two dimensional
+vector $u_p$.  The dynamics of the plant is given by the differential
+equation $\dot{x}_p=A_px_p+B_pu_p$.  In the sampled data system, the
+state of the plant is sampled every 4s.
+
+The controller state is represented by a 6-dimensional vector $x_c$,
+and the input to the controller is denoted
+$u_c=\lt({u^\pr}_c,u^\dpr_c\rt)$.  The controller inputs
+${{u^\pr}_c}$ and $u^\dpr_c$ are both 2-dimensional inputs.  The input
+$u^\dpr$ is an uncertain input which is in the range $[-100,100]$.  The
+controller dynamics is given by the equations
+%
+\begin{align*}
+  & \dot{\tau}=1,~~\tau(4^+)=0\\
+  & {u^\pr}_c(\tau)=\hat{u}_c(0)~\text{if}~\tau\in[0,4)\\
+  & {u^\pr}_c(4)=y_p(\tau)\\
+  & \dot{x_c}(\tau)={A}_cx_c(\tau)+{B}_cu_c(\tau)\\
+  & y_c(\tau)=C_cx_c(\tau)+D_cu_c(\tau).
+\end{align*}
+%
+The controller has a 2-dimensional output $y_c$ which is processed to
+provide input to the plant.  The processor has a saturation limit on
+the output received from the controller.  The saturated controller
+output is given by the equation
+%
+\begin{align*}
+u_p=D_p\lt(\join{\lt(\meet{y_c}{\mymatrix{v\\v}}\rt)}{\mymatrix{-v\\-v}}\rt).~\numberthis\label{eqn:sat1}
+\end{align*}
+%
+where $v=100$ is a saturation limit.  The sampled data dynamics with
+saturation can be modeled by an affine discrete time hybrid system,
+where the switching is controlled by relevant guards on $u_p$.
+However, if we consider the continuous state of the affine hybrid
+system as $\lt(x_p,x_c,u_p\rt)^T$, we observed that some of the
+directions are unbounded.  Therefore, we decoupled some unbounded
+directions of the dynamics from the bounded directions by making
+appropriate linear transformation of the coordinates.  The linear
+transformation is composed by two transformations, one of which
+involved Jordan decomposition in Matlab.
+
+\begin{table}
+{\scriptsize
+\begin{align*}
+& F_1  = \lt[\begin{matrix}
+3.6929   &      0  &  0.7302  &  7.9715 &  14.5019 &   -0.0072 &
+0.0720 &   -2.7354\\
+    3.6929   &      0  &  0.7302  &  7.9715 &  14.5019 &  -0.0072  &  0.0720  & -2.7354\\
+    0.9562    &     0  &  0.0019 &  -0.0021 &  -0.0022 &   -0.0000 &  -0.0001 &  -0.0002\\
+         0 &   0.6910    &     0    &     0  &       0     &    0   &      0    &     0\\
+    0.8833     &    0  & -0.1154 &  -1.2943 &  -2.3520  &  0.0012 &  -0.0118  &  0.4427\\
+   -0.4712    &     0 &  -0.0812 &    0.1151  & -1.4845  &  0.0007 &  -0.0071  &  0.2819\\
+   -0.1560     &    0 &  -0.0459 &  -0.3173  &  0.3650  &  0.0003  & -0.0023  &  0.1162\\
+   -0.7719   &      0 &  -0.1248  & -1.4264 &  -2.5901  &  0.9973 &  -0.0131  &  0.4869\\
+   -0.7544  &       0  & -0.1243 &  -1.4204 &  -2.5792  &  0.0013 &   0.9825 &   0.4796\\
+   -0.1905   &      0  & -0.0148  & -0.2081 &  -0.3751  &  0.0002  &  0.0033  &  1.0651
+\end{matrix}\rt]\\
+& F_2 = \lt[\begin{matrix}
+0.2543  &  0.2543\\
+    0.2543  &  0.2543\\
+   -0.0001 &  -0.0001\\
+         0 &        0\\
+   -0.0413 &  -0.0413\\
+    0.0219  &  0.0219\\
+    0.0102 &   0.0102\\
+    0.0431 &   0.0431\\
+    0.0428 &   0.0428\\
+    0.0065 &   0.0065\\
+\end{matrix}\rt],
+~F_3 = 10^{-2}\times\lt[\begin{matrix}
+ 0.0000    &     0  & -0.0330 &   2.0218\\
+    0   &      0  & -0.0330 &  -2.0218\\
+    0  &       0 &   -0  &  0\\
+   -0  &       0  &  0 &   0.0109\\
+   -0.0118 &        0  &  0.0172  &  0 \\
+    0.0436  &       0 &   0.0003 &  0 \\
+   -0.0478   &      0  &  0.0034 &   0 \\
+  -13.3924 &        0 &   0.0062 &   0 \\
+    0.0909     &    0  &  0.0061 &  0\\
+   -0.0798  &       0 &   0.0017  &  0\\
+\end{matrix}\rt]
+\end{align*}}
+\caption{Matrices of the transformed system dynamics}~\label{tab:matrices-nxt}
+\end{table}
+
+
+After decomposition, the bounded dynamics with saturation could be
+modeled in a 10-dimensional state space, which is described below.
+%
+\begin{align*}
+\mymatrix{x(t+1)\\y(t+1)}=F_1\trj{x}{t}+F_2sat\lt(\trj{y}{t}\rt)+F_3\trj{u}{t},
+\end{align*}
+where $\trj{x}{t}\in\realset^8$ is the transformed state of the
+composite system of plant and controller, $\trj{y}{t}\in\realset^2$ is
+the input sent by the controller, $\trj{u}{t}\in\lt[-100,100\rt]^4$ is
+the bounded additive disturbance input and $\operatorname*{sat}$ is
+the saturation function which limits the controller input received by
+the plant.  The body pitch angle is the first co-ordinate, i.e.,
+$\psi=x_1$.  The matrices $F_1$, $F_2$ and $F_3$ are given in
+Table~\ref{tab:matrices-nxt}.  The matrices for the original
+(untransformed system) are given in the appendix.  The saturation
+function is defined as follows.  The saturation function is given as
+follows.
+%
+\begin{align*}
+& \text{If
+  saturated}~~\operatorname*{sat}\lt(y_i\rt) = max\lt(-\delta
+ d_p,min\lt(y_i,\delta d_p\rt)\rt),~\forall i\in\{1,2\},\\
+&\text{If unsaturated}~~ sat\lt(y_i\rt)=y_i~\forall i\in\{1,2\}.
+\end{align*}
+%
+where $\delta=100$ and $d_p=0.0807$.  
+%
+{\color{red} TODO Input figure here}.
+
+{\bf Model complexity:} The 2-dimensional input $y$ on which the
+positive and negative saturation is defined can thus be divided into 9
+different regions, where the system exhibits different dynamics.  We
+model each of the discrete time dynamics by a self edge on a common location.
+Therefore, the saturated model consists of a single location with 9
+self-edges having appropriate linear guards and transition matrices.
+On the other hand, the unsaturated model is a linear system having
+uncertain input, which is therefore modeled by only one location.
+
+\emph{Size of saturated model}: 10 dimensional, 1 location and 9 edges.
+
+\emph{Size of unsaturated model}: 10 dimensional, 1 location, 0 edges.
+
+{\bf Linear invariance property to verify}: The safety requirement is
+that the \emph{body pitch angle} of the robot, which in our model is
+denoted by $x_1$, should be bounded within some value. In the
+benchmark, it was suggested that for the saturated system
+$x_1\in\lt[-\frac{\pi}{2}+\epsilon,\frac{\pi}{2}-\epsilon\rt]:~\epsilon>0$,
+while $x_1\in\lt[\frac{-\pi}{2.26},~\frac{\pi}{2.26}\rt]$ for the
+unsaturated system. The initial set is the origin.  Therefore, we want
+to find a small bound $d$ on the valued of
+$\absolute{\psi}=\absolute{x_1}$.  As the model is symmetric, it is
+sufficient to find a bound along the positive direction.  Therefore,
+we have to find a small enough $d$ such that $\lt(T,d\rt)$, where
+$T=\mymatrix{1&\repmat{0}{1}{9}}$, is a linear invariance property.
+
+{\bf Experiment settings.}
+
+\emph{Augmented complex zonotope: }  The primary template for the hybrid system
+is chosen as the collection of the (complex) eigenvectors of linear
+matrices of all affine maps for the edge transitions, the orthonormal
+vectors to the guarding hyperplane normals and the projections of the
+eigenvectors on the subspace spanned by the orthonormal vectors.  For
+the linear system, it consists of the eigenvectors of the linear map,
+the input set template and its multiplication by the linear matrix
+(related to affine map) and square of the linear matrix.
+
+\emph{SpaceEx:      } Concerning
+the experiment using SpaceEx, we tested with the octagon template and
+a template with $400$ uniformly sampled support vectors distributed
+uniformly in space.  
+\begin{table}
+\begin{minipage}{1\textwidth}
+\centering
+\begin{tabular}{|l|c|c|c|}
+\hline
+\multicolumn{2}{|c|}{\multirow{2}{*}{Method}} &
+\multirow{2}{*}{Bound on pitch angle} & \multirow{2}{*}{Comp. time (s)}\\
+\multicolumn{2}{|c|}{} & & \\
+\hline
+\multirow{4}{*}{SpaceEx} & octagon & \multirow{2}{*}{$>1000$} &
+\multirow{2}{*}{Not terminate in $<180s$}\\
+& template & & \\
+\cline{2-4}
+& 400 support & \multirow{2}{*}{UB} & \multirow{2}{*}{Not terminate in
+  $<180s$}\\
+& vectors & &\\
+\hline
+\multicolumn{2}{|c|}{\multirow{2}{*}{Suggested in~\cite{heinz2014benchmark}}} &
+\multirow{2}{*}{$1.39$} & \multirow{2}{*}{n/a}\\
+\multicolumn{2}{|c|}{} & &\\
+\hline
+\multicolumn{2}{|c|}{\multirow{2}{*}{Augmented complex zonotope}} & \multirow{2}{*}{$1.29$} &
+\multirow{2}{*}{$4$}\\
+\multicolumn{2}{|c|}{} & & \\
+\hline
+\end{tabular}
+\caption{Unsaturated robot model: results}
+~\label{tab:robot-unsaturated}
+\end{minipage}
+\hspace{0em}
+\begin{minipage}{1\textwidth}
+\centering
+\begin{tabular}{|l|c|c|c|}
+\hline
+\multicolumn{2}{|c|}{\multirow{2}{*}{Method}} &
+\multirow{2}{*}{Bound on pitch angle} & \multirow{2}{*}{Comp. time (s)}\\
+\multicolumn{2}{|c|}{} & & \\
+\hline
+\multirow{4}{*}{SpaceEx} & octagon & \multirow{2}{*}{$>1000$} &
+\multirow{2}{*}{Not terminate in $<180s$}\\
+& template & & \\
+\cline{2-4}
+& 400 support & \multirow{2}{*}{UB} & \multirow{2}{*}{Not terminate $<180s$}\\
+& vectors & & \\
+\hline
+\multicolumn{2}{|c|}{\multirow{2}{*}{Suggested in~\cite{heinz2014benchmark}}} &
+\multirow{2}{*}{$1.571-\epsilon:~\epsilon>0$} & \multirow{2}{*}{n/a}\\
+\multicolumn{2}{|c|}{} &  &\\
+\hline
+\multicolumn{2}{|c|}{\multirow{2}{*}{Augmented complex zonotope}} & \multirow{2}{*}{$1.16$} &
+\multirow{2}{*}{45}\\
+\multicolumn{2}{|c|}{} & &\\
+\hline
+\end{tabular}
+\caption{Saturated robot model: results}
+~\label{tab:robot-saturated}
+\end{minipage}
+\end{table}
+
+
+\tbf{Results.}  For both the hybrid and the linear systems, we could
+verify smaller magnitudes for the bounds on the pitch angle than what
+is proposed in the benchmark~\cite{heinz2014benchmark}.  But the
+SpaceEx tool could not find a finite bound for either of the above
+systems.  The results are reported in the
+Tables~\ref{tab:robot-unsaturated} and~\ref{tab:robot-saturated}.
+
+\tbf{Remark.}  We have discussed in the review of polytopes that
+although a linear system has a polytopic invariant, computing it can
+be difficult.  The representation size of a polytopic invariant for a
+fixed dimension can be arbitrarily large.  In our unsaturated model
+which is linear, some of the eigenvalues are complex and their
+magnitudes are close to one.  Possibly this is the reason SpaceEx
+could not find an invariant even with 400 support vectors distributed 
+uniformly in space.  But in our approach, since we use the complex
+eigen-structure, we could find the desired invariant for the
+unsaturated (linear) model.  Furthermore, we we also computed the
+invariant for the saturated (hybrid) model.
+
