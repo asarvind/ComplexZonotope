@@ -1,0 +1,36 @@
+Ellipsoids are sub-level sets of positive semi-definite quadratic
+forms.  In control theory, they are implicitly found while computing
+quadratic lyapunov functions for proving stability or stabilizability of
+systems~\cite{todo}.  An ellipsoid is represented by a pair of a
+positive semi-definite symmetric matrix $Q\in\mat{n}{n}{\reals}$ and a center
+$\cen\in\reals^n$, which is assigned to the following set.
+%
+\[
+\concrete{Q,c}:=\cen\oplus\set{x\in\reals^n:~\transpose{x}Qx\leq 1}.
+\]
+%
+{\bf Computing positive invariants} For stable linear systems,
+ellipsoidal positive invariants can be efficiently computed using
+semi-definite programming~\cite{todo}.  This is an advantage of using
+ellipsoids for computing positive invariants for linear systems, and a
+motivation for using them for other classes of systems.  There are
+techniques that try to compute positive invariants for
+non-linear~\cite{todo} and hybrid systems~\cite{todo}, although in the
+latter case, we can not guarantee the existence of positively
+invariant elliposids.  An alternative approach to semi-definite
+programming for computing positively invariant ellipsoids was
+presented in~\cite{todo}, which uses fixed point iteration based on
+Lowner order.  In this work, each iteration involves only algebraic
+computations, which possibly resulted in better computational
+efficiency than semi-definite programming on the tested examples.
+
+Ellipsoids are closed under linear transformations.  But they are not
+closed under a Minkowski sum, mutual intersection or intersection with
+half-spaces.  Recent work~\cite{todo} has addressed the problem of
+over-approximating the Minkowski sum of ellipsoids and their
+intersection with half-spaces, based on the Lowner order combined with
+semi-definite programming.  Still, there can be a significant error in
+the approximation.  An advantage of zonotopes and complex zonotopes
+over ellipsoids is that the former are closed under Minkowski sum,
+which can also be computed efficiently.
+

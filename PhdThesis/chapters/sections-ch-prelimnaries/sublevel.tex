@@ -1,0 +1,29 @@
+A sub-level set of a polynomial is a natural extension the
+$H$-representation of the polytope to non-polytopic sets to provide
+better approximation quality.  Mathematically, a polynomial sub-level
+set is defined as follows.
+%
+\begin{definition}
+A polynomial sub-level set is represented by a tuple $\lt(f,d\rt)$,
+where 
+$f\in\lt(\polyring{x_1,\ldots,x_n}{\reals}\rt)^r$ and $d\in\reals^r$,
+which is assigned to the following set.
+%
+\[
+\concrete{f,d}=\set{x\in\reals^n:~\forall
+  i\in\set{1,\ldots,r},~f_i(x)\leq d_i}
+\]
+%
+\end{definition}
+%
+Although polynomial sub-level sets are more expressive than
+$H$-representation, approximating reachable sets using the former is
+computationally more expensive.  To alleviate the complexity of
+computating positively invariant polynomial sub-level sets, a
+semi-definite relaxation combined with policy iteration has been
+proposed in~\cite{todo}.  Still, this approach uses a recursion of
+convex optimization steps.  So, the convergence of the recursion can
+be slower than polyhedral abstract domains~\cite{todo}, which use
+linear programming in the recursion.  In contrast, our approach using
+complex zonotopes tries to compute a positive invariant in only a
+single step of convex optimization.
