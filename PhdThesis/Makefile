@@ -4,6 +4,7 @@ SPELL_CHECK=aspell -c
 # Symbolic link
 
 SYMBOLIC_LINK_NAME1=reflis.bib
+SYMBOLIC_LINK_NAME2=fig
 
 #submission:
 #	latex ${INPUT_FILE}
@@ -27,7 +28,9 @@ pdf:
 TEX_FILES := $(wildcard *.tex chapters/*.tex chapters/*/*.tex)
 
 sym:
+	\rm -f ${SYMBOLIC_LINK_NAME1} ${SYMBOLIC_LINK_NAME2}
 	ln -s ~/Dropbox/Invariants/complex-zonotope/ref.bib ${SYMBOLIC_LINK_NAME1}
+	ln -s ../figures ${SYMBOLIC_LINK_NAME2}
 
 
 .PHONY: check
@@ -59,6 +62,7 @@ clean:
 	\rm -f  chapters/*.tex~	
 	\rm -f  chapters/*/*.tex~
 	\rm -f  ${SYMBOLIC_LINK_NAME1}
+	\rm -f  ${SYMBOLIC_LINK_NAME2}
 	# git rm -f Figures/*.pdf
 
 upload:
