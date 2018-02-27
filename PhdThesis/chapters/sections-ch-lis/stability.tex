@@ -10,6 +10,13 @@ system $\system$ is globally exponentially stable
 $||\tbf{x}_k||\leq c\lambda^k||\tbf{x}_0||$.
 \end{defn}
 %
+The following is the stability verification problem.
+%
+\begin{problem}
+Given a sampling period interval $\Delta=[\lsb,\usb]$, verify
+that the system $H$ is globally exponentially stable.
+\end{problem}
+%
 The GES of a system is related to the reachable sets of the
 system. Indeed if all bounded sets containing the origin eventually
 contract to arbitrarily small sets around the origin, then every point
@@ -22,35 +29,30 @@ call such sets as $C$-sets.
 
 The contractiveness of a set is defined as follows.
 %
-\begin{definition}[\cite{todo:all}]
+\begin{definition}[\cite{2014-fiacchini-set}]
 Given $\lambda\in[0,1]$, a set $C$-set $\Psi\subset\reals^n$ is
 $\lambda$-contractive for the system $\system$ iff
 \[\forall x\in\Psi,~\forall t\in\Delta,~H_tx\in\lambda\Psi.\]
 \end{definition}
 %
-The following is the stability verification problem.
-%
-\begin{problem}
-Given a sampling period interval $\Delta=[\lsb,\usb]$, verify
-that the system $H$ is globally exponentially stable.
-\end{problem}
-%
 \begin{remark} It has been shown previously
 in~(\cite{2014-fiacchini-set,athanasopoulos2014alternative,AlKhatib2015})
-that the globally exponentially stablility of the system is equivalent
-to the existence of a $\lambda$-contractive $C$-set for a
-$\lambda\in[0,1)$.  Therefore, the global exponential stability of the
-  system can be verified by finding a contractive $C$-set.
+that globally exponentially stablility of a nearly-periodic linear
+impulsive system is equivalent to the existence of a
+$\lambda$-contractive $C$-set for a $\lambda\in[0,1)$.  So, we can
+  find a $\lambda$-contractive $C$-set for $\lambda<1$ to prove  global
+  exponential stability.
 \end{remark}
 %
   A stability verification algorithm was proposed
   in~\cite{2014-fiacchini-set} that definitely computes a contractive
   $C$-set for a globally exponentially stable system.  But the
-  algorithm involves iterative intersections, where the complexity of
-  representing the set can grow uncontrollably during the recursion.
-  So, the algorithm~\cite{2014-fiacchini-set} can be costly,
-  especially in higher dimensions.  Alternatively, we propose a
-  stability verification algorithm using complex zonotope and convex
+  algorithm involves iterative intersections.  But during iterative
+  intersections, the complexity of representing the set can grow
+  uncontrollably.  So, the
+  algorithm~\cite{2014-fiacchini-set} can be costly, especially in
+  higher dimensions.  Alternatively, we propose a stability
+  verification algorithm using complex zonotope and convex
   optimization, where the size of the template is fixed apriori.
   Although the existence of a contractive complex zonotope is only a
   sufficient condition for global exponential stability, we demostrate

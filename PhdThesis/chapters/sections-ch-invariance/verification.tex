@@ -1,43 +1,43 @@
-To prove a linear invariance property, it follows from
-Lemma~\ref{lem:pi-ver} that we can compute a positive invariant
-containing the initial set and which satisfies the property.  We can
-also infer from Lemma~\ref{lem:pi-ver} that the smallest positive
-invariant is the union of reachable sets at different all time points.
-However, the smallest positive invariant can be computationally
-expensive to represent because reachable set at a time step is a union
-of sets whose number can be exponential in the number of the time
-step.  Alternatively, we can compute a positive invariant whose
-continuous projection in any location is represented as an augmented
-complex zonotope with a representation size that is amenable to
-computation.  We have earlier ellucidated the advantage of using a
-complex zonotope over other set representations, for computing a
-positive invariant of an affine hybrid system.  We shall now discuss
-how to compute the required augmented complex zonotopic positive
-invariant for verifying a linear invariance property.
+By Lemma~\ref{lem:pi-ver}, to prove a linear invariance property, we
+can compute a positive invariant containing the initial set and which
+satisfies the property.  We shall derive a convex program to compute a
+positively invariant satisfying a linear invariance property and
+containing an initial set, whose continuous projection in any location
+is represented as an augmented complex zonotope.  Our procedure
+apriori fixes the templates of the augmented complex zonotope and
+synthesizes the set of scaling factors, and lower and upper interval
+bounds for verifying the property.  We shall discuss in a latter
+section how to select a suitable primary template.  But the secondary
+template has to be the pseudo-inverse of the sub-parallelotopic
+template of the system, so that we can over-approximate the
+intersection with the guards and staying conditions based on
+Theorem~\ref{thm:main-intersection}.
 
-In the subsequent discussion, we consider a set of states $\Omega$ whose
-projection onto continuous states in a location $\loc$ is an augmented
-complex zonotope
+Therefore, we consider a set of states $\Omega$ whose projection onto
+continuous states in a location $\loc$ is an augmented complex
+zonotope specified as
 %
 \[
-\Omega_\loc=\acztope{\ptemp_\loc}{\cen_\loc}{\sfact_\loc}{\pinv{\qtemp}}{\lb_\loc}{\ub_\loc}.
+\Omega_\loc=\acztope{\ptemp}{\cen_\loc}{\sfact_\loc}{\pinv{\qtemp}}{\lb_\loc}{\ub_\loc}.
 \]
 %
-We apriori fix the primary and secondary templates of the augmented
-complex zonotope and compute a center, scaling factors and lower and
-upper interval bounds such that the augmented complex zonotope
-satisfies a given linear invariance property.  Above we have chosen
-the secondary template as the pseudo-inverse of the sub-parallelotopic
-template used to define the guards and staying conditions.  This is
-because we can then compute an over-approximation of the intersection
-between the augmented complex zonotope and the guards and staying
-conditions, using Theorem~\ref{thm:acz-ptope-intersection}.  The choice
-of the primary template will be explained later.  Firstly, we shall
-derive convex conditions on the rest of variables for verifying a
-linear invariance property.  Furthermore, we consider an
+where $\ptemp\in\mat{n}{m}{\compnums}$.  Furthermore, we require a
+condition the following condition on the templates for computing a
+sound intersection with the guards and staying conditions, based on
+Theorem~\ref{thm:main-intersection}.
+%
+\begin{equation}~\label{eqn:boxcenter}
+\begin{split}
+ & \forall
+ i\in\set{1,....,k},~\forall \loc\in\locations\\
+ & \tcztope{\compid{i}\qtemp\ptemp}{\compid{i}\qtemp\cen_\loc}{\sfact_\loc}\order\tcztope{\qtemp\ptemp}{\qtemp\cen_\loc}{\sfact_\loc}
+ \end{split}
+\end{equation}
+%
+We consider an
 over-approximation of the input
-disturbance set for any transition by an
-augmented complex zonotope as follows.
+disturbance set in any transition function, by an
+augmented complex zonotope, as follows.
 
 %
 \begin{align}
@@ -46,16 +46,19 @@ augmented complex zonotope as follows.
 & \forall \edge\in\edgeset,~\inputset_\edge\subseteq\acztope{\inputtemp_\edge}{\inputcen_\edge}{\inputsfact_\edge}{\inputstemp_\edge}{\inputlb_\edge}{\inputub_\edge}.
 \end{align}
 %
-{\bf Min and Max-approximation functions:} The
-the intersection of an interval zonotope and a
-sub-parallelotope given in Lemma~\ref{thm:acz-ptope-intersection}
+{\bf Min and Max-approximation functions:} The over-approximation of
+an intersection between an augmented complex zonotope and a
+sub-parallelotope, given in Theorem~\ref{thm:main-intersection}
 requires computing componentwise minimum (meet) and maximum (join) of
 two real vectors.  The meet and join operations on real vectors are in
-general not affine functions of the arguments.  However, under a
-certain affine constraint on the variables that shall be explained
-later in Lemma~\ref{lem:min-max-approximation}, the meet and join operations can be
-expressed as affine expressions of the variables.  In the context, we
-introduce the following functions.  A function
+general not affine functions of the arguments.  Since we are
+interested in deriving a convex program, we want to find an affine
+expression for the meet and join operations.  In this regard, we
+observe that under a certain affine constraint on the variables, the
+meet and join operations can be expressed as affine expressions of the
+variables.  We consider two affine functions
+called \emph{min-approximation} and \emph{max-approximation}
+functions, defined as follows.  A function
 $\minapproxsymbol:\reals^k\times\lt(\reals\cup\infty\rt)^k$ is a
 min-approximation function if for all $i\in\set{1,...,k}$
 %
@@ -70,7 +73,7 @@ min-approximation function if for all $i\in\set{1,...,k}$
 \]
 %
 By the above definition, $\minapprox{\ub}{\pub}$ is an affine function of its
-first argument $\ub$, which is a finite valued real vector.
+first argument $\ub$, and is a finite valued real vector.
 %
 \begin{equation}~\label{eqn:minapprox}
 \minapprox{\ub}{\pub}\geq\meet{\ub}{\pub}.
@@ -91,15 +94,15 @@ is a max-approximation function if for all $i\in\set{1,...,k}$
 \]
 %
 By the above definition, $\maxapprox{\lb}{\plb}$ is an affine function
-of its first argument $\lb$, which is a finite valued real vector.
+of its first argument $\lb$, and is a finite valued real vector.
 %
 \begin{equation}~\label{eqn:minapprox}
 \minapprox{\lb}{\plb}\geq\join{\lb}{\plb}.
 \end{equation}
 %
-Then, we have the following lemma about representing the meet and join
-operations using min and max-approximation functions under a certain
-condition.
+The following lemma states an affine condition when the meet and join
+operations can be equivalently computed by min and max-approximation
+functions, respectively.
 %
 \begin{lemma}~\label{lem:min-max-approximation}
 Let us consider vectors $\lb,\ub\in\reals^k$ and
@@ -107,23 +110,59 @@ $\plb,\pub\in\set{\reals,-\infty,\infty}^k$.  If
 $\lb\leq\maxapprox{\lb}{\plb}\leq\minapprox{\ub}{\pub}\leq\ub$, then
 %
 \begin{align*}
-& \join{\lb}{\plb}=\maxapprox{\lb}{\plb}\\
-& \meet{\ub}{\pub}=\minapprox{\ub}{\pub}.
+& \join{\lb}{\plb}=\maxapprox{\lb}{\plb}~\numberthis\label{eqn:max1}\\
+& \meet{\ub}{\pub}=\minapprox{\ub}{\pub}.~\numberthis\label{eqn:max2}
 \end{align*}
 %
 \end{lemma}
 %
 \begin{proof}
+For any $i\in\set{1,...,k}$, we derive results for the following four cases
 
+{\it Case 1: }  Let us consider that $\plb_i>-\infty$. So,
+$\lt(\maxaffine{\lb}{\plb}\rt)_i=\plb_i$.  Then by
+Equation~\ref{eqn:max1}, we get
+%
+\begin{align*}
+& \lt(\join{\lb}{\plb}\rt)_i=\plb_i=\lt(\maxaffine{\lb}{\plb}\rt)_i.
+\end{align*}
+%
+
+{Case 2: }  Let us consider that $\plb_i=-\infty$.  Then
+$\lt(\maxaffine{\lb}{\plb}\rt)_i=\lb_i$.   Then by
+Equation~\ref{eqn:max1}, we get
+%
+%
+\begin{align*}
+& \lt(\join{\lb}{\plb}\rt)_i=\lb_i=\lt(\maxaffine{\lb}{\plb}\rt)_i.
+\end{align*}
+%
+
+{\it Case 3: }  Let us consider that $\pub_i<\infty$. So,
+$\lt(\minaffine{\ub}{\pub}\rt)_i=\pub_i$.  Then by
+Equation~\ref{eqn:max2}, we get
+%
+\begin{align*}
+& \lt(\meet{\ub}{\pub}\rt)_i=\plb_i=\lt(\minaffine{\ub}{\pub}\rt)_i.
+\end{align*}
+%
+
+{Case 4: }  Let us consider that $\pub_i=\infty$.  Then
+$\lt(\minaffine{\ub}{\pub}\rt)_i=\ub_i$.  Then by
+Equation~\ref{eqn:max2}, we get
+%
+\begin{align*}
+& \lt(\meet{\ub}{\pub}\rt)_i=\ub_i=\lt(\minaffine{\ub}{\pub}\rt)_i.
+\end{align*}
+%
 \end{proof}
 %
-{\bf Deriving sufficient conditions for positive invariance.}  For the
-set of continuous reachable states $\contreach{\loc}{\Omega}$ in any
-location to be contained within the continuous states of $\Omega$, we
-introduce the following condition.  We shall show in
-Lemma~\ref{lem:pi-cont} that this
-condition is sufficient for
-$\contreach{\loc}{\Omega}\subseteq\Omega_\loc$.
+{\bf Deriving sufficient conditions for positive invariance.}  We
+introduce the following condition, which along with
+Equation~\ref{eqn:boxcenter} is sufficient for the inclusion of the
+set of continuous reachable states $\contreach{\loc}{\Omega}$ inside
+$\Omega_\loc$.  We shall prove this inclusion in
+Lemma~\ref{lem:pi-cont}.
 %
 \begin{definition}
   For $\loc\in\locations$, we say that
@@ -162,12 +201,15 @@ l^\dpr\leq\maxapprox{l^\dpr}{\lsys{\stay_\loc}}\leq\minapprox{u^\dpr}{\usys{\sta
 \end{definition}
 %
 \begin{lemma}~\label{lem:pi-cont}
-For a location $\loc\in\locations$, if $\posinv{\Omega}{\loc}$, then
+For a location $\loc\in\locations$, if $\posinv{\Omega}{\loc}$, and
+Equation~\ref{eqn:boxcenter} holds, then
 $\contreach{\loc}{\Omega}\subseteq\Omega$.
 \end{lemma}
 %
 \begin{proof}
-Based on Theorem~\ref{thm:acz-ptope-intersection} and Equations~\ref{eqn:continv1},~\ref{eqn:continv2}, we get
+By Theorem~\ref{thm:main-intersection},
+Equations~\ref{eqn:continv1},~\ref{eqn:continv2},~\ref{eqn:boxcenter}
+and Lemma~\ref{lem:min-max-approximation}, we get
 %
 \begin{align*}
 & \Omega_q\bigcap{\ptope{\qtemp}{\lsys{\stay_\loc}}{\usys{\stay_\loc}}}
@@ -202,7 +244,9 @@ get
 & \subseteq \acztope{\ptemp_\loc}{\cen_\loc}{\sfact_\loc}{\qtemp}{l^\dpr}{u^\dpr}~\label{eqn:proof-continv1}.
 \end{align}
 %
-Based on Theorem~\ref{thm:acz-ptope-intersection} and Equation~\ref{eqn:continv4}, we
+Again by Theorem~\ref{thm:main-intersection},
+Equations~\ref{eqn:continv4},~\ref{eqn:boxcenter}
+and Lemma~\ref{lem:min-max-approximation}, we
 get
 %
 \begin{align}
@@ -217,9 +261,6 @@ and~\ref{eqn:proof-continv2}, we get
 $\contreach{\loc}{\Omega}\subseteq \Omega_\loc$.
 \end{proof}
 %
-{\color{red} Write about second order conic constraints}
-%
-
 For the set of continuous states reached from $\Omega$ after a
 discrete transition, $\contreach{\edge}{\Omega}$, to be contained
 within 
@@ -271,8 +312,9 @@ For an edge $\edge\in\edgeset$, if $\posinv{\Omega}{\edge}$, then $\contreach{\e
 \end{lemma}
 %
 \begin{proof}
-Based on Theorem~\ref{thm:acz-ptope-intersection} and
-Equations~\ref{eqn:disinv1},~\ref{eqn:disinv2}, we get
+By Theorem~\ref{thm:main-intersection},
+Equations~\ref{eqn:disinv1},~\ref{eqn:disinv2},~\ref{eqn:boxcenter},
+and Lemma~\ref{lem:min-max-approximation} we get
 %
 \begin{align*}
 & \Omega_{\edge_1}\bigcap\ptope{\qtemp}{\join{\lsys{\edge}}{\lsys{\stay_{\edge_1}}}}{\meet{\usys{\edge}}{\usys{\stay_{\edge_1}}}}
@@ -307,7 +349,8 @@ get
 & \subseteq \acztope{\ptemp_{\edge_2}}{\cen_{\edge_2}}{\sfact_{\edge_2}}{\qtemp}{l^\dpr}{u^\dpr}~\label{eqn:proof-dis1}.
 \end{align}
 %
-By Theorem~\ref{thm:acz-ptope-intersection} and Equation~\ref{eqn:disinv4}, we get
+Again by Theorem~\ref{thm:main-intersection},
+Equations~\ref{eqn:disinv4},~\ref{eqn:boxcenter} and Lemma~\ref{lem:min-max-approximation}, we get
 %
 \begin{align}
 & \acztope{\ptemp_{\edge_2}}{\cen_{\edge_2}}{\sfact_{\edge_2}}{\qtemp}{l^\dpr}{u^\dpr}\bigcap\ptope{\qtemp}{\lsys{\stay_{\edge_2}}}{\usys{\stay_{\edge_2}}}\nonumber\\
@@ -321,23 +364,87 @@ and~\ref{eqn:proof-dis2}, we get $\contreach{\edge}{\Psi}
 \subseteq \Omega_{\edge_2}$.
 \end{proof}
 %
-{\bf Satisfaction of linear constaints:}  The continuous states of
-$\Omega$ satisfy the linear inequalities of a given linear invariance
-property when the following affine constraint is satisfied.
+The following condition is sufficient to check a linear
+invariance property.
 %
-\begin{lemma}
-For all $\loc\in\locations$ and for all $x\in \Omega_{\loc}$, we
-have $Tx\leq d$ iff
+\begin{theorem}~\label{thm:maintheorem}
+We get $\lt(\system,\Psi\rt)\models\invariance{T}{d}$ if all of the
+following is true.
 %
-\begin{equation}
-T\lt(\cen+\pinv{\qtemp}\frac{\lb+\ub}{2}\rt)+\absolute{T\mymatrix{\ptemp
-& \pinv{\qtemp}}}\mymatrix{\sfact\\\frac{\ub-\lb}{2}}\leq d.
-\end{equation}
+\begin{align*}
+& \forall
+ i\in\set{1,....,k},~\forall \loc\in\locations,~\forall\edge\in\edgeset\\
+& \tcztope{\compid{i}\qtemp\ptemp}{\compid{i}\qtemp\cen_\loc}{\sfact_\loc}\order\tcztope{\qtemp\ptemp}{\qtemp\cen_\loc}{\sfact_\loc},\\
+& \posinv{\Omega}{\loc}~\wedge~\posinv{\Omega}{\edge},\\
+& T\lt(\cen_\loc+\pinv{\qtemp}\frac{\lb_\loc+\ub_\loc}{2}\rt)+\absolute{T\mymatrix{\ptemp
+& \pinv{\qtemp}}}\mymatrix{\sfact_\loc\\\frac{\ub_\loc-\lb_\loc}{2}}\leq d~\numberthis\label{eqn:mainsup}.
+\end{align*}
 %
-\end{lemma}
+\end{theorem}
 %
 \begin{proof}
-The result follows from the expression for the support function of an
-augmented complex zonotope given in Lemma~\ref{lem:support-acz}.
+By Lemmas~\ref{lem:pi-cont} and~\ref{lem:pi-dis}, we get that $\Omega$ is
+a positive invariant.  According to the expression for support
+function in Lemma~\ref{lem:support-acz} which matches the last part of
+Equation~\ref{eqn:mainsup}, we get that all continuous states
+$x\in\Omega_\loc$ for all the locations satisfy $Tx\leq d$.  By
+Lemma~\ref{lem:pi-ver}, the linear invariance property is satisfied.
 \end{proof}
 %
+{\bf Algorithm for verification: } For fixed primary template and the
+secondary template chosen as explained previously, the verification
+procedure is given in Algorithm~\ref{alg:ver}.  The algorithm if
+succesful guarantees the verification of a linear invariance property.
+But it can not invalidate a linear invariance property because it is
+based on a sufficient but not necessary condition.  It can be
+implemented by a single step of
+\emph{second order conic programming}.  This follows from the fact
+that min and max-approximation functions are affine and the relation
+``$\order$'' between complex zonotopes is equivalent to a set of
+second order conic constraints on the center, scaling factors and
+lower and upper interval bounds.
+%
+ \begin{algorithm}
+\caption{Verification of linear invariance property}
+\label{alg:ver}
+For all $\loc\in\locations$, solve for $\cen_\loc$,
+$\sfact_\loc$, $\lb_\loc$ and $\ub_\loc$ satisfying Equation~\ref{eqn:mainsup}. 
+ \end{algorithm}
+%
+
+{\bf Selecting the primary template:  }  We note that adding any
+arbitrary vector to a primary template increases the accuracy of the
+verification procedure because the scaling factors are adjusted by the
+optimizer.  However, there the computational cost also increases by
+adding more vectors to a template.  Therefore, we have to select the
+primary template wisely.  In this regard, we provide some suggestions
+for chosing the primary template, which are based on the properties of
+complex zonotopes that we derived earlier.
+%
+\begin{enumerate}
+\item \emph{Eigenvectors:  }  We can add eigenvectors of the linear
+transformation matrices and their products.  This choice is based on
+Lemma~\ref{lem:eig-scaling} which states that a complex zonotope can
+capture the contraction by a linear transformation along the
+eigenvectors of the transformation.
+\item \emph{Orthonormal vectors and their projections:  }  We can add
+the orthonormal vectors in the null space of the secondary template
+and the projection of template vectors in the space orthogonal to the
+null space.  This is based on Theorem~\ref{thm:main-intersection}
+where the upper bound on the error in over-approximation of the intersection
+between an augmented complex zonotope and sub-parallelotope is
+proportional to the orientation between the primary template and the
+sub-parallelotopic template.
+\item \emph{Template of the input set and its transformations:  }  We can add the templates
+used to over-approximate the disturbance input set and its
+transformations by the system matrices.  This is based on
+Proposition~\ref{prop:commin} which states that the template size of
+the resultant complex zonotope from the Minkowski sum of two complex
+zonotopes does not increase when their templates are the same.  Since
+we take Minkowski sum with the disturbance input in our verification
+procedure, we expect to increase accuracy by incorporating the input
+template and its transformations in the primary template.
+\item Adding any vector to the primary template will increase the
+accuracy because the scaling factors can be adjusted by the
+optimizer.
+\end{enumerate}

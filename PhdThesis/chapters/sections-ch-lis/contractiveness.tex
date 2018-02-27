@@ -74,9 +74,14 @@ using Lemma~\ref{lem:composition}, we get
 %
 \end{proof}
 %
-\begin{lem}~\label{lem:convex}~\cite{todo}
-Let us consider $\set{A_0,A_1,...,A_r}\subseteq\mat{n}{n}\reals$ such
-that 
+If we want to bound the contraction of a polynomial with matrix
+co-efficients, where the variable has a bound, then the following
+lemma is useful.  The set of all posible values of
+the polynomial can be embedded inside a convex hull of a finite set of
+matrices, as described below.
+%
+\begin{lem}~\label{lem:convex}~\cite{2013hetel}
+Let us consider $\set{A_0,A_1,...,A_r}\subseteq\mat{n}{n}\reals$ where
 %
 \[
 \forall j\in\{0,...,r\},~ U_j(\rho)=\sum_{i=0}^jA_i\rho^i.
@@ -87,7 +92,7 @@ $0\leq\rho\leq \epsilon$, then $U_r(\rho)\in
 \convexhull{U_0(\epsilon),U_1(\epsilon),...,U_r(\epsilon)}$.
 \end{lem}
 \begin{proof}
-This has been proved in~\cite{todo}.
+This has been proved in~\cite{2013hetel}.
 \end{proof}
 
 Using the above results, we derive the following bound on contraction
