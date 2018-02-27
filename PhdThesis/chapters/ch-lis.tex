@@ -1,14 +1,65 @@
 
-An example in the section on experimental results will illustrate how
-sampled-data control can be modeled using the above impulsive systems.
-%    Since computers work with digital signals and the physical system they
-% control operates in the analog world, sampling is required.
 
-\subsection*{Related work} 
+    Since computers work with digital signals and the physical system
+    they control operates in the analog world, sampling is required.
+    Various parameters related to sampling of the system can be
+    subject to uncertainty like the sampling period, delay, digital
+    output of the controller, output feedback from the system, etc.
+    These uncertainties can lead to instability of the system.
+    Henceforth, we are faced with the challenge of verifying system
+    stability in the presence of these uncertainties.  We address this
+    issue by considering the problem of verifying stability of
+    nearly-periodic impulsive systems, which can be used to model
+    sampled-data systems \cite{naghshtabrizi2007delay} and networked
+    control systems \cite{2008-naghshtabrizi-exponential}.  This
+    problem has been tackled using control approaches, which mainly
+    involve deriving stability conditions in terms of Lyapunov
+    functions and checking these conditions using optimization (Linear
+    Matrix Inequalities (LMI) or Sum of Squares (SOS)). In this work,
+    we use a stability condition based on set contractiveness proposed
+    in
+    \cite{athanasopoulos2014alternative,2014-fiacchini-set,AlKhatib2015}
+    and propose a new method for checking it using computational
+    techniques, inspired by hybrid systems verification
+    techniques. Globally exponential stability (GES) of
+    nearly-periodic linear impulsive systems can be proved by showing
+    the contractiveness of a compact and convex set containing the
+    origin in its interior, also called as a $C$-set
+    \cite{Lazar2013,athanasopoulos2014alternative,2014-fiacchini-set,AlKhatib2015}.
+    The uncertainty in impulse times for which stability can be proved
+    depends on the choice of the contractive $C$-set.  A
+    nearly-periodic linear impulsive system is stable only if all of
+    its reachability operators, which compute the state reached after
+    an impulse, are stable.  This motivates us to use complex
+    zonotopes since we can find good candidate complex zonotope for
+    contractive sets using the eigenvectors of the reachability
+    operators.  For proving stability condition, we consider complex
+    zonotopes whose generator sets are chosen among the eigenvectors
+    of reachability operators of the nearly-periodic linear impulsive
+    system.  We then derive a condition for the contractiveness of a
+    complex zonotope that can be verified by convex optimization.
+    Concerning experimental results, our approach is either
+    competitive or better compared to the existing approaches, in
+    terms of the largeness of uncertainty of sampling periods for
+    which stability could be proved.
+
+    The chapter is organized into five main sections.  We discuss the
+    related work in Section~\ref{lis-rel}.  In
+    Section~\ref{sec:dynamics}, we describe the dynamics of a
+    nearly-periodic linear impulsive system.  In
+    Section~\ref{sec:ges}, we explain global exponential stability,
+    the verification problem and its relation to finding a contractive
+    $C$-set of the system.  In Section~\ref{sec:alg}, we explain our
+    algorithm for stability verification based on complex zonotopes.
+    The experiments on two benchmark examples are discussed in Section~\ref{sec:experiments}
+
+
+
+\section{Related work}~\label{lis-rel}
 A major approach to stability analysis of aperiodic sampling control uses time-delay 
-systems, and stability can be proved using Lyapunov Krakovskii functionals 
+systems, and stability can be proved using Lyapunov Krakovskii functional 
 \cite{Mikheev1988,Teel1998,2010-liu-stability,Mazenc2013}, 
-or time-dependent Lyapunov functionals \cite{2010-fridman-refined}. Using a continuous-time model,  
+or time-dependent Lyapunov functional \cite{2010-fridman-refined}. Using a continuous-time model,  
 discrete-time Lyapunov functions is proposed for stability condition \cite{2012-seuret-novel}, 
 which can be checked using Sum of Squares (SOS) \cite{2013-seuret-stability}. Robust stability with respect to 
 time-varying input delay can also be handled by input/output approach 
@@ -27,20 +78,20 @@ set theory conditions
 but can be efficiently verified. The novelty of our work lies in the use of complex zonotopes to efficiently 
 find contractive sets. Computationally speaking, our approach is close in spirit to abstract interpretation
 and hybrid systems analysis. Indeed the way we find contractive sets using such zonotopes is similar 
-to the way invariant sets are computed using some zonotopic
+to the way invariant sets are computed using some zonotope
 \cite{Girard05reachabilityof,Althoff2011,DBLP:conf/sas/GoubaultPV12} and
 template-polyhedral abstract domains \cite{Sriram2008,jeannet2009apron}.
 
 
 
-\section{Dynamics}
+\section{Dynamics}~\label{sec:dynamics}
 \input{chapters/sections-ch-lis/system.tex}
 
-\section{Globally exponential stability and set contraction}
+\section{Globally exponential stability and set contraction}~\label{sec:ges}
 \input{chapters/sections-ch-lis/stability.tex}
 
-\section{Stability verification using complex zonotope}
+\section{Stability verification using complex zonotope}~\label{sec:alg}
 \input{chapters/sections-ch-lis/verification.tex}
 
-\section{Experiments}
+\section{Experiments}~\label{sec:experiments}
 \input{chapters/sections-ch-lis/experiments.tex}

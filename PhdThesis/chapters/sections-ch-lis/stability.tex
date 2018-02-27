@@ -20,14 +20,19 @@ that the system $H$ is globally exponentially stable.
 The GES of a system is related to the reachable sets of the
 system. Indeed if all bounded sets containing the origin eventually
 contract to arbitrarily small sets around the origin, then every point
-eventually reaches close to the origin and the system is thus
-GES. Instead of verifying the contraction of all bounded sets
-containing the origin, we can verify the contraction of any compact
-and convex set containing the origin, because it can be scaled to
-include any bounded set. We
-call such sets as $C$-sets.
+eventually reaches close to the origin and the system is thus GES.
+Instead of verifying the contraction of all bounded sets containing
+the origin, we can verify the contraction of any compact and convex
+set containing the origin, because it can be scaled to include any
+bounded set. We call such sets as $C$-sets, defined as follows.
+%
+\begin{definition}
+A set $\Psi\subset\reals^n$ is called a $C$-set if it is compact,
+convex and contains the origin in its interior.
+\end{definition}
+%
 
-The contractiveness of a set is defined as follows.
+The contraction of a $C$-set is defined as follows.
 %
 \begin{definition}[\cite{2014-fiacchini-set}]
 Given $\lambda\in[0,1]$, a set $C$-set $\Psi\subset\reals^n$ is
@@ -37,7 +42,7 @@ $\lambda$-contractive for the system $\system$ iff
 %
 \begin{remark} It has been shown previously
 in~(\cite{2014-fiacchini-set,athanasopoulos2014alternative,AlKhatib2015})
-that globally exponentially stablility of a nearly-periodic linear
+that globally exponentially stability of a nearly-periodic linear
 impulsive system is equivalent to the existence of a
 $\lambda$-contractive $C$-set for a $\lambda\in[0,1)$.  So, we can
   find a $\lambda$-contractive $C$-set for $\lambda<1$ to prove  global
@@ -53,9 +58,9 @@ $\lambda$-contractive $C$-set for a $\lambda\in[0,1)$.  So, we can
   algorithm~\cite{2014-fiacchini-set} can be costly, especially in
   higher dimensions.  Alternatively, we propose a stability
   verification algorithm using complex zonotope and convex
-  optimization, where the size of the template is fixed apriori.
+  optimization, where the size of the template is fixed a priori.
   Although the existence of a contractive complex zonotope is only a
-  sufficient condition for global exponential stability, we demostrate
+  sufficient condition for global exponential stability, we demonstrate
   the efficiency of our procedure by experiments on some benchmark
   examples.  Our algorithm, described in the next section, uses some
   properties of contraction of sets, which we shall discuss now.

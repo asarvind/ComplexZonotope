@@ -2,23 +2,24 @@ We verify global exponential stability by finding a contractive
 complex zonotope that contains the origin in its interior.  A
 motivation for considering complex zonotope for stability verification
 is that they can capture the contraction along the eigenvectors, which
-was earlier explained in Proposition~\ref{prop:eig-scaling}.
-Therefore, we find a complex zonotope by samling the eigenvectors of
-some of the reachability operators and latter verifying that the
-complex zonotope contracts.  Our algorithm for stability verification
-has two stages.  In the first stage, we synthesize a complex zonotope
-that contracts with respect to a few sampled operators.  In the next
-stage, we verify that the synthesized complex zonotope contracts with
-respect to all the sampled operators.  We fix the template apriori by
-a set of eigenvectors of selected reachability operators, because of
-which we have control over the representation size of the contractive
-set.
+was earlier explained in Lemma~\ref{lem:eig-scaling}.  Accordingly, we
+find a complex zonotope by sampling the eigenvectors of some of the
+reachability operators, synthesizing suitable scaling factors and
+latter verifying that the complex zonotope contracts.  Our algorithm
+for stability verification has two stages.  In the first stage, we
+synthesize a complex zonotope that contracts with respect to a few
+sampled operators.  In the next stage, we verify that the synthesized
+complex zonotope contracts with respect to all the sampled operators.
+We fix the template a priori by a set of eigenvectors of selected
+reachability operators, because of which we have control over the
+representation size of the contractive set.
 
 {\bf Synthesizing a candidate template complex zonotope.}  
-Let us sample uniformy $k$ time points in the interval $\Delta$ as
+Let us sample uniform $k$ time points in the interval $\Delta$ as
 %
 \begin{align*}
-  & \omega_k^i=\lsb+i\frac{(\usb-\lsb)}{k}.
+  & \omega^k_i=\lsb+i\frac{(\usb-\lsb)}{k}:~i\in\set{0,...,k-1}\\
+  & \Lambda_k=\set{\omega^k_i:i\in\set{1,\ldots,k}}.
 \end{align*}
 %
 Let us denote $\Theta_i^k$ as a matrix with $n$ columns consisting of
@@ -38,27 +39,27 @@ Theorem~\ref{thm:suff-inclusion}.
 %
 \begin{thm}
 For a vector of scaling factors $\sfact\in\mb{R}^{m}_{\geq 0}$, the
-template complex zonotope $\tcz{\eigenvectors_k}{0}{s}$ would
-represent a $C$-set containing the origin in its interior, such that
-for any $t\in\Lambda_k$ and ${\lambda\in [0,1)}$, $H_t\tcztope{\eigenvectors_k}{0}{\sfact}\subseteq
-  \lambda\tcztope{\eigenvectors_k}{0}{\sfact}$, if all of following is true.
+template complex zonotope $\tcz{\eigenvectors_k}{0}{s}$ is
+$\lambda$-contractive with respect to all $H_t:~ t\in\Lambda_k$ and
+represent a $C$-set containing the origin in its interior,
+if all of following is true.
 %
 \begin{align*}
   & \tcztope{\identity{n}{n}}{0}{\repmat{1}{n}{1}}\order\tcztope{\eigenvectors_k}{0}{\sfact}~\numberthis\label{eqn:cset}\\
-  & \tcztope{H_t\eigenvectors_k}{0}{\sfact}\order\tcztope{\eigenvectors}{0}{\lambda\sfact}.~\numberthis\label{eqn:contractive}
+  &\forall t\in\Lambda_k,~ \tcztope{H_t\eigenvectors_k}{0}{\sfact}\order\tcztope{\eigenvectors}{0}{\lambda\sfact}.~\numberthis\label{eqn:contractive}
 \end{align*}
 \end{thm}
 %
 \begin{proof}
-The real projection of
-$\tcztope{\identity{n}{n}}{0}{\repmat{1}{n}{1}}$ is the hypercube
-containing $0$.  So, by Theorem~\ref{thm:suff-inclusion} and
+A complex zonotope is a compact and convex set.  Furthermore, the real
+projection of $\tcztope{\identity{n}{n}}{0}{\repmat{1}{n}{1}}$ is the
+hypercube containing $0$.  So, by Theorem~\ref{thm:suff-inclusion} and
 Equation~\ref{eqn:cset}, $\tcztope{\eigenvectors_k}{0}{\sfact}$
-contains the origin in its interior.  By Lemma~\ref{lem:lin-transform},
-Theorem~\ref{thm:suff-inclusion} and Equations~\ref{eqn:normalization}
-and~\ref{eqn:contractive},
-we get $H_t\tcztope{\eigenvectors_k}{0}{\sfact}\subseteq
-  \lambda\tcztope{\eigenvectors_k}{0}{\sfact}$.
+contains the origin in its interior. Therefore,
+$\tcztope{\eigenvectors_k}{0}{\sfact}$ is a $C$-set.  By
+Lemma~\ref{lem:lin-transform}, Theorem~\ref{thm:suff-inclusion} and
+Equations~\ref{eqn:normalization} and~\ref{eqn:contractive}, we get
+$H_t\tcztope{\eigenvectors_k}{0}{\sfact}\subseteq \lambda\tcztope{\eigenvectors_k}{0}{\sfact}$.
 \end{proof}
 %
 
@@ -174,7 +175,7 @@ $\rho\in[t,t+\epsilon]$, we derive the following.
 \State Initialize $k=3$.
 \State Choose an $M\in\integers_{>3}$ as the bound of $k$ and a $tol>0$ as
 the discretization parameter.
-\State Find a vector of scaling factors $\sfact$ solving Equtations~\ref{eqn:cset} and~\ref{eqn:contractive}.
+\State Find a vector of scaling factors $\sfact$ solving Equations~\ref{eqn:cset} and~\ref{eqn:contractive}.
 \State Initialize $t=\lsb$, $h=tol$, $r:=$ order of Taylor
 expansion (typically $\leq 2$).
 \While{$k \leq M$ and $t<\usb$ and $h\geq \; tol$}
@@ -208,7 +209,7 @@ expansion (typically $\leq 2$).
  each gird point using Theorem~\ref{thm:main-contraction}.  We choose
  an order of Taylor expansion, typically not greater than two.
  Starting with $t=\lsb$ and $h=tol$, for any $t$ and $h$, we check
- that $\cont{k}{r}{\sfact,t,h}<1$.  If sucessfull, we increment the
+ that $\cont{k}{r}{\sfact,t,h}<1$.  If successfully, we increment the
  value of $t$ to $t+h$ and $h$ to $h+tol$.  If not successful, we
  reduce the value of $h$ to $h-tol$.  If we have verified contraction
  until a point $t>\usb$, then we have successfully verified global
@@ -216,7 +217,7 @@ expansion (typically $\leq 2$).
  than zero at some point, we start another loop by increasing $k$ to
  $k+1$ and repeat the procedure.  We hope to verify contraction within
  a reasonable value of $k$.  Otherwise, we terminate without any
- conclusion.  The steps fo the procedure are systematically described
+ conclusion.  The steps of the procedure are systematically described
  in Algorithm~\ref{alg:1step}.  We shall discuss the experimental results
  based on this algorithm in the next section.
 %
