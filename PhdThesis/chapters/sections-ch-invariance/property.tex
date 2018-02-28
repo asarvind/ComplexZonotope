@@ -1,12 +1,12 @@
 A linear invariance property is a set of linear inequalities that are
 satisfied by the state of the system at all time instants for every
-trajectory starting in a given initial set.  We define a linear
-invariance property mathematically as follows.  
+trajectory starting in a given initial set.  Mathematically, it is
+defined as follows.
 %
 \begin{definition}[Linear Invariance]
-Let us consider a subset of states
-$\Psi\subseteq\reals^n\times\locations$, a matrix
-$T\in\mat{r}{n}{\reals}$ and a real vector $d\in\reals^r$.  We
+Let us consider a set of states
+$\Psi\subseteq\reals^n\times\locations$, a real matrix 
+${T\in\mat{r}{n}{\reals}}$ and a real vector $d\in\reals^r$.  We
 say that \[\lt(\system,\Psi\rt)\models\invariance{T}{d}~~\text{(Linear invariance property)}~~\text{iff}\] 
 %
 \begin{align*}\
@@ -18,10 +18,9 @@ say that \[\lt(\system,\Psi\rt)\models\invariance{T}{d}~~\text{(Linear invarianc
 \end{definition}
 %
 To prove that a set of initial states satisfies a linear invariance
-property is equivalent to showing that there exists a positive
-invariant containing which contains the initial states and satisfies
-the linear invariance property.  This described in the following
-lemma.
+property, we can equivalently show the existence of a positive
+invariant containing the initial states and satisfying the linear
+constraints given in the property specification.  This is described below.
 %
 \begin{lemma}~\label{lem:pi-ver}
 We have
@@ -39,10 +38,9 @@ $\Omega$ is a positive invariant, we have
 \[
 \bigcup_{t\in\integers_{\geq 0}}\reachset{t}{\Omega}\subseteq\Omega
 \]
-Therefore,
 %
 \begin{align*}
-  & \forall t\in\integers_{\geq 0}~\forall q\in\locations~\forall x\in\lt(\reachset{t}{\Omega}\rt)_\loc:~Tx\leq d\\
+  & \therefore\forall t\in\integers_{\geq 0}~\forall q\in\locations~\forall x\in\lt(\reachset{t}{\Omega}\rt)_\loc:~Tx\leq d\\
   & \%\%~~\text{since}~\Psi\subseteq\Omega\\
   & \forall t\in\integers_{\geq 0}~\forall q\in\locations~\forall x\in\lt(\reachset{t}{\Psi}\rt)_{\loc}:~Tx\leq d\\
   & \lt(\Psi,\system\rt)\models\invariance{T}{d}.
@@ -54,7 +52,7 @@ Therefore,
 \Omega=\bigcup_{t=0}^\infty\reachset{t}{\Psi}.
 \]
 % 
-Then by Lemma~\ref{lem:exact-pi}, $\Omega$ is a positve invariant.  By
+Then by Lemma~\ref{lem:exact-pi}, $\Omega$ is a positive invariant.  By
 the definition of linear invariant property, we get 
 %
 \begin{align*}
@@ -67,6 +65,6 @@ x\in\lt(\bigcup_{t=0}^\infty\reachset{t}{\Psi}\rt)_\loc:~~Tx\leq d\\
 x\in\Omega_\loc:~~Tx\leq d.
 \end{align*}
 %
-The lemma thus follows from the results in both the above cases.
+The lemma follows from the results in both the above cases.
 \end{proof}
 %

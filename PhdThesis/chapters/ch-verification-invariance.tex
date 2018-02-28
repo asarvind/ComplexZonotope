@@ -1,43 +1,49 @@
+In many verification problems, the safe set can be given linear
+constraints.  In this case, to verify safety, we have to verify the
+bounds on the reachable set of the system along the directions of the
+normals to the bounding hyperplanes.  We shall call the boundedness of
+the reachable set along a given set of directions as a {\it linear
+invariance property}.  In other words, a linear invariance property is
+a linear constraint that is true for all reachable states of the
+system at all time instants.  We consider the problem of verifying a
+linear invariance property of a discrete time affine hybrid system.
+We show that a linear invariance property is equivalent to the
+existence of a positive invariant containing the initial set and
+satisfying the linear constraints of the invariance property. However,
+the smallest positive invariant satisfying the property can be
+computationally intractable to represent.  Alternatively, we can use a
+set representation by which we can compute sufficiently accurate
+positive invariants that verify the property.
 
-An invariant property of a system is a property that is true about the
-state of the sytem at all time instants.  In many cases, a
-safety condition can be expressed as an invariance property.  For
-example, if a set of states of a system are considered safe, then the
-safety condition is the invariance property that the state of the
-system at all time instants should belong to the safe set.  We
-consider the problem of verifying {\it linear invariance} property of
-discrete time affine hybrid systems.  A linear invariance property is
-a linear constraint (inequality) that will be true for the
-state of the system at every time instant.   To prove a linear
-invariance property, it suffices to compute a positive invariant
-containing the initial state and contained within the intersection of
-sub-level set of linear inequalities.  Our approach is to compute an
-augmented complex zonotope, which is a positive invariant and
-satisfies the given linear constraints.  We derive a second order
-conic program to compute the required augmented complex zonotope
-positive invariant.
 
-This chapter is organized as follows.  In the following section, we
-discuss some of the related work on the problem of computing positive
-invariants for affine hybrid systems.  We discuss the advantage of the
-complex zonotope set representation in comparison to the other
-approaches, which was discussed in more detail in the introductory
-chapter.  In Section~\ref{sec:hybrid-system}, we define a discrete time affine
-hybrid system.  In Section~\ref{sec:linear-invariance}, we define a linear invariance
-property, positive invariant and show how we can verify linear
-invariance by finding a positive invariant.  In Section~\ref{sec:verification-invariance}, we
-discuss our procedure for verification of linear invariance based on
-computing an augmented complex zonotope positive invariant.  We derive
-a set of convex constraints, which are collectively equivalently to
-second order conic constraint, compute the desired augmented complex
-zonotope.  We also explain how to choose the template of the augmented
-complex template, which is fixed apriori, while other parameters are
-found by convex optimization.  In Sections~\ref{todo},~\ref{todo},
-and~\ref{todo}, we discuss our experiments on three benchmark examples
-that demonstrate the efficiency of our approach.
+We shall use augmented complex zonotopes to compute the positive
+invariants.  As discussed earlier, complex zonotopes have the
+advantage that they are closed under linear transformation and
+Minkowski sum, and efficiently capture positive invariants for linear
+systems using the complex eigenstructure.  Their representation is
+generalized to augmented complex zonotopes to compute an
+over-approximation of the intersection with linear guards such that
+the support function can still be computed efficiently.  The efficient
+computation of support function is crucial for verifying the
+satisfaction of linear constraints given in a linear invariance
+property.  We shall derive a convex program  for finding augmented
+complex zonotope positive invariants to verify a linear invariance
+property.  The derivation of the convex program uses the computations
+on augmented complex zonotopes that we have developed earlier.
 
-\section{Related Work}~\label{sec:invariance-related-work}
-\input{chapters/sections-ch-invariance/related-work.tex}  
+ This chapter is
+organized into four main sections.  In
+Section~\ref{sec:hybrid-system}, we describe a discrete time affine
+hybrid system and positive invariants of the system.  In
+Section~\ref{sec:linear-invariance}, we define a linear invariance
+property and show its equivalence to the existence of a certain
+positive invariant.  In Section~\ref{sec:verification-invariance}, we
+derive a convex program for computing a positive invariant that
+verifies a linear invariance property.  We also explain heuristics for
+choosing the template of the augmented complex to leverage the
+efficiency of the verification procedure.  In Section~\ref{sec:acz-exp},
+we discuss experiments on three benchmark examples that demonstrate
+the efficiency of our approach.
 
 \section{Discrete time affine hybrid system}~\label{sec:hybrid-system}
 \input{chapters/sections-ch-invariance/system.tex}
@@ -48,7 +54,7 @@ that demonstrate the efficiency of our approach.
 \section{Verification using complex zonotope}~\label{sec:verification-invariance}
 \input{chapters/sections-ch-invariance/verification.tex}
 
-\section{Experiments}
+\section{Experiments}~\label{sec:acz-exp}
 \input{chapters/sections-ch-invariance/experiments.tex}
 
 

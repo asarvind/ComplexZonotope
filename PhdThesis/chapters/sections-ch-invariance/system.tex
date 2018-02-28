@@ -1,10 +1,10 @@
 In a discrete time affine hybrid system, the state of the system is
 specified by a discrete valued variable, called location, and a
 continuous variable whose valuation is in the real Euclidean space of
-a finite dimenstion.  The state of the system in each location has to
+a finite dimension.  The state of the system in each location has to
 stay within a polyhedral set, called the staying condition.  The state
 of the system can change by two kinds of transitions, {\it continuous
-  transition} and {\it discrete transiton}.  In a continuous
+  transition} and {\it discrete transit on}.  In a continuous
 transition, the discrete state of the system remains constant while
 the continuous state changes by an affine transformation.  The affine
 transformation has possible additive disturbance input, which is
@@ -51,27 +51,26 @@ edges is $E$.  An edge $\edge\in\edgeset$ is specified by a tuple
 \]
 %
 The before and after locations of a discrete transition along an edge
-$\edge$ are $\edge_1,\edge_2\in\locations$.  The guard on the transition along the
-edge $\edge$ is the sub-parallelotope
-$\ptope{\qtemp}{\lsys{\edge}}{\usys{\edge}}$, whose pair of
-lower and upper interval bounds is
-$\lt({\lsys{\edge}},{\usys{\edge}}\rt)$.
-The parameters of the affine transformation for the discrete
-transition along the edge $\edge$ consists of a linear map specified
-by the matrix $\linmap_\edge\in\mat{n}{n}{\reals}$ and a bounded
-additive disturbance input set $\inputset_\edge\subset\reals^n$.  The
-set of initial states of the system is $\Psi\subseteq\locations\times\reals^n$.
+$\edge$ are ${\edge_1,\edge_2\in\locations}$.  The sub-parallelotope
+$\ptope{\qtemp}{\lsys{\edge}}{\usys{\edge}}$ is the guard on the
+transition along the edge $\edge$, where
+$\lt({\lsys{\edge}},{\usys{\edge}}\rt)$ is the pair of lower and
+upper interval bounds of the sub-parallelotope.  The
+parameters of the affine transformation for the discrete transition
+along the edge $\edge$ are specified by a matrix
+${\linmap_\edge\in\mat{n}{n}{\reals}}$  and a bounded additive
+disturbance input set $\inputset_\edge\subset\reals^n$.  The set of
+initial states is
+$\Psi\subseteq\locations\times\reals^n$.
 
 {\bf Dynamics.}  A state of the hybrid system, called a \emph{hybrid
-  state}, is a pair $(x,\loc)$,
-where $x\in\reals^n$, called the {\it continuous state}, and
-$\loc\in\locations$, called the {\it discrete state}.  A {\it
-  trajectory} specifies the evolution of the state of the system as a
-function of discrete time instants.  
-
-A trajectory is a function $\maphtrj:\integers_{\geq
-  0}\ra\reals^n\times\locations$, such that $\forall
-t\in\integers_{\geq 0}$, one of the following conditions is true.
+  state}, is a pair $(x,\loc)$, where $x\in\reals^n$, called the {\it
+  continuous state}, and $\loc\in\locations$, called the {\it discrete
+  state}.  A {\it trajectory} is the evolution of the state of the
+  system as a function of discrete time instants.  A trajectory is a
+  function $\maphtrj:\integers_{\geq 0}\ra\reals^n\times\locations$,
+  such that $\forall t\in\integers_{\geq 0}$, one of the following
+  conditions is true.
 %
 \begin{enumerate}
 \item Continuous transition:
@@ -117,7 +116,7 @@ which is mathematically defined as follows.
 %
 \end{definition}
 %
-So, we define the set of reachable states at a time $t$ starting from an intial
+So, we define the set of reachable states at a time $t$ starting from an initial
 set of states $\Psi$, denoted $\reachset{t}{\Psi}$, as
 follows.
 %
@@ -189,7 +188,7 @@ $\Psi\subseteq\Omega$.  Then
 We prove the result by induction.  We have
 $\reachset{0}{t}=\Psi\subseteq\Omega$ as given, which means that the
 result holds for $t=0$.  Assume that for a $t\geq 0$,
-$\reachset{t}{\Psi}\subseteq\Omega$.  Then 
+$\reachset{t}{\Psi}\subseteq\Omega$.  Then we derive the following.
 %
 \begin{align*}
 &
@@ -198,10 +197,10 @@ $\reachset{t}{\Psi}\subseteq\Omega$.  Then
 & \subseteq \Omega.
 \end{align*}
 %
-The lemma can therefore be proved follows by the principle of induction.
+The lemma then follows by the principle of induction.
 \end{proof}
 %
-The union of all reachable state of the system at all discrete time
+The set of all reachable states of the system at all discrete time
 instants is itself a positive invariant.  This is described in the
 following lemma.
 %
@@ -217,15 +216,14 @@ Then $\Omega$ is a positive invariant.
 \end{lemma}
 %
 \begin{proof}
-We have 
+We derive the following.
 %
 \begin{align*}
 & \nextset{\Omega}=\nextset{\bigcup_{t=0}^\infty\reachset{t}{\Psi}} = \bigcup_{t=0}^\infty\nextset{\reachset{t}{\Psi}}\\
 & = \bigcup_{t=0}^\infty\reachset{t+1}{\Psi}= \bigcup_{t=1}^\infty\reachset{t}{\Psi}\\
-& \subseteq  \bigcup_{t=0}^\infty\reachset{t}{\Psi}=\Omega.
+& \subseteq  \bigcup_{t=0}^\infty\reachset{t}{\Psi}=\Omega.\hspace{3em}\qedhere
 \end{align*}
 %
-Therefore, $\Omega$ is a positive invariant.
 \end{proof}
 %
 

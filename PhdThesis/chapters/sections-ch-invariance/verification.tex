@@ -4,7 +4,7 @@ satisfies the property.  We shall derive a convex program to compute a
 positively invariant satisfying a linear invariance property and
 containing an initial set, whose continuous projection in any location
 is represented as an augmented complex zonotope.  Our procedure
-apriori fixes the templates of the augmented complex zonotope and
+a priori fixes the templates of the augmented complex zonotope and
 synthesizes the set of scaling factors, and lower and upper interval
 bounds for verifying the property.  We shall discuss in a latter
 section how to select a suitable primary template.  But the secondary
@@ -13,7 +13,7 @@ template of the system, so that we can over-approximate the
 intersection with the guards and staying conditions based on
 Theorem~\ref{thm:main-intersection}.
 
-Therefore, we consider a set of states $\Omega$ whose projection onto
+Let us consider a set of states $\Omega$ whose projection onto
 continuous states in a location $\loc$ is an augmented complex
 zonotope specified as
 %
@@ -21,9 +21,9 @@ zonotope specified as
 \Omega_\loc=\acztope{\ptemp}{\cen_\loc}{\sfact_\loc}{\pinv{\qtemp}}{\lb_\loc}{\ub_\loc}.
 \]
 %
-where $\ptemp\in\mat{n}{m}{\compnums}$.  Furthermore, we require a
-condition the following condition on the templates for computing a
-sound intersection with the guards and staying conditions, based on
+where $\ptemp\in\mat{n}{m}{\compnums}$.  Furthermore, we have the
+following condition on the templates so as to compute a sound
+intersection with the guards and staying conditions, based on
 Theorem~\ref{thm:main-intersection}.
 %
 \begin{equation}~\label{eqn:boxcenter}
@@ -49,7 +49,7 @@ augmented complex zonotope, as follows.
 {\bf Min and Max-approximation functions:} The over-approximation of
 an intersection between an augmented complex zonotope and a
 sub-parallelotope, given in Theorem~\ref{thm:main-intersection}
-requires computing componentwise minimum (meet) and maximum (join) of
+requires computing component wise minimum (meet) and maximum (join) of
 two real vectors.  The meet and join operations on real vectors are in
 general not affine functions of the arguments.  Since we are
 interested in deriving a convex program, we want to find an affine
@@ -394,7 +394,7 @@ Lemma~\ref{lem:pi-ver}, the linear invariance property is satisfied.
 {\bf Algorithm for verification: } For fixed primary template and the
 secondary template chosen as explained previously, the verification
 procedure is given in Algorithm~\ref{alg:ver}.  The algorithm if
-succesful guarantees the verification of a linear invariance property.
+successful guarantees the verification of a linear invariance property.
 But it can not invalidate a linear invariance property because it is
 based on a sufficient but not necessary condition.  It can be
 implemented by a single step of
@@ -418,7 +418,7 @@ verification procedure because the scaling factors are adjusted by the
 optimizer.  However, there the computational cost also increases by
 adding more vectors to a template.  Therefore, we have to select the
 primary template wisely.  In this regard, we provide some suggestions
-for chosing the primary template, which are based on the properties of
+for choosing the primary template, which are based on the properties of
 complex zonotopes that we derived earlier.
 %
 \begin{enumerate}

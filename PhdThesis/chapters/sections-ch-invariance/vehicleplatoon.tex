@@ -5,7 +5,7 @@ vehicles $M_1$, $M_2$ and $M_3$ along with a leader board ahead $M_4$.
 The movement of the vehicles is dependent on the communication between
 them their relative distances, velocities and accelerations.  The
 distance between a vehicle $M_i$ and its next
-vechicle $M_{i+1}$, relative to a reference distances $d_i^{ref}$ is
+vehicle $M_{i+1}$, relative to a reference distances $d_i^{ref}$ is
 denoted $e_i$.  The acceleration of the leader vehicle is $a_L$ which
 ranges between $[-9,1]m/s$.  The state of the system is denoted
 by a vector
@@ -20,16 +20,22 @@ communication.  These dynamics are described by differential equations,
 \end{align*}
 %
 where the pairs of matrices $(A_c,B_c)$ and $(A_n,B_n)$ are different.
-The matrices are given in the appendix.  In any given mode, the
+In any given mode, the
 dynamics of the system is exponentially stable.  So, the lyapunov
 exponent (measure of stability) is higher in case of slow switching
 than fast switching.  Therefore, in our evaluation of this example, we
 also consider a model having integer switching times, which is less
 stable.
-
+%
+\begin{figure}
+\center
+\includegraphics[scale=0.5]{fig/platton-dynamics.png}
+\caption{Time discretized model of networked platoon}~\label{fig:model-platoon}
+\end{figure}
+%
 %
 \begin{table}
-\caption{Matices for discrete time slow switching model}~\label{matrices:slow}
+\caption{Matrices for discrete time slow switching model}~\label{matrices:slow}
 {\scriptsize
 $A_1=\mymatrix{0.2766  &  0.2855&   -0.0235&    0.2550&    0.2352&   -0.0429&    0.1245&    0.0956&   -0.0234\\
    -0.0917&   -0.0848&    0.0392&   -0.0517&    0.0134&    0.0023&    0.0003&    0.0385 &  -0.0166\\
@@ -133,72 +139,6 @@ $B_2=B_4=\mymatrix{0.3918\\
 }
 \end{table}
 %
-%
-\begin{figure}
-\center
-\includegraphics[scale=0.5]{fig/platton-dynamics.png}
-\caption{Time discretized model of networked platoon}~\label{fig:model-platoon}
-\end{figure}
-%
-
-\begin{table}
-\begin{tabular}{|l|c|c|c|c|c|}
-\hline
-\multicolumn{2}{|c|}{\multirow{4}{*}{Method}} & \multicolumn{4}{|c|}{\multirow{2}{*}{Slow switching}}\\
-\multicolumn{2}{|c|}{} & \multicolumn{4}{|c|}{}\\
-\cline{3-6}
-\multicolumn{2}{|c|}{} & \multirow{2}{*}{$-e_1\leq$} & \multirow{2}{*}{$-e_2\leq$} & \multirow{2}{*}{$-e_3\leq$} & Comp.\\
-\multicolumn{2}{|c|}{} & & & & time (s)\\
-\hline
-\multirow{4}{*}{SpaceEx} & octagon & \multirow{2}{*}{28} &
-\multirow{2}{*}{27} & \multirow{2}{*}{10}& \multirow{2}{*}{$>180s$}\\
-& template & & & &\\
-\cline{2-6}
-& 100 support & \multirow{2}{*}{28} & \multirow{2}{*}{25} &
-\multirow{2}{*}{13} & \multirow{2}{*}{1.3}\\
-& vectors & & & &\\
-\hline
-\multicolumn{2}{|c|}{\multirow{2}{*}{Real zonotope~\cite{makhlouf2014networked}}} &
-\multirow{2}{*}{25} & \multirow{2}{*}{25} & \multirow{2}{*}{10} & \multirow{2}{*}{n/a}\\
-\multicolumn{2}{|c|}{} & & & &\\
-\hline
-\multicolumn{2}{|c|}{\multirow{2}{*}{Augmented complex zonotope}} &
-\multirow{2}{*}{28} & \multirow{2}{*}{26} &
-\multirow{2}{*}{12} & \multirow{2}{*}{12}\\
-\multicolumn{2}{|c|}{} & & & & \\
-\hline
-\end{tabular}
-\caption{Expermimental results: Slow switching networked platoon}~\label{tab:largedwell-platoon}
-%
-\end{table}
-
-\begin{table}
-\begin{tabular}{|l|c|c|c|c|c|}
-\hline
-\multicolumn{2}{|c|}{\multirow{4}{*}{Method}} & \multicolumn{4}{|c|}{\multirow{2}{*}{Fast switching}}\\
-\multicolumn{2}{|c|}{} & \multicolumn{4}{|c|}{}\\
-\cline{3-6}
-\multicolumn{2}{|c|}{} & \multirow{2}{*}{$-e_1\leq$} & \multirow{2}{*}{$-e_2\leq$} & \multirow{2}{*}{$-e_3\leq$} & Comp.\\
-\multicolumn{2}{|c|}{} & & & & time (s)\\
-\hline
-\multirow{4}{*}{SpaceEx} & octagon & \multirow{2}{*}{$>1000$} &
-\multirow{2}{*}{$>1000$} & \multirow{2}{*}{$>1000$} &
-\multirow{2}{*}{$>180s$}\\
-& template & & & &\\
-\cline{2-6}
-& 100 support & \multirow{2}{*}{$>1000$} & \multirow{2}{*}{$>1000$} &
-\multirow{2}{*}{$>1000$} & \multirow{2}{*}{$>180s$}\\
-& vectors & & & & \\
-\hline
-\multicolumn{2}{|c|}{\multirow{2}{*}{Augmented complex zonotope}} &
-\multirow{2}{*}{46} & \multirow{2}{*}{54} &
-\multirow{2}{*}{57} & \multirow{2}{*}{12.6}\\
-\multicolumn{2}{|c|}{} & & & & \\
-\hline
-\end{tabular}
-%
-\caption{Expermimental results: Fast switching networked Platoon}~\label{tab:largedwell-platoon1}
-\end{table}
 
 {\bf Time discretized models: } We could discretized the dynamics of
 both models with large minimum switching time and integer switching
@@ -209,14 +149,14 @@ the case of slow switching and fast switching and are given in
 Tables~\ref{matrices:slow} and~\ref{matrices:fast}, respectively.
 
 
-{\bf Linear invariance property: } The verification challege proposed
-in~\cite{makhlouf2014networked} is to find the minimum possible reference distances
-$d_i^{ref}~\forall i\in\set{1,2,3}$, such that the vehicles do not
-collide.  Any set of upper bounds on $-e_1$, $-e_2$, and $-e_3$ are
-safe lower limits on the respective reference distances.  We express
-the verification challege in terms of linear invariance properties, we
-follows.  For each ${T_i:~1\leq
-i\leq 3}$, where
+{\bf Linear invariance property: } The verification challenge proposed
+in~\cite{makhlouf2014networked} is to find the minimum possible
+reference distances $d_i^{ref}~\forall i\in\set{1,2,3}$, such that the
+vehicles do not collide.  Any set of upper bounds on $-e_1$, $-e_2$,
+and $-e_3$ are safe lower limits on the respective reference
+distances.  We express the verification problem in terms of three
+linear invariance properties, as follows.  For each ${T_i:~1\leq i\leq
+3}$, where
 %
 $ T_1=\mymatrix{-1 & \repmat{0}{1}{8}},~
 T_2=\mymatrix{\repmat{0}{1}{3} & -1 &\repmat{0}{5}{3}}$ and
@@ -247,3 +187,62 @@ invariant for even the less stable fast switching model.  These
 results are reported in the Tables~\ref{tab:largedwell-platoon}
 and~\ref{tab:largedwell-platoon1}.
 %
+
+\begin{table}
+\begin{tabular}{|l|c|c|c|c|c|}
+\hline
+\multicolumn{2}{|c|}{\multirow{4}{*}{Method}} & \multicolumn{4}{|c|}{\multirow{2}{*}{Slow switching}}\\
+\multicolumn{2}{|c|}{} & \multicolumn{4}{|c|}{}\\
+\cline{3-6}
+\multicolumn{2}{|c|}{} & \multirow{2}{*}{$-e_1\leq$} & \multirow{2}{*}{$-e_2\leq$} & \multirow{2}{*}{$-e_3\leq$} & Comp.\\
+\multicolumn{2}{|c|}{} & & & & time (s)\\
+\hline
+\multirow{4}{*}{SpaceEx} & octagon & \multirow{2}{*}{28} &
+\multirow{2}{*}{27} & \multirow{2}{*}{10}& \multirow{2}{*}{$>180s$}\\
+& template & & & &\\
+\cline{2-6}
+& 100 support & \multirow{2}{*}{28} & \multirow{2}{*}{25} &
+\multirow{2}{*}{13} & \multirow{2}{*}{1.3}\\
+& vectors & & & &\\
+\hline
+\multicolumn{2}{|c|}{\multirow{2}{*}{Real zonotope~\cite{makhlouf2014networked}}} &
+\multirow{2}{*}{25} & \multirow{2}{*}{25} & \multirow{2}{*}{10} & \multirow{2}{*}{n/a}\\
+\multicolumn{2}{|c|}{} & & & &\\
+\hline
+\multicolumn{2}{|c|}{\multirow{2}{*}{Augmented complex zonotope}} &
+\multirow{2}{*}{28} & \multirow{2}{*}{26} &
+\multirow{2}{*}{12} & \multirow{2}{*}{12}\\
+\multicolumn{2}{|c|}{} & & & & \\
+\hline
+\end{tabular}
+\caption{Experimental results: Slow switching networked platoon}~\label{tab:largedwell-platoon}
+%% %
+%% \end{table}
+%% %
+%% \begin{table}
+\begin{tabular}{|l|c|c|c|c|c|}
+\hline
+\multicolumn{2}{|c|}{\multirow{4}{*}{Method}} & \multicolumn{4}{|c|}{\multirow{2}{*}{Fast switching}}\\
+\multicolumn{2}{|c|}{} & \multicolumn{4}{|c|}{}\\
+\cline{3-6}
+\multicolumn{2}{|c|}{} & \multirow{2}{*}{$-e_1\leq$} & \multirow{2}{*}{$-e_2\leq$} & \multirow{2}{*}{$-e_3\leq$} & Comp.\\
+\multicolumn{2}{|c|}{} & & & & time (s)\\
+\hline
+\multirow{4}{*}{SpaceEx} & octagon & \multirow{2}{*}{$>1000$} &
+\multirow{2}{*}{$>1000$} & \multirow{2}{*}{$>1000$} &
+\multirow{2}{*}{$>180s$}\\
+& template & & & &\\
+\cline{2-6}
+& 100 support & \multirow{2}{*}{$>1000$} & \multirow{2}{*}{$>1000$} &
+\multirow{2}{*}{$>1000$} & \multirow{2}{*}{$>180s$}\\
+& vectors & & & & \\
+\hline
+\multicolumn{2}{|c|}{\multirow{2}{*}{Augmented complex zonotope}} &
+\multirow{2}{*}{46} & \multirow{2}{*}{54} &
+\multirow{2}{*}{57} & \multirow{2}{*}{12.6}\\
+\multicolumn{2}{|c|}{} & & & & \\
+\hline
+\end{tabular}
+%
+\caption{Experimental results: Fast switching networked Platoon}~\label{tab:largedwell-platoon1}
+\end{table}
