@@ -1,9 +1,8 @@
-
 Simple zonotopes are linear
 projections of higher dimensional unit hypercubes onto lower
 dimensional spaces, therefore a sub-class of polytopes.  A simple
 zonotope is represented is a linear combination of real valued vectors
-plus a center, such that the real valued combining co-efficients are
+plus a center, such that the real valued combining coefficients are
 contained in a unit hypercube.  Geometrically speaking, a simple
 zonotope is a Minkowski sum of line segments.
 %
@@ -20,12 +19,12 @@ representation of a real zonotope.
 %
 For the rest of this chapter, we
 use the notation $\ptemp\in\reals^m$ and $\cen\in\reals^n$, unless
-otherwise sepcified.
+otherwise specified.
 
 A main advantage of the zonotope set representation is that besides
 being closed under linear transformation and Minkowski sum, these
 operations can be computed efficiently.  The computation of linear
-transformation of a zontope is given below.
+transformation of a zonotope is given below.
 %
 \begin{lemma}[Linear transformation]~\label{lem:lin-rz}
 Let $A\in\mat{n}{n}{\reals}$.  Then
@@ -75,27 +74,23 @@ We derive the following.
 %
 \end{proof}
 %
-We have earlier discussed that
-for a $V$-representation of a polytope, the complexity of Minkowski
-sum operation is quadratic, while for a $H$-representation, the
-complexity of Minkowski sum can be exponential.  On the other hand,
-the complexity of both Minkowski sum and linear transformation
-operations for a zonotope is only linear.  This is an advantage of the
-zonotope representation compared to a general convex polytope
-representation.  Therefore, simple zonotopes have been sucessfully
-applied for bounded time computation of uncertain linear systems and
-some affine hybrid systems with simple switching
-conditions~\cite{makhlouf2014networked,Girard05reachabilityof,girard2008zonotope}.
-However, for unbounded time computation of reachable sets, which
-generally requires computing positive invariants, zonotopes have the
-following drawback.  For the simple case of a stable linear system, we
-do not know if a positively invariant non-zero zonotope exists.  Even
-if such a positively invariant zonotope exists, similar to polytopes,
-the complexity of computation can be arbitrarily high in any dimension
-because they are geometrically a sub-class of polytopes.  But for a
-particular case when a stable linear system (say discrete time) has
-real eigenvalues, we can easily find a positively invariant zonotope
-zonotope based on the following proposition.
+We have earlier discussed that for a $V$-representation of a polytope,
+the complexity of Minkowski sum operation is quadratic, while for a
+$H$-representation, the complexity of Minkowski sum can be
+exponential.  On the other hand, the complexity of both Minkowski sum
+and linear transformation operations for a zonotope is only linear.
+This is an advantage of the zonotope representation compared to a
+general convex polytope representation.  Therefore, simple zonotopes
+have been successfully applied for reachability analysis of uncertain
+linear systems and some affine hybrid systems with simple switching
+conditions~\cite{makhlouf2014networked,Girard05reachabilityof,girard2008zonotope,HybridFluctuat}.
+Still, zonotopes have the following drawback while computing positive
+invariants of affine hybrid systems.  Even for the simple case of a
+stable linear system having complex valued eigenvectors, we do not
+know if a positively invariant non-zero zonotope exists.  When a stable linear system has
+ real eigenvectors, the computation of a non-zero positively
+invariant zonotope is guaranteed by the
+following proposition.
 %
 \begin{proposition}~\label{prop:eig-rztope}
 Let us consider $\ptemp\in\mat{n}{n}{\reals}$ consists
@@ -144,27 +139,43 @@ complex valued, we can not rely on the above proposition to find a
 positive invariant.  Therefore, in the next chapter we introduce
 complex zonotopes that can capture contraction along complex vectors.
 
+To approximate non-linear transformations of zonotopes, they have been
+extended to quadratic zonotopes~\cite{DBLP:conf/aplas/AdjeGW15}, and
+more generally, polynomial
+zonotopes~\cite{DBLP:conf/hybrid/Althoff13}.  Although a polynomial
+zonotope and the complex zonotope that we introduce are both
+non-polytopic sets, however, the representations are geometrically
+different.  While a polynomial zonotope is a polynomial function of
+real valued intervals, a complex zonotope shall be described as a
+complex valued linear function of circles in the complex plane.
+%
+\begin{definition}~\cite{DBLP:conf/hybrid/Althoff13}
+Let $f\in\polyring{x_1,\ldots,x_n}{\reals}$.  Then
+$\set{f(x):~x\in[-1,1]^n}$ is a polynomial zonotope.
+\end{definition}
+%
 Another drawback of simple zonotopes is that they not closed under
-mutual intersection and intersection with half-spaces.  The
-computation of intersection with half-spaces and hyperplanes is
-required in reachability analysis of hybrid systems having linear
-guards (pre-conditions) for switching.  To compute the intersection,
-we can try to convert a zonotope to a polytope, compute the
-intersection with the polytope and over-approximate the intersection
-by another zonotope.  However, a zonotope with $m$ generators in an
-$n$ dimensional space can have as many as
-$2\lt(\begin{matrix}m\\n-1\end{matrix}\rt)$
-faces~\cite{zaslavsky1975facing}, which is exponential in $n$.
-Therefore, the conversion of a zonotope to a polytope can be
-intractable in higher dimensions.  To address this problem, an
-algorithm for the tight over-approximation of the intersection between
-a zonotope and a hyperplane is proposed in~\cite{girard2008zonotope},
-that is based on the projection of the zonotope onto 2-dimensional
-hyperplanes.  Aleternatively, to extend the zonotope to a more general
-set representation in which the intersection with a half-space is a
-closed operation and can be computed efficiently.  Contrained
-zonotopes~\cite{scott2016constrained}, constrained affine sets~\cite{Ghorbal2010} and
-zonotopic bundles~\cite{althoff2011zonotope} are examples of such extensions.
+intersection with half-spaces.  The computation of intersection with
+half-spaces and hyperplanes is required in reachability analysis of
+hybrid systems having linear guards (pre-conditions) for switching.
+To compute the intersection, we can try to convert a zonotope to a
+polytope, compute the intersection with the polytope and
+over-approximate the intersection by another zonotope.  However, a
+zonotope with $m$ generators in an $n$ dimensional space can have as
+many as $2\lt(\begin{matrix}m\\n-1\end{matrix}\rt)$
+  faces~\cite{zaslavsky1975facing}, which is exponential in $n$.  It
+  means that the conversion of a zonotope to a polytope can be
+  intractable in higher dimensions.  To address this problem, an
+  algorithm for the tight over-approximation of the intersection
+  between a zonotope and a hyperplane is proposed
+  in~\cite{girard2008zonotope}, that is based on the projection of the
+  zonotope onto 2-dimensional hyperplanes.  Alternatively, to extend
+  the zonotope to a more general set representation in which the
+  intersection with a half-space is a closed operation and can be
+  computed efficiently.  Constrained
+  zonotopes~\cite{scott2016constrained}, constrained affine
+  sets~\cite{Ghorbal2010} and zonotopic
+  bundles~\cite{althoff2011zonotope} are examples of such extensions.
 
 In a constrained zonotope, there are linear equality constraints in
 addition to the unit interval bounds on the combining coefficients.
@@ -185,27 +196,10 @@ the tuple is assigned to the set
 %
 An even more general representation is a constrained affine
 set~\cite{Ghorbal2010}, where the combining coefficients can range in some
-abstract domain.  To represent the intersection of a contrained affine
+abstract domain.  To represent the intersection of a constrained affine
 set with half-spaces, the abstract domain constraining the combining
 coefficients can be chosen such that it has linear relations.  Another
-generalization is a zonotopic bundle set representation~\cite{althoff2011zonotopex},
+generalization is a zonotopic bundle set representation~\cite{althoff2011zonotope},
 which is closed under mutual intersection.
 
-To approximate non-linear transformations of zonotopes, they have been
-extended to quadratic zonotopes~\cite{DBLP:conf/aplas/AdjeGW15}, and more generally, polynomial
-zonotopes~\cite{DBLP:conf/hybrid/Althoff13}. 
-%
-\begin{definition}~\cite{DBLP:conf/hybrid/Althoff13}
-Let $f\in\polyring{x_1,\ldots,x_n}{\reals}$.  The following is a
-polynomial zonotope.
-%
-\[\set{f(x):~x\in[-1,1]^n}.\]
-%
-\end{definition}
-%
-Although a polynomial zonotope and the complex zonotope that we
-introduce are both non-polytopic sets, however, the representations
-are geometrically different.  While a polynomial zonotope is a
-polynomial function of real valued intervals, a complex zonotope shall
-be described as a complex valued linear function of circles in the
-complex plane.
+
