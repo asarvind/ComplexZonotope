@@ -1,7 +1,7 @@
 The basic representation of a complex zonotope is a linear combination
 of complex valued vectors with complex combining coefficients whose
 absolute value is bounded by unity.  This is a generalization of the
-representation of a simple zonotope given in Definition~\ref{todo} of
+representation of a simple zonotope given in Definition~\ref{defn:rztope} of
 previous chapter to the space of complex numbers.  However, the real
 projection of a complex zonotope is expressive because it can
 represent some non-polyhedral sets in addition to the polyhedral
@@ -95,7 +95,7 @@ combining coefficients.  Since, $\infnorm{-\zeta}=\infnorm{\zeta}\leq
 
 If we add more generators to the above representation of a complex
 zonotope, it would increase the size of the complex zonotope.
-Threfore, we can not find better approximations of a given set by
+Therefore, we can not find better approximations of a given set by
 only adding more generators to the complex zonotope.  Moreover, adding a
 generator can violate positive invariance, as shown in
 Figure~\ref{todo}.  Alternatively, to refine a complex zonotope, we
@@ -106,7 +106,7 @@ complex zonotope, by adjusting the
 magnitude of contribution of each generator.
 
 In order to conveniently perform algebraic manipulations on the
-magnitude of each generator, we can explicity specify values
+magnitude of each generator, we can explicitly specify values
 proportional to their magnitudes as part of the set representation.
 In this regard, we introduce a {\it template complex zonotope}
 representation, where the magnitude of each combining coefficient is
@@ -121,9 +121,9 @@ template complex zonotope, for a fixed template, subsets of the
 complex vector space can be mapped to the {\it scaling factors}.
 %
 \begin{definition}[Template complex zonotope]
-Let us consider $\ptemp\in\mat{n}{m}{\compnums}$ called the template,
-$\sfact\in\reals^m_{\geq 0}$ called scaling factors and
-$\cen\in\compnums^n$ called the center.  Then the following is a template
+Let us consider ${\ptemp\in\mat{n}{m}{\compnums}}$ called the template,
+${\sfact\in\reals^m_{\geq 0}}$ called scaling factors and
+${\cen\in\compnums^n}$ called the center.  Then the following is a template
 complex zonotope.
 %
 \begin{equation}
@@ -132,20 +132,22 @@ complex zonotope.
 i\in\set{1,...,m}}.
 \end{equation}
 \end{definition}
+In further discussion, we use the term {\it representation size} of a
+template complex zonotope to refer to the size of the template matrix.
+In the rest of this chapter, we consider the following notation,
+unless otherwise specified.
 %
-%% The scaling factors of a template complex zonotope can be treated as
-%% variables that can be adjusted to find better over-approximations of a
-%% reachable set.  For example, Figure~\ref{toref} illustrates the
-%% different over-approximations of a convex hull of five points by a
-%% complex zonotopes with a fixed template but different scaling factors.
+\[
+\ptemp\in\mat{n}{m}{\compnums},~~\cen\in\compnums^n,~~\sfact\in\reals^m_{\geq 0}.
+\]
+%
 A template complex zonotope can be converted to the basic
 representation of the complex zonotope by multiplying the diagonal
 matrix of scaling factors to the template.  This is described in the
 following lemma.
 %
 \begin{lemma}[Normalization]~\label{lem:normalization}
-Let us consider $\tcztope{\ptemp}{\cen}{\sfact}\subset\compnums^n$ where $\ptemp\in\mat{n}{m}{\compnums}$ and
-${\mu\in\compnums^m}$.
+Let us consider ${\mu\in\compnums^m}$.
 %
 \begin{align*}
 \text{Then}\hspace{3em}&\tcztope{\ptemp\diagonal{\mu}}{\cen}{\sfact}=\tcztope{\ptemp}{\cen}{\diagonal{\absolute{\mu}}\sfact}.~\numberthis\label{eqn:normalization}\\
@@ -248,7 +250,4 @@ By definition,
 \end{align*}
 %
 \end{proof}
-%
-In further discussion, by the {\it representation size} of a template complex
-zonotope, we refer to the size of the template matrix.
 %

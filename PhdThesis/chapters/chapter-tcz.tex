@@ -1,39 +1,48 @@
 
-In the previous chapter, we described a set representation called
-simple zonotope, which is a type of polytope represented as a linear
-combination of real valued vectors with bounded combining
-coefficients.  The advantage of simple zonotopes in set based
-computations is that they are closed under matrix multiplication and
+In the previous chapter, we have explained the advantage of simple
+zonotopes that they are closed under linear transformation and
 Minkowski sum operations and these can be computed efficiently.
-However, for computing a positive invariant of a linear system, there
-is no known procedure to choose a suitable set of generators for a
-simple zonotope so as to compute an invariant.  In this chapter, we
-extend simple zonotope a new set representation called \emph{complex
-zonotope} by which we can easily specify invariants of a linear system
-using the eigenstructure of the system.  Complex zonotopes have
+Regarding computation of a positive invariant real zonotope for a
+linear system, we showed in Proposition~\ref{prop:eig-rztope} that it
+can be done efficiently when the eigenvectors are real valued.
+However, when the eigenvectors of a stable linear system are complex
+valued, we can not guarantee the existence of a non-zero real
+zonotopic positive invariant.  Overcoming this drawback of real
+zonotopes, we extend them to a new class of sets called \emph{complex
+zonotopes} by which we can easily specify positive invariants of a
+stable linear system using the eigenstructure.  Complex zonotopes have
 complex valued generators complex combining coefficients bounded in
 their absolute values, as opposed to the real valued generators and
-real combining coefficients of simple zonotopes.  The real projections
-of complex zonotopes can describe some non-polytopic sets in addition
-to the polytopic zonotopes, which are Minkowski sums of some
-ellipsoids along with line segments.  Furthermore, complex zonotopes
-are also closed under matrix multiplications and Minkowski sums and
-these can be computed efficiently.
+real combining coefficients of simple zonotopes.  Complex zonotopes
+are also geometrically more expressive, since their real projections
+can describe Minkowski sums of some ellipsoids along with line
+segments.  Moreover, complex zonotopes retain the merit of real
+zonotopes that they are closed under linear transformations and
+Minkowski sums and these can be computed efficiently.  We also derive
+a convex program for checking inclusion between two complex zonotopes.
+The inclusion relation is a key ingredient for efficient invariant
+computation, which we shall discuss in latter chapters.
 
-Apart from discussing operations on complex zonotopes like linear
-transformations and Minkowski sums, in this chapter we derive a convex
-program for checking inclusion between two complex zonotopes.  The
-inclusion relation is a key ingredient for efficient invariant
-computation, as we shall see in the latter chapters.  The organization
-of this chapter is as follows.  PUT ORGANIZATION.
+This chapter is organized into three main sections.  In
+Section~\ref{sec:representation}, we shall introduce the basic
+representation of a complex zonotope that naturally extends the
+Definition~\ref{defn:rztope} of real zonotopes.  Further on, we shall
+introduce a more general but geometrically equivalent representation,
+called \emph{template complex zonotope}, which allows efficient
+modification of complex zonotopic sets for increasing accuracy of
+abstraction of sets.  In Section~\ref{sec:operations-tcz}, we shall
+discuss basic operations on a template complex zonotope like linear
+transformation, Minkowski sum and computation of support function.  In
+Section~\ref{sec:inclusion-tcz}, we shall derive a convex program for
+checking the inclusion between two template complex zonotopes.  
 
-\section{Representation of a complex zonotope}
+\section{Representation of a complex zonotope}~\label{sec:representation}
 \input{chapters/sections-ch-tcz/representation}
 
-\section{Basic operations}
+\section{Basic operations}~\label{sec:operations-tcz}
 \input{chapters/sections-ch-tcz/operations}
 
-\section{Checking inclusion}
+\section{Checking inclusion}~\label{sec:inclusion-tcz}
 \input{chapters/sections-ch-tcz/inclusion}
 
 %% \section{Reachable set computation for linear systems}

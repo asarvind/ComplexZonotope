@@ -91,7 +91,7 @@ $\zeta\in\compnums^m:\ptemp\zeta+\cen=\ptemp^\pr\zeta^\pr+\cen^\pr~\wedge~\absol
 \end{proof}
 %
 The reason solving Equation~\ref{eqn:exact-inclusion}
-requires non-covex optimization is explained as follows.  Let us consider
+requires non-convex optimization is explained as follows.  Let us consider
 that $\ptemp$ has a pseudo-inverse $\pinv{\ptemp}$.  Then by the
 rank-nullity theorem
 %
@@ -119,7 +119,7 @@ So the maximization
 \]
 %
 is equivalent to maximizing a non-concave function of $\zeta^\pr$.
-Maximizing a non-concave function is a non-covex optimization problem.
+Maximizing a non-concave function is a non-co-vex optimization problem.
 
 We shall now derive a sufficient condition, equivalent to a set of
 second order conic constraints, for checking inclusion between two
@@ -143,7 +143,7 @@ the sufficient condition.
 \end{lemma}
 %
 \begin{proof}
-  Let us consider $\epsilon\in\compnums^{r}$, xsuch that for any $i\in\set{1,...,r}$,
+  Let us consider $\epsilon\in\compnums^{r}$, such that for any $i\in\set{1,...,r}$,
 %
 \[\left\{
 \begin{array}{l}
@@ -198,19 +198,17 @@ that}\\
 %
 \end{definition}
 %
-\begin{theorem}[Sufficient condition for inclusion checking]~\label{thm:suff-inclusion}
-  The following is true.
-%
-\begin{align*}
-&  \tcztope{\ptemp}{\cen}{\sfact}\order\tcztope{\ptemp^\pr}{\cen^\pr}{\sfact^\pr}\\
-&\implies \tcztope{\ptemp}{\cen}{\sfact}\subseteq\tcztope{\ptemp^\pr}{\cen^\pr}{\sfact^\pr}.
-\end{align*}
+\begin{theorem}[Inclusion checking]~\label{thm:suff-inclusion}
+ If 
+ ${\tcztope{\ptemp}{\cen}{\sfact}\order\tcztope{\ptemp^\pr}{\cen^\pr}{\sfact^\pr}}$
+ then\\
+${\tcztope{\ptemp}{\cen}{\sfact}\subseteq\tcztope{\ptemp^\pr}{\cen^\pr}{\sfact^\pr}}$.
 %
 \end{theorem}
 %
 \begin{proof}
 The theorem follows from Lemmas~\ref{lem:exact-inclusion}
-and~\ref{lem:transfer-matrix}.  According to
+and~\ref{lem:transfer-matrix}.  By
 Lemma~\ref{lem:exact-inclusion}, the inclusion
 $\tcztope{\ptemp}{\cen}{\sfact}\subseteq\tcztope{\ptemp^\pr}{\cen^\pr}{\sfact^\pr}$
 holds iff the L.H.S of Equation~\ref{eqn:exact-inclusion} is bounded
@@ -228,7 +226,7 @@ Equations~\ref{eqn:inclusion1} such that the R.H.S of
 Equation~\ref{eqn:transfer-matrix} is bounded above by zero.
 \end{proof}
 %
-\begin{remark}
+\begin{remark}~\label{rem:socc}
   We can write Equation~\ref{eqn:inclusion-tcz2} as
   %
   \[

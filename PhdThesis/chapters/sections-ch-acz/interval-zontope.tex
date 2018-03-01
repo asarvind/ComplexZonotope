@@ -93,7 +93,7 @@ the row vectors $\lt[\begin{matrix} 1 & 1 & -1\end{matrix}\rt]$,
 $\lt[\begin{matrix} 1 & 1 & 1\end{matrix}\rt]$, and
 $\lt[\begin{matrix} 1 & 1 & 0 \end{matrix}\rt]$.
 
-Similar to a zontope, a sub-parallelotope has a generator
+Similar to a zonotope, a sub-parallelotope has a generator
 representation, as described in the following proposition.  However,
 the center of the representation can take arbitrary values in the null
 space of the sub-parallelotopic template.
@@ -132,7 +132,7 @@ closed under intersection with suitably aligned
 sub-parallelotopes.  In fact, we observe that when a
 sub-parallelotope has its template aligned with that of an interval
 zonotope, their intersection can be exactly represented by another
-interval zontope.  As an example, the intersection of
+interval zonotope.  As an example, the intersection of
 %
 \begin{align*}
 & \iztope{\lt[\begin{array}{l l}1 & 0 \\ 0 &
@@ -266,7 +266,7 @@ Using Equations~\ref{proof-hull3} and~\ref{proof-hull4}, the lemma
 follows by induction.
 \end{proof}
 %
-Now we state a reusult about over-approximating the intersection
+Now we state a result about over-approximating the intersection
 of a sub-parallelotope with the Minkowski sum
 of a convex set and interval zonotope.  We also find an
 under-approximation of the former so that we can bound the error in
@@ -276,7 +276,7 @@ this chapter.
 If $k<n$, then we consider $Y\in\mat{n}{(n-k)}{\reals}$ such that the
 column vectors of $Y$ form
 the basis of $\null{\qtemp}$.
-Othewise when $k=n$, we consider $Y=0$.
+Otherwise when $k=n$, we consider $Y=0$.
 %
 \begin{lemma}[Intersection with Minkowski sum]~\label{lem:minsum-intersection}
 Let $S\in\reals^n$ be a convex set and
@@ -440,7 +440,7 @@ we have proved Equation~\ref{eqn:intersection2}.
 An interval zonotope can be equivalently specified as the real
 projection of a template complex zonotope, as described in the
 following lemma.  We use this result to compute other operations on
-interval zonotopes, like linear trasnformation, Minkowski sum,
+interval zonotopes, like linear transformation, Minkowski sum,
 inclusion-checking and support function.
 %
 \begin{lemma}~\label{lem:iz-tcz-conversion}
@@ -569,7 +569,7 @@ Based on Lemma~\ref{lem:iz-rz-conversion}, we get
 &  A\iztope{\stemp}{\lb}{\ub}
  =
   A\rztope{\stemp\diag{\frac{\ub-\lb}{2}}}{\frac{\ub+\lb}{2}}\\
-  & ~~\%\%~~\text{by Lemma~\ref{todo}}\\
+  & ~~\%\%~~\text{by Lemma~\ref{lem:lin-rz}}\\
   & = \rztope{A\stemp\diag{\frac{\ub-\lb}{2}}}{\frac{\ub+\lb}{2}}\\
   & ~~\%\%~~\text{by Lemma~\ref{lem:iz-rz-conversion}}\\
   & = \iztope{A\stemp}{\lb}{\ub}.~~~~~\qedhere
@@ -596,7 +596,7 @@ By Lemma~\ref{lem:iz-rz-conversion}, we get
   \minsum{\iztope{\stemp}{\lb}{\ub}}{\iztope{\stemp^\pr}{\lb^\pr}{\ub^\pr}}\\
   & =
   \minsum{\rztope{\stemp\diag{\frac{\ub-\lb}{2}}}{\frac{\ub+\lb}{2}}}{\rztope{\stemp\diag{\frac{\ub^\pr-\lb^\pr}{2}}}{\frac{\ub^\pr+\lb^\pr}{2}}}\\
-  & \%\%~~\text{by Lemma~\ref{todo}}\\
+  & \%\%~~\text{by Lemma~\ref{lem:min-rz}}\\
   &= \rztope{\mymatrix{\stemp\diag{\frac{\ub-\lb}{2}} &
       \stemp^\pr\diag{\frac{\ub^\pr-\lb^\pr}{2}}}}{\frac{\ub+\lb}{2}+\frac{\ub^\pr+\lb^\pr}{2}}\\
   & = \rztope{\mymatrix{

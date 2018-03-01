@@ -7,7 +7,7 @@ plus a center, such that the real valued combining co-efficients are
 contained in a unit hypercube.  Geometrically speaking, a simple
 zonotope is a Minkowski sum of line segments.
 %
-\begin{definition}[Simple zonotope]
+\begin{definition}[Simple zonotope]~\label{defn:rztope}
 Let us consider $\ptemp\in\reals^m$, whose column vectors are called
 \emph{generators}, and $\cen\in\reals^n$ called the \emph{center}.  The following is the
 representation of a real zonotope.
@@ -27,7 +27,7 @@ being closed under linear transformation and Minkowski sum, these
 operations can be computed efficiently.  The computation of linear
 transformation of a zontope is given below.
 %
-\begin{lemma}[Linear transformation]
+\begin{lemma}[Linear transformation]~\label{lem:lin-rz}
 Let $A\in\mat{n}{n}{\reals}$.  Then
 %
 \begin{align*}
@@ -49,7 +49,7 @@ We derive the following.
 %
 The Minkowski sum of two zonotopes can be computed as follows.
 %
-\begin{lemma}[Minkowski sum]
+\begin{lemma}[Minkowski sum]~\label{lem:min-rz}
 Let us consider two matrices $\ptemp\in\mat{n}{m}{\reals}$ and
 $\ptemp^\pr\in\mat{n}{r}{\reals}$.  Then the following is true.
 %
@@ -97,7 +97,7 @@ particular case when a stable linear system (say discrete time) has
 real eigenvalues, we can easily find a positively invariant zonotope
 zonotope based on the following proposition.
 %
-\begin{proposition}
+\begin{proposition}~\label{prop:eig-rztope}
 Let us consider $\ptemp\in\mat{n}{n}{\reals}$ consists
 of the real eigenvectors of a matrix $A\in\mat{n}{n}{\reals}$ as
 its column vectors, where $\mu\in[0,1]^n$ is the vector of real
@@ -204,8 +204,8 @@ polynomial zonotope.
 \end{definition}
 %
 Although a polynomial zonotope and the complex zonotope that we
-introduce in the next chapter are both non-polytopic sets, however,
-both representations are geometrically different.  While a polynomial
-zonotope is a polynomial function of real valued intervals, we shall
-describe  a complex zonotope as a complex valued linear function
-of circles in the complex plane.
+introduce are both non-polytopic sets, however, the representations
+are geometrically different.  While a polynomial zonotope is a
+polynomial function of real valued intervals, a complex zonotope shall
+be described as a complex valued linear function of circles in the
+complex plane.

@@ -242,8 +242,9 @@ All of the following is true.
 &\implies \real\lt(\acztope{\ptemp^\pr}{\cen^\pr}{\sfact^\pr}{\stemp^\pr}{\lb^\pr}{\ub^\pr}\rt)\subseteq\real\lt(\acztope{\ptemp}{\cen}{\sfact}{\stemp}{\lb}{\ub}\rt).
 \end{align*}
 %
-\item The relation ``$\order$'' is a partial order on
-  augmented complex zonotopes.
+\item The relation ``$\order$'' is equivalent to a set of second order
+  conic constraints on the primary offset, scaling factors and upper and lower
+  interval bounds.
 \end{enumerate}
 %
 \end{theorem}
@@ -322,19 +323,18 @@ All of the following is true.
   \real\lt(\acztope{\ptemp^\pr}{\cen^\pr}{\sfact^\pr}{\stemp^\pr}{\lb^\pr}{\ub^\pr}\rt)\subseteq\real\lt(\acztope{\ptemp}{\cen}{\sfact}{\stemp}{\lb}{\ub}\rt).
   \end{align*}
   %
-Since ``$\order$'' is a partial order on template complex zonotopes,
-Equation~\ref{eqn:order-acz} implies that it is also a partial order on augmented
-complex zonotopes.
+Since ``$\order$'' is equivalent to SOCC constraints on the center and scaling factors of template complex zonotope,
+Equation~\ref{eqn:order-acz} translates them to SOCC on the primary offset, scaling factors and lower and upper interval bounds.
 \end{proof}
 %
 \begin{remark}
 We have explained for template complex zonotopes that the relation
 ``$\order$'' is equivalent to second order conic constraints on the
-center, scaling factors and some auxillary variables.  Therefore,
+center, scaling factors and some auxiliary variables.  Therefore,
 according to Equation~\ref{eqn:order-acz}, the extension of ``$\order$''
 to augmented complex zonotopes is equivalent to second order conic
 constraints on the primary offset, scaling factors, lower and upper
-interval bounds and some auxillary variables.
+interval bounds and some auxiliary variables.
 \end{remark}
 %
 The support function of an augmented complex zonotope is as an affine
