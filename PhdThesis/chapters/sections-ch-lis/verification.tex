@@ -1,18 +1,19 @@
 We verify global exponential stability by finding a contractive
 complex zonotope that contains the origin in its interior.  A
 motivation for considering complex zonotope for stability verification
-is that they can capture the contraction along the eigenvectors, which
-was earlier explained in Lemma~\ref{lem:eig-scaling}.  Accordingly, we
-find a complex zonotope by sampling the eigenvectors of some of the
-reachability operators, synthesizing suitable scaling factors and
-latter verifying that the complex zonotope contracts.  Our algorithm
-for stability verification has two stages.  In the first stage, we
-synthesize a complex zonotope that contracts with respect to a few
-sampled operators.  In the next stage, we verify that the synthesized
-complex zonotope contracts with respect to all the sampled operators.
-We fix the template a priori by a set of eigenvectors of selected
-reachability operators, because of which we have control over the
-representation size of the contractive set.
+is that they can capture contraction along the complex eigenvectors of
+reachability operators, based on Lemma~\ref{lem:eig-scaling} described
+earlier.  We find a complex zonotope by sampling the eigenvectors of
+some of the reachability operators, synthesizing suitable scaling
+factors and latter verifying that the complex zonotope contracts.  Our
+algorithm for stability verification has two stages.  In the first
+stage, we synthesize a complex zonotope that contracts with respect to
+a few sampled operators.  In the next stage, we verify that the
+synthesized complex zonotope contracts with respect to all the sampled
+operators.  We fix the template a priori by the collection of unit
+eigenvectors of a finite number of uniformly sampled reachability
+operators.  Therefore, we have control over the representation size of
+the contractive set.
 
 {\bf Synthesizing a candidate template complex zonotope.}  
 Let us sample uniform $k$ time points in the interval $\Delta$ as
@@ -41,7 +42,7 @@ Theorem~\ref{thm:suff-inclusion}.
 For a vector of scaling factors $\sfact\in\mb{R}^{m}_{\geq 0}$, the
 template complex zonotope $\tcz{\eigenvectors_k}{0}{s}$ is
 $\lambda$-contractive with respect to all $H_t:~ t\in\Lambda_k$ and
-represent a $C$-set containing the origin in its interior,
+represents a $C$-set,
 if all of following is true.
 %
 \begin{align*}
@@ -53,10 +54,9 @@ if all of following is true.
 \begin{proof}
 A complex zonotope is a compact and convex set.  Furthermore, the real
 projection of $\tcztope{\identity{n}{n}}{0}{\repmat{1}{n}{1}}$ is the
-hypercube containing $0$.  So, by Theorem~\ref{thm:suff-inclusion} and
+hypercube containing the origin.  So, by Theorem~\ref{thm:suff-inclusion} and
 Equation~\ref{eqn:cset}, $\tcztope{\eigenvectors_k}{0}{\sfact}$
-contains the origin in its interior. Therefore,
-$\tcztope{\eigenvectors_k}{0}{\sfact}$ is a $C$-set.  By
+contains the origin in its interior and hence a $C$-set.  By
 Lemma~\ref{lem:lin-transform}, Theorem~\ref{thm:suff-inclusion} and
 Equations~\ref{eqn:normalization} and~\ref{eqn:contractive}, we get
 $H_t\tcztope{\eigenvectors_k}{0}{\sfact}\subseteq \lambda\tcztope{\eigenvectors_k}{0}{\sfact}$.
@@ -69,7 +69,7 @@ the reachability operators $H_t:~t\in\Delta$, we divide the sampling
 interval into small enough sub-intervals and verify contraction in
 each interval.  For this, we need to find a bound on contraction of a
 complex zonotope with respect to any reachability operator.  When the
-synthesized complex zonotope contains the eigenvectors of a
+synthesized complex zonotope contains the eigenvectors of only one
 reachability operator, then the contraction by the operator is bounded
 by the maximum magnitude of the eigenvalues of the operator.  This is
 described in the following lemma.
@@ -173,12 +173,15 @@ $\rho\in[t,t+\epsilon]$, we derive the following.
 \label{alg:1step}
 \begin{algorithmic}[1]
 \State Initialize $k=3$.
-\State Choose an $M\in\integers_{>3}$ as the bound of $k$ and a $tol>0$ as
+\State Choose an $M\in\integers_{>3}$ as the bound of $k$.
+\State Choose $tol>0$ as
 the discretization parameter.
+\While{$k \leq M$ and $t<\usb$}
 \State Find a vector of scaling factors $\sfact$ solving Equations~\ref{eqn:cset} and~\ref{eqn:contractive}.
-\State Initialize $t=\lsb$, $h=tol$, $r:=$ order of Taylor
+\State Initialize $t=\lsb$ and $h=tol$. 
+\State Set $r:=$ order of Taylor
 expansion (typically $\leq 2$).
-\While{$k \leq M$ and $t<\usb$ and $h\geq \; tol$}
+\While{$h\geq \; tol$}
 \If{$\cont{k}{r}{\sfact,t,h}<1$}
 \State $t\gets t+h; h\gets h+tol$
 \Else
@@ -187,6 +190,7 @@ expansion (typically $\leq 2$).
 \If{$h<tol$}
 \State $k\gets k+1$.  
 \EndIf
+\EndWhile
 \EndWhile
 \If {$t \geq \usb$}
 \State \emph{System is exponentially stable}

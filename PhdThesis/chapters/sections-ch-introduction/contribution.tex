@@ -1,29 +1,31 @@
 The main contributions of our work is summarized below.
 %
 \begin{itemize}
-\item \emph{Complex zonotope: } Our most important contribution is a
-  new set representation called complex zonotope for verification of
-  hybrid systems, that can capture contraction along complex
-  eigen-vectors but still is computationally as efficient as real
-  zonotopes.  Just like real zonotopes, a complex zonotope is closed
+\item \emph{Complex zonotope: } Our most important contribution is the
+  extension of real zonotopes to the complex valued domain by
+  complex zonotopes, which can capture contraction along complex
+  vectors, but still are computationally as efficient as a real
+  zonotope.  Just like real zonotopes, a complex zonotope is closed
   under Minkowski sum, linear transformation and their computation is
-  also efficient.  Similar to a simple (polytopic) zonotope, the
-  support function of a complex zonotope can be computed by a simple
-  algebraic expression.  But complex zonotopes can represent
-  non-polytopic sets in addition to simple zonotopes.  They can
-  capture contractive along complex valued eigen-vectors when there
-  are non-zero real and imaginary parts, which real zonotopes can not.
-\item \emph{Template based representation: }  We introduce a template
-  based representation of a complex zonotope, by which we can
-  add generators to a complex zonotope to find better approximations.
-  In a real zonotope, adding a generator to the zonotope can increase
-  the size of the denoted set.  This problem is addressed by the
-  template based representation of a complex zonotope, which has a set
-  of scaling factors that determine the amount of contribution of each
-  \emph{generator} to the size of the set.  Henceforth, when we add
-  more generators to a complex zonotope, the scaling factors can be
-  suitably modified to find a better approximation than that of the
-  former complex zonotope.
+  also efficient.  The support function of a complex zonotope can also
+  be computed by a simple algebraic expression.  But additionally, a
+  complex zonotope can efficiently encode positive invariants for
+  linear transformations by incorporating complex eigenvectors as
+  generators.  On the other hand, eigenvectors having non-zero real
+  and imaginary parts can not be used as generators in real zonotopes.
+  Morover, complex zonotopes are geometrically more expressive since
+  their real projections can represent non-polytopic sets in addition
+  to polytopic zonotopes.
+\item \emph{Template based representation: } We introduce a template
+  based representation of a complex zonotope, by which we can add
+  generators to a complex zonotope to find better approximations.  In
+  a real zonotope, adding a generator to the zonotope can increase the
+  size of the denoted set.  This problem is addressed by the template
+  based representation of a complex zonotope, which has a set of
+  scaling factors that determine the amount of contribution of each
+  \emph{generator} to the size of the set.  Henceforth, when we can
+  add more generators to a complex zonotope and adjust the scaling
+  factors to find a better approximations.
 \item \emph{Intersection with half-spaces: } Similar to real
   zonotopes, complex zonotopes are also not closed under intersection
   with half-spaces.  Previous

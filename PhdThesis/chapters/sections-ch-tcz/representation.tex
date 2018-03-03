@@ -20,6 +20,33 @@ complex zonotope.
 %
 \end{definition}
 %
+{\it Shape of complex zonotope:} The real projection of a complex
+zonotope can represent non-polyhedral sets, which can be Minkowski sum
+of line segments as well as some ellipsoids.  Therefore, complex
+zonotopes are more expressive than real zonotopes.  An example of such
+a non-polyhedral complex zonotope projection in real space is
+illustrated with Figure~\ref{fig:cz}, where the generators are
+$\ptemp=\lt(\begin{array}{lll}(1+2i) & 1 & (2+i)\\(1-2i) & 1 &
+(2-i)\end{array}\rt)$ and the center is the origin.  Furthermore,
+complex zonotopes are different from polynomial zonotopes.  While a
+polynomial zonotope is a polynomial function of real valued intervals,
+a complex zonotope is a Minkowski sum of \emph{linearly transformed
+transformed circles} in the the complex plane.  A complex zonotope is
+symmetric around the center.  To see this, consider a point in a
+complex zonotope centered at the origin, written as $y=\ptemp\zeta$
+where $\ptemp$ defines the generator set and $\zeta$ is the vector of
+combining coefficients.  Since, $\infnorm{-\zeta}=\infnorm{\zeta}\leq
+1$, so $-y=\ptemp(-\zeta)$ also belongs to the complex zonotope.
+%
+\begin{figure}
+\centering
+\captionsetup{justification=centering}
+\includegraphics[scale=0.43]{fig/cznew.png}
+\includegraphics[scale=0.5]{fig/CZhull.png}
+\caption{Real projection of a complex zonotope as\\ Minkowski sum of 2 ellipses and 1 line segment }        
+\label{fig:cz}
+\end{figure}
+%
 A motivation for extending simple zonotopes to complex zonotopes is
 that a complex zonotope with its generators as the complex
 eigenvectors of a discrete time linear system will be a positively
@@ -74,23 +101,7 @@ $A\lt(\cztope{\ptemp}{0}\rt)\subseteq
 \cztope{\ptemp}{0}$ when $\infnorm{\mu}\leq 1$.
 \end{proof}
 %
-{\it Shape of complex zonotope:} Geometrically speaking, the real
-projection of a complex zonotope can be a Minkowski sum of line
-segments as well as some ellipsoids.  Therefore, complex zonotopes are
-more expressive than real zonotopes.  An example of such a
-non-polyhedral complex zonotope projection in real space is
-illustrated with Figure~\ref{fig:cz}, where the generators are
-$\ptemp=\lt(\begin{array}{lll}(1+2i) & 1 & (2+i)\\(1-2i) & 1 &
-  (2-i)\end{array}\rt)$ and the center is the origin.  Furthermore,
-complex zonotopes are different from polynomial zonotopes.  While a
-polynomial zonotope is a polynomial function of real valued intervals,
-a complex zonotope is a Minkowski sum of \emph{linearly transformed
-  transformed circles} in the the complex plane.  A complex zonotope
-is symmetric around the center.  To see this, consider a point in a
-complex zonotope centered at the origin, written as $y=\ptemp\zeta$
-where $\ptemp$ defines the generator set and $\zeta$ is the vector of
-combining coefficients.  Since, $\infnorm{-\zeta}=\infnorm{\zeta}\leq
-1$, so $-y=\ptemp(-\zeta)$ also belongs to the complex zonotope.
+
 
 
 If we add more generators to the above representation of a complex

@@ -14,7 +14,7 @@ The following is the stability verification problem.
 %
 \begin{problem}
 Given a sampling period interval $\Delta=[\lsb,\usb]$, verify
-that the system $H$ is globally exponentially stable.
+that the system $\system$ is globally exponentially stable.
 \end{problem}
 %
 The GES of a system is related to the reachable sets of the
@@ -52,7 +52,7 @@ $\lambda$-contractive $C$-set for a $\lambda\in[0,1)$.  So, we can
   A stability verification algorithm was proposed
   in~\cite{2014-fiacchini-set} that definitely computes a contractive
   $C$-set for a globally exponentially stable system.  But the
-  algorithm involves iterative intersections.  But during iterative
+  algorithm involves iterative intersections.  During iterative
   intersections, the complexity of representing the set can grow
   uncontrollably.  So, the
   algorithm~\cite{2014-fiacchini-set} can be costly, especially in
@@ -65,7 +65,7 @@ $\lambda$-contractive $C$-set for a $\lambda\in[0,1)$.  So, we can
   examples.  Our algorithm, described in the next section, uses some
   properties of contraction of sets, which we shall discuss now.
 
-Since the state change of the system can be identified by the
+As the state change of the system can be identified by the
 transformation by a reachability operator, we define contraction by
 a matrix as follows.  From here on, we denote $J$ as an
 $n\times n$ real matrix.

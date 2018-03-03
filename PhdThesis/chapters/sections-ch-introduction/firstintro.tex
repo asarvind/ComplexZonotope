@@ -1,8 +1,8 @@
 
 Physical systems controlled by digital logic exhibit a mix of
 continuous dynamics, described by differential or difference
-equations, and discrete dynamics described by switching of boolean
-variables.  Mathematical models describing the behavior of such
+equations, and discrete dynamics described by switching of discrete
+valued variables.  Mathematical models describing the behavior of such
 systems are called \emph{hybrid systems}.  Formal verification of
 hybrid systems generally requires computing the set of reachable
 states of the system.  But exactly computing the reachable states of a
@@ -11,26 +11,26 @@ hybrid systems that have differential equations, exact computation of
 the reachable set is undecidable~\cite{alur1995algorithmic}, except in
 particular cases~\cite{lafferriere1998decidable}.  Even in a simpler
 case like a discrete time affine hybrid system, the exact reachable
-set at any time is a union of sets whose number is exponential
-in the number of time steps.  An alternative is find a sufficiently
-accurate over-approximation of the infinite set of reachable states.
-To do so, we need to represent an infinite set of states symbolically
-by a {\it set representation}, which can be efficiently manipulated
-for the computation of the desired over-approximation.
+set at any time is a union of sets whose number is exponential in the
+number of time steps.  An alternative is find a sufficiently accurate
+over-approximation of the infinite set of reachable states.  To do so,
+we need to represent an infinite set of states symbolically by a {\it
+set representation}, which can be efficiently manipulated for the
+computation of the desired over-approximation.
 
 
 Verification of some properties of hybrid systems requires
 over-approximating the unbounded time reachable set of a system.  The
-unbounded time reachable set be over-approximated by
-a \emph{positive invariants}, which is a set whose next set of
-reachable states is contained within itself.  The efficiency, in terms
-of accuracy and computational speed, for positive
-invariant based verification using a set representation, is related
-to the following characteristics of the set representation.
+unbounded time reachable set can be approximated by a \emph{positive
+invariant}, which is a set whose next set of reachable states is
+contained within itself.  The efficiency, in terms of accuracy and
+computational speed, for computing positive invariants using a set
+representation is related to the following characteristics of the set
+representation.
 %
 \begin{enumerate}
-\item Closure under set operations and computational complexity of
-performing these operations, some of which are linear transformation,
+\item Closure under set operations used in reachability analysis and computational complexity of
+performing them.  Some of these operations are linear transformation,
 Minkowski sum, intersection, computation of support function and
 inclusion-checking.
 \item Efficient encoding of positive invariants in the set representation.
@@ -113,24 +113,25 @@ Zonotope & & & closed & encoding\\
 
 To address the above drawback of real zonotopes, we extend them to the
 complex valued domain to yield a set representation called {\it
-complex zonotope}.  A complex zonotope, is a linear combination of
+complex zonotope}.  A complex zonotope is a linear combination of
 complex valued vectors with absolute valued bounds on the combining
 coefficients.  A complex zonotope can capture contraction along the
 complex eigenvectors of a linear system, due to which they can
 efficiently encode non-zero positive invariants of a linear system.  A
 complex zonotope is also geometrically more expressive because its
-real projection can represent not only Minkowski sums of some
+real projection can represent Minkowski sums of some
 ellipsoids in addition to line segments.  They are also different from
 other extensions of complex zonotopes, like quadratic
 zonotopes~\cite{DBLP:conf/aplas/AdjeGW15}, which we shall explain
 later in a separate section.  Still, complex zonotopes retain the
 merit of real zonotopes that they are closed under linear
 transformation and Minkwoski sum, which can also be computed
-efficiently.  In Table~\ref{tab:compset}, we draw comparison of complex
-zonotopes with four categories of set representations comprising
-convex polytopes, zonotopes, ellipsoids and polynomial sub-level sets.
-A review of the other set representations and related work on
-computing positive invariants will be presented in a separate section.
+efficiently.  In Table~\ref{tab:compset}, we draw comparison of
+complex zonotopes with four categories of set representations
+comprising convex polytopes, zonotopes, ellipsoids and polynomial
+sub-level sets.  A review of the other set representations and related
+work on computing positive invariants will be presented in a separate
+section.
 
 We apply complex zonotopes to two problems in the domain of hybrid
 systems that require computing accurate positive invariants.  One
