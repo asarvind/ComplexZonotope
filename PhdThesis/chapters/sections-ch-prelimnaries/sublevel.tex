@@ -1,7 +1,8 @@
-A sub-level set of a polynomial is a natural extension of the
-$H$-representation of the polytope to non-polytopic sets for
-better approximation.  Mathematically, a polynomial sub-level
-set is defined as follows.
+A polynomial sub-level set encodes a set of points that satisfy
+a collection of multi-variate polynomials.  It
+is a natural extension of the $H$-representation of the polytope to
+non-polytopic sets for better approximation.  Mathematically, a
+polynomial sub-level set is defined as follows.
 %
 \begin{definition}
 A polynomial sub-level set is represented by a tuple $\lt(f,d\rt)$,
@@ -33,14 +34,25 @@ interior, because polynomial equalities represent hyper-surfaces which
 have an empty interior.
 
 On the other hand, polynomial sub-level sets specified by polynomial
-inequalities can over-approximate sets having a non-empty interior.
-But computing tight approximations of reachable sets by polynomial
-sub-level sets requires non-convex
-optimization which is expensive.
-Alternatively, a method for computing positive invariants using
-semi-definite relaxation and policy iterations is developed
-in~\cite{DBLP:conf/esop/AdjeGG10}.  However, this approach uses a recursion
-of convex optimization steps.  So, the convergence of the recursion
-can be slower than polyhedral abstract domains, which generally use
-linear programming in the recursion.  In contrast, our algorithm for
-computing positive invariants using complex zonotopes has only a single step of convex optimization.
+inequalities can over-approximate sets having a non-empty interior.  A
+sub-level set of a single multi-variate polynomial is implicitly found
+while computing barrier certificates by sum of squares
+programming~\cite{prajna2004safety}.  For certain classes of hybrid
+systems~\cite{prajna2005necessity}, the existence of a barrier certificate is both
+necessary and sufficient for safety.  However, the accuracy of
+over-approximation provided by a single multi-variate polynomial
+naturally depends on the degree of the polynomial.  But high
+dimensional spaces, representing polynomials of higher degree can be
+computationally expensive.  Alternatively, we can use multiple number
+of easily encodable multi-variate polynomials for better accuracy.
+But computing tight approximations of reachable sets by intersection
+of polynomial sub-level sets requires non-convex optimization, which
+is expensive.  To alleviate complexity of non-convex optimization
+problem in the case of multiple polynomials, an approach using
+semi-definite relaxation coupled with policy iterations has been
+developed in~\cite{DBLP:conf/esop/AdjeGG10}.  However, this approach
+uses a recursion of convex optimization steps.  So, the convergence of
+the recursion can be slower than polyhedral abstract domains, which
+generally use linear programming in the recursion.  In contrast, our
+algorithm for computing positive invariants using complex zonotopes
+has only a single step of convex optimization.

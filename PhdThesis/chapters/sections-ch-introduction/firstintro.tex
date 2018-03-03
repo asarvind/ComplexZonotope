@@ -1,0 +1,152 @@
+
+Physical systems controlled by digital logic exhibit a mix of
+continuous dynamics, described by differential or difference
+equations, and discrete dynamics described by switching of boolean
+variables.  Mathematical models describing the behavior of such
+systems are called \emph{hybrid systems}.  Formal verification of
+hybrid systems generally requires computing the set of reachable
+states of the system.  But exactly computing the reachable states of a
+hybrid system is either undecidable or computationally expensive.  For
+hybrid systems that have differential equations, exact computation of
+the reachable set is undecidable~\cite{alur1995algorithmic}, except in
+particular cases~\cite{lafferriere1998decidable}.  Even in a simpler
+case like a discrete time affine hybrid system, the exact reachable
+set at any time is a union of sets whose number is exponential
+in the number of time steps.  An alternative is find a sufficiently
+accurate over-approximation of the infinite set of reachable states.
+To do so, we need to represent an infinite set of states symbolically
+by a {\it set representation}, which can be efficiently manipulated
+for the computation of the desired over-approximation.
+
+
+Verification of some properties of hybrid systems requires
+over-approximating the unbounded time reachable set of a system.  The
+unbounded time reachable set be over-approximated by
+a \emph{positive invariants}, which is a set whose next set of
+reachable states is contained within itself.  The efficiency, in terms
+of accuracy and computational speed, for positive
+invariant based verification using a set representation, is related
+to the following characteristics of the set representation.
+%
+\begin{enumerate}
+\item Closure under set operations and computational complexity of
+performing these operations, some of which are linear transformation,
+Minkowski sum, intersection, computation of support function and
+inclusion-checking.
+\item Efficient encoding of positive invariants in the set representation.
+\end{enumerate}
+%
+Well known set representations have some of the above characteristics,
+but not all.  For example, polytopes have the advantage that they are
+closed under linear transformation, Minkowski sum and intersection.
+However, for a half-space representation of a polytope, the Minkowski
+sum operation is computationally expensive in higher dimensions.
+Moreover, to our knowledge, there is no upper bound on the
+representation size of a non-zero polytopic positive invariant for a
+stable linear system.  Ellipsoids have the advantage that they are
+closed under linear transformation and also efficiently encode the
+positive invariant of a stable linear system.  But ellipsoids are not
+closed under Minkowski sum and intersection with half-spaces.
+Although there has been work on over-approximation of the Minkowski
+sum and intersection with half-spaces for
+ellipsoids~\cite{allamigeon2017fast,kurzhanskiy2006ellipsoidal}, still there can be a significant
+approximation error.
+
+Zonotope~\cite{DBLP:conf/hybrid/Girard05} is yet another set
+representation, which is a type of polytope specified as a linear
+combination of real vectors whose combining coefficients are bounded
+in the interval $[0,1]$.  Geometrically, they are Minkowski sums of
+line segments.  Zonotopes have the advantage that they are closed
+under linear transformation and Minkowski sum operations, which can
+also be computed efficiently.  Therefore, they have been successfully
+applied to the computation of bounded time reachable sets of uncertain
+continuous linear systems~\cite{DBLP:conf/hybrid/Girard05} and affine
+hybrid systems with simple
+switching~\cite{makhlouf2014networked,girard2008zonotope}.  But
+for over-approximation of the {\it unbounded time reachable set by a
+positive invariant}, real zonotopes have the have the following
+drawback.  We can not guarantee the existence of positively invariant
+real zonotope for the case of a stable linear transformation having
+complex eigenvalues.  We shall show that when the eigenvectors of a
+stable linear transformation are real valued, then collecting the
+eigenvectors of the matrix among the generators of the zonotope gives
+a positively invariant real zonotope.  However, this result does not
+hold when the eigenvectors have complex values, i.e., have non-zero
+imaginary and real parts.
+
+\begin{table}
+\resizebox{\textwidth}{!}{
+\begin{tabular}{|l|c|c|c|c|}
+\hline
+Set & Linear & Minkowski & {Intersection } & {Postive Invariant: }\\
+representation & transformation & sum & with half-space & stable
+linear system\\
+\hline
+\multirow{2}{*}{Convex polytope} & {Efficient } & More than
+& \multirow{3}{*}{Efficient}  &  {Maximum complexity}\\
+\multirow{2}{*}{$H$-representation} & only for & exponential  &  & of encoding  \\
+& invertible matrix & complexity & & not bounded \\
+\hline
+\multirow{2}{*}{Zonotope} & \multirow{2}{*}{Efficient}
+& \multirow{2}{*}{Efficient} & Not & May not\\
+& & & closed & exist\\
+\hline
+\multirow{2}{*}{Ellipsoid} & \multirow{2}{*}{Efficient} & Not & Not &
+Efficient\\
+& & closed & closed & encoding\\
+\hline
+\multirow{2}{*}{Polynomial} & More than & More than & \multirow{3}{*}{Efficient} &
+\multirow{2}{*}{Efficient} \\
+\multirow{2}{*}{sub-level set} & exponential & exponential &
+& \multirow{2}{*}{encoding}\\
+& complexity & complexity & & \\
+\hline
+{Complex} & \multirow{2}{*}{Efficient} & \multirow{2}{*}{Efficient} &
+Not & Efficient\\
+Zonotope & & & closed & encoding\\
+\hline
+\end{tabular}
+}
+\caption{Comparison of set representations}~\label{tab:compset}
+\end{table}
+
+
+To address the above drawback of real zonotopes, we extend them to the
+complex valued domain to yield a set representation called {\it
+complex zonotope}.  A complex zonotope, is a linear combination of
+complex valued vectors with absolute valued bounds on the combining
+coefficients.  A complex zonotope can capture contraction along the
+complex eigenvectors of a linear system, due to which they can
+efficiently encode non-zero positive invariants of a linear system.  A
+complex zonotope is also geometrically more expressive because its
+real projection can represent not only Minkowski sums of some
+ellipsoids in addition to line segments.  They are also different from
+other extensions of complex zonotopes, like quadratic
+zonotopes~\cite{DBLP:conf/aplas/AdjeGW15}, which we shall explain
+later in a separate section.  Still, complex zonotopes retain the
+merit of real zonotopes that they are closed under linear
+transformation and Minkwoski sum, which can also be computed
+efficiently.  In Table~\ref{tab:compset}, we draw comparison of complex
+zonotopes with four categories of set representations comprising
+convex polytopes, zonotopes, ellipsoids and polynomial sub-level sets.
+A review of the other set representations and related work on
+computing positive invariants will be presented in a separate section.
+
+We apply complex zonotopes to two problems in the domain of hybrid
+systems that require computing accurate positive invariants.  One
+problem is verifying \emph{linear invariance properties} of discrete
+time affine hybrid systems.  A linear invariance property is a linear
+contraint on the state of the system that is satisfied by all the
+reachable states.  We derive a convex program based for computing
+positively invariant complex zonotopes that verify a linear invariance
+property.  We demonstrate the efficienty of our method by experiments
+on some benchmark examples.  The other problem is verifying stability
+of linear impulsive systems with sampling uncertainty.  We develop an
+algorithm that finds a contractive complex zonotope using the
+eigenstructure of the system.  Our experiments on two benchmark
+examples show either better or comparable performance compared to
+other approaches.
+
+
+
+
