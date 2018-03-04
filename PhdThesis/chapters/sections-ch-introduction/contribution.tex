@@ -1,4 +1,4 @@
-The main contributions of our work is summarized below.
+%The main contributions of our work is summarized below.
 %
 \begin{itemize}
 \item \emph{Complex zonotope: } Our most important contribution is the
@@ -13,50 +13,61 @@ The main contributions of our work is summarized below.
   linear transformations by incorporating complex eigenvectors as
   generators.  On the other hand, eigenvectors having non-zero real
   and imaginary parts can not be used as generators in real zonotopes.
-  Morover, complex zonotopes are geometrically more expressive since
+  Moreover, complex zonotopes are geometrically more expressive since
   their real projections can represent non-polytopic sets in addition
   to polytopic zonotopes.
-\item \emph{Template based representation: } We introduce a template
+\item \emph{Template based representation: } We introduced a template
   based representation of a complex zonotope, by which we can add
   generators to a complex zonotope to find better approximations.  In
-  a real zonotope, adding a generator to the zonotope can increase the
-  size of the denoted set.  This problem is addressed by the template
-  based representation of a complex zonotope, which has a set of
-  scaling factors that determine the amount of contribution of each
-  \emph{generator} to the size of the set.  Henceforth, when we can
-  add more generators to a complex zonotope and adjust the scaling
-  factors to find a better approximations.
-\item \emph{Intersection with half-spaces: } Similar to real
-  zonotopes, complex zonotopes are also not closed under intersection
-  with half-spaces.  Previous
-  approaches~\cite{scott2016constrained,Ghorbal2010} have addressed
-  this problem for real zonotopes by allowing more linear contraints
-  on the combining coefficients in addition to the interval bounds.
-  For real zonotopes, even with addition of arbitrary linear
-  constraints, the support function can be computed efficiently by
-  linear programming.  But in the case of complex zonotopes, if we add
-  more constraints than the quadratic absolute value bounds on the
-  combining coefficients, accurate computation of the support function
-  becomes intractable.  Alternatively, we generalize complex zonotopes
-  to a set representation called \emph{augmented complex zonotopes} to
-  over-approximate the intersection with a particular class of linear
-  sub-level sets called \emph{sub-parallelotopes}.  An augmented
-  complex zonotope is geometrically equivalent to a complex zonotope,
-  where the computation of support function is just as efficient as
-  the latter.  However, we show that an over-approximation of the
-  intersection of an augmented complex zonotope with a
-  sub-parallelotope can be efficiently encoded as another augmented
-  complex zonotope.  Furthermore, the error in
+  a real zonotope, adding a generator can increase the size of the
+  denoted set.  This problem is addressed by the template based
+  representation of a complex zonotope, which has a set of scaling
+  factors that determine the amount of contribution of each generator
+  to the size of the set.  Henceforth, to find a better
+  approximations, we can add more generators to a complex zonotope and
+  adjust the scaling factors.
+\item \emph{Set operations: } Apart from the simpler computations like
+  linear transformation, Minkowski sum and support function, we
+  developed a convex program to efficiently check-inclusion between
+  template complex zonotopes.  Then, we developed the augmented
+  complex zonotope representation to efficiently over-approximate the
+  intersection with sub-parallelotopes.  The error in
   over-approximation can be regulated by adjusting the scaling
-  factors.
-\item \emph{Convex program for verifying linear invariance property:
-}  We develop a convex program based on computing positively invariant
+  factors.  The main advantage of augmented complex zonotope is that
+  we can still compute the support function efficiently.  It
+  provided an alternative to the previous known variations of real
+  zonotopes for computing the intersection, because their extension to
+  complex zonotope makes computation of the support function
+  intractable.
+%% \item \emph{Intersection with half-spaces: } Similar to real
+%%   zonotopes, complex zonotopes are also not closed under intersection
+%%   with half-spaces.  Previous approaches have addressed this problem
+%%   for real zonotopes by allowing more linear constraints on the
+%%   combining coefficients in addition to the interval bounds.  For real
+%%   zonotopes, even with addition of arbitrary linear constraints, the
+%%   support function can be computed efficiently by linear programming.
+%%   But in the case of complex zonotopes, if we add more constraints
+%%   than the quadratic absolute value bounds on the combining
+%%   coefficients, accurate computation of the support function becomes
+%%   intractable.  Alternatively, we generalized complex zonotopes to a
+%%   set representation called \emph{augmented complex zonotopes} to
+%%   over-approximate the intersection with a particular class of linear
+%%   sub-level sets called \emph{sub-parallelotopes}.  An augmented
+%%   complex zonotope is geometrically equivalent to a complex zonotope,
+%%   where the computation of support function is just as efficient as
+%%   the latter.  However, we showed that an over-approximation of the
+%%   intersection of an augmented complex zonotope with a
+%%   sub-parallelotope can be efficiently encoded as another augmented
+%%   complex zonotope.  Furthermore, the error in over-approximation can
+%%   be regulated by adjusting the scaling factors.
+\item \emph{Verification of discrete time affine hybrid systems:
+}  We developed a convex program based on computing positively invariant
   augmented complex zonotopes to verify linear invariance properties
-  of discrete time affine hybrid systems.  We perform experiments on
+  of discrete time affine hybrid systems.  We performed experiments on
   three benchmark examples that demonstrate the efficiency of our
   approach. 
 \item \emph{Stability verification of linear impulsive systems: } We
-  develop an algorithm to find contractive complex zonotopes that
+  developed an algorithm to find contractive complex zonotopes that
   verify global exponential stability of linear impulsive systems with
   sampling uncertainty.  The novelty of our algorithm lies in using
   the eigenstructure of reachability operators for stability

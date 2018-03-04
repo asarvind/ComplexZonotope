@@ -367,6 +367,18 @@
 \newtheorem{prem}[theorem]{Premise} \newtheorem{egp}[thm]{Example}
 \newcommand{\initstate}{\tbf{x}_0} \newcommand{\camount}{\mathcal{\xi}}
 
+\newenvironment{dedication}
+  {%\clearpage           % we want a new page          %% I commented this
+   \thispagestyle{empty}% no header and footer
+   \vspace*{\stretch{1}}% some space at the top
+   \itshape             % the text is in italics
+   \raggedleft          % flush to the right margin
+  }
+  {\par % end the paragraph
+   \vspace{\stretch{3}} % space at bottom is three times that at the top
+   \clearpage           % finish off the page
+  }
+
 %% ========================================================
 %%% Define colors 
 %% ========================================================

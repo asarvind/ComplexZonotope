@@ -10,18 +10,17 @@ valued, we can not guarantee the existence of a non-zero real
 zonotopic positive invariant.  Overcoming this drawback of real
 zonotopes, we extend them to a new class of sets called \emph{complex
 zonotopes} by which we can easily specify positive invariants of a
-stable linear system using the eigenstructure.  Complex zonotopes have
-complex valued generators complex combining coefficients bounded in
-their absolute values, as opposed to the real valued generators and
-real combining coefficients of simple zonotopes.  Complex zonotopes
-are also geometrically more expressive, since their real projections
-can describe Minkowski sums of some ellipsoids along with line
-segments.  Moreover, complex zonotopes retain the merit of real
-zonotopes that they are closed under linear transformations and
-Minkowski sums and these can be computed efficiently.  We also derive
-a convex program for checking inclusion between two complex zonotopes.
-The inclusion relation is a key ingredient for efficient invariant
-computation, which we shall discuss in latter chapters.
+stable linear system using the eigenstructure.  Henceforth, we believe
+that even for affine hybrid systems, a complex zonotope can capture
+contraction along the complex eigenvectors of some of the
+transformation matrices.  Complex zonotopes are also geometrically
+more expressive, since their real projections can describe Minkowski
+sums of some ellipsoids along with line segments.  Apart from
+computing simple operations on complex zonotopes like linear
+transformation and Minkowski sum, we shall derive a convex program for
+checking inclusion between two complex zonotopes.  The inclusion
+relation is a key ingredient for efficient invariant computation,
+which we shall discuss in latter chapters.
 
 This chapter is organized into three main sections.  In
 Section~\ref{sec:representation}, we shall introduce the basic
@@ -44,40 +43,3 @@ checking the inclusion between two template complex zonotopes.
 
 \section{Checking inclusion}~\label{sec:inclusion-tcz}
 \input{chapters/sections-ch-tcz/inclusion}
-
-%% \section{Reachable set computation for linear systems}
-
-%% Similar to simple zonotopes, template complex zonotopes can also
-%% efficiently represent the bounded time reachable set of a discrete
-%% time linear system
-%% %
-%% \begin{align*}
-%% \trj{x}{t+1}=A\trj{x}{t}+ \inptrj{t}\\
-%% \trj{x}{0}\in\init~,\forall t\in\integers_{\geq 0}~\trj{t}\in\inputset
-%% \end{align*}
-%% %
-%% due to its closure under linear transformation and Minkowski sum
-%% operations and efficient computations of the same.  Based on
-%% Lemmas~\ref{lem:lin-transform}
-%% and~\ref{lem:min-sum}, if the initial set is
-%% $\init=\tcztope{\inittemp}{\initcen}{\initsfact}$ and the input set is
-%% $\inputset=\tcztope{\inputtemp}{\inputcen}{\inputsfact}$, then the
-%% reachable set at a time point is computed as
-%% %
-%% \begin{align}
-%% & \reachset{t}=\tcztope
-%% {% template
-%% \minsum{A^t\inittemp}{\lt(\sum_{i=0}^{t-1}A^i\rt)\inputtemp}
-%% }
-%% {% center
-%% A^t\initcen+\lt(\sum_{i=0}^{t-1}A^i\rt)\inputcen
-%% }
-%% {% scaling factors
-%% \lt[\begin{matrix}
-%% \initsfact \\
-%% \inputsfact
-%% \end{matrix}
-%% \rt]
-%% }.
-%% \end{align}
-

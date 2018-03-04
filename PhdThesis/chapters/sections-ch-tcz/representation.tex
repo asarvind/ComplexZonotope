@@ -43,8 +43,7 @@ combining coefficients.  Since, $\infnorm{-\zeta}=\infnorm{\zeta}\leq
 \captionsetup{justification=centering}
 \includegraphics[scale=0.43]{fig/cznew.png}
 \includegraphics[scale=0.5]{fig/CZhull.png}
-\caption{Real projection of a complex zonotope as\\ Minkowski sum of 2 ellipses and 1 line segment }        
-\label{fig:cz}
+\caption{Real projection of a complex zonotope as\\ Minkowski sum of 2 ellipses and 1 line segment }~\label{fig:cz}
 \end{figure}
 %
 A motivation for extending simple zonotopes to complex zonotopes is
@@ -107,27 +106,24 @@ $A\lt(\cztope{\ptemp}{0}\rt)\subseteq
 If we add more generators to the above representation of a complex
 zonotope, it would increase the size of the complex zonotope.
 Therefore, we can not find better approximations of a given set by
-only adding more generators to the complex zonotope.  Moreover, adding a
-generator can violate positive invariance, as shown in
-Figure~\ref{todo}.  Alternatively, to refine a complex zonotope, we
-can adjust the magnitude of contribution of each generator to the size
-of the set while also preserving the positive
-invariance.  This way can also add more generators to refine the
-complex zonotope, by adjusting the
-magnitude of contribution of each generator.
-
-In order to conveniently perform algebraic manipulations on the
-magnitude of each generator, we can explicitly specify values
-proportional to their magnitudes as part of the set representation.
-In this regard, we introduce a {\it template complex zonotope}
-representation, where the magnitude of each combining coefficient is
-bounded in its absolute value by a positive real, called a {\it
-  scaling factor}.  We call the matrix whose column vectors generate a
-template complex zonotope as a {\it template}.  This representation is
-similar in spirit to the known template based set
-representations~\cite{todo} in abstract interpretation, where for some
-fixed template, subsets
-of metric spaces are mapped to points in a lattice.  In the case of a
+only adding more generators to the complex zonotope.  Moreover, adding
+a generator can violate positive invariance.  Alternatively, to refine
+a complex zonotope, we can adjust the magnitude of contribution of
+each generator to the size of the set while also preserving the
+positive invariance.  This way, can also add more generators and
+increase approximation accuracy by adjusting the magnitudes of each
+generator.  In order to conveniently perform algebraic manipulations
+on the magnitude of each generator, we can explicitly specify variable
+bounds on the combining coefficients.  This gives us a more general
+representation, which we call as {\it template complex zonotope},
+where the magnitude of each combining coefficient is bounded in its
+absolute value a {\it scaling factor}.  We call the matrix whose
+column vectors generate a template complex zonotope as a {\it
+template}.  This representation is similar in spirit to the known
+template based set
+representations~\cite{Sankaranarayanan+Dang+Ivancic-08-Symbolic,DBLP:journals/lisp/Mine06}
+in abstract interpretation, where for some fixed template, subsets of
+metric spaces are mapped to points in a lattice.  In the case of a
 template complex zonotope, for a fixed template, subsets of the
 complex vector space can be mapped to the {\it scaling factors}.
 %

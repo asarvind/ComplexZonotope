@@ -1,4 +1,4 @@
-In hybrid dynamical systems, a transition canxs be controlled by
+In hybrid dynamical systems, a transition can be controlled by
 constraints on the state variables which act as preconditions for the
 transition.  In an affine hybrid system, the preconditions are linear
 constraints on the state variables.  So, computing an
@@ -15,59 +15,55 @@ overapproximation by adjusting the scaling factors.  Before describing
 an augmented complex zonotope, we briefly discuss related work on
 zonotopes and compare it with the augmented complex zonotopes.  
 
-{\bf Related work: } To account for the intersection operation with
-real zonotopes, these sets have been extended to constrained
+{\bf Related work and problem with their extension to complex
+zonotopes: } To accurately represent the intersection with linear
+sub-level sets, real zonotopes have been extended to constrained
 zonotopes~\cite{scott2016constrained} or more generally constrained
-affine sets~\cite{Ghorbal2010}.  Constrained zonotopes are briefly described
-in the introductory chapter.  In these representations, in addition to
-the interval constraints on the combining coefficients, there can be
-more general linear constraints.  Intersection with hyperplanes, or
-more generally half-spaces, can be computed efficiently in the
-representation.
+affine sets~\cite{Ghorbal2010}.  Constrained zonotopes are briefly
+described in the introductory chapter.  In these representations, in
+addition to the interval constraints on the combining coefficients,
+there can be more general linear constraints.  This permits exact
+representation of the intersection with hyperplanes, in the case of
+constrained zonotopes, and half-spaces, in the case of constrained
+affine sets.  In these extended representations, the support function
+can still be computed efficiently by linear programming because there are
+only linear constraints on the combining coefficients.  Similarly, in
+our complex zonotope representation, although there are quadratic
+constraints (absolute value bounds) on the combining coefficients, the
+support function can be computed by a simple affine expression given
+in Lemma~\ref{lem:support-tcz}.  However, if we introduce linear
+constraints on the complex combining coefficients in addition to the
+quadratic absolute value bounds, computing the support function
+becomes intractable.  But accurate computation of the support function
+is required in verifying bounds on the reachable set.  In other words,
+extending the idea of constrained zonotope or constrained affine set
+to a complex zonotope will make the computation of support function
+intractable.
 
-{\bf Drawback in extending earlier approaches to complex zonotopes: }
-In a constrained zonotope or a constrained affine set, the support
-function, i.e., projection along a direction, can be computed
-efficiently by linear programming because there are only linear
-constraints on the combining coefficients.  Also, in our complex
-zonotope representation, although there are quadratic constraints
-(absolute value bounds) on the combining coefficients, the support
-function can be computed by a simple affine expression given in
-Lemma~\ref{lem:support-tcz}.  However, if we have linear constraints on the
-complex combining coefficients in addition to the quadratic absolute
-value bounds, computing the support function becomes intractable.  But
-accurate computation of the support function is required in verifying
-bounds on the reachable set.  In other words, extending the idea of
-constrained zonotope or constrained affine set to a complex zonotope
-will make the computation of support function intractable.
+{\bf Our solution: } We observe that in certain cases, intersection of
+a version of the real zonotope representation, called \emph{interval
+zonotope}, with a particular class of linear sub-level sets,
+called \emph{sub-parallelotopes}, can be computed efficiently.
+Motivated by this, we introduce a more general representation of
+complex zonotope, called \emph{augmented complex zonotope}, which
+denotes the Minkowski sum of a complex zonotope and an interval
+zonotope.  We show that the interval zonotope part of an augmented
+complex zonotope can be used to over-approximate the intersection.  On
+the other hand, we can still compute the support function efficiently
+because an augmented complex zonotope is geometrically equivalent to a
+template complex zonotope.  Furthermore, we show that the error in
+overapproximation can be regulated by adjusting the scaling factors
+and the center of the template complex zonotope part.
 
-Henceforth, we want to develop a set representation for
-overapproximating the intersection such that computation of the
-support function is still efficient.  In this regard, we generalize
-complex zonotope to an augmented complex zonotope representation.  We
-shall observe that for particular cases, intersection of a version of
-simple zonotope, called interval zonotope, with sub-parallelotopic
-constraints can be computed efficiently.  Motivated by this, we define
-an augmented complex zonotope as a Minkowski sum of a complex zonotope
-and an interval zonotope.  However, the real projection of an
-augmented complex zonotope is geometrically equivalent to a real
-zonotope, which allows efficient computation of the support function.
-Furthermore, we can use the interval zonotope part of augmented
-complex zonotope to over-approximate the intersection.  We show that
-the error in overapproximation can be regulated by adjusting the
-scaling factors and the center.  The intersection operation will be
-explained later in detail.
-
-
-The chapter has three main sections.  In Section~\ref{sec:iztope}, we
+This chapter has three main sections.  In Section~\ref{sec:iztope}, we
 introduce the interval zonotope and sub-parallelotope set
 representations and describe the intersection between them.
 Furthermore, we discuss other operations on interval zonotopes like
 linear transformation, Minkowski sum and computation of the support
 function.  In Section~\ref{sec:acz-it}, we introduce the augmented
 complex zonotope and described its intersection with a
-sub-parallelotope.  We compute a bound on over-approximation of the
-intersection between them, which is dependent on the scaling factors
-and the center.  In Section~\ref{sec:operations-acz}, we shall discuss
-other operations on augmented complex zonotopes like linear
+sub-parallelotope.  We compute a bound on the over-approximation of
+the intersection between them, which is dependent on the scaling
+factors and the center.  In Section~\ref{sec:operations-acz}, we shall
+discuss other operations on augmented complex zonotopes like linear
 transformation, Minkowski sum and computation of the support function.
