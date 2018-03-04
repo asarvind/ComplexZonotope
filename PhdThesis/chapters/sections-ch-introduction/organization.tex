@@ -1,7 +1,7 @@
 This dissertation contains five main chapters and a conclusive
 chapter.  In the first chapter, we have briefly discussed the
 desirable characteristics of a good set representation for computing
-accurate positive invariants of hybrid systems.  In light of these
+accurate positive invariants of hybrid systems.  In the light of these
 characteristics, we provided a short review of some set
 representations and discussed their advantages and drawbacks.  We have
 discussed simple zonotopes, which are defined over real numbers, and
@@ -19,10 +19,10 @@ efficiently represent a non-zero positive invariant for a stable
 linear transformation based on the eigenstructure.  Next we introduce
 the template based representation of a complex zonotope, called
 \emph{template complex zonotope}.  It allows adding more generators to
-a template for increasing the quality of approximation by the complex
-zonotope.  Later we discuss set operations on template complex
-zonotopes and derive a second order conic program for checking
-inclusion between two template complex zonotopes.
+a template for increasing the quality of approximation of a given set.
+Later we discuss set operations on template complex zonotopes and
+derive a second order conic program for checking inclusion between two
+template complex zonotopes.
 
 In Chapter~\ref{ch:acz}, we generalize complex zonotope to an
 \emph{augmented complex zonotope} representation for computing
@@ -34,18 +34,20 @@ zonotope.  An interval zonotope has variable interval bounds on the
 combining coefficients.  We show that the intersection between an
 interval zonotope and a suitably aligned sub-parallelotope is another
 interval zonotope which can be computed algebraically.  Motivated by
-this result, we define an augmented complex zonotope so as to
-efficiently compute the over-approximation of its intersection with a
-sub-parallelotope.  Latter we discuss other set operations on
-augmented complex zonotopes.  We extend the inclusion-checking
-relation between template complex zonotopes to augmented complex
-zonotopes.
+this result, we define an augmented complex zonotope as a Minkowski
+sum of a complex zonotope and a real zonotope.  By this
+representation, we can efficiently compute the over-approximation of
+its intersection with a sub-parallelotope, where the approximation
+error can be regulated by adjusting the scaling factors.  Latter we
+discuss other set operations on augmented complex zonotopes.  We
+extend the inclusion-checking relation between template complex
+zonotopes to augmented complex zonotopes.
 
 In Chapter~\ref{ch:invariance}, we describe a discrete time affine
 hybrid system, its positive invariants and the problem of verifying a
 \emph{linear invariance property}.  We develop a convex program to
-verify a linear invariance property based on computing positively
-invariant augmented complex zonotopes.  We implement the method on
+verify a linear invariance property based on computing a positively
+invariant augmented complex zonotope.  We implement the method on
 some benchmark examples to demonstrate its efficiency.
 
 In Chapter~\ref{ch:lis}, we develop an algorithm for exponential
