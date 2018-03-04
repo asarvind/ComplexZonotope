@@ -1,21 +1,22 @@
-Computing reachable sets is a de facto approach in many verification
-problems for hybrid systems.  But exact computation of the reachable
-set is an intractable problem for many kinds of hybrid systems, either
-due to undecidability or high computational complexity.
-Alternatively, a lot of research has been focused on using \emph{set
-  representations} that can be efficiently manipulated to compute
-sufficiently accurate over-approximation of the reachable set.
-Zonotopes are a useful set representation in reachability analysis
-because of their closure and low complexity for computing linear
-transformation and Minkowski sum operations.  But for approximating the
-unbounded time reachable sets by \emph{positive invariants}, zonotope
-have the following drawback.  The efficiency of computing a positive
-invariant depends on capturing directions for convergence of the states
-to an equilibrium.  In affine hybrid systems, some of the directions
+Computing reachable sets is a de facto approach used in many formal
+verification methods for hybrid systems.  But exact computation of the
+reachable set is an intractable problem for many kinds of hybrid
+systems, either due to undecidability or high computational
+complexity.  Alternatively, quite a lot of research has been focused
+on using \emph{set representations} that can be efficiently
+manipulated to compute sufficiently accurate over-approximation of the
+reachable set.  Zonotopes are a useful set representation in
+reachability analysis because of their closure and low complexity for
+computing linear transformation and Minkowski sum operations.  But for
+approximating the unbounded time reachable sets by \emph{positive
+invariants}, zonotopes have the following drawback.  The effectiveness
+of a set representation for computing a positive invariant depends on
+efficiently encoding the directions for convergence of the states to
+an equilibrium.  In an affine hybrid system, some of the directions
 for convergence can be encoded by the complex valued eigenvectors of
 the transformation matrices.  But the zonotope representation can not
 exploit the complex eigenstructure of the transformation matrices
-because it has only real valued generators.
+because it only has real valued generators.
 
 Therefore, we extend real zonotopes to the complex valued domain in a
 way that can capture contraction along complex valued vectors.  This
@@ -25,12 +26,11 @@ include some non-polytopic sets as well as polytopic zonotopes.  They
 retain the merit of real zonotopes that we can efficiently perform
 linear transformation and Minkowski sum operations and compute the
 support function.  Additionally, we show that they can capture
-contraction along complex valued eigenvectors.  Apart from the
-aforementioned computationally efficient operations on complex
-zonotopes, we develop computationally tractable approximations for
-inclusion-checking and intersection with half-spaces.  Using these
-techniques we develop convex programs to verify \emph{linear
-invariance properties} of discrete time affine hybrid systems and
-exponential stability of \emph{linear impulsive systems}.  Our
-experiments on some benchmark examples demonstrate the efficiency of
-the verification techniques based on complex zonotopes.
+contraction along complex valued eigenvectors.  Furthermore, we
+develop computationally tractable approximations for
+inclusion-checking and intersection with half-spaces.  Using these set
+operations on complex zonotopes, we develop convex programs to
+verify \emph{linear invariance properties} of discrete time affine
+hybrid systems and exponential stability of \emph{linear impulsive
+systems}.  Our experiments on some benchmark examples demonstrate the
+efficiency of the verification techniques based on     complex zonotopes.

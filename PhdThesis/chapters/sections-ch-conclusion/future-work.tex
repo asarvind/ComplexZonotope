@@ -1,0 +1,42 @@
+Some of the directions for extending this research on complex
+zonotopes are discussed below.
+%
+\begin{enumerate}
+\item \emph{Non-linear systems: } Hybrid systems with non-linear
+  differential and difference equations are inherently more difficult
+  to verify than affine hybrid systems having linear differential or
+  difference equations.  For reachability analysis of affine hybrid
+  systems, complex zonotopes have the advantage that they are closed
+  and have low computational complexity under affine transformations.
+  However, complex zonotopes are not closed under non-affine
+  transformations, like polynomial functions, due to which extending
+  their usage to non-affine hybrid systems is computationally
+  challenging.  So, we have to develop convex relaxations to
+  approximate the non-affine images of complex zonotopes.
+  Alternatively, just like polynomial real zonotopes, we can extend
+  complex zonotopes to polynomial complex zonotopes.  Then, we face
+  the problem that the degree of polynomial complex zonotope grows
+  exponentially with the iterative application of non-affine
+  functions.  So, we have to approximate a polynomial complex zonotope
+  of higher degree with a polynomial complex zonotope of lower degree.
+\item \emph{Continuous time dynamics: } The set operations we have
+  developed are mainly useful for computing positive invariants of
+  discrete time dynamics or simpler cases of continuous dynamics that
+  can be easily discretized in time.  But for computing positively
+  invariant complex zonotopes for more general continuous time
+  dynamics, we have to develop approximations for the lie derivatives
+  of the complex zonotope.  
+\item \emph{Program verification:  }  Complex zonotopes can be used as
+  an abstract domain for program verification.  Indeed, our template
+  based representation of complex zonotope is closer in spirit to the
+  template based approaches in abstract interpretation.  We have to
+  experimentally find out the performance of complex zonotopes when
+  applied to numerical program verification.
+\end{enumerate}
+%
+Indeed, more experimentation has to be done to understand the
+practical issues with using complex zonotopes, even for affine hybrid
+systems.  Nevertheless, complex zonotopes provide an exemplary
+approach for future set representations to efficiently encode the
+eigenstructure of a system for increasing the accuracy of reachability
+analysis techniques.
