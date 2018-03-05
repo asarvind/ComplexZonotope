@@ -59,7 +59,7 @@ meet and join operations can be expressed as affine expressions of the
 variables.  We consider two affine functions
 called \emph{min-approximation} and \emph{max-approximation}
 functions, defined as follows.  A function
-$\minapproxsymbol:\reals^k\times\lt(\reals\cup\infty\rt)^k$ is a
+$\minapproxsymbol:\reals^k\times\lt(\reals\bigcup\set{\infty}\rt)^k$ is a
 min-approximation function if for all $i\in\set{1,...,k}$
 %
 \[
@@ -80,7 +80,7 @@ first argument $\ub$, and is a finite valued real vector.
 \end{equation}
 %
 Similarly, a function
-$\maxapproxsymbol:\reals^k\times\lt(\reals\cup\lt(-\infty\rt)^k\rt)$
+$\maxapproxsymbol:\reals^k\times\lt(\reals\bigcup\set{-\infty}\rt)^k$
 is a max-approximation function if for all $i\in\set{1,...,k}$
 %
 \[
@@ -106,7 +106,7 @@ functions, respectively.
 %
 \begin{lemma}~\label{lem:min-max-approximation}
 Let us consider vectors $\lb,\ub\in\reals^k$ and
-$\plb,\pub\in\set{\reals,-\infty,\infty}^k$.  If
+$\plb,\pub\in\lt(\reals\bigcup\set{-\infty,\infty}\rt)^k$.  If
 $\lb\leq\maxapprox{\lb}{\plb}\leq\minapprox{\ub}{\pub}\leq\ub$, then
 %
 \begin{align*}

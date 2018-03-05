@@ -4,19 +4,65 @@
 %%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-Notation
 \begin{itemize}
-   \item $\N$ the set of \emph{natural} numbers
-   \item $\mathbb{Q}$ the set of \emph{rational} numbers
-   \item $\R$ the set of \emph{real} numbers
-   \item $\B$ the set $\{0,1\}$
-   \item \dots
+\item $\reals$: Real numbers, $\compnums$: Complex numbers,
+  $\integers$: Integers.
+\item $\overline{\reals}=\reals\bigcup\set{\infty,-\infty}$.
+\item If $a,b\in\reals\bigcap{-\infty,\infty}$, then
+  $(a,b)=\set{x\in\overline{\reals}:~a< x< b}$,\\
+  $[a,b)=\set{x\in\overline{\reals}:~a\leq x< b}$,
+  $(a,b]=\set{x\in\overline{\reals}:~a< x\leq b}$ and\\
+  $[a,b]=\set{x\in\overline{\reals}:~a\leq x\leq b}$
+\item $\mat{n}{m}{S}$: Set of $n\times m$ matrices over the set $S$.
+\item If $X\in\mat{n}{m}{S}$, then $X_i$ is the $i^{th}$ row of $X$.
+  $X_{ij}$ is the $i^{th}$ row $j^{th}$ column entry of $X$.
+\item Let $a\in\reals$, $n\in\integers$, $S\subseteq\reals$ and
+  $\bowtie\in\set{\geq,\leq,>,<}$.  Then $S_{\bowtie a}=\set{x\in S:
+  x\bowtie a}$ and $S^n=\mat{n}{1}{S}$.
+\item If $\bowtie\in\set{\geq,\leq,<,>}$, and $x,y\in\reals^n$, then
+  $x\bowtie y$ iff $x_i\bowtie y_i$ for all $i\in\set{1,\ldots,n}$.
+\item For any $x,y\in\reals^n$, their join is denoted $\join{x}{y}$ and meet
+  is denoted $\meet{x}{y}$, which are defined as follows.  For any $i\in\set{1,\ldots,n}$,
+  %
+  \[
+\lt(\join{x}{y}\rt)_i=\max\set{x_i,y_i},~~~\lt(\meet{x}{y}\rt)_i=\min\set{x_i,y_i}.
+  \]
+  %
+\item For any $c=a+\iota b\in\compnums$, $\real{c}=a$, $\img{c}=b$ and
+  $\absolute{c}=\sqrt{a^2+b^2}$.
+\item  If $y\in\compnums^n$, then
+  $\norm{y}=\sqrt{\sum_{i=1}^n{\absolute{y}}^2}$ and
+  $\infnorm{y}=\max_{i=1}^n\absolute{y}$.
+\item If $A\in\mat{n}{m}{\compnums}$, then
+  $\norm{A}=\max\set{\norm{Ax}:\norm{x}=1}$
+  and\\ ${\infnorm{A}=\max\set{\infnorm{Ax}:\infnorm{x}=1}}.$
+\item  If $S$ is a finite set, then $\absolute{S}$ is the number of
+  elements in $S$.  On the other hand, if $S$ is an infinite set, then
+  $\absolute{S}=\infty$.
+\item If $S\subseteq\compnums^n$ and is a finite set, i.e.,
+  $\absolute{S}<\infty$, then the convex hull of $S$ is
+%
+  \[
+\convexhull{S}=\set{\sum_{i=1}^{\absolute{S}}a_ix_i:~x_i\in
+  S,~a\in\reals^{\absolute{S}}_{\geq 0},~\sum_{i=1}^{\absolute{S}}a_i=1}.
+  \]
+  %
+\item For any subset $S\subseteq\compnums$, its convex hull is
+%
+  \[
+\convexhull{S}=\bigcup_{\set{V\subseteq S:~\absolute{V}<\infty}}\convexhull{V}
+  \]
+  %
+\item The set of all real valued polynomials of multiple variables
+  $\set{x_1,\ldots,x_n}$ is $\polyring{x_1,\ldots,x_n}{\reals}$.
+\item A point $p\in\compnums$ is called an interior point of a set $S$
+  if there exists $b\in\reals_{\geq 0}$ such that
+  $\set{x:\sqnorm{p-x}\leq b}\subseteq S$.  The set $S$ is called an
+  open set if all of its elements are interior points.
+\item A set is closed if it is the complement of an open set.
+\item A set $S\subseteq\compnums$ is bounded if $\sup_{x\in
+  S}\norm{x}< \infty$.  The set $S$ is compact if it is closed and
+  bounded.
 \end{itemize}
 
 
-\ni Abbreviations
-\begin{itemize}
-   \item BDT : Binary Decision Tree
-   \item DNF : Disjunctive Normal Form
-   \item PBNF : Pseudo-Boolean Normal Form
-\end{itemize}

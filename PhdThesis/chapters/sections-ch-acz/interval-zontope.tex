@@ -33,7 +33,7 @@ Let us consider ${\qtemp}\in\mat{k}{n}{\reals}$ such that
 $\lt(\qtemp\transpose{\qtemp}\rt)$ is non-singular.  We
 call such a matrix $\qtemp$ as a \emph{sub-paralleotopic template}.  Let us
 consider
-$\plb,\pub\in\set{\reals,-\infty,\infty}^k$ such that $\plb\leq\pub$,
+$\plb,\pub\in\lt(\reals\bigcup\set{-\infty,\infty}\rt)^k$ such that $\plb\leq\pub$,
 called {\it lower and upper offsets}, respectively.  The following is
 the representation of a sub-parallelotope.
 %
@@ -227,7 +227,7 @@ otherwise specified.
 %
 \begin{align*}
 & \lb,\ub\in\reals^k:
-  k\leq n,~~~\plb\in\set{\reals,-\infty}^n,~~~\pub\in\set{\reals,\infty}^n\\
+  k\leq n,~~~\plb\in\lt(\reals\bigcup\set{-\infty}\rt)^k,~~~\pub\in\lt(\reals\bigcup\set{\infty}\rt)^k\\
 & ~~~\qtemp\in\mat{k}{n}{\reals}:~\lt(\qtemp\qtemp^T\rt)~\text{is
 non-singular}
 \end{align*}
