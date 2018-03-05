@@ -9,23 +9,23 @@ zonotopes are discussed below.
   systems, complex zonotopes have the advantage that they are closed
   and have low computational complexity under affine transformations.
   However, complex zonotopes are not closed under non-affine
-  transformations, like polynomial functions, due to which extending
-  their usage to non-affine hybrid systems is computationally
-  challenging.  So, we have to develop convex relaxations to
-  approximate the non-affine images of complex zonotopes.
-  Alternatively, just like polynomial real zonotopes, we can extend
-  complex zonotopes to polynomial complex zonotopes.  Then, we face
-  the problem that the degree of polynomial complex zonotope grows
-  exponentially with the iterative application of non-affine
-  functions.  So, we have to approximate a polynomial complex zonotope
-  of higher degree with a polynomial complex zonotope of lower degree.
+  transformations due to which extending their usage to non-affine
+  hybrid systems is computationally challenging.  To address this
+  problem, we can develop convex relaxations to approximate the
+  non-affine images of complex zonotopes.  Alternatively, just like
+  polynomial real zonotopes, we can extend complex zonotopes to
+  polynomial complex zonotopes.  But we then face the problem that the
+  degree of polynomial complex zonotope grows exponentially with the
+  iterative application of non-affine functions.  So, we have to
+  approximate a polynomial complex zonotope of higher degree with a
+  polynomial complex zonotope of lower degree.
 \item \emph{Continuous time dynamics: } The set operations we have
   developed are mainly useful for computing positive invariants of
   discrete time dynamics or simpler cases of continuous dynamics that
   can be easily discretized in time.  But for computing positively
   invariant complex zonotopes for more general continuous time
-  dynamics, we have to develop approximations for the lie derivatives
-  of the complex zonotope.  
+  dynamics, we have to develop approximations for the vector field
+  on the boundary of a complex zonotope.
 \item \emph{Program verification:  }  Complex zonotopes can be used as
   an abstract domain for program verification.  Indeed, our template
   based representation of complex zonotope is closer in spirit to the

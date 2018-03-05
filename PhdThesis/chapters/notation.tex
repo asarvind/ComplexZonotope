@@ -47,7 +47,7 @@
   S,~a\in\reals^{\absolute{S}}_{\geq 0},~\sum_{i=1}^{\absolute{S}}a_i=1}.
   \]
   %
-\item For any subset $S\subseteq\compnums$, its convex hull is
+\item For any subset $S\subseteq\compnums^n$, its convex hull is
 %
   \[
 \convexhull{S}=\bigcup_{\set{V\subseteq S:~\absolute{V}<\infty}}\convexhull{V}
@@ -55,12 +55,12 @@
   %
 \item The set of all real valued polynomials of multiple variables
   $\set{x_1,\ldots,x_n}$ is $\polyring{x_1,\ldots,x_n}{\reals}$.
-\item A point $p\in\compnums$ is called an interior point of a set $S$
-  if there exists $b\in\reals_{\geq 0}$ such that
-  $\set{x:\sqnorm{p-x}\leq b}\subseteq S$.  The set $S$ is called an
-  open set if all of its elements are interior points.
+\item A point $p\in\compnums^n$ is called an interior point of a set
+  $S\subseteq\compnums^n$ if there exists $b\in\reals_{\geq 0}$ such
+  that $\set{x:\infnorm{p-x}\leq b}\subseteq S$.  The set $S$ is called
+  an open set if all of its elements are interior points.
 \item A set is closed if it is the complement of an open set.
-\item A set $S\subseteq\compnums$ is bounded if $\sup_{x\in
+\item A set $S\subseteq\compnums^n$ is bounded if $\sup_{x\in
   S}\norm{x}< \infty$.  The set $S$ is compact if it is closed and
   bounded.
 \end{itemize}
