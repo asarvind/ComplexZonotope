@@ -66,4 +66,4 @@ clean:
 	# git rm -f Figures/*.pdf
 
 upload:
-	make clean; git commit -m "cleaned"; git push; git add .; git commit -m "updated"; git push
+	make clean; git commit -m "cleaned"; git push; git add .; git add ../figures; git commit -m "updated"; git push
