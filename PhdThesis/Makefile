@@ -3,7 +3,7 @@ SPELL_CHECK=aspell -c
 
 # Symbolic link
 
-SYMBOLIC_LINK_NAME1=reflis.bib
+
 SYMBOLIC_LINK_NAME2=fig
 
 #submission:
@@ -29,7 +29,6 @@ TEX_FILES := $(wildcard *.tex chapters/*.tex chapters/*/*.tex)
 
 sym:
 	\rm -f ${SYMBOLIC_LINK_NAME1} ${SYMBOLIC_LINK_NAME2}
-	ln -s ~/Dropbox/Invariants/complex-zonotope/ref.bib ${SYMBOLIC_LINK_NAME1}
 	ln -s ../figures ${SYMBOLIC_LINK_NAME2}
 
 
