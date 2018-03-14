@@ -20,23 +20,29 @@ complex zonotope.
 %
 \end{definition}
 %
-{\it Shape of complex zonotope:} The real projection of a complex
-zonotope can represent non-polyhedral sets, which can be Minkowski sum
-of line segments as well as some ellipsoids.  Therefore, complex
-zonotopes are more expressive than real zonotopes.  An example of such
-a non-polyhedral complex zonotope projection in real space is
-illustrated with Figure~\ref{fig:cz}, where the generators are
-$\ptemp=\mymatrix{(1+2i) & 1 & (2+i)\\(1-2i) & 0 &
-(2-i)}                   $ and the center is the origin.  Furthermore,
-complex zonotopes are different from polynomial zonotopes.  While a
-polynomial zonotope is a polynomial function of real valued intervals,
-a complex zonotope is a Minkowski sum of \emph{linearly transformed
-transformed circles} in the the complex plane.  A complex zonotope is
-symmetric around the center.  To see this, consider a point in a
-complex zonotope centered at the origin, written as $y=\ptemp\zeta$
-where $\ptemp$ defines the generator set and $\zeta$ is the vector of
-combining coefficients.  Since, $\infnorm{-\zeta}=\infnorm{\zeta}\leq
-1$, so $-y=\ptemp(-\zeta)$ also belongs to the complex zonotope.
+{\it Geometry of a complex zonotope :} The real projection of a complex
+zonotope can represent non-polytopic sets as well as polytopic
+zonotopes.  Therefore, complex zonotopes are geometrically more
+expressive than simple zonotopes.  Furthermore, complex zonotopes are
+different from polynomial zonotopes.  While a polynomial zonotope is a
+polynomial function of real valued intervals, a complex zonotope is a
+Minkowski sum of \emph{linearly transformed transformed circles} in
+the the complex plane.  A complex zonotope is symmetric around the center.  To see
+ this, consider a point in a complex zonotope centered at the origin,
+ written as $y=\ptemp\zeta$ where $\ptemp$ defines the generator set
+ and $\zeta$ is the vector of combining coefficients.  Since,
+ $\infnorm{-\zeta}=\infnorm{\zeta}\leq 1$, so $-y=\ptemp(-\zeta)$ also
+ belongs to the complex zonotope.
+
+{\it Example: } The real projection of the complex zonotope
+%
+\[
+\cztope{\mymatrix{(1+2i) & 1 & (2+i)\\(1-2i) & 0 & (2-i)}}{0}.
+\]
+%
+is a Minkowski sum of two ellipses and one line segment as shown in
+ Figure~\ref{fig:cz}.  It is symmetric around the origin.
+  
 %
 \begin{figure}
 \centering
@@ -46,20 +52,49 @@ combining coefficients.  Since, $\infnorm{-\zeta}=\infnorm{\zeta}\leq
 \caption{Real projection of a complex zonotope as\\ Minkowski sum of 2 ellipses and 1 line segment }~\label{fig:cz}
 \end{figure}
 %
-A motivation for extending simple zonotopes to complex zonotopes is
-that a complex zonotope with its generators as the complex
-eigenvectors of a discrete time linear system will be a positively
-invariant if the complex eigenvalues corresponding to the generators
-are bounded within unity in their absolute values.  This property is
-explained mathematically in the following proposition.
+
+\emph{Contraction along eigenvectors:  }  A motivation for extending
+simple zonotopes to complex zonotopes is that a complex zonotope with
+its generators as the complex eigenvectors of a discrete time linear
+system will be a positively invariant if the complex eigenvalues
+corresponding to the generators are bounded within unity in their
+absolute values.  This is because the generators of the resultant
+complex zonotope after transformation will be scaled by the absolute
+values of the corresponding eigenvalues.  For example, consider the
+following matrix $A$ and the complex zonotope
+$\cztope{V}{0}$ where $V$ contains the complex eigenvectors of $A$.
+%
+\begin{align*}
+& A=\mymatrix{
+0.4831 &  0.6132\\
+-0.2538  &  0.6298      
+}
+& V=\mymatrix{0.8410 & 0.8410 \\ 0.1006+0.5316\iota & 0.1006-0.5316\iota}
+\end{align*}
+%
+The eigenvalues of $A$ are $0.5564 + 0.3876i$ and $0.5564 - 0.3876i$,
+both of whose absolute values are equal to $0.6781$.
+Therefore, after transformation by $A$, the complex zonotope gets
+scaled down to $0.6781$ times its original size.  This is illustrated
+in Figure~\ref{fig:cz-scaled-down}.
+%
+\begin{figure}
+\center
+\includegraphics[scale=0.5]{fig/CZtopes/eigcontraction.png}
+\caption{Contraction based on eigenstructure}
+\end{figure}
+%
+This property of contraction of complex zonotope based on the
+eigenstructure of a matrix is explained mathematically in the
+following proposition.
 %
 \begin{proposition}[Eigenstructure based invariance]~\label{lem:eig-invariance}
-Let us consider $\ptemp\in\mat{n}{n}{\compnums}$ consists
-of the complex eigenvectors of a matrix $A\in\mat{n}{n}{\reals}$ as
-its column vectors and $\mu\in\compnums^n$ be the vector of complex
-eigenvalues, i.e., $A\ptemp
-= \ptemp\diagonal{\mu}$.  Then \[A\lt(\cztope{\ptemp}{0}\rt)
-= \cztope{\ptemp\diagonal{\mu}}{0}.\] If
+Let us consider $\ptemp\in\mat{n}{n}{\compnums}$ consists of the
+complex eigenvectors of a matrix $A\in\mat{n}{n}{\reals}$ as its
+column vectors and $\mu\in\compnums^n$ be the vector of complex
+eigenvalues, i.e., $A\ptemp = \ptemp\diagonal{\mu}$.
+Then \[A\lt(\cztope{\ptemp}{0}\rt)
+= \cztope{\ptemp\diagonal{{\mu}}}{0}.\]  If
 $\infnorm{\mu}\leq 1$, then
 $A\lt(\rztope{\ptemp}{0}\rt)\subseteq \rztope{\ptemp}{0}$.
 \end{proposition}
