@@ -22,7 +22,7 @@ computation of the desired over-approximation.
 Verification of some properties of hybrid systems requires
 over-approximating the unbounded time reachable set of a system.  The
 unbounded time reachable set can be approximated by a \emph{positive
-invariant}, which is a set whose next set of reachable states is
+invariant}, which is a set of states whose the set of successor states is
 contained within itself.  The efficiency, in terms of accuracy and
 computational speed, for computing positive invariants using a set
 representation is related to the following characteristics of the set
@@ -36,7 +36,7 @@ inclusion-checking.
 \item Efficient encoding of positive invariants in the set representation.
 \end{enumerate}
 
-Well known set representations have some of the above characteristics,
+Well-known set representations have some of the above characteristics,
 but not all.  For example, polytopes have the advantage that they are
 closed under linear transformation, Minkowski sum and intersection.
 However, for a half-space representation of a polytope, the Minkowski
@@ -65,8 +65,8 @@ continuous linear systems~\cite{DBLP:conf/hybrid/Girard05} and affine
 hybrid systems with simple
 switching~\cite{makhlouf2014networked,girard2008zonotope}.  But for
 over-approximation of the {\it unbounded time reachable set by a
-positive invariant}, real zonotopes have the have the following
-drawback.  The accuracy of over-approximation by a positive invariant
+positive invariant}, a drawback of real zonotopes can be explained as follows.  
+The accuracy of over-approximation by a positive invariant
 is closely related to the capturing the directions for convergence of
 the states to an equilibrium.  In affine hybrid systems, some of these
 directions can be encoded by the complex eigenvectors of a linear
