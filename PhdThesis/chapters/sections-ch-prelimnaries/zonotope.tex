@@ -1,5 +1,5 @@
 Simple zonotopes are linear
-projections of higher dimensional unit hypercubes onto lower
+projections of higher dimensional hypercubes onto lower
 dimensional spaces, therefore a sub-class of polytopes.  A simple
 zonotope is represented by a linear combination of real valued vectors
 plus a center, such that the real valued combining coefficients are
@@ -12,7 +12,7 @@ Let us consider $\ptemp\in\reals^m$, whose column vectors are called
 representation of a real zonotope.
 %
 \begin{align*}
-\rztope{\ptemp}{\cen}:=\set{\cen+\ptemp\zeta:~\zeta\in[0,1]^m}.
+\rztope{\ptemp}{\cen}:=\set{\cen+\ptemp\zeta:~\zeta\in[-1,1]^m}.
 \end{align*}
 %
 \end{definition}
@@ -40,8 +40,8 @@ We derive the following.
 %
 \begin{align*}
 &
-  A\rztope{\ptemp}{\cen}=A\set{\cen+\ptemp\zeta:~\zeta\in[0,1]^m}\\
-& = \set{A\cen+A\ptemp\zeta:~\zeta\in[0,1]^m}=\rztope{A\ptemp}{A\cen}.\hspace{3em}\qedhere
+  A\rztope{\ptemp}{\cen}=A\set{\cen+\ptemp\zeta:~\zeta\in[-1,1]^m}\\
+& = \set{A\cen+A\ptemp\zeta:~\zeta\in[-1,1]^m}=\rztope{A\ptemp}{A\cen}.\hspace{3em}\qedhere
 \end{align*}
 %
 \end{proof}
@@ -64,11 +64,11 @@ We derive the following.
 %
 \begin{align*}
 & \rztope{\ptemp}{\cen}\oplus\rztope{\ptemp^\pr}{\cen^\pr}\\
-& = \set{\cen+\ptemp\zeta:~\zeta\in[0,1]^m}\oplus\set{\cen^\pr+\ptemp^\pr\zeta^\pr:~\zeta^\pr\in[0,1]^r}\\
+& = \set{\cen+\ptemp\zeta:~\zeta\in[-1,1]^m}\oplus\set{\cen^\pr+\ptemp^\pr\zeta^\pr:~\zeta^\pr\in[-1,1]^r}\\
 & =
-  \set{\lt(\cen+\cen^\pr\rt)+\ptemp\zeta+\ptemp\zeta^\pr:~\zeta\in[0,1]^m,~\zeta^\pr\in[0,1]^r}\\
+  \set{\lt(\cen+\cen^\pr\rt)+\ptemp\zeta+\ptemp\zeta^\pr:~\zeta\in[-1,1]^m,~\zeta^\pr\in[-1,1]^r}\\
 & = \set{\lt(\cen+\cen^\pr\rt)+\mymatrix{\ptemp
-      &\ptemp^\pr}\mymatrix{\zeta\\\zeta^\pr}:~{\mymatrix{\zeta\\\zeta^\pr}}\in[0,1]^{m+r}}\\
+      &\ptemp^\pr}\mymatrix{\zeta\\\zeta^\pr}:~{\mymatrix{\zeta\\\zeta^\pr}}\in[-1,1]^{m+r}}\\
 & =  \rztope{\mymatrix{\ptemp & \ptemp^\pr}}{\cen+\cen^\pr}.\hspace{3em}\qedhere
 \end{align*}
 %
@@ -105,24 +105,24 @@ $A\lt(\rztope{\ptemp}{0}\rt)\subseteq \rztope{\ptemp}{0}$.
 We derive
   %
 \begin{align*}
-& A\lt(\rztope{\ptemp}{0}\rt) = A\set{\ptemp\zeta:~\zeta\in[0, 1]^n}\\
+& A\lt(\rztope{\ptemp}{0}\rt) = A\set{\ptemp\zeta:~\zeta\in[-1, 1]^n}\\
 &
-=\set{A\ptemp\zeta:~\zeta\in[0,1]^n}=\set{V\diagonal{\mu}\zeta:~\zeta\in[0,1]^n}.~\numberthis\label{proof-eigzonotope}
+=\set{A\ptemp\zeta:~\zeta\in[-1,1]^n}=\set{V\diagonal{\mu}\zeta:~\zeta\in[-1,1]^n}.~\numberthis\label{proof-eigzonotope}
 \end{align*}
 %
 Let $y$ be a point
 in $\rztope{\ptemp}{0}$.  By Equation~\ref{proof-eigzonotope}, we get
 %
 \begin{align*}
-  &\exists\delta\in[0,1]^n:~y = \ptemp\diagonal{\mu}\delta.
+  &\exists\delta\in[-1,1]^n:~y = \ptemp\diagonal{\mu}\delta.
 \end{align*}
 %
 Let $\zeta = \diagonal{\mu}\delta$. Since $\mu\in[0,1]^n$ and
-$\delta\in[0,1]^n$, we get $\zeta=\diagonal{\mu}\delta\in[0,1]^n$.  So,
+$\delta\in[-1,1]^n$, we get $\zeta=\diagonal{\mu}\delta\in[-1,1]^n$.  So,
 %
 \begin{align*}
   & y=\ptemp\zeta~~\text{ where }~
-  \zeta\in[0,1]^n\\
+  \zeta\in[-1,1]^n\\
   &\therefore~y\in\rztope{\ptemp}{0}.
 \end{align*}
 %
@@ -190,7 +190,7 @@ $\lt(\ptemp,\cen,A,b\rt)$, where $\ptemp\in\mat{n}{m}{\reals}$,
 $A\in\mat{k}{m}{\reals}$, $\cen\in\reals^n$ and $b\in\reals^m$, and
 the tuple is assigned to the set
 %
-\[\set{\cen+\ptemp\zeta:\zeta\in[0,1]^m,A\zeta=b}.\]
+\[\set{\cen+\ptemp\zeta:\zeta\in[-1,1]^m,A\zeta=b}.\]
 %
 \end{definition}
 %
