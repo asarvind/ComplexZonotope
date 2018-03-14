@@ -20,43 +20,119 @@ complex zonotope.
 %
 \end{definition}
 %
-{\it Geometry of a complex zonotope :} The real projection of a complex
-zonotope can represent non-polytopic sets as well as polytopic
-zonotopes.  Therefore, complex zonotopes are geometrically more
-expressive than simple zonotopes.  Furthermore, complex zonotopes are
-different from polynomial zonotopes.  While a polynomial zonotope is a
-polynomial function of real valued intervals, a complex zonotope is a
-Minkowski sum of \emph{linearly transformed transformed circles} in
-the the complex plane.  A complex zonotope is symmetric around the center.  To see
- this, consider a point in a complex zonotope centered at the origin,
- written as $y=\ptemp\zeta$ where $\ptemp$ defines the generator set
- and $\zeta$ is the vector of combining coefficients.  Since,
- $\infnorm{-\zeta}=\infnorm{\zeta}\leq 1$, so $-y=\ptemp(-\zeta)$ also
- belongs to the complex zonotope.
-
-{\it Example: } The real projection of the complex zonotope
+{\it Geometry of a complex zonotope :}
+The real projection of the set of points represented by each generator
+can either be an ellipoid or a line segment.  So, complex
+zonotopes can represent a Minkowski sum of a some ellipsoids and line
+segments.  Whereas, simple zonotopes represent only Minkowski sum of
+line segments.  Therefore, complex zonotopes are geometrically more
+expressive than real zonotopes.
+For example, the real projection of the the following complex vector
+is an ellipsoid.
+%
+\begin{align*}
+& \cztope{\mymatrix{-0.1335 + 0.1769i\\0.2713 + 0.3991i\\-0.8473 + 0.0000i}}{0}:=~~\\
+&  \lt(0.2749x-0.1218y+1.0978z\rt)^2+\lt(1.0505x+2.0401y+0.4877z\rt)^2\leq 1.
+\end{align*}
+%
+On the other hand, the real projection of the following real vector, which is a
+complex vector having zero imaginary part, is a line segment.
+%
+\begin{align*}
+\cztope{\mymatrix{-0.4544\\
+    0.7379\\
+    0.4991}}{0}:=~~-1\leq -0.4544x+0.7379y+0.4991z\leq 1.
+\end{align*}
+%
+The above observation is explained mathematically by the following
+proposition, which describes the set formed by a single generator.  
+%
+\begin{proposition}
+Let $v\in\compnums^n$ be a complex vector.  
 %
 \[
-\cztope{\mymatrix{(1+2i) & 1 & (2+i)\\(1-2i) & 0 & (2-i)}}{0}.
+\real\lt(\cztope{v}{0}\rt)=\set{x\in\reals^n:\norm{\pinv{\mymatrix{\real(v)&\img{v}}}x}^2\leq
+1}.
 \]
 %
-is a Minkowski sum of two ellipses and one line segment as shown in
- Figure~\ref{fig:cz}.  It is symmetric around the origin.
+The above set can either be an ellipsoid or a line segment.
+\end{proposition}
+%
+\begin{proof}
+Let us consider $x\in\cztope{v}{0}$.  Then there exists an
+$\zeta\in\compnums$ such that $\absolute{\zeta}\leq 1$ and
+$x=v\zeta$.  Then we derive the following.
+%
+\begin{align*}
+& \min{\absolute{\zeta}:~\zeta\in\compnums,~x=v\zeta}\\
+& =\min{\sqrt{a^2+b^2}:~a,b\in\reals,~x=\mymatrix{\real(v)
+& \img\lt(v\rt)}\mymatrix{a\\b}}=\norm{\pinv{\mymatrix{\real(v)
+& \img\lt(v\rt)}}x}.
+\end{align*}
+%
+Therefore, $x\in\cztope{v}{0}$ implies $\norm{\pinv{\mymatrix{\real(v)
+& \img\lt(v\rt)}}x}^2\leq 1$.
+\end{proof}
+%
+%% The real projection of a complex
+%% zonotope can represent non-polytopic sets as well as polytopic
+%% zonotopes.  Therefore, complex zonotopes are geometrically more
+%% expressive than simple zonotopes.  Furthermore, complex zonotopes are
+%% different from polynomial zonotopes.  While a polynomial zonotope is a
+%% polynomial function of real valued intervals, a complex zonotope is a
+%% Minkowski sum of \emph{linearly transformed transformed circles} in
+%% the the complex plane.  A complex zonotope is symmetric around the center.  To see
+%%  this, consider a point in a complex zonotope centered at the origin,
+%%  written as $y=\ptemp\zeta$ where $\ptemp$ defines the generator set
+%%  and $\zeta$ is the vector of combining coefficients.  Since,
+%%  $\infnorm{-\zeta}=\infnorm{\zeta}\leq 1$, so $-y=\ptemp(-\zeta)$ also
+%%  belongs to the complex zonotope.
+
+%% {\it Example: } The real projection of the complex zonotope
+%% %
+%% \[
+%% \cztope{\mymatrix{(1+2i) & 1 & (2+i)\\(1-2i) & 0 & (2-i)}}{0}.
+%% \]
+%% %
+%% is a Minkowski sum of two ellipses and one line segment as shown in
+%%  Figure~\ref{fig:cz}.  It is symmetric around the origin.
   
+%% %
+%% \begin{figure}
+%% \centering
+%% \captionsetup{justification=centering}
+%% \includegraphics[scale=0.43]{fig/cznew.png}\\[1em]
+%% \includegraphics[scale=0.5]{fig/CZhull.png}
+%% \caption{Real projection of a complex zonotope as\\ Minkowski sum of 2 ellipses and 1 line segment }~\label{fig:cz}
+%% \end{figure}
+%% %
+
+As the real projection of the generator of a complex zonotope can
+either be an ellipsoid or a line segment, a complex zonotope can
+represent a Minkowski sum of line segements as well as some
+ellipsoids.  The non-polyhedral real projections along the three axis
+oriented hyperplanes of the following 3-D complex zonotope is shown in
+Figure~\ref{fig:3dcztope}
+%
+\[
+\cztope{\mymatrix{-0.2226  & -0.1335 + 0.1769\iota  & -0.1335 - 0.1769\iota\\
+   0.3615 &   0.2713 + 0.3991\iota &  0.2713 - 0.3991\iota\\
+   0.2446 &  -0.8473 &  -0.8473}}{0}
+\]
 %
 \begin{figure}
-\centering
-\captionsetup{justification=centering}
-\includegraphics[scale=0.43]{fig/cznew.png}\\[1em]
-\includegraphics[scale=0.5]{fig/CZhull.png}
-\caption{Real projection of a complex zonotope as\\ Minkowski sum of 2 ellipses and 1 line segment }~\label{fig:cz}
+\center
+\includegraphics[scale=0.5]{fig/CZtopes/xycz.png}
+\includegraphics[scale=0.5]{fig/CZtopes/yzcz.png}
+\includegraphics[scale=0.5]{fig/CZtopes/xzcz.png}
+\caption{Real projection of complex zonotope on axis oriented hyperplanes}~\label{fig:3dcztope}
 \end{figure}
 %
 
 \emph{Contraction along eigenvectors:  }  A motivation for extending
 simple zonotopes to complex zonotopes is that a complex zonotope with
 its generators as the complex eigenvectors of a discrete time linear
-system will be a positively invariant if the complex eigenvalues
+system is positively invariant if the complex eigenvalues
 corresponding to the generators are bounded within unity in their
 absolute values.  This is because the generators of the resultant
 complex zonotope after transformation will be scaled by the absolute
