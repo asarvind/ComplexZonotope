@@ -60,7 +60,7 @@ clean:
 	\rm -f  chapters/*/*.tex.backup		
 	\rm -f  chapters/*.tex~	
 	\rm -f  chapters/*/*.tex~
-	\rem -f *.loa
+	\rm -f *.loa
 	\rm -f  ${SYMBOLIC_LINK_NAME1}
 	\rm -f  ${SYMBOLIC_LINK_NAME2}
 	# git rm -f Figures/*.pdf
