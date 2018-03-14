@@ -48,7 +48,9 @@ A\concrete{T,d}=\concrete{TA^{-1},d}.
 \]
 %
 But when the matrix $A$ is not invertible, the computation of the
-transformed polytope can be expensive.  Computing the Minkowski sum of
+transformed polytope can be expensive.
+
+Computing the Minkowski sum of
 two $H$-representations in an $n$-dimensional
 space can require elimination of at least $n$-variables in a system of
 more than $2n$ linear inequalities, which is discussed
@@ -56,6 +58,7 @@ in~\cite{kvasnica2005minkowski}.  The complexity of variable
 elimination by known algorithms is more than exponential.  Therefore,
 computation of Minkowski sum of two $H$-representations can be costly
 in higher dimensions.
+
 The intersection of two $H$-representations having the same set of
 supporting hyperplanes is easy to compute, as follows.  
 %
@@ -64,7 +67,7 @@ supporting hyperplanes is easy to compute, as follows.
 \end{align*}
 %
 The above operation also generalizes to the intersection with half-spaces
-by including the support vectors of a half-spaces among
+by including the support vectors of the half-spaces among
 the support vectors of a $H$-representation.  Therefore, a
 $H$-representation is efficient while computing intersections with
 linear guards of hybrid systems.
@@ -135,14 +138,15 @@ templates that can capture contraction along the complex eigenvectors
 of the transformation matrices.  But such complex valued templates can
 not be selected for polytopes.
 
-It is known that for any stable linear system, there exists a non-zero
-positively invariant polytope given by a polyhedral Lyapunov
-function~\cite{blanchini2008set}.  However, to our knowledge, there is
-no known upper bound on the smallest possible representation size of a
-polytopic invariant for stable linear systems.  In contrast, for a stable and
-invertible linear transformation, a complex zonotopic positive
-invariant containing the origin in its interior can be computed by
-just having the $n$-eigenvectors as its generators.
+It is known that for any stable linear system, there exists a
+positively invariant polytope with non-empty interior given by a
+polyhedral Lyapunov function~\cite{blanchini2008set}.  However, to our
+knowledge, there is no known upper bound on the smallest possible
+representation size of a polhedral lyapunov function for a stable
+linear systems.  In contrast, for a stable and invertible linear
+transformation, a complex zonotopic positive invariant containing the
+origin in its interior can be computed by just having the
+$n$-eigenvectors as its generators.
 
 Real zonotopes are also a sub-class of polytopes, which we discuss in
 a separate section.

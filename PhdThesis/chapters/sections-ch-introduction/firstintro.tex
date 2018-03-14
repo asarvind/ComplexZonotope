@@ -42,20 +42,20 @@ closed under linear transformation, Minkowski sum and intersection.
 However, for a half-space representation of a polytope, the Minkowski
 sum operation is computationally expensive in higher dimensions.
 Moreover, to our knowledge, there is no upper bound on the
-representation size of a non-zero polytopic positive invariant for a
-stable linear system.  Ellipsoids have the advantage that they are
-closed under linear transformation and also efficiently encode the
-positive invariant of a stable linear system.  But ellipsoids are not
-closed under Minkowski sum and intersection with half-spaces.
-Although there has been work on over-approximation of the Minkowski
-sum and intersection with half-spaces for
+representation size of a polytopic positive invariant having non-empty
+interior for a stable linear system.  Ellipsoids have the advantage
+that they are closed under linear transformation and also efficiently
+encode the positive invariant of a stable linear system.  But
+ellipsoids are not closed under Minkowski sum and intersection with
+half-spaces.  Although there has been work on over-approximation of
+the Minkowski sum and intersection with half-spaces for
 ellipsoids~\cite{allamigeon2017fast,kurzhanskiy2006ellipsoidal}, still
 there can be a significant approximation
 error. Zonotope~\cite{DBLP:conf/hybrid/Girard05} is yet another set
 representation, which is a type of polytope specified as a linear
 combination of real vectors whose combining coefficients are bounded
-in the interval $[0,1]$.  Geometrically, they are Minkowski sums of
-line segments.  
+in their absolute values.  Geometrically, they are Minkowski sums of
+line segments.
 
 Zonotopes have the advantage that they are closed under linear
 transformation and Minkowski sum operations, which can also be
@@ -123,11 +123,11 @@ called {\it complex zonotope}.  A complex zonotope is a linear
 combination of complex valued vectors with absolute valued bounds on
 the combining coefficients.  It can capture contraction along the
 complex eigenvectors of a linear system, due to which they can
-efficiently encode non-zero positive invariants of a linear system.
-It is also geometrically more expressive than real zonotope because
-its real projection can represent Minkowski sums of some ellipsoids in
-addition to line segments.  They are also different from other
-extensions of complex zonotopes, like quadratic
+efficiently encode positive invariants of a linear system.  It is also
+geometrically more expressive than real zonotope because its real
+projection can represent Minkowski sums of some ellipsoids in addition
+to line segments.  They are also different from other extensions of
+complex zonotopes, like quadratic
 zonotopes~\cite{DBLP:conf/aplas/AdjeGW15}, which we shall explain
 later in a separate section.  Still, complex zonotopes retain the
 merit of real zonotopes that they are closed under linear
@@ -146,7 +146,7 @@ time affine hybrid systems.  A linear invariance property is a linear
 constraint on the state of the system that is satisfied by all the
 reachable states.  We derive a convex program based for computing
 positively invariant complex zonotopes that verify a linear invariance
-property.  We demonstrate the efficient of our method by experiments
+property.  We demonstrate the efficiency of our method by experiments
 on some benchmark examples.  The other problem is verifying stability
 of linear impulsive systems with sampling uncertainty.  We develop an
 algorithm that finds a contractive complex zonotope using the
