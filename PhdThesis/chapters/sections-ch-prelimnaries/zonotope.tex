@@ -73,23 +73,22 @@ We derive the following.
 %
 \end{proof}
 %
-We have earlier discussed that for a $V$-representation of a polytope,
-the complexity of Minkowski sum operation is quadratic, while for a
-$H$-representation, the complexity of Minkowski sum can be
-exponential.  On the other hand, the complexity of both Minkowski sum
-and linear transformation operations for a zonotope is only linear.
-This is an advantage of the zonotope representation compared to a
-general convex polytope representation.  Therefore, simple zonotopes
-have been successfully applied for reachability analysis of uncertain
+We have earlier discussed that for a $H$-representation of a polytope,
+the complexity of Minkowski sum can be more than exponential.  On the
+other hand, the complexity of both Minkowski sum and linear
+transformation operations for a zonotope is only linear.  This is an
+advantage of the zonotope representation compared to the
+$H$-representation of a polytope.  Therefore, simple zonotopes have
+been successfully applied for reachability analysis of uncertain
 linear systems and some affine hybrid systems with simple switching
 conditions~\cite{makhlouf2014networked,Girard05reachabilityof,girard2008zonotope,HybridFluctuat}.
 Still, zonotopes have the following drawback while computing positive
 invariants of affine hybrid systems.  Even for the simple case of a
 stable linear system having complex valued eigenvectors, we do not
-know if a positively invariant non-zero zonotope exists.  When a stable linear system has
- real eigenvectors, the computation of a non-zero positively
-invariant zonotope is guaranteed by the
-following proposition.
+know if a positively invariant non-zero zonotope exists.  When a
+stable linear system has real eigenvectors, the computation of a
+non-zero positively invariant zonotope is guaranteed by the following
+proposition.
 %
 \begin{proposition}~\label{prop:eig-rztope}
 Let us consider $\ptemp\in\mat{n}{n}{\reals}$ consists
