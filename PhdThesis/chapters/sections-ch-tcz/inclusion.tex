@@ -18,15 +18,34 @@ $\reals^n$ is one of the following expressions.
 \end{enumerate}
 \end{definition}
 %
-Given a set of second order conic constraints on a variable
-$x\in\reals^n$, solving the constraints refers to finding a value
-$x^*\in\reals^n$ that satisfies the constraints.  A value
-$x^\pr\in\reals^n$ is called an approximate solution within a
-precision $\epsilon\in\reals_{\geq 0}$ if there exists a solution
-$x^*\in\reals^n$ such that $\sqnorm{x^\pr-x^*}\leq \epsilon$.  There
-are tools based on interior point methods (see~\cite{grant2008cvx})
-that can efficiently find approximate solutions with very high
-precision to second order conic constraints (SOCC).
+\begin{example}
+%
+An inequality like $x^2+4y^2+25z^2-3x-4y+z+3\leq 0$ is a second order
+  conic constraint because it can be written as
+%
+\[
+\norm{\mymatrix{
+    1 & 0 & 0\\
+    0 & 2 & 0\\
+    0 & 0 & 5
+}\mymatrix{x\\y\\z}}\leq \mymatrix{3 & 4 & -1}\mymatrix{x\\y\\z}+2.
+\]
+A linear equality like $3x+2y-4z=5$ is also a second order conic
+constraint.
+\end{example}
+%
+In the case of complex zonotope, we shall later derive a set of second
+order conic constraint (not just one constraint), which have to be
+collectively satisfied to guarantee inclusion.  Given a set of second
+order conic constraints on a variable $x\in\reals^n$, solving the
+constraints refers to finding a value $x^*\in\reals^n$ that satisfies
+the constraints.  A value $x^\pr\in\reals^n$ is called an approximate
+solution within a precision $\epsilon\in\reals_{\geq 0}$ if there
+exists a solution $x^*\in\reals^n$ such that $\sqnorm{x^\pr-x^*}\leq
+\epsilon$.  There are tools based on interior point methods
+(see~\cite{grant2008cvx}) that can efficiently find approximate
+solutions with very high precision to second order conic constraints
+(SOCC).
 
 Checking inclusion of a single point inside a template complex
 zonotope is equivalent to solving SOCC, as described below.
@@ -50,6 +69,27 @@ $x\in\tcztope{\ptemp}{\cen}{\sfact}$ is of the form
 $x=\cen+\ptemp\zeta$ for some $\zeta\in\compnums^m$ such that
 $\absolute{\zeta}\leq \sfact$.
 \end{proof}
+%
+\begin{example}
+Let us consider the template complex zonotope
+$\tcztope{\ptemp}{\cen}{\sfact}\subset\compnums^2$ and a point $x\in\compnums^2$,
+where
+%
+\[
+\ptemp=\mymatrix{1+\iota & 1 & 0\\1 & 0 & 1},~~\cen = \mymatrix{\iota\\ 1},~~\sfact=\mymatrix{1\\1\\1}~\text{and}~x=\mymatrix{2\iota-2\\\iota+2}.
+\]
+%
+To prove that $x\in\tcztope{\ptemp}{\cen}{\sfact}$, let us consider
+$\zeta=\mymatrix{\iota & -1 & 1}^T$.  Then we get
+%
+\[
+\ptemp\zeta = \mymatrix{\iota-2\\\iota+1}= \mymatrix{2\iota-2\\\iota+2}-\mymatrix{\iota\\1}=x-c.
+\]
+%
+Therefore, Equation~\ref{eqn:lem-point-inclusion-1} is satisfied.  Furthermore,
+$\absolute{\zeta}=\mymatrix{1 & 1 & 1}^T$.  So, Equation~\ref{eqn:lem-point-inclusion-2} is
+also satisfied.  Henceforth, $x\in\tcztope{\ptemp}{\cen}{\sfact}$.
+\end{example}
 %
 Equation~\ref{eqn:lem-point-inclusion-1} is an equality constraint on
 $\zeta$, which is therefore an SOCC.  We know that the absolute value
@@ -313,7 +353,7 @@ i\in\set{1,...,m}~\absolute{\mymatrix{\real\lt(X^T_i\rt)\\\img\lt(X^T_i\rt)\\\re
 
 When the template of the complex zonotope inside which containment is
 checked is invertible, and the centers of the template complex
-zonotope are same, then the above sufficient condition for inclusion
+zonotopes are same, then the above sufficient condition for inclusion
 checking is also a necessary condition.  This is described in the
 following theorem.
 %

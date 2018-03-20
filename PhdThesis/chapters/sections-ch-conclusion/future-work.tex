@@ -14,18 +14,18 @@ zonotopes are discussed below.
   problem, we can develop convex relaxations to approximate the
   non-affine images of complex zonotopes.  Alternatively, just like
   polynomial real zonotopes, we can extend complex zonotopes to
-  polynomial complex zonotopes.  But we then face the problem that the
-  degree of polynomial complex zonotope grows exponentially with the
-  iterative application of non-affine functions.  So, we have to
-  approximate a polynomial complex zonotope of higher degree with a
-  polynomial complex zonotope of lower degree.
+  polynomial complex zonotopes.  But then the degree of a polynomial
+  complex zonotope grows exponentially with the iterative application
+  of non-affine functions.  So, we have to compute
+  over-approximations a polynomial complex zonotope of higher degree
+  with a polynomial complex zonotope of lower degree.
 \item \emph{Continuous time dynamics: } The set operations we have
   developed are mainly useful for computing positive invariants of
   discrete time dynamics or simpler cases of continuous dynamics that
   can be easily discretized in time.  But for computing positively
   invariant complex zonotopes for more general continuous time
-  dynamics, we have to develop approximations for the vector field
-  on the boundary of a complex zonotope.
+  dynamics, we have to compute bounds on the vector field
+  at the boundary of a complex zonotope.
 \item \emph{Program verification:  }  Complex zonotopes can be used as
   an abstract domain for program verification.  Indeed, our template
   based representation of complex zonotope is closer in spirit to the
@@ -34,9 +34,8 @@ zonotopes are discussed below.
   applied to numerical program verification.
 \end{enumerate}
 %
-Indeed, more experimentation has to be done to understand the
-practical issues with using complex zonotopes, even for affine hybrid
-systems.  Nevertheless, complex zonotopes provide an exemplary
-approach for future set representations to efficiently encode the
-eigenstructure of a system for increasing the accuracy of reachability
-analysis techniques.
+More experimentation has to be done to understand the practical issues
+with using complex zonotopes.  Nevertheless, complex zonotopes provide
+an exemplary approach for future set representations to efficiently
+encode the eigenstructure of a system for increasing the accuracy of
+reachability analysis techniques.
