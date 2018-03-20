@@ -1,0 +1,217 @@
+Now, we shall derive an over-approximation of intersection of a
+sub-parallelotope with the Minkowski sum of an interval zonotope and a
+general convex set.  Before that, we describe the following result
+about convex sets which is latter used in the proof of the
+over-approximation.  We use the following notation for the rest of
+this chapter, unless otherwise specified.
+%
+\begin{align*}
+& \lb,\ub\in\reals^k:
+  k\leq n,~~~\plb\in\lt(\reals\bigcup\set{-\infty}\rt)^k,~~~\pub\in\lt(\reals\bigcup\set{\infty}\rt)^k\\
+& ~~~\qtemp\in\mat{k}{n}{\reals}:~\lt(\qtemp\qtemp^T\rt)~\text{is
+non-singular}
+\end{align*}
+%
+For any $i\in\set{1,...,k}$, we
+consider $\compidvec{i}\in\reals^k$ such that for any $j\in\set{1,...,k}$,
+$\lt(\compidvec{i}\rt)_j=0$ if $i=j$ and $\lt(\compidvec{i}\rt)_j=1$ otherwise.
+%
+\begin{lemma}~\label{lem:convexhull}
+Let $\Psi\subseteq\reals^k$ be a convex set such that
+$\compid{i}\Psi\in\Psi$ for all $i\in\set{1,...,k}$.
+Let $v\in\Psi$.  Then
+%
+\begin{align*}
+\prod_{i=1}^k\convexhull{\set{0,v_i}}\subseteq\Psi.
+\end{align*}
+%
+\end{lemma}
+%
+\begin{proof}
+We prove the above by induction.  We have
+%
+\begin{align*}
+& \compid{1}v=0\times\prod_{i=2}^k\set{v_i}\subseteq\Psi.
+ ~~\text{As $\Psi$ is a convex set and $v\in\Psi$, we get}\\
+& \convexhull{\set{0,v_1}}\times\prod_{i=2}^k\set{v_i}\subseteq\Psi~\numberthis\label{proof-hull3}.\\
+& \text{If for ~$j<k$}~\prod_{i=1}^j\convexhull{\set{0,v_i}}\times\prod_{i=j+1}^k\set{v_i}\subseteq \Psi,~\numberthis\label{proof-hull1}\\
+& \text{then}~~\compid{j+1}\prod_{i=1}^j\convexhull{\set{0,v_i}}\times\prod_{i=j+1}^k\set{v_i}\subseteq\compid{j+1}\Psi\subseteq\Psi\\
+& \equivalent \prod_{i=1}^j\convexhull{\set{0,v_i}}\times\set{0}\times\prod_{i=j+2}^k\set{v_i}\subseteq\Psi\\
+& \text{As $\Psi$ is a convex set, by the above equation and
+ Equation~\ref{proof-hull1}, we get}\\
+& \implies \prod_{i=1}^{j+1}\convexhull{\set{0,v_i}}\times\prod_{i=j+2}^k\set{v_i}\subseteq\Psi.~\numberthis\label{proof-hull4}
+\end{align*}
+%
+Using Equations~\ref{proof-hull3} and~\ref{proof-hull4}, the lemma
+follows by induction.
+\end{proof}
+%
+Now we state a result about over-approximating the intersection
+of a sub-parallelotope with the Minkowski sum
+of a convex set and interval zonotope.  We also find an
+under-approximation of the former so that we can bound the error in
+over-approximation.  We use the following notation for the rest of
+this chapter.
+
+If $k<n$, then we consider $Y\in\mat{n}{(n-k)}{\reals}$ such that the
+column vectors of $Y$ form
+the basis of $\null{\qtemp}$.
+Otherwise when $k=n$, we consider $Y=0$.
+%
+\begin{lemma}[Intersection with Minkowski sum]~\label{lem:minsum-intersection}
+Let $S\in\reals^n$ be a convex set and
+%
+\begin{align*}
+& \forall i\in\set{1,...,k}~\compid{i}\qtemp S\subseteq\qtemp S,~\numberthis\label{eqn:intersection3}\\
+& \lb\leq\join{\lb}{\plb}\leq\meet{\ub}{\pub}\leq\ub~\numberthis\label{eqn:intersection4}.\\
+& \text{Then}~~\mymatrix{0\\ Y^T}S \oplus\mymatrix{\qtemp\\
+ Y^T}\iztope{\pinv{\qtemp}}{\join{\lb}{\plb}}{\meet{\ub}{\pub}}
+ \\ & \subseteq\mymatrix{\qtemp\\
+ Y^T}\lt(\lt(S\oplus \iztope{\pinv{\qtemp}}{\lb}{\ub}\rt)\bigcap\ptope{\qtemp}{\plb}{\pub}\rt)~\numberthis\label{eqn:intersection1}\\
+ &\subseteq \mymatrix{\qtemp\\
+ Y^T}\lt(S \oplus\iztope{\pinv{\qtemp}}{\join{\lb}{\plb}}{\meet{\ub}{\pub}}\rt).\numberthis~\label{eqn:intersection2}
+\end{align*}
+%
+\end{lemma}
+%
+\begin{proof}
+
+First we shall prove Equation~\ref{eqn:intersection1}.
+By Equation~\ref{eqn:intersection3}, we get $0\in\qtemp S$.  So,
+%
+\begin{align*}
+\mymatrix{0\\ Y^T}S\subseteq\mymatrix{\qtemp\\ Y^T}S.~\numberthis\label{eqn:corr-proof-intersection1}
+\end{align*}
+%
+By
+Equation~\ref{eqn:intersection4} we get
+%
+\begin{align*}
+\mymatrix{\qtemp\\Y^T}\iztope{\pinv{\qtemp}}{\meet{\lb}{\plb}}{\join{\ub}{\pub}}\subseteq\mymatrix{\qtemp\\Y^T}\iztope{\pinv{\qtemp}}{\lb}{\ub}.~\numberthis\label{eqn:corr-proof-intersection2}
+\end{align*}
+%
+Then, Equation~\ref{eqn:intersection1} follows from Equations~\ref{eqn:corr-proof-intersection1} and~\ref{eqn:corr-proof-intersection2}.
+
+Now we shall prove Equation~\ref{eqn:intersection2}.
+
+Let us consider
+$x\in \lt(S\oplus \iztope{\pinv{\qtemp}}{\lb}{\ub}\rt)\bigcap\ptope{\qtemp}{\plb}{\pub}$
+where
+%
+\begin{align*}
+& x=v+\pinv{\qtemp}\zeta:~v\in S,~\lb\leq\zeta\leq\ub.\\
+& \text{ As
+$x\in\ptope{\qtemp}{\plb}{\pub}$, we get}~
+ \plb\leq \qtemp \lt(v+\pinv{\qtemp}\zeta\rt)\leq\pub\\
+& \implies\plb\leq\qtemp v+\zeta\leq\pub.~\numberthis\label{proof-intersection1}
+\end{align*}
+%
+Let us consider
+\begin{align*}
+& \epsilon\in\reals^k:~\epsilon_i=\lt\{\begin{array}{l}
+\min\set{\ub_i,\pub_i}~\text{if}~\zeta_i>\min\set{\ub_i,\pub_i}\\
+\max\set{\lb_i,\plb_i}~\text{if}~\zeta_i<\max\set{\lb_i,\plb_i}\\
+\zeta_i~\text{otherwise}.
+\end{array}
+\rt.
+\end{align*}
+%
+By the above definition, we get
+%
+\begin{align*}
+& \join{\lb}{\plb}\leq \epsilon\leq\meet{\ub}{\pub}.~~
+~\numberthis\label{proofnew-intersection1}
+\end{align*}
+%
+Let
+$w=x-\pinv{\qtemp}\epsilon=v+\pinv{\qtemp}\zeta-\pinv{\qtemp}\epsilon$.
+For
+any $i\in\set{1,...,k},$ we analyze the following cases.
+
+
+{\it Case 1:} Let us consider $\zeta_i>\min\set{\ub_i,\pub_i}$.  Then
+$\epsilon_i=\min\set{\ub_i,\pub_i}$.  Since $\zeta_i\leq\ub_i$, we get
+${\min\set{\ub_i,\pub_i}=\pub_i}$.  Then by using
+Equation~\ref{proof-intersection1}, we derive
+%
+\begin{align*}
+&\qtemp_iw=\qtemp_iv+\zeta_i-\epsilon_i\\
+& \leq\pub_i-\min\set{\ub_i,\pub_i}=\pub_i-\pub_i=0.
+\end{align*}
+%
+Also by using Equation~\ref{proofnew-intersection1}, we get
+%
+\begin{align*}
+& \qtemp_iw=\qtemp_iv+\zeta_i-\epsilon_i\\
+& \geq \qtemp_iv+\min\set{\ub_i,\pub_i}-\min\set{\ub_i,\pub_i}=\qtemp
+v_i.
+\end{align*}
+%
+\begin{align*}
+& \text{Therefore}~~ \qtemp_iw\in\convexhull{\set{0,\qtemp_iv}}.~\numberthis\label{proofnew-intersection2}
+\end{align*}
+%
+{\it Case 2:} Let us consider that $\zeta_i<\max\set{\lb_i,\plb_i}$.
+Then $\epsilon_i=\max{\set{\lb_i,\plb_i}}$.  Since $\zeta_i\geq\lb_i$,
+we get $\max{\set{\lb_i,\plb_i}}=\plb_i$.  Then by using
+Equation~\ref{proof-intersection1}, we derive
+%
+\begin{align*}
+& \qtemp_iw=\qtemp_iv+\zeta_i-\epsilon_i\\
+& \geq\plb_i-\min\set{\ub_i,\pub_i}=\plb_i-\plb_i=0.
+\end{align*}
+%
+Also by using Equation~\ref{proofnew-intersection1}, we derive
+\begin{align*}
+& \qtemp_iw=\qtemp_iv+\zeta_i-\epsilon_i\\
+& \leq \qtemp_iv+\max\set{\lb_i,\plb_i}-\max\set{\lb_i,\plb_i}=\qtemp
+v_i.
+\end{align*}
+%
+\begin{align*}
+& \text{Therefore}~~    \qtemp_iw\in\convexhull{\set{0,\qtemp_iv}}.~\numberthis\label{proofnew-intersection3}
+\end{align*}
+%
+{\it Case 3:}  Let us consider that the above two cases are not true.
+Then $\epsilon_i=\zeta_i$.  So,
+%
+\begin{align*}
+& \qtemp_iw=\qtemp_iv+\zeta_i-\epsilon_i=\qtemp_iv+\zeta_i-\zeta_i=v_i.~\numberthis\label{proofnew-intersection4}
+\end{align*}
+%
+From Equations~\ref{proofnew-intersection2}\textendash\ref{proofnew-intersection4}, we
+get
+%
+\begin{align*}
+& \qtemp w\in\prod_{i=1}^k\convexhull{\set{0,v_i}}.\label{proofnew-intersection5}
+\end{align*}
+%
+As $S$ is a convex set and $v\in S$, using Lemma~\ref{lem:convexhull} and
+Equations~\ref{eqn:intersection3}, we get
+%
+\begin{align*}
+& \prod_{i=1}^k\convexhull{\set{0,v_i}}\subseteq \qtemp S\\
+\implies \qtemp w\in S.
+\end{align*}
+%
+As $Y^T$ is orthogonal to $\qtemp$, we get
+%
+\begin{align*}
+& Y^Tw=Yv+Y\qtemp(\zeta-\epsilon)=Y^Tv+0=Y^Tv\in Y^TS.\\
+& \text{So,}~~\mymatrix{\qtemp\\ Y^T}w\in S.
+\end{align*}
+%
+By
+Equation~\ref{proofnew-intersection1}, we get
+$\qtemp\epsilon\in\iztope{\pinv{\qtemp}}{\join{\lb}{\plb}}{\meet{\ub}{\pub}}$.
+So, we get
+%
+\begin{align*}
+& \mymatrix{\qtemp\\ Y^T}x=\mymatrix{\qtemp\\ Y^T}\lt(w+\qtemp\epsilon\rt)\in\mymatrix{\qtemp\\ Y^T}\lt(S\oplus\iztope{\pinv{\qtemp}}{\join{\lb}{\plb}}{\meet{\ub}{\pub}}\rt).
+\end{align*}
+%
+As the above is true for any $x\in
+S\oplus\iztope{\pinv{\qtemp}}{\join{\lb}{\plb}}{\meet{\ub}{\pub}}$,
+we have proved Equation~\ref{eqn:intersection2}.
+\end{proof}
+%

@@ -1,9 +1,77 @@
 <?xml version="1.0"?>
 <!DOCTYPE ipe SYSTEM "ipe.dtd">
 <ipe version="70206" creator="Ipe 7.2.7">
-<info created="D:20171206194812" modified="D:20180314193515"/>
+<info created="D:20171206194812" modified="D:20180320143255"/>
 <preamble>\usepackage{bm}</preamble>
-<bitmap id="1" width="533" height="324" length="9884" ColorSpace="DeviceRGB" Filter="FlateDecode" BitsPerComponent="8" encoding="base64">
+<bitmap id="1" width="533" height="346" length="3527" ColorSpace="DeviceRGB" Filter="FlateDecode" BitsPerComponent="8" encoding="base64">
+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
+AAAAAAAAAAAAeIf/ARuO7Gw=
+</bitmap>
+<bitmap id="2" width="533" height="324" length="9884" ColorSpace="DeviceRGB" Filter="FlateDecode" BitsPerComponent="8" encoding="base64">
 eNrtnQ1UVGX+x5NXNd/tDVdNLB1e1FFDRTBEsFCCUmAxXTVBQwwFTFp1PYaZ7Yabm7nlZmr/
 +reVu7id4m9vZ63UznqMsn/bRuvfdIVcF/MNFQVBcP4PzXQZZoYBRoa597mfz5njGS8zcH/f
 53l+3/t7nvtiMgEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
@@ -188,6 +256,137 @@ AMAJb775pvCL0aNHnzhxQvz3k08+Ef8NCgpSw2NPAQBAnZSWlprPtiosLFQ25uXliS2TJ0+u
 qqpCIgAAsKGuri4lJUU4xYIFC6y3V1RUREREiO35+fmoBAAANmzatKm5M3XN154L9u3bh1AA
 AKDw1VdfmS/0ePvttx1+YMmSJeKnEyZMuHDhAnIBAAAAAAAAAAAAAAAAAAAAAAAAgEP+HzwE
 ev4=
+</bitmap>
+<bitmap id="4" width="533" height="346" length="3780" ColorSpace="DeviceRGB" Filter="FlateDecode" BitsPerComponent="8" encoding="base64">
+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
+
+</bitmap>
+<bitmap id="5" width="533" height="346" length="2986" ColorSpace="DeviceRGB" Filter="FlateDecode" BitsPerComponent="8" encoding="base64">
+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
+AAAAAAAAAADgJ/wPDa8aPA==
 </bitmap>
 <ipestyle name="basic">
 <symbol name="arrow/arc(spx)">
@@ -485,6 +684,77 @@ h
 <page>
 <layer name="alpha"/>
 <view layers="alpha" active="alpha"/>
+<image layer="alpha" rect="31.0333 248.022 563.967 593.978" bitmap="5"/>
+<path matrix="1 0 0 1 48 0" stroke="black" pen="heavier" arrow="normal/normal">
+240 528 m
+272 624 l
+</path>
+<text matrix="1 0 0 1 48 0" transformations="translations" pos="272 624" stroke="black" type="label" width="215.964" height="14.347" depth="4.02" valign="baseline" size="huge">{\bf Augmented complex  }</text>
+<text transformations="translations" pos="64 448" stroke="black" type="label" width="13.958" height="16.934" depth="0" valign="baseline" size="Huge">Z</text>
+<text transformations="translations" pos="288 256" stroke="black" type="label" width="17.185" height="16.934" depth="0" valign="baseline" size="Huge">Y</text>
+<text matrix="1 0 0 1 48 -16" transformations="translations" pos="272 624" stroke="black" type="label" width="287.814" height="14.347" depth="4.02" valign="baseline" size="huge">{\bf zonotope before intersection}</text>
+<text matrix="1 0 0 1 160 -48" transformations="translations" pos="272 624" stroke="black" type="label" width="177.927" height="14.347" depth="4.02" valign="baseline" size="huge">{\bf Sub-parallelotope}</text>
+<path stroke="black" pen="heavier" arrow="normal/normal">
+192 464 m
+112 592 l
+</path>
+<text matrix="1 0 0 1 -256 -16" transformations="translations" pos="272 624" stroke="black" type="label" width="215.964" height="14.347" depth="4.02" valign="baseline" size="huge">{\bf Augmented complex }</text>
+<text matrix="1 0 0 1 -256 -32" transformations="translations" pos="272 624" stroke="black" type="label" width="272.365" height="14.347" depth="4.02" valign="baseline" size="huge">{\bf zonotope after intersection}</text>
+<path stroke="black" pen="heavier" arrow="normal/normal">
+496 480 m
+544 576 l
+</path>
+<text matrix="1 0 0 1 -304 -176" transformations="translations" pos="240 656" stroke="black" type="label" width="63.124" height="15.974" depth="0" valign="baseline" size="Huge" style="math">\bm{e=0}</text>
+</page>
+<page>
+<layer name="alpha"/>
+<view layers="alpha" active="alpha"/>
+<text layer="alpha" matrix="1 0 0 1 -304 0" transformations="translations" pos="272 624" stroke="black" type="label" width="215.964" height="14.347" depth="4.02" valign="baseline" size="huge">{\bf Augmented complex }</text>
+<text matrix="1 0 0 1 -304 -16" transformations="translations" pos="272 624" stroke="black" type="label" width="272.365" height="14.347" depth="4.02" valign="baseline" size="huge">{\bf zonotope after intersection}</text>
+<text matrix="1 0 0 1 48 16" transformations="translations" pos="272 624" stroke="black" type="label" width="215.964" height="14.347" depth="4.02" valign="baseline" size="huge">{\bf Augmented complex  }</text>
+<text matrix="1 0 0 1 48 0" transformations="translations" pos="272 624" stroke="black" type="label" width="287.814" height="14.347" depth="4.02" valign="baseline" size="huge">{\bf zonotope before intersection}</text>
+<image rect="31.0333 248.022 563.967 593.978" bitmap="4"/>
+<text matrix="1 0 0 1 240 -112" transformations="translations" pos="272 624" stroke="black" type="label" width="177.927" height="14.347" depth="4.02" valign="baseline" size="huge">{\bf Sub-parallelotope}</text>
+<path matrix="1 0 0 1 0 -16" stroke="black" pen="heavier" arrow="normal/normal">
+496 480 m
+544 528 l
+</path>
+<path matrix="1 0 0 1 -48 16" stroke="black" pen="heavier" arrow="normal/normal">
+192 464 m
+112 592 l
+</path>
+<path matrix="1 0 0 1 48 16" stroke="black" pen="heavier" arrow="normal/normal">
+240 528 m
+272 624 l
+</path>
+<text matrix="1 0 0 1 -304 -160" transformations="translations" pos="240 656" stroke="black" type="label" width="63.124" height="15.974" depth="0" valign="baseline" size="Huge" style="math">\bm{e=1}</text>
+</page>
+<page>
+<layer name="alpha"/>
+<view layers="alpha" active="alpha"/>
+<image layer="alpha" rect="31.0333 248.022 563.967 593.978" bitmap="1"/>
+<path matrix="1 0 0 1 -16 32" stroke="black" pen="heavier" arrow="normal/normal">
+192 464 m
+112 592 l
+</path>
+<text matrix="1 0 0 1 -272 16" transformations="translations" pos="272 624" stroke="black" type="label" width="215.964" height="14.347" depth="4.02" valign="baseline" size="huge">{\bf Augmented complex }</text>
+<text matrix="1 0 0 1 -272 0" transformations="translations" pos="272 624" stroke="black" type="label" width="272.365" height="14.347" depth="4.02" valign="baseline" size="huge">{\bf zonotope after intersection}</text>
+<path matrix="1 0 0 1 0 -16" stroke="black" pen="heavier" arrow="normal/normal">
+496 480 m
+544 528 l
+</path>
+<text matrix="1 0 0 1 240 -112" transformations="translations" pos="272 624" stroke="black" type="label" width="177.927" height="14.347" depth="4.02" valign="baseline" size="huge">{\bf Sub-parallelotope}</text>
+<path matrix="1 0 0 1 64 16" stroke="black" pen="heavier" arrow="normal/normal">
+240 528 m
+272 624 l
+</path>
+<text matrix="1 0 0 1 64 16" transformations="translations" pos="272 624" stroke="black" type="label" width="215.964" height="14.347" depth="4.02" valign="baseline" size="huge">{\bf Augmented complex  }</text>
+<text matrix="1 0 0 1 64 0" transformations="translations" pos="272 624" stroke="black" type="label" width="287.814" height="14.347" depth="4.02" valign="baseline" size="huge">{\bf zonotope before intersection}</text>
+<text matrix="1 0 0 1 -320 -160" transformations="translations" pos="240 656" stroke="black" type="label" width="84.985" height="15.974" depth="0" valign="baseline" size="Huge" style="math">\bm{e=0.5}</text>
+</page>
+<page>
+<layer name="alpha"/>
+<view layers="alpha" active="alpha"/>
 <path layer="alpha" matrix="1 0 0 1 -128 -48" stroke="red" pen="ultrafat" arrow="normal/normal" rarrow="normal/normal">
 112 464 m
 144 432 l
@@ -494,9 +764,9 @@ h
 176 368 l
 </path>
 <text matrix="2 0 0 2.01891 -256 -488.473" pos="160 448" stroke="black" type="label" width="22.171" height="15.703" depth="3.3" valign="baseline" size="Huge" style="math">\bm{\oplus}</text>
-<image matrix="0.552231 0 0 0.691298 126.506 115.967" rect="31.0333 259.02 563.967 582.98" bitmap="1"/>
+<image matrix="0.552231 0 0 0.691298 126.506 115.967" rect="31.0333 259.02 563.967 582.98" bitmap="2"/>
 <text matrix="2 0 0 2.01891 160 -488.473" pos="160 448" stroke="black" type="label" width="22.171" height="15.703" depth="3.3" valign="baseline" size="Huge" style="math">\bm{\oplus}</text>
-<image matrix="0.552231 0 0 0.691298 526.506 115.967" rect="31.0333 259.02 563.967 582.98" bitmap="1"/>
+<image matrix="0.552231 0 0 0.691298 526.506 115.967" rect="31.0333 259.02 563.967 582.98" bitmap="2"/>
 </page>
 <page>
 <layer name="alpha"/>

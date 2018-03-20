@@ -1,0 +1,212 @@
+We shall now describe some general properties of support functions of
+convex sets and also some specific properties related to interval
+zonotopes and sub-parallelotopes.  These properties shall be used
+later to derive an over-approximation of the intersection of Minkowski
+sum of a convex set and interval zonotope with a sub-parallelotope.
+We use the following notation for the rest of
+this chapter, unless otherwise specified.
+%
+\begin{align*}
+& \lb,\ub\in\reals^k:
+  k\leq n,~~~\plb\in\lt(\reals\bigcup\set{-\infty}\rt)^k,~~~\pub\in\lt(\reals\bigcup\set{\infty}\rt)^k\\
+& ~~~\qtemp\in\mat{k}{n}{\reals}:~\lt(\qtemp\qtemp^T\rt)~\text{is
+non-singular}
+\end{align*}
+%
+The following properties are some properties of the support function
+of a convex set.
+%
+\begin{lemma}~\label{lem:gen-supp}
+All of the following statements are true about any two convex subsets
+$\Psi_1,\Psi_2$ of $\reals^n$ and any $v\in\reals^n$.
+%
+\begin{enumerate}
+\item $\supp{v}{\Psi_1\oplus\Psi_2}=\supp{v}{\Psi_1}+\supp{v}{\Psi_2}$.
+\item If $\Psi_1\bigcap\Psi_2\neq\emptyset$, then $\supp{v}{\Psi_1\bigcap\Psi_2}\leq\inf\set{\supp{v}{\Psi_1},\supp{v}{\Psi_2}}$.
+\end{enumerate}
+%
+\end{lemma}
+%
+\begin{proof}
+We derive the following to prove the first statement.
+%
+\begin{align*}
+& \supp{v}{\Psi_1\oplus\Psi_2} =
+  \sup_{x\in\Psi_1,~y\in\Psi_2}v^T(x+y)\\
+& = \sup_{x\in\Psi_1}v^Tx+\sup{x\in\Psi_2}v^Ty=\supp{v}{\Psi_1}+\supp{v}{\Psi_2}. 
+\end{align*}
+%
+To prove the second statement, we derive the following.
+%
+\begin{align*}
+& \supp{v}{\Psi_1\bigcap\Psi_2}=\sup_{x\in\Psi_1\bigcap\Psi_2}v^Tx\\
+& \leq
+  \inf\set{\sup{x\in\Psi_1}v^Tx,\sup{x\in\Psi_2}v^Tx}\\
+& = \inf\set{\supp{v}{\Psi_1},\supp{v}{\Psi_2}}.~\hspace{3em}\qedhere
+\end{align*}
+%
+\end{proof}
+%
+When the support function of a sub-parallelotope is finite, then we
+get the following result.
+%
+\begin{lemma}~\label{lem:exist-point}
+Let $v\in\reals^n$ be such that
+$\supp{v}{\ptope{\qtemp}{\plb}{\pub}}<\infty$.  Then there exists
+$p\in\iztope{\pinv{\qtemp}}{\maxapprox{\lb}{\plb}}{\minapprox{\lb}{\plb}}$
+  such that $\supp{v}{\ptope{\qtemp}{\plb}{\pub}}=v^Tp$.
+\end{lemma}
+%
+\begin{proof}
+According to Lemma~\ref{lem:ptope-iz-conversion}, we get
+%
+\[
+\ptope{\qtemp}{\plb}{\pub}=\set{\pinv{\qtemp}\zeta:~\zeta\in\reals^k,~\plb\leq\zeta\leq\pub}\oplus\nullspace{\qtemp}.
+\]
+%
+Therefore,
+we derive the following using Lemma~\ref{lem:gen-supp} for computing
+the Minkowski sum of two sets
+%
+\begin{align*}
+&
+  \supp{v}{\ptope{\qtemp}{\plb}{\pub}}=\sup\set{v^T\pinv{\qtemp}\zeta:~\zeta\in\reals^k,~\plb\leq\zeta\leq\pub}+\supp{v}{\nullspace{\qtemp}}\\
+& =  \sum_{i=1}^k\sup_{h\in[\plb_i,\pub_i]}\lt(v^T\pinv{\qtemp}\rt)_ih+\supp{v}{\nullspace{\qtemp}}.
+\end{align*}
+%
+As $\nullspace{\qtemp}$ is a vector space, so
+$\supp{v}{\nullspace{\qtemp}}$ can either be zero or infinity.
+However, we are given that
+$\supp{v}{\ptope{\qtemp}{\plb}{\pub}}<\infty$.  So,
+$\supp{v}{\nullspace{\qtemp}}=0$.  Then we get,
+%
+\begin{align*}
+&
+  \supp{v}{\ptope{\qtemp}{\plb}{\pub}}=\sum_{i=1}^k\sup_{h\in[\plb_i,\pub_i]}\lt(v^T\pinv{\qtemp}\rt)_ih.~\numberthis\label{eqn:proof-suppint2}
+\end{align*}
+%
+Let us define
+$\zeta\in\reals^k:~\maxapprox{\lb}{\plb}\leq\zeta\leq\minapprox{\ub}{\pub}$
+as follows.  For any $i\in\set{1,\ldots,k}$,
+%
+\[
+\zeta_i=\lt\{\begin{array}{l}
+\lt(\maxapprox{\lb}{\plb}\rt)_i~\text{if}~\lt(v^T\qtemp\rt)_i\leq 0\\
+\lt(\minapprox{\ub}{\pub}\rt)_i~\text{otherwise}.
+\end{array}
+\rt.
+\]
+%
+Then we shall prove that for any $i\in\set{1,\ldots,k}$,
+%
+\begin{equation}~\label{eqn:proof-suppint1}
+\sup_{h\in[\plb_i,\pub_i]}\lt(v^T\pinv{\qtemp}\rt)_ih = \lt(v^T\pinv{\qtemp}\rt)_i\zeta_i.
+\end{equation}
+%
+We shall prove Equation~\ref{eqn:proof-suppint1} by considering the following three cases.
+
+{\it Case 1  :}  Let us consider that $\lt(v^T\qtemp\rt)_i<0$.  Then
+$\sup_{h\in[\plb_i,\pub_i]}\lt(v^T\pinv{\qtemp}\rt)_ih=\lt(v^T\pinv{\qtemp}\rt)_i\plb_i$.
+However, $\lt(v^T\pinv{\qtemp}\rt)_i\plb_i<\infty$ because
+$\supp{v}{\ptope{\qtemp}{\plb}{\pub}}$ is finite.  Therefore,
+$\plb_i>-\infty$.  Then $\plb_i=\maxapprox{\lb}{\plb}=\zeta_i$.  
+
+{\it Case 2:  } Let us consider that $\lt(v^T\qtemp\rt)_i>0$.  Then
+$\sup_{h\in[\plb_i,\pub_i]}\lt(v^T\pinv{\qtemp}\rt)_ih=\lt(v^T\pinv{\qtemp}\rt)_i\pub_i$.
+However, $\lt(v^T\qtemp\rt)_i\plb_i<\infty$ because
+$\supp{v}{\ptope{\qtemp}{\plb}{\pub}}$ is finite.  Therefore,
+$\plb_i<\infty$.  Then $\pub_i=\maxapprox{\lb}{\pub}=\zeta_i$.  
+
+{\it Case 3:  }  Let us consider that $\lt(v^T\qtemp\rt)_i=0$.  Then
+%
+\[
+\sup_{h\in[\plb_i,\pub_i]}\lt(v^T\pinv{\qtemp}\rt)_ih=\lt(v^T\pinv{\qtemp}\rt)_i\pub_i
+= 0 = \lt(v^T\pinv{\qtemp}\rt)_i\zeta_i.
+\]
+%
+Let us consider $p=\pinv{\qtemp}\zeta$.  Then we derive using
+Equations~\ref{eqn:proof-suppint2} and~\ref{eqn:proof-suppint1}
+%
+\begin{align*}
+\supp{v}{\ptope{\qtemp}{\plb}{\pub}} = \sum_{i=1}^k\lt(v^T\pinv{\qtemp}\rt)_i\zeta_i=\pinv{\qtemp}\zeta.~\hspace{3em}\qedhere
+\end{align*}
+%
+\end{proof}
+%
+
+The following lemma describes a condition when finite values of the
+support function of a sub-parallelotope is less than that of an
+interval zonotope.
+%
+\begin{lemma}~\label{lem:min-support}
+Let $v\in\reals^n$ be such that
+$\supp{v}{\ptope{\qtemp}{\plb}{\pub}}<\infty$.  Then,
+%
+\[
+\supp{v}{\ptope{\qtemp}{\plb}{\pub}}\leq\supp{v}{\iztope{\pinv{\qtemp}}{\maxapprox{\lb}{\plb}}{\minapprox{\ub}{\pub}}}.
+\]
+%
+\end{lemma}
+%
+\begin{proof}
+The above lemma follows from the fact that by
+Lemma~\ref{lem:exist-point}, there exists
+$p\in\iztope{\pinv{\qtemp}}{\maxapprox{\lb}{\plb}}{\minapprox{\lb}{\plb}}$
+such that $\supp{v}{\ptope{\qtemp}{\plb}{\pub}}=v^Tp$.  
+\end{proof}
+%
+Now we shall derive an over-approximation for the intersection of the
+Minkowski sum of a convex set and an interval zonotope with a
+sub-parallelotope.
+%
+\begin{lemma}
+Let $S$ be a convex set such that $0\in S$.  Let us consider that
+${\lb\leq\maxapprox{\lb}{\plb}\leq\minapprox{\ub}{\pub}\leq\ub}$.  Then the following is
+true.
+%
+\[
+\lt(S\oplus\iztope{\pinv{\qtemp}}{\lb}{\ub}\rt)\bigcap\ptope{\qtemp}{\plb}{\pub}\subseteq
+S\oplus\iztope{\pinv{\qtemp}}{\maxapprox{\lb}{\plb}}{\minapprox{\ub}{\pub}}. 
+\]
+%
+\end{lemma}
+%
+\begin{proof}
+Let us denote $\Psi_1=\iztope{\pinv{\qtemp}}{\lb}{\ub}$,
+$\Psi_2=\ptope{\qtemp}{\plb}{\pub}$, and 
+$\Psi_3=\iztope{\pinv{\qtemp}}{\maxapprox{\lb}{\plb}}{\minapprox{\ub}{\pub}}.$
+We shall first prove that for any $v\in\reals^n$,
+%
+\begin{equation}
+\supp{v}{\lt(S\oplus\Psi_1\rt)\bigcap\Psi_2}\leq
+\supp{v}{S\oplus\Psi_3}.
+\end{equation}
+%
+Let us denote $\supp{v}{S}=a$, $\supp{v}{\Psi_1}=b$ and
+$\supp{v}{\Psi_2}=c$ and $\supp{v}{\Psi_3}=d$.  Since $0\in S$, so
+$a\geq 0$.  Then we derive the following using
+Lemma~\ref{lem:gen-supp}
+%
+\begin{align*}
+& \supp{v}{\lt(S\oplus \Psi_1\rt)\bigcap\Psi_2}\leq \inf\set{a+b,c}\\
+  & \%\%~~\text{As}~a\geq 0\\
+& \leq\inf\set{a+b,a+c}=a+c.
+\end{align*}
+%
+As an interval zonotope is a bounded set, $b<\infty$.  By
+Lemma~\ref{lem:min-support}, if $c<\infty$, then $c<b$.  Therefore, we
+get
+%
+\begin{align*}
+& \supp{v}{\lt(S\oplus \Psi_1\rt)\bigcap\Psi_2}\leq
+  \inf\set{a+b,c}\leq a+c.
+\end{align*}
+%
+Next, we derive the following.
+%
+\begin{align*}
+\supp{v}{S\oplus\lt(\Psi_1\bigcap\Psi_2\rt)}
+\end{align*}
+%
+\end{proof}
+%

@@ -117,3 +117,59 @@ sub-parallelotopic template $\qtemp$ the the primary template $\ptemp$
 and primary offset $\cen$.  The bound is zero when the $\qtemp$ is orthogonal to
 $\ptemp$ and $\cen$, in which case the we can exactly specify the
 intersection by the augmented complex zonotope.
+%
+\begin{example}
+Let us consider an augmented complex zonotope\\
+${S_1=\acztope{V}{0}{\repmat{3}{1}{1}}{\pinv{K}}{1}{1}}$ and a
+sub-parallelotope $S_2=\ptope{K}{0.5}{0.5}$ where
+%
+\[
+V = \mymatrix{
+1+2\iota & 1 & 0\\
+1-\iota & 0 & 0\\
+0 & 0 & e
+},~~
+K = \mymatrix{0 & 0 & 1}.
+\]
+%
+for some $e\in \reals$.  Then
+%
+\[
+S_1\bigcap S_2\subseteq \acztope{V}{0}{\repmat{3}{1}{1}}{K}{0.5}{0.5}.
+\]
+%
+Furthermore, the over-approximation error is proportional to
+$\absolute{e}$, which is equal to $\norm{KV}$.  For example, when
+$e=0$, then the over-approximation error is zero, i.e., the above is
+an equality.  On the other hand, when $e\neq 0$, then the Hausdorff
+distance between the intersected set and the over-approximation is
+equal to $e$.  This is illustrated in
+Figures~\ref{fig:overapp1},~\ref{fig:overapp1} and ~\ref{fig:overapp1}
+that display the projection of the intersected set and the
+over-approximation along the $XY$ and $YZ$ planes for ${e=0}$, $e=0.5$
+and $e=1$, respectively.
+\end{example}
+%
+%
+\begin{figure}
+\center
+\includegraphics[scale=0.5]{fig/CZtopes/intersectionyz1.png}
+\includegraphics[scale=0.5]{fig/CZtopes/intersectionxy.png}
+\caption{Over-approximation of intersection of $e=0$.}~\label{fig:overapp1}
+\end{figure}
+%
+%
+\begin{figure}
+\center
+\includegraphics[scale=0.5]{fig/CZtopes/intersectionyz2.png}
+\includegraphics[scale=0.5]{fig/CZtopes/intersectionxy.png}
+\caption{Over-approximation of intersection of $e=0.5$.}~\label{fig:overapp2}
+\end{figure}
+%
+\begin{figure}
+\center
+\includegraphics[scale=0.5]{fig/CZtopes/intersectionyz3.png}
+\includegraphics[scale=0.5]{fig/CZtopes/intersectionxy.png}
+\caption{Over-approximation of intersection of $e=1$.}~\label{fig:overapp3}
+\end{figure}
+%

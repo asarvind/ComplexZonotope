@@ -179,6 +179,14 @@ proposition follows from
 Equations~\ref{eqn:proof-commin2} and~\ref{eqn:proof-commin1}.
 \end{proof}
 %
+We denote the value of the support function of a set $\Psi\in\reals^n$
+at a vector $v\in\reals^n$ as $\supp{v}{\Psi}$, which is defined as
+follows.
+%
+\[
+\supp{v}{\Psi}=\sup_{x\in\Psi}v^Tx.
+\]
+%
 The support function of a template complex zonotope is an affine
 expression of the scaling factors and the center, as described in the
 following lemma.
@@ -237,8 +245,57 @@ mutual intersection.  Even the intersection between template complex
 zonotopes with a common template and center need not be a closed.  But
 when the common template is a non-singular (invertible) matrix and
 the center is common, then the intersection is a closed operation and
-can be expressed algebraically.  This is described in the following
-lemma.
+can be expressed algebraically.
+%
+\begin{example}
+Let us consider two template complex zonotopes having a common
+template as $\tcztope{\ptemp}{0}{\sfact}$ and
+$\tcztope{\ptemp}{0}{\sfact^\pr}$ where
+%
+\[
+V = \mymatrix{
+  1+\iota & 1 & 0\\
+  1 & 0 & 1
+},~~
+\sfact=\mymatrix{1\\0.5\\1}~\text{and}~\sfact^\pr=\mymatrix{1\\1\\0.5}.
+\]
+%
+The template complex zonotope
+$\tcztope{V}{0}{\meet{\sfact}{\sfact^\pr}}$, where
+$\meet{\sfact}{\sfact^\pr}=\mymatrix{1 & 0.5 & 0.5}^T$, can not be an
+over-approximation of the intersection of the previous two template
+complex zonotopes as shown in Figure~\ref{fig:nonclosure}.
+
+On the other hand, let us consider the following invertible matrix $W$
+and two vectors of scaling factors $r$ and $r^\pr$, respectively.
+%
+\[
+W=\mymatrix{0.5+\iota & 0\\ 0.5 & 1},~~r=\mymatrix{1\\0.5},~~r^\pr=\mymatrix{0.5\\1}.
+\]
+%
+Since $W$ is invertible, we can exactly express the intersection
+between the two complex zonotopes as another complex zonotope given
+below and illustrated in Figure~\ref{fig:closure}.
+%
+\[
+\tcztope{W}{0}{r}\bigcap\tcztope{W}{0}{r^\pr} = \tcztope{W}{0}{\meet{r}{r^\pr}}.
+\]
+%
+\end{example}
+%
+\begin{figure}
+  \center
+  \caption{Non-closure of intersection between complex zonotopes for a non-invertible template.}~\label{fig:nonclosure}
+  \includegraphics[scale=0.5]{fig/CZtopes/nonclosure.png}
+  \vspace{1em}
+  \caption{Closure of intersection between complex zonotopes for an invertible template.}~\label{fig:closure}
+  \includegraphics[scale=0.5]{fig/CZtopes/closure.png}
+\end{figure}
+%
+
+The observation in the above example about intersection between
+complex zonotopes is mathematically explained for a general case in
+the following lemma.
 %
 \begin{lemma}[Mutual intersection]~\label{lem:intersection}
 Let ${\ptemp\in\mat{n}{n}{\compnums}}$ be a non-singular matrix.  
