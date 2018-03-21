@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <!DOCTYPE ipe SYSTEM "ipe.dtd">
 <ipe version="70206" creator="Ipe 7.2.7">
-<info created="D:20171206194812" modified="D:20180320143255"/>
+<info created="D:20171206194812" modified="D:20180321142717"/>
 <preamble>\usepackage{bm}</preamble>
 <bitmap id="1" width="533" height="346" length="3527" ColorSpace="DeviceRGB" Filter="FlateDecode" BitsPerComponent="8" encoding="base64">
 eNrt3DFLY1kfwGE/itV+BAtRUezEJoVVIgo22gbEMrcOGCSIIIIBGxEEGysb0RRio4KFpRbK
@@ -71,7 +71,116 @@ m7GxsXAR3vKHL/r8/Hw6nT46OvJa+7jwspqbmwvzHBwcvLq6Sta0324+cXN2S3fyDEnctPl0
 3fwb0oT6+++///nnn4ROu8nmk7JVt7QDBAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
 AAAAAAAAAAAAeIf/ARuO7Gw=
 </bitmap>
-<bitmap id="2" width="533" height="324" length="9884" ColorSpace="DeviceRGB" Filter="FlateDecode" BitsPerComponent="8" encoding="base64">
+<bitmap id="2" width="512" height="384" length="5742" ColorSpace="DeviceRGB" Filter="FlateDecode" BitsPerComponent="8" encoding="base64">
+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
+AAAAAAAAAAAAAIAI/g8HYUOf
+</bitmap>
+<bitmap id="3" width="533" height="324" length="9884" ColorSpace="DeviceRGB" Filter="FlateDecode" BitsPerComponent="8" encoding="base64">
 eNrtnQ1UVGX+x5NXNd/tDVdNLB1e1FFDRTBEsFCCUmAxXTVBQwwFTFp1PYaZ7Yabm7nlZmr/
 +reVu7id4m9vZ63UznqMsn/bRuvfdIVcF/MNFQVBcP4PzXQZZoYBRoa597mfz5njGS8zcH/f
 53l+3/t7nvtiMgEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
@@ -257,7 +366,7 @@ qqpCIgAAsKGuri4lJUU4xYIFC6y3V1RUREREiO35+fmoBAAANmzatKm5M3XN154L9u3bh1AA
 AKDw1VdfmS/0ePvttx1+YMmSJeKnEyZMuHDhAnIBAAAAAAAAAAAAAAAAAAAAAAAAgEP+HzwE
 ev4=
 </bitmap>
-<bitmap id="4" width="533" height="346" length="3780" ColorSpace="DeviceRGB" Filter="FlateDecode" BitsPerComponent="8" encoding="base64">
+<bitmap id="5" width="533" height="346" length="3780" ColorSpace="DeviceRGB" Filter="FlateDecode" BitsPerComponent="8" encoding="base64">
 eNrt209LW+kewPF5D/cNuJqXYKmoVNy04kaoq0QMuFHopgGxXeV0WcEgQQQRTHEjQsCNUHAj
 moV1o4IUl7pQBouLBCkuMqb3sbktubHjxKn/Tufz4eFyxhzK6S8nz9eTmfvlCwAAAAAAAAAA
 AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEGPJZPJ3gF9L2Nls77ctzPkB/lExnYBr
@@ -330,7 +439,7 @@ Xa39sKenp1QqxWjawRXXH4vrjMWQf5l8xG7aNGlzc3N+fn5paanJu7Sjo+P09DTuf4t7v87Z
 1x+L63RL20AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIB/4L/qG1No
 
 </bitmap>
-<bitmap id="5" width="533" height="346" length="2986" ColorSpace="DeviceRGB" Filter="FlateDecode" BitsPerComponent="8" encoding="base64">
+<bitmap id="6" width="533" height="346" length="2986" ColorSpace="DeviceRGB" Filter="FlateDecode" BitsPerComponent="8" encoding="base64">
 eNrt3b9LW/sbwHHX+1+42D8hg0RR3EIWBycjKWTR9UBwzJmFBBERgmDARQTBxSlL0AziYgSH
 jNdBKUKGiINDmvR7vg0tXmP90Vbrsa8XGc7Vg3x8kj7vJnfoly8AAAAAAAAAAAAAAAAAAAAA
 AAAAAAAAAAAAAAAAAAAAAAAAAAAAAECMZTKZDwDvS7TZrPeXFs35Df6omE7AmR3bma0j+fCK
@@ -684,7 +793,14 @@ h
 <page>
 <layer name="alpha"/>
 <view layers="alpha" active="alpha"/>
-<image layer="alpha" rect="31.0333 248.022 563.967 593.978" bitmap="5"/>
+<image layer="alpha" rect="41.532 229.024 553.468 612.976" bitmap="2"/>
+<text matrix="1 0 0 1 -16 0" transformations="translations" pos="80 448" stroke="black" type="label" width="19.475" height="16.938" depth="0" valign="baseline" size="Huge" style="math">{Y}</text>
+<text matrix="1 0 0 1 224 -224" transformations="translations" pos="80 448" stroke="black" type="label" width="22.092" height="16.938" depth="0" valign="baseline" size="Huge" style="math">{X}</text>
+</page>
+<page>
+<layer name="alpha"/>
+<view layers="alpha" active="alpha"/>
+<image layer="alpha" rect="31.0333 248.022 563.967 593.978" bitmap="6"/>
 <path matrix="1 0 0 1 48 0" stroke="black" pen="heavier" arrow="normal/normal">
 240 528 m
 272 624 l
@@ -692,19 +808,68 @@ h
 <text matrix="1 0 0 1 48 0" transformations="translations" pos="272 624" stroke="black" type="label" width="215.964" height="14.347" depth="4.02" valign="baseline" size="huge">{\bf Augmented complex  }</text>
 <text transformations="translations" pos="64 448" stroke="black" type="label" width="13.958" height="16.934" depth="0" valign="baseline" size="Huge">Z</text>
 <text transformations="translations" pos="288 256" stroke="black" type="label" width="17.185" height="16.934" depth="0" valign="baseline" size="Huge">Y</text>
+<path stroke="black" pen="heavier" arrow="normal/normal">
+496 480 m
+544 528 l
+</path>
 <text matrix="1 0 0 1 48 -16" transformations="translations" pos="272 624" stroke="black" type="label" width="287.814" height="14.347" depth="4.02" valign="baseline" size="huge">{\bf zonotope before intersection}</text>
-<text matrix="1 0 0 1 160 -48" transformations="translations" pos="272 624" stroke="black" type="label" width="177.927" height="14.347" depth="4.02" valign="baseline" size="huge">{\bf Sub-parallelotope}</text>
+<text matrix="1 0 0 1 240 -96" transformations="translations" pos="272 624" stroke="black" type="label" width="177.927" height="14.347" depth="4.02" valign="baseline" size="huge">{\bf Sub-parallelotope}</text>
 <path stroke="black" pen="heavier" arrow="normal/normal">
 192 464 m
 112 592 l
 </path>
 <text matrix="1 0 0 1 -256 -16" transformations="translations" pos="272 624" stroke="black" type="label" width="215.964" height="14.347" depth="4.02" valign="baseline" size="huge">{\bf Augmented complex }</text>
 <text matrix="1 0 0 1 -256 -32" transformations="translations" pos="272 624" stroke="black" type="label" width="272.365" height="14.347" depth="4.02" valign="baseline" size="huge">{\bf zonotope after intersection}</text>
-<path stroke="black" pen="heavier" arrow="normal/normal">
-496 480 m
-544 576 l
+<path stroke="black" pen="ultrafat">
+128 768 m
+144 768 l
+144 768 l
 </path>
-<text matrix="1 0 0 1 -304 -176" transformations="translations" pos="240 656" stroke="black" type="label" width="63.124" height="15.974" depth="0" valign="baseline" size="Huge" style="math">\bm{e=0}</text>
+<path stroke="black" pen="ultrafat">
+128 768 m
+128 688 l
+</path>
+<text transformations="translations" pos="144 752" stroke="black" type="label" width="59.022" height="13.319" depth="2.58" valign="baseline" size="huge" style="math">\bm {1+2\iota}</text>
+<text matrix="1 0 0 1 80 0" transformations="translations" pos="144 752" stroke="black" type="label" width="11.623" height="13.316" depth="0" valign="baseline" size="huge" style="math">\bm {1}</text>
+<text matrix="1 0 0 1 112 0" transformations="translations" pos="144 752" stroke="black" type="label" width="11.623" height="13.316" depth="0" valign="baseline" size="huge" style="math">\bm {0}</text>
+<text matrix="1 0 0 1 0 -32" transformations="translations" pos="144 752" stroke="black" type="label" width="47.801" height="13.321" depth="2.75" valign="baseline" size="huge" style="math">\bm {1-\iota}</text>
+<text matrix="1 0 0 1 80 -32" transformations="translations" pos="144 752" stroke="black" type="label" width="11.623" height="13.316" depth="0" valign="baseline" size="huge" style="math">\bm {0}</text>
+<text matrix="1 0 0 1 112 -32" transformations="translations" pos="144 752" stroke="black" type="label" width="11.623" height="13.316" depth="0" valign="baseline" size="huge" style="math">\bm {0}</text>
+<text matrix="1 0 0 1 0 -64" transformations="translations" pos="144 752" stroke="black" type="label" width="11.623" height="13.316" depth="0" valign="baseline" size="huge" style="math">\bm {0}</text>
+<text matrix="1 0 0 1 80 -64" transformations="translations" pos="144 752" stroke="black" type="label" width="11.623" height="13.316" depth="0" valign="baseline" size="huge" style="math">\bm {0}</text>
+<text matrix="1 0 0 1 112 -64" transformations="translations" pos="144 752" stroke="black" type="label" width="11.623" height="13.316" depth="0" valign="baseline" size="huge" style="math">\bm {0}</text>
+<path stroke="black" pen="ultrafat">
+128 688 m
+128 672 l
+</path>
+<path stroke="black" pen="ultrafat">
+128 672 m
+144 672 l
+</path>
+<path stroke="black" pen="ultrafat">
+256 768 m
+272 768 l
+272 672 l
+256 672 l
+</path>
+<text matrix="1 0 0 1 -16 -32" transformations="translations" pos="96 736" stroke="black" type="label" width="39.898" height="14.177" depth="0" valign="baseline" size="huge" style="math">\bm{V}=</text>
+<text matrix="1 0 0 1 208 -32" transformations="translations" pos="96 736" stroke="black" type="label" width="42.122" height="14.177" depth="0" valign="baseline" size="huge" style="math">\bm{K}=</text>
+<text transformations="translations" pos="368 704" stroke="black" type="label" width="11.623" height="13.316" depth="0" valign="baseline" size="huge" style="math">\bm{0}</text>
+<text matrix="1 0 0 1 32 0" transformations="translations" pos="368 704" stroke="black" type="label" width="11.623" height="13.316" depth="0" valign="baseline" size="huge" style="math">\bm{0}</text>
+<text matrix="1 0 0 1 64 0" transformations="translations" pos="368 704" stroke="black" type="label" width="11.623" height="13.316" depth="0" valign="baseline" size="huge" style="math">\bm{0}</text>
+<path stroke="black" pen="ultrafat">
+368 736 m
+352 736 l
+352 688 l
+368 688 l
+368 688 l
+</path>
+<path stroke="black" pen="ultrafat">
+432 736 m
+448 736 l
+448 688 l
+432 688 l
+</path>
 </page>
 <page>
 <layer name="alpha"/>
@@ -713,7 +878,57 @@ h
 <text matrix="1 0 0 1 -304 -16" transformations="translations" pos="272 624" stroke="black" type="label" width="272.365" height="14.347" depth="4.02" valign="baseline" size="huge">{\bf zonotope after intersection}</text>
 <text matrix="1 0 0 1 48 16" transformations="translations" pos="272 624" stroke="black" type="label" width="215.964" height="14.347" depth="4.02" valign="baseline" size="huge">{\bf Augmented complex  }</text>
 <text matrix="1 0 0 1 48 0" transformations="translations" pos="272 624" stroke="black" type="label" width="287.814" height="14.347" depth="4.02" valign="baseline" size="huge">{\bf zonotope before intersection}</text>
-<image rect="31.0333 248.022 563.967 593.978" bitmap="4"/>
+<path matrix="1 0 0 1 32 0" stroke="black" pen="ultrafat">
+128 768 m
+144 768 l
+144 768 l
+</path>
+<path matrix="1 0 0 1 32 0" stroke="black" pen="ultrafat">
+128 768 m
+128 688 l
+</path>
+<text matrix="1 0 0 1 32 0" transformations="translations" pos="144 752" stroke="black" type="label" width="59.022" height="13.319" depth="2.58" valign="baseline" size="huge" style="math">\bm {1+2\iota}</text>
+<text matrix="1 0 0 1 112 0" transformations="translations" pos="144 752" stroke="black" type="label" width="11.623" height="13.316" depth="0" valign="baseline" size="huge" style="math">\bm {1}</text>
+<text matrix="1 0 0 1 144 0" transformations="translations" pos="144 752" stroke="black" type="label" width="11.623" height="13.316" depth="0" valign="baseline" size="huge" style="math">\bm {0}</text>
+<text matrix="1 0 0 1 32 -32" transformations="translations" pos="144 752" stroke="black" type="label" width="47.801" height="13.321" depth="2.75" valign="baseline" size="huge" style="math">\bm {1-\iota}</text>
+<text matrix="1 0 0 1 112 -32" transformations="translations" pos="144 752" stroke="black" type="label" width="11.623" height="13.316" depth="0" valign="baseline" size="huge" style="math">\bm {0}</text>
+<text matrix="1 0 0 1 144 -32" transformations="translations" pos="144 752" stroke="black" type="label" width="11.623" height="13.316" depth="0" valign="baseline" size="huge" style="math">\bm {0}</text>
+<text matrix="1 0 0 1 32 -64" transformations="translations" pos="144 752" stroke="black" type="label" width="11.623" height="13.316" depth="0" valign="baseline" size="huge" style="math">\bm {0}</text>
+<text matrix="1 0 0 1 112 -64" transformations="translations" pos="144 752" stroke="black" type="label" width="11.623" height="13.316" depth="0" valign="baseline" size="huge" style="math">\bm {0}</text>
+<text matrix="1 0 0 1 144 -64" transformations="translations" pos="144 752" stroke="black" type="label" width="11.623" height="13.316" depth="0" valign="baseline" size="huge" style="math">\bm {1}</text>
+<path matrix="1 0 0 1 32 0" stroke="black" pen="ultrafat">
+128 688 m
+128 672 l
+</path>
+<path matrix="1 0 0 1 32 0" stroke="black" pen="ultrafat">
+128 672 m
+144 672 l
+</path>
+<text matrix="1 0 0 1 16 -32" transformations="translations" pos="96 736" stroke="black" type="label" width="39.898" height="14.177" depth="0" valign="baseline" size="huge" style="math">\bm{V}=</text>
+<text matrix="1 0 0 1 240 -32" transformations="translations" pos="96 736" stroke="black" type="label" width="42.122" height="14.177" depth="0" valign="baseline" size="huge" style="math">\bm{K}=</text>
+<text matrix="1 0 0 1 32 0" transformations="translations" pos="368 704" stroke="black" type="label" width="11.623" height="13.316" depth="0" valign="baseline" size="huge" style="math">\bm{0}</text>
+<text matrix="1 0 0 1 64 0" transformations="translations" pos="368 704" stroke="black" type="label" width="11.623" height="13.316" depth="0" valign="baseline" size="huge" style="math">\bm{0}</text>
+<text matrix="1 0 0 1 96 0" transformations="translations" pos="368 704" stroke="black" type="label" width="11.623" height="13.316" depth="0" valign="baseline" size="huge" style="math">\bm{0}</text>
+<path matrix="1 0 0 1 32 0" stroke="black" pen="ultrafat">
+368 736 m
+352 736 l
+352 688 l
+368 688 l
+368 688 l
+</path>
+<path matrix="1 0 0 1 32 0" stroke="black" pen="ultrafat">
+432 736 m
+448 736 l
+448 688 l
+432 688 l
+</path>
+<path matrix="1 0 0 1 16 0" stroke="black" pen="ultrafat">
+272 768 m
+288 768 l
+288 672 l
+272 672 l
+</path>
+<image rect="31.0333 248.022 563.967 593.978" bitmap="5"/>
 <text matrix="1 0 0 1 240 -112" transformations="translations" pos="272 624" stroke="black" type="label" width="177.927" height="14.347" depth="4.02" valign="baseline" size="huge">{\bf Sub-parallelotope}</text>
 <path matrix="1 0 0 1 0 -16" stroke="black" pen="heavier" arrow="normal/normal">
 496 480 m
@@ -727,7 +942,6 @@ h
 240 528 m
 272 624 l
 </path>
-<text matrix="1 0 0 1 -304 -160" transformations="translations" pos="240 656" stroke="black" type="label" width="63.124" height="15.974" depth="0" valign="baseline" size="Huge" style="math">\bm{e=1}</text>
 </page>
 <page>
 <layer name="alpha"/>
@@ -750,7 +964,56 @@ h
 </path>
 <text matrix="1 0 0 1 64 16" transformations="translations" pos="272 624" stroke="black" type="label" width="215.964" height="14.347" depth="4.02" valign="baseline" size="huge">{\bf Augmented complex  }</text>
 <text matrix="1 0 0 1 64 0" transformations="translations" pos="272 624" stroke="black" type="label" width="287.814" height="14.347" depth="4.02" valign="baseline" size="huge">{\bf zonotope before intersection}</text>
-<text matrix="1 0 0 1 -320 -160" transformations="translations" pos="240 656" stroke="black" type="label" width="84.985" height="15.974" depth="0" valign="baseline" size="Huge" style="math">\bm{e=0.5}</text>
+<path stroke="black" pen="ultrafat">
+128 768 m
+144 768 l
+144 768 l
+</path>
+<path stroke="black" pen="ultrafat">
+128 768 m
+128 688 l
+</path>
+<text transformations="translations" pos="144 752" stroke="black" type="label" width="59.022" height="13.319" depth="2.58" valign="baseline" size="huge" style="math">\bm {1+2\iota}</text>
+<text matrix="1 0 0 1 80 0" transformations="translations" pos="144 752" stroke="black" type="label" width="11.623" height="13.316" depth="0" valign="baseline" size="huge" style="math">\bm {1}</text>
+<text matrix="1 0 0 1 112 0" transformations="translations" pos="144 752" stroke="black" type="label" width="11.623" height="13.316" depth="0" valign="baseline" size="huge" style="math">\bm {0}</text>
+<text matrix="1 0 0 1 0 -32" transformations="translations" pos="144 752" stroke="black" type="label" width="47.801" height="13.321" depth="2.75" valign="baseline" size="huge" style="math">\bm {1-\iota}</text>
+<text matrix="1 0 0 1 80 -32" transformations="translations" pos="144 752" stroke="black" type="label" width="11.623" height="13.316" depth="0" valign="baseline" size="huge" style="math">\bm {0}</text>
+<text matrix="1 0 0 1 112 -32" transformations="translations" pos="144 752" stroke="black" type="label" width="11.623" height="13.316" depth="0" valign="baseline" size="huge" style="math">\bm {0}</text>
+<text matrix="1 0 0 1 0 -64" transformations="translations" pos="144 752" stroke="black" type="label" width="11.623" height="13.316" depth="0" valign="baseline" size="huge" style="math">\bm {0}</text>
+<text matrix="1 0 0 1 80 -64" transformations="translations" pos="144 752" stroke="black" type="label" width="11.623" height="13.316" depth="0" valign="baseline" size="huge" style="math">\bm {0}</text>
+<text matrix="1 0 0 1 112 -64" transformations="translations" pos="144 752" stroke="black" type="label" width="29.846" height="13.316" depth="0" valign="baseline" size="huge" style="math">\bm {0.5}</text>
+<path stroke="black" pen="ultrafat">
+128 688 m
+128 672 l
+</path>
+<path stroke="black" pen="ultrafat">
+128 672 m
+144 672 l
+</path>
+<text matrix="1 0 0 1 -16 -32" transformations="translations" pos="96 736" stroke="black" type="label" width="39.898" height="14.177" depth="0" valign="baseline" size="huge" style="math">\bm{V}=</text>
+<text matrix="1 0 0 1 208 -32" transformations="translations" pos="96 736" stroke="black" type="label" width="42.122" height="14.177" depth="0" valign="baseline" size="huge" style="math">\bm{K}=</text>
+<text transformations="translations" pos="368 704" stroke="black" type="label" width="11.623" height="13.316" depth="0" valign="baseline" size="huge" style="math">\bm{0}</text>
+<text matrix="1 0 0 1 32 0" transformations="translations" pos="368 704" stroke="black" type="label" width="11.623" height="13.316" depth="0" valign="baseline" size="huge" style="math">\bm{0}</text>
+<text matrix="1 0 0 1 64 0" transformations="translations" pos="368 704" stroke="black" type="label" width="11.623" height="13.316" depth="0" valign="baseline" size="huge" style="math">\bm{0}</text>
+<path stroke="black" pen="ultrafat">
+368 736 m
+352 736 l
+352 688 l
+368 688 l
+368 688 l
+</path>
+<path stroke="black" pen="ultrafat">
+432 736 m
+448 736 l
+448 688 l
+432 688 l
+</path>
+<path stroke="black" pen="ultrafat">
+272 768 m
+288 768 l
+288 672 l
+272 672 l
+</path>
 </page>
 <page>
 <layer name="alpha"/>
@@ -764,9 +1027,9 @@ h
 176 368 l
 </path>
 <text matrix="2 0 0 2.01891 -256 -488.473" pos="160 448" stroke="black" type="label" width="22.171" height="15.703" depth="3.3" valign="baseline" size="Huge" style="math">\bm{\oplus}</text>
-<image matrix="0.552231 0 0 0.691298 126.506 115.967" rect="31.0333 259.02 563.967 582.98" bitmap="2"/>
+<image matrix="0.552231 0 0 0.691298 126.506 115.967" rect="31.0333 259.02 563.967 582.98" bitmap="3"/>
 <text matrix="2 0 0 2.01891 160 -488.473" pos="160 448" stroke="black" type="label" width="22.171" height="15.703" depth="3.3" valign="baseline" size="Huge" style="math">\bm{\oplus}</text>
-<image matrix="0.552231 0 0 0.691298 526.506 115.967" rect="31.0333 259.02 563.967 582.98" bitmap="2"/>
+<image matrix="0.552231 0 0 0.691298 526.506 115.967" rect="31.0333 259.02 563.967 582.98" bitmap="3"/>
 </page>
 <page>
 <layer name="alpha"/>
