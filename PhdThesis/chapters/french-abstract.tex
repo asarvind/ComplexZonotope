@@ -1,0 +1,41 @@
+Le calcul de l'ensemble atteignable est une approche 
+utilis\'ee dans de nombreuses m\'ethodes de v\'erification formelles pour
+des syst\`emes hybrides. Mais le calcul exact de l'ensemble atteignable
+est un probl\`eme d\^ur pour plusieurs classes de syst\`emes
+hybrides, soit en raison de l'ind\'ecidabilit\'e ou de la complexit\'e de
+calcul \'elev\'ee. Alternativement, beaucoup de recherches ont \'et\'e centr\'ees
+sur le d\'ev\'eloppement des repr\'esentations d'ensembles qui peuvent \^etre
+manipul\'ees efficacement pour calculer une surapproximation suffisamment
+pr\'ecise de l'ensemble atteignable. Les zonotopes sont une
+repr\'esentation d'ensemble utile pour l'analyse d'accessibilit\'e
+en raison de leur fermeture et de leur faible complexit\'e pour le
+calcul de la transformation lin\'eaire et de la somme de
+Minkowski. Mais pour approximer l'ensemble atteignable pour une dur\'ee de temps non born\'ee
+par des invariants positifs, les zonotopes pr\'esentent
+l'inconv\'enient suivant. L'efficacit\'e d'une repr\'esentation d'ensemble
+pour calculer un invariant positif d\'epend de l'encodage efficace des
+directions de convergence des \'etats vers un point d'\'equilibre. Dans un syst\'eme
+hybride affine, certaines des directions de convergence peuvent \^etre
+d\'eriv\'ees \`a partir des vecteurs propres des matrices de
+dynamiques continues. Mais la repr\'esentation zonotopique usuelle ne peut pas
+exploiter la structure des vecteurs propres complexe de ces matrices de transformation
+car la repr\'esentation zonotopique usuelle ne se d\'efinit avec des g\'en\'erateurs \'a valeurs r\'eelles.
+
+Par cons\'equent, nous \'etendons les zonotopes r\'eels au domaine 
+complexe afin de capturer la contraction le long des
+vecteurs propres complexes, ce qui am\`ene \`a une nouvelle repr\'esentation
+d'ensemble appel\'ee {\em zonotope complexe}. G\'eom\'etriquement parlant, les zonotopes
+complexes repr\'esentent une classe d'ensembles plus large qui
+comprennent des ensembles non-polytopiques ainsi que des zonotopes
+polytopiques. Ils conservent les avantages des zonotopes r\'eels permettant
+d'effectuer efficacement la transformation lin\'eaire et les
+op\'erations de somme de Minkowski et calculer la fonction de
+support. De plus, nous d\'eveloppons des
+algorithmes approximatifs pour le test d'inclusion
+et le calcul d'intersection avec des demi-espaces. En utilisant ces op\'erations
+sur des zonotopes complexes, nous d\'eveloppons ensuite des programmes convexes
+pour v\'erifier les propri\'et\'es d'invariance lin\'eaire des syst\'emes
+hybrides affines \'a temps discret et la stabilit\'e exponentielle des
+syst\'emes impulsifs lin\'eaires. Nos r\'esultats exp\'erimentaux sur certains exemples de
+benchmarks d\'emontrent l'efficacit\'e nos techniques de v\'erification
+bas\'ees sur des zonotopes complexes.
