@@ -1,17 +1,11 @@
 We shall discuss the computation of some basic operations on template
 complex zonotopes like linear transformation, Minkowski sum and
 intersection in special cases.  In the next section, we shall discuss
-how to check inclusion between two template complex zonotopes.  For
-the rest of this chapter, we use the following notation, unless
-otherwise specified.
-%
-\begin{align*}
-\ptemp\in\mat{n}{m}{\compnums},~~\sfact\in\reals^m_{\geq 0},~~\cen\in\reals^n.
-\end{align*}
-%
-The set of template complex zonotopes is closed under linear transformation and
-{Minkowski sum} operations, which are straightforward algebraic
-computations just like in the case of simple (real) zonotopes.
+how to check inclusion between two template complex zonotopes.  The
+set of template complex zonotopes is closed under linear
+transformation and {Minkowski sum} operations, which are
+straightforward algebraic computations just like in the case of simple
+(real) zonotopes.
 %
 \begin{lemma}[Linear transformation]~\label{lem:lin-transform}
 Let $A\in\mat{n}{n}{\reals}$ and $\ptemp\in\mat{n}{m}{\compnums}$.
@@ -36,16 +30,16 @@ Let $A\in\mat{n}{n}{\reals}$ and $\ptemp\in\mat{n}{m}{\compnums}$.
   %
 \end{proof}
 %
-We see that the template of a complex zonotope can change after a
-linear transformation.  But when the column vectors of the template
-are the eigenvectors of the linear transformation and the center is
-the origin, we can represent the transformed complex zonotope using
-the same template by multiplying the scaling factors with the
-magnitudes of eigenvalues.  So, when the magnitudes of eigenvalues are
-less than one, the transformed template complex zonotope contains the
-original template complex zonotope.  This result can be seen as an
-extension of Proposition~\ref{lem:eig-invariance} to the case of
-template complex zonotopes.
+In the above lemma, we see that the template of a complex zonotope can
+change after a linear transformation.  But when the column vectors of
+the template are the eigenvectors of the linear transformation we can
+represent the transformed complex zonotope using the same template by
+multiplying the scaling factors with the magnitudes of eigenvalues.
+Therefore, when the magnitudes of eigenvalues are less than one and
+the center is the origin, the transformed template complex zonotope
+contains the original template complex zonotope.  This result can be
+seen as an extension of Proposition~\ref{lem:eig-invariance} to the
+case of template complex zonotopes.
 %
 \begin{lemma}[Eigenstructure based scaling]~\label{lem:eig-scaling}
 Let us consider $\ptemp\in\mat{n}{n}{\compnums}$ consists of the complex
@@ -104,9 +98,9 @@ We derive the following.
 %
 \end{proof}
 %
-We see that that the representation size of a template complex
-zonotope can increase after a Minkowski sum with another template
-complex zonotope.  But when two template complex
+In the above lemma, we see that that the representation size of a
+template complex zonotope can increase after a Minkowski sum with
+another template complex zonotope.  But when two template complex
 zonotopes have the same template, their Minkowski sum results in a
 complex zonotope with the same template, i.e., the representation size
 does not increase.  This is described in the following Proposition.

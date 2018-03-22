@@ -125,18 +125,18 @@ By the above definition, we get
 %
 Let
 $w=x-\pinv{\qtemp}\epsilon=v+\pinv{\qtemp}\zeta-\pinv{\qtemp}\epsilon$.
-For
-any $i\in\set{1,...,k},$ we analyze the following cases.
+
+For any $i\in\set{1,...,k},$ we analyze the following cases.
 
 
 {\it Case 1:} Let us consider $\zeta_i>\min\set{\ub_i,\pub_i}$.  Then
 $\epsilon_i=\min\set{\ub_i,\pub_i}$.  Since $\zeta_i\leq\ub_i$, we get
-${\min\set{\ub_i,\pub_i}=\pub_i}$.  Then by using
+${\min\set{\ub_i,\pub_i}=\pub_i}=\epsilon_i$.  Then by using
 Equation~\ref{proof-intersection1}, we derive
 %
 \begin{align*}
-&\qtemp_iw=\qtemp_iv+\zeta_i-\epsilon_i\\
-& \leq\pub_i-\min\set{\ub_i,\pub_i}=\pub_i-\pub_i=0.
+&\qtemp_iw=\qtemp_ix-\epsilon_i\\
+& \leq\pub_i-\pub_i=\pub_i-\pub_i=0.
 \end{align*}
 %
 Also by using Equation~\ref{proofnew-intersection1}, we get
@@ -153,12 +153,12 @@ v_i.
 %
 {\it Case 2:} Let us consider that $\zeta_i<\max\set{\lb_i,\plb_i}$.
 Then $\epsilon_i=\max{\set{\lb_i,\plb_i}}$.  Since $\zeta_i\geq\lb_i$,
-we get $\max{\set{\lb_i,\plb_i}}=\plb_i$.  Then by using
+we get $\max{\set{\lb_i,\plb_i}}=\plb_i=\epsilon_i$.  Then by using
 Equation~\ref{proof-intersection1}, we derive
 %
 \begin{align*}
-& \qtemp_iw=\qtemp_iv+\zeta_i-\epsilon_i\\
-& \geq\plb_i-\min\set{\ub_i,\pub_i}=\plb_i-\plb_i=0.
+& \qtemp_iw=\qtemp_ix-\epsilon_i\\
+& \geq \plb_i-\plb_i=\plb_i-\plb_i=0.
 \end{align*}
 %
 Also by using Equation~\ref{proofnew-intersection1}, we derive
@@ -176,38 +176,39 @@ v_i.
 Then $\epsilon_i=\zeta_i$.  So,
 %
 \begin{align*}
-& \qtemp_iw=\qtemp_iv+\zeta_i-\epsilon_i=\qtemp_iv+\zeta_i-\zeta_i=v_i.~\numberthis\label{proofnew-intersection4}
+& \qtemp_iw=\qtemp_iv+\zeta_i-\epsilon_i=\qtemp_iv+0=v_i.~\numberthis\label{proofnew-intersection4}
 \end{align*}
 %
 From Equations~\ref{proofnew-intersection2}\textendash\ref{proofnew-intersection4}, we
 get
 %
 \begin{align*}
-& \qtemp w\in\prod_{i=1}^k\convexhull{\set{0,v_i}}.\label{proofnew-intersection5}
+& \qtemp w\in\prod_{i=1}^k\convexhull{\set{0,v_i}}.\numberthis\label{proofnew-intersection5}
 \end{align*}
 %
 As $S$ is a convex set and $v\in S$, using Lemma~\ref{lem:convexhull} and
 Equations~\ref{eqn:intersection3}, we get
 %
 \begin{align*}
-& \prod_{i=1}^k\convexhull{\set{0,v_i}}\subseteq \qtemp S\\
-\implies \qtemp w\in S.
+  & \prod_{i=1}^k\convexhull{\set{0,v_i}}\subseteq \qtemp S\\
+& \%\%~~\text{by Equation~\ref{proofnew-intersection5}}\\
+& \implies \qtemp w\in \qtemp S.
 \end{align*}
 %
 As $Y^T$ is orthogonal to $\qtemp$, we get
 %
 \begin{align*}
-& Y^Tw=Yv+Y\qtemp(\zeta-\epsilon)=Y^Tv+0=Y^Tv\in Y^TS.\\
-& \text{So,}~~\mymatrix{\qtemp\\ Y^T}w\in S.
+& Y^Tw=Yv+Y\pinv{\qtemp}(\zeta-\epsilon)=Y^Tv+0=Y^Tv\in Y^TS.\\
+& \text{So,}~~\mymatrix{\qtemp\\ Y^T}w\in \mymatrix{\qtemp\\ Y^T}S.
 \end{align*}
 %
 By
 Equation~\ref{proofnew-intersection1}, we get
-$\qtemp\epsilon\in\iztope{\pinv{\qtemp}}{\join{\lb}{\plb}}{\meet{\ub}{\pub}}$.
+$\pinv{\qtemp}\epsilon\in\iztope{\pinv{\qtemp}}{\join{\lb}{\plb}}{\meet{\ub}{\pub}}$.
 So, we get
 %
 \begin{align*}
-& \mymatrix{\qtemp\\ Y^T}x=\mymatrix{\qtemp\\ Y^T}\lt(w+\qtemp\epsilon\rt)\in\mymatrix{\qtemp\\ Y^T}\lt(S\oplus\iztope{\pinv{\qtemp}}{\join{\lb}{\plb}}{\meet{\ub}{\pub}}\rt).
+& \mymatrix{\qtemp\\ Y^T}x=\mymatrix{\qtemp\\ Y^T}\lt(w+\pinv{\qtemp}\epsilon\rt)\in\mymatrix{\qtemp\\ Y^T}\lt(S\oplus\iztope{\pinv{\qtemp}}{\join{\lb}{\plb}}{\meet{\ub}{\pub}}\rt).
 \end{align*}
 %
 As the above is true for any $x\in

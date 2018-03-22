@@ -2,8 +2,9 @@ Simple zonotopes are linear projections of higher dimensional
 hypercubes onto lower dimensional spaces, therefore a sub-class of
 polytopes.  A simple zonotope is represented by a linear combination
 of real valued vectors plus a center, such that the real valued
-combining coefficients are contained in a hypercube.  Geometrically
-speaking, a simple zonotope is a Minkowski sum of line segments.
+combining coefficients are contained in a hypercube symmetric around
+the origin.  Geometrically speaking, a simple zonotope is a Minkowski
+sum of line segments.
 %
 \begin{definition}[Simple zonotope]~\label{defn:rztope}
 Let us consider $\ptemp\in\reals^m$, whose column vectors are called
@@ -176,7 +177,7 @@ many as $2\lt(\begin{matrix}m\\n-1\end{matrix}\rt)$
   bundles~\cite{althoff2011zonotope} are examples of such extensions.
 
 In a constrained zonotope, there are linear equality constraints in
-addition to the unit interval bounds on the combining coefficients.
+addition to interval constraints on the combining coefficients.
 Therefore, the intersection of a hyperplane and a constrained zonotope
 can be represented by another constrained zonotope.  Moreover, they
 retain the closure property under linear transformation and Minkowski

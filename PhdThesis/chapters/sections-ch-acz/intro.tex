@@ -11,9 +11,13 @@ more general representation of a complex zonotopic set, called
 augmented complex zonotope, by which we can over-approximate the
 intersection with a particular class of linear constraints, called
 \emph{sub-parallelotopic}.  Furthermore, we can control the error in
-overapproximation by adjusting the scaling factors.  Before describing
-an augmented complex zonotope, we briefly discuss related work on
-zonotopes and compare it with the augmented complex zonotopes.  
+overapproximation by adjusting the scaling factors.  First we shall
+motivate the need for a novel extension of complex zonotope to handle
+the intersection, by explaining a drawback in extending the known
+approches for real zonotope and halfspace intersection to complex
+zonotopes.  In this regard, a brief description of the related
+approaches is given below.  However, a more detailed discussion was
+given in the introductory chapter.
 
 {\bf Related set representations and problem with their extension to complex
 zonotopes: } To accurately represent the intersection with linear
@@ -57,13 +61,14 @@ and the center of the template complex zonotope part.
 
 This chapter has three main sections.  In Section~\ref{sec:iztope}, we
 introduce the interval zonotope and sub-parallelotope set
-representations, and describe the intersection between them.
-Furthermore, we discuss other operations on interval zonotopes like
-linear transformation, Minkowski sum and computation of the support
-function.  In Section~\ref{sec:acz-it}, we introduce the augmented
-complex zonotope and described its intersection with a
-sub-parallelotope.  We compute a bound on the over-approximation of
-the intersection between them, which is dependent on the scaling
-factors and the center.  In Section~\ref{sec:operations-acz}, we shall
-discuss other operations on augmented complex zonotopes like linear
+representations, and describe the intersection between them.  We also
+discuss other operations on interval zonotopes like linear
 transformation, Minkowski sum and computation of the support function.
+In Section~\ref{sec:acz-it}, we introduce the augmented complex
+zonotope representation and discuss the over-approximation of its
+intersection with a sub-parallelotope.  We compute a bound on the
+error in over-approximation of the intersection, which can be regulated
+by changing the scaling factors and the center.  In
+Section~\ref{sec:operations-acz}, we shall discuss other operations on
+augmented complex zonotopes like linear transformation, Minkowski sum
+and computation of the support function.
