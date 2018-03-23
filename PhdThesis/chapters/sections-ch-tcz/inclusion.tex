@@ -35,17 +35,16 @@ constraint.
 \end{example}
 %
 In the case of complex zonotope, we shall later derive a set of second
-order conic constraint (not just one constraint), which have to be
-collectively satisfied to guarantee inclusion.  Given a set of second
-order conic constraints on a variable $x\in\reals^n$, solving the
-constraints refers to finding a value $x^*\in\reals^n$ that satisfies
-the constraints.  A value $x^\pr\in\reals^n$ is called an approximate
-solution within a precision $\epsilon\in\reals_{\geq 0}$ if there
-exists a solution $x^*\in\reals^n$ such that $\sqnorm{x^\pr-x^*}\leq
-\epsilon$.  There are tools based on interior point methods
-(see~\cite{grant2008cvx}) that can efficiently find approximate
-solutions with very high precision to second order conic constraints
-(SOCC).
+order conic constraints, which have to be collectively satisfied to
+guarantee inclusion.  Given a set of second order conic constraints on
+a variable $x\in\reals^n$, solving the constraints refers to finding a
+value $x^*\in\reals^n$ that satisfies the constraints.  A value
+$x^\pr\in\reals^n$ is called an approximate solution within a
+precision $\epsilon\in\reals_{\geq 0}$ if there exists a solution
+$x^*\in\reals^n$ such that $\sqnorm{x^\pr-x^*}\leq \epsilon$.  There
+are tools based on interior point methods (see~\cite{grant2008cvx})
+that can efficiently find approximate solutions with very high
+precision to second order conic constraints (SOCC).
 
 Checking inclusion of a single point inside a template complex
 zonotope is equivalent to solving SOCC, as described below.
@@ -267,24 +266,27 @@ Equation~\ref{eqn:transfer-matrix} is bounded above by zero.
 \end{proof}
 %
 \begin{remark}~\label{rem:socc}
-  We can write Equation~\ref{eqn:inclusion-tcz2} as
+  The following constraints are equivalent to Equation~\ref{eqn:inclusion-tcz2} as
   %
-  \[
+  \begin{align*}
 \forall
-i\in\set{1,...,m}~\absolute{\mymatrix{\real\lt(X^T_i\rt)\\\img\lt(X^T_i\rt)\\\real\lt(y_i\rt)\\\img\lt(y_i\rt)}}\leq\sfact_i.
-  \]
+& i\in\set{1,...,m}, \exists ~a_i,b_i\\
+& ~\norm{\mymatrix{\real\lt(X^T_i\rt)\\\img\lt(X^T_i\rt)}}\leq a_i, \hspace{2em}
+\norm{\mymatrix{\real\lt(y_i\rt)\\\img\lt(y_i\rt)}}\leq b_i, \hspace{2em}
+ 0\leq \sfact_i-a_i-b_i.
+\end{align*}
 %
-  The above is equivalent to $m$ second order conic constraints on a
-  \emph{real vector} of size $2mr+3m$, which comprises the scaling
-  factors and the additional variables.  Next, for a fixed template,
-  Equation~\ref{eqn:inclusion-tcz2} is a set of $n(n+r)$ linear
-  constraints on a \emph{complex vector} of size $mr+2m+n$, which
-  comprises the center, scaling factors and the additional variables.
-  On the other hand, the representation size of both the template
-  complex zonotopes together is $(m+r)n$.  Therefore, the size of the
-  second order conic program for checking the inclusion between two
-  template complex zonotopes can be at most of the order cubic in the
-  size of the template complex zonotopes.
+  The above is equivalent to $3m$ second order conic constraints on a
+  \emph{real vector} of size at most $2mr$, which comprises the
+  scaling factors and the additional variables.  Next, for a fixed
+  template, Equation~\ref{eqn:inclusion-tcz1} is a set of $n(n+1)$
+  linear constraints on a \emph{complex vector} of size at most
+  $mr+2m+r$, which comprises the center, scaling factors and the
+  additional variables.  On the other hand, the representation size of
+  both the template complex zonotopes together is $(m+r)n$.
+  Therefore, the size of the second order conic program for checking
+  the inclusion between two template complex zonotopes can be at most
+  of the order cubic in the size of the template complex zonotopes.
 \end{remark}
 %
 %% Furthermore, the above relation is a partial order.
@@ -402,8 +404,8 @@ $\tvect=0$.  Then by
 Equation~\ref{proof-necc-inc1}, we get for any $i\in\set{1,...,n}$
 %
 \begin{align*}
-& \max_{\zeta^\pr\in\compnums^m:~\infnorm{\zeta}\leq 1}\absolute{\sum_{i=1}^m\tmat_{ij}\zeta_i}\leq\sfact_i.
-\hspace{1em}\therefore \sum_{i=1}^n\absolute{\tmat_i\frac{\absolute{\tmat_i}}{\tmat_i}}
+& \max_{\zeta^\pr\in\compnums^m:~\infnorm{\zeta}\leq 1}\absolute{\sum_{j=1}^m\tmat_{ij}\zeta_i}\leq\sfact_i.
+\hspace{1em}\therefore \sum_{j=1}^m\absolute{\tmat_{ij}\frac{\absolute{\tmat_{ij}}}{\tmat_{ij}}}
     \leq\sfact_i\\
     & \%\%~~\text{since}~y_i=0\\
 & \therefore \sum_{i=1}^n\absolute{\tmat_{ij}}  +\absolute{\tvect_i}\leq \sfact_i .~\numberthis\label{proof-necc-inc2}
