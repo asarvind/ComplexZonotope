@@ -6,16 +6,16 @@
 \addvspace {10\p@ }
 \addvspace {10\p@ }
 \addvspace {10\p@ }
-\contentsline {table}{\numberline {4.1}{\ignorespaces Matrices of the transformed system dynamics\relax }}{68}{table.caption.101}
-\contentsline {table}{\numberline {4.2}{\ignorespaces Unsaturated robot model: results\relax }}{70}{table.caption.102}
-\contentsline {table}{\numberline {4.3}{\ignorespaces Saturated robot model: results\relax }}{70}{table.caption.102}
-\contentsline {table}{\numberline {4.4}{\ignorespaces Matrices for discrete time slow switching model\relax }}{72}{table.caption.104}
-\contentsline {table}{\numberline {4.5}{\ignorespaces Matrices for discrete time fast switching model\relax }}{73}{table.caption.105}
-\contentsline {table}{\numberline {4.6}{\ignorespaces Experimental results: Slow switching networked platoon\relax }}{74}{table.caption.106}
-\contentsline {table}{\numberline {4.7}{\ignorespaces Experimental results: Fast switching networked Platoon\relax }}{74}{table.caption.106}
-\contentsline {table}{\numberline {4.8}{\ignorespaces Small invariant computation: Perturbed double integrator\relax }}{76}{table.caption.107}
-\contentsline {table}{\numberline {4.9}{\ignorespaces Large invariant computation: Perturbed double integrator\relax }}{76}{table.caption.108}
+\contentsline {table}{\numberline {4.1}{\ignorespaces Matrices of the transformed system dynamics\relax }}{68}{table.caption.99}
+\contentsline {table}{\numberline {4.2}{\ignorespaces Unsaturated robot model: results\relax }}{70}{table.caption.100}
+\contentsline {table}{\numberline {4.3}{\ignorespaces Saturated robot model: results\relax }}{70}{table.caption.100}
+\contentsline {table}{\numberline {4.4}{\ignorespaces Matrices for discrete time slow switching model\relax }}{72}{table.caption.102}
+\contentsline {table}{\numberline {4.5}{\ignorespaces Matrices for discrete time fast switching model\relax }}{73}{table.caption.103}
+\contentsline {table}{\numberline {4.6}{\ignorespaces Experimental results: Slow switching networked platoon\relax }}{74}{table.caption.104}
+\contentsline {table}{\numberline {4.7}{\ignorespaces Experimental results: Fast switching networked Platoon\relax }}{74}{table.caption.104}
+\contentsline {table}{\numberline {4.8}{\ignorespaces Small invariant computation: Perturbed double integrator\relax }}{76}{table.caption.105}
+\contentsline {table}{\numberline {4.9}{\ignorespaces Large invariant computation: Perturbed double integrator\relax }}{76}{table.caption.106}
 \addvspace {10\p@ }
-\contentsline {table}{\numberline {5.1}{\ignorespaces Experimental results: Example 1\relax }}{88}{table.caption.118}
-\contentsline {table}{\numberline {5.2}{\ignorespaces Experimental results: Example 2\relax }}{88}{table.caption.119}
+\contentsline {table}{\numberline {5.1}{\ignorespaces Experimental results: Example 1\relax }}{88}{table.caption.116}
+\contentsline {table}{\numberline {5.2}{\ignorespaces Experimental results: Example 2\relax }}{88}{table.caption.117}
 \addvspace {10\p@ }

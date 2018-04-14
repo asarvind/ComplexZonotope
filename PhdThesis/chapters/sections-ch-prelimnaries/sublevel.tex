@@ -20,7 +20,7 @@ which is assigned to the following set.
 In~\cite{duggirala2013safety}, it was shown that the safety
 verification problem for linear systems is decidable when the initial
 set is a sub-level set of eigen-functions, which can be quadratic
-polynomials.  Our extension of real zonotopes to complex zonotopes
+polynomials.  Our extension of real zonotopes to complex zonotopes is
 inspired by their work, which analyzes the eigenstructure of linear
 systems.  In~\cite{Sriram}, positive invariants represented by
 polynomial equalities are computed for a general class of hybrid
@@ -38,21 +38,23 @@ inequalities can over-approximate sets having a non-empty interior.  A
 sub-level set of a single multi-variate polynomial is implicitly found
 while computing barrier certificates by sum of squares
 programming~\cite{prajna2004safety}.  For certain classes of hybrid
-systems~\cite{prajna2005necessity}, the existence of a barrier certificate is both
-necessary and sufficient for safety.  However, the accuracy of
-over-approximation provided by a single multi-variate polynomial
-naturally depends on the degree of the polynomial.  But high
-dimensional spaces, representing polynomials of higher degree can be
-computationally expensive.  Alternatively, we can use multiple number
-of easily encodable multi-variate polynomials for better accuracy.
-But computing tight approximations of reachable sets by intersection
-of polynomial sub-level sets requires non-convex optimization, which
-is expensive.  To alleviate complexity of non-convex optimization
-problem in the case of multiple polynomials, an approach using
-semi-definite relaxation coupled with policy iterations has been
-developed in~\cite{DBLP:conf/esop/AdjeGG10}.  However, this approach
-uses a recursion of convex optimization steps.  So, the convergence of
-the recursion can be slower than polyhedral abstract domains, which
-generally use linear programming in the recursion.  In contrast, our
-algorithm for computing positive invariants using complex zonotopes
-has only a single step of convex optimization.
+systems~\cite{prajna2005necessity}, the existence of a barrier
+certificate is both necessary and sufficient for safety.  However, the
+accuracy of over-approximation provided by a single multi-variate
+polynomial naturally depends on the degree of the polynomial.  But
+representing polynomials of higher degree in high dimensional spaces
+can be computationally expensive.  Alternatively, we can use multiple
+number of easily encodable multi-variate polynomials for better
+accuracy.  But computing tight approximations of reachable sets by
+intersection of polynomial sub-level sets requires non-convex
+optimization, which is expensive.  To alleviate complexity of
+non-convex optimization problem in the case of multiple polynomials,
+an approach using semi-definite relaxation coupled with policy
+iterations has been developed in~\cite{DBLP:conf/esop/AdjeGG10}.
+However, this approach uses a recursion of convex optimization steps.
+So, the convergence of the recursion can be slower than polyhedral
+abstract domains, which generally use linear programming in the
+recursion.  In contrast, the algorithm that we develop based on
+complex zonotopes for computing positive invariants of affine hybrid
+systems has only a single step of convex
+optimization.

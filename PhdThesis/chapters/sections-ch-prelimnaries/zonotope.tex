@@ -94,7 +94,7 @@ proposition.
 \begin{proposition}~\label{prop:eig-rztope}
 Let us consider $\ptemp\in\mat{n}{n}{\reals}$ consists
 of the real eigenvectors of a matrix $A\in\mat{n}{n}{\reals}$ as
-its column vectors, where $\mu\in[0,1]^n$ is the vector of real
+its column vectors, where $\mu\in[-1,1]^n$ is the vector of real
 eigenvalues, i.e., $A\ptemp
 = \ptemp\diagonal{\mu}$.  Then,
 $A\lt(\rztope{\ptemp}{0}\rt)\subseteq \rztope{\ptemp}{0}$.
@@ -116,7 +116,7 @@ in $\rztope{\ptemp}{0}$.  By Equation~\ref{proof-eigzonotope}, we get
   &\exists\delta\in[-1,1]^n:~y = \ptemp\diagonal{\mu}\delta.
 \end{align*}
 %
-Let $\zeta = \diagonal{\mu}\delta$. Since $\mu\in[0,1]^n$ and
+Let $\zeta = \diagonal{\mu}\delta$. Since $\mu\in[-1,1]^n$ and
 $\delta\in[-1,1]^n$, we get $\zeta=\diagonal{\mu}\delta\in[-1,1]^n$.  So,
 %
 \begin{align*}
@@ -128,7 +128,7 @@ $\delta\in[-1,1]^n$, we get $\zeta=\diagonal{\mu}\delta\in[-1,1]^n$.  So,
 As the above is true for any $y\in
 A\rztope{\ptemp}{0}$, we get
 $A\lt(\rztope{\ptemp}{0}\rt)\subseteq
-\rztope{\ptemp}{0}$ when $\infnorm{\mu}\leq 1$.
+\rztope{\ptemp}{0}$ when $\mu\in[-1,1]^n$.
 \end{proof}
 %
 However, the eigenvalues of a linear matrix can have non-zero

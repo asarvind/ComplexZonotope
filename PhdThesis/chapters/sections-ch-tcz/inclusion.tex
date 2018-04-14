@@ -230,7 +230,7 @@ iff all of the following is collectively true.
 \begin{align*}
 & \exists \tmat\in\mat{m}{r}{\compnums},\tvect\in\compnums^m~~\text{such
 that}\\
-& \ptemp\tmat=\ptemp^\pr\diagonal{\sfact^\pr},~~\ptemp\tvect=\cen^\pr-\cen~\numberthis\label{eqn:inclusion-tcz1}\\
+& \ptemp\tmat=\ptemp^\pr\diagonal{\sfact^\pr},~~\ptemp\tvect=\cen^\pr-\cen~\\%\numberthis\label{eqn:inclusion-tcz1}\\
 & \max_{i=1}^m\lt(\absolute{\tvect_i}+\sum_{j=1}^r\absolute{\tmat_{ij}}-\sfact_i\rt)\leq
 0~\numberthis\label{eqn:inclusion-tcz2}.
 \end{align*}
@@ -266,27 +266,38 @@ Equation~\ref{eqn:transfer-matrix} is bounded above by zero.
 \end{proof}
 %
 \begin{remark}~\label{rem:socc}
-  The following constraints are equivalent to Equation~\ref{eqn:inclusion-tcz2} as
-  %
-  \begin{align*}
-\forall
-& i\in\set{1,...,m}, \exists ~a_i,b_i\\
-& ~\norm{\mymatrix{\real\lt(X^T_i\rt)\\\img\lt(X^T_i\rt)}}\leq a_i, \hspace{2em}
-\norm{\mymatrix{\real\lt(y_i\rt)\\\img\lt(y_i\rt)}}\leq b_i, \hspace{2em}
- 0\leq \sfact_i-a_i-b_i.
-\end{align*}
+For a complex variable $x\in\compnums$, a constraint of the form
+$\absolute{x}\leq \epsilon$ is equivalent to
 %
-  The above is equivalent to $3m$ second order conic constraints on a
-  \emph{real vector} of size at most $2mr$, which comprises the
-  scaling factors and the additional variables.  Next, for a fixed
-  template, Equation~\ref{eqn:inclusion-tcz1} is a set of $n(n+1)$
-  linear constraints on a \emph{complex vector} of size at most
-  $mr+2m+r$, which comprises the center, scaling factors and the
-  additional variables.  On the other hand, the representation size of
-  both the template complex zonotopes together is $(m+r)n$.
-  Therefore, the size of the second order conic program for checking
-  the inclusion between two template complex zonotopes can be at most
-  of the order cubic in the size of the template complex zonotopes.
+\[
+\norm{\mymatrix{\real\lt(x\rt)\\ \img\lt(x\rt)}}\leq \epsilon.
+\]
+The above is a second order conic constraint.  Accordingly,
+Equation~\ref{eqn:inclusion-tcz2} for checking inclusion can be
+rewritten as polynomial number of second order conic constraints on a
+variable whose size is $\mc{O}\lt(mr+n\rt)$.
+%
+  %% The following constraints are equivalent to Equation~\ref{eqn:inclusion-tcz2} as
+%%   %
+%%   \begin{align*}
+%% \forall
+%% & i\in\set{1,...,m}, \exists ~a_i,b_i\\
+%% & ~\norm{\mymatrix{\real\lt(X^T_i\rt)\\\img\lt(X^T_i\rt)}}\leq a_i, \hspace{2em}
+%% \norm{\mymatrix{\real\lt(y_i\rt)\\\img\lt(y_i\rt)}}\leq b_i, \hspace{2em}
+%%  0\leq \sfact_i-a_i-b_i.
+%% \end{align*}
+%% %
+%%   The above is equivalent to $3m$ second order conic constraints on a
+%%   \emph{real vector} of size at most $2mr$, which comprises the
+%%   scaling factors and the additional variables.  Next, for a fixed
+%%   template, Equation~\ref{eqn:inclusion-tcz1} is a set of $n(n+1)$
+%%   linear constraints on a \emph{complex vector} of size at most
+%%   $mr+2m+r$, which comprises the center, scaling factors and the
+%%   additional variables.  On the other hand, the representation size of
+%%   both the template complex zonotopes together is $(m+r)n$.
+%%   Therefore, the size of the second order conic program for checking
+%%   the inclusion between two template complex zonotopes can be at most
+%%   of the order cubic in the size of the template complex zonotopes.
 \end{remark}
 %
 %% Furthermore, the above relation is a partial order.

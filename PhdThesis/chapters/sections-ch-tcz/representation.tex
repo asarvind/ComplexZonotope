@@ -9,8 +9,8 @@ zonotopes, which we shall discuss later.
 %
 \begin{definition}[Complex zonotope]
 Let $\ptemp\in\mat{m}{n}{\compnums}$ be a complex valued matrix
-whose columns are called {\it generators} and $\cen\in\compnums^n$ be a
-complex valued vector called the {\it center}.  The following is the
+whose columns are called {\it generators} and $\cen\in\reals^n$ be a
+real vector called the {\it center}.  The following is the
 representation of a
 complex zonotope.
 %
@@ -20,19 +20,19 @@ complex zonotope.
 %
 \end{definition}
 %
-{\it Geometry of a complex zonotope :}
-The real projection of the set of points represented by each generator
-can either be an ellipsoid or a line segment.  So, complex
-zonotopes can represent a Minkowski sum of a some ellipsoids and line
+{\it Geometry of a complex zonotope :} The real projection of the set
+of points represented by each generator can either be an ellipse in a
+higher dimensional space or a line segment.  So, complex zonotopes can
+represent a Minkowski sum of a higher dimensional ellipses and line
 segments.  Whereas, simple zonotopes represent only Minkowski sum of
 line segments.  Therefore, complex zonotopes are geometrically more
-expressive than real zonotopes.
-For example, the real projection of the the following complex vector
-is an ellipsoid.
+expressive than real zonotopes.  For example, the real projection of
+the the following complex vector is the following ellipse.
 %
 \begin{align*}
-& \cztope{\mymatrix{-0.1335 + 0.1769i\\0.2713 + 0.3991i\\-0.8473 + 0.0000i}}{0}:=~~\\
-&  \lt(0.2749x-0.1218y+1.0978z\rt)^2+\lt(1.0505x+2.0401y+0.4877z\rt)^2\leq 1.
+& \cztope{\mymatrix{-0.1335 + 0.1769\iota\\0.2713 + 0.3991\iota\\-0.8473 }}{0}:=~~\\
+& \set{{\mymatrix{-0.1335 &  -0.1769\\0.2713 & -0.3991i\\-0.8473 & 0}}\mymatrix{a\\b}:~a^2+b^2\leq 1}.
+%&  \lt(0.2749x-0.1218y+1.0978z\rt)^2+\lt(1.0505x+2.0401y+0.4877z\rt)^2\leq 1.
 \end{align*}
 %
 On the other hand, the real projection of the following real vector, which is a
@@ -41,38 +41,40 @@ complex vector having zero imaginary part, is a line segment.
 \begin{align*}
 \cztope{\mymatrix{-0.4544\\
     0.7379\\
-    0.4991}}{0}:=~~-1\leq -0.4544x+0.7379y+0.4991z\leq 1.
+    0.4991}}{0}:=\set{\mymatrix{-0.4544\\
+    0.7379\\
+    0.4991}a:~-1\leq a\leq 1}.
 \end{align*}
 %
-The above observation is explained mathematically by the following
-proposition, which describes the set formed by a single generator.  
-%
-\begin{proposition}
-Let $v\in\compnums^n$ be a complex vector.  
-%
-\[
-\real\lt(\cztope{v}{0}\rt)=\set{x\in\reals^n:\norm{\pinv{\mymatrix{\real(v)&\img{v}}}x}^2\leq
-1}.
-\]
-%
-The above set can either be an ellipsoid or a line segment.
-\end{proposition}
-%
-\begin{proof}
-Let us consider $x\in\cztope{v}{0}$.  Then there exists an
-$\zeta\in\compnums$ such that $\absolute{\zeta}\leq 1$ and
-$x=v\zeta$.  Then we derive the following.
-%
-\begin{align*}
-& \min\set{\absolute{\zeta}:~\zeta\in\compnums,~x=v\zeta}\\
-& =\min\set{\sqrt{a^2+b^2}:~a,b\in\reals,~x=\mymatrix{\real(v)
-& \img\lt(v\rt)}\mymatrix{a\\b}}=\norm{\pinv{\mymatrix{\real(v)
-& \img\lt(v\rt)}}x}.
-\end{align*}
-%
-Therefore, $x\in\cztope{v}{0}$ implies $\norm{\pinv{\mymatrix{\real(v)
-& \img\lt(v\rt)}}x}^2\leq 1$.
-\end{proof}
+%% The above observation is explained mathematically by the following
+%% proposition, which describes the set formed by a single generator.  
+%% %
+%% \begin{proposition}
+%% Let $v\in\compnums^n$ be a complex vector.  
+%% %
+%% \[
+%% \real\lt(\cztope{v}{0}\rt)=\set{x\in\reals^n:\norm{\pinv{\mymatrix{\real(v)&\img{v}}}x}^2\leq
+%% 1}.
+%% \]
+%% %
+%% The above set can either be an ellipse or a line segment.
+%% \end{proposition}
+%% %
+%% \begin{proof}
+%% Let us consider $x\in\cztope{v}{0}$.  Then there exists an
+%% $\zeta\in\compnums$ such that $\absolute{\zeta}\leq 1$ and
+%% $x=v\zeta$.  Then we derive the following.
+%% %
+%% \begin{align*}
+%% & \min\set{\absolute{\zeta}:~\zeta\in\compnums,~x=v\zeta}\\
+%% & =\min\set{\sqrt{a^2+b^2}:~a,b\in\reals,~x=\mymatrix{\real(v)
+%% & \img\lt(v\rt)}\mymatrix{a\\b}}=\norm{\pinv{\mymatrix{\real(v)
+%% & \img\lt(v\rt)}}x}.
+%% \end{align*}
+%% %
+%% Therefore, $x\in\cztope{v}{0}$ implies $\norm{\pinv{\mymatrix{\real(v)
+%% & \img\lt(v\rt)}}x}^2\leq 1$.
+%% \end{proof}
 %
 %% The real projection of a complex
 %% zonotope can represent non-polytopic sets as well as polytopic
@@ -108,9 +110,9 @@ Therefore, $x\in\cztope{v}{0}$ implies $\norm{\pinv{\mymatrix{\real(v)
 %% %
 
 As the real projection of the generator of a complex zonotope can
-either be an ellipsoid or a line segment, a complex zonotope can
+either be an ellipse or a line segment, a complex zonotope can
 represent a Minkowski sum of line segments as well as some
-ellipsoids.  The non-polyhedral real projections along the three axis
+ellipses.  The non-polyhedral real projections along the three axis
 oriented hyperplanes of the following 3-D complex zonotope is shown in
 Figure~\ref{fig:3dcztope}
 %
@@ -222,7 +224,8 @@ $y\in\cztope{\ptemp}{0}$, we have
 $A\lt(\cztope{\ptemp}{0}\rt)\subseteq
 \cztope{\ptemp}{0}$ when $\infnorm{\mu}\leq 1$.
 \end{proof}
-%If we add more generators to the above representation of a complex
+
+If we add more generators to the above representation of a complex
 zonotope, it would increase the size of the complex zonotope.
 Therefore, we can not find better approximations of a given set by
 only adding more generators to the complex zonotope.  Moreover, adding
@@ -267,7 +270,7 @@ adding a generator to the basic representation.}~\label{fig:refinement}
 Alternatively, to refine
 a complex zonotope, we can adjust the magnitude of contribution of
 each generator to the size of the set while also preserving the
-positive invariance.  This way, can also add more generators and
+positive invariance.  This way, we can also add more generators and
 increase approximation accuracy by adjusting the magnitudes of each
 generator.  In order to conveniently perform algebraic manipulations
 on the magnitude of each generator, we can explicitly specify variable
@@ -287,7 +290,7 @@ complex vector space can be mapped to the {\it scaling factors}.
 \begin{definition}[Template complex zonotope]
 Let us consider ${\ptemp\in\mat{n}{m}{\compnums}}$ called the template,
 ${\sfact\in\reals^m_{\geq 0}}$ called scaling factors and
-${\cen\in\compnums^n}$ called the center.  Then the following is a template
+${\cen\in\reals^n}$ called the center.  Then the following is a template
 complex zonotope.
 %
 \begin{equation}
