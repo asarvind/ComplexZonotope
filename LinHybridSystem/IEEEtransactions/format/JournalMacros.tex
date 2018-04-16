@@ -1,0 +1,359 @@
+%% ========================================================
+%%% Basic symbols
+%% ========================================================
+
+% \def    \s      {\sigma}
+\def    \S      {\Sigma}
+\def    \d      {\delta}
+% \def    \D      {\Delta}
+\def    \ee     {\epsilon}
+\def    \e      {\varepsilon}
+% \def    \g      {\gamma}
+\def    \se     {\subseteq}
+% 
+\def    \N      {\mathbb{N}}
+% \def    \Z      {\mathbb{Z}}
+\def    \Q      {\mathbb{Q}}
+\def    \R      {\mathbb{R}}
+\def    \B      {\mathbb{B}}
+\def    \A      {\mathcal{A}}
+ 
+% 
+\def    \qed    {\hfill\ensuremath{\square}\vspace{.7em}}%                
+\def    \QED    {\hfill\ensuremath{\blacksquare}}%
+
+
+%% ========================================================
+%%% New commands
+%% ========================================================
+
+\newcommand{\sem}[1]{[\![#1]\!]}
+
+%%% membership queries
+\def \mq          {{\textsc{mq}}}
+\def \eq          {{\textsc{eq}}}
+
+%%% shortcuts
+\newcommand{\lt}{\left}
+\newcommand{\rt}{\right}
+\newcommand{\pr}{\prime}
+\newcommand{\dpr}{{\pr\pr}}
+\newcommand{\tcz}{\tcztope}
+\newcommand{\imp}{\implies}
+\newcommand{\realset}{\reals}
+\newcommand{\diag}{\diagonal}
+\newcommand{\tbf}{\textbf}
+\newcommand{\pair}[2]{\lt(#1,#2\rt)}
+\newcommand{\mc}{\mathcal}
+\newcommand{\maxaffine}{\maxapprox}
+\newcommand{\minaffine}{\minapprox}
+
+%% environments
+% double vertically spaced row in table
+\newcommand{\doublerow}[1]{\multirow{2}{*}{#1}}
+
+
+%%% operations
+% absolute value
+\newcommand{\absolute}[1]{\lt|#1\rt|}
+% infimum norm
+\newcommand{\infnorm}[1]{\left\|#1\right\|_{\infty}}
+% square norm
+\newcommand{\sqnorm}[1]{\left\|#1\right\|_{2}}
+% euclidean norm
+\newcommand{\norm}[1]{\left\|#1\right\|_2}
+% determinant
+\newcommand{\determinant}[1]{\operatorname{det}\lt(#1\rt)}
+% Minkowski sum
+\newcommand{\minsum}[2]{#1\oplus #2}
+% Intersection
+\newcommand{\intersection}[2]{#1\bigcap #2}
+% Meet
+\newcommand{\meet}[2]{#1\bigwedge #2}
+% Join
+\newcommand{\join}[2]{#1\bigvee #2}
+% vectormin
+\newcommand{\vectormin}[1]{\underset{#1}{\bigwedge}}
+% vectormax
+\newcommand{\vectormax}[1]{\underset{#1}{\bigvee}}
+
+
+
+%%% functions
+% function specification
+\newcommand{\func}[3]{#1:#2\rightarrow #3}
+% support of a vector
+\newcommand{\support}[3]{\rho\left(#1,#2,#3\right)}
+% \support function
+\newcommand{\supp}[2]{\rho\lt(#1,#2\rt)}
+% over approximation error
+\newcommand{\approxerror}[2]{\delta\lt(#1,#2\rt)}
+% min-approximation 
+\newcommand{\minapprox}[2]{\lt\llbracket\bigwedge\rt\rrbracket\lt(#1,#2\rt)}
+% min-approximation function symbol
+\newcommand{\minapproxsymbol}[2]{\llbracket\bigwedge\rrbracket}
+% max-approximation
+\newcommand{\maxapprox}[2]{\lt\llbracket\bigvee\rt\rrbracket\lt(#1,#2\rt)}
+% max-approximation function symbol
+\newcommand{\maxapproxsymbol}[2]{\llbracket\bigvee\rrbracket}
+% Hausdorff distance
+\newcommand{\hausdorff}[2]{\d_H\lt(#1,#2\rt)}
+% over-approximation error
+\newcommand{\err}[4]{\Delta\lt(#1,#2,#3,#4\rt)}
+% shifted lower bound
+\newcommand{\slb}[4]{\overline{l}_{#4}\lt(#1,#2,#3\rt)}
+% shifted upper bound
+\newcommand{\sub}[4]{\overline{u}_{#4}\lt(#1,#2,#3\rt)}
+% contraction
+\newcommand{\contraction}[2]{\chi\lt(#2,#1\rt)}
+% concretization
+\newcommand{\concrete}[1]{\lt\llbracket#1\rt\rrbracket}
+
+
+%%% numbers
+\newcommand{\reals}{\mathbb{R}}
+\newcommand{\compnums}{\mathbb{C}}
+\newcommand{\integers}{\mathbb{Z}}
+% imaginary part
+\newcommand{\img}{\operatorname{Im}}
+% real part
+\newcommand{\real}{\operatorname{Re}}
+
+
+
+
+%%% arrays and vectors
+% set of matrices
+\newcommand{\mat}[3]{\mathbb{M}_{#1\times#2}\left(#3\right)}
+% diagonal matrix
+\newcommand{\diagonal}[1]{\operatorname{diag}\left(#1\right)}
+% repeat elements
+\newcommand{\repmat}[3]{\lt[#1\rt]_{#2\times #3}}
+% inverse matrix
+\newcommand{\inv}[1]{{#1}^{-1}}
+% pseudo-inverse
+\newcommand{\pinv}[1]{{#1}^\dagger}
+% transpose
+\newcommand{\transpose}[1]{{#1}^T}
+% matrix
+\newcommand{\mymatrix}[1]{\lt[\begin{matrix}#1\end{matrix}\rt]}
+% orthonormal basis
+\newcommand{\orthnorm}[1]{#1^*}
+% column vector of identity matrix
+\newcommand{\idvec}[1]{\bm{e}_{#1}}
+% identity matrix
+\newcommand{\identity}[2]{\bm{Id}_{#1\times #2}}
+% vector with one component zero and rest equals one
+\newcommand{\compidvec}[1]{\bm{\alpha}_{#1}}
+% diagonal matrix with above vector
+\newcommand{\compid}[1]{\diagonal{\bm{\alpha}_{#1}}}
+
+
+
+%%% relations
+% convex order relation between complex zonotopes
+\newcommand{\order}{\sqsubseteq}
+\newcommand{\equivalent}{\Leftrightarrow}
+
+
+
+%%% set representations
+% set 
+\newcommand{\set}[1]{\left\{#1\right\}}
+% polynomial ring
+\newcommand{\polyring}[2]{#2\lt[#1\rt]}
+% nullspace
+\newcommand{\nullspace}[1]{\operatorname{null}\lt(#1\rt)}
+% polytope
+\newcommand{\polytope}[2]{\mathit{Poly}\lt(#1,#2\rt)}
+% real zonotope
+\newcommand{\rztope}[2]{\mathit{\mathcal{Z}}\lt(#1,#2\rt)}
+% complex zonotope
+\newcommand{\cztope}[2]{\mathit{\mathcal{C}}\lt(#1,#2\rt)}
+% template complex zonotope
+\newcommand{\tcztope}[3]{\mathit{\operatorname{\mathcal{T}}}\lt(#1,#2,#3\rt)}
+% interval zonotope
+\newcommand{\iztope}[3]{\mathit{\operatorname{\mathcal{I}}}\lt(#1,#2,#3\rt)}
+% sub-parallelotope
+\newcommand{\ptope}[3]{\mathcal{P}\left(#1,#2,#3\right)}
+% augmented complex zonotope
+\newcommand{\acztope}[6]{\mathcal{G}\left(#1,#2,#3,#4,#5,#6\right)}
+% error interval zonotope
+\newcommand{\errtope}[5]{\Delta_{#5}\lt(#1,#2,#3,#4\rt)}
+% boundary of a set
+\newcommand{\boundary}[1]{\operatorname{\bm{Bd}}\lt(#1\rt)}
+% convexhull
+\newcommand{\convexhull}[1]{\bm{Conv}\lt(#1\rt)}
+
+
+
+%%% variables in set representation 
+% primary template
+\newcommand{\ptemp}{\mathcal{V}}
+% secondary template
+\newcommand{\sectemp}{\mathcal{W}}
+% parallelotope template
+\newcommand{\partemp}{\mathcal{K}}
+% center
+\newcommand{\cen}{c}
+% scaling factors
+\newcommand{\sfact}{s}
+% secondary template
+\newcommand{\stemp}{\mathcal{W}}
+% lower interval bound
+\newcommand{\lb}{l}
+% upper interval bound
+\newcommand{\ub}{u}
+% parallelotope template
+\newcommand{\qtemp}{\mathcal{K}}
+% lower parallelotope bound
+\newcommand{\plb}{\widehat{\lb}}
+% upper parallelotope bound
+\newcommand{\pub}{\widehat{\ub}}
+
+
+
+%%% Variables in equations
+% transfer matrix inclusion-checking
+\newcommand{\tmat}{X}
+% transfer vector in inclusion-checking
+\newcommand{\tvect}{y}
+% optimal variable substitution
+\newcommand{\optimal}[1]{#1^*}
+
+
+
+
+%%% System specifications
+% system notation
+\newcommand{\system}{\mathbb{H}}
+% locations
+\newcommand{\locations}{Q}
+% location dynamics map
+\newcommand{\locmap}{\Gamma}
+% staying bounds
+\newcommand{\stay}{\gamma}
+% linear map
+\newcommand{\linmap}{\mathcal{A}}
+% Set of edges
+\newcommand{\edgeset}{E}
+% trajectory
+\newcommand{\trj}[2]{{\bf #1}\lt(#2\rt)}
+% continuous trajectory
+\newcommand{\ctrj}[1]{\trj{x}{#1}}
+% discrete trajectory
+\newcommand{\dtrj}[1]{\trj{\loc}{#1}}
+% hybrid trajectory
+\newcommand{\htrj}[1]{\lt(\ctrj{#1},\dtrj{#1}\rt)}
+% hybrid trajectory map
+\newcommand{\maphtrj}{\lt(\tbf{x},\tbf{\loc}\rt)}
+% input trajectory
+\newcommand{\inptrj}[1]{{\bf u}\lt(#1\rt)}
+% input set
+\newcommand{\inputset}{U}
+% initial set
+\newcommand{\init}{\Psi_0}
+% location
+\newcommand{\loc}{q}
+% edge
+\newcommand{\edge}{\sigma}
+% upper bound
+\newcommand{\usys}[1]{#1^+}
+% lower bound
+\newcommand{\lsys}[1]{#1^-}
+% initial template 
+\newcommand{\inittemp}{\ptemp^{\operatorname{init}}}
+% initial center
+\newcommand{\initcen}{\cen^{\operatorname{init}}}
+% initial scaling factors
+\newcommand{\initsfact}{\sfact^{\operatorname{init}}}
+% input template
+\newcommand{\inputtemp}{\ptemp^{\operatorname{inp}}}
+% input center
+\newcommand{\inputcen}{\cen^{\operatorname{inp}}}
+% input secondary template
+\newcommand{\inputstemp}{\mathcal{W}^{\operatorname{inp}}}
+% input lower interval bound
+\newcommand{\inputlb}{\lb^{\operatorname{inp}}}
+% input upper interval bound
+\newcommand{\inputub}{\ub^{\operatorname{inp}}}
+% input scaling factors
+\newcommand{\inputsfact}{\sfact^{\operatorname{inp}}}
+% Next reachable set from a given set of states
+\newcommand{\nextset}[1]{\mathcal{R}\lt(#1\rt)}
+% Next continuous reachable set 
+\newcommand{\contreach}[2]{\mathcal{R}_{#1}\lt(#2\rt)}
+% Reachable set at a time point from an initial set of states
+\newcommand{\reachset}[2]{\mathcal{R}^{#1}\lt(#2\rt)}
+% Set of trajectories
+\newcommand{\trajectoryset}{\Gamma}
+% Linear Invariance property
+\newcommand{\invariance}[2]{\lt(#1,#2\rt)}
+% continuous projection
+\newcommand{\proj}[2]{#1_#2}
+% positive invariance with respect to a transition
+\newcommand{\posinv}[2]{#1\order\pair{\system}{#2}}
+% lower sampling bound
+\newcommand{\lsb}{\bm{\underline{\tau}}}
+% upper sampling bound
+\newcommand{\usb}{\bm{\overline{\tau}}}
+
+
+
+
+%% ========================================================
+%%% Referencing miscellaneous
+%% ========================================================
+
+% number equation inside align*
+\newcommand\numberthis{\addtocounter{equation}{1}\tag{\theequation}}
+
+%% ========================================================
+%%% New operators
+%% ========================================================
+
+\DeclareMathOperator*{\argmax}{\rm arg\max}
+\DeclareMathOperator*{\argmin}{\rm arg\min}
+
+%% ========================================================
+%%% Edit standard operators
+%% ========================================================
+
+\renewcommand{\min}{\inf}
+\renewcommand{\max}{\sup}
+
+%% ========================================================
+%%% Editing Commands
+%% ========================================================
+\def    \toupdate#1 {\textcolor{Periwinkle}{#1 } }
+\def    \comment#1 { }
+\def    \note#1    {\textbf{[ \marginpar{\texttt{note}}}{ \small #1 }\textbf{] }}
+\def    \todo#1    {\marginpar{ \small \textcolor{red}{TODO: #1}}}
+
+
+%% ========================================================
+%%% Document appearance
+%% ========================================================
+ 
+\def    \ni     {\noindent}
+
+
+%% ========================================================
+%%% New environments
+%% ========================================================
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{example}[theorem]{Example}
+\newtheorem{remark}[theorem]{Remark}
+\newtheorem{problem}[theorem]{Problem}
+\newtheorem{thm}{Theorem}[section]
+
+\newtheorem{lem}[theorem]{Lemma} \newtheorem{prop}[thm]{Proposition}
+\newtheorem{cor}[theorem]{Corollary} \newtheorem{defn}[thm]{Definition}
+\newtheorem{rem}[theorem]{Remark} \newtheorem{prp}[thm]{Property}
+\newtheorem{prem}[theorem]{Premise} \newtheorem{egp}[thm]{Example}
+\newcommand{\initstate}{\tbf{x}_0} \newcommand{\camount}{\mathcal{\xi}}
+
