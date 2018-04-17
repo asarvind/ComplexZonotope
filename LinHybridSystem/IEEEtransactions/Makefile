@@ -51,6 +51,8 @@ clean:
 	\rm -f  *.blg
 	\rm -f  *.bbl
 	\rm -f  *~
+	\rm -f  ./sections/*~
+	\rm -f ./format/*~
 	\rm -f  *.mtc*
 	\rm -f  *.maf
 	\rm -f  *.toc
