@@ -36,7 +36,7 @@ desirable property.  A complex zonotope consists of points represented
 by a linear combination of complex valued vectors with translation,
 where some of the combining coefficients are complex valued and
 bounded in their absolute values, while others are real valued and
-bounded inside real intervals.  We shall later show in Lemma~\ref{}
+bounded inside real intervals.  We shall later show in Lemma~\ref{lem:lintransform}
 how a complex zonotope can efficiently encode a positive invariant of
 a stable linear transformation using the complex eigenstructure.
 %
@@ -78,8 +78,147 @@ Furthermore, a complex zonotope can efficiently encode a positive
 invariant of an invertible stable linear transformation by capturing
 contraction along the complex eigenvectors.  This is described in the
 following lemma.
-%
-\begin{lemma}[Linear transformation and eigenstructure based contraction]
 
+\emph{Notation}:  From now, we use the following notation unless
+otherwise specified:
+%
+$
+{\ptemp\in\mat{n}{m}{\compnums}},~{\cen\in\reals^n},{\sfact\in\reals_{\geq 0}^m},~\stemp\in\mat{n}{k}{\reals},~{\lb,\ub\in\reals^k}.
+$
+%
+\begin{lemma}[Linear transformation and eigenstructure based contraction]~\label{lem:lintransform}
+Let us consider $\Xi\in\mat{n}{n}{\compnums}$ contains the complex
+eigenvectors of $A\in\mat{n}{n}{\reals}$ as its columns vectors such
+that $A\Xi=\Xi\diagonal{\mu}$ for a vector of eigenvalues
+$\mu\in\compnums^n$.  All of the following statements are true.
+%
+\begin{enumerate}
+\item
+  $A\acztope{\ptemp}{\cen}{\sfact}{\stemp}{\lb}{\ub}=\acztope{A\ptemp}{A\cen}{\sfact}{A\stemp}{\lb}{\ub}$.
+\item
+  $A\acztope{\Xi}{0}{\sfact}{0}{0}{0}=\acztope{\Xi}{0}{\diagonal{\absolute{\mu}}\sfact}{0}{0}{0}$.
+\item If $\infnorm{\mu}\leq 1$, then
+  \[A\acztope{\Xi}{0}{\sfact}{0}{0}{0}\subseteq\acztope{\Xi}{0}{\sfact}{0}{0}{0}.\]
+\end{enumerate}
+%
 \end{lemma}
+%
+\begin{proof}
+The proof of first statement is derived as follows.
+%
+\begin{align*}
+& A\acztope{\ptemp}{\cen}{\sfact}{\stemp}{\lb}{\ub}\\
+& = A\set{
+  \cen+\ptemp\zeta+\stemp\epsilon:
+  \begin{array}{l}
+    \zeta\in\compnums^m,~\epsilon\in\reals^k,\\
+    \absolute{\zeta}\leq
+    \sfact,~\lb\leq\epsilon\leq\ub
+   \end{array}
+  }\\
+& = \set{
+  A\cen+A\ptemp\zeta+A\stemp\epsilon:
+  \begin{array}{l}
+    \zeta\in\compnums^m,~\epsilon\in\reals^k,\\
+    \absolute{\zeta}\leq
+    \sfact,~\lb\leq\epsilon\leq\ub
+   \end{array}
+  }\\
+& = \acztope{A\ptemp}{A\cen}{\sfact}{A\stemp}{\lb}{\ub}.
+\end{align*}
+%
+By the above derivation we get
+$A\acztope{\Xi}{0}{\sfact}{0}{0}{0}=\acztope{A\Xi}{0}{\sfact}{0}{0}{0}=\acztope{\Xi\diagonal{\mu}}{0}{\sfact}{0}{0}{0}$.
+We have
+%
+\begin{align*}
+& \set{\diagonal{\mu}\zeta:\zeta\in\compnums^m,\absolute{\zeta}\leq
+    \sfact}\\
+& =\set{\zeta^\pr:\zeta^\pr\in\compnums^m,\absolute{\zeta^\pr}\leq\diagonal{\absolute{\mu}}\sfact}\\
+& \therefore
+  A\acztope{\Xi}{0}{\sfact}{0}{0}{0}=\acztope{\Xi}{0}{\diagonal{\absolute{\mu}}\sfact}{0}{0}{0}.
+\end{align*}
+%
+If $\infnorm{\mu}\leq 1$, then $\diagonal{\absolute{\mu}}{\sfact}\leq
+\sfact$.  Then we get
+$A\acztope{\Xi}{0}{\sfact}{0}{0}{0}=\acztope{\Xi}{0}{\diagonal{\absolute{\mu}}\sfact}{0}{0}{0}\subseteq\acztope{\Xi}{0}{\sfact}{0}{0}{0}$.
+\end{proof}
+%
+If an $n\times n$ matrix is invertible, then it has $n$-linearly
+independent eigenvectors.  So, a complex zonotope whose template
+contains the $n$-linearly independent eigenvectors and the scaling
+factors are non-zero has a non-empty interior.  Additionally, if the
+invertible matrix is also Schur stable, then we get a complex zonotope
+with non-empty interior, which after transformation by the matrix is
+contained inside itself according to the above lemma.  In other words,
+we can specify a positive invariant complex zonotope with non-empty
+interior for a stable and invertible linear transformation using the
+eigenstructure.
+
+Complex zonotopes are also closed under Minkowski sum, which can be
+computed by an affine expression as
+follows.
+%
+\begin{lemma}
+Let us consider $\ptemp^\pr\in\mat{n}{r}{\compnums}$ and
+$\stemp^\pr\in\mat{n}{h}{\reals}$.  Then the following is true.
+%
+\begin{align*}
+&
+  \acztope{\ptemp}{\cen}{\sfact}{\stemp}{\lb}{\ub}\oplus\acztope{\ptemp^\pr}{\cen^\pr}{
+    \sfact^\pr}{\stemp^\pr}{\lb^\pr}{\ub^\pr}\\
+& = \acztope{
+    \mymatrix{\ptemp & \ptemp^\pr}
+  }
+          {
+            \mymatrix{\cen+\cen^\pr}
+          }
+          {\mymatrix{\sfact\\\sfact^\pr}
+          }
+          {\mymatrix{\stemp & \stemp^\pr}
+          }
+          {\mymatrix{\lb\\ \lb^\pr}
+          }
+          {\mymatrix{\ub\\ \ub^\pr}
+          }.
+\end{align*}
+%
+\end{lemma}
+%
+\begin{proof}
+$\acztope{\ptemp}{\cen}{\sfact}{\stemp}{\lb}{\ub}\oplus\acztope{\ptemp^\pr}{\cen^\pr}{
+    \sfact^\pr}{\stemp^\pr}{\lb^\pr}{\ub^\pr}=$
+%
+\begin{align*}
+&  \lt\{\cen+\cen^\pr+\ptemp\zeta+\stemp\epsilon+\ptemp^\pr\zeta^\pr+\stemp^\pr\epsilon^\pr\rt.:
+  \lt. \zeta\in\compnums^m,\zeta^\pr\in\compnums^r,\rt.\\
+  & \lt. \epsilon\in\reals^k,\epsilon^\pr\in\reals^h,
+    \absolute{\zeta}\leq\sfact,\lb\leq\epsilon\leq
+    \ub,\absolute{\zeta^\pr}\leq\sfact^\pr,\lb^\pr\leq\epsilon^\pr\leq
+    \ub^\pr\rt\}=\\
+& \lt\{\lt(\cen+\cen^\pr\rt)+\mymatrix{\ptemp
+      &\ptemp^\pr}\mymatrix{\zeta\\\zeta^\pr}+\mymatrix{\stemp
+      &\stemp^\pr}\mymatrix{\epsilon\\ \epsilon^\pr}: \mymatrix{\zeta\\\zeta^\pr}\in\compnums^{m+r}\rt.\\
+    & \lt. \mymatrix{\epsilon\\\epsilon^\pr}\in\reals^{k+h},\rt.
+    \lt.\absolute{\begin{matrix}\zeta\\\zeta^\pr\end{matrix}}\leq
+        \mymatrix{\sfact\\\sfact^\pr},
+        \mymatrix{\lb\\\lb^\pr}\leq\mymatrix{\epsilon\\\epsilon^\pr}\leq\mymatrix{\ub\\\ub^\pr}
+        \rt\}\\
+& = \acztope{
+    \mymatrix{\ptemp & \ptemp^\pr}
+  }
+          {
+            \mymatrix{\cen+\cen^\pr}
+          }
+          {\mymatrix{\sfact\\\sfact^\pr}
+          }
+          {\mymatrix{\stemp & \stemp^\pr}
+          }
+          {\mymatrix{\lb\\ \lb^\pr}
+          }
+          {\mymatrix{\ub\\ \ub^\pr}
+          }.\hspace{1em}\qedhere
+\end{align*}
+%
+\end{proof}
 %
