@@ -8,23 +8,111 @@ zonotopes, which we later show is sufficient for the inclusion.
 \begin{definition}[Relation for checking inclusion]~\label{defn:inclusion}
 Let us consider $\ptemp^\pr\in\mat{n}{r}{\compnums}$ and
 $\stemp^\pr\in\mat{n}{h}{\reals}$.  We say that
-$\acztope{\ptemp}{\cen}{\sfact}{\stemp}{\lb}{\ub} \order \acztope{\ptemp^\pr}{\cen^\pr}{\sfact^\pr}{\stemp^\pr}{\lb^\pr}{\ub^\pr}$
+$\acztope{\ptemp^\pr}{\cen^\pr}{\sfact^\pr}{\stemp^\pr}{\lb^\pr}{\ub^\pr}
+\order \acztope{\ptemp}{\cen}{\sfact}{\stemp}{\lb}{\ub}$
 if all of the following is collectively true.
 %
 \begin{align*}
-  & \exists X\in\mat{(m+k)}{(r+h)}{\compnums},~y\in\compnums^{m+k}:~\mymatrix{\ptemp & \stemp}{y} = \cen-\cen^\pr \\
+  & \exists X\in\mat{(m+k)}{(r+h)}{\compnums},~y\in\compnums^{m+k}:\\
+   & \mymatrix{\ptemp & \stemp}{y} = \cen^\pr+\stemp^\pr\frac{\ub^\pr+\lb^\pr}{2}-\cen-\stemp\frac{\ub+\lb}{2}, \\
   & \mymatrix{\ptemp & \stemp} X = \mymatrix{\ptemp^\pr &
     \stemp^\pr}\diagonal{\mymatrix{\sfact
-      \\ \frac{\ub-\lb}{2}}},\\
-  & \forall i\in\set{1,\ldots,m},~\sum_{j = 1}^{r+h}\absolute{X_{i_j}}
-  \leq \sfact_i\\
-  & \forall i\in\set{1,\ldots,k},~\sum_{j =
-    1}^{r+h}\absolute{X_{(m+1)_j}}\leq \lt(\frac{\lb-\ub}{2}\rt)_i.
+      \\ \frac{\ub^\pr-\lb^\pr}{2}}},\\
+  & \forall i\in\set{1,\ldots,m}~\absolute{y_i}+\sum_{j = 1}^{r+h}\absolute{X_{i_j}}
+  \leq \sfact_i,\\
+  & \forall i\in\set{1,\ldots,k}~\absolute{y_i}+\sum_{j =
+    1}^{r+h}\absolute{X_{(m+i)_j}}\leq \lt(\frac{\ub-\lb}{2}\rt)_i.
 \end{align*}
 %
 \end{definition}
 %
+The following lemma states that the above relation between complex
+zonotopes is sufficient to guarantee the inclusion between them.
+%
+\begin{lemma}[Sufficient condition for inclusion]~\label{lem:inclusion}
+Let us consider that
+$\acztope{\ptemp^\pr}{\cen^\pr}{\sfact^\pr}{\stemp^\pr}{\lb^\pr}{\ub^\pr}
+\order \acztope{\ptemp}{\cen}{\sfact}{\stemp}{\lb}{\ub}$.  Then
+$\acztope{\ptemp^\pr}{\cen^\pr}{\sfact^\pr}{\stemp^\pr}{\lb^\pr}{\ub^\pr}
+\subseteq \acztope{\ptemp}{\cen}{\sfact}{\stemp}{\lb}{\ub}$.
+\end{lemma}
+%
 \begin{proof}
-
+Let us consider a point
+$x\in\acztope{\ptemp^\pr}{\cen^\pr}{\sfact^\pr}{\stemp^\pr}{\lb^\pr}{\ub^\pr}$.
+Then there exists $\zeta^\pr\in\compnums^r$ and
+$\epsilon^\pr\in\reals^k$ such that
+%
+\begin{align*}
+x=\ptemp^\pr\zeta^\pr+\stemp^\pr\epsilon^\pr,~\absolute{\zeta^\pr}\leq\sfact^\pr,~\text{and}~\lb\leq\epsilon^\pr\leq\ub.%~\numberthis\label{eqn:spec}
+\end{align*}
+%
+Let us consider $\alpha\in\compnums^r$ and $\beta\in\reals^h$ defined as follows.
+%
+\begin{align*}
+&  \forall i\in\set{1,\ldots,r}~\alpha_i=\lt\{\begin{array}{l}
+  \frac{\zeta_i}{\sfact^\pr_i}~\text{if}~\zeta_i\neq 0\\
+  0~\text{otherwise}.
+  \end{array}
+  \rt.\\
+  & \forall i\in\set{1,\ldots,h}~\beta_i=\lt\{
+  \begin{array}{l}
+  \frac{2\zeta^\pr-\ub^\pr+\lb^\pr}{\ub^\pr-\lb^\pr}~\text{if}~\zeta^\pr\neq\frac{\ub^\pr-\lb^\pr}{2}\\
+  0~\text{otherwise}.
+    \end{array}
+    \rt.\\ \text{Then}~
+%% \end{align*}
+%% %
+%% Then we get
+%% %
+%% \begin{align*}
+&  \zeta^\pr=\diagonal{\sfact^\pr}\alpha,~\epsilon^\pr=\diagonal{\frac{\ub^\pr-\lb^\pr}{2}}\beta+\frac{\ub^\pr+\lb^\pr}{2},\\
+&  \infnorm{\alpha}\leq 1,~\infnorm{\beta}\leq 1.%~\numberthis\label{eqn:conversion}
+\end{align*}
+%
+Let us consider $\mymatrix{\zeta\\\epsilon}=y+X\mymatrix{\alpha\\\beta}+\mymatrix{0\\\frac{\ub-\lb}{2}}$.
+We derive
+%
+\begin{align*}
+  &  x=\cen^\pr+\ptemp^\pr\zeta^\pr+\stemp^\pr\epsilon^\pr\\
+&   = \cen^\pr + \mymatrix{\ptemp^\pr & \stemp^\pr}\mymatrix{\diagonal{\sfact^\pr}\alpha\\
+  \diagonal{\frac{\ub^\pr-\lb^\pr}{2}}\beta +
+  \frac{\ub^\pr+\lb^\pr}{2}}\\
+  & = \cen^\pr+\stemp^\pr\frac{\ub^\pr+\lb^\pr}{2}+\mymatrix{\ptemp &
+    \stemp}X\mymatrix{\alpha\\\beta}\\
+  & = \cen +\stemp\frac{\ub-\lb}{2}+\mymatrix{\ptemp &
+    \stemp}{\lt(y+X\mymatrix{\alpha\\\beta}\rt)}\\
+  & = \cen+\mymatrix{\ptemp & \stemp}\mymatrix{\zeta\\ \epsilon}.~\numberthis\label{eqn:conversion1}
+\end{align*}
+%
+We derive the following bounds on $\zeta$ and $\epsilon$.
+%
+\begin{align*}
+& \forall
+i\in\set{1,\ldots,m}~\absolute{\zeta_i}=\absolute{y_i+X_i\alpha}\\
+& \leq \absolute{y_i}+\sum_{i=1}^{r+h}\absolute{X_{i_j}}\leq \sfact_i~\lt(\because
+\infnorm{\alpha}\leq 1\rt)~\numberthis\label{eqn:bound1}\\
+& \forall i\in\set{1,\ldots,k}~\absolute{y_i+X_i\beta}\\
+& \leq \absolute{y_i}+\sum_{i=1}^{r+h}\absolute{X_{i_j}}\leq\frac{\ub-\lb}{2}~\lt(\because
+\infnorm{\beta}\leq 1\rt)~\numberthis\label{eqn:bound2}\\
+& \%\%~\because \epsilon_i =
+y_i+X_i\beta_i+\frac{\ub+\lb}{2},~\text{by
+  Equation~\ref{eqn:bound2}}:\\
+& \lb\leq\epsilon\leq \ub.~\numberthis\label{eqn:bound3}
+\end{align*}
+%
+By Equations~\ref{eqn:conversion1},~\ref{eqn:bound1}
+and~\ref{eqn:bound3}, we get that
+$x\in\acztope{\ptemp}{\cen}{\sfact}{\stemp}{\lb}{\ub}$.  As this is
+true for all
+$x\in\acztope{\ptemp^\pr}{\cen^\pr}{\sfact^\pr}{\stemp^\pr}{\lb^\pr}{\ub^\pr}$,
+we get
+$\acztope{\ptemp^\pr}{\cen^\pr}{\sfact^\pr}{\stemp^\pr}{\lb^\pr}{\ub^\pr}\subseteq\acztope{\ptemp}{\cen}{\sfact}{\stemp}{\lb}{\ub}$.
 \end{proof}
 %
+We note that for fixed templates, the relation in
+Definition~\ref{defn:inclusion} is a set of convex constraints on the
+scaling factors, primary offset and interval bounds of the two complex
+zonotopes.  In fact, these constraints can be equivalently
+expressed as a second order conic program of polynomial size in the
+specification of the two complex zonnotopes.
