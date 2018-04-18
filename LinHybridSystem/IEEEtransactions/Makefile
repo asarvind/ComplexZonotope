@@ -3,7 +3,7 @@ SPELL_CHECK=aspell -c
 
 # Symbolic link
 
-
+SYMBOLIC_LINK_NAME1=bibfolder
 SYMBOLIC_LINK_NAME2=fig
 
 #submission:
@@ -20,7 +20,7 @@ all:
 	bibtex main 
 	pdflatex -shell-escape -synctex=1 ${INPUT_FILE}
 	pdflatex -shell-escape -synctex=1 ${INPUT_FILE}
-	open main.pdf &
+	#open main.pdf &
 
 pdf:
 	pdflatex -shell-escape -synctex=1 ${INPUT_FILE}
@@ -28,9 +28,10 @@ pdf:
 TEX_FILES := $(wildcard *.tex chapters/*.tex chapters/*/*.tex)
 
 sym:
-	\rm -f ${SYMBOLIC_LINK_NAME1} ${SYMBOLIC_LINK_NAME2}
+	\rm -f ${SYMBOLIC_LINK_NAME1}
+	\rm -f ${SYMBOLIC_LINK_NAME2}
+	#ln -s ../FORMATS2017_final/ ${SYMBOLIC_LINK_NAME1}
 	ln -s ../../figures ${SYMBOLIC_LINK_NAME2}
-
 
 .PHONY: check
 

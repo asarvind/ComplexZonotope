@@ -1,0 +1,30 @@
+Checking inclusion between two complex zonotopes amounts to
+solving a non-convex optimization problem which can be computationally
+intractable.  However, we shall provide a sufficient condition for
+the inclusion that can be checked by convex optimization.  In
+this regard we define the following relation between two complex
+zonotopes, which we later show is sufficient for the inclusion.
+%
+\begin{definition}[Relation for checking inclusion]~\label{defn:inclusion}
+Let us consider $\ptemp^\pr\in\mat{n}{r}{\compnums}$ and
+$\stemp^\pr\in\mat{n}{h}{\reals}$.  We say that
+$\acztope{\ptemp}{\cen}{\sfact}{\stemp}{\lb}{\ub} \order \acztope{\ptemp^\pr}{\cen^\pr}{\sfact^\pr}{\stemp^\pr}{\lb^\pr}{\ub^\pr}$
+if all of the following is collectively true.
+%
+\begin{align*}
+  & \exists X\in\mat{(m+k)}{(r+h)}{\compnums},~y\in\compnums^{m+k}:~\mymatrix{\ptemp & \stemp}{y} = \cen-\cen^\pr \\
+  & \mymatrix{\ptemp & \stemp} X = \mymatrix{\ptemp^\pr &
+    \stemp^\pr}\diagonal{\mymatrix{\sfact
+      \\ \frac{\ub-\lb}{2}}},\\
+  & \forall i\in\set{1,\ldots,m},~\sum_{j = 1}^{r+h}\absolute{X_{i_j}}
+  \leq \sfact_i\\
+  & \forall i\in\set{1,\ldots,k},~\sum_{j =
+    1}^{r+h}\absolute{X_{(m+1)_j}}\leq \lt(\frac{\lb-\ub}{2}\rt)_i.
+\end{align*}
+%
+\end{definition}
+%
+\begin{proof}
+
+\end{proof}
+%
