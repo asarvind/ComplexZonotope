@@ -1,0 +1,102 @@
+The switching conditions in an affine hybrid system can be controlled
+by linear constraints on the state variables.  In such a case,
+over-approximating the reachable set by a set representation can
+require computing an over-approximation of the intersection between
+sets in the representation with sub-level sets of linear inequalities
+controlling the transitions.  Then the accuracy of approximation of
+reachable sets depends on the accuracy of approximation of the
+intersection.  But like simple zonotopes, complex zonotopes also have
+the drawback that they are not closed under intersection with
+half-spaces.  However, we shall derive an over-approximation of the
+intersection between a complex zonotope and a class of sub-level sets
+of linear inequalities, called \emph{sub-parallelotopes}, which are
+algebraically related to the generator representation.  The
+over-approximation shall be such that the error can be regulated by
+modifying the scaling factors.
+
+A sub-parallelotope is a set representation that encodes possibly
+unbounded parallelotopes and is defined as follows.
+%
+\begin{definition}[Sub-parallelotope]
+Let us consider a matrix $\qtemp\in\mat{k}{n}{\reals}$ where
+$\qtemp\transpose{\qtemp}$ is invertible,
+i.e. $\determinant{\qtemp\transpose{\qtemp}}\neq 0$,
+$\plb\in\lt(\reals\bigcup\set{-\infty}\rt)^k$ and
+$\pub\in\lt(\reals\bigcap\set{\infty}\rt)^k$ such that $\plb\leq\pub$.
+The following is the representation of a sub-parallelotope.
+%
+\[
+\ptope{\qtemp}{\lb}{\ub} = \set{x\in\reals^n: \plb\leq\qtemp x\leq\pub}.
+\]
+%
+\end{definition}
+%
+For example, the set of linear constraints
+%
+\[ -1\leq x+y-z\leq
+1~\wedge~~ x-y+z\leq 3\]
+%
+is equivalent to a sub-parallelotope
+$$\sptope{\mymatrix{1 & 1 & 1\\1 &-1 & 1}}{\mymatrix{-1\\-\infty}}{\mymatrix{1\\3}},$$
+because the rows of the sub-parallelotopic template are linearly
+independent.  On the other hand, the set of constraints
+%
+\[
+-1\leq
+x+y-z\leq 1~\wedge~~x+y+z\leq 2\wedge~~-1\leq x+y
+\]
+%
+do not constitute a sub-parallelotope, because the three row vectors
+$\lt[\begin{array}{c c c}1 & 1 & -1\end{array}\rt]$,
+$\lt[\begin{array}{c c c}1 & 1 & 1\end{array}\rt]$, and
+$\lt[\begin{array}{c c c}1 & 1 & 0\end{array}\rt]$ together are
+linearly dependent.  The reason we shall consider the special case of
+intersection between sub-parallelotopes and complex zonotopes is
+because the former is algebraically related to a generator
+representation.  We can express %
+\[
+\sptope{K_{k\times
+    n}}{\wh{l}}{\wh{u}}=\lt\{z+\pinv{K}\zeta:\begin{array}{l}~z\in\realset^n,\zeta\in\realset^k,
+  \\~Kz=0,~\wh{l}\leq
+\zeta\leq \wh{u}\end{array}\rt\}.
+\]
+%
+%% Therefore, it is possible to compute an over-approximationexpress
+%% the intersection of sub-parallelotope with a suitably aligned
+%% zonotope as a simple algebraic expression, as we will see latter.
+The over-approximation of the intersection between a sub-parallelotope
+and a complex zonotope that we derive later shall be expressed in
+terms of the following affine function, called \emph{min-approximation} and
+\emph{max-approximation} functions, respectively.  A function
+$\minapproxsymbol:\reals^k\times\lt(\reals\bigcup\set{\infty}\rt)^k$ is a
+min-approximation function if for all $i\in\set{1,...,k}$
+%
+\[
+\lt(\minapprox{\ub}{\pub}\rt)_i=
+\lt\{
+\begin{array}{l}
+\ub_i~\text{if}~\pub_i=\infty\\
+\pub_i~\text{if}~\pub_i<\infty
+\end{array}
+\rt.
+\]
+%
+The function $\minapprox{\ub}{\pub}$ is an affine function of its
+first argument $\ub$ and outputs a finite valued real vector.
+Similarly, a function
+$\maxapproxsymbol:\reals^k\times\lt(\reals\bigcup\set{-\infty}\rt)^k$
+is a max-approximation function if for all $i\in\set{1,...,k}$
+%
+\[
+\lt(\maxapprox{\lb}{\plb}\rt)_i=
+\lt\{
+\begin{array}{l}
+\lb_i~\text{if}~\plb_i=-\infty\\
+\plb_i~\text{if}~\plb_i>-\infty
+\end{array}
+\rt.
+\]
+%
+The function $\maxapprox{\lb}{\plb}$ is an affine function of its
+first argument $\lb$ and outputs a finite valued real vector.
+%
