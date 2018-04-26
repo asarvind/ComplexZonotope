@@ -1,0 +1,257 @@
+
+%%=====================================================
+\newcommand{\col}[2]{{\color{#1} #2}}
+\newcommand{\textcol}[1]{\col{blue}{#1}}
+\newcommand{\eqncol}[1]{\col{purple}{#1}}
+%%======================================================
+
+%% ========================================================
+%%% Basic symbols
+%% ========================================================
+
+% \def    \s      {\sigma}
+\def    \S      {\Sigma}
+\def    \d      {\delta}
+% \def    \D      {\Delta}
+\def    \ee     {\epsilon}
+\def    \e      {\varepsilon}
+% \def    \g      {\gamma}
+\def    \se     {\subseteq}
+% 
+\def    \N      {\mathbb{N}}
+% \def    \Z      {\mathbb{Z}}
+\def    \Q      {\mathbb{Q}}
+\def    \R      {\mathbb{R}}
+\def    \B      {\mathbb{B}}
+\def    \A      {\mathcal{A}}
+ 
+% 
+\def    \qed    {\hfill\ensuremath{\square}\vspace{.7em}}%                
+\def    \QED    {\hfill\ensuremath{\blacksquare}}%
+
+
+%% ========================================================
+%%% New commands
+%% ========================================================
+
+\newcommand{\sem}[1]{[\![#1]\!]}
+
+%%% membership queries
+\def \mq          {{\textsc{mq}}}
+\def \eq          {{\textsc{eq}}}
+
+%%% shortcuts and buffers
+\newcommand{\lt}{\left}
+\newcommand{\rt}{\right}
+\newcommand{\pr}{\prime}
+\newcommand{\dpr}{{\pr\pr}}
+\newcommand{\tcz}{\tcztope}
+\newcommand{\imp}{\implies}
+\newcommand{\realset}{\reals}
+\newcommand{\ra}{\rightarrow}
+\newcommand{\wh}{\widehat}
+\newcommand{\sptope}{\ptope}
+\newcommand{\ptemplate}{\qtemp}
+\newcommand{\gcz}{\acztope}
+\newcommand{\cz}{\tcztope}
+\newcommand{\mb}{\mathbb}
+\newcommand{\dg}{\mathcal{D}}
+
+% matrix operations
+\newcommand{\ColumnJoin}[2]{\left[\begin{array}{c}{#1}\\{#2} \end{array}\right]}
+\newcommand{\cjoin}[3]{\begin{array}{c}#1\\#2\\#3\end{array}}
+\newcommand{\conjtranspose}[1]{#1^*}
+
+
+%%% operations
+% absolute value
+\newcommand{\absolute}[1]{\lt|#1\rt|}
+%infimum norm
+\newcommand{\infnorm}[1]{\left\|#1\right\|_{\infty}}
+% square norm
+\newcommand{\sqnorm}[1]{\left\|#1\right\|_{2}}
+% determinant
+\newcommand{\determinant}[1]{\operatorname{det}\lt(#1\rt)}
+% Minkowski sum
+\newcommand{\minsum}[2]{#1\oplus #2}
+% Intersection
+\newcommand{\intersection}[2]{#1\bigcap #2}
+% Meet
+\newcommand{\meet}[2]{#1\bigwedge #2}
+% Join
+\newcommand{\join}[2]{#1\bigvee #2}
+% vectormin
+\newcommand{\vectormin}[1]{\underset{#1}{\bigwedge}}
+
+
+
+%%% functions
+% function specification
+\newcommand{\func}[3]{#1:#2\rightarrow #3}
+% support of a vector
+\newcommand{\support}[3]{\rho\left(#1,#2,#3\right)}
+\newcommand{\minaffine}[2]{\widehat{\Lambda}\lt(#1,#2\rt)}
+\newcommand{\maxaffine}[2]{\overline{\Lambda}\lt(#1,#2\rt)}
+\newcommand{\minaffinefunc}{\widehat{\Lambda}}
+\newcommand{\maxaffinefunc}{\overline{\Lambda}}
+\newcommand{\minaffineset}{\widehat{\Delta}}
+\newcommand{\maxaffineset}{\overline{\Delta}}
+
+
+
+%%% numbers
+\newcommand{\reals}{\mathbb{R}}
+\newcommand{\compnums}{\mathbb{C}}
+\newcommand{\integers}{\mathbb{Z}}
+% imaginary part
+\newcommand{\img}{\operatorname{Im}}
+% real part
+\newcommand{\real}{\operatorname{Re}}
+
+
+
+%%% arrays
+% set of matrices
+\newcommand{\mat}[3]{\mathbb{M}_{#1\times#2}\left(#3\right)}
+% diagonal matrix
+\newcommand{\diagonal}[1]{\operatorname{diag}\left(#1\right)}
+% repeat elements
+\newcommand{\repmat}[3]{\lt[1\rt]_{#2\times #3}}
+% inverse matrix
+\newcommand{\inv}[1]{{#1}^{-1}}
+% pseudo-inverse
+\newcommand{\pinv}[1]{{#1}^\dagger}
+% transpose
+\newcommand{\transpose}[1]{{#1}^T}
+
+
+
+%%% relations
+% convex order relation between complex zonotopes
+\newcommand{\order}{\sqsubseteq}
+
+
+
+
+%%% set representations
+% set 
+\newcommand{\set}[1]{\left\{#1\right\}}
+%
+\newcommand{\nullspace}[1]{\operatorname{null}\lt(#1\rt)}
+% polytope
+\newcommand{\polytope}[2]{\mathit{Poly}\lt(#1,#2\rt)}
+% real zonotope
+\newcommand{\rztope}[2]{\mathit{\mathcal{Z}}\lt(#1,#2\rt)}
+% complex zonotope
+\newcommand{\cztope}[2]{\mathit{\mathcal{C}}\lt(#1,#2\rt)}
+% template complex zonotope
+\newcommand{\tcztope}[3]{\mathit{\operatorname{\mathcal{T}}}\lt(#1,#2,#3\rt)}
+% interval zonotope
+\newcommand{\iztope}[3]{\mathit{\operatorname{\mathcal{I}}}\lt(#1,#2,#3\rt)}
+% sub-parallelotope
+\newcommand{\ptope}[3]{\mathcal{P}\left(#1,#2,#3\right)}
+% augmented complex zonotope
+\newcommand{\acztope}[6]{\mathcal{G}\left(#1,#2,#3,#4,#5,#6\right)}
+
+
+
+
+%%% variables in set representation 
+% primary template
+\newcommand{\ptemp}{\mathcal{V}}
+% secondary template
+\newcommand{\sectemp}{\mathcal{W}}
+% parallelotope template
+\newcommand{\partemp}{\mathcal{K}}
+% center
+\newcommand{\cen}{c}
+% scaling factors
+\newcommand{\sfact}{s}
+% secondary template
+\newcommand{\stemp}{\mathcal{W}}
+% lower interval bound
+\newcommand{\lb}{l}
+% upper interval bound
+\newcommand{\ub}{u}
+% parallelotope template
+\newcommand{\qtemp}{\mathcal{K}}
+% lower parallelotope bound
+\newcommand{\plb}{\widehat{\lb}}
+% upper parallelotope bound
+\newcommand{\pub}{\widehat{\ub}}
+
+
+
+%%% Variables in equations
+% transfer matrix inclusion-checking
+\newcommand{\tmat}{X}
+% transfer vector in inclusion-checking
+\newcommand{\tvect}{y}
+
+% Equations
+\newcommand{\transfer}[4]{#1#4 = #2\dg\lt(#3\rt)}
+\newcommand{\centertransfer}[4]{#1#4 = #3-#2}
+\newcommand{\scalebound}[5]{\max_{i=1}^{#4}\lt(\lt|#2_i\rt|+\sum_{j=1}^{#5}\lt|#1_{ij}\rt|-#3_i\rt)}
+
+
+
+%%% System specifications
+% trajectory
+\newcommand{\trj}[2]{{\bf #1}\lt(#2\rt)}
+%
+\newcommand{\inptrj}[1]{{\bf u}\lt(#1\rt)}
+% input set
+\newcommand{\inputset}{\mathcal{U}}
+% initial set
+\newcommand{\init}{\Psi_0}
+% initial template 
+\newcommand{\inittemp}{\ptemp^{\operatorname{init}}}
+% initial center
+\newcommand{\initcen}{\cen^{\operatorname{init}}}
+% initial scaling factors
+\newcommand{\initsfact}{\sfact^{\operatorname{init}}}
+% input template
+\newcommand{\inputtemp}{\ptemp^{\operatorname{input}}}
+% input center
+\newcommand{\inputcen}{\cen^{\operatorname{input}}}
+% input scaling factors
+\newcommand{\inputsfact}{\sfact^{\operatorname{input}}}
+% Reachable set at a time
+\newcommand{\reachset}[1]{\mathcal{R}\lt(#1\rt)}
+
+
+
+
+%% ========================================================
+%%% New operators
+%% ========================================================
+
+\DeclareMathOperator*{\argmax}{\rm arg\max}
+\DeclareMathOperator*{\argmin}{\rm arg\min}
+
+%% ========================================================
+%%% Editing Commands
+%% ========================================================
+\def    \toupdate#1 {\textcolor{Periwinkle}{#1 } }
+\def    \comment#1 { }
+\def    \note#1    {\textbf{[ \marginpar{\texttt{note}}}{ \small #1 }\textbf{] }}
+\def    \todo#1    {\marginpar{ \small \textcolor{red}{TODO: #1}}}
+
+
+
+
+%% ========================================================
+%%% New environments
+%% ========================================================
+\theoremstyle{plain}
+\newtheorem{proposition}[theorem]{Proposition}
+
+%% ========================================================
+%%% Define colors 
+%% ========================================================
+\definecolor{myred}{RGB}{204,0,0}
+\definecolor{mygreen}{RGB}{0,204,0}
+\definecolor{myblue}{RGB}{0,0,204}
+\definecolor{mypurple}{HTML}{880088}
+
+\colorlet{colorhighlight}{black!10}
