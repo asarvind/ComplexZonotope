@@ -61,6 +61,8 @@ clean:
 	\rm -f  chapters/*.tex~	
 	\rm -f  chapters/*/*.tex~
 	\rm -f *.loa
+	\rm -f *.lot
+	\rm -f *.lof
 	\rm -f  ${SYMBOLIC_LINK_NAME1}
 	\rm -f  ${SYMBOLIC_LINK_NAME2}
 	# git rm -f Figures/*.pdf
