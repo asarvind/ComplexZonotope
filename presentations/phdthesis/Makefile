@@ -30,3 +30,4 @@ clean:
 	rm -f *.pdf *.aux *.log *~ *.bbl *.blg *.nav *.out *.snm *.toc
 	rm -f $(symnames)
 	rm -f *#*
+	rm -f .nfs*
