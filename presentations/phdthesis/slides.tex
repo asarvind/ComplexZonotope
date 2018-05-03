@@ -2,36 +2,204 @@
 \input{settings}
 
 %\input{stylefiles/preamble.tex}
-\input{stylefiles/mymacros.tex}
+\input{macros.tex}
 \input{stylefiles/additional.tex}
-\definecolor{calpolypomonagreen}{rgb}{0.12, 0.3, 0.17}
-\definecolor{coolblack}{rgb}{0.0, 0.18, 0.39}
+\input{colors}
+
 
 \input{titlepage}
 
-% \setbeamercolor{title}{fg=blue}
-% \title{Augmented Complex Zonotopes For Computing Invariants of Affine Hybrid Systems}
-% \setbeamercolor{author}{fg=coolblack}
-% \author[shortname]{{  Arvind\ Adimoolam\\
-% \footnotesize Adviser: Thao Dang}}
-% \setbeamercolor{institute}{fg=calpolypomonagreen}
-% \institute{{
-% VERIMAG / University Grenoble Alpes}\\~Grenoble,France
-% \begin{figure}
-% \center
-% \hspace{2em}\includegraphics[scale=0.2]{figures/LogoVERIMAG.png}
-% \hspace{2em}\includegraphics[scale=0.04]{logo-uga-vo-cmjn.jpg}
-% \end{figure}
-% }
+\setbeamercolor{title}{bg=snow}
+\setbeamercolor{title}{fg=darkblue}
+\title{A Calculus of Complex Zonotopes for \\ Invariant and Stability Verification \\of Affine Hybrid Systems}
+\setbeamercolor{author}{fg=darkblue}
+\author[shortname]{ {\Large  Arvind\ Adimoolam}\vspace{-2em}}
+%\setbeamercolor{institute}{fg=calpolypomonagreen}
+%% \institute{
+%% \center
+%% \includegraphics[scale=0.15]{figures/LogoVERIMAG.png}
+%% VERIMAG \includegraphics[scale=0.03]{logo-uga-vo-cmjn.jpg}
+%% }
+
 
 \date{}
 
 \begin{document}
-\maketitle
 
-\begin{frame}{Test slide}
-Will input something!
+% Title page
+\begin{frame}[plain]
+\maketitle
+%
+%
+\begin{minipage}{1\textwidth}
+\vspace{-4em}
+\begin{minipage}{0.3\textwidth}
+{\footnotesize {\it Reviewers}}\\
+{\small Sylvie Putot\\
+Mahesh Viswanathan}
+\end{minipage}
+%
+\hspace{2em}
+\begin{minipage}{0.3\textwidth}
+{\footnotesize {\it Supervised by}}\\
+{\small Thao Dang}
+\end{minipage}
+%
+\begin{minipage}{0.25\textwidth}
+{\footnotesize {\it Examiners}}\\
+{\small Laurent Fribourg\\
+Luc Jaulin}
+\end{minipage}
+%
+\end{minipage}
+%
+\begin{minipage}{1\textwidth}
+\vspace{0.5em}
+\center
+%
+\begin{minipage}{0.2\textwidth}
+\includegraphics[scale=0.15]{figures/LogoVERIMAG.png}
+\end{minipage}
+%
+\begin{minipage}{0.5\textwidth}
+{\footnotesize \hspace{0em}VERIMAG / University Grenoble Alpes\\
+$~~~~~~~~~~~~~~~~$Grenoble, France}
+\end{minipage}
+%
+\begin{minipage}{0.2\textwidth}
+~~\includegraphics[scale=0.03]{logo-uga-vo-cmjn.jpg}
+\end{minipage}
+%
+\end{minipage}
+%
 \end{frame}
+
+%=============================================================================================================================
+
+\begin{frame}{Hybrid dynamics of real world systems}
+
+\begin{minipage}{0.5\textwidth}
+%% Signal with hybrid behavior:
+%
+\begin{tikzpicture}[scale = 0.6]
+% Create axis
+\draw[thick,->] (0,0) -- (0,5);
+\draw[thick,->] (0,0) -- (6,0);
+
+% Label axis
+\node[text width = 1 cm] at (-0.8,5) {signal value};
+\node[text width = 1 cm] at (6,-0.4) {time};
+
+% Create curve 1 from t=0 to t=2
+\draw[red,very thick] (0,0) parabola (2,2);
+% Create curve 1 from t=2 to t=4
+\draw[red,very thick] (2,2) .. controls (3,1.5) .. (4,3);
+% Create curve 1 from t=4 to t=6
+\draw[red,very thick] (4,2) .. controls (5,3) .. (6,5);
+
+% Label behavior of curves
+
+% Label switch in dynamics
+\node[text width = 1.6cm, blue] at (2,4)  (switch) {{\footnotesize switch in\\ dynamics}};
+\draw[ ->] (2,2) -- (switch);
+
+
+% Label jump in state
+\node[text width = 2.5cm, blue] at (5.5,1) (jump) {{\footnotesize jump in state}};
+\draw[blue, dashed] (4,2) -- (4,3);
+\draw[->] (4,2.5) -- (jump);
+
+\end{tikzpicture}
+%
+\end{minipage}
+\begin{minipage}{0.45\textwidth}
+%% Dynamics of hybrid system
+%
+\begin{tikzpicture}[scale =0.8,
+location/.style = {circle, draw=red!60, thick, fill = cyan!5}, 
+]
+
+
+% Draw locations
+\node[text width = 2 cm, scale =0.8, location] at (0,0) {{ Diff. eqn.\\ \hspace{1.5em} @ $l_1$}};
+\node[text width = 2 cm, scale =0.8, location] at (4,0) {{ Diff. eqn.\\  \hspace{1.5em} @ $l_2$}};
+
+% Draw edges
+\draw[thick, blue, ->] (1,0.5) --  (3,0.5);
+\draw[thick, blue, <-] (1,-0.5) --  (3,-0.5);
+
+% Label edges
+\node[text width = 1cm] at (2,0.7) {\scriptsize state};
+\node[text width = 1cm] at (2,0.3) {\scriptsize change};
+\node[text width = 1cm] at (2,-0.3) {\scriptsize state};
+\node[text width = 1cm] at (2,-0.7) {\scriptsize change};
+
+\end{tikzpicture}\\[0.5em]
+%
+$x\in\reals^n$: Continuous state.\\
+$l\in\set{l_1,...,l_k}$: Discrete state.
+\end{minipage}
+
+\begin{minipage}{0.45\textwidth}
+\begin{figure}
+\center
+\includegraphics[width = 3cm, height = 3cm]{figures/downloaded/CarGear.png}
+\caption{\small Gear control to switch dynamics}
+\end{figure}
+\end{minipage}
+%
+\begin{minipage}{0.45\textwidth}
+\begin{figure}
+\includegraphics[height = 3cm, width = 2.5cm]{figures/downloaded/ComputerControl.jpg}
+\caption{\small Computer Control System}
+\end{figure}
+\end{minipage}
+
+\end{frame}
+
+
+%=========================================================================================================================================
+
+\begin{frame}{Verification of hybrid systems is challenging}
+%
+\begin{itemize}
+\item For most hybrid system, computing set of reachable states is {\color{darkred} undecidable} or {\color{darkred} computationally expensive}.
+{\bf TODO give references}
+\item Consider a simple {\color{darkred} discrete time affine switched system}:
+\[
+x(t+1) = A_ix(t)+u_i,~~i\in\set{1,2}.
+\]
+%
+\begin{tikzpicture}[scale = 0.8
+]
+\draw[fill=cyan!30] (0,0) circle (1cm);
+
+\draw[rotate around = {45:(2,2)}, fill=cyan!30] (2,2) ellipse (0.5cm and 1cm);
+\draw[rotate around = {135:(1.5,2.5)}, fill=cyan!30] (1.5,2.5) ellipse (0.4cm and 1.2cm);
+\draw[->,thick] (0,0) -- (2,2);
+\draw[->,thick] (0,0) -- (1.5,2.5);
+\node[text width = 2cm] at (0.6, 2.5) {$2$ convex sets};
+
+\draw[rotate around = {30:(6,1)}, fill=cyan!30] (6,1) ellipse (0.5cm and 1cm);
+\draw[rotate around = {120:(5.5,1.2)}, fill=cyan!30] (5.5,1.2) ellipse (0.4cm and 1.2cm);
+\draw[rotate around = {60:(5.8,1.5)}, fill=cyan!30] (5.8,1.5) ellipse (0.5cm and 1cm);
+\draw[rotate around = {150:(5.3,1.7)}, fill=cyan!30] (5.3,1.7) ellipse (0.5cm and 1cm);
+\draw[->,thick] (2,2) -- (6,1);
+\draw[->,thick] (2,2) -- (5.5,1.2);
+\draw[->,thick] (1.5,2.5) -- (5.3,1.7);
+\draw[->,thick] (1.5,2.5) -- (5.8,1.5);
+\node[text width = 2cm] at (5, 2.7) {$4$ convex sets};
+
+\draw[->,thick] (6,1.5) -- (9,3);
+\node[text width = 2cm] at (8.5,2) {\small $n$ steps};
+\node[draw,text  width = 2cm]  at (10.5,3.5) {{\color{darkred} $2^n$ convex\\ sets}};
+\end{tikzpicture}
+%
+\end{itemize}
+%
+\end{frame}
+
+%==========================================================================================================================
 
 \bibliographystyle{plain}
 \bibliography{ref}
