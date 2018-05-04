@@ -76,7 +76,7 @@ $~~~~~~~~~~~~~~~~$Grenoble, France}
 
 %=============================================================================================================================
 
-\begin{frame}{Hybrid dynamics of real world systems}
+\begin{frame}{Hybrid Dynamics of Real World Systems}
 
 \begin{minipage}{0.5\textwidth}
 %% Signal with hybrid behavior:
@@ -160,12 +160,12 @@ $l\in\set{l_1,...,l_k}$: Discrete state.
 
 %=========================================================================================================================================
 
-\begin{frame}{Verification of hybrid systems is challenging}
+\begin{frame}{Verification of Hybrid Systems is Challenging}
 %
 \begin{itemize}
-\item For most hybrid system, computing set of reachable states is {\color{darkred} undecidable} or {\color{darkred} computationally expensive}.
+\item For most hybrid system, computing set of reachable states is \negemph{ undecidable} or \negemph{ computationally expensive}.
 {\bf TODO give references}
-\item Consider a simple {\color{darkred} discrete time affine switched system}:
+\item Consider a simple \negemph{ discrete time affine switched system}:
 \[
 x(t+1) = A_ix(t)+u_i,~~i\in\set{1,2}.
 \]
@@ -192,7 +192,7 @@ x(t+1) = A_ix(t)+u_i,~~i\in\set{1,2}.
 
 \draw[->,thick] (6,1.5) -- (9,3);
 \node[text width = 2cm] at (8.5,2) {\small $n$ steps};
-\node[draw,text  width = 2cm]  at (10.5,3.5) {{\color{darkred} $2^n$ convex\\ sets}};
+\node[draw,text  width = 2cm]  at (10.5,3.5) {\negemph{ $2^n$ convex\\ sets}};
 \end{tikzpicture}
 %
 \end{itemize}
@@ -200,6 +200,95 @@ x(t+1) = A_ix(t)+u_i,~~i\in\set{1,2}.
 \end{frame}
 
 %==========================================================================================================================
+
+\begin{frame}{Over-approximation Using Set Representation}
+To deal with \negemph{ undecidability} or \negemph{ high computational complexity} of representing reachable sets:
+%
+\begin{itemize}
+\item \posemph{Over-approximate} them by a \posemph{ set} which can be \posemph{ encoded} and \posemph{ manipulated efficiently}.
+\item use \plemph{ Set Representation}:  A \posemph{ digital encoding} of a possibly infinite \posemph{ set of states}.
+\end{itemize}
+%
+
+\begin{minipage}{0.35\textwidth}
+% Polytopic approximation of reachable set
+\center{
+\begin{tikzpicture}[scale=0.9]
+\draw[rotate around = {30:(6,1)}, fill=cyan!30] (6,1) ellipse (0.5cm and 1cm);
+\draw[rotate around = {120:(5.5,1.2)}, fill=cyan!30] (5.5,1.2) ellipse (0.4cm and 1.2cm);
+\draw[rotate around = {60:(5.8,1.5)}, fill=cyan!30] (5.8,1.5) ellipse (0.5cm and 1cm);
+\draw[rotate around = {150:(5.3,1.7)}, fill=cyan!30] (5.3,1.7) ellipse (0.5cm and 1cm);
+% draw lines of polytope around above image
+\draw[very thick,color=onyx] (4.38,0.53)--(5,2.7);
+\draw[very thick,color=onyx] (5,2.7)--(5.8,2.6);
+\draw[very thick,color=onyx] (5.8,2.6)--(6.6,1.75);
+\draw[very thick,color=onyx] (6.6,1.75)--(6.8,0.9);
+\draw[very thick,color=onyx] (6.8,0.9)--(6.575,0);
+\draw[very thick,color=onyx] (6.575,0)--(4.38,0.53);
+\end{tikzpicture}
+}
+%
+\begin{exampleblock}{Polytopes}
+\eqnemph{$\set{x:Tx\leq d, x\in\reals^n}$}\\
+$T\in\mat{m}{n}{\reals}$, ${d\in\reals^m}$.
+\end{exampleblock}
+%
+\end{minipage}
+%
+\hspace{2.5em}
+\begin{minipage}{0.4\textwidth}
+%
+\vspace{-0.5em}
+\centering{
+%
+\begin{tikzpicture}[scale=0.8]x
+\draw[rotate around = {30:(6,1)}, fill=cyan!30] (6,1) ellipse (0.5cm and 1cm);
+\draw[rotate around = {120:(5.5,1.2)}, fill=cyan!30] (5.5,1.2) ellipse (0.4cm and 1.2cm);
+\draw[rotate around = {60:(5.8,1.5)}, fill=cyan!30] (5.8,1.5) ellipse (0.5cm and 1cm);
+\draw[rotate around = {150:(5.3,1.7)}, fill=cyan!30] (5.3,1.7) ellipse (0.5cm and 1cm);
+% draw ellipse around the above image
+\draw[color=onyx, very thick, rotate around={70:(5.7,1.1)}] (5.7,1.1) ellipse (1.65cm and 1.225cm);
+\end{tikzpicture}
+%
+}
+%
+\hspace{0.5em}
+\begin{exampleblock}{Ellipsoid}
+\eqnemph{$\set{x: x^TPx\leq 1, x\in\reals^n}$}.\\
+$P\in\mat{n}{n}{\reals}$: Positive semi-definite.
+\end{exampleblock}
+%
+\end{minipage}
+%
+\end{frame}
+
+%=====================================================================================================================================
+
+\begin{frame}{Desirable Features of a Set Representation}
+\begin{itemize}
+\item \posemph{Accurate} and \posemph{fast computation} of  reachable states $\Leftarrow$
+\begin{enumerate}
+\item \plemph{Closure} under set operations involved in computing reachable sets.
+\item \plemph{Low computational complexity} of set operations involved in computing reachable sets.
+\item \plemph{Existence} and \plemph{efficient encoding} of \plemph{positive invariants} for \plemph{stable linear transformations}.
+\end{enumerate}
+\end{itemize}
+\pause
+%
+For \posemph{affine hybrid systems}, like \eqnemph{
+%
+\begin{align*}
+& \text{if}~T_{\trj{l}{t}}\trj{x}{t}\leq 1,~~ \trj{l}{t+1}=f(\trj{l}{t})\\
+& \trj{x}{t+1}=
+A_{\trj{l}{t}}\trj{x}{t}+\trj{u}{t}.
+\end{align*}
+}
+%
+Set operations typically used in reachability computations:\\
+\plemph{Linear transformation}, \plemph{Minkowski sum}, \plemph{Intersection with half-spaces}.
+\end{frame}
+
+%=======================================================================================================================================
 
 \bibliographystyle{plain}
 \bibliography{ref}
