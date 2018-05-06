@@ -9,8 +9,8 @@
 
 \input{titlepage}
 
-\setbeamercolor{title}{bg=snow}
-\setbeamercolor{title}{fg=darkblue}
+%\setbeamercolor{title}{bg=snow}
+%\setbeamercolor{title}{fg=darkblue}
 \title{A Calculus of Complex Zonotopes for \\ Invariant and Stability Verification \\of Affine Hybrid Systems}
 \setbeamercolor{author}{fg=darkblue}
 \author[shortname]{ {\Large  Arvind\ Adimoolam}\vspace{-2em}}
@@ -230,7 +230,7 @@ To deal with \negemph{ undecidability} or \negemph{ high computational complexit
 %
 \begin{exampleblock}{Polytopes}
 \eqnemph{$\set{x:Tx\leq d, x\in\reals^n}$}\\
-$T\in\mat{m}{n}{\reals}$, ${d\in\reals^m}$.
+{\small $T\in\mat{m}{n}{\reals}$, ${d\in\reals^m}$.}
 \end{exampleblock}
 %
 \end{minipage}
@@ -255,9 +255,48 @@ $T\in\mat{m}{n}{\reals}$, ${d\in\reals^m}$.
 \hspace{0.5em}
 \begin{exampleblock}{Ellipsoid}
 \eqnemph{$\set{x: x^TPx\leq 1, x\in\reals^n}$}.\\
-$P\in\mat{n}{n}{\reals}$: Positive semi-definite.
+{\small $P\in\mat{n}{n}{\reals}$: Positive semi-definite.}
 \end{exampleblock}
 %
+\end{minipage}
+%
+\end{frame}
+
+%====================================================================================================================================
+
+\begin{frame}{Positive Invariant for Unbounded Time
+Over-approximation}
+Typically use \plemph{Positive Invariant} (PI) to approximate reachable
+set for \posemph{unbounded/all time/s}.
+%
+\begin{block}{}
+$\Psi: Positive Invariant\implies \forall x\in\Psi, \operatorname*{Next}(x)\in\Psi$.
+\end{block}
+%
+\hspace{1.5em}
+\begin{minipage}{0.45\textwidth}
+\eqnemph{
+({\small {Initial~Set}$\subseteq$ PI)$\implies$ \\(Unbounded(t) 
+reach set $\subseteq$ PI).}
+}
+\end{minipage}
+%
+\begin{minipage}{0.35\textwidth}
+\center{
+\begin{tikzpicture}[scale=2.5]
+\draw[fill=cyan!30] plot[smooth cycle] coordinates {(0,0) (0.5,1)
+(1,1.2) (1.5,0.9) (1.2,0) };
+\draw[fill=red!30] plot[smooth cycle] coordinates {(0.2,0.2) (0.5,0.8)
+(1,1) (1.5,0.8) (1.2,0.2) };
+\draw[->,thick] (0,0)--(0.2,0.2);
+\draw[->,thick] (0.5,1)--(0.5,0.8);
+\draw[->,thick] (1,1.2)--(1,1);
+\draw[->,thick] (1.5,0.9) -- (1.48,0.79);
+\draw[->,thick] (1.2,0)--(1.2,0.2);
+\draw[fill=white] (0.5,0) rectangle (1,0.5);
+\node[text width = 0.25cm] at (0.75, 0.25) {\small Init.\\ Set };
+\end{tikzpicture}
+}
 \end{minipage}
 %
 \end{frame}
@@ -290,6 +329,334 @@ Set operations typically used in reachability computations:\\
 
 %=======================================================================================================================================
 
+\begin{frame}{Features of Polytopes and Ellipsoids}
+%
+\begin{minipage}{0.48\textwidth}
+\underline{\plemph{Polytope}}:
+\begin{enumerate}
+\item \emph{Linear transformation}: \posemph{Efficient} for \posemph{invertible matrix};
+\negemph{Otherwise Exponential Complexity}.
+\item \emph{Minkowski sum}: More than \negemph{Exponential
+Complexity}.
+\item \emph{Positive Invariant}: \posemph{Exists} for stable linear
+transformation, but \negemph{compleixty of encoding} is \negemph{unbounded}.
+\end{enumerate}
+\end{minipage}
+%
+\begin{minipage}{0.48\textwidth}
+\underline{\plemph{Ellipsoid}}:
+%
+\begin{enumerate}
+\item \emph{Invertible Linear transformation} is \posemph{efficiently
+computable}.
+\item \emph{Minkowski sum}: \negemph{Not closed}.
+\item \emph{Positive Invariant}: \posemph{Exists}
+and \posemph{Efficiently encodable} for stable linear transformation.
+\end{enumerate}
+%
+\end{minipage}
+%
+\end{frame}
+
+%==================================================================================================================================
+
+\begin{frame}{Simple Zonotope}
+A \plemph{zonotope} is a \plemph{projection} of \plemph{higher dimensional hypercube}
+onto \plemph{lower dimensional} space.\\[0.5em]
+%
+Let  \emph{ $V\in\mat{n}{m}{\reals}$: Generator matrix},
+ \emph{$c\in\reals^n$: center}.
+ %
+\begin{block}{}
+\center{
+\eqnemph{
+$
+\rztope{\ptemp}{\cen}:=\set{\cen+\ptemp\zeta:~\zeta\in[-1,1]^m}.
+$
+}
+}
+%
+\end{block}
+%
+\vspace{0.5em}
+%
+\begin{minipage}{0.43\textwidth}
+{\scriptsize $V=\mymatrix{1 &   -1 &          0 &    0.5 \\
+   -1 &         0 &   -1 &    0.5}$}
+\includegraphics[scale=0.25]{figures/CZtopes/RealZonotope.jpg}
+\end{minipage}
+%
+\vline
+%
+\begin{minipage}{0.55\textwidth}
+\begin{enumerate}
+\item \posemph{Advantage} over \posemph{polytope} for linear transformation.
+%
+\eqnemph{\[
+A\rztope{\ptemp}{\cen}=\rztope{A\ptemp}{A\cen}.
+\]}
+%
+\vspace{-2em}
+\item \posemph{Advantage} over \posemph{ellipsoid} and \posemph{polytope} for Minkowski sum.
+%
+\eqnemph{\begin{align*}
+& \rztope{\ptemp}{\cen}\oplus\rztope{\ptemp^\pr}{\cen^\pr}\\
+& = \rztope{\mymatrix{\ptemp & \ptemp^\pr}}{\cen+\cen^\pr}.  
+\end{align*}}
+%
+\end{enumerate}
+%
+\end{minipage}
+%
+\end{frame}
+
+%==================================================================================================================================
+
+
+\begin{frame}{Drawback of Zonotopes for Computing Positive Invariants}
+\begin{itemize}
+\item \negemph{Directions for convergence} to an \negemph{equilibrium} can be
+encoded by \negemph{complex valued eigenvectors}.
+\item Usual \negemph{zonotopes} only have
+\negemph{real eigenvectors} as \negemph{generators}.
+\end{itemize}
+%
+\pause
+%
+\begin{block}{}
+{\small
+Let \emph{$A\in\mat{n}{n}{\reals}$} has \emph{$\mu\in[-1,1]^n$: real
+eigenvalues} and \emph{$\ptemp\in\mat{n}{n}{\reals}$: eigenvectors} as
+\emph{column vectors}, i.e., \emph{$A\ptemp = \ptemp\diagonal{\mu}$}.
+}
+\eqnemph{\[
+A\lt(\rztope{\ptemp}{0}\rt)\subseteq \rztope{\ptemp}{0}
+\]}
+\vspace{-1em}
+\end{block}
+%
+\negemph{*} We \negemph{can not rely} on above proposition when \negemph{eigenvectors are complex}.
+\end{frame}
+
+%==================================================================================================================================
+
+\begin{frame}{Complex Zonotope: A New Set Representation}
+
+{\small
+\begin{itemize}
+\item Extend \posemph{simple zonotope to complex numbers} in a way that can \posemph{capture
+contraction along complex vectors}.
+\item \plemph{Complex valued generators} with \plemph{Complex combining
+coefficients} whose \plemph{absolute value $<=1$}.
+\item Geometrically, \plemph{Minkowski sum} of \plemph{Ellipses}
+and \plemph{Line Segments}.
+\end{itemize}
+%
+$\ptemp\in\mat{n}{m}{\compnums}$, $\cen\in\reals^n$.
+}
+%
+\begin{block}{}
+\center{
+\eqnemph{$
+\cztope{\ptemp}{\cen} := \set{\ptemp\zeta+\cen:~\zeta\in\compnums^m,~\infnorm{\zeta}\leq 1}.
+$}
+}
+\end{block}
+%
+\begin{minipage}{0.35\textwidth}
+%
+\begin{tikzpicture}[scale=1]
+\node[text width = 1cm] at (0,2) {{\small $\mymatrix{1+2\iota\\1-2\iota}$}};
+\draw[thick,fill=cyan!30, rotate around = {135:(0,0)}] (0,0) ellipse
+(1cm and 0.5cm);
+\draw[->] (0,1.5)--(0,0.8);
+\node at (1.5,1){$\bigoplus$};
+\end{tikzpicture}
+%
+\end{minipage}
+%
+\begin{minipage}{0.3\textwidth}
+%
+\begin{tikzpicture}[scale=0.8]
+\node[text width = 1cm] at (0,3.5) {{\small $\mymatrix{1\\1}$}};
+\draw[color=blue,very thick] (-0.5,0.5)--(1,2);
+\draw[->] (-0.2,3)--(-0.2,1.5);
+\node at (1.5,2.5){$\bigoplus$};
+\end{tikzpicture}
+%
+\end{minipage}
+%
+\begin{minipage}{0.3\textwidth}
+%
+\begin{tikzpicture}[scale=1]
+\node[text width = 1cm] at (0,2) {{\small$\mymatrix{2+\iota\\2-\iota}$}};
+\draw[thick,fill=cyan!30, rotate around = {45:(0,0)}] (0,0) ellipse
+(1cm and 0.5cm);
+\draw[->] (0,1.5)--(0,0.8);
+\end{tikzpicture}
+%
+\end{minipage}
+%
+\end{frame}
+
+%==================================================================================================================================
+
+\begin{frame}{Non-polytopic Projection of Complex Zonotope}
+%
+\begin{figure}
+\center
+\includegraphics[scale=0.3]{figures/CZtopes/xycz.png}
+\includegraphics[scale=0.3]{figures/CZtopes/yzcz.png}\\
+\includegraphics[scale=0.3]{figures/CZtopes/xzcz.png}
+%\caption{Real projection of complex zonotope on axis oriented hyperplanes}~\label{fig:3dcztope}
+\end{figure}
+%
+\end{frame}
+
+%==================================================================================================================================
+
+\begin{frame}{Contraction Along Complex Eigenvectors}
+
+\begin{block}{}
+{\small
+Let \plemph{$A\ptemp = \ptemp\diagonal{\mu}$}:
+$\ptemp\in\mat{n}{n}{\compnums}$ and $\mu\in\compnums^n$.
+}
+
+\begin{enumerate}
+\eqnemph{
+\item $A\lt(\cztope{\ptemp}{0}\rt)
+= \cztope{\ptemp\diagonal{{\mu}}}{0}.$
+\item If
+$\infnorm{\mu}\leq 1$, then
+$A\lt(\rztope{\ptemp}{0}\rt)\subseteq \rztope{\ptemp}{0}$.
+}
+\end{enumerate}
+%
+\end{block}
+%
+\begin{figure}
+\center
+\includegraphics[scale=0.25]{figures/CZtopes/eigcontraction.png}\\
+\includegraphics[scale=0.25]{figures/CZtopes/contraction-zonotope.png}
+%\caption{Contraction of complex zonotope along
+%eigenvectors}~\label{fig:cz-scaled-down}
+\end{figure}
+%
+\end{frame}
+
+\begin{frame}{Problem with Refining a Complex Zonotope}
+\negemph{*} \negemph{Better approximation} by complex
+zonotope \negemph{can not} be found by \negemph{adding generator}.
+%
+\begin{enumerate}
+\item \negemph{Increases size}.
+\item \negemph{Distorts positive invariance}.
+\end{enumerate}
+%
+\begin{figure}
+\center
+\includegraphics[scale=0.3]{figures/CZtopes/refinement.png}
+%% \caption{Violation of positive invariance and size increase after
+%% adding a generator to the basic representation.}~\label{fig:refinement}
+\end{figure}
+%
+\end{frame}
+%
+\begin{frame}{Template Complex Zonotope}
+\plemph{Variable bounds} on absolute values of \plemph{combining
+coefficients}.\\[0.5em]
+
+{\small
+${\ptemp\in\mat{n}{m}{\compnums}}$: \plemph{template},
+\fbox{${\sfact\in\reals^m_{\geq 0}}$: \plemph{scaling factors}},
+${\cen\in\reals^n}$: \plemph{center}.
+}
+%
+\begin{block}{}
+%
+\center{\eqnemph{
+$
+\tcztope{\ptemp}{\cen}{\sfact}
+= \set{\ptemp\zeta+\cen:~\absolute{\zeta_i}\leq \sfact_i~\forall
+i\in\set{1,...,m}}.
+$
+}}
+\end{block}
+%
+\begin{itemize}
+\item \posemph{Add more generators} and \posemph{adjust scaling} factors to find \posemph{better approximations}.
+\end{itemize}
+%
+[TODO: ADD FIGURE HERE]\\
+Similar to \posemph{template polyhedron}~{TODO: CITE REFERENCES}.
+\end{frame}
+%
+\begin{frame}{Basic Operations: Template Complex Zonotope}
+%
+\begin{enumerate}
+\eqnemph{
+\item
+$A\tcztope{\ptemp}{\cen}{\sfact}=\tcztope{A\ptemp}{A\cen}{\sfact}$.
+\item $\minsum{\tcztope{\ptemp}{\cen}{\sfact}}{\tcztope{\ptemp^\pr}{\cen^\pr}{\sfact^\pr}}
+= \tcztope{\begin{bmatrix}\ptemp
+& \ptemp^\pr\end{bmatrix}}{\cen+\cen^\pr}{\begin{bmatrix}\sfact\\\sfact^\pr\end{bmatrix}}$.
+}
+\item {\small Let $\supp{v}{\Psi}=\sup_{x\in\Psi}v^Tx$}. Then \plemph{support
+function}\\
+\eqnemph{
+\[
+\supp{v}{\real\lt(\tcztope{\ptemp}{\cen}{\sfact}\rt)}=v^Tc+\absolute{v^T\ptemp}\sfact.
+\]
+}
+\end{enumerate}
+%
+\begin{itemize}
+\item Above are \posemph{affine functions} of \posemph{center}
+and \posemph{scaling factors}.
+\end{itemize}
+%
+\end{frame}
+%
+\begin{frame}{Checking Inclusion}
+Generally, checking inclusion between complex zonotopes requires \negemph{non-convex
+optimization}.
+But we propose a \posemph{convex relaxation} that  \posemph{works well
+in practice}.\\[0.5em]
+%
+{\small 
+%
+\begin{definition}[\eqnemph{$\tcztope{\ptemp^\pr}{\cen^\pr}{\sfact^\pr}\order\tcztope{\ptemp}{\cen}{\sfact}$}]
+%
+\vspace{-1em}
+\begin{align*}
+& \exists \tmat\in\mat{m}{r}{\compnums},\tvect\in\compnums^m~~\text{such
+that}\\
+& \ptemp\tmat=\ptemp^\pr\diagonal{\sfact^\pr},~~\ptemp\tvect=\cen^\pr-\cen~\\%\numberthis\label{eqn:inclusion-tcz1}\\
+& \max_{i=1}^m\lt(\absolute{\tvect_i}+\sum_{j=1}^r\absolute{\tmat_{ij}}-\sfact_i\rt)\leq
+0.
+\end{align*}
+%
+\end{definition}
+}
+\vspace{0.3em}
+\begin{minipage}{0.37\textwidth}
+\begin{exampleblock}{}
+\center{\eqnemph{Result: 
+$\order\implies\subseteq$.
+}}
+\end{exampleblock}
+\end{minipage}
+%
+\begin{minipage}{0.6\textwidth}
+\begin{itemize}
+\item $\order$: \plemph{Second order conic constraints} (convex
+constraints) on \plemph{center} and \plemph{scaling factors}.
+\end{itemize}
+\end{minipage}
+%
+\end{frame}
+%
 \bibliographystyle{plain}
 \bibliography{ref}
 
