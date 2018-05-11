@@ -1120,7 +1120,58 @@ Verifying
 %==================================================================================================================================
 
 \begin{frame}{Nearly Periodic Linear Impulsive System}
-                     
+%
+\begin{minipage}{0.55\textwidth}
+\begin{enumerate}
+\item \plemph{Continuous linear evolution} with intermediate \plemph{ linear impulses}.
+\item \plemph{Time} between \plemph{succesive impulses} is \plemph{bounded} in a \plemph{sampling interval}.
+\end{enumerate}
+\end{minipage}
+%
+\begin{minipage}{0.4\textwidth}
+%\hspace{2em}
+\vspace{0em}
+%
+\begin{tikzpicture}
+\draw[fill=cyan!30] (0,0) circle (1cm);
+\node at (0,0) {$\dot{\bm{x}} = A_c\bm{x}$};
+\draw[thick,->,rotate around={-90:(0,0)}] (0.5,0.867) arc (0:206:0.7);
+\node at (2.5,0) {$x^+=A_rx$};
+%
+\end{tikzpicture}
+%
+\end{minipage}
+%
+\pause
+%
+\begin{minipage}{0.48\textwidth}
+%
+\begin{block}{Global exponential stability (GES)}
+Exists \eqnemph{$\lambda\in[0,1)$ and $c>0$} such that \eqnemph{$\forall ~\tbf{x}_0,
+\in\mb{R}^n,~k\in\mb{Z}_+$},
+\center{\eqnemph{$||\tbf{x}_k||\leq c\lambda^k||\tbf{x}_0||$}}.
+%
+\end{block}
+%
+\end{minipage}
+%
+\begin{minipage}{0.48\textwidth}
+%
+\begin{center}
+\begin{tikzpicture}[scale=2.3]
+\draw[very thick,blue,->,dashed] (0,1)..controls (-1,0.7) and (-1,-0.6)..(0,-0.8);
+\draw[very thick,blue,->,dashed] (0,-0.8)..controls (0.8,-0.5) and (0.7,0.3)..(-0.3,0.2);
+\draw[very thick,blue,->,dashed] (-0.3,0.2)..controls (-0.6,-0.6) and (0.2,-0.5)..(0.1,0.05);
+\node at (-0.1,0) {o};
+\node at (0,1.1) {$k=0$};
+\node at (0.5,-0.75) {$k=1$};
+\node at (-0.3,0.4) {$k=2$};
+\node at (0.4,0.05) {$k=3$};
+\end{tikzpicture}
+\end{center}
+%
+\end{minipage}
+%
 \end{frame}
 
 %==================================================================================================================================
