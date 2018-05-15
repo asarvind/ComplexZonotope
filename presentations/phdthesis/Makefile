@@ -1,4 +1,4 @@
-symnames = stylefiles figures fig lib.bib reflis
+symnames = stylefiles figures fig lib.bib thesis
 
 all:
 	make clean
@@ -14,7 +14,7 @@ sym:
 	ln -s ../../figures/ figures;
 	ln -s ../malthyJan2018/fig fig;
 	ln -s ../../PhdThesis/myLib.bib lib.bib
-	ln -s ../../PhdThesis/ PhdThesis
+	ln -s ../../PhdThesis/ thesis
 
 pdf: 
 	pdflatex slides.tex

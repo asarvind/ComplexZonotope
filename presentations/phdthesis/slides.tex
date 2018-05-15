@@ -1768,6 +1768,36 @@ Find \textcol{minimum (possible) reference distances} between vehicles such that
 Example from
 %Bj\"{o}rn et. al.
 ~\cite{wittenmark2002computer}
+
+\begin{itemize}
+\item Lower bound on the transmission period: $0.08$
+\end{itemize}
+%
+\begin{alertblock}{}
+Find \plemph{upper bound $t_{max}$ on transmission period}  such that
+system is \plemph{GES}
+\end{alertblock}
+%
+\begin{table}
+%\resizebox{\textwidth}{!}{
+\begin{tabular}{|l|c|r|}
+  \hline
+  Reference & $t_{min}$ & $t_{max}$ \\
+\hline
+  %& &\\
+Value recommended in~\cite{wittenmark2002computer} & 0.08 & 0.22\\
+  \hline
+  %& &\\
+  NCS toolbox~\cite{BauLoo_NECSYS12a} & 0.08 & 0.4 \\
+\hline
+  %& &\\
+  Template complex zonotope & 0.08 & 0.58 \\
+  \hline
+\end{tabular}
+\caption{Experimental results: Example 1}
+%}
+\end{table}
+%
 \end{frame}
 
 %==================================================================================================================================
@@ -1847,7 +1877,7 @@ Arvind~S Adimoolam and Thao Dang.
 
 
 \bibliographystyle{apalike}
-\bibliography{lib,PhDThesis/reflis}
+\bibliography{lib,thesis/reflis}
 
 %% \begin{frame}{Special Case: Interval Zonotope and Sub-parallelotope}
 %% %
