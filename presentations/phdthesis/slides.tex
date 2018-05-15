@@ -35,21 +35,21 @@
 \begin{minipage}{1\textwidth}
 \vspace{-4em}
 \begin{minipage}{0.3\textwidth}
-{\footnotesize {\it Reviewers}}\\
-{\small Sylvie Putot\\
-Mahesh Viswanathan}
+\eqnemph{{\small {\it Reviewers}}}\\
+\plemph{{Sylvie Putot\\
+Mahesh Viswanathan}}
 \end{minipage}
 %
 \hspace{2em}
 \begin{minipage}{0.3\textwidth}
-{\footnotesize {\it Supervised by}}\\
-{\small Thao Dang}
+\eqnemph{{\small {\it Supervised by}}}\\
+\plemph{{Thao Dang}}
 \end{minipage}
 %
 \begin{minipage}{0.25\textwidth}
-{\footnotesize {\it Examiners}}\\
-{\small Laurent Fribourg\\
-Luc Jaulin}
+\eqnemph{{\small {\it Examiners}}}\\
+\plemph{{Laurent Fribourg\\
+Luc Jaulin}}
 \end{minipage}
 %
 \end{minipage}
@@ -63,8 +63,8 @@ Luc Jaulin}
 \end{minipage}
 %
 \begin{minipage}{0.5\textwidth}
-{\footnotesize \hspace{0em}VERIMAG / University Grenoble Alpes\\
-$~~~~~~~~~~~~~~~~$Grenoble, France}
+{\color{darkgreen}{\center {\large VERIMAG}\\\footnotesize \hspace{0em} University Grenoble Alpes, France\\
+}}
 \end{minipage}
 %
 \begin{minipage}{0.2\textwidth}
@@ -76,6 +76,8 @@ $~~~~~~~~~~~~~~~~$Grenoble, France}
 \end{frame}
 
 %=============================================================================================================================
+
+%\section{Motivation for Complex Zonotope Representation}
 
 \begin{frame}{Hybrid Dynamics of Real World Systems}
 
@@ -122,23 +124,23 @@ location/.style = {circle, draw=red!60, thick, fill = cyan!5},
 
 
 % Draw locations
-\node[text width = 2 cm, scale =0.8, location] at (0,0) {{ Diff. eqn.\\ \hspace{1.5em} @ $l_1$}};
-\node[text width = 2 cm, scale =0.8, location] at (4,0) {{ Diff. eqn.\\  \hspace{1.5em} @ $l_2$}};
+\node[text width = 2.5 cm, scale =0.8, location] at (0,0) {{\small  $\trj{x}{t+1}$\\=$A_1\trj{x}{t}+B_1\trj{u}{t}$\\ \hspace{1.5em} @ $l_1$}};
+\node[text width = 2.5 cm, scale =0.8, location] at (4,0) {{\small $\trj{x}{t+1}$\\=$A_2\trj{x}{t}+B_2\trj{u}{t}$\\  \hspace{1.5em} @ $l_2$}};
 
 % Draw edges
-\draw[thick, blue, ->] (1,0.5) --  (3,0.5);
-\draw[thick, blue, <-] (1,-0.5) --  (3,-0.5);
+\draw[thick, blue, ->,yshift=0.6cm] (1,0.5) --  (3,0.5);
+\draw[thick, blue, <-,yshift=-0.6cm] (1,-0.5) --  (3,-0.5);
 
 % Label edges
-\node[text width = 1cm] at (2,0.7) {\scriptsize state};
-\node[text width = 1cm] at (2,0.3) {\scriptsize change};
-\node[text width = 1cm] at (2,-0.3) {\scriptsize state};
-\node[text width = 1cm] at (2,-0.7) {\scriptsize change};
+\node[text width = 1cm, yshift=0.5cm, xshift=0.1cm] at (2,0.7) {\scriptsize state};
+\node[text width = 1cm, yshift=0.5cm, xshift=0.1cm] at (2,0.3) {\scriptsize jump};
+\node[text width = 1cm, yshift=-0.5cm, xshift=0.1cm] at (2,-0.3) {\scriptsize state};
+\node[text width = 1cm, yshift=-0.5cm, xshift=0.1cm] at (2,-0.7) {\scriptsize jump};
 
 \end{tikzpicture}\\[0.5em]
 %
-$x\in\reals^n$: Continuous state.\\
-$l\in\set{l_1,...,l_k}$: Discrete state.
+$x\in\reals^n$: Continuous state\\
+$l\in\set{l_1,...,l_k}$: Discrete state
 \end{minipage}
 
 \begin{minipage}{0.45\textwidth}
@@ -152,7 +154,7 @@ $l\in\set{l_1,...,l_k}$: Discrete state.
 \begin{minipage}{0.45\textwidth}
 \begin{figure}
 \includegraphics[height = 3cm, width = 2.5cm]{figures/downloaded/ComputerControl.jpg}
-\caption{\small Computer Control System}
+\caption{\small Computer Controlled System}
 \end{figure}
 \end{minipage}
 
@@ -164,8 +166,7 @@ $l\in\set{l_1,...,l_k}$: Discrete state.
 \begin{frame}{Verification of Hybrid Systems is Challenging}
 %
 \begin{itemize}
-\item For most hybrid system, computing set of reachable states is \negemph{ undecidable} or \negemph{ computationally expensive}.
-{\bf TODO give references}
+\item Computing \negemph{exact set} of \negemph{reachable states} of hybrid systems is \negemph{impossible} or \negemph{computationally expensive}
 \item Consider a simple \negemph{ discrete time affine switched system}:
 \[
 x(t+1) = A_ix(t)+u_i,~~i\in\set{1,2}.
@@ -202,15 +203,16 @@ x(t+1) = A_ix(t)+u_i,~~i\in\set{1,2}.
 
 %==========================================================================================================================
 
-\begin{frame}{Over-approximation Using Set Representation}
-To deal with \negemph{ undecidability} or \negemph{ high computational complexity} of representing reachable sets:
+\begin{frame}{Set Representation for Verification}
+%To deal with \negemph{ undecidability} or \negemph{ high computational complexity} of representing reachable sets:
 %
+Need for set representations:
 \begin{itemize}
-\item \posemph{Over-approximate} them by a \posemph{ set} which can be \posemph{ encoded} and \posemph{ manipulated efficiently}.
-\item use \plemph{ Set Representation}:  A \posemph{ digital encoding} of a possibly infinite \posemph{ set of states}.
+\item To handle \plemph{set of possible solutions} arising from \plemph{non-determinism} in dynamics
 \end{itemize}
 %
-
+\plemph{ Set Representation}:  A \posemph{ digital encoding} of a possibly infinite \posemph{ set of states}
+%
 \begin{minipage}{0.35\textwidth}
 % Polytopic approximation of reachable set
 \center{
@@ -231,7 +233,7 @@ To deal with \negemph{ undecidability} or \negemph{ high computational complexit
 %
 \begin{exampleblock}{Polytopes}
 \eqnemph{$\set{x:Tx\leq d, x\in\reals^n}$}\\
-{\small $T\in\mat{m}{n}{\reals}$, ${d\in\reals^m}$.}
+{\small \eqnemph{$T$}: real matrix, \eqnemph{${d}$}: vector of bounds.}
 \end{exampleblock}
 %
 \end{minipage}
@@ -249,14 +251,15 @@ To deal with \negemph{ undecidability} or \negemph{ high computational complexit
 \draw[rotate around = {150:(5.3,1.7)}, fill=cyan] (5.3,1.7) ellipse (0.5cm and 1cm);
 % draw ellipse around the above image
 \draw[color=onyx, very thick, rotate around={70:(5.7,1.1)}] (5.7,1.1) ellipse (1.65cm and 1.225cm);
+%
 \end{tikzpicture}
 %
 }
 %
 \hspace{0.5em}
 \begin{exampleblock}{Ellipsoid}
-\eqnemph{$\set{x: x^TPx\leq 1, x\in\reals^n}$}.\\
-{\small $P\in\mat{n}{n}{\reals}$: Positive semi-definite.}
+\eqnemph{$\set{x: (x-c)^TP(x-c)\leq 1}$}.\\
+{\small \eqnemph{$P$}: Positive semi-definite matrix, \eqnemph{$c$}: real vector (center)}
 \end{exampleblock}
 %
 \end{minipage}
@@ -265,103 +268,129 @@ To deal with \negemph{ undecidability} or \negemph{ high computational complexit
 
 %====================================================================================================================================
 
-\begin{frame}{Positive Invariant for Unbounded Time
-Over-approximation}
-Typically use \plemph{Positive Invariant} (PI) to approximate reachable
-set for \posemph{unbounded/all time/s}.
-%
-\begin{block}{}
-$\Psi: Positive Invariant\implies \forall x\in\Psi, \operatorname*{Next}(x)\in\Psi$.
-\end{block}
-%
-\hspace{1.5em}
-\begin{minipage}{0.45\textwidth}
-\eqnemph{
-({\small {Initial~Set}$\subseteq$ PI)$\implies$ \\(Unbounded(t) 
-reach set $\subseteq$ PI).}
-}
-\end{minipage}
-%
-\begin{minipage}{0.35\textwidth}
-\center{
-\begin{tikzpicture}[scale=2.5]
-\draw[fill=cyan] plot[smooth cycle] coordinates {(0,0) (0.5,1)
-(1,1.2) (1.5,0.9) (1.2,0) };
-\draw[fill=red!30] plot[smooth cycle] coordinates {(0.2,0.2) (0.5,0.8)
-(1,1) (1.5,0.8) (1.2,0.2) };
-\draw[->,thick] (0,0)--(0.2,0.2);
-\draw[->,thick] (0.5,1)--(0.5,0.8);
-\draw[->,thick] (1,1.2)--(1,1);
-\draw[->,thick] (1.5,0.9) -- (1.48,0.79);
-\draw[->,thick] (1.2,0)--(1.2,0.2);
-\draw[fill=white] (0.5,0) rectangle (1,0.5);
-\node[text width = 0.25cm] at (0.75, 0.25) {\small Init.\\ Set };
-\end{tikzpicture}
-}
-\end{minipage}
-%
-\end{frame}
+%% \begin{frame}{Positive Invariant for Unbounded Time
+%% Over-approximation}
+%% Typically use \plemph{Positive Invariant} (PI) to approximate reachable
+%% set for \posemph{unbounded/all time/s}.
+%% %
+%% \begin{block}{}
+%% \center{Positive Invariant $\Psi$: \eqnemph{$\forall x\in\Psi, \operatorname*{Next}(x)\in\Psi$}.}
+%% \end{block}
+%% %
+%% \begin{itemize}
+%% \item \center{\eqnemph{
+%% ({ {Initial~Set}$\subseteq$ PI)$\implies$ (Unbounded(t) 
+%% reach set $\subseteq$ PI).}
+%% }}
+%% \end{itemize}
+%% %
+%% %\begin{minipage}{0.35\textwidth}
+%% \center{
+%% \begin{tikzpicture}[scale=2.5]
+%% \draw[fill=cyan] plot[smooth cycle] coordinates {(0,0) (0.5,1)
+%% (1,1.2) (1.5,0.9) (1.2,0) };
+%% \draw[fill=red!30] plot[smooth cycle] coordinates {(0.2,0.2) (0.5,0.8)
+%% (1,1) (1.5,0.8) (1.2,0.2) };
+%% \draw[->,thick] (0,0)--(0.2,0.2);
+%% \draw[->,thick] (0.5,1)--(0.5,0.8);
+%% \draw[->,thick] (1,1.2)--(1,1);
+%% \draw[->,thick] (1.5,0.9) -- (1.48,0.79);
+%% \draw[->,thick] (1.2,0)--(1.2,0.2);
+%% \draw[fill=white] (0.5,0) rectangle (1,0.5);
+%% \node[text width = 0.25cm] at (0.75, 0.25) {\small Init.\\ Set };
+%% %
+%% \node at (1.8,0.6) {$\bm{\implies}$};
+%% %
+%% \draw[fill=cyan,xshift=2cm] plot[smooth cycle] coordinates {(0,0) (0.5,1)
+%% (1,1.2) (1.5,0.9) (1.2,0) };
+%% \draw[fill=yellow, rotate around={180:(2.75,0.4)}, xshift=1.85cm,yshift=-0.15cm] plot[smooth cycle] coordinates {(0.2,0.2) (0.5,0.8)
+%% (1,1) (1.5,0.8) (1.2,0.2) };
+%% \node[text width = 0.25cm,xshift=4.5cm,yshift=0.2cm] at (0.75, 0.25) { Reachable\\ Set };
+%% \end{tikzpicture}
+%% }
+%% %\end{minipage}
+%% %
+%% \end{frame}
 
 %=====================================================================================================================================
 
-\begin{frame}{Desirable Features of a Set Representation}
-\begin{itemize}
-\item \posemph{Accurate} and \posemph{fast computation} of  reachable states $\Leftarrow$
+\begin{frame}{Requirements of a Set Representation}
+%
+Goal: \eqnemph{design efficient set representation} for
+%
 \begin{enumerate}
-\item \plemph{Closure} under set operations involved in computing reachable sets.
-\item \plemph{Low computational complexity} of set operations involved in computing reachable sets.
-\item \plemph{Existence} and \plemph{efficient encoding} of \plemph{positive invariants} for \plemph{stable linear transformations}.
+\item \plemph{Reachability computation} for safety verification
+\item \plemph{Positive invariant} computation
+\item \plemph{Stability verification}
 \end{enumerate}
+%
+\vspace{2em}
+Typically required operations:\\
+\plemph{Linear transformation} (e.g. continuous dynamics), \plemph{Minkowski sum} (e.g. input disturbance), \plemph{Intersection with half-spaces} (e.g. switching dynamics), e.t.c
+%
+\vspace{2em}
+\begin{itemize}
+\item \posemph{Accurate} and \posemph{fast computation}: 
+%\begin{enumerate}
+ \plemph{closure} and \plemph{low computational complexity} under required set operations.
+%% \begin{align*}
+%% & \text{if}~T_{\trj{l}{t}}\trj{x}{t}\leq 1,~~ \trj{l}{t+1}=f(\trj{l}{t})\\
+%% & \trj{x}{t+1}=
+%% A_{\trj{l}{t}}\trj{x}{t}+\trj{u}{t}.
+%% \end{align*}
+%% }
+%% %
+%\end{enumerate}
+\vspace{1em}
+
+%Common set representations: \plemph{Polytopes, Ellipsoids, Zonotopes}
 \end{itemize}
-\pause
-%
-For \posemph{affine hybrid systems}, like \eqnemph{
-%
-\begin{align*}
-& \text{if}~T_{\trj{l}{t}}\trj{x}{t}\leq 1,~~ \trj{l}{t+1}=f(\trj{l}{t})\\
-& \trj{x}{t+1}=
-A_{\trj{l}{t}}\trj{x}{t}+\trj{u}{t}.
-\end{align*}
-}
-%
-Set operations typically used in reachability computations:\\
-\plemph{Linear transformation}, \plemph{Minkowski sum}, \plemph{Intersection with half-spaces}.
 \end{frame}
 
 %=======================================================================================================================================
 
-\begin{frame}{Features of Polytopes and Ellipsoids}
-%
-\begin{minipage}{0.48\textwidth}
-\underline{\plemph{Polytope}}:
-\begin{enumerate}
-\item \emph{Linear transformation}: \posemph{Efficient} for \posemph{invertible matrix};
-\negemph{Otherwise Exponential Complexity}.
-\item \emph{Minkowski sum}: More than \negemph{Exponential
-Complexity}.
-\item \emph{Positive Invariant}: \posemph{Exists} for stable linear
-transformation, but \negemph{compleixty of encoding} is \negemph{unbounded}.
-\end{enumerate}
-\end{minipage}
-%
-\begin{minipage}{0.48\textwidth}
-\underline{\plemph{Ellipsoid}}:
-%
-\begin{enumerate}
-\item \emph{Invertible Linear transformation} is \posemph{efficiently
-computable}.
-\item \emph{Minkowski sum}: \negemph{Not closed}.
-\item \emph{Positive Invariant}: \posemph{Exists}
-and \posemph{Efficiently encodable} for stable linear transformation.
-\end{enumerate}
-%
-\end{minipage}
-%
-\end{frame}
+%% \begin{frame}{Review of Some Set Representations}
+%% %
+%% \begin{itemize}
+%% \item Polytopes: \eqnemph{$Tx\leq d$} where $T$: real matrix, $d$: vector of bounds
+
+%% \end{itemize}
+%% %
+%% \end{frame}
+
+%% %% \begin{frame}{Features of Polytopes and Ellipsoids}
+%% %% %
+%% %% \begin{minipage}{0.48\textwidth}
+%% %% \underline{\plemph{Polytope}}:
+%% %% \begin{enumerate}
+%% %% \item \emph{Linear transformation}: \posemph{Efficient} for \posemph{invertible matrix};
+%% %% \negemph{Otherwise Exponential Complexity}.
+%% %% \item \emph{Minkowski sum}: More than \negemph{Exponential
+%% %% Complexity}.
+%% %% \item \emph{Positive Invariant}: \posemph{Exists} for stable linear
+%% %% transformation, but \negemph{compleixty of encoding} is \negemph{unbounded}.
+%% %% \end{enumerate}
+%% %% \end{minipage}
+%% %% %
+%% %% \begin{minipage}{0.48\textwidth}
+%% %% \vspace{-3em}
+%% %% \underline{\plemph{Ellipsoid}}:
+%% %% %
+%% %% \begin{enumerate}
+%% %% \item \emph{Invertible Linear transformation} is \posemph{efficiently
+%% %% computable}.
+%% %% \item \emph{Minkowski sum}: \negemph{Not closed}.
+%% %% \item \emph{Positive Invariant}: \posemph{Exists}
+%% %% and \posemph{Efficiently encodable} for stable linear transformation.
+%% %% \end{enumerate}
+%% %% %
+%% %% \end{minipage}
+%% %% %
+%% %% \end{frame}
 
 %==================================================================================================================================
 
-\begin{frame}{Simple Zonotope}
+\begin{frame}{Usual Zonotope}
 A \plemph{zonotope} is a \plemph{projection} of \plemph{higher dimensional hypercube}
 onto \plemph{lower dimensional} space.\\[0.5em]
 %
@@ -387,6 +416,7 @@ $
 \includegraphics[scale=0.25]{figures/CZtopes/RealZonotope.jpg}
 \end{minipage}
 %
+\pause
 \vline
 %
 \begin{minipage}{0.55\textwidth}
@@ -415,25 +445,54 @@ A\rztope{\ptemp}{\cen}=\rztope{A\ptemp}{A\cen}.
 
 
 \begin{frame}{Drawback of Zonotopes for Computing Positive Invariants}
+%
+\begin{minipage}{0.48\textwidth}
+\plemph{Positive Invariant}: \plemph{Next} reachable set \plemph{contained inside} the original set.
+%
+{\small
 \begin{itemize}
 \item \negemph{Directions for convergence} to an \negemph{equilibrium} can be
 encoded by \negemph{complex valued eigenvectors}.
 \item Usual \negemph{zonotopes} only have
 \negemph{real eigenvectors} as \negemph{generators}.
 \end{itemize}
+}
+%
+\end{minipage}
+%
+\begin{minipage}{0.48\textwidth}
+
+\center{
+\begin{tikzpicture}[scale=1.6]
+\draw[fill=cyan] plot[smooth cycle] coordinates {(0,0) (0.5,1)
+(1,1.2) (1.5,0.9) (1.2,0) };
+\draw[fill=red!30] plot[smooth cycle] coordinates {(0.2,0.2) (0.5,0.8)
+(1,1) (1.5,0.8) (1.2,0.2) };
+\draw[->,thick] (0,0)--(0.2,0.2);
+\draw[->,thick] (0.5,1)--(0.5,0.8);
+\draw[->,thick] (1,1.2)--(1,1);
+\draw[->,thick] (1.5,0.9) -- (1.48,0.79);
+\draw[->,thick] (1.2,0)--(1.2,0.2);
+\end{tikzpicture}
+}
+%
+\begin{figure}
+\caption{$a+\iota b:~a\neq 0~~b\neq 0$.}
+\vspace{-1em}
+\includegraphics[scale=0.15]{figures/CZtopes/InwardSpiral.png}
+\end{figure}
+\end{minipage}
 %
 \pause
 %
 \begin{block}{}
 {\small
-Let \emph{$A\in\mat{n}{n}{\reals}$} has \emph{$\mu\in[-1,1]^n$: real
-eigenvalues} and \emph{$\ptemp\in\mat{n}{n}{\reals}$: eigenvectors} as
-\emph{column vectors}, i.e., \emph{$A\ptemp = \ptemp\diagonal{\mu}$}.
+Let \eqnemph{$A$}: \plemph{stable real matrix}, \eqnemph{$\mu$}: \plemph{real
+eigenvalues} and \eqnemph{$\ptemp$}: \plemph{eigenvectors}, i.e., \eqnemph{$A\ptemp = \ptemp\diagonal{\mu}$}.
 }
-\eqnemph{\[
-A\lt(\rztope{\ptemp}{0}\rt)\subseteq \rztope{\ptemp}{0}
-\]}
-\vspace{-1em}
+Then {\eqnemph{
+$A\lt(\rztope{\ptemp}{0}\rt)\subseteq \rztope{\ptemp}{0}$
+}}
 \end{block}
 %
 \negemph{*} We \negemph{can not rely} on above proposition when \negemph{eigenvectors are complex}.
@@ -453,7 +512,7 @@ coefficients} whose \plemph{absolute value $<=1$}.
 and \plemph{Line Segments}.
 \end{itemize}
 %
-$\ptemp\in\mat{n}{m}{\compnums}$, $\cen\in\reals^n$.
+$\ptemp$: \plemph{complex} matrix, $\cen$: real vector (center).
 }
 %
 \begin{block}{}
@@ -516,12 +575,12 @@ $}
 
 %==================================================================================================================================
 
-\begin{frame}{Contraction Along Complex Eigenvectors}
+\begin{frame}{Complex Zonotopes: Ability to Capture Contraction along Complex Eigenvectors}
 
 \begin{block}{}
 {\small
-Let \plemph{$A\ptemp = \ptemp\diagonal{\mu}$}:
-$\ptemp\in\mat{n}{n}{\compnums}$ and $\mu\in\compnums^n$.
+Let \eqnemph{$A\ptemp = \ptemp\diagonal{\mu}$} where
+$\ptemp$: \plemph{complex matrix} and $\mu$: \plemph{complex eigenvalues}.
 }
 
 \begin{enumerate}
@@ -546,7 +605,55 @@ $A\lt(\rztope{\ptemp}{0}\rt)\subseteq \rztope{\ptemp}{0}$.
 %
 \end{frame}
 
-\begin{frame}{Problem with Refining a Complex Zonotope}
+%==================================================================================================================================
+
+\begin{frame}{Comparison with Existing Set Representations}
+%
+\begin{table}
+\resizebox{\textwidth}{!}{
+\begin{tabular}{|l|c|c|c|c|}
+\hline
+\multirow{2}{*}{Set} & \multirow{2}{*}{Linear} & \multirow{2}{*}{Minkowski} & \multirow{2}{*}{Intersection } & {Positive Invariant }\\
+\multirow{2}{*}{representation} & \multirow{2}{*}{transformation} & \multirow{2}{*}{sum} & \multirow{2}{*}{with half-space} & (non-empty interior)\\
+& & & & stable invertible\\
+& & & & linear transformation\\
+\hline
+\multirow{2}{*}{Convex polytope} & {\negemph{Efficient} } & \negemph{More than}
+& \multirow{3}{*}{\posemph{Efficient}}  &  \negemph{Maximum complexity}\\
+\multirow{2}{*}{$H$-representation} & \negemph{only for} & \negemph{exponential}  &  & \negemph{of encoding}  \\
+& \negemph{invertible matrix} & \negemph{complexity} & & \negemph{not bounded} \\
+\hline
+\multirow{2}{*}{Zonotope} & \multirow{2}{*}{\posemph{Efficient}}
+& \multirow{2}{*}{\posemph{Efficient}} & \negemph{Not} & \negemph{May not}\\
+& & & \negemph{closed} & \negemph{exist}\\
+\hline
+\multirow{2}{*}{Ellipsoid} & \multirow{2}{*}{\posemph{Efficient}} & \negemph{Not} & \negemph{Not} &
+\posemph{Efficient}\\
+& & \negemph{closed} & \negemph{closed} & \posemph{encoding}\\
+\hline
+\multirow{2}{*}{Polynomial} & \negemph{More than} & \negemph{More than} & \multirow{3}{*}{\posemph{Efficient}} &
+\multirow{2}{*}{\posemph{Efficient}} \\
+\multirow{2}{*}{sub-level set} & \negemph{exponential} & \negemph{exponential} &
+& \multirow{2}{*}{\posemph{encoding}}\\
+& \negemph{complexity} & \negemph{complexity} & & \\
+\hline
+\plemph{Complex} & \multirow{2}{*}{\posemph{Efficient}} & \multirow{2}{*}{\posemph{Efficient}} &
+\negemph{Not} & \posemph{Efficient}\\
+\plemph{Zonotope} & & & \negemph{closed} & \posemph{encoding}\\
+\hline
+\end{tabular}
+}
+%\caption{Comparison of set representations}~\label{tab:compset}
+\end{table}
+%
+\end{frame}
+
+%==================================================================================================================================
+
+\begin{frame}{Template Complex Zonotope: Motivation}
+
+Problem with \negemph{refining} a        complex zonotope\\[1em]
+
 \negemph{*} \negemph{Better approximation} by complex
 zonotope \negemph{can not} be found by \negemph{adding generator}.
 %
@@ -563,8 +670,11 @@ zonotope \negemph{can not} be found by \negemph{adding generator}.
 \end{figure}
 %
 \end{frame}
-%
-\begin{frame}{Template Complex Zonotope}
+
+
+%==================================================================================================================================
+
+\begin{frame}{Template Complex Zonotope: Definition}
 \plemph{Variable bounds} on absolute values of \plemph{combining
 coefficients}.\\[0.5em]
 
@@ -589,10 +699,24 @@ $
 \item \posemph{Add more generators} and \posemph{adjust scaling} factors to find \posemph{better approximations}.
 \end{itemize}
 %
-[TODO: ADD FIGURE HERE]\\
-Similar to \posemph{template polyhedron}~{TODO: CITE REFERENCES}.
-\end{frame}
+\begin{tikzpicture}[scale=2.5]
+\draw[fill = orange] plot[smooth cycle] coordinates{(0,0) (-0.5,0.5) (0,1) (0.75,0.75) (1,0) (0.5,-0.25)};
+\draw[fill = blue] plot[smooth cycle] coordinates{(0,0) (-0.25,0.5) (0,1) (0.75,0.4) (1,0) (0.5,-0.1) };
+\draw[fill=yellow] (0,0)--(0,1)--(1,0)--cycle;
+\draw[->] (0.75,0.75)--(1.75,0.75);
+\node at (2.25,0.75) {$\tcztope{V}{c}{s}$};
+\draw[->] (0.75,0.4)--(1.4,0.4);
+\node  at (2.25,0.4) {$\tcztope{\mymatrix{V & W}}{c}{\mymatrix{a\\b}}$};
+\end{tikzpicture}
 %
+\end{frame}
+
+%==================================================================================================================================     
+
+
+
+\section{Operations on a Complex Zonotope}
+
 \begin{frame}{Basic Operations: Template Complex Zonotope}
 %
 \begin{enumerate}
@@ -618,7 +742,9 @@ and \posemph{scaling factors}.
 \end{itemize}
 %
 \end{frame}
-%
+
+%==================================================================================================================================
+
 \begin{frame}{Checking Inclusion}
 Generally, checking inclusion between complex zonotopes requires \negemph{non-convex
 optimization}.
@@ -662,6 +788,34 @@ constraints) on \plemph{center} and \plemph{scaling factors}.
 
 \begin{frame}{Intersection between Complex Zonotopes}
 
+\begin{block}{Closed only for invertible template}
+Let ${\ptemp\in\mat{n}{n}{\compnums}}$ be a non-singular matrix.  Then\\
+%
+
+\begin{center}
+\eqnemph{
+$\tcztope{\ptemp}{\cen}{\sfact}\bigcap\tcztope{\ptemp}{\cen}{\sfact^\pr}=\tcztope{\ptemp}{\cen}{\meet{\sfact}{\sfact^\pr}}$.
+}
+\end{center}
+%
+\end{block}
+%
+\begin{minipage}{0.48\textwidth}
+\begin{figure}
+  \center
+  \caption{Non-closure  for a non-invertible template.}
+  \includegraphics[scale=0.3]{figures/CZtopes/nonclosure.png}
+\end{figure}
+\end{minipage}
+%
+\begin{minipage}{0.48\textwidth}
+\begin{figure}
+  \center
+  \caption{Closure for an invertible template.}
+  \includegraphics[scale=0.35]{figures/CZtopes/closure.png}
+\end{figure}
+\end{minipage}
+%
 \end{frame}
 
 %==================================================================================================================================
@@ -674,101 +828,49 @@ constraints) on \plemph{center} and \plemph{scaling factors}.
 {\small Earlier \posemph{extensions} of \posemph{real zonotope} to handle \posemph{half-space intersection}}.
 
 \begin{itemize}
-\item \plemph{Constrained Zonotope}, \plemph{Constrained Affine set}.\\[0.5em]
+\item \plemph{Constrained Zonotope}, \plemph{Constrained Affine set}. [\negemph{put reference}]\\[0.5em]
 \item Allow \plemph{additional linear contraints} on \plemph{combining coefficients}.
 \end{itemize}
 %
 \end{minipage}
-~\\[1em]
+\pause
 %
-{\small \negemph{Emulating} the above for complex zonotope, we get:}
-\begin{minipage}{0.48\textwidth}
-\eqnemph{\small
-\begin{align*}
-& \cztope{\mymatrix{1+2\iota & 2+\iota\\ 1-2\iota &2-\iota}}{0}
-\bigcap\set{x: x\leq 0}\\[0.5em]
-\hline\\[-1em]
-&= \set{\begin{array}{c}
-\mymatrix{1+2\iota & 2+\iota\\ 1-2\iota & 2-\iota}(\zeta+\iota\epsilon):\\
-~\\[-0.5em]
-\hline
-\multicolumn{1}{|c|}{\zeta_i^2+\epsilon_i^2\leq 1~\forall i\in\set{1,2}}\\
-\hline
-~\\[-0.5em]
-\hline
-\multicolumn{1}{|c|}{\zeta_1+\zeta_2-2\epsilon_1+2\epsilon_2\leq 0}\\
-\hline
-\end{array}
-}.
-\end{align*}
-}
-\end{minipage}
+%{\small
+If we \negemph{emulate} above for complex zonotope:
+%% \begin{minipage}{0.48\textwidth}
+%% \eqnemph{\small
+%% \begin{align*}
+%% & \cztope{\mymatrix{1+2\iota & 2+\iota\\ 1-2\iota &2-\iota}}{0}
+%% \bigcap\set{x: x\leq 0}\\[0.5em]
+%% \hline\\[-1em]
+%% &= \set{\begin{array}{c}
+%% \mymatrix{1+2\iota & 2+\iota\\ 1-2\iota & 2-\iota}(\zeta+\iota\epsilon):\\
+%% ~\\[-0.5em]
+%% \hline
+%% \multicolumn{1}{|c|}{\zeta_i^2+\epsilon_i^2\leq 1~\forall i\in\set{1,2}}\\
+%% \hline
+%% ~\\[-0.5em]
+%% \hline
+%% \multicolumn{1}{|c|}{\zeta_1+\zeta_2-2\epsilon_1+2\epsilon_2\leq 0}\\
+%% \hline
+%% \end{array}
+%% }.
+%% \end{align*}
+%% }
+%% \end{minipage}
 %
-\begin{minipage}{0.45\textwidth}
+%\begin{minipage}{0.45\textwidth}
 \begin{itemize}
 \item Computing \negemph{support function} becomes \negemph{intractable}.
 \item \negemph{Can not} find \negemph{practically useful} convex relaxation for \negemph{inclusion-checking}.
 \end{itemize}
 %
-\end{minipage}
+%\end{minipage}
 %
 \end{frame}
 
 %==================================================================================================================================
 
-\begin{frame}{Special Case: Interval Zonotope and Sub-parallelotope}
-%
-\begin{minipage}{0.45\textwidth}
-\plemph{Interval Zonotope}: {\small Representation of \plemph{real zonotope} using \plemph{{variable\\ {interval} bounds}}, no explicit center.\\[0.5em]
-%
-\eqnemph{${\lb,\ub}\in\reals^k:~\lb\leq \ub$}, ${\stemp\in\mat{k}{n}{\reals}}$.}
-%
-{\small
-\begin{exampleblock}{\center{$\iztope{\stemp}{\lb}{\ub}$}}
-\eqnemph{$\set{\stemp\zeta:~\zeta\in\reals^k,~\lb\leq\zeta\leq\ub}.$}
-\end{exampleblock}
-}
-%
-\end{minipage}
-%
-\hspace{0.25em}
-\vline
-\hspace{0.25em}
-%
-\begin{minipage}{0.45\textwidth}
-\plemph{Sub-parallelotope}: {\small Represents  \\\plemph{possibly unbounded parallelotopes}.\\[0.5em]
-%
-\eqnemph{${\plb\in\lt(\reals\bigcup\set{-\infty}\rt)^k}$, ${\pub\in\lt(\reals\bigcup\set{\infty}\rt)^k}$\\[0.5em]
-%
-${\qtemp\in\mat{n}{k}{\reals}:{k\leq n}},~~{\qtemp\transpose{\qtemp}:\text{invertible}}$.
-}
-}
-\vspace{-0.5em}
-%
-{\small
-\begin{exampleblock}{\center{$\ptope{\qtemp}{\plb}{\pub}$}}
-\eqnemph{$\set{x\in\reals^n:~\plb\leq\qtemp x\leq\pub}$.}
-\end{exampleblock}
-}
-%
-\end{minipage}
-%
-\begin{block}{}
-\center{\eqnemph{$\lt(\iztope{\pinv{\qtemp}}{\lb}{\ub}\rt)\bigcap\ptope{\qtemp}{\plb}{\pub}
-=\iztope{\pinv{\qtemp}}{\join{\lb}{\plb}}{\meet{\ub}{\pub}}$}.}
-\end{block}
-%
-\begin{tikzpicture}[scale = 1.5]
-\node[text width = 3cm] at (-1,0.75) {{\small $\qtemp = \mymatrix{1 & 0\\ -1 & 4}$\\[0.5em]$\lb = \mymatrix{0\\ 0}$ $\ub = \mymatrix{2\\3}$}};
-\node[text width = 4cm] at (4.5,0.75) {{\small $\plb = \mymatrix{1\\ -\infty}$ $\pub = \mymatrix{\infty\\3}$}};
-\draw[fill=red!30] (0,0)--(0,1)--(2,1.5)--(2,0.5)--cycle;
-\fill[cyan] (1,1)--(3,1.5)--(3,-1.5)--(1,-2)--cycle;
-\draw[dashed, thick, fill = green!30] (1,1)--(2,1.25)--(2,0.5)--(1,0.25)--cycle;
-\draw[->, thick] (2,1.25)--(2.8,1.45);
-\draw[->, thick] (1,0.25)--(1,-0.1);
-\end{tikzpicture}
-%
-\end{frame}
 
 
 
@@ -776,27 +878,36 @@ ${\qtemp\in\mat{n}{k}{\reals}:{k\leq n}},~~{\qtemp\transpose{\qtemp}:\text{inver
 
 \begin{frame}{Augmented Complex Zonotope}
 %
-\begin{minipage}{0.6\textwidth}
+\begin{minipage}{0.5\textwidth}
 \begin{itemize}
-\item \plemph{Minkowski sum} of \plemph{template complex zonotope} and \plemph{interval zonotope}.
 \item Some combining coefficients have \plemph{absolute value bounds} and others have \plemph{interval bounds}.
+\item \plemph{Minkowski sum} of \plemph{template complex zonotope} and \plemph{interval zonotope}.
 \end{itemize}
 \end{minipage}
 %
 \vline\hspace{1em}
 %
-\begin{minipage}{0.33\textwidth}
-\begin{block}{\center{$\acztope{\ptemp}{\cen}{\sfact}{\stemp}{\lb}{\ub}$}}
+\begin{minipage}{0.44\textwidth}
+%
+{\small
+\begin{exampleblock}{\center{Interval Zonotope: $\iztope{\stemp}{\lb}{\ub}$}}
+\eqnemph{$\set{\stemp\zeta:~\zeta\in\reals^k,~\lb\leq\zeta\leq\ub}.$}
+\end{exampleblock}
+}
+%
+\begin{block}{Template Complex Zonotope\\ $\oplus$ Interval Zonotope}
 \eqnemph{
 $\minsum{\tcztope{\ptemp}{\cen}{\sfact}}{\iztope{\stemp}{\lb}{\ub}}$.
 }
 \end{block}
 \end{minipage}
+
 %
-\begin{alertblock}{}
-$\ptemp$: Primary template, $\cen$: primary offset, $\sfact$: scaling factors, $\stemp$: secondary template, $\lb$: lower interval bound, $\ub$: upper interval bound.
-\end{alertblock}
+%% \begin{alertblock}{}
+%% $\ptemp$: Primary template, $\cen$: primary offset, $\sfact$: scaling factors, $\stemp$: secondary template, $\lb$: lower interval bound, $\ub$: upper interval bound.
+%% \end{alertblock}
 %
+\vspace{1em}
 \begin{tikzpicture}[block/.style={rectangle, fill=magenta!60}]
 \draw[fill=cyan] (0,0) ellipse (1.5cm and 0.75cm);
 \node at (2,0) {$\bigoplus$};
@@ -805,85 +916,85 @@ $\ptemp$: Primary template, $\cen$: primary offset, $\sfact$: scaling factors, $
 \draw[->] (3,0)--(3,-1);
 \draw[->] (3,0)--(6,0);
 \draw[dashed,thick,fill=green] (3,0)--(4.5,0)--(4.5,-0.5)--(3,-0.5);
-\draw[->] (0,0)--(0,-1);
+%\draw[->] (0,0)--(0,-1);
 \node [text width = 4cm] at (0,-1.5) {Captures contraction\\along complex vectors};
 \node at (7,0.3) {Over-approximates intersection};
-\node at (7.8,0) {with sub-parallelotope};
+\node at (7.8,0) {with linear constraints};
 \end{tikzpicture}
 \end{frame}
 
 %==================================================================================================================================
 
-\begin{frame}{Intersection with Minkowski sum}
-%
-\begin{minipage}{0.48\textwidth}
-Let us consider set\\ \eqnemph{$S:~\forall i\in\set{1,...,k}$} and
-%
-\eqnemph{
-\begin{block}{}
-$\lt(\identity{n}{n}-\diagonal{\bm{e}_i}\rt)\qtemp S \subseteq \qtemp S$.
-\end{block}
-}
-%
-\end{minipage}
-%
-\begin{minipage}{0.48\textwidth}
-%
-\begin{center}
-$\forall P\in \qtemp S$.
-\begin{tikzpicture}[scale=1]
-\coordinate (samplept) at (1.15,0.83);
-\draw[fill=cyan] (0,0) ellipse (2cm and 1cm);
-\fill[color=yellow] (0,0) rectangle (samplept);
-\draw[dashed, thick, ->] (0,0)--(samplept);
-\node at (1.17,1) {P};
-\end{tikzpicture}
-\end{center}
-%
-\end{minipage}
-%
-\pause
-%
-\begin{block}{Result}
-\begin{itemize}
-\eqnemph{
-\item $\lt(\lt(S\oplus \iztope{\pinv{\qtemp}}{\lb}{\ub}\rt)\bigcap\ptope{\qtemp}{\plb}{\pub}\rt)
-\subseteq \lt(S \oplus\iztope{\pinv{\qtemp}}{\join{\lb}{\plb}}{\meet{\ub}{\pub}}\rt).$
-}
-\item \plemph{Over-approximation error} positively correlated to \plemph{size of $\qtemp S$}.
-\end{itemize}
-\end{block}
-%
-\vspace{-1.5em}
-%
-\begin{center}
-\begin{tikzpicture}[block/.style={rectangle, fill=magenta!60}]
-\draw[fill=cyan] (0,0) ellipse (1.5cm and 0.75cm);
-\node at (2,0) {$\bigoplus$};
-\draw[fill=orange] (2.5,-0.5) rectangle (4.5,0.5);
-\fill[brown!30] (3,0)--(6,0)--(6,-1)--(3,-1)--cycle;
-\node at (5.5,-0.6) {$T$};
-\draw[->] (3,0)--(3,-1);
-\draw[->] (3,0)--(6,0);
-\draw[dashed,thick,fill=green] (3,0)--(4.5,0)--(4.5,-0.5)--(3,-0.5);
-\draw[->,thick] plot [smooth] coordinates{(0.8,0.5) (1.5,1) (3,0.5)};
-\node at (1.5,1.3) {$\Psi_1$};
-\draw[->,thick] plot [smooth] coordinates{(0.8,-0.5) (1.5,-1) (3.5,-0.5)};
-\node at (1.5,-1.3) {$\Psi_2$};
-\node[block] at (8,0) {{\Large
-$\lt(\Psi_1\bigcap T\rt)\subseteq\Psi_2$
-}};
-\end{tikzpicture}
-\end{center}
-%
-\end{frame}
+%% \begin{frame}{Intersection with Minkowski sum}
+%% %
+%% \begin{minipage}{0.48\textwidth}
+%% Let us consider set\\ \eqnemph{$S:~\forall i\in\set{1,...,k}$} and
+%% %
+%% \eqnemph{
+%% \begin{block}{}
+%% $\lt(\identity{n}{n}-\diagonal{\bm{e}_i}\rt)\qtemp S \subseteq \qtemp S$.
+%% \end{block}
+%% }
+%% %
+%% \end{minipage}
+%% %
+%% \begin{minipage}{0.48\textwidth}
+%% %
+%% \begin{center}
+%% $\forall P\in \qtemp S$.
+%% \begin{tikzpicture}[scale=1]
+%% \coordinate (samplept) at (1.15,0.83);
+%% \draw[fill=cyan] (0,0) ellipse (2cm and 1cm);
+%% \fill[color=yellow] (0,0) rectangle (samplept);
+%% \draw[dashed, thick, ->] (0,0)--(samplept);
+%% \node at (1.17,1) {P};
+%% \end{tikzpicture}
+%% \end{center}
+%% %
+%% \end{minipage}
+%% %
+%% \pause
+%% %
+%% \begin{block}{Result}
+%% \begin{itemize}
+%% \eqnemph{
+%% \item $\lt(\lt(S\oplus \iztope{\pinv{\qtemp}}{\lb}{\ub}\rt)\bigcap\ptope{\qtemp}{\plb}{\pub}\rt)
+%% \subseteq \lt(S \oplus\iztope{\pinv{\qtemp}}{\join{\lb}{\plb}}{\meet{\ub}{\pub}}\rt).$
+%% }
+%% \item \plemph{Over-approximation error} positively correlated to \plemph{size of $\qtemp S$}.
+%% \end{itemize}
+%% \end{block}
+%% %
+%% \vspace{-1.5em}
+%% %
+%% \begin{center}
+%% \begin{tikzpicture}[block/.style={rectangle, fill=magenta!60}]
+%% \draw[fill=cyan] (0,0) ellipse (1.5cm and 0.75cm);
+%% \node at (2,0) {$\bigoplus$};
+%% \draw[fill=orange] (2.5,-0.5) rectangle (4.5,0.5);
+%% \fill[brown!30] (3,0)--(6,0)--(6,-1)--(3,-1)--cycle;
+%% \node at (5.5,-0.6) {$T$};
+%% \draw[->] (3,0)--(3,-1);
+%% \draw[->] (3,0)--(6,0);
+%% \draw[dashed,thick,fill=green] (3,0)--(4.5,0)--(4.5,-0.5)--(3,-0.5);
+%% \draw[->,thick] plot [smooth] coordinates{(0.8,0.5) (1.5,1) (3,0.5)};
+%% \node at (1.5,1.3) {$\Psi_1$};
+%% \draw[->,thick] plot [smooth] coordinates{(0.8,-0.5) (1.5,-1) (3.5,-0.5)};
+%% \node at (1.5,-1.3) {$\Psi_2$};
+%% \node[block] at (8,0) {{\Large
+%% $\lt(\Psi_1\bigcap T\rt)\subseteq\Psi_2$
+%% }};
+%% \end{tikzpicture}
+%% \end{center}
+%% %
+%% \end{frame}
 
 %==================================================================================================================================
 
 \begin{frame}{Augmented Complex Zonotope $\bigcap$ Sub-parallelotope}
 %
 \begin{minipage}{0.48\textwidth}
-Let us consider set\\ \eqnemph{$S:~\forall i\in\set{1,...,k}$} and
+Template complex zonotope\\ $S=\tcztope{V}{c}{s}$ s.t. \eqnemph{$\forall i\in\set{1,...,k}$}
 %
 \eqnemph{
 \begin{block}{}
@@ -896,7 +1007,7 @@ $\lt(\identity{n}{n}-\diagonal{\bm{e}_i}\rt)\tcztope{\qtemp\ptemp}{\qtemp\cen}{\
 \begin{minipage}{0.48\textwidth}
 %
 \begin{center}
-$\forall P\in \qtemp S$.
+$\forall P\in \qtemp S$
 \begin{tikzpicture}[scale=1]
 \coordinate (samplept) at (1.15,0.83);
 \draw[fill=cyan] (0,0) ellipse (2cm and 1cm);
@@ -908,20 +1019,22 @@ $\forall P\in \qtemp S$.
 %
 \end{minipage}
 %
-\begin{block}{Result}
+\begin{block}{}
 \begin{itemize}
+\item \plemph{Augmented complex zonotope} \eqnemph{$\acztope{\ptemp}{\cen}{\sfact}{\pinv{\qtemp}}{\lb}{\ub}$} \plemph{constructed from template complex zonotope} \eqnemph{$S$} and a \plemph{sub-parallelotope} \eqnemph{$\ptope{\qtemp}{\plb}{\pub}$}.
+$\pinv{\qtemp}:$ Pseudo-inverse of $\qtemp$
 \eqnemph{
-\item $\lt(\acztope{\ptemp}{\cen}{\sfact}{\pinv{\qtemp}}{\lb}{\ub}\bigcap\ptope{\qtemp}{\plb}{\pub}\rt)
-\subseteq \acztope{\ptemp}{\cen}{\sfact}{\pinv{\qtemp}}{\join{\lb}{\plb}}{\meet{\ub}{\pub}}.$
+\item $\acztope{\ptemp}{\cen}{\sfact}{\pinv{\qtemp}}{\lb}{\ub}\bigcap\ptope{\qtemp}{\plb}{\pub}
+\subseteq \acztope{\ptemp}{\cen}{\sfact}{\pinv{\qtemp}}{\join{\lb}{\plb}}{\meet{\ub}{\pub}}$
 }
-\item \plemph{Over-approximation error} positively correlated to \plemph{size of $\qtemp S$}.
+\item \plemph{Over-approximation error} positively correlated to \plemph{magnitude of $\qtemp\ptemp$}
 \end{itemize}
 \end{block}
 %
-\vspace{-1.5em}
+%\vspace{-1.5em}
 %
 \begin{center}
-\begin{tikzpicture}[block/.style={rectangle, fill=magenta!60}]
+\begin{tikzpicture}[block/.style={rectangle, fill=magenta!60},scale=0.75]
 \draw[fill=cyan] (0,0) ellipse (1.5cm and 0.75cm);
 \node at (2,0) {$\bigoplus$};
 \draw[fill=orange] (2.5,-0.5) rectangle (4.5,0.5);
@@ -930,13 +1043,12 @@ $\forall P\in \qtemp S$.
 \draw[->] (3,0)--(3,-1);
 \draw[->] (3,0)--(6,0);
 \draw[dashed,thick,fill=green] (3,0)--(4.5,0)--(4.5,-0.5)--(3,-0.5);
-\draw[->,thick] plot [smooth] coordinates{(0.8,0.5) (1.5,1) (3,0.5)};
-\node at (1.5,1.3) {$\Psi_1$};
-\draw[->,thick] plot [smooth] coordinates{(0.8,-0.5) (1.5,-1) (3.5,-0.5)};
-\node at (1.5,-1.3) {$\Psi_2$};
-\node[block] at (8,0) {{\Large
-$\lt(\Psi_1\bigcap T\rt)\subseteq\Psi_2$
-}};
+%\draw[->,thick] plot [smooth] coordinates{(0.8,0.5) (1.5,1) (3,0.5)};
+%\node at (1.5,1.3) {$\Psi_1$};
+%\draw[->,thick] plot [smooth] coordinates{(0.8,-0.5) (1.5,-1) (3.5,-0.5)};
+%\node at (1.5,-1.3) {$\Psi_2$};
+%% \node[block] at (8,0) {{\Large
+%% $\lt(\Psi_1\bigcap T\rt)\subseteq\Psi_2$}};
 \end{tikzpicture}
 \end{center}
 %
@@ -946,7 +1058,7 @@ $\lt(\Psi_1\bigcap T\rt)\subseteq\Psi_2$
 
 
 
-\begin{frame}{Affine Substitution for Meet and Join}
+\begin{frame}{Affine Substitution for Meet (Min) and Join (Max)}
 
 {\small
 \begin{exampleblock}{Min and Max-approximation functions}
@@ -971,22 +1083,22 @@ $\lt(\Psi_1\bigcap T\rt)\subseteq\Psi_2$
 \end{exampleblock}
 }
 %
-\begin{block}{Result}
-\center{If $\lb\leq\maxapprox{\lb}{\plb}\leq\minapprox{\ub}{\pub}\leq\ub$, then\\
-\eqnemph{
-$\join{\lb}{\plb}=\maxapprox{\lb}{\plb},~~\meet{\ub}{\pub}=\minapprox{\ub}{\pub}.$
+\begin{block}{}
+\center{{\bf If} \eqnemph{$\lb\leq\maxapprox{\lb}{\plb}\leq\minapprox{\ub}{\pub}\leq\ub$},\\
+{\bf then} \plemph{
+$\join{\lb}{\plb}=\maxapprox{\lb}{\plb}$, $\meet{\ub}{\pub}=\minapprox{\ub}{\pub}$
 }
 }
 %
 \end{block}
 %
 \begin{alertblock}{}
-{\small Therefore, \posemph{intersection} between augmented complex zonotope and sub-parallelotope over-approximated by \posemph{second order conic program} for \posemph{fixed templates}.}
+{\small Over-approximation of \posemph{intersection}  expressed as \posemph{second order conic program} for \posemph{fixed templates}.}
 \end{alertblock}
 \end{frame}
 
 %==================================================================================================================================
-
+\section{Applications}
 %==================================================================================================================================
 
 %
@@ -1000,46 +1112,53 @@ Verifying
 
 %==================================================================================================================================
 
+\subsection{Invariance Verification for Affine Hybrid System}
+
 \begin{frame}{Checking Positive Invariance for Affine Hybrid System}
-%
-\begin{minipage}{0.45\textwidth}
-\plemph{Continuous transition}:
+%% %
+%% \begin{minipage}{0.45\textwidth}
+%% \plemph{Continuous transition}:
 
-%
-\begin{tikzpicture}
-\draw[fill=red] (0,0) circle (0.7);
-\node at (0,0) {{\Large $q$}};
-\node[text width = 4cm] at (0,1) {Stay: $x\in\ptope{\qtemp}{\lb_q}{\ub_q}$};
-\node[text width = 5cm] at (0,-1) {{ \hspace{3em}$A_q x\oplus\acztope{\ptemp_q^{\operatorname*{inp}}}{\cen_q^{\operatorname*{inp}}}{\sfact_q^{\operatorname*{inp}}}{\stemp_q^{\operatorname*{inp}}}{\lb_q^{\operatorname*{inp}}}{\ub_q^{\operatorname*{inp}}}$}};
-\end{tikzpicture}
-%
-%% \begin{align*}
-%% & \exists l^\pr_q,u^\pr_q:\\
-%% & \mathcal{G}\lt(\begin{array}{l}
-%% \mymatrix{A\ptemp_q & \ptemp_q^{\operatorname*{inp}}},{A\cen_q+\cen_q^{\operatorname*{inp}}},{\mymatrix{\sfact\\\sfact_q^{\operatorname*{inp}}}}\\
-%% {\mymatrix{\stemp_q & \stemp_q^{\operatorname*{inp}}}},{\mymatrix{\lb\\\lb_q^{\operatorname*{inp}}}},{\mymatrix{\ub\\\ub_q^{\operatorname*{inp}}}}
-%% \end{array}
-%% \rt)
-%% \end{align*}
-\end{minipage}
-%
-\hspace{0.5em}\vline\hspace{0.5em}
-%
-\begin{minipage}{0.45\textwidth}
-\plemph{Discrete transition}:
+%% %
+%% \begin{tikzpicture}
+%% \draw[fill=red] (0,0) circle (0.7);
+%% \node at (0,0) {{\Large $q$}};
+%% \node[text width = 4cm] at (0,1) {Stay: $x\in\ptope{\qtemp}{\lb_q}{\ub_q}$};
+%% \node[text width = 5cm] at (0,-1) {{ \hspace{3em}$A_q x\oplus\acztope{\ptemp_q^{\operatorname*{inp}}}{\cen_q^{\operatorname*{inp}}}{\sfact_q^{\operatorname*{inp}}}{\stemp_q^{\operatorname*{inp}}}{\lb_q^{\operatorname*{inp}}}{\ub_q^{\operatorname*{inp}}}$}};
+%% \end{tikzpicture}
+%% %
+%% %% \begin{align*}
+%% %% & \exists l^\pr_q,u^\pr_q:\\
+%% %% & \mathcal{G}\lt(\begin{array}{l}
+%% %% \mymatrix{A\ptemp_q & \ptemp_q^{\operatorname*{inp}}},{A\cen_q+\cen_q^{\operatorname*{inp}}},{\mymatrix{\sfact\\\sfact_q^{\operatorname*{inp}}}}\\
+%% %% {\mymatrix{\stemp_q & \stemp_q^{\operatorname*{inp}}}},{\mymatrix{\lb\\\lb_q^{\operatorname*{inp}}}},{\mymatrix{\ub\\\ub_q^{\operatorname*{inp}}}}
+%% %% \end{array}
+%% %% \rt)
+%% %% \end{align*}
+%% \end{minipage}
+%% %
+%% \hspace{0.5em}\vline\hspace{0.5em}
+%% %
+%% \begin{minipage}{0.45\textwidth}
+%% \plemph{Discrete transition}:
 
-\begin{tikzpicture}
-\draw[fill=red] (-1,0) circle (0.5);
-\draw[fill=red] (1,0) circle (0.5);
-\draw[thick,->] (-0.5,0)--(0.5,0);
-\node at (-1,0) {{\Large ${\sigma_1}$}};
-\node at(1,0) {{\Large ${\sigma_2}$}};
-\node[text width = 6cm] at (1,1) {Respective Staying conditions;\\ Guard: $x\in\ptope{\qtemp}{\lb_\sigma}{\ub_\sigma}$;};
-\node[text width = 5cm] at (1,-1) {{ \hspace{3em}$A_\sigma x\oplus\acztope{\ptemp_\sigma^{\operatorname*{inp}}}{\cen_\sigma^{\operatorname*{inp}}}{\sfact_\sigma^{\operatorname*{inp}}}{\stemp_\sigma^{\operatorname*{inp}}}{\lb_\sigma^{\operatorname*{inp}}}{\ub_\sigma^{\operatorname*{inp}}}$}};
-\end{tikzpicture}
+%% \begin{tikzpicture}
+%% \draw[fill=red] (-1,0) circle (0.5);
+%% \draw[fill=red] (1,0) circle (0.5);
+%% \draw[thick,->] (-0.5,0)--(0.5,0);
+%% \node at (-1,0) {{\Large ${\sigma_1}$}};
+%% \node at(1,0) {{\Large ${\sigma_2}$}};
+%% \node[text width = 6cm] at (1,1) {Respective Staying conditions;\\ Guard: $x\in\ptope{\qtemp}{\lb_\sigma}{\ub_\sigma}$;};
+%% \node[text width = 5cm] at (1,-1) {{ \hspace{3em}$A_\sigma x\oplus\acztope{\ptemp_\sigma^{\operatorname*{inp}}}{\cen_\sigma^{\operatorname*{inp}}}{\sfact_\sigma^{\operatorname*{inp}}}{\stemp_\sigma^{\operatorname*{inp}}}{\lb_\sigma^{\operatorname*{inp}}}{\ub_\sigma^{\operatorname*{inp}}}$}};
+%% \end{tikzpicture}
+%% %
+%% \end{minipage}
 %
-\end{minipage}
-%
+Involves:
+\begin{itemize}
+\item \plemph{Intersection} with \plemph{guards} and \plemph{staying conditions}
+\item \plemph{Affine transition} under {additive disturbance}
+\end{itemize}
 \pause
 %
 \begin{tikzpicture}
@@ -1086,7 +1205,8 @@ Verifying
 \end{minipage}
 %
 \begin{minipage}{0.48\textwidth}
-\fbox{\posemph{Single step of convex optimization}}
+\plemph{Linear Invariance}: All \plemph{reachable states} satisfy \plemph{linear constraints}\\[1em]
+Verification using \plemph{complex zonotope}:\\ \fbox{\posemph{Single step of convex optimization}}
 \end{minipage}
 \pause
 %
@@ -1094,18 +1214,12 @@ Verifying
 \item Fix \plemph{primary} and {secondary templates} of complex zonotope.
 \begin{itemize}
 \item Secondary template is \plemph{pseudo-inverse} of primary template.
-\item Choice of \plemph{primary template} discussed \plemph{later}.
+\item Choice of \plemph{primary template} according to \plemph{dynamics}.
 \end{itemize}
 \pause
-\item \plemph{Aforementioned steps} for checking positive invariance can be written as \plemph{convex constraints} on
-\plemph{primary offset, scaling factors, lower and upper interval bounds}.
-\begin{itemize}
-\item As discussed in \plemph{operations on complex zonotopes}.
-\end{itemize}
-\pause
-\item Write \plemph{bound on support function} which is an {affine constraint}.
-\pause
-\item Write \plemph{convex constraints} for \plemph{inclusion} of \plemph{initial set}.
+\item Write \plemph{convex constraints} on \plemph{variables} of augmented complex zonotope as \plemph{discussed} in \plemph{operations on complex zonotopes}
+for \\
+1) \plemph{positive invariance} 2) \plemph{inclusion} of \plemph{initial set} 3) \plemph{inclusion} inside \plemph{linear constraints}
 \end{enumerate}
 %
 \end{frame}
@@ -1113,18 +1227,36 @@ Verifying
 %==================================================================================================================================
 
 \begin{frame}{Choice of Primary Template}
-
+\begin{itemize}
+\item \textcol{Secondary template} is fixed as \textcol{Pseudo-Inverse} of system \textcol{Sub-Parallelotopic template}.\pause
+\end{itemize}
+\begin{block}{Chosing Primary Template}
+All or some of the following:\pause
+\begin{enumerate}
+\item \plemph{Eigenvectors} of the transformation matrices and their products, \plemph{templates} of \plemph{input sets}
+\item  \plemph{Orthogonal projections}  on the null space of
+   the \plemph{subparallelotopic template} of \plemph{guards} and \plemph{staying conditions}  
+\item  \plemph{Arbitrary} vectors
+\end{enumerate}
+\end{block}
 
 \end{frame}
 
 %==================================================================================================================================
+\subsection{Nearly Periodic Linear Impulsive System}
 
 \begin{frame}{Nearly Periodic Linear Impulsive System}
 %
 \begin{minipage}{0.55\textwidth}
 \begin{enumerate}
-\item \plemph{Continuous linear evolution} with intermediate \plemph{ linear impulses}.
-\item \plemph{Time} between \plemph{succesive impulses} is \plemph{bounded} in a \plemph{sampling interval}.
+\item \plemph{Linear impulse} (actuation) applied to \plemph{sampled state} of \plemph{continuous time linear} system  E.g.
+%
+\begin{itemize}
+\item \plemph{Networked control} system (\eqnemph{plant and controller}) with
+\plemph{sensors} (sampling) and \plemph{actuators} (impulse)
+\end{itemize}
+%xs
+\item \plemph{Time} between \plemph{succesive samplings} is \plemph{bounded}.
 \end{enumerate}
 \end{minipage}
 %
@@ -1134,9 +1266,9 @@ Verifying
 %
 \begin{tikzpicture}
 \draw[fill=cyan!30] (0,0) circle (1cm);
-\node at (0,0) {$\dot{\bm{x}} = A_c\bm{x}$};
+\node[text width = 2cm] at (0.4,0) {$\dot{\bm{x}} = A_c\bm{x}$\\$\dot{\bm{\tau}}=1$\\$\bm{\tau}\leq\tau_{max}$};
 \draw[thick,->,rotate around={-90:(0,0)}] (0.5,0.867) arc (0:206:0.7);
-\node at (2.5,0) {$x^+=A_rx$};
+\node[text width=4cm] at (3.7,0) {If $\tau\in\lt[\tau_{min},\tau_{max}\rt]$:-\\$x:=A_rx$,~$\tau:=0$};
 %
 \end{tikzpicture}
 %
@@ -1158,6 +1290,7 @@ Exists \eqnemph{$\lambda\in[0,1)$ and $c>0$} such that \eqnemph{$\forall ~\tbf{x
 \begin{minipage}{0.48\textwidth}
 %
 \begin{center}
+\vspace{-2em}
 \begin{tikzpicture}[scale=2.3]
 \draw[very thick,blue,->,dashed] (0,1)..controls (-1,0.7) and (-1,-0.6)..(0,-0.8);
 \draw[very thick,blue,->,dashed] (0,-0.8)..controls (0.8,-0.5) and (0.7,0.3)..(-0.3,0.2);
@@ -1176,9 +1309,599 @@ Exists \eqnemph{$\lambda\in[0,1)$ and $c>0$} such that \eqnemph{$\forall ~\tbf{x
 
 %==================================================================================================================================
 
+\begin{frame}{Set Contraction and Stability Verification}
+%
+Let \plemph{Reachability operator}
+%
+%\begin{center}
+\eqnemph{$H_\tau=e^{A_c\tau}A_r$.}
+%\end{center}
+%
+%\pause
+%
+\begin{minipage}{0.48\textwidth}
+%
+\begin{exampleblock}{\center{Contractive $C$-set}~\cite{2014-fiacchini-set}}
+\plemph{Compact} and \plemph{convex} set $\Psi$:
+%
+\begin{enumerate}
+\item \plemph{Origin} is \plemph{interior} point.
+\item \plemph{Contraction}: $\exists~\lambda\in [0,1)$: $\forall \tau\in\lt[\tau_{min},\tau_{max}\rt]$\\
+%
+\begin{center}
+\eqnemph{$H_\tau\Psi\subseteq\lambda\Psi$}.
+\end{center}
+%
+\end{enumerate}
+%
+\end{exampleblock}
+%
+\end{minipage}
+%
+\begin{minipage}{0.48\textwidth}
+%
+\begin{center}
+\begin{tikzpicture}[scale=2]
+\draw[fill=cyan] plot[smooth cycle] coordinates {(0,0) (0.5,1)
+(1,1.2) (1.5,0.9) (1.2,0) };
+\draw[fill=red!30] plot[smooth cycle] coordinates {(0.2,0.2) (0.5,0.8)
+(1,1) (1.3,0.8) (1.2,0.2) };
+\draw[->,thick] (0,0)--(0.2,0.2);
+\draw[->,thick] (0.5,1)--(0.5,0.8);
+\draw[->,thick] (1,1.2)--(1,1);
+\draw[->,thick] (1.5,0.9) -- (1.3,0.8);
+\draw[->,thick] (1.2,0)--(1.2,0.2);
+\node at (0.75,0.5) {{\Large o}};
+\end{tikzpicture}
+\end{center}
+%
+\end{minipage}
+%
+\pause
+%
+\begin{alertblock}{}
+Existence of \plemph{contractive $C$-set} \eqnemph{$\equivalent$} \plemph{GES}.
+\end{alertblock}
+%
+\begin{itemize}
+\item Find \posemph{contractive $C$-set} to \posemph{verify GES}.
+\end{itemize}
+%
+\end{frame}
 
-\bibliographystyle{plain}
-\bibliography{ref}
+%==================================================================================================================================
+
+\begin{frame}{Stability Verification Using Complex Zonotope}
+%
+\begin{center}
+{2 stages}:
+\begin{enumerate}
+\item \plemph{Synthesize} a \plemph{candidate complex zonotope}.
+\item \plemph{Verify contraction} of candidate complex zonotope.
+\end{enumerate}
+\end{center}
+%
+\end{frame}
+
+%==================================================================================================================================
+
+\begin{frame}{Synthesizing Candidate Complex Zonotope}
+%
+%\begin{itemize}
+%\item \underline{Criterion}: The candidate complex zonotopes should \plemph{contract} with respect to a \plemph{few uniformly sampled reference operators} and be a \plemph{$C$-set}.
+%
+\begin{enumerate}
+\item Collect \plemph{eigenvectors} of \plemph{$K$-uniformly sampled reachability operators} as \plemph{template}.
+%
+\begin{center}
+\begin{tikzpicture}[scale=4]
+\draw[thick,blue] (0,0)--(1,0);
+\draw[thick,red] (0,-0.05)--(0,0.05);
+\draw[thick,red] (0.5,-0.05)--(0.5,0.05);
+\draw[thick,red] (1,-0.05)--(1,0.05);
+\node[text width = 5cm] at (0.5,0.15) {{\small Eigenvectors of ${e^{A_ct}A_r}$:\\ $t$ is uniformly sampled}};
+%\draw[dashed,thick,<->] (0.3,-0.1)--(0.7,-0.1);
+\end{tikzpicture}
+\end{center}
+%
+%\begin{block}{}
+%% \eqnemph{
+%% \begin{center}
+%%   $\eigenvectors_k$: Eigenvectors of $\omega^k_i=e^{A_c\lt(\lsb+i\frac{(\usb-\lsb)}{k}\rt)}A_r~~\forall i\in\set{0,...,k-1}$.
+%% \end{center}
+%% }
+%\end{block}
+%
+\item \plemph{Synthesize scaling factors} such that we get
+%
+\begin{enumerate}
+%
+\item  \plemph{$\lambda$-contractive} complex zonotope which contains
+\item \plemph{unit box} containing origin (\plemph{$C$-set})
+%\eqnemph{
+%% \begin{center}
+%% $\tcztope{\identity{n}{n}}{0}{\repmat{1}{n}{1}}\order\tcztope{\eigenvectors_k}{0}{\sfact}$ \plemph{($C$-set)}\\
+%% $\forall t\in\Lambda_k,~ \tcztope{H_t\eigenvectors_k}{0}{\sfact}\order\tcztope{\eigenvectors}{0}{\lambda\sfact}$ \plemph{(contraction)}.
+%% \end{center}
+%}
+%
+\end{enumerate}
+%
+\end{enumerate}
+%
+%\end{itemize}
+%
+\end{frame}
+
+%==================================================================================================================================
+
+\begin{frame}{Verifying Contraction w.r.t All Reachability Operators}
+%
+\begin{enumerate}
+\item Derive \plemph{contraction bound} in a small \plemph{neighborhood} of a reachability operator \plemph{using known operations} on complex zonotopes.
+%
+\begin{itemize}
+\item Requires \posemph{convex optimization}.
+\end{itemize}
+%
+\item \plemph{Dynamically} divide \plemph{sampling intervals} into {small sub-intervals} \plemph{while verifying contraction bound $<1$}.
+\end{enumerate}
+%
+\begin{center}
+\begin{tikzpicture}[scale=4]
+\draw[thick,blue] (0,0)--(1,0);
+\draw[thick,red] (0,-0.05)--(0,0.05);
+\draw[thick,red] (0.3,-0.05)--(0.3,0.05);
+\draw[thick,red] (0.7,-0.05)--(0.7,0.05);
+\node at (0.3,0.15) {${e^{A_ct}A_r}$};
+\draw[dashed,thick,<->] (0.3,-0.1)--(0.7,-0.1);
+\node at (0.5,-0.15) {$\bm{h_t}$};
+\end{tikzpicture}
+%
+\end{center}
+\eqnemph{$h_t=$  Maximum interval at $t$} for which \eqnemph{contraction bound} is \eqnemph{less than 1}.
+%
+\end{frame}
+
+%==================================================================================================================================
+
+%\section{Benchmarks}
+
+\begin{frame}{NXT-Lego Robot model}
+\eqncol{Benchmark example} published in \eqncol{ARCH 2014~\cite{heinz2014benchmark}} %\textcol{(Heinz, Oehlerking and Woehrle.)}
+
+\begin{minipage}{0.3\textwidth}
+\begin{figure}
+\centering
+\includegraphics[scale=0.09]{fig/NXT-lego.JPG}
+\end{figure}
+\end{minipage}
+\begin{minipage}{0.6\textwidth}
+{\footnotesize Lego NXT self-balancing robot by\\ Medelen8/CC-BY-SA-3.0}
+\begin{itemize}
+\item \textcol{Sampled data Networked Control System}:
+\item Controller input has \textcol{saturation} on {\color{violet} 2 controller inputs}: \textcol{hybrid behavior}.
+\end{itemize}
+\end{minipage}
+
+%% \begin{block}{}
+%% $
+%% \lt[\begin{array}{cc}\trj{x}{t+1} &
+%%     \trj{y}{t+1}\end{array}\rt]^T=F_1\trj{x}{t}+F_2sat\lt(\trj{y}{t}\rt)+F_3\trj{u}{t}$\\
+%% \textcol{Saturated}: $sat\lt(y_i\rt) = max\lt(-\delta
+%% d_p,min\lt(y_i,\delta d_p\rt)\rt),~\forall i\in\{1,2\}$, where $\delta=100$
+%% and $d_p=0.0807$. \textcol{Unsaturated}: $sat\lt(y_i\rt) = y_i$
+%% \end{block}
+\end{frame}
+
+
+\begin{frame}{Verification challege: NXT-Lego Robot model}
+\begin{alertblock}{Task}
+Find/Verify bounds on \textcol{body pitch angle}.
+\end{alertblock}
+%
+\eqncol{After transformation to decouple unbounded directions, we
+obtained}\\
+%
+\begin{block}{Complexity}
+\begin{itemize}
+\item \eqncol{Saturated}: \textcol{9 dimensional, 1 location, 9 edges.}
+\item \eqncol{Unsaturated}: \textcol{9 dimensional linear system.}
+\end{itemize}
+\end{block}
+%
+\end{frame}
+
+%% \begin{frame}{Experimental settings}
+%% %
+%% \begin{itemize}
+%% \item \eqncol{Primary template:}  (Complex) \textcol{Eigenvectors} of linear maps and their products,
+%%  \textcol{Orthonormal
+%% vectors} to guarding hyperplane normals.  For
+%% the linear system, it consists of the eigenvectors of the linear map,
+%% the \textcol{uncertain input set template} and its multiplication by the linear matrix
+%% (related to affine map) and square of the linear matrix. 
+%% \item \eqncol{SpaceEx settings:}  \textcol{Octagon template} and a
+%% template with \textcol{$400$ uniformly sampled support vectors}.
+%% \end{itemize}
+%% %
+%% \end{frame}
+
+%==================================================================================================================================
+
+\begin{frame}{NXT-Lego Robot model}
+\center{{\eqncol{\small{\footnotesize UB: $>$1000, ~~NT: Not terminating in more than 180s, \newline
+  n/a: Not applicable/not available, ~~ACZ: Augmented complex
+  zonotope.}}}}
+{\color{black}
+\begin{minipage}{0.48\textwidth}
+\begin{table}
+\centering
+\resizebox{0.5\textheight}{0.35\textwidth}{
+\begin{tabular}{|l|c|c|c|}
+\hline
+\multicolumn{2}{|c|}{\multirow{2}{*}{Method}} &
+\multirow{2}{*}{$\lt|\psi\rt|\leq$} & Comp.\\
+\multicolumn{2}{|c|}{} & & time (s)\\
+\hline
+\multirow{4}{*}{SpaceEx} & octagon & \multirow{2}{*}{UB} & \multirow{2}{*}{NT}\\
+& template & & \\
+\cline{2-4}
+& 400 support & \multirow{2}{*}{UB} & \multirow{2}{*}{NT}\\
+& vectors & &\\
+\hline
+\multicolumn{2}{|c|}{\multirow{2}{*}{Suggested in~\cite{heinz2014benchmark}}} &
+\multirow{2}{*}{$1.39$} & \multirow{2}{*}{n/a}\\
+\multicolumn{2}{|c|}{} & &\\
+\hline
+\multicolumn{2}{|c|}{\multirow{2}{*}{ACZ invariant}} & \multirow{2}{*}{$1.29$} &
+\multirow{2}{*}{$4$}\\
+\multicolumn{2}{|c|}{} & & \\
+\hline
+\end{tabular}
+}
+\caption*{{\footnotesize Unsaturated robot model: results}}
+\end{table}
+\end{minipage}
+\begin{minipage}{0.48\textwidth}
+\begin{table}
+\centering
+\resizebox{0.5\textheight}{0.35\textwidth}{
+\begin{tabular}{|l|c|c|c|}
+\hline
+\multicolumn{2}{|c|}{\multirow{2}{*}{Method}} &
+\multirow{2}{*}{$\lt|\psi\rt|\leq$} & Comp.\\
+\multicolumn{2}{|c|}{} & & time (s)\\
+\hline
+\multirow{4}{*}{SpaceEx} & octagon & \multirow{2}{*}{UB} &
+\multirow{2}{*}{NT}\\
+& template & & \\
+\cline{2-4}
+& 400 support & \multirow{2}{*}{UB} & \multirow{2}{*}{NT}\\
+& vectors & & \\
+\hline
+\multicolumn{2}{|c|}{\multirow{2}{*}{Suggested in~\cite{heinz2014benchmark}}} &
+$1.571-\epsilon:$ & \multirow{2}{*}{n/a}\\
+\multicolumn{2}{|c|}{} & $\epsilon>0$ &\\
+\hline
+\multicolumn{2}{|c|}{\multirow{2}{*}{ACZ invariant}} & \multirow{2}{*}{$1.13$} &
+\multirow{2}{*}{45}\\
+\multicolumn{2}{|c|}{} & &\\
+\hline
+\end{tabular}
+}
+\caption*{{\footnotesize Saturated robot model: results}}
+\end{table}
+\end{minipage}
+}
+\vspace{-2em}
+{\small
+\begin{alertblock}{Remarks}
+\begin{itemize}
+\item Model has \textcol{complex eigenstructure}, some eigenvalues have \textcol{magnitude close to 1}.
+\item \textcol{Complex Zonotope uses complex eigenstructure}: better \plemph{acucracy}.
+\end{itemize}
+\end{alertblock}
+}
+\end{frame}
+
+%==================================================================================================================================
+
+\begin{frame}{Networked vehicle platoon}
+\begin{figure}
+\caption*{\small Benchmark {\color{blue}  2014 ARCH Workshop}: \eqncol{~\cite{makhlouf2014networked}}}
+\includegraphics[scale=0.4]{fig/VehiclePlatoon.png}\\
+\includegraphics[scale=0.4]{fig/networked-platoon-model.png}
+\end{figure}
+\end{frame}
+
+%==================================================================================================================================
+
+\begin{frame}{Verification challenge: Networked platoon}
+\begin{alertblock}{Task}
+%\begin{itemize}
+%\item
+Find \textcol{minimum (possible) reference distances} between vehicles such that vehicles \plemph{ do not collide}.
+%\end{itemize}
+\end{alertblock}
+%
+\begin{exampleblock}{Two cases}
+\begin{enumerate}
+\item \textcol{Slow switching}: \eqncol{Minimum dwell time 20 s}. {\color{violet} 9 dimensional, 2 locations, 4 edges}.
+\item \textcol{Fast switching}: \eqncol{Integer dwell times}. {\color{violet} 9 dimensional, 2 locations, 2 edges}.
+\end{enumerate}
+\end{exampleblock}
+\end{frame}
+
+\begin{frame}{Expermimental results: Networked Platoon}
+\begin{table}
+\resizebox{1.1\textwidth}{!}{\hspace{-3em}
+\begin{tabular}{|l|c|c|c|c|c|c|c|c|c|}
+\hline
+\multicolumn{2}{|c|}{\multirow{4}{*}{Method}} & \multicolumn{4}{|c|}{\multirow{2}{*}{Slow switching}} & \multicolumn{4}{|c|}{\multirow{2}{*}{Fast switching}}\\
+\multicolumn{2}{|c|}{} & \multicolumn{4}{|c|}{} & \multicolumn{4}{|c|}{} \\
+\cline{3-10}
+\multicolumn{2}{|c|}{} & \multirow{2}{*}{$-e_1\leq$} & \multirow{2}{*}{$-e_2\leq$} & \multirow{2}{*}{$-e_3\leq$} & Comp. & \multirow{2}{*}{$-e_1\leq$} & \multirow{2}{*}{$-e_2\leq$} & \multirow{2}{*}{$-e_3\leq$} & Comp.\\
+\multicolumn{2}{|c|}{} & & & & time (s) & & & & time (s)\\
+\hline
+\multirow{4}{*}{SpaceEx} & octagon & \multirow{2}{*}{28} &
+\multirow{2}{*}{27} & \multirow{2}{*}{10} &
+\multirow{2}{*}{NT} & \multirow{2}{*}{UB} &
+\multirow{2}{*}{UB} & \multirow{2}{*}{UB} &
+\multirow{2}{*}{NT}\\
+& template & & & & & & & &\\
+\cline{2-10}
+& 100 support & \multirow{2}{*}{28} & \multirow{2}{*}{25} &
+\multirow{2}{*}{13} & \multirow{2}{*}{1.3} & \multirow{2}{*}{UB} & \multirow{2}{*}{UB} &
+\multirow{2}{*}{UB} & \multirow{2}{*}{NT}\\
+& vectors & & & & & & & &\\
+\hline
+\multicolumn{2}{|c|}{\multirow{2}{*}{Real zonotope~\cite{makhlouf2014networked}}} &
+\multirow{2}{*}{25} & \multirow{2}{*}{25} & \multirow{2}{*}{10}
+ & \multirow{2}{*}{n/a} & \multirow{2}{*}{n/a} & \multirow{2}{*}{n/a} & \multirow{2}{*}{n/a}
+ & \multirow{2}{*}{n/a}\\
+\multicolumn{2}{|c|}{} & & & & & & & &\\
+\hline
+\multicolumn{2}{|c|}{\multirow{2}{*}{ACZ invariant}} &
+\multirow{2}{*}{28} & \multirow{2}{*}{26} &
+\multirow{2}{*}{12} & \multirow{2}{*}{12} &
+\multirow{2}{*}{46} & \multirow{2}{*}{54} &
+\multirow{2}{*}{57} & \multirow{2}{*}{12.6}\\
+\multicolumn{2}{|c|}{} & & & & & & & &\\
+\hline
+\end{tabular}
+}
+%% \caption*{{\footnotesize UB: $>$1000, ~~NT: Not terminating in more than 180s, \newline
+%%   n/a: Not applicable/not available, ~~ACZ: Augmented complex
+%%   zonotope.
+%% }}
+{\small
+\begin{alertblock}{Remarks}
+\begin{itemize}
+\item {\bf Fast switching model} is \textcol{less stable} than  {\bf slow switching model} 
+\item Since {\bf complex zonotope} used \textcol{eigenstructue}: better \plemph{accuracy} on \plemph{less stable} model
+\end{itemize}
+\end{alertblock}
+}
+\end{table}
+\end{frame}
+
+%==================================================================================================================================
+
+%% \begin{frame}{Perturbed double integrator}
+%% \begin{itemize}
+%% \item Example from \textcol{CDC 2004}~\cite{rakovic2004computation}.
+%% \item \textcol{Piecewise affine with 2 dimensional additive disturbance input}, \eqncol{Four different Affine
+%% dynamics} in \eqncol{Four different polytopic regions} of space.
+%% \item Model complexity: \textcol{2 dimensions, 4 locations and 12 edges.}
+%% \end{itemize}
+%% \begin{alertblock}{Challenge}
+%% \begin{enumerate}
+%% \item Verify \textcol{smallest (possible) bounds} on the \textcol{two state space co-ordinates}.
+%% \item Compute a \textcol{large set} of \textcol{safe initial conditions}.
+%% \end{enumerate}
+%% \end{alertblock}
+%% \pause
+%% \begin{exampleblock}{Experimental settings}
+%% \begin{itemize}
+%% \item  {\bf Primary template}: \textcol{Complex eigenvectors} of all linear matrices of the \textcol{affine maps and
+%% their binary products}. 
+%% \item  {\bf SpaceEx tool}: \eqncol{Two
+%% different templates}: \textcol{Octagon} template and a template with \textcol{100
+%% uniformly sampled support vectors}.
+%% \end{itemize}
+%% \end{exampleblock}
+%% \end{frame}
+
+%% \begin{frame}{Experimental results: PDI}
+%% \begin{table}
+%% \begin{minipage}{\textwidth}
+%% \center
+%% \caption*{Small invariant computation}
+%% {\small
+%% \begin{tabular}{|l|c|c|c|c|}
+%% \hline
+%% \multicolumn{2}{|c|}{\multirow{2}{*}{Method}} &
+%% \multirow{2}{*}{$\lt|x_1\rt|\leq$} & \multirow{2}{*}{$\lt|x_2\rt|\leq$} & Comp.\\
+%% \multicolumn{2}{|c|}{} & & & time (s) \\
+%% \hline
+%% \multirow{4}{*}{SpaceEx} & octagon & \multirow{2}{*}{0.38} &
+%% \multirow{2}{*}{0.43} & \multirow{2}{*}{1.7}\\
+%% & template & & &\\
+%% \cline{2-5}
+%% & 100 support & \multirow{2}{*}{0.38} & \multirow{2}{*}{0.43} & \multirow{2}{*}{23.6}\\
+%% & vectors & & &\\
+%% \hline
+%% \multicolumn{2}{|c|}{\multirow{2}{*}{ACZ invariant}} &
+%% \multirow{2}{*}{0.36} & \multirow{2}{*}{0.43} & 
+%% \multirow{2}{*}{5.1}\\
+%% \multicolumn{2}{|c|}{} & & &\\
+%% \hline
+%% \end{tabular}
+%% }
+%% \end{minipage}
+%% \hspace{4em}
+%% \begin{minipage}{\textwidth}
+%% \center
+%% {\small
+%% \caption*{Large invariant computation}
+%% \begin{tabular}{|c|c|}
+%% \hline
+%% \multirow{2}{*}{Method} & Comp.\\
+%% & time (s)\\
+%% \hline
+%% \multirow{2}{*}{MPT tool~\cite{rakovic2004computation}} & \multirow{2}{*}{107}\\
+%% & \\
+%% \hline
+%% \multirow{2}{*}{ACZ} & \multirow{2}{*}{12}\\
+%% & \\
+%% \hline
+%% \end{tabular}
+%% }
+%% \end{minipage}
+%% \end{table}
+%% \end{frame}
+
+%==================================================================================================================================
+
+\begin{frame}{Benchmark: Networked Control System}
+Example from
+%Bj\"{o}rn et. al.
+~\cite{wittenmark2002computer}
+\end{frame}
+
+%==================================================================================================================================
+
+\begin{frame}{Contributions}
+\begin{enumerate}
+\item \posemph{Complex Zonotope representation}: efficiently utilize \plemph{eigenstructure} for verification.
+%
+\begin{itemize}
+\item Captures \posemph{contraction} along \posemph{complex eigenvectors}.
+\item \posemph{Linear transformation} and \plemph{Minkowski sum} are \plemph{efficiently computable}.
+\end{itemize}
+%
+\pause
+\item \posemph{Template based representation} for \posemph{finding better approximations}.
+\pause
+\item \posemph{Intersection with linear constraints} using \posemph{augmented complex zonotope}.
+\pause
+\item \plemph{Applications}:  Develop \plemph{convex programs} for verifying
+%
+\begin{enumerate}
+\item \posemph{positive invariance}
+\item \posemph{linear invariance}
+\item \posemph{stability}
+ \end{enumerate}
+ %
+\end{enumerate}
+\end{frame}
+
+%==================================================================================================================================
+
+\begin{frame}{Future Work}
+\begin{enumerate}
+\item Extend \plemph{application} of complex zonotopes to \plemph{Non-linear dynamics} and {Continuous time Hybrid systems}.
+\item Experiment with more \plemph{computationally challenging examples}.
+\end{enumerate}
+\end{frame}
+
+\begin{frame}{Publications}
+\begin{enumerate}
+\item Arvind Adimoolam and Thao Dang.
+\newblock Augmented complex zonotopes for computing invariants of affine hybrid
+  systems.
+\newblock In {\em International Conference on Formal Modeling and Analysis of
+  Timed Systems}, pages 97--115. Springer, 2017.
+
+\item %\bibitem{adimoolam2017classification}
+Arvind Adimoolam, Thao Dang, Alexandre Donz{\'e}, James Kapinski, and Xiaoqing
+  Jin.
+\newblock Classification and coverage-based falsification for embedded control
+  systems.
+\newblock In {\em International Conference on Computer Aided Verification},
+  pages 483--503. Springer, 2017.
+
+
+\item %\bibitem{tcz2017}
+Arvind Adimoolam and Thao Dang.
+\newblock Template complex zonotopes for stability and invariant computation.
+\newblock In {\em American Control Conference (ACC), 2017}. IEEE, 2017.
+
+
+\item %\bibitem{adimoolamACC2016}
+Arvind~S Adimoolam and Thao Dang.
+\newblock Using complex zonotopes for stability verification.
+\newblock In {\em American Control Conference (ACC), 2016}, pages 4269--4274.
+  IEEE, 2016.
+\end{enumerate}
+\end{frame}
+
+%==================================================================================================================================
+
+\begin{frame}{}
+\center
+{\Huge {\color{blue} Thank you!}}
+\end{frame}
+
+
+
+\bibliographystyle{apalike}
+\bibliography{lib,PhDThesis/reflis}
+
+%% \begin{frame}{Special Case: Interval Zonotope and Sub-parallelotope}
+%% %
+%% \begin{minipage}{0.45\textwidth}
+%% \plemph{Interval Zonotope}: {\small Representation of \plemph{real zonotope} using \plemph{{variable\\ {interval} bounds}}, no explicit center.\\[0.5em]
+%% %
+%% \eqnemph{${\lb,\ub}\in\reals^k:~\lb\leq \ub$}, ${\stemp\in\mat{k}{n}{\reals}}$.}
+%% %
+%% {\small
+%% \begin{exampleblock}{\center{$\iztope{\stemp}{\lb}{\ub}$}}
+%% \eqnemph{$\set{\stemp\zeta:~\zeta\in\reals^k,~\lb\leq\zeta\leq\ub}.$}
+%% \end{exampleblock}
+%% }
+%% %
+%% \end{minipage}
+%% %
+%% \hspace{0.25em}
+%% \vline
+%% \hspace{0.25em}
+%% %
+%% \begin{minipage}{0.45\textwidth}
+%% \plemph{Sub-parallelotope}: {\small Represents  \\\plemph{possibly unbounded parallelotopes}.\\[0.5em]
+%% %
+%% \eqnemph{${\plb\in\lt(\reals\bigcup\set{-\infty}\rt)^k}$, ${\pub\in\lt(\reals\bigcup\set{\infty}\rt)^k}$\\[0.5em]
+%% %
+%% ${\qtemp\in\mat{n}{k}{\reals}:{k\leq n}},~~{\qtemp\transpose{\qtemp}:\text{invertible}}$.
+%% }
+%% }
+%% \vspace{-0.5em}
+%% %
+%% {\small
+%% \begin{exampleblock}{\center{$\ptope{\qtemp}{\plb}{\pub}$}}
+%% \eqnemph{$\set{x\in\reals^n:~\plb\leq\qtemp x\leq\pub}$.}
+%% \end{exampleblock}
+%% }
+%% %
+%% \end{minipage}
+%% %
+%% \begin{block}{}
+%% \center{\eqnemph{$\lt(\iztope{\pinv{\qtemp}}{\lb}{\ub}\rt)\bigcap\ptope{\qtemp}{\plb}{\pub}
+%% =\iztope{\pinv{\qtemp}}{\join{\lb}{\plb}}{\meet{\ub}{\pub}}$}.}
+%% \end{block}
+%% %
+%% \begin{tikzpicture}[scale = 1.5]
+%% \node[text width = 3cm] at (-1,0.75) {{\small $\qtemp = \mymatrix{1 & 0\\ -1 & 4}$\\[0.5em]$\lb = \mymatrix{0\\ 0}$ $\ub = \mymatrix{2\\3}$}};
+%% \node[text width = 4cm] at (4.5,0.75) {{\small $\plb = \mymatrix{1\\ -\infty}$ $\pub = \mymatrix{\infty\\3}$}};
+%% \draw[fill=red!30] (0,0)--(0,1)--(2,1.5)--(2,0.5)--cycle;
+%% \fill[cyan] (1,1)--(3,1.5)--(3,-1.5)--(1,-2)--cycle;
+%% \draw[dashed, thick, fill = green!30] (1,1)--(2,1.25)--(2,0.5)--(1,0.25)--cycle;
+%% \draw[->, thick] (2,1.25)--(2.8,1.45);
+%% \draw[->, thick] (1,0.25)--(1,-0.1);
+%% \end{tikzpicture}
+%% %
+%% \end{frame}
 
 
 
