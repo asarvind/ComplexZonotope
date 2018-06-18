@@ -136,7 +136,7 @@ Luc Jaulin}}
 
 %==================================================================================================================================
 
-\begin{frame}{Hybrid Dynamics of Real World Systems}
+\begin{frame}{Hybrid Dynamics of Embedded/Cyber-physical Systems}
 
 \begin{minipage}{0.5\textwidth}
 %% Signal with hybrid behavior:
@@ -427,7 +427,7 @@ Typically required operations:\\
 %
 \emph{}
 %
-\item \plemph{Complex Zonotope} $\rightarrow$ \plemph{template complex zonotope}
+\item \plemph{Complex Zonotope} $\rightarrow$ \plemph{Template complex zonotope}
 %% \begin{itemize}
 %% \item Motivation: \plemph{better approximation} of reachable sets
 %% \item Basic \posemph{operations}: linear transformation, Minkowski sum, support function
@@ -503,7 +503,7 @@ Typically required operations:\\
 
 %==================================================================================================================================
 
-\begin{frame}{Usual Zonotope}
+\begin{frame}{Usual Zonotope: Definition}
 A \plemph{zonotope} is a \plemph{projection} of \plemph{higher dimensional hypercube}
 onto \plemph{lower dimensional} space.\\[0.5em]
 %
@@ -557,7 +557,7 @@ $
 %==================================================================================================================================
 
 
-\begin{frame}{Drawback of Zonotopes for Computing Positive Invariants}
+\begin{frame}{Zonotopes: Computing Positive Invariants}
 %
 \begin{minipage}{0.48\textwidth}
 \plemph{Positive Invariant}: \plemph{Next} reachable set \plemph{contained inside} the original set.
@@ -596,8 +596,6 @@ encoded by \negemph{complex valued eigenvectors}.
 \end{figure}
 \end{minipage}
 %
-\emph{}
-%
 \begin{block}{}
 {\small
 Let us consider  a \plemph{stable real matrix} \eqnemph{$A$} whose \plemph{real
@@ -608,7 +606,7 @@ $A\lt(\rztope{\ptemp}{0}\rt)\subseteq \rztope{\ptemp}{0}$% \plemph{(inclusion af
 }}
 \end{block}
 %
-\negemph{*} We \negemph{can not rely} on above proposition when \negemph{eigenvectors are complex}.
+\negemph{*} We \negemph{can not exploit} the above proposition when \negemph{eigenvectors are complex}.
 \end{frame}
 
 %==================================================================================================================================
@@ -619,7 +617,7 @@ $A\lt(\rztope{\ptemp}{0}\rt)\subseteq \rztope{\ptemp}{0}$% \plemph{(inclusion af
 \begin{itemize}
 \item Extend \posemph{simple zonotope to complex numbers} in a way that can \posemph{capture
 contraction along complex vectors}.
-\item \plemph{Complex valued generators} with \plemph{Complex combining
+\item \plemph{Complex valued generators} with \plemph{complex combining
 coefficients} whose \plemph{absolute value $<=1$}.
 \item Geometrically, \plemph{Minkowski sum} of \plemph{Ellipses}
 and \plemph{Line Segments}.
@@ -837,7 +835,7 @@ $
 \draw[->] (0.68,0.4)--(1.4,0.4);
 \node  at (2.25,0.4) {$\tcztope{\mymatrix{V & W}}{c}{\mymatrix{a\\b}}$};
 \draw[->] (0.5,-0.4)--(1.7,-0.1);
-\node at (2.25,0) {$\cztope{\mymatrix{V & W}}{s}$};
+\node at (2.25,0) {$\cztope{\mymatrix{V & W}}{c}$};
 \draw[very thick,dashed,->] (0,0)--(-0.3,-0.3);
 \node at (-0.4,-0.4) {$W$};
 \end{tikzpicture}
@@ -916,7 +914,7 @@ constraints) on \plemph{center} and \plemph{scaling factors}.
 
 %==================================================================================================================================
 
-\begin{frame}{Intersection between Complex Zonotopes}
+\begin{frame}{Intersection between Template Complex Zonotopes}
 %
 \begin{itemize}
 \item Closed for \plemph{common invertible template}
@@ -960,8 +958,8 @@ $\tcztope{\ptemp}{\cen}{\sfact}\bigcap\tcztope{\ptemp}{\cen}{\sfact^\pr}=\tcztop
 \resizebox{\textwidth}{!}{
 \begin{tabular}{|l|c|c|c|c|}
 \hline
-\multirow{2}{*}{Set} & \multirow{2}{*}{Linear} & \multirow{2}{*}{Minkowski} & \multirow{2}{*}{Intersection } & {Positive Invariant }\\
-\multirow{2}{*}{representation} & \multirow{2}{*}{transformation} & \multirow{2}{*}{sum} & \multirow{2}{*}{with half-space} & (non-empty interior)\\
+\multirow{2}{*}{{\bf Set}} & \multirow{2}{*}{{\bf Linear}} & \multirow{2}{*}{{\bf Minkowski}} & \multirow{2}{*}{{\bf Intersection} } & {{\bf Positive Invariant} }\\
+\multirow{2}{*}{{\bf representation}} & \multirow{2}{*}{{\bf transformation}} & \multirow{2}{*}{{\bf sum}} & \multirow{2}{*}{{\bf with half-space}} & \\
 & & & & stable invertible\\
 & & & & linear transformation\\
 \hline
@@ -978,12 +976,12 @@ $\tcztope{\ptemp}{\cen}{\sfact}\bigcap\tcztope{\ptemp}{\cen}{\sfact^\pr}=\tcztop
 \posemph{Efficient}\\
 & & \negemph{closed} & \negemph{closed} & \posemph{encoding}\\
 \hline
-\multirow{2}{*}{Polynomial} & \negemph{More than} & \negemph{More than} & \multirow{3}{*}{\posemph{Efficient}} &
-\multirow{2}{*}{\posemph{Efficient}} \\
-\multirow{2}{*}{sub-level set} & \negemph{exponential} & \negemph{exponential} &
-& \multirow{2}{*}{\posemph{encoding}}\\
-& \negemph{complexity} & \negemph{complexity} & & \\
-\hline
+%% \multirow{2}{*}{Polynomial} & \negemph{More than} & \negemph{More than} & \multirow{3}{*}{\posemph{Efficient}} &
+%% \multirow{2}{*}{\posemph{Efficient}} \\
+%% \multirow{2}{*}{sub-level set} & \negemph{exponential} & \negemph{exponential} &
+%% & \multirow{2}{*}{\posemph{encoding}}\\
+%% & \negemph{complexity} & \negemph{complexity} & & \\
+%% \hline
 \plemph{Template Complex} & \multirow{2}{*}{\posemph{Efficient}} & \multirow{2}{*}{\posemph{Efficient}} &
 \negemph{Not} & \posemph{Efficient}\\
 \plemph{Zonotope} & & & \negemph{closed} & \posemph{encoding}\\
@@ -1825,7 +1823,7 @@ Verification using\\ \fbox{\posemph{Single step of convex optimization}}
 \begin{enumerate}
 \item Fix templates of complex zonotope.
 \begin{itemize}
-\item Secondary template is \plemph{pseudo-inverse} of primary template.
+\item Secondary template is \plemph{pseudo-inverse} of parallelotopic template of \plemph{guards}.
 \item Choice of \plemph{primary template} according to \plemph{dynamics}.
 \end{itemize}
 \emph{}
@@ -1868,7 +1866,7 @@ Verification using\\ \fbox{\posemph{Single step of convex optimization}}
 {\footnotesize Lego NXT self-balancing robot by\\ Medelen8/CC-BY-SA-3.0}
 \begin{itemize}
 \item \textcol{Sampled data Networked Control System}:
-\item Controller input has \textcol{saturation} on {\color{violet} 2 controller inputs}: \textcol{hybrid behavior}.
+\item Controller input has \textcol{saturation}: \textcol{hybrid behavior}.
 \end{itemize}
 \end{minipage}
 
