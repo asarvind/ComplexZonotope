@@ -3,14 +3,13 @@ by linear constraints on the state variables.  In such a case,
 over-approximating the reachable set by a set representation can
 require computing an over-approximation of the intersection between
 sets in the representation with sub-level sets of linear inequalities
-controlling the transitions.  Then the accuracy of approximation of
+controlling the transitions.  So, the accuracy of approximation of
 reachable sets depends on the accuracy of approximation of the
 intersection.  But like simple zonotopes, complex zonotopes also have
 the drawback that they are not closed under intersection with
 half-spaces.  However, we shall derive an over-approximation of the
 intersection between a complex zonotope and a class of sub-level sets
-of linear inequalities, called \emph{sub-parallelotopes}, which are
-algebraically related to the generator representation.  The
+of linear inequalities, called \emph{sub-parallelotopes}.  The
 over-approximation shall be such that the error can be regulated by
 modifying the scaling factors.
 
@@ -64,9 +63,10 @@ representation.  We can express %
 %% Therefore, it is possible to compute an over-approximationexpress
 %% the intersection of sub-parallelotope with a suitably aligned
 %% zonotope as a simple algebraic expression, as we will see latter.
-The over-approximation of the intersection between a sub-parallelotope
-and a complex zonotope that we derive later shall be expressed in
-terms of the following affine function, called \emph{min-approximation} and
+The over-approximation that we derive later for the intersection
+between a sub-parallelotope and a complex zonotope as another complex
+zonotope shall be expressed in terms of the following affine
+functions, called \emph{min-approximation} and
 \emph{max-approximation} functions, respectively.  A function
 $\minapproxsymbol:\reals^k\times\lt(\reals\bigcup\set{\infty}\rt)^k$ is a
 min-approximation function if for all $i\in\set{1,...,k}$
@@ -99,4 +99,57 @@ is a max-approximation function if for all $i\in\set{1,...,k}$
 %
 The function $\maxapprox{\lb}{\plb}$ is an affine function of its
 first argument $\lb$ and outputs a finite valued real vector.
+
+For any real vector with possibly unbounded componenets, i.e.,
+$v\in\lt(\reals\bigcup\set{\infty,-\infty}\rt)^k$, we define the index
+of co-ordinates along which the unbounded components are defined as
+$\unbdind{v}$ as follows.
+%
+\[
+\unbdind{v}=\set{i\in\set{1,\ldots,k}:\sup\set{-v_i,v_i}=\infty}.
+\]
+%
+For any $i\in\set{1,...,k}$, let us consider a vector
+$\alpha_i\in\reals^k$ defined as follows.  For any $j\in\set{1,\ldots,k}$,
+%
+\[
+\alpha_{i_j}=\lt\{
+\begin{array}{l}
+1~\text{if}~i\neq j\\
+0~\text{otherwise}
+\end{array}.
+\rt.
+\]
+%
+The following lemma gives an over-approximation of a complex zonotope
+with a suitably aligned sub-parallelotope when a certain convex
+condition is satisified.  Furthermore, an upper bound is provided on
+the Hausdorff distance between the over-approximation and the acutual
+intersection.  We shall denote the Hausdorff distance between two sets
+$S_1$ and $S_2$ as $\hausdorff{S_1}{S_2}$.
+%
+{\color{red} define hausdorff here}.
+%
+\begin{lemma}
+Let us consider that $Y\in\mat{n}{(n-k)}{\reals}$ is a matrix whose column vectors form an
+orthonormal basis of $\nullspace{\qtemp}$, the null space of
+$\qtemp$.  If $\nullspace{\qtemp}=0$, the we consider $Y=0$.  Furthermore,
+$S_1=\acztope{\ptemp}{\cen}{\sfact}{\pinv{\qtemp}}{\lb}{\ub}\bigcap\ptope{\qtemp}{\plb}{\pub}$ and
+$S_2=\acztope{\ptemp}{\cen}{\sfact}{\pinv{\qtemp}}{\maxapprox{\lb}{\plb}}{\minapprox{\ub}{\pub}}$
+such that all of the following conditions are true.
+%
+\begin{align*}
+& \lb\leq\minapprox{\lb}{\plb}\leq\maxapprox{\ub}{\pub}\leq\ub,~\numberthis\label{eqn:intcond1}\\
+& \forall
+i\in\unbdind{\plb}\bigcup\unbdind{\pub}\\
+& ~\acztope{\alpha_i\qtemp\ptemp}{\alpha_i\qtemp\cen}{\sfact}{0}{0}{0}\order\acztope{\qtemp\ptemp}{\qtemp\cen}{\sfact}{0}{0}{0}.~\numberthis\label{eqn:intcond2}
+\end{align*}
+%
+Then $S_1\subseteq S_2$ and $\hausdorff{S_1}{S_2}\leq todo$
+\end{lemma}
+%
+\begin{proof}
+Let us consider $x\in\mymatrix{\qtemp\\\transpose{Y}}S_1$,
+$y=\prod_{i\in\unbdind{\plb}\bigcup\unbdind{\pub}}\alpha_ix$ and $z=x-y$.
+\end{proof}
 %
