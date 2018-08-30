@@ -63,11 +63,10 @@ representation.  We can express %
 %% Therefore, it is possible to compute an over-approximationexpress
 %% the intersection of sub-parallelotope with a suitably aligned
 %% zonotope as a simple algebraic expression, as we will see latter.
-The over-approximation that we derive later for the intersection
+We shall derive an over-approximation for the intersection
 between a sub-parallelotope and a complex zonotope as another complex
-zonotope shall be expressed in terms of the following affine
-functions, called \emph{min-approximation} and
-\emph{max-approximation} functions, respectively.  A function
+zonotope using the following affine
+functions.  A function
 $\minapproxsymbol:\reals^k\times\lt(\reals\bigcup\set{\infty}\rt)^k$ is a
 min-approximation function if for all $i\in\set{1,...,k}$
 %
@@ -81,8 +80,6 @@ min-approximation function if for all $i\in\set{1,...,k}$
 \rt.
 \]
 %
-The function $\minapprox{\ub}{\pub}$ is an affine function of its
-first argument $\ub$ and outputs a finite valued real vector.
 Similarly, a function
 $\maxapproxsymbol:\reals^k\times\lt(\reals\bigcup\set{-\infty}\rt)^k$
 is a max-approximation function if for all $i\in\set{1,...,k}$
@@ -97,59 +94,221 @@ is a max-approximation function if for all $i\in\set{1,...,k}$
 \rt.
 \]
 %
-The function $\maxapprox{\lb}{\plb}$ is an affine function of its
-first argument $\lb$ and outputs a finite valued real vector.
-
-For any real vector with possibly unbounded componenets, i.e.,
-$v\in\lt(\reals\bigcup\set{\infty,-\infty}\rt)^k$, we define the index
-of co-ordinates along which the unbounded components are defined as
-$\unbdind{v}$ as follows.
+The above functions output finite values and are affine expressions in
+their first argument, when the second argument is fixed.  Now we shall
+introduce a few results using which we can derive the
+over-approximation for the intersection.  
+For any $i\in\set{1,\ldots,k}$, we consider $\alpha_i\in\reals^k$ such
+that $\forall j\in\set{1,\ldots,k}$, $\rqb{\alpha_i}_j=0$ if $i\neq j$
+and $\rqb{\alpha_i}_j=0$ otherwise.
+%
+\begin{lemma}~\label{lem:convexhull}
+Let $\Psi\in\reals^k$ be a convex set such that
+$\forall i\in\set{1,\ldots,k},~\diag{\alpha_i}\Psi\subseteq\Psi$.
+Then
 %
 \[
-\unbdind{v}=\set{i\in\set{1,\ldots,k}:\sup\set{-v_i,v_i}=\infty}.
+\forall v\in\Psi, \prod_{i=1}^k\convexhull{\set{0,v_i}}\subseteq\Psi.
 \]
-%
-For any $i\in\set{1,...,k}$, let us consider a vector
-$\alpha_i\in\reals^k$ defined as follows.  For any $j\in\set{1,\ldots,k}$,
-%
-\[
-\alpha_{i_j}=\lt\{
-\begin{array}{l}
-1~\text{if}~i\neq j\\
-0~\text{otherwise}
-\end{array}.
-\rt.
-\]
-%
-The following lemma gives an over-approximation of a complex zonotope
-with a suitably aligned sub-parallelotope when a certain convex
-condition is satisified.  Furthermore, an upper bound is provided on
-the Hausdorff distance between the over-approximation and the acutual
-intersection.  We shall denote the Hausdorff distance between two sets
-$S_1$ and $S_2$ as $\hausdorff{S_1}{S_2}$.
-%
-{\color{red} define hausdorff here}.
-%
-\begin{lemma}
-Let us consider that $Y\in\mat{n}{(n-k)}{\reals}$ is a matrix whose column vectors form an
-orthonormal basis of $\nullspace{\qtemp}$, the null space of
-$\qtemp$.  If $\nullspace{\qtemp}=0$, the we consider $Y=0$.  Furthermore,
-$S_1=\acztope{\ptemp}{\cen}{\sfact}{\pinv{\qtemp}}{\lb}{\ub}\bigcap\ptope{\qtemp}{\plb}{\pub}$ and
-$S_2=\acztope{\ptemp}{\cen}{\sfact}{\pinv{\qtemp}}{\maxapprox{\lb}{\plb}}{\minapprox{\ub}{\pub}}$
-such that all of the following conditions are true.
-%
-\begin{align*}
-& \lb\leq\minapprox{\lb}{\plb}\leq\maxapprox{\ub}{\pub}\leq\ub,~\numberthis\label{eqn:intcond1}\\
-& \forall
-i\in\unbdind{\plb}\bigcup\unbdind{\pub}\\
-& ~\acztope{\alpha_i\qtemp\ptemp}{\alpha_i\qtemp\cen}{\sfact}{0}{0}{0}\order\acztope{\qtemp\ptemp}{\qtemp\cen}{\sfact}{0}{0}{0}.~\numberthis\label{eqn:intcond2}
-\end{align*}
-%
-Then $S_1\subseteq S_2$ and $\hausdorff{S_1}{S_2}\leq todo$
 \end{lemma}
 %
 \begin{proof}
-Let us consider $x\in\mymatrix{\qtemp\\\transpose{Y}}S_1$,
-$y=\prod_{i\in\unbdind{\plb}\bigcup\unbdind{\pub}}\alpha_ix$ and $z=x-y$.
+We prove the above by induction.  We have ${\compid{1}v=0\times\prod_{i=2}^k\set{v_i}\subseteq\Psi}.$
+As $\set{v}=\prod_{i=1}^k\set{v}_i\subseteq \Psi$ and $\Psi$ is a convex set, we get
+%
+\begin{align*}
+\convexhull{\set{0,v_1}}\times\prod_{i=2}^k\set{v_i}\subseteq\Psi~\numberthis\label{proof-hull3}.
+\end{align*}
+%
+\begin{align*}
+& \text{If for
+~$j<k$}~\prod_{i=1}^j\convexhull{\set{0,v_i}}\times\prod_{i=j+1}^k\set{v_i}\subseteq \Psi,~\text{then}\\
+&\compid{j+1}\prod_{i=1}^j\convexhull{\set{0,v_i}}\times\prod_{i=j+1}^k\set{v_i}\\
+& \subseteq\compid{j+1}\Psi\subseteq\Psi\\
+& \equivalent \prod_{i=1}^j\convexhull{\set{0,v_i}}\times\set{0}\times\prod_{i=j+2}^k\set{v_i}\subseteq\Psi\\
+& \%\%~\text{As $v\in\Psi$ and $\Psi$ is a convex set}\\
+& \implies \prod_{i=1}^{j+1}\convexhull{\set{0,v_i}}\times\prod_{i=j+2}^k\set{v_i}\subseteq\Psi.~\numberthis\label{proof-hull4}
+\end{align*}
+%
+From Equations~\ref{proof-hull3} and~\ref{proof-hull4}, the lemma
+follows by induction.             
 \end{proof}
 %
+From here, we use the
+following notations.
+%
+\begin{align*}
+& \lb,\ub\in\reals^k:k\leq
+n,~\plb\in\rqb{\reals\bigcup\set{-\infty}}^k,~\pub\in\rqb{\reals\bigcup\set{\infty}}^k,\\
+& \qtemp\in\mat{k}{n}{\reals}:\det\rqb{\qtemp\transpose{\qtemp}}\neq 0.
+\end{align*}
+%
+A complex zonotope can be written as the Minkowski sum of the
+following complex set and a real set, which we call as \emph{template complex zonotope}
+and \emph{interval zonotope}, respectively.
+%
+\begin{align*}
+& \acztope{\ptemp}{\cen}{\sfact}{\stemp}{\lb}{\ub}  =\tcz{\ptemp}{\cen}{\sfact}\oplus\iztope{\stemp}{\lb}{\ub}\\
+& \tcztope{\ptemp}{\cen}{\sfact}:= \set{\cen+\ptemp\zeta:~\zeta\in\compnums^n,~\absolute{\zeta}\leq\sfact}\\
+& \iztope{\stemp}{\lb}{\ub}:=\set{\stemp\epsilon:~\epsilon\in\reals^k,~\lb\leq\zeta\leq\ub}.
+\end{align*}
+%
+The following lemma gives an over-approximation as well as
+under-approximation of the intersection of the Minkowski sum of a
+convex set and an interval zonotope with a sub-parallelotope.
+
+For any $k<n$, let us consider $Y\in\mat{n}{(n-k)}{\reals}$ such that the
+column vectors of $Y$ form
+the basis of $\null{\qtemp}$.
+Otherwise when $k=n$, we consider $Y=0$.
+%
+\begin{lemma}~\label{lem:minsum-intersection}
+Let $S\in\reals^n$ be a convex set and
+%
+\begin{align*}
+& \forall i\in\set{1,...,k}~\compid{i}\qtemp S\subseteq\qtemp S,~\numberthis\label{eqn:intersection3}\\
+& \lb\leq\maxapprox{\lb}{\plb}\leq\minapprox{\ub}{\pub}\leq\ub~\numberthis\label{eqn:intersection4}.\\
+& \text{Then}~~\mymatrix{0\\ Y^T}S \oplus\mymatrix{\qtemp\\
+ Y^T}\iztope{\pinv{\qtemp}}{\maxapprox{\lb}{\plb}}{\minapprox{\ub}{\pub}}
+ \\ & \subseteq\mymatrix{\qtemp\\
+ Y^T}\lt(\lt(S\oplus \iztope{\pinv{\qtemp}}{\lb}{\ub}\rt)\bigcap\ptope{\qtemp}{\plb}{\pub}\rt)~\numberthis\label{eqn:intersection1}\\
+ &\subseteq \mymatrix{\qtemp\\
+ Y^T}\lt(S \oplus\iztope{\pinv{\qtemp}}{\maxapprox{\lb}{\plb}}{\minapprox{\ub}{\pub}}\rt).\numberthis~\label{eqn:intersection2}
+\end{align*}
+%
+\end{lemma}
+%
+\begin{proof}
+
+First we shall prove Equation~\ref{eqn:intersection1}.
+By Equation~\ref{eqn:intersection3}, we get that for any $v\in S$, $0=\prod_{i=1}^n\alpha_iv\in\qtemp S$.  So,
+%
+\begin{align*}
+\mymatrix{0\\ Y^T}S\subseteq\mymatrix{\qtemp\\ Y^T}S.~\numberthis\label{eqn:corr-proof-intersection1}
+\end{align*}
+%
+By
+Equation~\ref{eqn:intersection4} we get
+%
+\begin{align*}
+\mymatrix{\qtemp\\Y^T}\iztope{\pinv{\qtemp}}{\minapprox{\lb}{\plb}}{\maxapprox{\ub}{\pub}}\subseteq\mymatrix{\qtemp\\Y^T}\iztope{\pinv{\qtemp}}{\lb}{\ub}.~\numberthis\label{eqn:corr-proof-intersection2}
+\end{align*}
+%
+Then, Equation~\ref{eqn:intersection1} follows from Equations~\ref{eqn:corr-proof-intersection1} and~\ref{eqn:corr-proof-intersection2}.
+
+Now we shall prove Equation~\ref{eqn:intersection2}.
+
+Let
+$x\in \lt(S\oplus \iztope{\pinv{\qtemp}}{\lb}{\ub}\rt)\bigcap\ptope{\qtemp}{\plb}{\pub}$
+be a point complex vector that $x=v+\pinv{\qtemp}\zeta:~v\in S,~\lb\leq\zeta\leq\ub$.
+%
+\begin{align*}
+& 
+x\in\ptope{\qtemp}{\plb}{\pub} \implies
+ \plb\leq \qtemp \lt(v+\pinv{\qtemp}\zeta\rt)\leq\pub\\
+& \implies\plb\leq\qtemp v+\zeta\leq\pub.~\numberthis\label{proof-intersection1}
+\end{align*}
+%
+Let us consider
+\begin{align*}
+& \epsilon\in\reals^k:~\epsilon_i=\lt\{\begin{array}{l}
+\min\set{\ub_i,\pub_i}~\text{if}~\zeta_i>\min\set{\ub_i,\pub_i}\\
+\max\set{\lb_i,\plb_i}~\text{if}~\zeta_i<\max\set{\lb_i,\plb_i}\\
+\zeta_i~\text{otherwise}.
+\end{array}
+\rt.
+\end{align*}
+%
+Then, it follows from the definitions of min-approximation and max-approximation functions that
+\begin{align*}
+&\maxapprox{\lb}{\plb}\leq \epsilon\leq\minapprox{\ub}{\pub}.~~
+~\numberthis\label{proofnew-intersection1}
+\end{align*}
+%
+Let
+$w=x-\pinv{\qtemp}\epsilon=v+\pinv{\qtemp}\zeta-\pinv{\qtemp}\epsilon$.  We shall first show that $\qtemp w\in\prod_{i=1}^n\convexhull{\set{0,\qtemp_iv}}$.
+For proving this,  we analyze the following cases for any $i\in\set{1,...,k}$.
+
+
+{\it Case 1:} Let us consider $\zeta_i>\min\set{\ub_i,\pub_i}$.  Then
+$\epsilon_i=\min\set{\ub_i,\pub_i}$.  Also by definition $\zeta_i\leq\ub_i$, which gives
+${\min\set{\ub_i,\pub_i}=\pub_i}=\epsilon_i$.  So, $\qtemp_iw=\qtemp_ix-\epsilon_i$
+%
+\begin{align*}
+& \leq\pub_i-\pub_i=0
+\end{align*}
+%
+Also by using Equations~\ref{proof-intersection1} and~\ref{proofnew-intersection1}, we get
+%
+\begin{align*}
+& \qtemp_iw=\qtemp_iv+\zeta_i-\epsilon_i\\
+& \geq \qtemp_iv+\min\set{\ub_i,\pub_i}-\min\set{\ub_i,\pub_i}=\qtemp_i
+v.
+\end{align*}
+%
+\begin{align*}
+& \text{Therefore}~~ \qtemp_iw\in\convexhull{\set{0,\qtemp_iv}}.~\numberthis\label{proofnew-intersection2}
+\end{align*}
+%
+{\it Case 2:} Let us consider that $\zeta_i<\max\set{\lb_i,\plb_i}$.
+Then $\epsilon_i=\max{\set{\lb_i,\plb_i}}$.  Also $\zeta_i\geq\lb_i$ by definition, which gives
+$\max{\set{\lb_i,\plb_i}}=\plb_i=\epsilon_i$.  So, $\qtemp_iw=\qtemp_ix-\epsilon_i$ 
+%
+\begin{align*}
+& \geq \plb_i-\plb_i=0~\text{\%\% as $x\in\ptope{\qtemp}{\plb}{\pub}$}
+\end{align*}
+%
+Also by using Equations~\ref{proof-intersection1} and~\ref{proofnew-intersection1}, we derive
+\begin{align*}
+& \qtemp_iw=\qtemp_iv+\zeta_i-\epsilon_i\\
+& \leq \qtemp_iv+\max\set{\lb_i,\plb_i}-\max\set{\lb_i,\plb_i}=\qtemp_i
+v.
+\end{align*}
+%
+\begin{align*}
+& \text{Therefore}~~    \qtemp_iw\in\convexhull{\set{0,\qtemp_iv}}.~\numberthis\label{proofnew-intersection3}
+\end{align*}
+%
+{\it Case 3:}  Let us consider that the above two cases are not true.
+Then $\epsilon_i=\zeta_i$ by definition.  So,
+%
+\begin{align*}
+& \qtemp_iw=\qtemp_iv+\zeta_i-\epsilon_i=\qtemp_iv+0=v_i.~\numberthis\label{proofnew-intersection4}
+\end{align*}
+%
+From Equations~\ref{proofnew-intersection2}\textendash\ref{proofnew-intersection4}, we
+get
+%
+\begin{align*}
+& \qtemp w\in\prod_{i=1}^k\convexhull{\set{0,v_i}}.\numberthis\label{proofnew-intersection5}
+\end{align*}
+%
+As $S$ is a convex set and $v\in S$, using Equations~\ref{eqn:intersection3} with Lemma~\ref{lem:convexhull} gives $\prod_{i=1}^k\convexhull{\set{0,v_i}}\subseteq \qtemp S$ 
+%
+\begin{align*}
+& (\%\%~~\text{by Equation~\ref{proofnew-intersection5}}) \implies \qtemp w\in \qtemp S~\numberthis\label{eqn:intersectionnew1}
+\end{align*}
+%
+As $Y^T$ is orthogonal to $\qtemp$, we also get
+%
+\begin{align*}
+& Y^Tw=Yv+Y\pinv{\qtemp}(\zeta-\epsilon)=Y^Tv+0=Y^Tv\in Y^TS.\\
+& \text{Combining with Equation~\ref{eqn:intersectionnew1}},~~\mymatrix{\qtemp\\ Y^T}w\in \mymatrix{\qtemp\\ Y^T}S~\numberthis\label{eqn:intersectionnew2}
+\end{align*}
+%
+By
+Equation~\ref{proofnew-intersection1}, we get
+$\pinv{\qtemp}\epsilon\in\iztope{\pinv{\qtemp}}{\maxapprox{\lb}{\plb}}{\minapprox{\ub}{\pub}}$.
+Combining the above with Equation~\ref{eqn:intersectionnew2}, we get
+%
+\begin{align*}
+& \mymatrix{\qtemp\\ Y^T}x=\mymatrix{\qtemp\\ Y^T}\lt(w+\pinv{\qtemp}\epsilon\rt)\\
+& \in\mymatrix{\qtemp\\ Y^T}\lt(S\oplus\iztope{\pinv{\qtemp}}{\maxapprox{\lb}{\plb}}{\minapprox{\ub}{\pub}}\rt).
+\end{align*}
+%
+As the above is true for any ${x\in
+S\oplus\iztope{\pinv{\qtemp}}{\maxapprox{\lb}{\plb}}{\minapprox{\ub}{\pub}}}$,
+we have proved Equation~\ref{eqn:intersection2}.
+\end{proof}
+%
+
